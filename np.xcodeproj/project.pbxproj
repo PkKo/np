@@ -15,6 +15,8 @@
 		A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CA1BA116D1006F5F4A /* Security.framework */; };
 		A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */; };
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
+		A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */; };
+		A2DE58821BA7E780008903E6 /* CertificateRoamingPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */; };
 		A2DEADEB1B9FE68600EDCCBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEADEA1B9FE68600EDCCBA /* main.m */; };
 		A2DEADEE1B9FE68600EDCCBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEADED1B9FE68600EDCCBA /* AppDelegate.m */; };
 		A2DEADF41B9FE68600EDCCBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF21B9FE68600EDCCBA /* Main.storyboard */; };
@@ -74,6 +76,9 @@
 		A2DA68CA1BA116D1006F5F4A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A2DA68CE1BA13F85006F5F4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A2DE587E1BA7E780008903E6 /* CertificateRoamingPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingPassViewController.h; sourceTree = "<group>"; };
+		A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingPassViewController.m; sourceTree = "<group>"; };
+		A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingPassViewController.xib; sourceTree = "<group>"; };
 		A2DEADE51B9FE68600EDCCBA /* np.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = np.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2DEADE91B9FE68600EDCCBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2DEADEA1B9FE68600EDCCBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -395,6 +400,9 @@
 				A2DA2BDE1BA6A63A00E6BBDC /* CertificateRoamingViewController.h */,
 				A2DA2BDF1BA6A63A00E6BBDC /* CertificateRoamingViewController.m */,
 				A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */,
+				A2DE587E1BA7E780008903E6 /* CertificateRoamingPassViewController.h */,
+				A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */,
+				A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */,
 			);
 			path = Certificate;
 			sourceTree = "<group>";
@@ -511,6 +519,7 @@
 				A2DEAE7C1B9FE6E600EDCCBA /* MenuViewController.xib in Resources */,
 				A2DEAE7A1B9FE6E600EDCCBA /* HomeViewController.xib in Resources */,
 				A2DA2BDD1BA64C6600E6BBDC /* MenuTableCell.xib in Resources */,
+				A2DE58821BA7E780008903E6 /* CertificateRoamingPassViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2DEAE771B9FE6E600EDCCBA /* CertificateMenuViewController.m in Sources */,
+				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
 				A2DEAE791B9FE6E600EDCCBA /* HomeViewController.m in Sources */,

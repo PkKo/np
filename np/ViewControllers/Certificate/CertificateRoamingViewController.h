@@ -8,6 +8,12 @@
 
 #import "CommonViewController.h"
 
-@interface CertificateRoamingViewController : CommonViewController
+@interface CertificateRoamingViewController : CommonViewController<UIAlertViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *certNum1;
+@property (strong, nonatomic) IBOutlet UILabel *certNum2;
+@property (strong, nonatomic) IBOutlet UILabel *certNum3;
+@property (strong, nonatomic) IBOutlet UILabel *certNum4;
+
+- (IBAction)nextButtonClick:(id)sender;
 @end
