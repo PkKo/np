@@ -17,14 +17,17 @@
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
 		A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */; };
 		A2DE58821BA7E780008903E6 /* CertificateRoamingPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */; };
+		A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE58841BA7F98A008903E6 /* CertificateListViewController.m */; };
+		A2DE58871BA7F98A008903E6 /* CertificateListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE58851BA7F98A008903E6 /* CertificateListViewController.xib */; };
+		A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DE58881BA805A3008903E6 /* libBTW-SSLSign.a */; };
+		A2DE588F1BA80F93008903E6 /* libBTWCryptoLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DE588E1BA80F93008903E6 /* libBTWCryptoLib.a */; };
+		A2DE58901BA81296008903E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF21B9FE68600EDCCBA /* Main.storyboard */; };
 		A2DEADEB1B9FE68600EDCCBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEADEA1B9FE68600EDCCBA /* main.m */; };
-		A2DEADEE1B9FE68600EDCCBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEADED1B9FE68600EDCCBA /* AppDelegate.m */; };
-		A2DEADF41B9FE68600EDCCBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF21B9FE68600EDCCBA /* Main.storyboard */; };
+		A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A2DEADED1B9FE68600EDCCBA /* AppDelegate.mm */; };
 		A2DEADF61B9FE68600EDCCBA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF51B9FE68600EDCCBA /* Images.xcassets */; };
 		A2DEADF91B9FE68600EDCCBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF71B9FE68600EDCCBA /* LaunchScreen.xib */; };
 		A2DEAE051B9FE68600EDCCBA /* npTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEAE041B9FE68600EDCCBA /* npTests.m */; };
 		A2DEAE101B9FE6A400EDCCBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DEAE0F1B9FE6A400EDCCBA /* UIKit.framework */; };
-		A2DEAE1D1B9FE6CC00EDCCBA /* libBTW-SSLSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DEAE1C1B9FE6CC00EDCCBA /* libBTW-SSLSign.a */; };
 		A2DEAE531B9FE6D800EDCCBA /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEAE201B9FE6D800EDCCBA /* CommonUtil.m */; };
 		A2DEAE541B9FE6D800EDCCBA /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEAE221B9FE6D800EDCCBA /* CommonViewController.m */; };
 		A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEAE261B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m */; };
@@ -79,11 +82,16 @@
 		A2DE587E1BA7E780008903E6 /* CertificateRoamingPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingPassViewController.h; sourceTree = "<group>"; };
 		A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingPassViewController.m; sourceTree = "<group>"; };
 		A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingPassViewController.xib; sourceTree = "<group>"; };
+		A2DE58831BA7F98A008903E6 /* CertificateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateListViewController.h; sourceTree = "<group>"; };
+		A2DE58841BA7F98A008903E6 /* CertificateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateListViewController.m; sourceTree = "<group>"; };
+		A2DE58851BA7F98A008903E6 /* CertificateListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateListViewController.xib; sourceTree = "<group>"; };
+		A2DE58881BA805A3008903E6 /* libBTW-SSLSign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBTW-SSLSign.a"; sourceTree = "<group>"; };
+		A2DE588E1BA80F93008903E6 /* libBTWCryptoLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBTWCryptoLib.a; sourceTree = "<group>"; };
 		A2DEADE51B9FE68600EDCCBA /* np.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = np.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2DEADE91B9FE68600EDCCBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2DEADEA1B9FE68600EDCCBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A2DEADEC1B9FE68600EDCCBA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A2DEADED1B9FE68600EDCCBA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A2DEADED1B9FE68600EDCCBA /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		A2DEADF31B9FE68600EDCCBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A2DEADF51B9FE68600EDCCBA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A2DEADF81B9FE68600EDCCBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -99,7 +107,6 @@
 		A2DEAE191B9FE6CC00EDCCBA /* CertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertManager.h; sourceTree = "<group>"; };
 		A2DEAE1A1B9FE6CC00EDCCBA /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		A2DEAE1B1B9FE6CC00EDCCBA /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
-		A2DEAE1C1B9FE6CC00EDCCBA /* libBTW-SSLSign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBTW-SSLSign.a"; sourceTree = "<group>"; };
 		A2DEAE1F1B9FE6D800EDCCBA /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
 		A2DEAE201B9FE6D800EDCCBA /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
 		A2DEAE211B9FE6D800EDCCBA /* CommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
@@ -167,12 +174,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2DE588F1BA80F93008903E6 /* libBTWCryptoLib.a in Frameworks */,
+				A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */,
 				A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */,
 				A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */,
 				A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */,
 				A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */,
 				A2DEAE101B9FE6A400EDCCBA /* UIKit.framework in Frameworks */,
-				A2DEAE1D1B9FE6CC00EDCCBA /* libBTW-SSLSign.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +221,7 @@
 				A2DEAE681B9FE6E600EDCCBA /* ViewControllers */,
 				A2DEAE111B9FE6BB00EDCCBA /* Images */,
 				A2DEADEC1B9FE68600EDCCBA /* AppDelegate.h */,
-				A2DEADED1B9FE68600EDCCBA /* AppDelegate.m */,
+				A2DEADED1B9FE68600EDCCBA /* AppDelegate.mm */,
 				A2DEADF21B9FE68600EDCCBA /* Main.storyboard */,
 				A2DEADF51B9FE68600EDCCBA /* Images.xcassets */,
 				A2DEADF71B9FE68600EDCCBA /* LaunchScreen.xib */,
@@ -287,7 +295,8 @@
 				A2DEAE191B9FE6CC00EDCCBA /* CertManager.h */,
 				A2DEAE1A1B9FE6CC00EDCCBA /* FileManager.h */,
 				A2DEAE1B1B9FE6CC00EDCCBA /* Keychain.h */,
-				A2DEAE1C1B9FE6CC00EDCCBA /* libBTW-SSLSign.a */,
+				A2DE58881BA805A3008903E6 /* libBTW-SSLSign.a */,
+				A2DE588E1BA80F93008903E6 /* libBTWCryptoLib.a */,
 			);
 			path = "BTW-SSLSign";
 			sourceTree = "<group>";
@@ -403,6 +412,9 @@
 				A2DE587E1BA7E780008903E6 /* CertificateRoamingPassViewController.h */,
 				A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */,
 				A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */,
+				A2DE58831BA7F98A008903E6 /* CertificateListViewController.h */,
+				A2DE58841BA7F98A008903E6 /* CertificateListViewController.m */,
+				A2DE58851BA7F98A008903E6 /* CertificateListViewController.xib */,
 			);
 			path = Certificate;
 			sourceTree = "<group>";
@@ -510,7 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2DEADF41B9FE68600EDCCBA /* Main.storyboard in Resources */,
+				A2DE58901BA81296008903E6 /* Main.storyboard in Resources */,
 				A2DEAE781B9FE6E600EDCCBA /* CertificateMenuViewController.xib in Resources */,
 				A2DA2BE21BA6A63A00E6BBDC /* CertificateRoamingViewController.xib in Resources */,
 				A2DEADF91B9FE68600EDCCBA /* LaunchScreen.xib in Resources */,
@@ -518,6 +530,7 @@
 				A2DEADF61B9FE68600EDCCBA /* Images.xcassets in Resources */,
 				A2DEAE7C1B9FE6E600EDCCBA /* MenuViewController.xib in Resources */,
 				A2DEAE7A1B9FE6E600EDCCBA /* HomeViewController.xib in Resources */,
+				A2DE58871BA7F98A008903E6 /* CertificateListViewController.xib in Resources */,
 				A2DA2BDD1BA64C6600E6BBDC /* MenuTableCell.xib in Resources */,
 				A2DE58821BA7E780008903E6 /* CertificateRoamingPassViewController.xib in Resources */,
 			);
@@ -545,7 +558,7 @@
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
 				A2DEAE631B9FE6D800EDCCBA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
-				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.m in Sources */,
+				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
 				A2DEAE5F1B9FE6D800EDCCBA /* MASLayoutConstraint.m in Sources */,
 				A2DEAE5C1B9FE6D800EDCCBA /* MASCompositeConstraint.m in Sources */,
@@ -559,6 +572,7 @@
 				A2DEAE651B9FE6D800EDCCBA /* NavigationView.m in Sources */,
 				A2DEAE561B9FE6D800EDCCBA /* ECSlidingAnimationController.m in Sources */,
 				A2DEAE541B9FE6D800EDCCBA /* CommonViewController.m in Sources */,
+				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,
 				A2DEAE5E1B9FE6D800EDCCBA /* MASConstraintMaker.m in Sources */,
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
@@ -692,7 +706,10 @@
 		A2DEAE091B9FE68600EDCCBA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PREFIX_HEADER = "np/NHPush-PrefixHeader.pch";
 				INFOPLIST_FILE = np/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
@@ -709,6 +726,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_PREFIX_HEADER = "np/NHPush-PrefixHeader.pch";
 				INFOPLIST_FILE = np/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
