@@ -10,6 +10,8 @@
 #import "MenuTableCell.h"
 #import "HomeViewController.h"
 #import "CertificateMenuViewController.h"
+#import "StatisticMainViewController.h"
+#import "StatisticMainUtil.h"
 
 @interface MenuViewController ()
 
@@ -21,7 +23,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], nil];
+    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +76,14 @@
         case 1:
         {
             newTopViewController = [[CertificateMenuViewController alloc] init];
+            break;
+        }
+        case 2:
+        {
+            
+            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
+            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
+            
             break;
         }
             
