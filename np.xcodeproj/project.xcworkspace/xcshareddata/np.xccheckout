@@ -7,21 +7,21 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F3BC5504-EBFC-430B-B75A-5354B7BF9D89</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>np</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>BC6C5D6B1193A4EAFCFE9C095E955D55729A8A00</key>
-		<string>github.com:PkKo/np.git</string>
+		<string>https://github.com/PkKo/np.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>np.xcodeproj/project.xcworkspace</string>
+	<string>np.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BC6C5D6B1193A4EAFCFE9C095E955D55729A8A00</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:PkKo/np.git</string>
+	<string>https://github.com/PkKo/np.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
