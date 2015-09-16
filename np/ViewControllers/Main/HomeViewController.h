@@ -7,10 +7,11 @@
 //
 
 #import "CommonViewController.h"
+#import "HomeTimeLineView.h"
 
 typedef enum HomeViewType
 {
-    TIMELINE    = 0,
+    TIMELINE    = 100,
     BANKING,
     OTHER
 } HomeViewType;
@@ -19,4 +20,15 @@ typedef enum HomeViewType
 
 @property (assign, nonatomic) HomeViewType mViewType;
 
+// 타임라인 탭
+@property (strong, nonatomic) IBOutlet UIButton *mTimeLineButton;
+@property (strong, nonatomic) HomeTimeLineView  *mTimeLineView;
+// 입출금내역 탭
+@property (strong, nonatomic) IBOutlet UIButton *mIncomeButton;
+// 기타메시지 탭
+@property (strong, nonatomic) IBOutlet UIButton *mEtcButton;
+// 실제 내용을 보여줄 뷰
+@property (strong, nonatomic) IBOutlet UIView *mMainContentView;
+
+- (IBAction)tabButtonClick:(id)sender;
 @end

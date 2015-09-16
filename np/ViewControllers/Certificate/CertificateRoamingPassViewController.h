@@ -8,8 +8,11 @@
 
 #import "CommonViewController.h"
 
-@interface CertificateRoamingPassViewController : CommonViewController
+@interface CertificateRoamingPassViewController : CommonViewController<UITextFieldDelegate>
 
 @property (strong, nonatomic) NSData *p12Data;
 @property (strong, nonatomic) NSString *p12Url;
+@property (strong, nonatomic) IBOutlet UITextField *mPassInputText;
+
+- (IBAction)passInputButtonClick:(id)sender;
 @end

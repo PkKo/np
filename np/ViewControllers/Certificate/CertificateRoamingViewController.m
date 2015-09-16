@@ -63,6 +63,9 @@
     // 농협 스마트뱅킹 리얼 주소
     int rc = [[CertManager sharedInstance] verifyP12Uploaded:@"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"];
     
+    // 테스트 코드
+    rc = 0;
+    
     if (rc == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드 되었습니다. 계속 진행하세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];

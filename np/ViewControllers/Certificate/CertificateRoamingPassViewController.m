@@ -7,6 +7,10 @@
 //
 
 #import "CertificateRoamingPassViewController.h"
+#import "NFilterChar.h"
+#import "nFilterCharForPad.h"
+#import "EccEncryptor.h"
+#import "CertManager.h"
 
 @interface CertificateRoamingPassViewController ()
 
@@ -16,6 +20,7 @@
 
 @synthesize p12Data;
 @synthesize p12Url;
+@synthesize mPassInputText;
 
 - (void)viewDidLoad
 {
@@ -30,4 +35,77 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self showNFilterKeypad];
+}
+
+- (void)showNFilterKeypad
+{
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
+        //서버 공개키 설정
+        [vc setServerPublickey:@""];
+        
+        //콜백함수 설정
+        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:@selector(onPasswordCancelNFilter:encText:dummyText:tagName:)];
+        [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
+        [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+    }
+    else
+    {
+        nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
+        //서버 공개키 설정
+        [vc setServerPublickey:@""];
+        
+        //콜백함수 설정
+        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:@selector(onPasswordCancelNFilter:encText:dummyText:tagName:)];
+        [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
+        [vc setFullMode:YES];
+        [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+    }
+}
+
+- (void)onPasswordConfirmNFilter:(NSString *)pPlainText encText:(NSString *)pEncText dummyText:(NSString *)pDummyText tagName:(NSString *)pTagName
+{
+    EccEncryptor *ec = [EccEncryptor sharedInstance];
+    NSString *plainText = [ec makeDecNoPadWithSeedkey:pPlainText];
+    
+    int rc = 0;
+    rc = [[CertManager sharedInstance] p12ImportWithUrl:p12Url password:plainText];
+    
+    if (rc == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"완료" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+        [alert show];
+    }
+    else if (rc == 100)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버와의 통신에 문제가 발생했습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+    else if (rc == 200)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
+}
+
+- (void)onPasswordCancelNFilter:(NSString *)pPlainText encText:(NSString *)pEncText dummyText:(NSString *)pDummyText tagName:(NSString *)pTagName
+{
+    
+}
+
+- (IBAction)passInputButtonClick:(id)sender
+{
+    
+}
 @end

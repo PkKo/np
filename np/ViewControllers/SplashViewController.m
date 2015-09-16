@@ -48,6 +48,7 @@
     
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     HomeViewController *vc = [[HomeViewController alloc] init];
+    [vc setMViewType:TIMELINE];
     slidingViewController.topViewController = vc;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
