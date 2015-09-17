@@ -2,10 +2,55 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>item 1</key>
+	<key>search 1</key>
 	<dict>
-		<key>itemColor</key>
-		<string></string>
+		<key>startDate</key>
+		<date>2015-08-17T07:31:29Z</date>
+		<key>endDate</key>
+		<date>2015-09-16T07:31:58Z</date>
+		<key>dataArray</key>
+		<array>
+			<dict>
+				<key>itemName</key>
+				<string>급여(55%)</string>
+				<key>itemColor</key>
+				<string>#1E88E5</string>
+				<key>itemValue</key>
+				<integer>1800000</integer>
+				<key>isIncome</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>itemName</key>
+				<string>주거비(25%)</string>
+				<key>itemColor</key>
+				<string>#FFAB40</string>
+				<key>itemValue</key>
+				<integer>800000</integer>
+				<key>isIncome</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>itemName</key>
+				<string>식비(15%)</string>
+				<key>itemColor</key>
+				<string>#1E88E5</string>
+				<key>itemValue</key>
+				<integer>650000</integer>
+				<key>isIncome</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>itemName</key>
+				<string>기타지출(5%)</string>
+				<key>itemColor</key>
+				<string>#FF6D00</string>
+				<key>itemValue</key>
+				<integer>200000</integer>
+				<key>isIncome</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 </dict>
 </plist>

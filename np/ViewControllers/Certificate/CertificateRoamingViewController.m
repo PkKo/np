@@ -86,8 +86,8 @@
 
 #pragma mark - AlertView Delegate Methods
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     if (alertView.tag == 9999)
     {
         CertificateRoamingPassViewController *viewController = [[CertificateRoamingPassViewController alloc] init];
