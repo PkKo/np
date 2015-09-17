@@ -10,6 +10,7 @@
 #import "StatisticMainUtil.h"
 #import "StatisticDateSearchView.h"
 #import "ChartMainView.h"
+#import "ChartController.h"
 
 @interface StatisticMainViewController ()
 
@@ -21,6 +22,9 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
+    [self.mNaviView.mBackButton setHidden:YES];
+    [self.mNaviView.mTitleLabel setText:@"입금/지출 통계"];
+    
     [self addChartView];
 }
 
@@ -28,16 +32,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)backToPrvView:(UIBarButtonItem *)sender {
     [StatisticMainUtil hideStatisticView];

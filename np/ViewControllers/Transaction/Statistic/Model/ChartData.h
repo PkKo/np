@@ -10,9 +10,8 @@
 
 @interface ChartData : NSObject
 
-@property NSString *itemColor;
-@property NSString *itemName;
-@property NSString *itemValue;
-@property BOOL *isIncome; // not income is expense
+@property NSDate *startDate;
+@property NSDate *endDate;
+@property NSMutableArray *itemArray; // array of ChartItemData
 
 @end

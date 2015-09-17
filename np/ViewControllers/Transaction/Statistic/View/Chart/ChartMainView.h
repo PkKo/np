@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PieChartWithInputData.h"
 
 @interface ChartMainView : UIView
+
 @end

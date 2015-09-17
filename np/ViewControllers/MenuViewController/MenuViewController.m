@@ -11,7 +11,7 @@
 #import "HomeViewController.h"
 #import "CertificateMenuViewController.h"
 #import "StatisticMainViewController.h"
-#import "StatisticMainUtil.h"
+#import "SNSViewController.h"
 
 @interface MenuViewController ()
 
@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], nil];
+    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], @[@"공유하기", @"SMSViewController"], nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +86,12 @@
             
             break;
         }
+        case 3:
+        {
+            newTopViewController = [[SNSViewController alloc] initWithNibName:@"SNSViewController" bundle:nil];
+            break;
+        }
+         
             
         default:
             break;
