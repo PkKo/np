@@ -8,6 +8,7 @@
 
 #import "CertificateMenuViewController.h"
 #import "CertificateRoamingViewController.h"
+#import "CertificateListViewController.h"
 #import "MenuTableCell.h"
 
 @interface CertificateMenuViewController ()
@@ -68,10 +69,18 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    switch (indexPath.row) {
-        case 0:
+    switch (indexPath.row)
+    {
+        case 0:// pc에서 인증서 가져오기
         {
             CertificateRoamingViewController *vc = [[CertificateRoamingViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+            
+        case 2: // 인증서 관리
+        {
+            CertificateListViewController *vc = [[CertificateListViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

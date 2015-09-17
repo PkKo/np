@@ -25,4 +25,9 @@
 #define STRING_DASH     @"-"
 #define STRING_MASKING  @"****"
 
+// 가입완료된 사용자 설정
+#define IS_USER                 @"isUser"
+// 간편보기 설정값
+#define QUICK_VIEW_SETTING      @"quickViewSetting"
+
 #endif

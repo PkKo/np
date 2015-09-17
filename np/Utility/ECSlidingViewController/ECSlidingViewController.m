@@ -128,7 +128,6 @@
 }
 
 - (void)viewDidLoad {
-    NSLog(@"%s", __FUNCTION__);
     [super viewDidLoad];
     if (!self.topViewController) [NSException raise:@"Missing topViewController"
                                              format:@"Set the topViewController before loading ECSlidingViewController"];

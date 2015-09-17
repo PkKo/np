@@ -8,6 +8,8 @@
 
 #import "CommonViewController.h"
 
-@interface CertificateListViewController : CommonViewController
+@interface CertificateListViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UITableView *mCertListTable;
+@property (strong, nonatomic) NSMutableArray *mCertControllArray;
 @end

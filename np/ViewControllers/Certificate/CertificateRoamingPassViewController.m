@@ -8,6 +8,7 @@
 
 #import "CertificateRoamingPassViewController.h"
 #import "NFilterChar.h"
+#import "NFilterNum.h"
 #import "nFilterCharForPad.h"
 #import "EccEncryptor.h"
 #import "CertManager.h"
@@ -47,12 +48,16 @@
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
+//        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
         [vc setServerPublickey:@""];
         
         //콜백함수 설정
-        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:@selector(onPasswordCancelNFilter:encText:dummyText:tagName:)];
+        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
         [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
+        [vc setFullMode:YES];
+        [vc setTopBarText:@"공인인증센터"];
+        [vc setTitleText:@"비밀번호 입력"];
         [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
     }
     else
@@ -62,9 +67,8 @@
         [vc setServerPublickey:@""];
         
         //콜백함수 설정
-        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:@selector(onPasswordCancelNFilter:encText:dummyText:tagName:)];
+        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
         [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
-        [vc setFullMode:YES];
         [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
     }
 }
@@ -73,6 +77,8 @@
 {
     EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pPlainText];
+    
+    [mPassInputText setText:plainText];
     
     int rc = 0;
     rc = [[CertManager sharedInstance] p12ImportWithUrl:p12Url password:plainText];

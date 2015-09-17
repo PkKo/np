@@ -18,8 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    NSLog(@"%s", __FUNCTION__);
+    // 앱 위변조 체크 삽입 예정
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,7 +34,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"%s", __FUNCTION__);
     [super viewDidAppear:animated];
     
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:2];
@@ -44,8 +42,6 @@
 
 - (void)setMainViewController
 {
-    NSLog(@"%s", __FUNCTION__);
-    
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     HomeViewController *vc = [[HomeViewController alloc] init];
     [vc setMViewType:TIMELINE];
