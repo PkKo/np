@@ -20,7 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%s", __FUNCTION__);
     [self makeNaviAndMenuView];
 }
 
@@ -41,8 +40,6 @@
 
 - (void)makeNaviAndMenuView
 {
-    NSLog(@"%s", __FUNCTION__);
-    
     self.mNaviView = [NavigationView view];
     [self.mNaviView setFrame:CGRectMake(0, 20, self.view.frame.size.width, self.mNaviView.frame.size.height)];
     [self.view addSubview:self.mNaviView];
@@ -83,7 +80,6 @@
 
 - (void)showMenuView
 {
-    NSLog(@"%s", __FUNCTION__);
     [self.slidingViewController anchorTopViewToLeftAnimated:YES onComplete:^{
         [mMenuCloseButton setEnabled:YES];
     }];
@@ -91,7 +87,6 @@
 
 - (void)closeMenuView
 {
-    NSLog(@"%s", __FUNCTION__);
     [self.slidingViewController resetTopViewAnimated:YES onComplete:^{
         [mMenuCloseButton setEnabled:NO];
     }];

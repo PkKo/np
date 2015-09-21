@@ -13,5 +13,6 @@
     NSArray *mMenuTitleArray;
 }
 
+@property (strong, nonatomic) IBOutlet UITableView *menuTableView;
 - (IBAction)closeMenu:(id)sender;
 @end

@@ -19,11 +19,17 @@
 
 @implementation MenuViewController
 
+@synthesize menuTableView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], @[@"공유하기", @"SMSViewController"], nil];
+
+	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+    [menuTableView setTableFooterView:footerView];
 }
 
 - (void)didReceiveMemoryWarning

@@ -27,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%s", __FUNCTION__);
     
     [self.mNaviView.mBackButton setHidden:YES];
     
