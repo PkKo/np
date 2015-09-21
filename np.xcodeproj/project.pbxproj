@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 172356E61BAE621C001564A1 /* StoryLinkHelper.m */; };
 		A2D95AFF1BA8F1DD00DC943D /* NSData+AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D95A3B1BA8F1DD00DC943D /* NSData+AESCrypt.m */; };
 		A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D95A3D1BA8F1DD00DC943D /* NSDataKNAdditions.m */; };
 		A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D95A3F1BA8F1DD00DC943D /* NSStreamKNAdditions.m */; };
@@ -230,6 +231,7 @@
 		A54B94E31BAA841C00D5D99B /* SNSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94E11BAA841C00D5D99B /* SNSViewController.xib */; };
 		A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E41BAA9B5800D5D99B /* Social.framework */; };
 		A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E61BAAA03A00D5D99B /* MessageUI.framework */; };
+		A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */; };
 		A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */; };
 		A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26421BA943C0007E6689 /* ChartController.m */; };
 		A5ED265D1BA943C0007E6689 /* DummyChartData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26431BA943C0007E6689 /* DummyChartData.plist */; };
@@ -252,6 +254,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		172356E51BAE621C001564A1 /* StoryLinkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryLinkHelper.h; path = SNS/StoryLinkHelper.h; sourceTree = "<group>"; };
+		172356E61BAE621C001564A1 /* StoryLinkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryLinkHelper.m; path = SNS/StoryLinkHelper.m; sourceTree = "<group>"; };
 		A2D95A3A1BA8F1DD00DC943D /* NSData+AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AESCrypt.h"; sourceTree = "<group>"; };
 		A2D95A3B1BA8F1DD00DC943D /* NSData+AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AESCrypt.m"; sourceTree = "<group>"; };
 		A2D95A3C1BA8F1DD00DC943D /* NSDataKNAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataKNAdditions.h; sourceTree = "<group>"; };
@@ -547,6 +551,7 @@
 		A54B94E11BAA841C00D5D99B /* SNSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNSViewController.xib; path = SNS/SNSViewController.xib; sourceTree = "<group>"; };
 		A54B94E41BAA9B5800D5D99B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A54B94E61BAAA03A00D5D99B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = np/Library/SNS/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		A5ED263E1BA943C0007E6689 /* StatisticMainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticMainUtil.h; sourceTree = "<group>"; };
 		A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticMainUtil.m; sourceTree = "<group>"; };
 		A5ED26411BA943C0007E6689 /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
@@ -572,6 +577,7 @@
 				A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */,
 				A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */,
 				A2DE588F1BA80F93008903E6 /* libBTWCryptoLib.a in Frameworks */,
+				A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */,
 				A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */,
 				A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */,
 				A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */,
@@ -1049,6 +1055,7 @@
 		A2DEAE0E1B9FE69000EDCCBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */,
 				A54B94E61BAAA03A00D5D99B /* MessageUI.framework */,
 				A54B94E41BAA9B5800D5D99B /* Social.framework */,
 				A2DA68CE1BA13F85006F5F4A /* Foundation.framework */,
@@ -1280,6 +1287,8 @@
 			children = (
 				A54B94DF1BAA841C00D5D99B /* SNSViewController.h */,
 				A54B94E01BAA841C00D5D99B /* SNSViewController.m */,
+				172356E51BAE621C001564A1 /* StoryLinkHelper.h */,
+				172356E61BAE621C001564A1 /* StoryLinkHelper.m */,
 				A54B94E11BAA841C00D5D99B /* SNSViewController.xib */,
 			);
 			name = SNS;
@@ -1671,6 +1680,7 @@
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,
+				172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */,
 				A54B94D71BAA454200D5D99B /* ChartMainView.m in Sources */,
 				A2DEAE5A1B9FE6D800EDCCBA /* UIViewController+ECSlidingViewController.m in Sources */,
 				A2DEAE641B9FE6D800EDCCBA /* View+MASAdditions.m in Sources */,
@@ -1804,6 +1814,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/np/Library/SNS",
+				);
 				GCC_PREFIX_HEADER = "np/NHPush-PrefixHeader.pch";
 				INFOPLIST_FILE = np/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
@@ -1813,6 +1828,7 @@
 					"$(PROJECT_DIR)/np/Library/BTW-SSLSign",
 					"$(PROJECT_DIR)/np/Library/nFilter/Common/LibNFilter",
 				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1823,6 +1839,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/np/Library/SNS",
+				);
 				GCC_PREFIX_HEADER = "np/NHPush-PrefixHeader.pch";
 				INFOPLIST_FILE = np/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
@@ -1832,6 +1853,7 @@
 					"$(PROJECT_DIR)/np/Library/BTW-SSLSign",
 					"$(PROJECT_DIR)/np/Library/nFilter/Common/LibNFilter",
 				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

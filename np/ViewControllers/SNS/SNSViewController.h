@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
+#import "CommonViewController.h"
 
-@interface SNSViewController : UIViewController
+@interface SNSViewController : CommonViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *snsContent;
 
