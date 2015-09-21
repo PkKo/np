@@ -28,11 +28,9 @@
 
 +(HttpRequest *)getInstance;
 -(void)setDelegate:(id)mTarget selector:(SEL)mSelector;
--(BOOL)requestUrlWithAPI:(NSString *)api bodyObject:(NSDictionary *) bodyObject;
 -(BOOL)requestUrl:(NSString *)url bodyObject:(NSDictionary *)bodyObject;
 -(BOOL)requestUrl:(NSString *)url bodyString:(NSString *)bodyString;
 -(BOOL)requestUrlGET:(NSString *)url;
--(BOOL)requestUrlWithEncode:(NSString *)url bodyObject:(NSDictionary *)bodyObject encodingKey:(NSString *)encodingKey;
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)mResponse;
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;

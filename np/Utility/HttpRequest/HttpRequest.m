@@ -49,81 +49,6 @@
 }
 
 #pragma mark - request function
--(BOOL)requestUrlWithAPI:(NSString *)api bodyObject:(NSDictionary *)bodyObject
-{
-    //호출할 API와 서버주소로 URL
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, api];
-    //서버 주소 설정
-    requestUrl = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
-    
-    //통신방식 정의
-    [requestUrl setHTTPMethod:@"POST"];
-    /*
-    //SBJson writer
-    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    NSLog(@"postData = %@", [writer stringWithObject:bodyObject]);
-    //dictionary 형태를 JSON data로 바꿔준다
-    NSData *postData = [NSData dataWithData:[writer dataWithObject:bodyObject]];*/
-    
-    NSString *strData = [NSString string];
-    
-    NSEnumerator *keyEnumerator = [bodyObject keyEnumerator];
-    for(NSString *key in keyEnumerator)
-    {
-        if([strData length] == 0)
-        {
-            strData = [NSString stringWithFormat:@"%@=%@", key, [bodyObject objectForKey:key]];
-        }
-        else
-        {
-            strData = [NSString stringWithFormat:@"%@&%@=%@", strData, key, [bodyObject objectForKey:key]];
-        }
-
-    }
-    
-    NSLog(@"postData = %@", strData);
-    
-    postData = [strData dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    //data를 헤더에 붙여준다
-    [requestUrl setHTTPBody:postData];
-    [requestUrl setValue:[NSString stringWithFormat:@"%lu", postData.length] forHTTPHeaderField:@"Content-Length"];
-    [requestUrl setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
-    
-    //연결이 되면 데이터를 받을 변수 초기화
-    if(connection) {
-        receivedData = [[NSMutableData alloc] init];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)requestRestart
-{
-    if(requestUrl != nil && postData != nil)
-    {
-        //data를 헤더에 붙여준다
-        [requestUrl setHTTPBody:postData];
-        [requestUrl setValue:[NSString stringWithFormat:@"%lu", postData.length] forHTTPHeaderField:@"Content-Length"];
-        [requestUrl setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        
-        //연결을 시도하는 connection 생성
-        connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
-        
-        //연결이 되면 데이터를 받을 변수 초기화
-        if(connection)
-        {
-            receivedData = [[NSMutableData alloc] init];
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
 -(BOOL)requestUrl:(NSString *)url bodyObject:(NSDictionary *)bodyObject
 {
     //NSLog(@"%s",__FUNCTION__);
@@ -132,12 +57,7 @@
     
     //통신방식 정의
     [requestUrl setHTTPMethod:@"POST"];
-    //SBJson writer
-//    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    //NSLog(@"postData = %@", [writer stringWithObject:bodyObject]);
     //dictionary 형태를 JSON data로 바꿔준다
-//    postData = [NSData dataWithData:[writer dataWithObject:bodyObject]];
-    
     postData = [NSJSONSerialization dataWithJSONObject:bodyObject options:NSJSONWritingPrettyPrinted error:nil];
     //data를 헤더에 붙여준다
     [requestUrl setHTTPBody:postData];
@@ -162,10 +82,6 @@
     
     //통신방식 정의
     [requestUrl setHTTPMethod:@"POST"];
-    //NSLog(@"%@\n%@", url, bodyString);
-    //SBJson writer
-    //SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    //NSLog(@"postData = %@", [writer stringWithObject:bodyObject]);
     //dictionary 형태를 JSON data로 바꿔준다
     postData = [bodyString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     //data를 헤더에 붙여준다
@@ -206,39 +122,6 @@
     
     return NO;
 }
-
-/*
--(BOOL)requestUrlWithEncode:(NSString *)url bodyObject:(NSDictionary *)bodyObject encodingKey:(NSString *)encodingKey
-{
-    //서버에 연결한다
-    requestUrl = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
-    
-    //통신방식 정의
-    [requestUrl setHTTPMethod:@"POST"];
-    
-    //SBJson writer
-    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    //dictionary 형태를 JSON String으로 바꿔준다
-    NSString *bodyString = [writer stringWithObject:bodyObject];
-    //입력받은 encoding key로 암호화한다
-    NSString *encodedString = [CommonUtility encrypt3DESWithKey:bodyString key:encodingKey];
-    //암호화된 스트링을 데이터로 변환
-    postData = [encodedString dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"bodyString = %@\nencodedString = %@\npostData = %@",bodyString, encodedString, postData);
-    //data를 헤더에 붙여준다
-    [requestUrl setHTTPBody:postData];
-    
-    //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
-    
-    //연결이 되면 데이터를 받을 변수 초기화
-    if(connection) {
-        receivedData = [[NSMutableData alloc] init];
-        return YES;
-    }
-    
-    return NO;
-}*/
 
 - (void)cancelRequestAsync
 {
@@ -290,14 +173,7 @@
     //델리게이트가 있으면 실행한다
     if([self target] && [[self target] respondsToSelector:[self selector]])
     {
-        if(error)
-        {
-            [[self target] performSelector:[self selector] withObject:result];
-        }
-        else
-        {
-            [[self target] performSelector:[self selector] withObject:responseDic];
-        }
+        [[self target] performSelector:[self selector] withObject:responseDic];
     }
     
     requestUrl = nil;

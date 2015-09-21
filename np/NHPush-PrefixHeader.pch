@@ -15,5 +15,6 @@
 #import "UIView+LoadFromXib.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "ECSlidingViewController.h"
+#import "HttpRequest.h"
 
 #endif
