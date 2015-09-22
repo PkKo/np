@@ -16,6 +16,8 @@
 
 @synthesize mNaviView;
 @synthesize mMenuCloseButton;
+@synthesize keyboardCloseButton;
+@synthesize currentTextField;
 
 - (void)viewDidLoad
 {
@@ -76,6 +78,15 @@
     }
     
     [self.view bringSubviewToFront:mMenuCloseButton];
+    
+    keyboardCloseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [keyboardCloseButton setBackgroundColor:[UIColor clearColor]];
+    [keyboardCloseButton addTarget:self action:@selector(keyboardClose) forControlEvents:UIControlEventTouchUpInside];
+    [keyboardCloseButton setEnabled:NO];
+    [keyboardCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [self.view addSubview:keyboardCloseButton];
+    
+    [self.view bringSubviewToFront:keyboardCloseButton];
 }
 
 - (void)showMenuView
@@ -95,6 +106,14 @@
 - (void)moveBack
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)keyboardClose
+{
+    if(currentTextField != nil)
+    {
+        [currentTextField resignFirstResponder];
+    }
 }
 
 @end

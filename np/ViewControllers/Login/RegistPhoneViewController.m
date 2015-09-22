@@ -53,6 +53,7 @@
  */
 - (IBAction)carrierNumClick:(id)sender
 {
+    [carrierPickerView setHidden:NO];
 }
 
 /**
@@ -136,10 +137,59 @@
     return [carrierListArray count];
 }
 
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [carrierListArray objectAtIndex:row];
+}
+
 #pragma mark - UIPickerViewDelegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [carrierSelectButton setTitle:[carrierListArray objectAtIndex:row] forState:UIControlStateNormal];
+    [carrierPickerView setHidden:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return NO;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.currentTextField = textField;
+    [self.keyboardCloseButton setEnabled:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.currentTextField = nil;
+    [self.keyboardCloseButton setEnabled:NO];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(![string isEqualToString:@""])
+    {
+        if([textField isEqual:phoneNumberInput])
+        {
+            if(textField.text.length == 8)
+            {
+                return NO;
+            }
+        }
+        else if ([textField isEqual:phoneAuthNumInput])
+        {
+            if(textField.text.length == 6)
+            {
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - AuthNumberTimer

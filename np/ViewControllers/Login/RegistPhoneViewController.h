@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
     NSArray *carrierListArray;
     BOOL isAuthNumberConfirm;
