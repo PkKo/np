@@ -24,10 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"공유하기"];
-    
     self.eventStore = [[EKEventStore alloc] init];
 }
 
@@ -212,6 +208,10 @@
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)closeSNSView {
 }
 
 @end

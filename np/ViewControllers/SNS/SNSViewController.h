@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 #import "CommonViewController.h"
+#import "TransactionObject.h"
 
-@interface SNSViewController : CommonViewController
+@interface SNSViewController : UIViewController
+
+@property (weak, nonatomic) TransactionObject *transactionObject;
 
 @property (weak, nonatomic) IBOutlet UITextView *snsContent;
 
@@ -21,5 +24,6 @@
 - (IBAction)shareOnKakaoTalk:(id)sender;
 - (IBAction)shareViaSMS:(id)sender;
 - (IBAction)shareViaCalendar:(id)sender;
+- (IBAction)closeSNSView;
 
 @end

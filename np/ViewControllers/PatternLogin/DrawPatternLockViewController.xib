@@ -27,7 +27,7 @@
                     <state key="normal" title="취소"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tae-9h-SiN">
-                    <rect key="frame" x="229" y="476" width="30" height="30"/>
+                    <rect key="frame" x="229.00000007574755" y="476" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <state key="normal" title="계속"/>
                 </button>

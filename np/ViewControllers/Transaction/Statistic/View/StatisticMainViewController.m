@@ -11,6 +11,7 @@
 #import "StatisticDateSearchView.h"
 #import "ChartMainView.h"
 #import "ChartController.h"
+#import "StorageBoxUtil.h"
 
 @interface StatisticMainViewController ()
 
@@ -145,6 +146,21 @@
     [chartMainView setFrame:chartMainViewFrame];
     
     [self.mainView addSubview:chartMainView];
+}
+
+
+- (IBAction)showMemoComposer {
+    
+    TransactionObject * transation = [[TransactionObject alloc] init];
+    [transation setTransactionDate:[NSDate date]];
+    [transation setTransactionAccountNumber:@"111-22-***33"];
+    [transation setTransactionDetails:@"당풍니"];
+    [transation setTransactionType:@"입금"];
+    [transation setTransactionAmount:[NSNumber numberWithFloat:100000.0f]];
+    
+    
+    StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
+    [util showMemoComposerInViewController:self withTransationObject:transation];
 }
 
 @end

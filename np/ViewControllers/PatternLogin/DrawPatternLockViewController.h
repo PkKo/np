@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet DrawPatternLockView *patternView;
 // get key from the pattern drawn
 - (NSString*)getKey;
-
 - (void)setTarget:(id)target withAction:(SEL)action;
 
+- (IBAction)showMemoComposer;
 @end
