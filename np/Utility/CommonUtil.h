@@ -11,4 +11,5 @@
 @interface CommonUtil : NSObject
 
 + (NSString *)getMaskingNumber:(NSString *)number;
++ (NSString *)getDeviceUUID;
 @end

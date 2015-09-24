@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="mEtcButton" destination="p9q-hj-ewS" id="Ygo-Ge-kR0"/>
+                <outlet property="mInboxButton" destination="til-m6-3mu" id="yfe-e8-EOI"/>
                 <outlet property="mIncomeButton" destination="6CO-Ig-yCw" id="ZUM-8h-Nu3"/>
                 <outlet property="mMainContentView" destination="RKl-1B-6zU" id="muf-wF-WPz"/>
                 <outlet property="mTimeLineButton" destination="okv-Vt-2u9" id="ljY-u1-SPI"/>
@@ -31,7 +32,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="okv-Vt-2u9">
-                            <rect key="frame" x="0.0" y="0.0" width="106" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="1" green="0.45274549426372956" blue="0.4836259093339389" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,7 +48,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6CO-Ig-yCw">
-                            <rect key="frame" x="107" y="0.0" width="106" height="40"/>
+                            <rect key="frame" x="80" y="0.0" width="80" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.34422640333150145" green="0.626794619893695" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="입출금">
@@ -59,14 +60,24 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="p9q-hj-ewS">
-                            <rect key="frame" x="214" y="0.0" width="106" height="40"/>
+                            <rect key="frame" x="160" y="0.0" width="80" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.38886651634906355" green="1" blue="0.27665286964965086" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="기타">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="qc2-Ln-231"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="til-m6-3mu">
+                            <rect key="frame" x="240" y="0.0" width="80" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.42964545670424714" green="1" blue="0.96794108779825261" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="보관함"/>
+                            <connections>
+                                <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="8lo-7B-TUv"/>
                             </connections>
                         </button>
                     </subviews>
@@ -81,9 +92,4 @@
             <point key="canvasLocation" x="330" y="396"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

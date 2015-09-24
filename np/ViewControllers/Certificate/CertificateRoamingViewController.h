@@ -10,10 +10,13 @@
 
 @interface CertificateRoamingViewController : CommonViewController<UIAlertViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIView *mainView;
+
 @property (strong, nonatomic) IBOutlet UILabel *certNum1;
 @property (strong, nonatomic) IBOutlet UILabel *certNum2;
 @property (strong, nonatomic) IBOutlet UILabel *certNum3;
 @property (strong, nonatomic) IBOutlet UILabel *certNum4;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
 - (IBAction)nextButtonClick:(id)sender;
 @end

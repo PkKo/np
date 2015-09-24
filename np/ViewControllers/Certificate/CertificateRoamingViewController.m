@@ -16,10 +16,14 @@
 
 @implementation CertificateRoamingViewController
 
+@synthesize mainView;
+
 @synthesize certNum1;
 @synthesize certNum2;
 @synthesize certNum3;
 @synthesize certNum4;
+
+@synthesize nextButton;
 
 - (void)viewDidLoad
 {

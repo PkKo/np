@@ -9,8 +9,19 @@
 #ifndef httpserver_Constants_h
 #define httpserver_Constants_h
 
+#define DEV_MODE        1
+
 // server url 정보
+#ifdef DEV_MODE
+// 개발서버
+#define SERVER_URL      @"https://218.239.251.103:39190/"
+#else
+// 운영서버
 #define SERVER_URL      @""
+#endif
+
+// 공인인증서 NH은행 실제 주소
+#define NH_BANK_CERT_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"
 
 /*
 *  System Versioning Preprocessor Macros
@@ -24,6 +35,8 @@
 
 #define STRING_DASH     @"-"
 #define STRING_MASKING  @"****"
+
+#define KEYCHAIN_ID     @"NHSMARTPUSH"
 
 // 가입완료된 사용자 설정
 #define IS_USER                 @"isUser"

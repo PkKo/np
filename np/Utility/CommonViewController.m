@@ -45,7 +45,7 @@
     self.mNaviView = [NavigationView view];
     [self.mNaviView setFrame:CGRectMake(0, 20, self.view.frame.size.width, self.mNaviView.frame.size.height)];
     [self.view addSubview:self.mNaviView];
-    
+    /*
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
     {
         [self.mNaviView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -54,7 +54,7 @@
             make.top.equalTo(self.view.mas_top).offset(20);
             make.height.equalTo(@(self.mNaviView.frame.size.height));
         }];
-    }
+    }*/
     
     [self.mNaviView.mMenuButton addTarget:self action:@selector(showMenuView) forControlEvents:UIControlEventTouchUpInside];
     [self.mNaviView.mBackButton addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
@@ -66,7 +66,7 @@
     [mMenuCloseButton setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [mMenuCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view addSubview:mMenuCloseButton];
-    
+    /*
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
     {
         [mMenuCloseButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +75,7 @@
             make.right.equalTo(self.view.mas_right);
             make.bottom.equalTo(self.view.mas_bottom);
         }];
-    }
+    }*/
     
     [self.view bringSubviewToFront:mMenuCloseButton];
     
