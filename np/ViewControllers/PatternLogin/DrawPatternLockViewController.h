@@ -22,5 +22,4 @@
 - (NSString*)getKey;
 - (void)setTarget:(id)target withAction:(SEL)action;
 
-- (IBAction)showMemoComposer;
 @end

@@ -14,4 +14,6 @@
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 - (void)showSNSShareInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 
++ (UIColor *)getDimmedBackgroundColor;
+
 @end

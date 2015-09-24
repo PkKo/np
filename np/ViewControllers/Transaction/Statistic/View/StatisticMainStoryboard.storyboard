@@ -13,35 +13,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jJt-N1-f2m">
-                                <rect key="frame" x="249" y="70" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Search">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clickSearchButton" destination="lHy-Af-bbj" eventType="touchUpInside" id="Ctz-Dy-zSE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fuM-qT-gdd">
-                                <rect key="frame" x="44" y="70" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="메모 작성"/>
-                                <connections>
-                                    <action selector="showMemoComposer" destination="lHy-Af-bbj" eventType="touchUpInside" id="rVl-h0-MBh"/>
-                                </connections>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="FQC-y1-FDJ">
+                                <rect key="frame" x="0.0" y="61" width="320" height="507"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fuM-qT-gdd">
+                                        <rect key="frame" x="8" y="8" width="56" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="메모 작성"/>
+                                        <connections>
+                                            <action selector="showMemoComposer" destination="lHy-Af-bbj" eventType="touchUpInside" id="rVl-h0-MBh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jJt-N1-f2m">
+                                        <rect key="frame" x="263" y="8" width="48" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Search">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickSearchButton" destination="lHy-Af-bbj" eventType="touchUpInside" id="Ctz-Dy-zSE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="mainView" destination="QgP-Nu-Sva" id="KsD-hV-bsu"/>
+                        <outlet property="scrollView" destination="FQC-y1-FDJ" id="flB-hX-Ndl"/>
                         <outlet property="searchButton" destination="jJt-N1-f2m" id="Mqk-XX-Rjo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oct-24-KSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266.66666666666669" y="285.89333333333332"/>
+            <point key="canvasLocation" x="266" y="285"/>
         </scene>
     </scenes>
 </document>

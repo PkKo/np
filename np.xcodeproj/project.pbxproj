@@ -244,6 +244,7 @@
 		A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235401BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib */; };
 		A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */; };
 		A2E235471BAAACAF00BAEBEA /* HomeQuickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */; };
+		A507B32A1BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */; settings = {ASSET_TAGS = (); }; };
 		A54B94D11BAA454200D5D99B /* ChartDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94C61BAA454200D5D99B /* ChartDataTableView.m */; };
 		A54B94D21BAA454200D5D99B /* ChartMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94C71BAA454200D5D99B /* ChartMainView.xib */; };
 		A54B94D31BAA454200D5D99B /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94C91BAA454200D5D99B /* ItemTableViewCell.m */; };
@@ -605,6 +606,8 @@
 		A2E235431BAAACAF00BAEBEA /* HomeQuickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQuickViewController.h; sourceTree = "<group>"; };
 		A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQuickViewController.m; sourceTree = "<group>"; };
 		A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQuickViewController.xib; sourceTree = "<group>"; };
+		A507B3281BB3EA7E00BB42D6 /* StatisticDateSearchUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatisticDateSearchUtil.h; path = Common/StatisticDateSearchUtil.h; sourceTree = "<group>"; };
+		A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatisticDateSearchUtil.m; path = Common/StatisticDateSearchUtil.m; sourceTree = "<group>"; };
 		A54B94C51BAA454200D5D99B /* ChartDataTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataTableView.h; sourceTree = "<group>"; };
 		A54B94C61BAA454200D5D99B /* ChartDataTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataTableView.m; sourceTree = "<group>"; };
 		A54B94C71BAA454200D5D99B /* ChartMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChartMainView.xib; path = ChartData/ChartMainView.xib; sourceTree = "<group>"; };
@@ -1421,6 +1424,15 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		A507B3211BB3E93200BB42D6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A507B3281BB3EA7E00BB42D6 /* StatisticDateSearchUtil.h */,
+				A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		A54B94C31BAA454200D5D99B /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1595,6 +1607,7 @@
 		A5ED26541BA943C0007E6689 /* DateSearch */ = {
 			isa = PBXGroup;
 			children = (
+				A507B3211BB3E93200BB42D6 /* Common */,
 				A5ED26551BA943C0007E6689 /* StatisticDateSearchView.h */,
 				A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */,
 				A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */,
@@ -1947,6 +1960,7 @@
 				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,
 				A54B94D11BAA454200D5D99B /* ChartDataTableView.m in Sources */,
 				A2DEAE5E1B9FE6D800EDCCBA /* MASConstraintMaker.m in Sources */,
+				A507B32A1BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m in Sources */,
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,

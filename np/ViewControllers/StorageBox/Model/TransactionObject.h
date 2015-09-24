@@ -10,10 +10,14 @@
 
 @interface TransactionObject : NSObject
 
-@property (nonatomic, weak) NSDate * transactionDate;
-@property (nonatomic, weak) NSString * transactionAccountNumber;
-@property (nonatomic, weak) NSString * transactionDetails;
-@property (nonatomic, weak) NSString * transactionType;
-@property (nonatomic, weak) NSNumber * transactionAmount;
+@property (nonatomic, copy) NSDate * transactionDate;
+@property (nonatomic, copy) NSString * transactionAccountNumber;
+@property (nonatomic, copy) NSString * transactionDetails;
+@property (nonatomic, copy) NSString * transactionType;
+@property (nonatomic, copy) NSNumber * transactionAmount;
+
+- (NSString *)formattedTransactionDate;
+
+- (NSString *)formattedTransactionAmount;
 
 @end

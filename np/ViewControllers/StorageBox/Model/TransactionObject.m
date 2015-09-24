@@ -10,4 +10,19 @@
 
 @implementation TransactionObject
 
+- (NSString *)formattedTransactionDate {
+    
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mm"];
+    return [dateFormatter stringFromDate:self.transactionDate];
+}
+
+- (NSString *)formattedTransactionAmount {
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    return [NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]]];
+}
+
 @end

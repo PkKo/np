@@ -13,7 +13,7 @@
 
 @interface SNSViewController : UIViewController
 
-@property (weak, nonatomic) TransactionObject *transactionObject;
+@property (strong, nonatomic) TransactionObject *transactionObject;
 
 @property (weak, nonatomic) IBOutlet UITextView *snsContent;
 

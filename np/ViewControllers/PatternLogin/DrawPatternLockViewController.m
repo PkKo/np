@@ -139,8 +139,10 @@
     [_patternView setNeedsDisplay];
     
     // pass the output to target action...
+    /*
     if (_target && _action)
         [_target performSelector:_action withObject:[self getKey]];
+     */
 }
 
 // get key from the pattern drawn

@@ -12,7 +12,8 @@
 #import "CertificateMenuViewController.h"
 #import "StatisticMainViewController.h"
 #import "SNSViewController.h"
-#import "DrawPatternLockViewController.h"
+#import "MenuTableEtcView.h"
+#import "NotiSettingMenuViewController.h"
 
 @interface MenuViewController ()
 
@@ -26,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], @[@"패턴 로그인", @"DrawPatternLockViewController"], nil];
+    mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"전체", @"HomeViewController"], @[@"입출금", @"HomeViewController"], @[@"기타", @"HomeViewController"], @[@"보관함", @"HomeViewController"], @[@"알림설정", @"NotiSettingListViewController"], @[@"환경설정", @""], @[@"고객센터", @""], @[@"NH APPZONE", @""], nil];
 
 	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
     MenuTableEtcView *footerView = [MenuTableEtcView view];
@@ -110,6 +111,8 @@
         }
         case 5: // 환경설정
         {
+            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
+            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
             break;
         }
         case 6: // 고객센터
@@ -118,7 +121,6 @@
         }
         case 7: // NH APPZONE
         {
-            newTopViewController = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
             break;
         }
             

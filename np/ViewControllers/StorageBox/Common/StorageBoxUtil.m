@@ -13,6 +13,10 @@
 
 @implementation StorageBoxUtil
 
++ (UIColor *)getDimmedBackgroundColor {
+    return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+}
+
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
     
     NSLog(@"showMemoComposerInViewController");

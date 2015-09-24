@@ -17,28 +17,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="Co5-nm-ekY">
-                    <rect key="frame" x="8" y="81" width="304" height="384"/>
+                    <rect key="frame" x="21" y="81" width="281" height="384"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cpm-cY-Ymb">
-                            <rect key="frame" x="13" y="208" width="78" height="30"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                            <rect key="frame" x="8" y="208" width="78" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="카카오스토리"/>
                             <connections>
                                 <action selector="shareOnKakaoStory:" destination="-1" eventType="touchUpInside" id="ion-3b-JCp"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z2o-4t-v8K">
-                            <rect key="frame" x="128" y="208" width="52" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                            <rect key="frame" x="115" y="208" width="52" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="페이스북"/>
                             <connections>
                                 <action selector="shareOnFacebook:" destination="-1" eventType="touchUpInside" id="Ujq-Cg-ZsV"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CMY-a7-zQs">
-                            <rect key="frame" x="237" y="208" width="39" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                            <rect key="frame" x="234" y="208" width="39" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="트위터">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -47,46 +47,46 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IsX-b5-4Ob">
-                            <rect key="frame" x="13" y="246" width="52" height="30"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                            <rect key="frame" x="8" y="246" width="52" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="카카오톡"/>
                             <connections>
                                 <action selector="shareOnKakaoTalk:" destination="-1" eventType="touchUpInside" id="HUd-FI-Hk4"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JZS-bV-NJM">
-                            <rect key="frame" x="136" y="246" width="33" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                            <rect key="frame" x="123" y="246" width="33" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="SMS"/>
                             <connections>
                                 <action selector="shareViaSMS:" destination="-1" eventType="touchUpInside" id="HhS-ph-y1L"/>
                             </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="2015/09/17 12:30 111-22-***33 당풍니 입금 100,000원" selectable="NO" id="goe-23-NDR">
-                            <rect key="frame" x="11" y="124" width="283" height="66.5"/>
+                            <rect key="frame" x="8" y="124" width="265" height="66.5"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공유하식 문구를 작성해주세요. (SMS/MMS으로 전송 시 비용이 발생할 수 있습니다.)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Krj-1z-eR2">
-                            <rect key="frame" x="8" y="46" width="288" height="64"/>
+                            <rect key="frame" x="8" y="46" width="265" height="64"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jwJ-PA-0Ce">
-                            <rect key="frame" x="139" y="338" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <rect key="frame" x="126" y="338" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <state key="normal" title="닫기"/>
                             <connections>
                                 <action selector="closeSNSView" destination="-1" eventType="touchUpInside" id="zUg-wr-Dyc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j9m-Ch-woF">
-                            <rect key="frame" x="237" y="246" width="39" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                            <rect key="frame" x="234" y="246" width="39" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="캘린더">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

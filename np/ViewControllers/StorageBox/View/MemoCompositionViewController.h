@@ -12,7 +12,7 @@
 
 @interface MemoCompositionViewController : UIViewController
 
-@property (nonatomic) TransactionObject *transactionObject;
+@property (nonatomic, strong) TransactionObject *transactionObject;
 
 - (IBAction)removeComposer;
 - (IBAction)saveToStorageBox;
