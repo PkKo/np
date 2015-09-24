@@ -17,5 +17,6 @@
 @property (strong, nonatomic) UITextField *currentTextField;
 
 - (void)makeNaviAndMenuView;
+- (void)closeMenuView;
 - (void)keyboardClose;
 @end

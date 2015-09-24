@@ -29,7 +29,8 @@
     mMenuTitleArray = [[NSArray alloc] initWithObjects:@[@"타임라인", @"HomeViewController"], @[@"공인인증서 관리", @"CertificateMenuViewController"], @[@"입출금", @"StatisticMainViewController"], @[@"패턴 로그인", @"DrawPatternLockViewController"], nil];
 
 	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+    MenuTableEtcView *footerView = [MenuTableEtcView view];
+    [footerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, footerView.frame.size.height)];
     [menuTableView setTableFooterView:footerView];
 }
 
@@ -74,26 +75,48 @@
     
     UIViewController *newTopViewController = nil;
     
-    switch (indexPath.row) {
-        case 0:
+    switch (indexPath.row)
+    {
+        case 0: // 전체
         {
             newTopViewController = [[HomeViewController alloc] init];
+            [(HomeViewController *)newTopViewController setMViewType:TIMELINE];
             break;
         }
-        case 1:
+        case 1: // 입출금
         {
+//            newTopViewController = [[HomeViewController alloc] init];
+//            [(HomeViewController *)newTopViewController setMViewType:BANKING];
+            // 임시 공인인증서 뷰 컨트롤러 적용
             newTopViewController = [[CertificateMenuViewController alloc] init];
             break;
         }
-        case 2:
+        case 2: // 기타
         {
-            
-            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
-            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
-            
+            newTopViewController = [[HomeViewController alloc] init];
+            [(HomeViewController *)newTopViewController setMViewType:OTHER];
             break;
         }
-        case 3:
+        case 3: // 보관함
+        {
+            newTopViewController = [[HomeViewController alloc] init];
+            [(HomeViewController *)newTopViewController setMViewType:INBOX];
+            break;
+        }
+        case 4: // 알림설정
+        {
+            newTopViewController = [[NotiSettingMenuViewController alloc] init];
+            break;
+        }
+        case 5: // 환경설정
+        {
+            break;
+        }
+        case 6: // 고객센터
+        {
+            break;
+        }
+        case 7: // NH APPZONE
         {
             newTopViewController = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
             break;

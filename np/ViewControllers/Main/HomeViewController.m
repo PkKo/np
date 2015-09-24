@@ -21,6 +21,7 @@
 
 @synthesize mIncomeButton;
 @synthesize mEtcButton;
+@synthesize mInboxButton;
 
 @synthesize mMainContentView;
 
@@ -57,17 +58,19 @@
     
     switch ([sender tag])
     {
-        case TIMELINE:
+        case TIMELINE:  // 전체
         {
             break;
         }
-            
-        case BANKING:
+        case BANKING:   // 입출금
         {
             break;
         }
-            
-        case OTHER:
+        case OTHER:     // 기타
+        {
+            break;
+        }
+        case INBOX:     // 보관함
         {
             break;
         }

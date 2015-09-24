@@ -28,6 +28,9 @@
     [self.mNaviView.mTitleLabel setText:@"공인인증서센터"];
     
     mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC -> 스마트폰 인증서 가져오기", @"스마트폰 -> 스마트폰 인증서 가져오기", @"인증서 관리", nil];
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+    [mCertMenuTableView setTableFooterView:footerView];
 }
 
 - (void)viewWillAppear:(BOOL)animated

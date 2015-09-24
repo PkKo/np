@@ -7,6 +7,7 @@
 //
 
 #import "CommonUtil.h"
+#import "KeychainItemWrapper.h"
 
 @implementation CommonUtil
 
@@ -45,5 +46,27 @@
     }
     
     return maskingNumber;
+}
+
++ (NSString *)getDeviceUUID
+{
+    KeychainItemWrapper *keyChainWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    NSString *uuidString = [keyChainWrapper objectForKey:(__bridge NSString *)kSecAttrAccount];
+    
+    // 키체인에 저장된 UUID가 없으면 새로 생성해 키체인에 저장하고 값을 리턴한다
+    if(uuidString == nil || uuidString.length <= 0)
+    {
+        CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+        CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+        CFRelease(uuidRef);
+        
+        uuidString = [NSString stringWithString:(__bridge NSString *)uuidStringRef];
+        CFRelease(uuidStringRef);
+        
+        // 키체인에 UUID 저장
+        [keyChainWrapper setObject:uuidString forKey:(__bridge NSString *)kSecAttrAccount];
+    }
+    
+    return uuidString;
 }
 @end

@@ -13,7 +13,8 @@ typedef enum HomeViewType
 {
     TIMELINE    = 100,
     BANKING,
-    OTHER
+    OTHER,
+    INBOX
 } HomeViewType;
 
 @interface HomeViewController : CommonViewController
@@ -27,6 +28,8 @@ typedef enum HomeViewType
 @property (strong, nonatomic) IBOutlet UIButton *mIncomeButton;
 // 기타메시지 탭
 @property (strong, nonatomic) IBOutlet UIButton *mEtcButton;
+// 보관함 탭
+@property (strong, nonatomic) IBOutlet UIButton *mInboxButton;
 // 실제 내용을 보여줄 뷰
 @property (strong, nonatomic) IBOutlet UIView *mMainContentView;
 

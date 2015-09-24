@@ -8,7 +8,7 @@
 
 #import "SplashViewController.h"
 #import "HomeViewController.h"
-#import "RegistPhoneViewController.h"
+#import "RegistAccountViewController.h"
 
 @interface SplashViewController ()
 
@@ -44,9 +44,9 @@
 - (void)setMainViewController
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-//    HomeViewController *vc = [[HomeViewController alloc] init];
-//    [vc setMViewType:TIMELINE];
-    RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+    HomeViewController *vc = [[HomeViewController alloc] init];
+    [vc setMViewType:TIMELINE];
+//    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
     slidingViewController.topViewController = vc;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
