@@ -8,57 +8,77 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StatisticDateSearchView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015년 9월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="12C-J1-1jF">
-                    <rect key="frame" x="119" y="8" width="83" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="05S-Ow-sYW">
-                    <rect key="frame" x="86" y="2" width="30" height="30"/>
+                    <rect key="frame" x="63" y="0.0" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="&lt;"/>
+                    <connections>
+                        <action selector="choosePrvMonth" destination="iN0-l3-epB" eventType="touchUpInside" id="FJ6-jk-M5Q"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hWS-tV-Q3V">
-                    <rect key="frame" x="205" y="2" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="233" y="0.0" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="&gt;"/>
+                    <connections>
+                        <action selector="chooseNxtMonth" destination="iN0-l3-epB" eventType="touchUpInside" id="5cD-Gy-klI"/>
+                    </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2015.08.02" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="7Nl-8f-NFK">
-                    <rect key="frame" x="8" y="40" width="88" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2015/08/02" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="7Nl-8f-NFK">
+                    <rect key="frame" x="2" y="38" width="97" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h4i-0m-hDK">
-                    <rect key="frame" x="101" y="40" width="33" height="30"/>
+                    <rect key="frame" x="104" y="38" width="33" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Date"/>
+                    <connections>
+                        <action selector="chooseStartDate" destination="iN0-l3-epB" eventType="touchUpInside" id="mvm-HS-i8Y"/>
+                    </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2015.09.01" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="1jq-tl-0Kh">
-                    <rect key="frame" x="140" y="40" width="88" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2015/09/01" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="1jq-tl-0Kh">
+                    <rect key="frame" x="136" y="38" width="95" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R7B-u0-iEh">
-                    <rect key="frame" x="233" y="40" width="33" height="30"/>
+                    <rect key="frame" x="233" y="38" width="33" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Date"/>
+                    <connections>
+                        <action selector="chooseEndDate" destination="iN0-l3-epB" eventType="touchUpInside" id="2iI-68-uQK"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Prw-wQ-jmi">
-                    <rect key="frame" x="282" y="40" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="282" y="38" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="검색"/>
+                    <connections>
+                        <action selector="searchTransactions" destination="iN0-l3-epB" eventType="touchUpInside" id="sr0-Zi-xpd"/>
+                    </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="12C-J1-1jF">
+                    <rect key="frame" x="110" y="6" width="100" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="386" y="504.5"/>
+            <connections>
+                <outlet property="endDate" destination="1jq-tl-0Kh" id="gLp-gr-Yjh"/>
+                <outlet property="selectedMonth" destination="12C-J1-1jF" id="c4N-cU-tnN"/>
+                <outlet property="startDate" destination="7Nl-8f-NFK" id="xX6-ow-lBi"/>
+            </connections>
+            <point key="canvasLocation" x="384" y="496.5"/>
         </view>
     </objects>
 </document>

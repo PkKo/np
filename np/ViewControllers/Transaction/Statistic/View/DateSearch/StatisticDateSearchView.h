@@ -8,6 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol StatisticDateSearchViewDelegate <NSObject>
+
+- (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
+- (void)showDatePickerForStartDate;
+- (void)showDatePickerForEndDate;
+
+@end
+
 @interface StatisticDateSearchView : UIView
+
+@property (weak) id<StatisticDateSearchViewDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UILabel *selectedMonth;
+- (IBAction)choosePrvMonth;
+- (IBAction)chooseNxtMonth;
+
+@property (weak, nonatomic) IBOutlet UITextField *startDate;
+@property (weak, nonatomic) IBOutlet UITextField *endDate;
+- (IBAction)chooseStartDate;
+- (IBAction)chooseEndDate;
+
+- (IBAction)searchTransactions;
+
+- (void)updateCurrentYearMonth;
 
 @end

@@ -2120,7 +2120,10 @@
 					"$(PROJECT_DIR)/np/Library/BTW-SSLSign",
 					"$(PROJECT_DIR)/np/Library/nFilter/Common/LibNFilter",
 				);
-				OTHER_LDFLAGS = "-w";
+				OTHER_LDFLAGS = (
+					"-w",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
 			};
@@ -2148,7 +2151,10 @@
 					"$(PROJECT_DIR)/np/Library/BTW-SSLSign",
 					"$(PROJECT_DIR)/np/Library/nFilter/Common/LibNFilter",
 				);
-				OTHER_LDFLAGS = "-w";
+				OTHER_LDFLAGS = (
+					"-w",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
 			};

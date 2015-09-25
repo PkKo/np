@@ -13,7 +13,7 @@
 @interface StatisticDateSearchUtil : NSObject
 
 - (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIScrollView *)scrollView;
-- (void)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY;
+- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY;
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView;
 
 @end

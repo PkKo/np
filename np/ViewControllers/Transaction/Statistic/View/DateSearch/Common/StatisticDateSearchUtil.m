@@ -26,7 +26,7 @@
     return nil;
 }
 
-- (void)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY {
+- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY {
     
     // add date search view
     NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"StatisticDateSearchView" owner:self options:nil];
@@ -42,6 +42,7 @@
     
     [dateSearchView setFrame:fromDateSearchViewFrame];
     [scrollView addSubview:dateSearchView];
+    [dateSearchView updateCurrentYearMonth];
     
     // move Date Search view down and reduce its height
     /*
@@ -55,7 +56,11 @@
                          [dateSearchView setFrame:toDateSearchViewFrame];
                          //[chartMainView setFrame:shrunkChartMainViewFrame];
                      }
-                     completion:^(BOOL finished) {}];
+                     completion:^(BOOL finished) {
+                         
+                     }];
+    
+    return dateSearchView;
 }
 
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView {

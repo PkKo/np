@@ -19,8 +19,6 @@
 
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
     
-    NSLog(@"showMemoComposerInViewController");
-    
     MemoCompositionViewController * memoComposer = [[MemoCompositionViewController alloc] initWithNibName:@"MemoCompositionViewController"
                                                                                                    bundle:nil];
     [memoComposer setTransactionObject:transactionObject];
@@ -28,8 +26,6 @@
 }
 
 - (void)showSNSShareInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
-    
-    NSLog(@"showSNSShareInViewController");
     
     SNSViewController * snsShare = [[SNSViewController alloc] initWithNibName:@"SNSViewController"
                                                                                                    bundle:nil];
@@ -40,14 +36,23 @@
 
 - (void)showViewController:(UIViewController *)viewController inParentViewController:(UIViewController *)parentViewController {
     
-    NSLog(@"showViewController");
-    
     viewController.view.frame             = parentViewController.view.bounds;
     viewController.view.autoresizingMask  = parentViewController.view.autoresizingMask;
     
     [parentViewController addChildViewController:viewController];
     [parentViewController.view addSubview:viewController.view];
-    
+    /*
+    [parentViewController transitionFromViewController:parentViewController
+                                      toViewController:viewController
+                                              duration:0.3f
+                                               options:UIViewAnimationOptionLayoutSubviews
+                                            animations:^{
+                                                viewController.view.frame             = parentViewController.view.bounds;
+                                            }
+                                            completion:^(BOOL finished) {
+                                                [viewController didMoveToParentViewController:parentViewController];
+                                            }];
+    */
     [viewController didMoveToParentViewController:parentViewController];
 }
 

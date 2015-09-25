@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
+#import "StatisticDateSearchView.h"
 
-@interface StatisticMainViewController : CommonViewController
+@interface StatisticMainViewController : CommonViewController <StatisticDateSearchViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

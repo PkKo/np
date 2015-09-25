@@ -8,7 +8,6 @@
 
 #import "StatisticMainViewController.h"
 #import "StatisticMainUtil.h"
-#import "StatisticDateSearchView.h"
 #import "ChartMainView.h"
 #import "ChartController.h"
 #import "StorageBoxUtil.h"
@@ -33,26 +32,60 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"%s:%d", __func__, __LINE__);
 }
 
-/*
- #pragma mark - Date Search View
- */
+
+#pragma mark - Date Search View
+
 - (IBAction)clickSearchButton {
     
     StatisticDateSearchUtil * dateSearchUtil        = [[StatisticDateSearchUtil alloc] init];
     StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
     
     if (existedDateSearchView) {
-        
         [dateSearchUtil hideDateSearchView:existedDateSearchView];
-        
     } else {
         
         CGFloat belowSearchButtonY = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
-        [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
+        existedDateSearchView = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
+        existedDateSearchView.delegate = self;
     }
 }
+
+- (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    
+    NSLog(@"refreshChartFromDate fromDate: %@ - toDate: %@", [dateFormatter stringFromDate:fromDate], [dateFormatter stringFromDate:toDate]);
+}
+
+- (void)showDatePickerForStartDate {
+    [self showDatePicker];
+}
+- (void)showDatePickerForEndDate {
+    [self showDatePicker];
+}
+
+- (void)showDatePicker {
+    
+    CGFloat datePickerHeight = 300;
+    CGFloat datePickerWith = self.view.frame.size.width;
+    CGFloat datePickerY = self.view.frame.size.height - datePickerHeight;
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, datePickerY, datePickerWith, datePickerHeight)];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    [datePicker addTarget:self action:@selector(onDatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:datePicker];
+}
+
+- (void)onDatePickerValueChanged:(UIDatePicker *)datePicker {
+    NSLog(@"onDatePickerValueChanged");
+}
+
+
+
 
 - (ChartMainView *)getChartMainView {
     NSArray *subviewArray = [self.mainView subviews];
