@@ -11,8 +11,8 @@
 @protocol StatisticDateSearchViewDelegate <NSObject>
 
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
-- (void)showDatePickerForStartDate;
-- (void)showDatePickerForEndDate;
+- (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
+- (void)showDatePickerForEndDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
 
 @end
 
@@ -32,5 +32,7 @@
 - (IBAction)searchTransactions;
 
 - (void)updateCurrentYearMonth;
+- (void)updateStartDate:(NSDate *)startDate;
+- (void)updateEndDate:(NSDate *)endDate;
 
 @end

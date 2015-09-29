@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#define INCOME  @"income"
+#define EXPENSE @"expense"
+
 @interface ChartItemData : NSObject
 
-@property NSString *itemColor;
-@property NSString *itemName;
-@property NSString *itemValue;
-@property BOOL *isIncome; // not income is expense
+@property (nonatomic, copy) NSString * itemColor;
+@property (nonatomic, copy) NSString * itemName;
+@property (nonatomic, copy) NSString * itemPercent;
+@property (nonatomic, copy) NSString * itemValue;
+@property (nonatomic, copy) NSString * itemType; // income or expense
+
+- (instancetype)initWithColor:(NSString *)color name:(NSString *)name percent:(NSString *)percent value:(NSString *)value type:(NSString *)itemType;
 
 @end

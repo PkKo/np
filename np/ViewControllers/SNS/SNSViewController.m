@@ -61,24 +61,61 @@
 }
 
 - (NSArray *)kakaotalkMessage {
-    KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:_snsContent.text];
-    KakaoTalkLinkObject *image = [KakaoTalkLinkObject createImage:@"https://developers.kakao.com/assets/img/link_sample.jpg"
-                                                            width:138 height:80];
-    KakaoTalkLinkObject *webLink = [KakaoTalkLinkObject createWebLink:@"NH 스마트알림 앱 다운로드"
-                                                                  url:@"https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8"];
+    KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:[NSString stringWithFormat:@"[%@]\r%@",
+                                                                   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
     
-    return @[label, image, webLink];
+    KakaoTalkLinkAction *androidAppAction = [KakaoTalkLinkAction createAppAction:KakaoTalkLinkActionOSPlatformAndroid devicetype:KakaoTalkLinkActionDeviceTypePhone execparam:@{@"test1" : @"test1", @"test2" : @"test2"}];
+    
+    KakaoTalkLinkAction *iphoneAppAction = [KakaoTalkLinkAction createAppAction:KakaoTalkLinkActionOSPlatformIOS
+                                                                     devicetype:KakaoTalkLinkActionDeviceTypePhone
+                                                                      execparam:@{@"test1" : @"test1", @"test2" : @"test2"}];
+    
+    KakaoTalkLinkAction *ipadAppAction = [KakaoTalkLinkAction createAppAction:KakaoTalkLinkActionOSPlatformIOS
+                                                                   devicetype:KakaoTalkLinkActionDeviceTypePad
+                                                                    execparam:@{@"test1" : @"test1", @"test2" : @"test2"}];
+    
+    
+    KakaoTalkLinkObject *appLink = [KakaoTalkLinkObject createAppButton:@"앱으로 연결"
+                                                                actions:@[androidAppAction, iphoneAppAction, ipadAppAction]];
+    
+    return @[label, appLink];
 }
 
 - (IBAction)shareOnKakaoStory:(id)sender {
+    
     if (![StoryLinkHelper canOpenStoryLink]) {
         NSLog(@"Cannot open kakao story.");
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://story.kakao.com/s/login"]];
         return;
     }
     
-    [StoryLinkHelper openStoryLinkWithURLString:[self kakaoStoryContent]];
+    [StoryLinkHelper openStoryLinkWithURLString:[self dummyStoryLinkURLString]];
 }
+
+
+
+
+- (NSString *)dummyStoryLinkURLString {
+    
+    NSLog(@"[%s %d]", __func__, __LINE__);
+    
+    NSBundle *bundle        = [NSBundle mainBundle];
+    ScrapInfo *scrapInfo    = [[ScrapInfo alloc] init];
+    scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
+    scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
+    scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
+    scrapInfo.type = ScrapTypeVideo;
+    
+    NSString * text = [NSString stringWithFormat:@"[%@]2015/09/17 12:30 111-22-***33 당풍니 입금 100,000원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
+                       [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
+    
+    return [StoryLinkHelper makeStoryLinkWithPostingText:text
+                                             appBundleID:[bundle bundleIdentifier]
+                                              appVersion:[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+                                                 appName:[bundle objectForInfoDictionaryKey:@"CFBundleName"]
+                                               scrapInfo:scrapInfo];
+}
+
 
 - (NSString *)kakaoStoryContent {
     
@@ -87,7 +124,7 @@
     scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
     scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
-    scrapInfo.type          = ScrapTypeNone;
+    scrapInfo.type          = ScrapTypeArticle;
     
     return [StoryLinkHelper makeStoryLinkWithPostingText:[NSString stringWithFormat:@"[%@]\r%@",
                                                           [bundle objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]

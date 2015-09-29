@@ -8,12 +8,25 @@
 
 #import "StatisticMainViewController.h"
 #import "StatisticMainUtil.h"
-#import "ChartMainView.h"
 #import "ChartController.h"
 #import "StorageBoxUtil.h"
-#import "StatisticDateSearchUtil.h"
+#import "StatisticMainUtil.h"
+#import "ChartDataView.h"
+#import "ChartItemData.h"
+#import "CustomizedDatePickerViewController.h"
 
-@interface StatisticMainViewController ()
+@interface StatisticMainViewController () {
+    
+    CustomizedDatePickerViewController * _datePicker;
+    
+    PieChartWithInputData   * _doughnutChart;
+    ChartDataView           * _incomeDataView;
+    ChartDataView           * _expenseDataView;
+    
+    NSArray * _dataSource; // array of ChartItemData
+    NSArray * _incomeDataSource;
+    NSArray * _expenseDataSource;
+}
 
 @end
 
@@ -26,7 +39,13 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"입금/지출 통계"];
     
-    //[self addChartView];
+    NSDate * today          = [NSDate date];
+    NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDate:1 beforeThisDate:today];
+    [self updateSelectedDates:dateAmonthAgo toDate:today];
+    
+    [self loadData];
+    [self addChart];
+    [self addChartData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,80 +59,107 @@
 
 - (IBAction)clickSearchButton {
     
-    StatisticDateSearchUtil * dateSearchUtil        = [[StatisticDateSearchUtil alloc] init];
+    StatisticMainUtil       * dateSearchUtil        = [[StatisticMainUtil alloc] init];
     StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
     
     if (existedDateSearchView) {
         [dateSearchUtil hideDateSearchView:existedDateSearchView];
     } else {
         
-        CGFloat belowSearchButtonY = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
-        existedDateSearchView = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
-        existedDateSearchView.delegate = self;
+        CGFloat belowSearchButtonY      = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
+        existedDateSearchView           = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
+        existedDateSearchView.delegate  = self;
     }
 }
 
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [self updateSelectedDates:fromDate toDate:toDate];
+}
+
+- (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
     
-    NSLog(@"refreshChartFromDate fromDate: %@ - toDate: %@", [dateFormatter stringFromDate:fromDate], [dateFormatter stringFromDate:toDate]);
+    StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
+    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate inParentViewController:self
+                                   doneAction:@selector(chooseStartDate:)];
 }
 
-- (void)showDatePickerForStartDate {
-    [self showDatePicker];
-}
-- (void)showDatePickerForEndDate {
-    [self showDatePicker];
-}
-
-- (void)showDatePicker {
+- (void)showDatePickerForEndDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
     
-    CGFloat datePickerHeight = 300;
-    CGFloat datePickerWith = self.view.frame.size.width;
-    CGFloat datePickerY = self.view.frame.size.height - datePickerHeight;
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, datePickerY, datePickerWith, datePickerHeight)];
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    [datePicker addTarget:self action:@selector(onDatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:datePicker];
+    StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
+    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate inParentViewController:self
+                                   doneAction:@selector(chooseEndDate:)];
 }
 
-- (void)onDatePickerValueChanged:(UIDatePicker *)datePicker {
-    NSLog(@"onDatePickerValueChanged");
+- (void)chooseStartDate:(id)sender {
+    NSLog(@"%s %d: %@", __func__, __LINE__, sender);
+    StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
+    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
+    [existedDateSearchView updateStartDate:(NSDate *)sender];
 }
 
+- (void)chooseEndDate:(id)sender {
+    NSLog(@"%s %d: %@", __func__, __LINE__, sender);
+    StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
+    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
+    [existedDateSearchView updateEndDate:(NSDate *)sender];
+}
 
-
-
-- (ChartMainView *)getChartMainView {
-    NSArray *subviewArray = [self.mainView subviews];
+- (void)updateSelectedDates:(NSDate *)fromDate toDate:(NSDate *)toDate {
     
-    for (UIView *subview in subviewArray) {
-        if ([subview isKindOfClass:[ChartMainView class]]) {
-            return (ChartMainView *)subview;
+    [self.selectedDatesLabel setText:[NSString stringWithFormat:@"%@ ~ %@",
+                                      [[StatisticMainUtil getDateFormatterDateStyle] stringFromDate:fromDate],
+                                      [[StatisticMainUtil getDateFormatterDateStyle] stringFromDate:toDate]]];
+}
+
+#pragma mark - Chart
+
+- (void)loadData {
+    ChartController * dataCtr = [[ChartController alloc] init];
+    _dataSource = [dataCtr getChartData];
+    NSMutableArray * _incomeMutableArr  = [[NSMutableArray alloc] init];
+    NSMutableArray * _expenseMutableArr = [[NSMutableArray alloc] init];
+    
+    for (ChartItemData * item in _dataSource) {
+        
+        if ([item.itemType isEqualToString:INCOME]) {
+            [_incomeMutableArr addObject:item];
+        } else {
+            [_expenseMutableArr addObject:item];
         }
     }
-    return nil;
+    
+    _incomeDataSource   = [_incomeMutableArr copy];
+    _expenseDataSource  = [_expenseMutableArr copy];
 }
 
-/*
- #pragma mark - Chart
- */
-- (void)addChartView {
+- (void)addChart {
     
-    NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"ChartMainView" owner:self options:nil];
-    ChartMainView * chartMainView = (ChartMainView *)[viewArray objectAtIndex:0];
+    StatisticMainUtil * chartUtil        = [[StatisticMainUtil alloc] init];
+    _doughnutChart = [chartUtil addPieChartToView:self.scrollView belowDateLabel:self.selectedDatesLabel];
     
-    CGRect mainFrame = self.mainView.frame;
-    CGFloat chartMainViewY = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
-    CGRect chartMainViewFrame = CGRectMake(mainFrame.origin.x, chartMainViewY, mainFrame.size.width, mainFrame.size.height - chartMainViewY);
-    [chartMainView setFrame:chartMainViewFrame];
+    NSMutableArray * colors     = [[NSMutableArray alloc] init]; // array of UIColor
+    NSMutableArray * percents   = [[NSMutableArray alloc] init];
+    for (ChartItemData *item in _dataSource ) {
+        [colors addObject: [StatisticMainUtil colorFromHexString:item.itemColor]];
+        [percents addObject:[NSNumber numberWithFloat:[item.itemPercent floatValue]]];
+    }
     
-    [self.mainView addSubview:chartMainView];
+    [_doughnutChart reloadChartWithColorArray:[colors copy] sliceArr:[percents copy]];
 }
 
+- (void)addChartData {
+    
+    StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
+    
+    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 50;
+    _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
+    
+    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 20;
+    _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+    
+    [chartViewUtil setContentSizeOfScrollView:self.scrollView];
+}
 
 - (IBAction)showMemoComposer {
     

@@ -10,4 +10,16 @@
 
 @implementation ChartItemData
 
+- (instancetype)initWithColor:(NSString *)color name:(NSString *)name percent:(NSString *)percent value:(NSString *)value type:(NSString *)itemType {
+    self = [super init];
+    if (self != nil) {
+        self.itemColor      = color;
+        self.itemName       = name;
+        self.itemPercent    = percent;
+        self.itemValue      = value;
+        self.itemType       = itemType;
+    }
+    return self;
+}
+
 @end

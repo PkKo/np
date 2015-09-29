@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 172356E61BAE621C001564A1 /* StoryLinkHelper.m */; };
+		1770448D1BB91515009638B0 /* ChartDataTotalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770448C1BB91515009638B0 /* ChartDataTotalView.xib */; settings = {ASSET_TAGS = (); }; };
+		177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1770448F1BB9152C009638B0 /* ChartDataTotalView.m */; settings = {ASSET_TAGS = (); }; };
+		17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17745DE21BB96355003609C7 /* CustomizedDatePickerViewController.m */; settings = {ASSET_TAGS = (); }; };
+		17745DE51BB96355003609C7 /* CustomizedDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17745DE31BB96355003609C7 /* CustomizedDatePickerViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1797119D1BB805F3007131A5 /* ChartDataItemView.m */; settings = {ASSET_TAGS = (); }; };
+		179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1797119F1BB80604007131A5 /* ChartDataItemView.xib */; settings = {ASSET_TAGS = (); }; };
+		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; settings = {ASSET_TAGS = (); }; };
 		A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */; settings = {ASSET_TAGS = (); }; };
 		A2D90D5D1BB2304900315425 /* RegistCertMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2D90D601BB2489300315425 /* RegistCertPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5F1BB2489300315425 /* RegistCertPassView.m */; settings = {ASSET_TAGS = (); }; };
@@ -244,14 +251,6 @@
 		A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235401BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib */; };
 		A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */; };
 		A2E235471BAAACAF00BAEBEA /* HomeQuickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */; };
-		A507B32A1BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */; settings = {ASSET_TAGS = (); }; };
-		A54B94D11BAA454200D5D99B /* ChartDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94C61BAA454200D5D99B /* ChartDataTableView.m */; };
-		A54B94D21BAA454200D5D99B /* ChartMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94C71BAA454200D5D99B /* ChartMainView.xib */; };
-		A54B94D31BAA454200D5D99B /* ItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94C91BAA454200D5D99B /* ItemTableViewCell.m */; };
-		A54B94D41BAA454200D5D99B /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94CA1BAA454200D5D99B /* ItemTableViewCell.xib */; };
-		A54B94D51BAA454200D5D99B /* TotalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94CC1BAA454200D5D99B /* TotalTableViewCell.m */; };
-		A54B94D61BAA454200D5D99B /* TotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94CD1BAA454200D5D99B /* TotalTableViewCell.xib */; };
-		A54B94D71BAA454200D5D99B /* ChartMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94CF1BAA454200D5D99B /* ChartMainView.m */; };
 		A54B94DA1BAA4BF700D5D99B /* PieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94D91BAA4BF700D5D99B /* PieChart.m */; };
 		A54B94DD1BAA4EE400D5D99B /* PieChartWithInputData.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94DC1BAA4EE400D5D99B /* PieChartWithInputData.m */; };
 		A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B94E01BAA841C00D5D99B /* SNSViewController.m */; };
@@ -270,8 +269,6 @@
 		A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */; };
 		A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */; };
 		A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26421BA943C0007E6689 /* ChartController.m */; };
-		A5ED265D1BA943C0007E6689 /* DummyChartData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26431BA943C0007E6689 /* DummyChartData.plist */; };
-		A5ED265E1BA943C0007E6689 /* ChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26461BA943C0007E6689 /* ChartData.m */; };
 		A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */; };
 		A5ED26671BA943C0007E6689 /* StatisticDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */; };
 		A5ED26681BA943C0007E6689 /* StatisticMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26581BA943C0007E6689 /* StatisticMainStoryboard.storyboard */; };
@@ -292,6 +289,17 @@
 /* Begin PBXFileReference section */
 		172356E51BAE621C001564A1 /* StoryLinkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryLinkHelper.h; path = SNS/StoryLinkHelper.h; sourceTree = "<group>"; };
 		172356E61BAE621C001564A1 /* StoryLinkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryLinkHelper.m; path = SNS/StoryLinkHelper.m; sourceTree = "<group>"; };
+		1770448C1BB91515009638B0 /* ChartDataTotalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartDataTotalView.xib; sourceTree = "<group>"; };
+		1770448E1BB9152C009638B0 /* ChartDataTotalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataTotalView.h; sourceTree = "<group>"; };
+		1770448F1BB9152C009638B0 /* ChartDataTotalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataTotalView.m; sourceTree = "<group>"; };
+		17745DE11BB96355003609C7 /* CustomizedDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedDatePickerViewController.h; sourceTree = "<group>"; };
+		17745DE21BB96355003609C7 /* CustomizedDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedDatePickerViewController.m; sourceTree = "<group>"; };
+		17745DE31BB96355003609C7 /* CustomizedDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomizedDatePickerViewController.xib; sourceTree = "<group>"; };
+		1797119C1BB805F3007131A5 /* ChartDataItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataItemView.h; sourceTree = "<group>"; };
+		1797119D1BB805F3007131A5 /* ChartDataItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataItemView.m; sourceTree = "<group>"; };
+		1797119F1BB80604007131A5 /* ChartDataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartDataItemView.xib; sourceTree = "<group>"; };
+		179711A11BB80869007131A5 /* ChartDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataView.h; sourceTree = "<group>"; };
+		179711A21BB80869007131A5 /* ChartDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataView.m; sourceTree = "<group>"; };
 		A2D90D591BB2303900315425 /* RegistCertMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistCertMenuView.h; sourceTree = "<group>"; };
 		A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistCertMenuView.m; sourceTree = "<group>"; };
 		A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistCertMenuView.xib; sourceTree = "<group>"; };
@@ -606,19 +614,6 @@
 		A2E235431BAAACAF00BAEBEA /* HomeQuickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQuickViewController.h; sourceTree = "<group>"; };
 		A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQuickViewController.m; sourceTree = "<group>"; };
 		A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQuickViewController.xib; sourceTree = "<group>"; };
-		A507B3281BB3EA7E00BB42D6 /* StatisticDateSearchUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatisticDateSearchUtil.h; path = Common/StatisticDateSearchUtil.h; sourceTree = "<group>"; };
-		A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatisticDateSearchUtil.m; path = Common/StatisticDateSearchUtil.m; sourceTree = "<group>"; };
-		A54B94C51BAA454200D5D99B /* ChartDataTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataTableView.h; sourceTree = "<group>"; };
-		A54B94C61BAA454200D5D99B /* ChartDataTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataTableView.m; sourceTree = "<group>"; };
-		A54B94C71BAA454200D5D99B /* ChartMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChartMainView.xib; path = ChartData/ChartMainView.xib; sourceTree = "<group>"; };
-		A54B94C81BAA454200D5D99B /* ItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewCell.h; sourceTree = "<group>"; };
-		A54B94C91BAA454200D5D99B /* ItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewCell.m; sourceTree = "<group>"; };
-		A54B94CA1BAA454200D5D99B /* ItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
-		A54B94CB1BAA454200D5D99B /* TotalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalTableViewCell.h; sourceTree = "<group>"; };
-		A54B94CC1BAA454200D5D99B /* TotalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalTableViewCell.m; sourceTree = "<group>"; };
-		A54B94CD1BAA454200D5D99B /* TotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalTableViewCell.xib; sourceTree = "<group>"; };
-		A54B94CE1BAA454200D5D99B /* ChartMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartMainView.h; sourceTree = "<group>"; };
-		A54B94CF1BAA454200D5D99B /* ChartMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartMainView.m; sourceTree = "<group>"; };
 		A54B94D81BAA4BF700D5D99B /* PieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChart.h; sourceTree = "<group>"; };
 		A54B94D91BAA4BF700D5D99B /* PieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChart.m; sourceTree = "<group>"; };
 		A54B94DB1BAA4EE400D5D99B /* PieChartWithInputData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartWithInputData.h; sourceTree = "<group>"; };
@@ -647,9 +642,6 @@
 		A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticMainUtil.m; sourceTree = "<group>"; };
 		A5ED26411BA943C0007E6689 /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
 		A5ED26421BA943C0007E6689 /* ChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartController.m; sourceTree = "<group>"; };
-		A5ED26431BA943C0007E6689 /* DummyChartData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DummyChartData.plist; sourceTree = "<group>"; };
-		A5ED26451BA943C0007E6689 /* ChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartData.h; sourceTree = "<group>"; };
-		A5ED26461BA943C0007E6689 /* ChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartData.m; sourceTree = "<group>"; };
 		A5ED26551BA943C0007E6689 /* StatisticDateSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticDateSearchView.h; sourceTree = "<group>"; };
 		A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticDateSearchView.m; sourceTree = "<group>"; };
 		A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticDateSearchView.xib; sourceTree = "<group>"; };
@@ -1424,21 +1416,9 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		A507B3211BB3E93200BB42D6 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				A507B3281BB3EA7E00BB42D6 /* StatisticDateSearchUtil.h */,
-				A507B3291BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m */,
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
 		A54B94C31BAA454200D5D99B /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				A54B94C71BAA454200D5D99B /* ChartMainView.xib */,
-				A54B94CE1BAA454200D5D99B /* ChartMainView.h */,
-				A54B94CF1BAA454200D5D99B /* ChartMainView.m */,
 				A54B94C41BAA454200D5D99B /* ChartData */,
 				A54B94D01BAA454200D5D99B /* DoughnutChart */,
 			);
@@ -1448,14 +1428,14 @@
 		A54B94C41BAA454200D5D99B /* ChartData */ = {
 			isa = PBXGroup;
 			children = (
-				A54B94C51BAA454200D5D99B /* ChartDataTableView.h */,
-				A54B94C61BAA454200D5D99B /* ChartDataTableView.m */,
-				A54B94C81BAA454200D5D99B /* ItemTableViewCell.h */,
-				A54B94C91BAA454200D5D99B /* ItemTableViewCell.m */,
-				A54B94CA1BAA454200D5D99B /* ItemTableViewCell.xib */,
-				A54B94CB1BAA454200D5D99B /* TotalTableViewCell.h */,
-				A54B94CC1BAA454200D5D99B /* TotalTableViewCell.m */,
-				A54B94CD1BAA454200D5D99B /* TotalTableViewCell.xib */,
+				1797119C1BB805F3007131A5 /* ChartDataItemView.h */,
+				1797119D1BB805F3007131A5 /* ChartDataItemView.m */,
+				1797119F1BB80604007131A5 /* ChartDataItemView.xib */,
+				1770448E1BB9152C009638B0 /* ChartDataTotalView.h */,
+				1770448F1BB9152C009638B0 /* ChartDataTotalView.m */,
+				1770448C1BB91515009638B0 /* ChartDataTotalView.xib */,
+				179711A11BB80869007131A5 /* ChartDataView.h */,
+				179711A21BB80869007131A5 /* ChartDataView.m */,
 			);
 			path = ChartData;
 			sourceTree = "<group>";
@@ -1576,7 +1556,6 @@
 			children = (
 				A5ED26411BA943C0007E6689 /* ChartController.h */,
 				A5ED26421BA943C0007E6689 /* ChartController.m */,
-				A5ED26431BA943C0007E6689 /* DummyChartData.plist */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1584,8 +1563,6 @@
 		A5ED26441BA943C0007E6689 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A5ED26451BA943C0007E6689 /* ChartData.h */,
-				A5ED26461BA943C0007E6689 /* ChartData.m */,
 				A5ED266A1BA961F7007E6689 /* ChartItemData.h */,
 				A5ED266B1BA961F7007E6689 /* ChartItemData.m */,
 			);
@@ -1607,10 +1584,12 @@
 		A5ED26541BA943C0007E6689 /* DateSearch */ = {
 			isa = PBXGroup;
 			children = (
-				A507B3211BB3E93200BB42D6 /* Common */,
 				A5ED26551BA943C0007E6689 /* StatisticDateSearchView.h */,
 				A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */,
 				A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */,
+				17745DE11BB96355003609C7 /* CustomizedDatePickerViewController.h */,
+				17745DE21BB96355003609C7 /* CustomizedDatePickerViewController.m */,
+				17745DE31BB96355003609C7 /* CustomizedDatePickerViewController.xib */,
 			);
 			path = DateSearch;
 			sourceTree = "<group>";
@@ -1700,6 +1679,7 @@
 				A2D95B911BA8F1DD00DC943D /* nf_ios_num_btn@3x.png in Resources */,
 				A2D95B641BA8F1DD00DC943D /* nf_ios_spacebar.png in Resources */,
 				A2DF410E1BAFBD00001389E7 /* CarrierList.plist in Resources */,
+				17745DE51BB96355003609C7 /* CustomizedDatePickerViewController.xib in Resources */,
 				A2D95B2E1BA8F1DD00DC943D /* NFPadbar@2x.png in Resources */,
 				A2D95B681BA8F1DD00DC943D /* nf_cancel@2x.png in Resources */,
 				A2D95B781BA8F1DD00DC943D /* nf_ios_next@2x.png in Resources */,
@@ -1727,7 +1707,6 @@
 				A2D95B861BA8F1DD00DC943D /* nf_ios_btn_ok@3x.png in Resources */,
 				A2D95B091BA8F1DD00DC943D /* clear.wav in Resources */,
 				A5ED26671BA943C0007E6689 /* StatisticDateSearchView.xib in Resources */,
-				A5ED265D1BA943C0007E6689 /* DummyChartData.plist in Resources */,
 				A2DA2BE21BA6A63A00E6BBDC /* CertificateRoamingViewController.xib in Resources */,
 				A2D95B771BA8F1DD00DC943D /* nf_ios_icon_special@2x.png in Resources */,
 				A2D95B3C1BA8F1DD00DC943D /* NFPadnum_btn@2x.png in Resources */,
@@ -1764,6 +1743,7 @@
 				A2D95B251BA8F1DD00DC943D /* NFPadbtn_ok_wide.png in Resources */,
 				A2D95B611BA8F1DD00DC943D /* nf_ios_num_btn.png in Resources */,
 				A2D95B741BA8F1DD00DC943D /* nf_ios_icon_refresh@2x.png in Resources */,
+				179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */,
 				A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */,
 				A2D95B981BA8F1DD00DC943D /* iPhoneKeySetting.plist in Resources */,
 				A2D95B381BA8F1DD00DC943D /* NFPadicon_backspace@2x.png in Resources */,
@@ -1773,6 +1753,7 @@
 				A2DFD71C1BB14DD300838E09 /* RegistAccountViewController.xib in Resources */,
 				A2D95B221BA8F1DD00DC943D /* NFPadspacebar.png in Resources */,
 				A2D95B3B1BA8F1DD00DC943D /* NFPadnum_bg@2x.png in Resources */,
+				1770448D1BB91515009638B0 /* ChartDataTotalView.xib in Resources */,
 				A2D95B5A1BA8F1DD00DC943D /* nf_ios_char.png in Resources */,
 				A2D95B601BA8F1DD00DC943D /* nf_ios_next.png in Resources */,
 				A2D95B8C1BA8F1DD00DC943D /* nf_ios_icon_refresh@3x.png in Resources */,
@@ -1837,7 +1818,6 @@
 				A2D95B6A1BA8F1DD00DC943D /* nf_ios_btn@2x.png in Resources */,
 				A2D95B571BA8F1DD00DC943D /* nf_ios_btn_confirm.png in Resources */,
 				A2DFD7131BB0EAD600838E09 /* MenuTableEtcView.xib in Resources */,
-				A54B94D41BAA454200D5D99B /* ItemTableViewCell.xib in Resources */,
 				A2D95B4A1BA8F1DD00DC943D /* NFPadchar_wide_pressed@2x.png in Resources */,
 				A2D95B581BA8F1DD00DC943D /* nf_ios_btn_ok.png in Resources */,
 				A55BDEF01BB0EB8100646C79 /* DrawPatternLockViewController.xib in Resources */,
@@ -1845,9 +1825,7 @@
 				A2D95B0E1BA8F1DD00DC943D /* NFPadbar.png in Resources */,
 				A2D95B1E1BA8F1DD00DC943D /* NFPadnum_btn_ok_pressed.png in Resources */,
 				A2D95B9B1BA8F1DD00DC943D /* NFilterChar.xib in Resources */,
-				A54B94D61BAA454200D5D99B /* TotalTableViewCell.xib in Resources */,
 				A2D95B901BA8F1DD00DC943D /* nf_ios_next@3x.png in Resources */,
-				A54B94D21BAA454200D5D99B /* ChartMainView.xib in Resources */,
 				A2DF410C1BAF99DE001389E7 /* RegistTabView.xib in Resources */,
 				A2D95B8B1BA8F1DD00DC943D /* nf_ios_icon_backspace@3x.png in Resources */,
 				A2D95B1F1BA8F1DD00DC943D /* NFPadnum_btn_pressed.png in Resources */,
@@ -1898,18 +1876,19 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
-				A54B94D51BAA454200D5D99B /* TotalTableViewCell.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
+				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
 				A2D95B021BA8F1DD00DC943D /* NSStringKNAdditions.m in Sources */,
 				A2DFD7171BB0F1A100838E09 /* KeychainItemWrapper.m in Sources */,
 				A2DEAE791B9FE6E600EDCCBA /* HomeViewController.m in Sources */,
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
 				A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */,
+				177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */,
 				A2DEAE631B9FE6D800EDCCBA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */,
 				A5ED266C1BA961F7007E6689 /* ChartItemData.m in Sources */,
@@ -1920,13 +1899,12 @@
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
 				A2D95B9A1BA8F1DD00DC943D /* NFilterNum.m in Sources */,
 				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
+				17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */,
 				A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */,
 				A2D90D6C1BB2745000315425 /* CertTableCell.m in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
 				A2DEAE5F1B9FE6D800EDCCBA /* MASLayoutConstraint.m in Sources */,
-				A54B94D31BAA454200D5D99B /* ItemTableViewCell.m in Sources */,
 				A2DEAE5C1B9FE6D800EDCCBA /* MASCompositeConstraint.m in Sources */,
-				A5ED265E1BA943C0007E6689 /* ChartData.m in Sources */,
 				A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */,
 				A54B94DD1BAA4EE400D5D99B /* PieChartWithInputData.m in Sources */,
 				A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */,
@@ -1945,6 +1923,7 @@
 				A2DEAE571B9FE6D800EDCCBA /* ECSlidingInteractiveTransition.m in Sources */,
 				A2DEAE7B1B9FE6E600EDCCBA /* MenuViewController.m in Sources */,
 				A2D95B511BA8F1DD00DC943D /* nFilterCharForPad.m in Sources */,
+				179711A31BB80869007131A5 /* ChartDataView.m in Sources */,
 				A54B94DA1BAA4BF700D5D99B /* PieChart.m in Sources */,
 				A2DF410A1BAF99D2001389E7 /* RegistTabView.m in Sources */,
 				A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */,
@@ -1958,15 +1937,12 @@
 				A2DF41041BAF9902001389E7 /* RegistPhoneViewController.m in Sources */,
 				A2DFDD901BB3742C00DC1A78 /* NotiSettingMenuViewController.m in Sources */,
 				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,
-				A54B94D11BAA454200D5D99B /* ChartDataTableView.m in Sources */,
 				A2DEAE5E1B9FE6D800EDCCBA /* MASConstraintMaker.m in Sources */,
-				A507B32A1BB3EA7E00BB42D6 /* StatisticDateSearchUtil.m in Sources */,
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,
 				172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */,
-				A54B94D71BAA454200D5D99B /* ChartMainView.m in Sources */,
 				A2DEAE5A1B9FE6D800EDCCBA /* UIViewController+ECSlidingViewController.m in Sources */,
 				A2DEAE641B9FE6D800EDCCBA /* View+MASAdditions.m in Sources */,
 				A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */,

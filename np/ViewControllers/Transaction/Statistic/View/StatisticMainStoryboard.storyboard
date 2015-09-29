@@ -35,6 +35,13 @@
                                             <action selector="clickSearchButton" destination="lHy-Af-bbj" eventType="touchUpInside" id="Ctz-Dy-zSE"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015/08/17~2015/09/16" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MaX-28-MtA">
+                                        <rect key="frame" x="8" y="43" width="304" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -42,9 +49,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="mainView" destination="QgP-Nu-Sva" id="KsD-hV-bsu"/>
                         <outlet property="scrollView" destination="FQC-y1-FDJ" id="flB-hX-Ndl"/>
                         <outlet property="searchButton" destination="jJt-N1-f2m" id="Mqk-XX-Rjo"/>
+                        <outlet property="selectedDatesLabel" destination="MaX-28-MtA" id="TS8-RM-oit"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oct-24-KSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
