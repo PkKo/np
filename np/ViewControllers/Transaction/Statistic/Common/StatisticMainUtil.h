@@ -30,8 +30,12 @@
 + (NSInteger) getLastDayOfMonth:(NSInteger)month year:(NSInteger)year;
 
 + (NSDateFormatter *)getDateFormatterDateHourStyle;
++ (NSDateFormatter *)getDateFormatterDateHourMinuteStyle;
 + (NSDateFormatter *)getDateFormatterDateStyle;
++ (NSDateFormatter *)getDateFormatterHourMinuteStyle;
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style;
+
++ (NSNumberFormatter *)getNumberFormatter;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 
 @end

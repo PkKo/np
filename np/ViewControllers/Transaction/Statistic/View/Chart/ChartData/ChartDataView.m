@@ -11,6 +11,7 @@
 #import "ChartItemData.h"
 #import "ChartDataTotalView.h"
 #import "StatisticMainUtil.h"
+#import "ConstantMaster.h"
 
 @implementation ChartDataView
 
@@ -32,8 +33,7 @@
     BOOL    isIncome    = NO;
     CGFloat total       = 0;
     
-    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumberFormatter * numberFormatter = [StatisticMainUtil getNumberFormatter];
     
     int numberOfItem    = (int)[arr count];
     

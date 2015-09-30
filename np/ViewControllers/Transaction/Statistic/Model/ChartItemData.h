@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define INCOME  @"income"
-#define EXPENSE @"expense"
-
 @interface ChartItemData : NSObject
 
 @property (nonatomic, copy) NSString * itemColor;

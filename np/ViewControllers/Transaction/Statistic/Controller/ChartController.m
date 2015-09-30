@@ -8,6 +8,7 @@
 
 #import "ChartController.h"
 #import "ChartItemData.h"
+#import "ConstantMaster.h"
 
 @implementation ChartController
 

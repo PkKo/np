@@ -100,8 +100,8 @@
         }
         case 3: // 보관함
         {
-            newTopViewController = [[HomeViewController alloc] init];
-            [(HomeViewController *)newTopViewController setMViewType:INBOX];
+            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
+            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
             break;
         }
         case 4: // 알림설정

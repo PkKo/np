@@ -206,6 +206,14 @@
     return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd HH:mm:ss"];
 }
 
++ (NSDateFormatter *)getDateFormatterDateHourMinuteStyle {
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd HH:mm"];
+}
+
++ (NSDateFormatter *)getDateFormatterHourMinuteStyle {
+    return [StatisticMainUtil getDateFormatterWithStyle:@"HH:mm"];
+}
+
 + (NSDateFormatter *)getDateFormatterDateStyle {
     return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd"];
 }
@@ -216,6 +224,14 @@
     [dateFormatter setDateFormat:style];
     [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
     return dateFormatter;
+}
+
+#pragma mark - General
++ (NSNumberFormatter *)getNumberFormatter {
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    return numberFormatter;
 }
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
