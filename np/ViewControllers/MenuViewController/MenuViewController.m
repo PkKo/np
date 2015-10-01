@@ -108,6 +108,8 @@
         {
             newTopViewController = [[MainPageViewController alloc] init];
             [(MainPageViewController *)newTopViewController setStartPageIndex:3];
+            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
+            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
             break;
         }
         case 4: // 알림설정
@@ -117,6 +119,8 @@
         }
         case 5: // 환경설정
         {
+            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
+            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
             break;
         }
         case 6: // 고객센터

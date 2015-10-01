@@ -121,6 +121,7 @@ NSString * HTTPArgumentsStringForParameters(NSDictionary *parameters) {
     }
     
     NSString *parameterString = HTTPArgumentsStringForParameters(parameters);
+    
     return [NSString stringWithFormat:@"%@?%@", StoryLinkURLBaseString, parameterString];
 }
 

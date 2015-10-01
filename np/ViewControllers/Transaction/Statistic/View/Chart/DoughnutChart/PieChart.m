@@ -16,6 +16,9 @@
 
 -(id)initWithFrame:(CGRect)frame
 {
+    
+    NSLog(@"[%s %d]", __func__, __LINE__);
+    
    self = [super initWithFrame:frame];
     
    if (self != nil)

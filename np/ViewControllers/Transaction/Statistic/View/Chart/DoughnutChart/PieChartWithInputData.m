@@ -20,9 +20,12 @@
 @implementation PieChartWithInputData
 
 
+
 - (instancetype)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
+    
+    NSLog(@"%s:%d", __func__, __LINE__);
     
     if (self != nil) {
         _pieChart = [[PieChart alloc] initWithFrame:frame];
@@ -34,7 +37,7 @@
     return self;
 }
 
-- (void)setDataSourceWithColorArray:(NSArray *)colorArr sliceArr:(NSArray *)sliceArr {
+- (void)reloadChartWithColorArray:(NSArray *)colorArr sliceArr:(NSArray *)sliceArr {
     
     _colorArr = colorArr;
     _sliceArr = sliceArr;
@@ -44,7 +47,7 @@
 
 #pragma mark - PieCharDelegate
 - (CGFloat)centerCircleRadius {
-    return 60;
+    return 40;
 }
 
 #pragma mark - PieCharDataSource

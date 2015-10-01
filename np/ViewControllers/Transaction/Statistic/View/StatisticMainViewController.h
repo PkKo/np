@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
+#import "StatisticDateSearchView.h"
+#import "PieChartWithInputData.h"
 
-@interface StatisticMainViewController : CommonViewController
+@interface StatisticMainViewController : CommonViewController <StatisticDateSearchViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
-
-- (IBAction)backToPrvView:(UIBarButtonItem *)sender;
-- (IBAction)showMenu:(id)sender;
 - (IBAction)clickSearchButton;
+@property (weak, nonatomic) IBOutlet UILabel *selectedDatesLabel;
 
 @end

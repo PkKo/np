@@ -10,6 +10,6 @@
 
 @interface PieChartWithInputData : UIView
 
-- (void)setDataSourceWithColorArray:(NSArray *)colorArr sliceArr:(NSArray *)sliceArr;
+- (void)reloadChartWithColorArray:(NSArray *)colorArr sliceArr:(NSArray *)sliceArr;
 
 @end
