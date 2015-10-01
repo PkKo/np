@@ -97,7 +97,7 @@
 #pragma mark - Doughnut Chart
 - (PieChartWithInputData *)addPieChartToView:(UIScrollView *)scrollView belowDateLabel:(UILabel *)selectedDateLabel {
     
-    PieChartWithInputData * chart = [[PieChartWithInputData alloc] initWithFrame:CGRectMake(0, selectedDateLabel.frame.origin.y, 150, 150)];
+    PieChartWithInputData * chart = [[PieChartWithInputData alloc] initWithFrame:CGRectMake(0, selectedDateLabel.frame.origin.y, 185, 185)];
     CGPoint chartCenter = CGPointMake(scrollView.center.x, chart.center.y);
     chart.center        = chartCenter;
     
@@ -118,6 +118,7 @@
     CGRect chartDataViewFrame        = chartDataView.frame;
     chartDataViewFrame.origin.y      = chartDataViewY;
     [chartDataView setFrame:chartDataViewFrame];
+    [chartDataView setBackgroundColor:[UIColor whiteColor]];
     
     chartDataViewCenter              = CGPointMake(scrollView.center.x, chartDataView.center.y);
     chartDataView.center             = chartDataViewCenter;

@@ -271,9 +271,7 @@
 		A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E311BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E361BBBA09C00626C74 /* ArchivedTransItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E341BBBA09C00626C74 /* ArchivedTransItemCell.m */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E371BBBA09C00626C74 /* ArchivedTransItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E351BBBA09C00626C74 /* ArchivedTransItemCell.xib */; settings = {ASSET_TAGS = (); }; };
-		A5EA7E391BBBA3FC00626C74 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E381BBBA3FC00626C74 /* arrow_left.png */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E3D1BBBB36000626C74 /* StorageBoxController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E3C1BBBB36000626C74 /* StorageBoxController.m */; settings = {ASSET_TAGS = (); }; };
-		A5EA7E441BBBBF9300626C74 /* arrow_right.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E431BBBBF9300626C74 /* arrow_right.jpg */; settings = {ASSET_TAGS = (); }; };
 		A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */; };
 		A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26421BA943C0007E6689 /* ChartController.m */; };
 		A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */; };
@@ -651,11 +649,9 @@
 		A5EA7E331BBBA09C00626C74 /* ArchivedTransItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArchivedTransItemCell.h; path = StorageBox/View/ArchivedTransItemCell.h; sourceTree = "<group>"; };
 		A5EA7E341BBBA09C00626C74 /* ArchivedTransItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArchivedTransItemCell.m; path = StorageBox/View/ArchivedTransItemCell.m; sourceTree = "<group>"; };
 		A5EA7E351BBBA09C00626C74 /* ArchivedTransItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArchivedTransItemCell.xib; path = StorageBox/View/ArchivedTransItemCell.xib; sourceTree = "<group>"; };
-		A5EA7E381BBBA3FC00626C74 /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left.png; sourceTree = "<group>"; };
 		A5EA7E3B1BBBB36000626C74 /* StorageBoxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorageBoxController.h; path = StorageBox/Controller/StorageBoxController.h; sourceTree = "<group>"; };
 		A5EA7E3C1BBBB36000626C74 /* StorageBoxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorageBoxController.m; path = StorageBox/Controller/StorageBoxController.m; sourceTree = "<group>"; };
 		A5EA7E3E1BBBB92500626C74 /* ConstantMaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConstantMaster.h; path = Transaction/Statistic/Common/ConstantMaster.h; sourceTree = "<group>"; };
-		A5EA7E431BBBBF9300626C74 /* arrow_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arrow_right.jpg; sourceTree = "<group>"; };
 		A5ED263E1BA943C0007E6689 /* StatisticMainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticMainUtil.h; sourceTree = "<group>"; };
 		A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticMainUtil.m; sourceTree = "<group>"; };
 		A5ED26411BA943C0007E6689 /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
@@ -1517,8 +1513,6 @@
 		A5E2C4491BB25D5B006EE828 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A5EA7E431BBBBF9300626C74 /* arrow_right.jpg */,
-				A5EA7E381BBBA3FC00626C74 /* arrow_left.png */,
 				A5E2C44A1BB26E5A006EE828 /* MemoCompositionViewController.h */,
 				A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */,
 				A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */,
@@ -1765,7 +1759,6 @@
 				A2D95B621BA8F1DD00DC943D /* nf_ios_num_num.png in Resources */,
 				A2D95B881BA8F1DD00DC943D /* nf_ios_btn_pressed@3x.png in Resources */,
 				A2D90D621BB248A100315425 /* RegistCertPassView.xib in Resources */,
-				A5EA7E391BBBA3FC00626C74 /* arrow_left.png in Resources */,
 				A2D95B4B1BA8F1DD00DC943D /* NFPadnum_bg_wide@2x.png in Resources */,
 				A2D95B371BA8F1DD00DC943D /* NFPadchar_pressed@2x.png in Resources */,
 				A55BDEED1BB0EB8100646C79 /* dot_on.png in Resources */,
@@ -1817,7 +1810,6 @@
 				A2D95B721BA8F1DD00DC943D /* nf_ios_char@2x.png in Resources */,
 				A2D95B0B1BA8F1DD00DC943D /* click2.wav in Resources */,
 				A2D95B4F1BA8F1DD00DC943D /* nFilterCharForPad.xib in Resources */,
-				A5EA7E441BBBBF9300626C74 /* arrow_right.jpg in Resources */,
 				A2D95B191BA8F1DD00DC943D /* NFPadicon_shift.png in Resources */,
 				A2D95B921BA8F1DD00DC943D /* nf_ios_num_num@3x.png in Resources */,
 				A2D95B7D1BA8F1DD00DC943D /* nf_ios_spacebar_pressed@2x.png in Resources */,

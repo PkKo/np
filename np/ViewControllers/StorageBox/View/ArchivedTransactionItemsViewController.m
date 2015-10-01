@@ -76,12 +76,12 @@
         
         TransactionObject * transacObj = [sectionItems objectAtIndex:[indexPath row]];
         
-        [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:INCOME] ? @"arrow_right.jpg" : @"arrow_left.png"]];
+        [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:INCOME] ? @"icon_sticker_01" : @"icon_sticker_02"]];
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
         
         [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [[transacObj transactionType] isEqualToString:INCOME] ? @"입금" : @"출금", [transacObj formattedTransactionAmount]]];
-        [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:INCOME] ? [UIColor blueColor] : [UIColor redColor]];
+        [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
         
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];

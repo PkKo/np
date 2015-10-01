@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 - (IBAction)clickSearchButton;
 @property (weak, nonatomic) IBOutlet UILabel *selectedDatesLabel;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
 
 @end

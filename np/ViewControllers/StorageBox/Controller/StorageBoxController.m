@@ -128,7 +128,7 @@
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:8 minute:40]
                                                                      transactionAccountNumber:@"221-2343-11**-**"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:EXPENSE
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];

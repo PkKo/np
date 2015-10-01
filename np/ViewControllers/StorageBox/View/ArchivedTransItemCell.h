@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel        * transacAmount;
 @property (weak, nonatomic) IBOutlet UILabel        * transacAccountNo;
 @property (weak, nonatomic) IBOutlet UILabel        * transacBalance;
-@property (weak, nonatomic) IBOutlet UITextField    * transacMemo;
+@property (weak, nonatomic) IBOutlet UILabel        * transacMemo;
 
 - (IBAction)editMemo;
 

@@ -47,6 +47,7 @@
     [self loadData];
     [self addChart];
     [self addChartData];
+    [self replaceNoticeView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,11 +154,23 @@
     
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
-    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 50;
+    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 70;
     _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
     
-    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 20;
+    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
     _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+}
+
+- (void)replaceNoticeView {
+    
+    StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
+    
+    CGRect noticeViewFrame = self.noticeView.frame;
+    noticeViewFrame.origin.y = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
+    [self.noticeView setFrame:noticeViewFrame];
+    
+    CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
+    [self.noticeView setCenter:noticeViewCenterPoint];
     
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
 }
