@@ -57,7 +57,7 @@
 //    slidingViewController.topViewController = nVC;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-//    [((AppDelegate *)[UIApplication sharedApplication].delegate).window setRootViewController:slidingViewController];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
 @end

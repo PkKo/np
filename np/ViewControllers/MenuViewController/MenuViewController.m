@@ -114,13 +114,13 @@
         }
         case 4: // 알림설정
         {
-            newTopViewController = [[NotiSettingMenuViewController alloc] init];
+            pushViewController = [[NotiSettingMenuViewController alloc] init];
             break;
         }
         case 5: // 환경설정
         {
             UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
-            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
+            pushViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
             break;
         }
         case 6: // 고객센터
@@ -138,17 +138,17 @@
     
     if(newTopViewController)
     {
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = newTopViewController;
-        self.slidingViewController.topViewController.view.frame = frame;
+        CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopViewAnimated:NO];
     }
     else if(pushViewController)
     {
         [self closeMenu:nil];
         ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
-        [self.slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
-        [self.slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
     }
     
 }

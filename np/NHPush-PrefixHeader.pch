@@ -9,6 +9,7 @@
 #ifndef np_NHPush_PrefixHeader_pch
 #define np_NHPush_PrefixHeader_pch
 
+#import "AppDelegate.h"
 #import "Constants.h"
 #import "Masonry.h"
 #import "CommonUtil.h"
