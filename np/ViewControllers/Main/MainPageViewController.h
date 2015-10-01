@@ -17,9 +17,13 @@
 @property (strong, nonatomic) IBOutlet UIView *tabButtonView;
 
 @property (strong, nonatomic) IBOutlet UIButton *timeLineButton;
+@property (strong, nonatomic) IBOutlet UIImageView *timeLineSelectImg;
 @property (strong, nonatomic) IBOutlet UIButton *incomeButton;
+@property (strong, nonatomic) IBOutlet UIImageView *incomeSelectImg;
 @property (strong, nonatomic) IBOutlet UIButton *etcButton;
+@property (strong, nonatomic) IBOutlet UIImageView *etcSelectImg;
 @property (strong, nonatomic) IBOutlet UIButton *inboxButton;
+@property (strong, nonatomic) IBOutlet UIImageView *inboxSelectImg;
 
 - (IBAction)tabButtonClick:(id)sender;
 @end

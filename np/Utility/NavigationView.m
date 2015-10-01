@@ -13,5 +13,6 @@
 @synthesize mTitleLabel;
 @synthesize mMenuButton;
 @synthesize mBackButton;
+@synthesize imgTitleView;
 
 @end

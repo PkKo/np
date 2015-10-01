@@ -36,7 +36,9 @@
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:YES];
-//    [self.mNaviView.mMenuButton setHidden:YES];
+    [self.mNaviView.mMenuButton setHidden:YES];
+    [self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];
     
     /*
      * 공인인증서로 가입하려는 경우

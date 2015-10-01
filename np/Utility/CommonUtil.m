@@ -88,4 +88,20 @@
     
     return bodyString;
 }
+
++ (CGSize)getStringFrameSize:(NSString *)string fontSize:(CGFloat)fontSize bold:(BOOL)isBold
+{
+    CGSize size = CGSizeMake(0, 0);
+    
+    if(isBold)
+    {
+        size = [string sizeWithFont:[UIFont boldSystemFontOfSize:fontSize]];
+    }
+    else
+    {
+        size = [string sizeWithFont:[UIFont systemFontOfSize:fontSize]];
+    }
+    
+    return size;
+}
 @end

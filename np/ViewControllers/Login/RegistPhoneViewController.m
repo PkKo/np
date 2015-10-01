@@ -29,7 +29,8 @@
     [super viewDidLoad];
     
     [self.mNaviView.mMenuButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"NH스마트알림"];
+    [self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];
     
     NSString *carrierListPath = [[NSBundle mainBundle] pathForResource:@"CarrierList" ofType:@"plist"];
     carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];

@@ -8,10 +8,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainPageViewController">
             <connections>
                 <outlet property="etcButton" destination="2KH-Is-Ure" id="bww-j8-zDd"/>
+                <outlet property="etcSelectImg" destination="vqb-h2-6fp" id="EhO-7e-Sdq"/>
                 <outlet property="inboxButton" destination="KUm-8b-8YP" id="aAu-xc-RLO"/>
+                <outlet property="inboxSelectImg" destination="hLV-6I-1VH" id="Kku-60-Wv6"/>
                 <outlet property="incomeButton" destination="imY-TY-7RU" id="uFo-XE-A2E"/>
+                <outlet property="incomeSelectImg" destination="QaV-g5-oOh" id="51X-s7-yD3"/>
                 <outlet property="tabButtonView" destination="lgo-DN-6Yb" id="tTZ-B2-T6i"/>
                 <outlet property="timeLineButton" destination="uyt-Jx-I0e" id="5u3-x3-aoB"/>
+                <outlet property="timeLineSelectImg" destination="zgp-UE-rU2" id="Hxe-rk-6Bc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,20 +25,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="lgo-DN-6Yb" userLabel="TabButtonView">
-                    <rect key="frame" x="0.0" y="60" width="320" height="40"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uyt-Jx-I0e">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uyt-Jx-I0e">
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                            <color key="backgroundColor" red="1" green="0.13605925933524377" blue="0.99452694305126343" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="TimeLine">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="전체">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
-                                <color key="titleColor" red="1" green="0.055102548240631655" blue="0.093594117329479309" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
                                 <color key="titleColor" red="1" green="0.96186075610142552" blue="0.17993707525484826" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,16 +47,16 @@
                                 <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="qh2-vY-DWn"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="imY-TY-7RU">
-                            <rect key="frame" x="80" y="0.0" width="80" height="40"/>
+                        <button tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="imY-TY-7RU">
+                            <rect key="frame" x="80" y="0.0" width="80" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                            <color key="backgroundColor" red="0.34422640329999998" green="0.62679461989999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.39607843139999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="입출금">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
-                                <color key="titleColor" red="1" green="0.05510254824" blue="0.093594117330000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
                                 <color key="titleColor" red="1" green="0.96186075609999999" blue="0.1799370753" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,16 +65,16 @@
                                 <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="7rM-yo-TIU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2KH-Is-Ure">
-                            <rect key="frame" x="160" y="0.0" width="80" height="40"/>
+                        <button tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2KH-Is-Ure">
+                            <rect key="frame" x="160" y="0.0" width="80" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                            <color key="backgroundColor" red="0.38886651630000002" green="1" blue="0.27665286960000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="기타">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
-                                <color key="titleColor" red="1" green="0.05510254824" blue="0.093594117330000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
                                 <color key="titleColor" red="1" green="0.96186075609999999" blue="0.1799370753" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,16 +83,17 @@
                                 <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="xoa-E3-bBv"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KUm-8b-8YP">
-                            <rect key="frame" x="240" y="0.0" width="80" height="40"/>
+                        <button tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KUm-8b-8YP">
+                            <rect key="frame" x="240" y="0.0" width="80" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                            <color key="backgroundColor" red="0.42964545669999998" green="1" blue="0.96794108779999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="보관함">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
-                                <color key="titleColor" red="1" green="0.05510254824" blue="0.093594117330000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
                                 <color key="titleColor" red="1" green="0.96186075609999999" blue="0.1799370753" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,11 +102,38 @@
                                 <action selector="tabButtonClick:" destination="-1" eventType="touchUpInside" id="H7f-jL-nKM"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_tab_01.png" id="GQ0-VG-Bsg">
+                            <rect key="frame" x="0.0" y="27" width="320" height="18"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_tab_02.png" id="QaV-g5-oOh">
+                            <rect key="frame" x="111" y="27" width="18" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_tab_02.png" id="vqb-h2-6fp">
+                            <rect key="frame" x="191" y="27" width="18" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_tab_02.png" id="hLV-6I-1VH">
+                            <rect key="frame" x="271" y="27" width="18" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_tab_02.png" id="zgp-UE-rU2">
+                            <rect key="frame" x="32" y="27" width="18" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="312" y="374"/>
         </view>
     </objects>
+    <resources>
+        <image name="menu_tab_01.png" width="1" height="30"/>
+        <image name="menu_tab_02.png" width="19" height="30"/>
+    </resources>
 </document>

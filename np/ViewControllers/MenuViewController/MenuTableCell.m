@@ -11,6 +11,8 @@
 @implementation MenuTableCell
 
 @synthesize mMenuTitleLabel;
+@synthesize menuTitleImg;
+@synthesize menuSeparateLine;
 
 - (void)awakeFromNib {
     // Initialization code

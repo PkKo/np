@@ -7,9 +7,10 @@
 //
 
 #import "HomeTimeLineView.h"
-#import "MenuTableCell.h"
+#import "HomeTimeLineTableViewCell.h"
 
-#define REFRESH_HEADER_HEIGHT 52.0f
+#define REFRESH_HEADER_HEIGHT   52.0f
+#define SECTION_HEADER_HEIGHT   31.0f
 
 @implementation HomeTimeLineView
 
@@ -134,33 +135,53 @@
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if([mTimeLineSection count] == 0)
-    {
-        return @"";
-    }
-    else
-    {
-        return [mTimeLineSection objectAtIndex:section];
-    }
+    return SECTION_HEADER_HEIGHT;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEADER_HEIGHT)];
+    
+    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]];
+    
+    NSString *date = [mTimeLineSection objectAtIndex:section];
+    NSString *day = @"일요일";
+    
+    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12.0 bold:YES];
+    UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, dateSize.width, SECTION_HEADER_HEIGHT)];
+    [dateLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
+    [dateLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [dateLabel setText:date];
+    [sectionHeaderView addSubview:dateLabel];
+    
+    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:12 bold:NO];
+    UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(dateLabel.frame.origin.x + dateSize.width, 0, daySize.width, SECTION_HEADER_HEIGHT)];
+    [dayLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
+    [dayLabel setFont:[UIFont systemFontOfSize:12.0F]];
+    [dayLabel setText:day];
+    [sectionHeaderView addSubview:dayLabel];
+    
+    return sectionHeaderView;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseId = [NSString stringWithFormat:@"%@", [MenuTableCell class]];
-    MenuTableCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    NSString *reuseId = [NSString stringWithFormat:@"%@", [HomeTimeLineTableViewCell class]];
+    HomeTimeLineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     
     if(cell == nil)
     {
-        cell = [MenuTableCell cell];
+        cell = [HomeTimeLineTableViewCell cell];
     }
     
     NSString *section = [mTimeLineSection objectAtIndex:indexPath.section];
     NSString *desc = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
     
-    [cell.mMenuTitleLabel setText:desc];
-    
+    [cell.titleLabel setText:desc];
+        
     return cell;
 }
 

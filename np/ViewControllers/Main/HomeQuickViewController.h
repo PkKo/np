@@ -8,6 +8,20 @@
 
 #import "CommonViewController.h"
 
-@interface HomeQuickViewController : CommonViewController
+@interface HomeQuickViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *pushList;
+    NSMutableArray *noticeList;
+}
 
+@property (strong, nonatomic) IBOutlet UIButton *pushMenuButton;
+@property (strong, nonatomic) IBOutlet UILabel *pushCountLabel;
+@property (strong, nonatomic) IBOutlet UIButton *noticeMenuButton;
+@property (strong, nonatomic) IBOutlet UILabel *noticeCountLabel;
+@property (strong, nonatomic) IBOutlet UIView *listContentView;
+@property (strong, nonatomic) IBOutlet UIView *emptyListView;
+@property (strong, nonatomic) IBOutlet UITableView *pushTableView;
+@property (strong, nonatomic) IBOutlet UITableView *noticeTableView;
+@property (strong, nonatomic) IBOutlet UIView *noticeView;
+@property (strong, nonatomic) IBOutlet UIView *bannerView;
 @end

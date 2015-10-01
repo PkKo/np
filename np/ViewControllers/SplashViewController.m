@@ -8,6 +8,7 @@
 
 #import "SplashViewController.h"
 #import "HomeViewController.h"
+#import "HomeQuickViewController.h"
 #import "RegistAccountViewController.h"
 #import "MainPageViewController.h"
 #import "AppDelegate.h"
@@ -46,15 +47,14 @@
 - (void)setMainViewController
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-//    HomeViewController *vc = [[HomeViewController alloc] init];
-//    [vc setMViewType:TIMELINE];
+    // 가입시작
 //    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
-    MainPageViewController *vc = [[MainPageViewController alloc] init];
-    [vc setStartPageIndex:0];
+    // 메인 시작
+//    MainPageViewController *vc = [[MainPageViewController alloc] init];
+//    [vc setStartPageIndex:0];
+    // 퀵뷰
+    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
     slidingViewController.topViewController = vc;
-//    UINavigationController *nVC = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [nVC setNavigationBarHidden:YES];
-//    slidingViewController.topViewController = nVC;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;

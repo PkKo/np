@@ -23,15 +23,21 @@
 @synthesize tabButtonView;
 
 @synthesize timeLineButton;
+@synthesize timeLineSelectImg;
 @synthesize incomeButton;
+@synthesize incomeSelectImg;
 @synthesize etcButton;
+@synthesize etcSelectImg;
 @synthesize inboxButton;
+@synthesize inboxSelectImg;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:YES];
+    [self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];
     
     HomeViewController *homeVc = [self viewControllerAtIndex:startPageIndex];
     pageViewControllerArray = [NSArray arrayWithObject:homeVc];
@@ -170,5 +176,11 @@
         default:
             break;
     }
+    
+    [timeLineSelectImg setHidden:[timeLineButton isEnabled]];
+    [incomeSelectImg setHidden:[incomeButton isEnabled]];
+    [etcSelectImg setHidden:[etcButton isEnabled]];
+    [inboxSelectImg setHidden:[inboxButton isEnabled]];
+
 }
 @end

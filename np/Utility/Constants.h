@@ -51,4 +51,8 @@
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
 
+#pragma mark - 입출금 내역 스트링
+#define INCOME_TYPE_STRING             @"입금"
+#define WITHDRAW_TYPE_STRING           @"출금"
+
 #endif
