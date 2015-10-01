@@ -12,4 +12,5 @@
 
 + (NSString *)getMaskingNumber:(NSString *)number;
 + (NSString *)getDeviceUUID;
++ (NSString *)getBodyString:(NSDictionary *)bodyObject;
 @end

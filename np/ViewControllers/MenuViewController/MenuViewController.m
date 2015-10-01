@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "MenuTableCell.h"
+#import "MainPageViewController.h"
 #import "HomeViewController.h"
 #import "CertificateMenuViewController.h"
 #import "StatisticMainViewController.h"
@@ -43,7 +44,11 @@
 
 - (IBAction)closeMenu:(id)sender
 {
-    [self.slidingViewController.topViewController performSelector:@selector(closeMenuView) withObject:nil];
+    NSLog(@"%@", self.slidingViewController.topViewController);
+    if([self.slidingViewController.topViewController respondsToSelector:@selector(closeMenuView)])
+    {
+        [self.slidingViewController.topViewController performSelector:@selector(closeMenuView) withObject:nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -75,33 +80,34 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     UIViewController *newTopViewController = nil;
+    UIViewController *pushViewController = nil;
     
     switch (indexPath.row)
     {
         case 0: // 전체
         {
-            newTopViewController = [[HomeViewController alloc] init];
-            [(HomeViewController *)newTopViewController setMViewType:TIMELINE];
+            newTopViewController = [[MainPageViewController alloc] init];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:0];
             break;
         }
         case 1: // 입출금
         {
-//            newTopViewController = [[HomeViewController alloc] init];
-//            [(HomeViewController *)newTopViewController setMViewType:BANKING];
+//            newTopViewController = [[MainPageViewController alloc] init];
+//            [(MainPageViewController *)newTopViewController setStartPageIndex:1];
             // 임시 공인인증서 뷰 컨트롤러 적용
             newTopViewController = [[CertificateMenuViewController alloc] init];
             break;
         }
         case 2: // 기타
         {
-            newTopViewController = [[HomeViewController alloc] init];
-            [(HomeViewController *)newTopViewController setMViewType:OTHER];
+            newTopViewController = [[MainPageViewController alloc] init];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:2];
             break;
         }
         case 3: // 보관함
         {
-            newTopViewController = [[HomeViewController alloc] init];
-            [(HomeViewController *)newTopViewController setMViewType:INBOX];
+            newTopViewController = [[MainPageViewController alloc] init];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:3];
             break;
         }
         case 4: // 알림설정
@@ -132,6 +138,13 @@
         self.slidingViewController.topViewController = newTopViewController;
         self.slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopViewAnimated:NO];
+    }
+    else if(pushViewController)
+    {
+        [self closeMenu:nil];
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
+        [self.slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
+        [self.slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
     }
     
 }

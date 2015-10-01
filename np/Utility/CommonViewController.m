@@ -29,6 +29,11 @@
 {
     [super viewWillAppear:animated];
     
+    if(self.slidingViewController == nil)
+    {
+        NSLog(@"%s. slidingView nil", __FUNCTION__);
+    }
+    
     if(![self.slidingViewController.underRightViewController isKindOfClass:[MenuViewController class]])
     {
         self.slidingViewController.underRightViewController = [[MenuViewController alloc] init];
@@ -87,6 +92,14 @@
     [self.view addSubview:keyboardCloseButton];
     
     [self.view bringSubviewToFront:keyboardCloseButton];
+    
+    loadingIndicatorBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithWhite:0.3f alpha:0.3f]];
+    [loadingIndicatorBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [loadingIndicatorBg setAutoresizesSubviews:YES];
+    [loadingIndicatorBg setHidden:YES];
+    
+    [self.view addSubview:loadingIndicatorBg];
 }
 
 - (void)showMenuView
@@ -114,6 +127,24 @@
     {
         [currentTextField resignFirstResponder];
     }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [self stopIndicator];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:error.description delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)startIndicator
+{
+    [loadingIndicatorBg setHidden:NO];
+}
+
+- (void)stopIndicator
+{
+    [loadingIndicatorBg setHidden:YES];
 }
 
 @end

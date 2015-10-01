@@ -14,22 +14,16 @@
 
 @implementation HomeViewController
 
-@synthesize mViewType;
+@synthesize viewType;
 
-@synthesize mTimeLineButton;
 @synthesize mTimeLineView;
-
-@synthesize mIncomeButton;
-@synthesize mEtcButton;
-@synthesize mInboxButton;
-
 @synthesize mMainContentView;
+
+@synthesize indexView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.mNaviView.mBackButton setHidden:YES];
     
     mTimeLineView = [HomeTimeLineView view];
     [mTimeLineView setDelegate:self];
@@ -42,41 +36,12 @@
     [timeLine setObject:@[@"입금:10000", @"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"출금:23000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/16"];
     [mTimeLineView initData:section timeLineDic:timeLine];
     [mMainContentView addSubview:mTimeLineView];
+    
+    [indexView setText:[NSString stringWithFormat:@"%d", viewType]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (IBAction)tabButtonClick:(id)sender
-{
-    if(mViewType == [sender tag])
-    {
-        return;
-    }
-    
-    switch ([sender tag])
-    {
-        case TIMELINE:  // 전체
-        {
-            break;
-        }
-        case BANKING:   // 입출금
-        {
-            break;
-        }
-        case OTHER:     // 기타
-        {
-            break;
-        }
-        case INBOX:     // 보관함
-        {
-            break;
-        }
-            
-        default:
-            break;
-    }
 }
 @end

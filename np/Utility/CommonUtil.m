@@ -69,4 +69,23 @@
     
     return uuidString;
 }
+
++ (NSString *)getBodyString:(NSDictionary *)bodyObject
+{
+    NSString *bodyString = [NSString string];
+    NSEnumerator *keys = [bodyObject keyEnumerator];
+    for(NSString *key in keys)
+    {
+        if([bodyString length] == 0)
+        {
+            bodyString = [NSString stringWithFormat:@"%@=%@", key, [bodyObject objectForKey:key]];
+        }
+        else
+        {
+            bodyString = [NSString stringWithFormat:@"%@&%@=%@", bodyString, key, [bodyObject objectForKey:key]];
+        }
+    }
+    
+    return bodyString;
+}
 @end

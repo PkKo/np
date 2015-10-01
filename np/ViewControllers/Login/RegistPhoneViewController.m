@@ -28,7 +28,6 @@
 {
     [super viewDidLoad];
     
-    [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mMenuButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"NH스마트알림"];
     

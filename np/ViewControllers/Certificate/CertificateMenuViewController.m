@@ -22,7 +22,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%s, size = %f", __FUNCTION__, self.mNaviView.frame.origin.y + self.mNaviView.frame.size.height);
     
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"공인인증서센터"];
@@ -72,24 +71,29 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    UIViewController *vc = nil;
     switch (indexPath.row)
     {
         case 0:// pc에서 인증서 가져오기
         {
-            CertificateRoamingViewController *vc = [[CertificateRoamingViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            vc = [[CertificateRoamingViewController alloc] init];
             break;
         }
             
         case 2: // 인증서 관리
         {
-            CertificateListViewController *vc = [[CertificateListViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            vc = [[CertificateListViewController alloc] init];
             break;
         }
             
         default:
             break;
+    }
+    
+    if(vc != nil)
+    {
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        [self.navigationController pushViewController:eVC animated:YES];
     }
 }
 @end

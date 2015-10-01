@@ -9,6 +9,8 @@
 #import "SplashViewController.h"
 #import "HomeViewController.h"
 #import "RegistAccountViewController.h"
+#import "MainPageViewController.h"
+#import "AppDelegate.h"
 
 @interface SplashViewController ()
 
@@ -37,19 +39,25 @@
 {
     [super viewDidAppear:animated];
     
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:2];
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
     
 }
 
 - (void)setMainViewController
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    HomeViewController *vc = [[HomeViewController alloc] init];
-    [vc setMViewType:TIMELINE];
+//    HomeViewController *vc = [[HomeViewController alloc] init];
+//    [vc setMViewType:TIMELINE];
 //    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
     slidingViewController.topViewController = vc;
+//    UINavigationController *nVC = [[UINavigationController alloc] initWithRootViewController:vc];
+//    [nVC setNavigationBarHidden:YES];
+//    slidingViewController.topViewController = nVC;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+//    [((AppDelegate *)[UIApplication sharedApplication].delegate).window setRootViewController:slidingViewController];
 }
 
 @end

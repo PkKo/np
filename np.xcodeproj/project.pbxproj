@@ -238,6 +238,8 @@
 		A2DFD71C1BB14DD300838E09 /* RegistAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFD71A1BB14DD300838E09 /* RegistAccountViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A2DFDD901BB3742C00DC1A78 /* NotiSettingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFDD8E1BB3742C00DC1A78 /* NotiSettingMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A2DFDD911BB3742C00DC1A78 /* NotiSettingMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFDD8F1BB3742C00DC1A78 /* NotiSettingMenuViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFDD931BB398FD00DC1A78 /* MainPageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A2DFDD961BB398FD00DC1A78 /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFDD941BB398FD00DC1A78 /* MainPageViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E2353A1BAA452000BAEBEA /* CertInfoViewController.m */; };
 		A2E2353D1BAA452000BAEBEA /* CertInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E2353B1BAA452000BAEBEA /* CertInfoViewController.xib */; };
 		A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E2353F1BAA4AF500BAEBEA /* CertPasswordChangeViewController.m */; };
@@ -587,6 +589,9 @@
 		A2DFDD8D1BB3742C00DC1A78 /* NotiSettingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiSettingMenuViewController.h; sourceTree = "<group>"; };
 		A2DFDD8E1BB3742C00DC1A78 /* NotiSettingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotiSettingMenuViewController.m; sourceTree = "<group>"; };
 		A2DFDD8F1BB3742C00DC1A78 /* NotiSettingMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotiSettingMenuViewController.xib; sourceTree = "<group>"; };
+		A2DFDD921BB398FD00DC1A78 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		A2DFDD931BB398FD00DC1A78 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
+		A2DFDD941BB398FD00DC1A78 /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
 		A2E235391BAA452000BAEBEA /* CertInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertInfoViewController.h; sourceTree = "<group>"; };
 		A2E2353A1BAA452000BAEBEA /* CertInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertInfoViewController.m; sourceTree = "<group>"; };
 		A2E2353B1BAA452000BAEBEA /* CertInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertInfoViewController.xib; sourceTree = "<group>"; };
@@ -1309,6 +1314,9 @@
 		A2DEAE6D1B9FE6E600EDCCBA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				A2DFDD921BB398FD00DC1A78 /* MainPageViewController.h */,
+				A2DFDD931BB398FD00DC1A78 /* MainPageViewController.m */,
+				A2DFDD941BB398FD00DC1A78 /* MainPageViewController.xib */,
 				A2DEAE6E1B9FE6E600EDCCBA /* HomeViewController.h */,
 				A2DEAE6F1B9FE6E600EDCCBA /* HomeViewController.m */,
 				A2DEAE701B9FE6E600EDCCBA /* HomeViewController.xib */,
@@ -1756,6 +1764,7 @@
 				A2D95B501BA8F1DD00DC943D /* nFilterNumForPad.xib in Resources */,
 				A2D95B0D1BA8F1DD00DC943D /* tock.caf in Resources */,
 				A2D95B3D1BA8F1DD00DC943D /* NFPadnum_btn_ok@2x.png in Resources */,
+				A2DFDD961BB398FD00DC1A78 /* MainPageViewController.xib in Resources */,
 				A2D95B3E1BA8F1DD00DC943D /* NFPadnum_btn_ok_pressed@2x.png in Resources */,
 				A2D95B5B1BA8F1DD00DC943D /* nf_ios_icon_backspace.png in Resources */,
 				A2D95B321BA8F1DD00DC943D /* NFPadbtn_ok_pressed@2x.png in Resources */,
@@ -1795,6 +1804,7 @@
 				A2DEAE771B9FE6E600EDCCBA /* CertificateMenuViewController.m in Sources */,
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
+				A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
 				A54B94D51BAA454200D5D99B /* TotalTableViewCell.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,

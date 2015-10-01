@@ -10,6 +10,10 @@
 #import "MenuViewController.h"
 
 @interface CommonViewController :UIViewController
+{
+    UIView *loadingIndicatorBg;
+    UIImageView *loadingIndicatorImg;
+}
 
 @property (strong, nonatomic) NavigationView *mNaviView;
 @property (strong, nonatomic) UIButton *mMenuCloseButton;
@@ -19,4 +23,7 @@
 - (void)makeNaviAndMenuView;
 - (void)closeMenuView;
 - (void)keyboardClose;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void)startIndicator;
+- (void)stopIndicator;
 @end
