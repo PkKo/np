@@ -14,5 +14,8 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *menuTableView;
+@property (strong, nonatomic) IBOutlet UIImageView *loginImg;
+@property (strong, nonatomic) IBOutlet UILabel *loginTextLabel;
+@property (strong, nonatomic) IBOutlet UILabel *loginButtonTextLabel;
 - (IBAction)closeMenu:(id)sender;
 @end

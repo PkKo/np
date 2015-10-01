@@ -35,6 +35,11 @@
 {
     [super viewDidLoad];
     
+    [self.mNaviView.mBackButton setHidden:YES];
+    [self.mNaviView.mMenuButton setHidden:YES];
+    [self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];
+    
     /*
      * 공인인증서로 가입하려는 경우
      */
@@ -69,6 +74,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 #pragma mark - 공인인증서 인증 관련 공인인증서 가져오기 Method
@@ -160,18 +170,72 @@
 {
     // 실제 사용가능한 인증서인지 확인한 후 가입 진행한다.
     NSLog(@"%s, certInfo = %@", __FUNCTION__, certInfo);
-    NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+    [[CertManager sharedInstance] setCertInfo:certInfo];
     
-    HttpRequest *req = [HttpRequest getInstance];
-    [req setDelegate:self selector:@selector(certInfoResponse:)];
-    [req requestUrl:@"" bodyObject:requestBody];
+    [self showNFilterKeypad];
+}
+
+- (void)certInfoRequest:(NSString *)password
+{
+    int rc = 0;
+    
+    rc = [[CertManager sharedInstance] checkPassword:password];
+    
+    if(rc == 0)
+    {
+        [self startIndicator];
+        
+        NSString *strTbs = @"abc"; //서명할 원문
+        [[CertManager sharedInstance] setTbs:strTbs];
+        // 전자서명 API 호출
+        NSString *sig = [[CertManager sharedInstance] getSignature];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, @"PMCNA100R.cmd"];
+        
+        NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+        [requestBody setObject:strTbs forKey:@"SSLSIGN_TBS_DATA"];
+        [requestBody setObject:sig forKey:@"SSLSIGN_SIGNATURE"];
+#ifdef DEV_MODE
+        [requestBody setObject:@"1" forKey:@"REQ_LOGINTYPE"];
+//        [requestBody setObject:@"Y" forKey:@"dummyYn"];
+#endif
+        /*
+        NSString *tbs = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_TBS_DATA", strTbs];
+        NSString *sigStr = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_SIGNATURE", sig];
+        NSString *loginType = [NSString stringWithFormat:@"%@=%@", @"REQ_LOGINTYPE", @"1"];
+        NSString *bodyString = [NSString stringWithFormat:@"%@&%@&%@", tbs, sigStr, loginType];
+         */
+        
+        NSString *bodyString = [CommonUtil getBodyString:requestBody];
+        
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(certInfoResponse:)];
+//        [req requestUrl:url bodyObject:requestBody];
+        [req requestUrl:url bodyString:bodyString];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 인증서의 비밀번호가 맞지 않습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (void)certInfoResponse:(NSDictionary *)response
 {
-    // 인증 성공한 이후 휴대폰 인증으로 이동
-    RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    {
+        // 인증 성공한 이후 휴대폰 인증으로 이동
+        RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - AlertView Delegate Methods
@@ -240,7 +304,14 @@
     EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pPlainText];
     
-    [currentTextField setText:plainText];
+    if(currentTextField != nil)
+    {
+        [currentTextField setText:plainText];
+    }
+    else
+    {
+        [self certInfoRequest:plainText];
+    }
 }
 
 @end

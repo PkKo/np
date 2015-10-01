@@ -12,4 +12,6 @@
 
 + (NSString *)getMaskingNumber:(NSString *)number;
 + (NSString *)getDeviceUUID;
++ (NSString *)getBodyString:(NSDictionary *)bodyObject;
++ (CGSize)getStringFrameSize:(NSString *)string fontSize:(CGFloat)fontSize bold:(BOOL)isBold;
 @end

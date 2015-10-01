@@ -8,6 +8,8 @@
 
 #import "CommonViewController.h"
 
+#define TOP_LAYOUT_OFFSET   22
+
 @interface CommonViewController ()
 
 @end
@@ -29,6 +31,11 @@
 {
     [super viewWillAppear:animated];
     
+    if(self.slidingViewController == nil)
+    {
+        NSLog(@"%s. slidingView nil", __FUNCTION__);
+    }
+    
     if(![self.slidingViewController.underRightViewController isKindOfClass:[MenuViewController class]])
     {
         self.slidingViewController.underRightViewController = [[MenuViewController alloc] init];
@@ -42,8 +49,16 @@
 
 - (void)makeNaviAndMenuView
 {
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.0f green:101.0f/255.0f blue:179.0f/255.0f alpha:1.0f]];
+    
     self.mNaviView = [NavigationView view];
-    [self.mNaviView setFrame:CGRectMake(0, 20, self.view.frame.size.width, self.mNaviView.frame.size.height)];
+    // 이미지 타이틀의 경우 일부에서만 보이면 된다.
+    /**
+     가입, 간편보기, 메인화면
+     */
+    [self.mNaviView.imgTitleView setHidden:YES];
+    [self.mNaviView setFrame:CGRectMake(0, TOP_LAYOUT_OFFSET, self.view.frame.size.width, self.mNaviView.frame.size.height)];
     [self.view addSubview:self.mNaviView];
     /*
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
@@ -60,11 +75,12 @@
     [self.mNaviView.mBackButton addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
     
     mMenuCloseButton = [[UIButton alloc] init];
-    [mMenuCloseButton setBackgroundColor:[UIColor clearColor]];
+    [mMenuCloseButton setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
     [mMenuCloseButton addTarget:self action:@selector(closeMenuView) forControlEvents:UIControlEventTouchUpInside];
     [mMenuCloseButton setEnabled:NO];
     [mMenuCloseButton setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [mMenuCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [mMenuCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [mMenuCloseButton setHidden:YES];
     [self.view addSubview:mMenuCloseButton];
     /*
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
@@ -87,20 +103,30 @@
     [self.view addSubview:keyboardCloseButton];
     
     [self.view bringSubviewToFront:keyboardCloseButton];
+    
+    loadingIndicatorBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithWhite:0.3f alpha:0.3f]];
+    [loadingIndicatorBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [loadingIndicatorBg setAutoresizesSubviews:YES];
+    [loadingIndicatorBg setHidden:YES];
+    
+    [self.view addSubview:loadingIndicatorBg];
 }
 
 - (void)showMenuView
 {
     [self.slidingViewController anchorTopViewToLeftAnimated:YES onComplete:^{
+        [mMenuCloseButton setHidden:NO];
         [mMenuCloseButton setEnabled:YES];
+        [self.view bringSubviewToFront:mMenuCloseButton];
     }];
 }
 
 - (void)closeMenuView
 {
-    [self.slidingViewController resetTopViewAnimated:YES onComplete:^{
-        [mMenuCloseButton setEnabled:NO];
-    }];
+    [mMenuCloseButton setHidden:YES];
+    [mMenuCloseButton setEnabled:NO];
+    [self.slidingViewController resetTopViewAnimated:YES];
 }
 
 - (void)moveBack
@@ -114,6 +140,24 @@
     {
         [currentTextField resignFirstResponder];
     }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [self stopIndicator];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:error.description delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)startIndicator
+{
+    [loadingIndicatorBg setHidden:NO];
+}
+
+- (void)stopIndicator
+{
+    [loadingIndicatorBg setHidden:YES];
 }
 
 @end
