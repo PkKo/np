@@ -18,6 +18,15 @@
                         <rect key="frame" x="18" y="18" width="25" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ba0-oo-9lW">
+                        <rect key="frame" x="18" y="18" width="25" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="icon_sticker_05_dft"/>
+                        <state key="selected" image="icon_sticker_05_sel"/>
+                        <connections>
+                            <action selector="clickDeleteBtn" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Art-yt-aTp"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:58" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O7g-uC-lOZ">
                         <rect key="frame" x="60" y="22" width="56" height="16"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -77,6 +86,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="deleteBtn" destination="ba0-oo-9lW" id="udl-jc-O36"/>
                 <outlet property="transacAccountNo" destination="Z9n-QJ-Qjh" id="IAN-gQ-KxK"/>
                 <outlet property="transacAmount" destination="HaD-Cn-Ito" id="945-K8-iXw"/>
                 <outlet property="transacBalance" destination="qzo-IY-z4c" id="S09-zC-5Hd"/>
@@ -93,5 +103,7 @@
         <image name="icon_pen_01_dft" width="18" height="18"/>
         <image name="icon_pen_01_sel" width="18" height="18"/>
         <image name="icon_sticker_01" width="25" height="25"/>
+        <image name="icon_sticker_05_dft" width="25" height="25"/>
+        <image name="icon_sticker_05_sel" width="25" height="25"/>
     </resources>
 </document>

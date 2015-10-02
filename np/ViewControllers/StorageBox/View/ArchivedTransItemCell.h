@@ -11,13 +11,14 @@
 @interface ArchivedTransItemCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView    * transacTypeImageView;
+@property (weak, nonatomic) IBOutlet UIButton       * deleteBtn;
+- (IBAction)clickDeleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel        * transacTime;
 @property (weak, nonatomic) IBOutlet UILabel        * transacName;
 @property (weak, nonatomic) IBOutlet UILabel        * transacAmount;
 @property (weak, nonatomic) IBOutlet UILabel        * transacAccountNo;
 @property (weak, nonatomic) IBOutlet UILabel        * transacBalance;
 @property (weak, nonatomic) IBOutlet UILabel        * transacMemo;
-
 - (IBAction)editMemo;
 
 @end

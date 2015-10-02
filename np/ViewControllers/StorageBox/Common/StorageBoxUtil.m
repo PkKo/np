@@ -10,12 +10,118 @@
 #import "MemoCompositionViewController.h"
 #import "SNSViewController.h"
 
-
 @implementation StorageBoxUtil
 
 + (UIColor *)getDimmedBackgroundColor {
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
 }
+
+- (void)addSelectToRemoveViewToParent:(UIView *)parentView
+             moveTopViewSeperatorDown:(UILabel *)topViewSeperator
+                    moveTableviewDown:(UITableView *)tableview
+                               target:(id)target
+                      selectAllAction:(SEL)selectAllAction
+            removeSelectedItemsAction:(SEL)removeSelectedItemsAction
+        closeSelectToRemoveViewAction:(SEL)closeSelectToRemoveViewAction {
+    
+    if ([self hasSelectAllViewInParentView:parentView]) {
+        return;
+    }
+    
+    NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemRemoveAllSelectView"
+                                                     owner:self options:nil];
+    ArchivedTransItemRemoveAllSelectView * selectAllView = (ArchivedTransItemRemoveAllSelectView *)[nibArr objectAtIndex:0];
+    
+    [selectAllView addTargetForSelectAllBtn:target action:selectAllAction];
+    
+    CGRect selectToRemoveViewFrame      = selectAllView.frame;
+    selectToRemoveViewFrame.origin.y    = topViewSeperator.frame.origin.y;
+    selectToRemoveViewFrame.size.width  = parentView.frame.size.width;
+    [selectAllView setFrame:selectToRemoveViewFrame];
+    
+    CGRect topViewSeperatorFrame    = topViewSeperator.frame;
+    topViewSeperatorFrame.origin.y += selectToRemoveViewFrame.size.height;
+    [topViewSeperator setFrame:topViewSeperatorFrame];
+    
+    CGRect tableviewFrame           = tableview.frame;
+    tableviewFrame.origin.y        += selectToRemoveViewFrame.size.height;
+    tableviewFrame.size.height     -= selectToRemoveViewFrame.size.height;
+    [tableview setFrame:tableviewFrame];
+    
+    [parentView addSubview:selectAllView];
+    
+    // -------
+    
+    nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemRemoveActionView"
+                                           owner:self options:nil];
+    ArchivedTransItemRemoveActionView * removeCancelView = (ArchivedTransItemRemoveActionView *)[nibArr objectAtIndex:0];
+    [removeCancelView addTargetForRemoveButton:target action:removeSelectedItemsAction];
+    [removeCancelView addTargetForCancelButton:target action:closeSelectToRemoveViewAction];
+    
+    CGRect removeCancelViewFrame        = removeCancelView.frame;
+    removeCancelViewFrame.origin.y      = parentView.frame.size.height - removeCancelViewFrame.size.height;
+    removeCancelViewFrame.size.width    = parentView.frame.size.width;
+    [removeCancelView setFrame:removeCancelViewFrame];
+    /*
+    tableviewFrame.size.height         -= removeCancelViewFrame.size.height;
+    [tableview setFrame:tableviewFrame];
+    */
+    [parentView addSubview:removeCancelView];
+}
+
+- (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
+                      moveTopViewSeperatorBack:(UILabel *)topViewSeperator
+                             moveTableviewBack:(UITableView *)tableview {
+    
+    ArchivedTransItemRemoveAllSelectView    * selectAllView     = [self hasSelectAllViewInParentView:parentView];
+    ArchivedTransItemRemoveActionView       * removeCancelView  = [self hasRemoveCancelViewInParentView:parentView];
+    
+    if (selectAllView && removeCancelView) {
+        
+        CGRect selectToRemoveViewFrame  = selectAllView.frame;
+        CGRect topViewSeperatorFrame    = topViewSeperator.frame;
+        topViewSeperatorFrame.origin.y -= selectToRemoveViewFrame.size.height;
+        [topViewSeperator setFrame:topViewSeperatorFrame];
+        
+        
+        CGRect tableviewFrame           = tableview.frame;
+        tableviewFrame.origin.y        -= selectToRemoveViewFrame.size.height;
+        tableviewFrame.size.height     += selectToRemoveViewFrame.size.height;
+        [tableview setFrame:tableviewFrame];
+        
+        /*
+        CGRect removeCancelViewFrame    = removeCancelView.frame;
+        tableviewFrame.size.height     += removeCancelViewFrame.size.height;
+        [tableview setFrame:tableviewFrame];
+        */
+        
+        [selectAllView removeFromSuperview];
+        [removeCancelView removeFromSuperview];
+    }
+}
+
+- (ArchivedTransItemRemoveAllSelectView *)hasSelectAllViewInParentView:(UIView *)parentView {
+    
+    NSArray * subviews = [parentView subviews];
+    for (UIView * subview in subviews) {
+        if ([subview isKindOfClass:[ArchivedTransItemRemoveAllSelectView class]]) {
+            return (ArchivedTransItemRemoveAllSelectView *)subview;
+        }
+    }
+    return nil;
+}
+
+- (ArchivedTransItemRemoveActionView *)hasRemoveCancelViewInParentView:(UIView *)parentView {
+    
+    NSArray * subviews = [parentView subviews];
+    for (UIView * subview in subviews) {
+        if ([subview isKindOfClass:[ArchivedTransItemRemoveActionView class]]) {
+            return (ArchivedTransItemRemoveActionView *)subview;
+        }
+    }
+    return nil;
+}
+
 
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
     
@@ -41,18 +147,6 @@
     
     [parentViewController addChildViewController:viewController];
     [parentViewController.view addSubview:viewController.view];
-    /*
-    [parentViewController transitionFromViewController:parentViewController
-                                      toViewController:viewController
-                                              duration:0.3f
-                                               options:UIViewAnimationOptionLayoutSubviews
-                                            animations:^{
-                                                viewController.view.frame             = parentViewController.view.bounds;
-                                            }
-                                            completion:^(BOOL finished) {
-                                                [viewController didMoveToParentViewController:parentViewController];
-                                            }];
-    */
     [viewController didMoveToParentViewController:parentViewController];
 }
 

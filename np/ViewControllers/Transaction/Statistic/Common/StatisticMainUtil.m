@@ -185,6 +185,23 @@
     return [calendar dateFromComponents:newDateComponents];
 }
 
++ (NSString *)getWeekdayOfDate:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitWeekday
+                                                   fromDate:date];
+    
+    NSArray * weekdays = @[@"일요일", @"월요일", @"화요일", @"수요일", @"목요일", @"금요일", @"토요일", @"일요일"];
+    
+    return [weekdays objectAtIndex:((int)[dateComponents weekday] - 1)];
+}
+
++ (NSString *)getWeekdayOfDateStr:(NSString *)dateStr { // yyyy.MM.dd
+    
+    NSDateFormatter *dateFormatter = [StatisticMainUtil getDateFormatterDateStyle];
+    NSDate * date = [dateFormatter dateFromString:dateStr];
+    return [StatisticMainUtil getWeekdayOfDate:date];
+}
+
 + (NSInteger) getLastDayOfMonth:(NSInteger)month year:(NSInteger)year {
     
     NSDate *curDate = [NSDate date];
@@ -204,11 +221,11 @@
 
 #pragma mark - Date Formatter
 + (NSDateFormatter *)getDateFormatterDateHourStyle {
-    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd HH:mm:ss"];
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy.MM.dd HH:mm:ss"];
 }
 
 + (NSDateFormatter *)getDateFormatterDateHourMinuteStyle {
-    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd HH:mm"];
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy.MM.dd HH:mm"];
 }
 
 + (NSDateFormatter *)getDateFormatterHourMinuteStyle {
@@ -216,7 +233,7 @@
 }
 
 + (NSDateFormatter *)getDateFormatterDateStyle {
-    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd"];
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy.MM.dd"];
 }
 
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style {

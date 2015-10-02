@@ -20,6 +20,11 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)clickDeleteBtn {
+    NSLog(@"%s", __func__);
+    [self.deleteBtn setSelected:!self.deleteBtn.selected];
+}
+
 - (IBAction)editMemo {
     NSLog(@"%s", __func__);
 }

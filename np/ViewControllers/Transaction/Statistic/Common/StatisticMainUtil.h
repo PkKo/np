@@ -27,6 +27,8 @@
 - (void)setContentSizeOfScrollView:(UIScrollView *)scroll;
 
 + (NSDate *)getExactDate:(NSInteger)months beforeThisDate:(NSDate *)thisDate;
++ (NSString *)getWeekdayOfDate:(NSDate *)date;
++ (NSString *)getWeekdayOfDateStr:(NSString *)dateStr; // yyyy.MM.dd
 + (NSInteger) getLastDayOfMonth:(NSInteger)month year:(NSInteger)year;
 
 + (NSDateFormatter *)getDateFormatterDateHourStyle;
