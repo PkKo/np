@@ -24,9 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"보관함"];
-    
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     
     _transactions       = [controller getIndexDicOutOfArray:[controller getArchivedItems]];

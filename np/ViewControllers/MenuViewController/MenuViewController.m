@@ -139,9 +139,7 @@
         case 3: // 보관함
         {
             newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:3];
-            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
-            newTopViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:INBOX];
             break;
         }
         case 4: // 알림설정

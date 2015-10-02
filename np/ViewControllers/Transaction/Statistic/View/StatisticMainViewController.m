@@ -68,7 +68,7 @@
         [dateSearchUtil hideDateSearchView:existedDateSearchView];
     } else {
         
-        CGFloat belowSearchButtonY      = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
+        CGFloat belowSearchButtonY      = self.topView.frame.origin.y + self.topView.frame.size.height;
         existedDateSearchView           = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
         existedDateSearchView.delegate  = self;
     }

@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="FQC-y1-FDJ">
-                                <rect key="frame" x="0.0" y="61" width="320" height="507"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="513"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="TD5-0I-3vW">
@@ -44,7 +44,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -58,7 +58,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="8aG-4V-WPC">
-                                        <rect key="frame" x="18" y="336" width="280" height="145"/>
+                                        <rect key="frame" x="18" y="342" width="280" height="145"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 수입/지출 통계 조회기간은 최대 1개월까지만    가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yeP-St-JF8">
@@ -94,8 +94,8 @@
                     <connections>
                         <outlet property="noticeView" destination="8aG-4V-WPC" id="ORa-Rd-5qh"/>
                         <outlet property="scrollView" destination="FQC-y1-FDJ" id="flB-hX-Ndl"/>
-                        <outlet property="searchButton" destination="jJt-N1-f2m" id="Mqk-XX-Rjo"/>
                         <outlet property="selectedDatesLabel" destination="MaX-28-MtA" id="TS8-RM-oit"/>
+                        <outlet property="topView" destination="TD5-0I-3vW" id="YTY-MT-kWY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oct-24-KSr" userLabel="First Responder" sceneMemberID="firstResponder"/>

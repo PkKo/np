@@ -98,6 +98,18 @@
         case INBOX:
         {
             // 보관함 구현
+            UIStoryboard        * archivedItemsStoryBoard       = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
+            UIViewController    * archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
+            
+            archivedItemsViewController.view.frame             = mMainContentView.bounds;
+            archivedItemsViewController.view.autoresizingMask  = mMainContentView.autoresizingMask;
+            
+            [self addChildViewController:archivedItemsViewController];
+            [mMainContentView addSubview:archivedItemsViewController.view];
+            [archivedItemsViewController didMoveToParentViewController:self];
+            
+            [indexView setText:[NSString stringWithFormat:@"%d", viewType]];
+            
             break;
         }
             

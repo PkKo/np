@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface ArchivedTransactionItemsViewController : CommonViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
