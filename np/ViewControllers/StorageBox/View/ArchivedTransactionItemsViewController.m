@@ -17,7 +17,7 @@
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
 
-@interface ArchivedTransactionItemsViewController () {
+@interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
     NSArray         * _transactionTitles;
 }
@@ -59,7 +59,6 @@
                                 removeSelectedItemsAction:@selector(removeSelectedItems)
                             closeSelectToRemoveViewAction:@selector(closeSelectToRemoveView)];
         
-        
     } else {
         [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
                                           moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:self.tableview];
@@ -69,6 +68,7 @@
 
 - (void)removeSelectedItems {
     NSLog(@"%s", __func__);
+    
 }
 
 - (void)closeSelectToRemoveView {
@@ -83,6 +83,14 @@
     
     BOOL isSelectAll = [(NSNumber *)sender boolValue];
     NSLog(@"%@", isSelectAll ? @"select all" : @"remove all");
+    
+    for (NSString * sectionTitle in _transactionTitles) {
+        NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+        
+        for (TransactionObject * transacObj in sectionItems) {
+            [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
+        }
+    }
 }
 
 - (IBAction)toggleSearchView {
@@ -139,8 +147,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%s %d", __func__, (int)[indexPath row]);
-    
     static NSString *simpleTableIdentifier = @"ArchivedTransItemCell";
     
     ArchivedTransItemCell *cell = (ArchivedTransItemCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -149,17 +155,23 @@
     if (cell == nil) {
         
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemCell" owner:self options:nil];
-        cell = (ArchivedTransItemCell *)[nibArr objectAtIndex:0];
+        cell            = (ArchivedTransItemCell *)[nibArr objectAtIndex:0];
+        cell.delegate   = self;
         
         NSString        * sectionTitle = [_transactionTitles objectAtIndex:indexPath.section];
         NSMutableArray  * sectionItems = [_transactions objectForKey:sectionTitle];
         
         TransactionObject * transacObj = [sectionItems objectAtIndex:[indexPath row]];
         
+        // these following two variables are used for delete & edit.
+        [cell setSection:indexPath.section];
+        [cell setRow:indexPath.row];
+        
         if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
             
             [cell.deleteBtn setHidden:NO];
             [cell.transacTypeImageView setHidden:YES];
+            cell.deleteBtn.selected = [transacObj.transactionMarkAsDeleted boolValue];
             
         } else {
             
@@ -178,6 +190,15 @@
         [cell.transacMemo setText:[transacObj transactionMemo]];
     }
     return cell;
+}
+
+- (void)markAsDeleted:(BOOL)isMarkedAsDeleted ofItemSection:(NSInteger)section row:(NSInteger)row {
+    
+    NSString        * sectionTitle  = [_transactionTitles objectAtIndex:section];
+    NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+    
+    TransactionObject * transacObj = [sectionItems objectAtIndex:row];
+    [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isMarkedAsDeleted]];
 }
 
 @end

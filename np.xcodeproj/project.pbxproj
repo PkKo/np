@@ -366,6 +366,8 @@
 		A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */; settings = {ASSET_TAGS = (); }; };
 		A55BDEF01BB0EB8100646C79 /* DrawPatternLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
+		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
 		A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5E2C44E1BB26E5A006EE828 /* MemoCompositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4511BB28E79006EE828 /* TransactionObject.m */; settings = {ASSET_TAGS = (); }; };
@@ -851,6 +853,9 @@
 		A55BDEE91BB0EB8100646C79 /* DrawPatternLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockViewController.h; sourceTree = "<group>"; };
 		A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternLockViewController.m; sourceTree = "<group>"; };
 		A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawPatternLockViewController.xib; sourceTree = "<group>"; };
+		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
+		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
+		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		A5E2C44A1BB26E5A006EE828 /* MemoCompositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoCompositionViewController.h; path = StorageBox/View/MemoCompositionViewController.h; sourceTree = "<group>"; };
 		A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemoCompositionViewController.m; path = StorageBox/View/MemoCompositionViewController.m; sourceTree = "<group>"; };
 		A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemoCompositionViewController.xib; path = StorageBox/View/MemoCompositionViewController.xib; sourceTree = "<group>"; };
@@ -887,6 +892,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */,
 				A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */,
 				A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */,
 				A2DE588F1BA80F93008903E6 /* libBTWCryptoLib.a in Frameworks */,
@@ -1387,6 +1393,7 @@
 		A2DEAE0E1B9FE69000EDCCBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */,
 				A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */,
 				A54B94E61BAAA03A00D5D99B /* MessageUI.framework */,
 				A54B94E41BAA9B5800D5D99B /* Social.framework */,
@@ -1878,6 +1885,8 @@
 			children = (
 				A5EA7E3B1BBBB36000626C74 /* StorageBoxController.h */,
 				A5EA7E3C1BBBB36000626C74 /* StorageBoxController.m */,
+				A5989BBB1BC25D0600873B76 /* DBManager.h */,
+				A5989BBC1BC25D0600873B76 /* DBManager.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2335,6 +2344,7 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
+				A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */,
 				A2D7916F1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m in Sources */,
 				A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,

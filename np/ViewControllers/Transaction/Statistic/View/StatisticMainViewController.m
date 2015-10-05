@@ -177,14 +177,14 @@
 
 - (IBAction)showMemoComposer {
     
-    TransactionObject * transation = [[TransactionObject alloc] init];
-    [transation setTransactionDate:[NSDate date]];
-    [transation setTransactionAccountNumber:@"111-22-***33"];
-    [transation setTransactionDetails:@"당풍니"];
-    [transation setTransactionType:@"입금"];
-    [transation setTransactionAmount:[NSNumber numberWithFloat:100000.0f]];
-    
-    
+    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
+                                                                                       transactionDate:[NSDate date]
+                                                                              transactionAccountNumber:@"111-22-***33"
+                                                                                    transactionDetails:@"당풍니"
+                                                                                       transactionType:INCOME
+                                                                                     transactionAmount:[NSNumber numberWithFloat:100000.0f]
+                                                                                    transactionBalance:[NSNumber numberWithFloat:200000.0f]
+                                                                                       transactionMemo:@""];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
     [util showMemoComposerInViewController:self withTransationObject:transation];
 }

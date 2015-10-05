@@ -10,13 +10,16 @@
 #import "TransactionObject.h"
 #import "TransactionObject.h"
 
-@interface MemoCompositionViewController : UIViewController
+@interface MemoCompositionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) TransactionObject *transactionObject;
+@property (weak, nonatomic) IBOutlet UIView *snsView;
+@property (weak, nonatomic) IBOutlet UITextField *memo;
 
 - (IBAction)removeComposer;
 - (IBAction)saveToStorageBox;
 - (IBAction)shareSNS;
+- (IBAction)validateTextEditing:(UITextField *)sender;
 
 
 @end

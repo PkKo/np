@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#define TRANS_MARK_AS_DELETED_NO    0
+#define TRANS_MARK_AS_DELETED_YES   1
+
 @interface TransactionObject : NSObject
 
+@property (nonatomic, copy) NSString * transactionId;
 @property (nonatomic, copy) NSDate * transactionDate;
 @property (nonatomic, copy) NSString * transactionAccountNumber;
 @property (nonatomic, copy) NSString * transactionDetails;
@@ -17,6 +21,16 @@
 @property (nonatomic, copy) NSNumber * transactionAmount;
 @property (nonatomic, copy) NSNumber * transactionBalance;
 @property (nonatomic, copy) NSString * transactionMemo;
+@property (nonatomic, copy) NSNumber * transactionMarkAsDeleted;
+
+- (instancetype)initTransactionObjectWithTransactionId:(NSDate *)transactionId
+                                       transactionDate:(NSDate *)transactionDate
+                              transactionAccountNumber:(NSString *)transactionAccountNumber
+                                    transactionDetails:(NSString *)transactionDetails
+                                       transactionType:(NSString *)transactionType
+                                     transactionAmount:(NSNumber *)transactionAmount
+                                    transactionBalance:(NSNumber *)transactionBalance
+                                       transactionMemo:(NSString *)transactionMemo;
 
 - (instancetype)initTransactionObjectWithTransactionDate:(NSDate *)transactionDate
                                 transactionAccountNumber:(NSString *)transactionAccountNumber
