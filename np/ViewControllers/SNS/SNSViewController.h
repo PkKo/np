@@ -16,6 +16,7 @@
 @property (strong, nonatomic) TransactionObject *transactionObject;
 
 @property (weak, nonatomic) IBOutlet UITextView *snsContent;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 - (IBAction)shareOnKakaoStory:(id)sender;
 - (IBAction)shareOnFacebook:(id)sender;

@@ -57,13 +57,14 @@
     ArchivedTransItemRemoveActionView * removeCancelView = (ArchivedTransItemRemoveActionView *)[nibArr objectAtIndex:0];
     [removeCancelView addTargetForRemoveButton:target action:removeSelectedItemsAction];
     [removeCancelView addTargetForCancelButton:target action:closeSelectToRemoveViewAction];
+    [removeCancelView updateHighlightBackgroundColor];
     
     CGRect removeCancelViewFrame        = removeCancelView.frame;
     removeCancelViewFrame.origin.y      = parentView.frame.size.height - removeCancelViewFrame.size.height;
     removeCancelViewFrame.size.width    = parentView.frame.size.width;
     [removeCancelView setFrame:removeCancelViewFrame];
     /*
-    tableviewFrame.size.height         -= removeCancelViewFrame.size.height;
+    tableviewFrame.size.height         -= removeCancelViewFrame.size.height + 18;
     [tableview setFrame:tableviewFrame];
     */
     [parentView addSubview:removeCancelView];
@@ -88,13 +89,11 @@
         tableviewFrame.origin.y        -= selectToRemoveViewFrame.size.height;
         tableviewFrame.size.height     += selectToRemoveViewFrame.size.height;
         [tableview setFrame:tableviewFrame];
-        
         /*
         CGRect removeCancelViewFrame    = removeCancelView.frame;
         tableviewFrame.size.height     += removeCancelViewFrame.size.height;
         [tableview setFrame:tableviewFrame];
         */
-        
         [selectAllView removeFromSuperview];
         [removeCancelView removeFromSuperview];
     }

@@ -45,6 +45,10 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelBtn" destination="VJ4-zn-pW7" id="POu-1F-X1P"/>
+                <outlet property="removeBtn" destination="1Z4-rM-FQ5" id="wOO-6f-3ps"/>
+            </connections>
             <point key="canvasLocation" x="337" y="312"/>
         </view>
     </objects>

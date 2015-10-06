@@ -13,6 +13,7 @@
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import "StoryLinkHelper.h"
 #import "StorageBoxUtil.h"
+#import "UIButton+BackgroundColor.h"
 
 @interface SNSViewController () <MFMessageComposeViewControllerDelegate, EKEventEditViewDelegate>
 
@@ -29,6 +30,8 @@
     self.eventStore = [[EKEventStore alloc] init];
     
     [self composeSNSContent];
+    
+    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 /*

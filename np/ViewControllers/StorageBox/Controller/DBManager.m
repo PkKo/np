@@ -104,11 +104,11 @@
     NSLog(@"%s", __func__);
     
     sqlite3_stmt * statement;
-    const char * encodedDBPath = [self.databasePath UTF8String];
     
-    NSLog(@"self.databasePath: %@", self.databasePath);
-    
-    if (sqlite3_open(encodedDBPath, &_nhTransactionDB)) {
+    BOOL openDatabaseResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    if(openDatabaseResult == SQLITE_OK) {
+        NSLog(@"succeed to open");
+        
         NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (trans_id, trans_memo) VALUES (\"%@\", \"%@\")", transObj.transactionId, transObj.transactionMemo];
         const char * insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare(_nhTransactionDB, insert_stmt, -1, &statement, NULL);
@@ -120,8 +120,9 @@
         }
         sqlite3_finalize(statement);
         sqlite3_close(_nhTransactionDB);
+        
     } else {
-        NSLog(@"faied to open");
+        NSLog(@"failed to open");
     }
 }
 
