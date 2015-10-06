@@ -19,6 +19,8 @@
     NSString *textPull;
     NSString *textRelease;
     NSString *textLoading;
+    
+    BOOL listSortType;
 }
 
 @property (strong, nonatomic) id delegate;
@@ -29,4 +31,12 @@
 @property (strong, nonatomic) IBOutlet UITableView  *mTimeLineTable;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
+
+/**
+ @brief 리스트 정렬 순서 변경
+ */
+- (IBAction)listSortChange:(id)sender;
+- (IBAction)searchViewShow:(id)sender;
+- (IBAction)deleteMode:(id)sender;
+
 @end

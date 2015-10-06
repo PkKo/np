@@ -289,6 +289,15 @@
 		A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CA1BA116D1006F5F4A /* Security.framework */; };
 		A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */; };
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
+		A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBC3981BBE514600FFF357 /* IndexPathButton.m */; settings = {ASSET_TAGS = (); }; };
+		A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A2DD87441BC2155A0013470D /* RegisterTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DD87481BC216AE0013470D /* RegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87461BC216AE0013470D /* RegisterAccountViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A2DD87491BC216AE0013470D /* RegisterAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87471BC216AE0013470D /* RegisterAccountViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DD874D1BC219790013470D /* RegistCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD874B1BC219790013470D /* RegistCompleteViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A2DD874E1BC219790013470D /* RegistCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD874C1BC219790013470D /* RegistCompleteViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */; settings = {ASSET_TAGS = (); }; };
+		A2DD87531BC23BB50013470D /* RegistAccountInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */; };
 		A2DE58821BA7E780008903E6 /* CertificateRoamingPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */; };
 		A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE58841BA7F98A008903E6 /* CertificateListViewController.m */; };
@@ -705,6 +714,20 @@
 		A2DA68CA1BA116D1006F5F4A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A2DA68CE1BA13F85006F5F4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A2DBC3971BBE514600FFF357 /* IndexPathButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPathButton.h; sourceTree = "<group>"; };
+		A2DBC3981BBE514600FFF357 /* IndexPathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPathButton.m; sourceTree = "<group>"; };
+		A2DD87401BC2155A0013470D /* RegisterTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTermsViewController.h; sourceTree = "<group>"; };
+		A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTermsViewController.m; sourceTree = "<group>"; };
+		A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterTermsViewController.xib; sourceTree = "<group>"; };
+		A2DD87451BC216AE0013470D /* RegisterAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterAccountViewController.h; path = np/ViewControllers/Login/RegisterAccountViewController.h; sourceTree = SOURCE_ROOT; };
+		A2DD87461BC216AE0013470D /* RegisterAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterAccountViewController.m; path = np/ViewControllers/Login/RegisterAccountViewController.m; sourceTree = SOURCE_ROOT; };
+		A2DD87471BC216AE0013470D /* RegisterAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterAccountViewController.xib; path = np/ViewControllers/Login/RegisterAccountViewController.xib; sourceTree = SOURCE_ROOT; };
+		A2DD874A1BC219790013470D /* RegistCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistCompleteViewController.h; sourceTree = "<group>"; };
+		A2DD874B1BC219790013470D /* RegistCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistCompleteViewController.m; sourceTree = "<group>"; };
+		A2DD874C1BC219790013470D /* RegistCompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistCompleteViewController.xib; sourceTree = "<group>"; };
+		A2DD874F1BC23B9B0013470D /* RegistAccountInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountInputView.h; sourceTree = "<group>"; };
+		A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountInputView.m; sourceTree = "<group>"; };
+		A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountInputView.xib; sourceTree = "<group>"; };
 		A2DE587E1BA7E780008903E6 /* CertificateRoamingPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingPassViewController.h; sourceTree = "<group>"; };
 		A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingPassViewController.m; sourceTree = "<group>"; };
 		A2DE58801BA7E780008903E6 /* CertificateRoamingPassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingPassViewController.xib; sourceTree = "<group>"; };
@@ -1529,6 +1552,8 @@
 				A2DEAE4D1B9FE6D800EDCCBA /* NavigationView.h */,
 				A2DEAE4E1B9FE6D800EDCCBA /* NavigationView.m */,
 				A2DEAE4F1B9FE6D800EDCCBA /* NavigationView.xib */,
+				A2DBC3971BBE514600FFF357 /* IndexPathButton.h */,
+				A2DBC3981BBE514600FFF357 /* IndexPathButton.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1690,6 +1715,15 @@
 				A2DF41021BAF9902001389E7 /* RegistPhoneViewController.m */,
 				A2DF41031BAF9902001389E7 /* RegistPhoneViewController.xib */,
 				A2DF410D1BAFBD00001389E7 /* CarrierList.plist */,
+				A2DD87401BC2155A0013470D /* RegisterTermsViewController.h */,
+				A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */,
+				A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */,
+				A2DD87451BC216AE0013470D /* RegisterAccountViewController.h */,
+				A2DD87461BC216AE0013470D /* RegisterAccountViewController.m */,
+				A2DD87471BC216AE0013470D /* RegisterAccountViewController.xib */,
+				A2DD874A1BC219790013470D /* RegistCompleteViewController.h */,
+				A2DD874B1BC219790013470D /* RegistCompleteViewController.m */,
+				A2DD874C1BC219790013470D /* RegistCompleteViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1709,6 +1743,9 @@
 				A2D90D631BB2730D00315425 /* RegistCertListView.h */,
 				A2D90D641BB2730D00315425 /* RegistCertListView.m */,
 				A2D90D661BB2731900315425 /* RegistCertListView.xib */,
+				A2DD874F1BC23B9B0013470D /* RegistAccountInputView.h */,
+				A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */,
+				A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */,
 			);
 			path = RegistView;
 			sourceTree = "<group>";
@@ -2030,6 +2067,7 @@
 				A2DF410E1BAFBD00001389E7 /* CarrierList.plist in Resources */,
 				A2D791291BBCB94500E817E7 /* icon_indicator_dft@2x.png in Resources */,
 				17745DE51BB96355003609C7 /* CustomizedDatePickerViewController.xib in Resources */,
+				A2DD874E1BC219790013470D /* RegistCompleteViewController.xib in Resources */,
 				A2D95B2E1BA8F1DD00DC943D /* NFPadbar@2x.png in Resources */,
 				A2D7914F1BBCB94500E817E7 /* icon_sticker_02@2x.png in Resources */,
 				A2D7915B1BBCB94500E817E7 /* image_01@2x.png in Resources */,
@@ -2077,6 +2115,7 @@
 				A2D95B771BA8F1DD00DC943D /* nf_ios_icon_special@2x.png in Resources */,
 				A2D791391BBCB94500E817E7 /* icon_notice_02_dft@2x.png in Resources */,
 				A2D791511BBCB94500E817E7 /* icon_sticker_04@2x.png in Resources */,
+				A2DD87531BC23BB50013470D /* RegistAccountInputView.xib in Resources */,
 				A2D95B3C1BA8F1DD00DC943D /* NFPadnum_btn@2x.png in Resources */,
 				A2DEADF91B9FE68600EDCCBA /* LaunchScreen.xib in Resources */,
 				A2D791561BBCB94500E817E7 /* icon_storage_02@2x.png in Resources */,
@@ -2102,6 +2141,7 @@
 				A2D95B4B1BA8F1DD00DC943D /* NFPadnum_bg_wide@2x.png in Resources */,
 				A2D95B371BA8F1DD00DC943D /* NFPadchar_pressed@2x.png in Resources */,
 				A55BDEED1BB0EB8100646C79 /* dot_on.png in Resources */,
+				A2DD87491BC216AE0013470D /* RegisterAccountViewController.xib in Resources */,
 				A2D791481BBCB94500E817E7 /* icon_right_01@2x.png in Resources */,
 				A2D7914B1BBCB94500E817E7 /* icon_settings_01_on@2x.png in Resources */,
 				A2D95B891BA8F1DD00DC943D /* nf_ios_bubble@3x.png in Resources */,
@@ -2161,6 +2201,7 @@
 				A2D791421BBCB94500E817E7 /* icon_notice_setting_01_on@2x.png in Resources */,
 				A2D791411BBCB94500E817E7 /* icon_notice_setting_01_dft@2x.png in Resources */,
 				A2D95B791BA8F1DD00DC943D /* nf_ios_num_btn@2x.png in Resources */,
+				A2DD87441BC2155A0013470D /* RegisterTermsViewController.xib in Resources */,
 				A5E2C44E1BB26E5A006EE828 /* MemoCompositionViewController.xib in Resources */,
 				A2D95B551BA8F1DD00DC943D /* nf_ios_btn.png in Resources */,
 				A2D95B4E1BA8F1DD00DC943D /* iPadKeySetting.plist in Resources */,
@@ -2323,12 +2364,14 @@
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
+				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
 				A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
 				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
 				A2D95B021BA8F1DD00DC943D /* NSStringKNAdditions.m in Sources */,
+				A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */,
 				A2DFD7171BB0F1A100838E09 /* KeychainItemWrapper.m in Sources */,
 				A2DEAE791B9FE6E600EDCCBA /* HomeViewController.m in Sources */,
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
@@ -2340,7 +2383,9 @@
 				A2D90D601BB2489300315425 /* RegistCertPassView.m in Sources */,
 				A2D95AFF1BA8F1DD00DC943D /* NSData+AESCrypt.m in Sources */,
 				A5E2C4561BB2921A006EE828 /* StorageBoxUtil.m in Sources */,
+				A2DD87481BC216AE0013470D /* RegisterAccountViewController.m in Sources */,
 				A5ED26691BA943C0007E6689 /* StatisticMainViewController.m in Sources */,
+				A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */,
 				A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */,
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
 				A2D95B9A1BA8F1DD00DC943D /* NFilterNum.m in Sources */,
@@ -2376,6 +2421,7 @@
 				A54B94DA1BAA4BF700D5D99B /* PieChart.m in Sources */,
 				A2DF410A1BAF99D2001389E7 /* RegistTabView.m in Sources */,
 				A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */,
+				A2DD874D1BC219790013470D /* RegistCompleteViewController.m in Sources */,
 				A2D95B991BA8F1DD00DC943D /* NFilterChar.m in Sources */,
 				A2DEAE651B9FE6D800EDCCBA /* NavigationView.m in Sources */,
 				A2D95B081BA8F1DD00DC943D /* PublicKeyDownloader.m in Sources */,

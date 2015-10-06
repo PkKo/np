@@ -14,6 +14,7 @@
 #import "Masonry.h"
 #import "CommonUtil.h"
 #import "UIView+LoadFromXib.h"
+#import "IndexPathButton.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "ECSlidingViewController.h"
 #import "HttpRequest.h"

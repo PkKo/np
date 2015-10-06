@@ -17,9 +17,11 @@
 #import "NFilterChar.h"
 #import "NFilterNum.h"
 #import "nFilterCharForPad.h"
+#import "nFilterNumForPad.h"
 #import "EccEncryptor.h"
 #import "RegistCertListView.h"
 #import "RegistPhoneViewController.h"
+#import "RegistAccountInputView.h"
 
 @interface RegistAccountViewController ()
 
@@ -29,7 +31,8 @@
 
 @synthesize contentView;
 @synthesize certControllArray;
-@synthesize currentTextField;
+@synthesize certSelectBtn;
+@synthesize accountSelectBtn;
 
 - (void)viewDidLoad
 {
@@ -40,6 +43,34 @@
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
     
+    [self showRegistCertView];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)removeAllSubViews
+{
+    for (UIView *subView in [contentView subviews])
+    {
+        [subView removeFromSuperview];
+    }
+}
+
+- (void)showRegistCertView
+{
+    if([[contentView subviews] count] > 0)
+    {
+        [self removeAllSubViews];
+    }
     /*
      * 공인인증서로 가입하려는 경우
      */
@@ -61,24 +92,47 @@
     }
     
     // 1-4. 공인인증서로 가입 진행
-    
+}
+
+- (void)showRegistAccountView
+{
+    if([[contentView subviews] count] > 0)
+    {
+        [self removeAllSubViews];
+    }
     /*
      * 계좌번호로 가입하려는 경우
      */
     // 2-1. 계좌번호 입력 뷰 생성
-    // 2-2. 이후 서버와 통신진행
+    RegistAccountInputView *inputView = [RegistAccountInputView view];
+    [inputView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+    [[inputView accountInputField] setDelegate:self];
+    [[inputView accountPassInputField] setDelegate:self];
+    [[inputView birthInputField] setDelegate:self];
+    [inputView setDelegate:self];
+    [contentView addSubview:inputView];
     
+    // 2-2. 이후 서버와 통신진행
 }
 
-- (void)didReceiveMemoryWarning
+/**
+ @breif 인증방식 뷰 변경
+ */
+- (IBAction)changeRegistView:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    UIButton *selBtn = (UIButton *)sender;
+    if(selBtn == certSelectBtn)
+    {
+        [certSelectBtn setEnabled:NO];
+        [accountSelectBtn setEnabled:YES];
+        [self showRegistCertView];
+    }
+    else if(selBtn == accountSelectBtn)
+    {
+        [certSelectBtn setEnabled:YES];
+        [accountSelectBtn setEnabled:NO];
+        [self showRegistAccountView];
+    }
 }
 
 #pragma mark - 공인인증서 인증 관련 공인인증서 가져오기 Method
@@ -134,7 +188,7 @@
 - (void)passwordCheck
 {
     int rc = 0;
-    rc = [[CertManager sharedInstance] p12ImportWithUrl:NH_BANK_CERT_URL password:currentTextField.text];
+    rc = [[CertManager sharedInstance] p12ImportWithUrl:NH_BANK_CERT_URL password:self.currentTextField.text];
     
     if (rc == 0)
     {
@@ -226,6 +280,8 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
+        // 공인인증서로 인증한걸로 저장한다.
+        [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -236,6 +292,39 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+#pragma mark - 계좌인증 확인
+- (void)checkRegistAccountRequest:(NSDictionary *)accountInfo
+{
+    [self startIndicator];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    
+    // Request Start
+    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1.5];
+}
+
+- (void)checkRegistAccountResponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+#ifdef DEV_MODE
+    // 계좌번호로 인증한걸로 저장한다.
+    [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
+    // 인증 성공한 이후 휴대폰 인증으로 이동
+    RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+#else
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    {
+        // 계좌번호로 인증한걸로 저장한다.
+        [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
+        // 인증 성공한 이후 휴대폰 인증으로 이동
+        RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+#endif
 }
 
 #pragma mark - AlertView Delegate Methods
@@ -251,7 +340,7 @@
         }
         case 10002: // 공인인증서 목록
         {
-            currentTextField = nil;
+            self.currentTextField = nil;
             [self moveToCertListView];
             break;
         }
@@ -264,38 +353,89 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    self.currentTextField = textField;
+    
+    if([self.currentTextField isSecureTextEntry])
+    {
+        [textField resignFirstResponder];
+        [self showNFilterKeypad];
+    }
+    else
+    {
+        [self.keyboardCloseButton setEnabled:YES];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     [textField resignFirstResponder];
-    currentTextField = textField;
-    [self showNFilterKeypad];
+    [self.keyboardCloseButton setEnabled:NO];
+    
+    if(![self.currentTextField isSecureTextEntry])
+    {
+        self.currentTextField = nil;
+    }
 }
 
 - (void)showNFilterKeypad
 {
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    if(![certSelectBtn isEnabled])
     {
-        NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
-        //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
-        //서버 공개키 설정
-        [vc setServerPublickey:@""];
-        
-        //콜백함수 설정
-        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
-        [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
-        [vc setFullMode:YES];
-        [vc setTopBarText:@"공인인증센터"];
-        [vc setTitleText:@"공인인증서 비밀번호 입력"];
-        [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
+            //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+            //서버 공개키 설정
+            [vc setServerPublickey:@""];
+            
+            //콜백함수 설정
+            [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
+            [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
+            [vc setFullMode:YES];
+            [vc setTopBarText:@"공인인증센터"];
+            [vc setTitleText:@"공인인증서 비밀번호 입력"];
+            [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        }
+        else
+        {
+            nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
+            //서버 공개키 설정
+            [vc setServerPublickey:@""];
+            
+            //콜백함수 설정
+            [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
+            [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
+            [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        }
     }
-    else
+    else if(![accountSelectBtn isEnabled])
     {
-        nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
-        //서버 공개키 설정
-        [vc setServerPublickey:@""];
-        
-        //콜백함수 설정
-        [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
-        [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
-        [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
+            //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+            //서버 공개키 설정
+            [vc setServerPublickey:@""];
+            
+            //콜백함수 설정
+            [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
+            [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
+            [vc setFullMode:YES];
+            [vc setTopBarText:@"계좌비밀번호"];
+            [vc setTitleText:@"계좌 비밀번호 입력"];
+            [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        }
+        else
+        {
+            nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
+            //서버 공개키 설정
+            [vc setServerPublickey:@""];
+            
+            //콜백함수 설정
+            [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
+            [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
+            [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
+        }
     }
 }
 
@@ -304,14 +444,17 @@
     EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pPlainText];
     
-    if(currentTextField != nil)
+    if(self.currentTextField != nil)
     {
-        [currentTextField setText:plainText];
+        [self.currentTextField setText:plainText];
     }
-    else
+    
+    if(![certSelectBtn isEnabled])
     {
         [self certInfoRequest:plainText];
     }
+    
+    self.currentTextField = nil;
 }
 
 @end

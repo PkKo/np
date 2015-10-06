@@ -54,5 +54,12 @@
 #pragma mark - 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"
 #define WITHDRAW_TYPE_STRING           @"출금"
+#define INCOME_STRING_COLOR     [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1.0f]
+#define WITHDRAW_STRING_COLOR   [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1.0f]
 
+#pragma mark - 가입 플로우 관련
+// 인증방식 저장(공인인증서 or 계좌)
+#define REGIST_TYPE                     @"RegistType"
+#define REGIST_TYPE_CERT                @"RegistCert"
+#define REGIST_TYPE_ACCOUNT             @"RegistAccount"
 #endif

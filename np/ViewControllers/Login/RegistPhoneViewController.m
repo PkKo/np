@@ -8,6 +8,7 @@
 
 #import "RegistPhoneViewController.h"
 #import "RegistTabView.h"
+#import "RegisterTermsViewController.h"
 
 #define AUTH_NUMBER_TIMER_INTERVAL  1.0
 #define AUTH_NUMBER_TIMER_MAX       180
@@ -101,6 +102,9 @@
     }
     
     // 인증번호 인증유효시간 체크
+    
+    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Network Connect

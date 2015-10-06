@@ -11,6 +11,9 @@
 
 #define REFRESH_HEADER_HEIGHT   52.0f
 #define SECTION_HEADER_HEIGHT   31.0f
+#define SECTION_FOOTER_HEIGHT   93.0f
+
+#define AMOUNT_FONT_SIZE        18.0f
 
 @implementation HomeTimeLineView
 
@@ -39,6 +42,30 @@
     mTimeLineDic = data;
     
     [self addPullToRefreshHeader];
+}
+
+- (IBAction)listSortChange:(id)sender
+{
+    listSortType = !listSortType;
+    
+    // section을 먼저 sorting한다.
+    mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
+    // sorting된 section을 가지고 dictionary를 구성한다.
+    NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
+    for(NSString *key in mTimeLineSection)
+    {
+        NSArray *reverseArray = [[[mTimeLineDic objectForKey:key] reverseObjectEnumerator] allObjects];
+        [reverseDic setObject:reverseArray forKey:key];
+    }
+    mTimeLineDic = reverseDic;
+    
+    [mTimeLineTable reloadData];
+}
+
+- (IBAction)searchViewShow:(id)sender {
+}
+
+- (IBAction)deleteMode:(id)sender {
 }
 
 - (void)addPullToRefreshHeader
@@ -177,15 +204,80 @@
         cell = [HomeTimeLineTableViewCell cell];
     }
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     NSString *section = [mTimeLineSection objectAtIndex:indexPath.section];
     NSString *desc = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
     
-    [cell.titleLabel setText:desc];
+    // 스티커 버튼
+    [cell.stickerButton setIndexPath:indexPath];
+    // 푸시 시간
+    [cell.timeLabel setText:@"09:05"];
+    // 거래명
+    [cell.nameLabel setText:@"김농협"];
+    
+    if(indexPath.row % 2 == 0)
+    {
+        // 입출금 타입
+        [cell.typeLabel setText:@"입금"];
+        [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
+        // 금액
+        CGSize amountSize = [CommonUtil getStringFrameSize:@"100,000,000" fontSize:AMOUNT_FONT_SIZE bold:NO];
+        [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                             cell.amountLabel.frame.origin.y,
+                                              amountSize.width, cell.amountLabel.frame.size.height)];
+        [cell.amountLabel setText:@"100,000,000"];
+        [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
+        
+        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                 cell.amountDescLabel.frame.origin.y,
+                                                 cell.amountDescLabel.frame.size.width,
+                                                  cell.amountDescLabel.frame.size.height)];
+    }
+    else
+    {
+        // 입출금 타입
+        [cell.typeLabel setText:@"출금"];
+        [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
+        // 금액
+        CGSize amountSize = [CommonUtil getStringFrameSize:@"50,000,000" fontSize:AMOUNT_FONT_SIZE bold:NO];
+        [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                              cell.amountLabel.frame.origin.y,
+                                              amountSize.width, cell.amountLabel.frame.size.height)];
+        [cell.amountLabel setText:@"50,000,000"];
+        [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
+        
+        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                  cell.amountDescLabel.frame.origin.y,
+                                                  cell.amountDescLabel.frame.size.width,
+                                                  cell.amountDescLabel.frame.size.height)];
+    }
+    
+    // 계좌별명 + 계좌명
+    [cell.accountLabel setText:@"급여통장 111-2458-1123-45"];
+    // 잔액
+    [cell.remainAmountLabel setText:@"잔액 123,432,000원"];
+    
+    // 고정핀
+    [cell.pinButton setIndexPath:indexPath];
+    [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    // more 버튼
+    [cell.moreButton setIndexPath:indexPath];
+    
+    
+    if(indexPath.row == 0)
+    {
+        [cell.upperLine setHidden:YES];
+    }
+    else if ([[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+    {
+        [cell.underLine setHidden:YES];
+    }
         
     return cell;
 }
 
-#pragma mark UITableViewDelegate
+#pragma mark UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;
@@ -228,6 +320,37 @@
         // Released above the header
         [self startLoading];
     }
+    else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
+    {
+        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
+        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
+        // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
+    }
+}
+
+#pragma mark - CellButtonClickEvent
+- (void)pinButtonClick:(id)sender
+{
+    IndexPathButton *currentBtn = (IndexPathButton *)sender;
+    NSIndexPath *indexPath = currentBtn.indexPath;
+    
+    NSLog(@"button indexPath = %@", currentBtn.indexPath);
+    
+    if([currentBtn isSelected])
+    {
+        // 고정핀 해제를 위해 디바이스에서 해당 인덱스패스에 있는 푸시 아이디를 삭제한다.
+    }
+    else
+    {
+        // 고정핀 적용을 위해 디바이스에 해당 인덱스패스의 푸시 아이디를 저장한다.
+    }
+    
+    [currentBtn setSelected:![currentBtn isSelected]];
+}
+
+- (void)moreButtonClick:(id)sender
+{
+    IndexPathButton *currentBtn = (IndexPathButton *)sender;
 }
 
 @end
