@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface ArchivedTransactionItemsViewController : CommonViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *sortByDateBtn;
+- (IBAction)sortByDate;
+- (IBAction)toggleRemovementView:(id)sender;
+- (IBAction)toggleSearchView;
+@property (weak, nonatomic) IBOutlet UILabel *topViewSeperator;
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end

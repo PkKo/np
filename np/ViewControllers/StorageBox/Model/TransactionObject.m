@@ -11,6 +11,40 @@
 
 @implementation TransactionObject
 
+- (instancetype)init {
+    
+    self = [super init];
+    
+    if (self != nil) {
+        self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
+    }
+    
+    return self;
+}
+
+- (instancetype)initTransactionObjectWithTransactionId:(NSDate *)transactionId
+                                       transactionDate:(NSDate *)transactionDate
+                              transactionAccountNumber:(NSString *)transactionAccountNumber
+                                    transactionDetails:(NSString *)transactionDetails
+                                       transactionType:(NSString *)transactionType
+                                     transactionAmount:(NSNumber *)transactionAmount
+                                    transactionBalance:(NSNumber *)transactionBalance
+                                       transactionMemo:(NSString *)transactionMemo {
+    self = [super init];
+    if (self != nil) {
+        self.transactionId              = transactionId;
+        self.transactionDate            = transactionDate;
+        self.transactionAccountNumber   = transactionAccountNumber;
+        self.transactionDetails         = transactionDetails;
+        self.transactionType            = transactionType;
+        self.transactionAmount          = transactionAmount;
+        self.transactionBalance         = transactionBalance;
+        self.transactionMemo            = transactionMemo;
+        self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
+    }
+    return self;
+}
+
 - (instancetype)initTransactionObjectWithTransactionDate:(NSDate *)transactionDate
                                 transactionAccountNumber:(NSString *)transactionAccountNumber
                                       transactionDetails:(NSString *)transactionDetails
@@ -27,6 +61,7 @@
         self.transactionAmount          = transactionAmount;
         self.transactionBalance         = transactionBalance;
         self.transactionMemo            = transactionMemo;
+        self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
     }
     return self;
 }

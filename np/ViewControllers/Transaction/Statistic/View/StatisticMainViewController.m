@@ -47,6 +47,7 @@
     [self loadData];
     [self addChart];
     [self addChartData];
+    [self replaceNoticeView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,7 +68,7 @@
         [dateSearchUtil hideDateSearchView:existedDateSearchView];
     } else {
         
-        CGFloat belowSearchButtonY      = self.searchButton.frame.origin.y + self.searchButton.frame.size.height;
+        CGFloat belowSearchButtonY      = self.topView.frame.origin.y + self.topView.frame.size.height;
         existedDateSearchView           = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
         existedDateSearchView.delegate  = self;
     }
@@ -153,25 +154,37 @@
     
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
-    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 50;
+    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 70;
     _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
     
-    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 20;
+    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
     _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+}
+
+- (void)replaceNoticeView {
+    
+    StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
+    
+    CGRect noticeViewFrame = self.noticeView.frame;
+    noticeViewFrame.origin.y = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
+    [self.noticeView setFrame:noticeViewFrame];
+    
+    CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
+    [self.noticeView setCenter:noticeViewCenterPoint];
     
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
 }
 
 - (IBAction)showMemoComposer {
     
-    TransactionObject * transation = [[TransactionObject alloc] init];
-    [transation setTransactionDate:[NSDate date]];
-    [transation setTransactionAccountNumber:@"111-22-***33"];
-    [transation setTransactionDetails:@"당풍니"];
-    [transation setTransactionType:@"입금"];
-    [transation setTransactionAmount:[NSNumber numberWithFloat:100000.0f]];
-    
-    
+    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
+                                                                                       transactionDate:[NSDate date]
+                                                                              transactionAccountNumber:@"111-22-***33"
+                                                                                    transactionDetails:@"당풍니"
+                                                                                       transactionType:INCOME
+                                                                                     transactionAmount:[NSNumber numberWithFloat:100000.0f]
+                                                                                    transactionBalance:[NSNumber numberWithFloat:200000.0f]
+                                                                                       transactionMemo:@""];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
     [util showMemoComposerInViewController:self withTransationObject:transation];
 }

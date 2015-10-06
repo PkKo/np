@@ -13,9 +13,11 @@
 
 @interface StatisticMainViewController : CommonViewController <StatisticDateSearchViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UIScrollView   * scrollView;
+@property (weak, nonatomic) IBOutlet UIView         * topView;
+@property (weak, nonatomic) IBOutlet UILabel        * selectedDatesLabel;
+@property (weak, nonatomic) IBOutlet UIView         * noticeView;
+
 - (IBAction)clickSearchButton;
-@property (weak, nonatomic) IBOutlet UILabel *selectedDatesLabel;
 
 @end

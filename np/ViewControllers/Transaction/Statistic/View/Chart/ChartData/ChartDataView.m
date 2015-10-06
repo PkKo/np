@@ -13,6 +13,8 @@
 #import "StatisticMainUtil.h"
 #import "ConstantMaster.h"
 
+#define MARGIN_TOP 5
+
 @implementation ChartDataView
 
 /*
@@ -52,14 +54,16 @@
         total += [item.itemValue floatValue];
         
         CGRect itemViewFrame    = itemView.frame;
-        itemViewFrame.origin.y  = itemIdx * itemViewFrame.size.height;
+        itemViewFrame.origin.y  = itemIdx * itemViewFrame.size.height + MARGIN_TOP;
+        
+        
         [itemView setFrame:itemViewFrame];
         
         [self addSubview:itemView];
         
         if (itemIdx == numberOfItem - 1) {
             mainViewWith    = itemViewFrame.size.width;
-            mainViewHeight  = itemViewFrame.size.height * numberOfItem;
+            mainViewHeight  = itemViewFrame.size.height * numberOfItem + MARGIN_TOP;
             if ([[item itemType] isEqualToString:INCOME]) {
                 isIncome = YES;
             }

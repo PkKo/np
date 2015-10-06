@@ -47,7 +47,7 @@
 
 #pragma mark - PieCharDelegate
 - (CGFloat)centerCircleRadius {
-    return 40;
+    return 50;
 }
 
 #pragma mark - PieCharDataSource
