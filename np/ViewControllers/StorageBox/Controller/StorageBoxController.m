@@ -10,10 +10,19 @@
 #import "TransactionObject.h"
 #import "ConstantMaster.h"
 #import "StatisticMainUtil.h"
+#import "DBManager.h"
+
+#define USE_SQLITE 1
 
 @implementation StorageBoxController
 
 - (NSArray *)getArchivedItems { // array of TransactionObject
+    
+#if USE_SQLITE
+    return [[DBManager sharedInstance] selectAllTransactions];
+#endif
+    
+#if !USE_SQLITE
     
     NSMutableArray * mutableArr = [[NSMutableArray alloc] init];
     
@@ -140,6 +149,7 @@
                                                                            transactionBalance:@3000000
                                                                               transactionMemo:@"이정호가 입금해준 돈"]];
     return [mutableArr copy];
+#endif
 }
 
 - (NSDictionary *)getIndexDicOutOfArray:(NSArray *)arr { // array of TransactionObject

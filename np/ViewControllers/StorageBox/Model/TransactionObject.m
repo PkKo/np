@@ -22,7 +22,7 @@
     return self;
 }
 
-- (instancetype)initTransactionObjectWithTransactionId:(NSDate *)transactionId
+- (instancetype)initTransactionObjectWithTransactionId:(NSString *)transactionId
                                        transactionDate:(NSDate *)transactionDate
                               transactionAccountNumber:(NSString *)transactionAccountNumber
                                     transactionDetails:(NSString *)transactionDetails
@@ -69,6 +69,11 @@
 - (NSString *)formattedTransactionDate {
     return [[StatisticMainUtil getDateFormatterDateHourMinuteStyle] stringFromDate:self.transactionDate];
 }
+
+- (NSString *)formattedTransactionDateForDB {
+    return [[StatisticMainUtil getDateFormatterDateHourStyle] stringFromDate:self.transactionDate];
+}
+
 
 - (NSString *)formattedTransactionAmount {
     return [NSString stringWithFormat:@"%@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]]];

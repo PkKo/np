@@ -250,4 +250,11 @@
     [alert show];
 }
 
+-(void)updateUI {
+    [self.fakeStartDate.layer setBorderWidth:1];
+    [self.fakeStartDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeEndDate.layer setBorderWidth:1];
+    [self.fakeEndDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+}
+
 @end

@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *selectedMonth;
 - (IBAction)choosePrvMonth;
 - (IBAction)chooseNxtMonth;
+@property (weak, nonatomic) IBOutlet UITextField *fakeStartDate;
+@property (weak, nonatomic) IBOutlet UITextField *fakeEndDate;
 
 @property (weak, nonatomic) IBOutlet UITextField *startDate;
 @property (weak, nonatomic) IBOutlet UITextField *endDate;
@@ -31,6 +33,7 @@
 
 - (IBAction)searchTransactions;
 
+-(void)updateUI;
 - (void)updateCurrentYearMonth;
 - (void)updateStartDate:(NSDate *)startDate;
 - (void)updateEndDate:(NSDate *)endDate;

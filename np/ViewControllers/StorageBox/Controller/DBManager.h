@@ -13,7 +13,11 @@
 
 + (instancetype)sharedInstance;
 
+- (NSArray *)selectAllTransactions; // array of TransactionObject
 - (NSString *)findTransactionMemoById:(NSString *)transactionId;
-- (void)saveTransaction:(TransactionObject *)transObj;
+- (BOOL)saveTransaction:(TransactionObject *)transObj;
+- (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId;
+- (BOOL)deleteAllTransactions;
+- (BOOL)deleteTransactionById:(NSString *)transId;
 
 @end
