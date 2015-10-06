@@ -13,7 +13,10 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) NSMutableArray *certControllArray;
-@property (strong, nonatomic) UITextField *currentTextField;
+@property (strong, nonatomic) IBOutlet UIButton *certSelectBtn;
+@property (strong, nonatomic) IBOutlet UIButton *accountSelectBtn;
 
 - (void)certInfoSelected:(CertInfo *)certInfo;
+- (IBAction)changeRegistView:(id)sender;
+- (void)checkRegistAccountRequest:(NSDictionary *)accountInfo;
 @end

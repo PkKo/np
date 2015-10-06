@@ -10,7 +10,20 @@
 
 @implementation HomeTimeLineTableViewCell
 
-@synthesize titleLabel;
+@synthesize upperLine;
+@synthesize underLine;
+
+@synthesize typeLabel;
+@synthesize stickerButton;
+@synthesize timeLabel;
+@synthesize nameLabel;
+@synthesize amountLabel;
+@synthesize accountLabel;
+@synthesize remainAmountLabel;
+@synthesize amountDescLabel;
+
+@synthesize pinButton;
+@synthesize moreButton;
 
 - (void)awakeFromNib {
     // Initialization code

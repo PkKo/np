@@ -10,5 +10,18 @@
 
 @interface HomeTimeLineTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *upperLine;
+@property (strong, nonatomic) IBOutlet UIImageView *underLine;
+
+@property (strong, nonatomic) IBOutlet UILabel *typeLabel;
+@property (strong, nonatomic) IBOutlet IndexPathButton *stickerButton;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *amountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *accountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *remainAmountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *amountDescLabel;
+
+@property (strong, nonatomic) IBOutlet IndexPathButton *pinButton;
+@property (strong, nonatomic) IBOutlet IndexPathButton *moreButton;
 @end

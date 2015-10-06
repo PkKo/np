@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistAccountViewController">
             <connections>
+                <outlet property="accountSelectBtn" destination="bI7-Bu-MDH" id="7on-YP-uAg"/>
+                <outlet property="certSelectBtn" destination="ou4-kg-KSA" id="kQD-Qf-WOX"/>
                 <outlet property="contentView" destination="BVX-ev-hMz" id="F3O-gF-OSf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,15 +22,21 @@
                     <rect key="frame" x="0.0" y="80" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ou4-kg-KSA">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ou4-kg-KSA">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <state key="normal" title="공인인증서"/>
+                            <connections>
+                                <action selector="changeRegistView:" destination="-1" eventType="touchUpInside" id="loU-D3-ahe"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bI7-Bu-MDH">
                             <rect key="frame" x="160" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <state key="normal" title="계좌인증"/>
+                            <connections>
+                                <action selector="changeRegistView:" destination="-1" eventType="touchUpInside" id="tZA-4q-bdN"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
