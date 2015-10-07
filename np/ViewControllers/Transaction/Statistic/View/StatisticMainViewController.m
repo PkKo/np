@@ -183,7 +183,8 @@
                                                                                        transactionType:INCOME
                                                                                      transactionAmount:[NSNumber numberWithFloat:100000.0f]
                                                                                     transactionBalance:[NSNumber numberWithFloat:200000.0f]
-                                                                                       transactionMemo:@""];
+                                                                                       transactionMemo:@""
+                                                                                  transactionActivePin:[NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
     [util showMemoComposerInViewController:self withTransationObject:transation];
 }

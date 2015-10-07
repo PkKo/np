@@ -53,7 +53,7 @@
             
             char *errMsg;
             const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS transactions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANS_ID TEXT, TRANS_DATE TEXT, TRANS_ACCOUNT TEXT, TRANS_NAME TEXT, TRANS_TYPE TEXT, TRANS_AMOUNT TEXT, TRANS_BALANCE TEXT, TRANS_MEMO TEXT)";
+            "CREATE TABLE IF NOT EXISTS transactions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANS_ID TEXT, TRANS_DATE TEXT, TRANS_ACCOUNT TEXT, TRANS_NAME TEXT, TRANS_TYPE TEXT, TRANS_AMOUNT TEXT, TRANS_BALANCE TEXT, TRANS_MEMO TEXT, TRANS_PINNABLE TEXT)";
             
             if (sqlite3_exec(_nhTransactionDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
@@ -67,6 +67,25 @@
     }
 }
 
+- (void)deleteTableTransactions {
+    
+    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    
+    if (openDB == SQLITE_OK) {
+        char * error;
+        const char * drop_table_stmt = "DROP TABLE transactions";
+        
+        if (sqlite3_exec(_nhTransactionDB, drop_table_stmt, NULL, NULL, &error) != SQLITE_OK) {
+            NSLog(@"failed to remove table.");
+        } else {
+            NSLog(@"removed table.");
+        }
+    } else {
+        NSLog(@"Failed to open db");
+    }
+}
+
+
 - (NSArray *)selectAllTransactions { // array of TransactionObject
     
     NSMutableArray * transactions = [[NSMutableArray alloc] init];
@@ -76,21 +95,49 @@
     BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     if (openDB == SQLITE_OK) {
         
-        NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO FROM transactions";
+        NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions";
         
         if (sqlite3_prepare(_nhTransactionDB, [selectSQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 
+                NSString * transId          = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 0)];
+                
+                NSDate   * transDate        = [[StatisticMainUtil getDateFormatterDateHourStyle] dateFromString:[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 1)]];
+                
+                NSString * transAccount     = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 2)];
+                
+                NSString * transName        = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 3)];
+                
+                NSString * transType        = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 4)];
+                
+                NSNumber * transAmount      = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 5)] floatValue]];
+                
+                NSNumber * transBalance     = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 6)] floatValue]];
+                
+                NSString * transMemo        = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 7)];
+                
+                NSNumber * transPinnable    = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 8)] floatValue]];
+                
                 TransactionObject * tranObj = [[TransactionObject alloc] init];
-                [tranObj setTransactionId:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)]];
-                [tranObj setTransactionDate:[[StatisticMainUtil getDateFormatterDateHourStyle] dateFromString:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)]]];
-                [tranObj setTransactionAccountNumber:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)]];
-                [tranObj setTransactionDetails:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)]];
-                [tranObj setTransactionType:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)]];
-                [tranObj setTransactionAmount:[NSNumber numberWithFloat:[[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] floatValue]]];
-                [tranObj setTransactionBalance:[NSNumber numberWithFloat:[[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)] floatValue]]];
-                [tranObj setTransactionMemo:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)]];
+                [tranObj setTransactionId           :transId];
+                [tranObj setTransactionDate         :transDate];
+                [tranObj setTransactionAccountNumber:transAccount];
+                [tranObj setTransactionDetails      :transName];
+                [tranObj setTransactionType         :transType];
+                [tranObj setTransactionAmount       :transAmount];
+                [tranObj setTransactionBalance      :transBalance];
+                [tranObj setTransactionMemo         :transMemo];
+                [tranObj setTransactionActivePin    :transPinnable];
                 
                 [transactions addObject:tranObj];
             }
@@ -130,9 +177,11 @@
     return memo;
 }
 
-- (void)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId {
+- (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId {
     
     sqlite3_stmt * statement;
+    
+    BOOL updated = NO;
     
     BOOL openDBResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     
@@ -145,16 +194,23 @@
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"updated.");
+            updated = YES;
         } else {
             NSLog(@"failed to update");
+            updated = NO;
         }
     } else {
         NSLog(@"failed to open db.");
+        updated = NO;
     }
+    return updated;
 }
 
-- (void)deleteAllTransactions {
+- (BOOL)deleteAllTransactions {
+    
     sqlite3_stmt * statement;
+    
+    BOOL deleted = NO;
     
     BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     
@@ -166,17 +222,21 @@
         sqlite3_prepare(_nhTransactionDB, [deleteSQL UTF8String], -1, &statement, NULL);
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"deleted");
+            NSLog(@"delete all transactions.");
+            deleted = YES;
         } else {
             NSLog(@"failed to delete");
         }
     } else {
         NSLog(@"failed to open db");
     }
+    return deleted;
 }
 
-- (void)deleteTransactionById:(NSString *)transId {
+- (BOOL)deleteTransactionById:(NSString *)transId {
     sqlite3_stmt * statement;
+    
+    BOOL deleted = NO;
     
     BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     
@@ -189,31 +249,36 @@
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"deleted");
+            deleted = YES;
         } else {
             NSLog(@"failed to delete");
         }
     } else {
         NSLog(@"failed to open db");
     }
+    return deleted;
 }
 
-- (void)saveTransaction:(TransactionObject *)transObj {
+- (BOOL)saveTransaction:(TransactionObject *)transObj {
     
     sqlite3_stmt * statement;
+    
+    BOOL saved = NO;
     
     BOOL openDatabaseResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     if(openDatabaseResult == SQLITE_OK) {
         
-        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
+        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
                                 transObj.transactionAccountNumber, transObj.transactionDetails,
                                 transObj.transactionType, [transObj.transactionAmount stringValue],
-                                [transObj.transactionBalance stringValue], transObj.transactionMemo];
+                                [transObj.transactionBalance stringValue], transObj.transactionMemo, [transObj.transactionActivePin stringValue]];
         
         const char * insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare(_nhTransactionDB, insert_stmt, -1, &statement, NULL);
         
         if (sqlite3_step(statement) == SQLITE_DONE) {
             NSLog(@"added");
+            saved = YES;
         } else {
             NSLog(@"failed to add");
         }
@@ -223,6 +288,7 @@
     } else {
         NSLog(@"failed to open");
     }
+    return saved;
 }
 
 @end

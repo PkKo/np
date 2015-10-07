@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton       * sortByDateBtn;
 - (IBAction)sortByDate;
 - (IBAction)toggleRemovalView:(id)sender;

@@ -347,19 +347,17 @@
 
 - (void)moreButtonClick:(id)sender
 {
-    NSLog(@"%s", __func__);
-    IndexPathButton *currentBtn = (IndexPathButton *)sender;
-    
-    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
+    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374797493"
                                                                                        transactionDate:[NSDate date]
                                                                               transactionAccountNumber:@"111-22-***33"
                                                                                     transactionDetails:@"당풍니"
                                                                                        transactionType:INCOME
                                                                                      transactionAmount:[NSNumber numberWithFloat:100000.0f]
                                                                                     transactionBalance:[NSNumber numberWithFloat:200000.0f]
-                                                                                       transactionMemo:@""];
+                                                                                       transactionMemo:@""
+                                                                                  transactionActivePin:[NSNumber numberWithBool:TRANS_ACTIVE_PIN_NO]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
-    [util showMemoComposerInViewController:self.delegate withTransationObject:transation];
+    [util showMemoComposerInViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController withTransationObject:transation];
 }
 
 @end

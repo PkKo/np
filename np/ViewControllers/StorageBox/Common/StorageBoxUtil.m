@@ -10,12 +10,84 @@
 #import "MemoCompositionViewController.h"
 #import "SNSViewController.h"
 
+
 @implementation StorageBoxUtil
 
 + (UIColor *)getDimmedBackgroundColor {
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
 }
 
+#pragma mark - Date Search
+- (void)addStorageDateSearchViewToParent:(UIView *)parentView
+                moveTopViewSeperatorDown:(UILabel *)topViewSeperator
+                       moveTableviewDown:(UIView *)tableview {
+    
+    if ([self hasStorageDateSearchViewInParentView:parentView]) {
+        return;
+    }
+    
+    if ([self hasSelectAllViewInParentView:parentView]) {
+        [self removeSelectToRemoveViewFromParentView:parentView
+                            moveTopViewSeperatorBack:topViewSeperator moveTableviewBack:tableview];
+    }
+    
+    NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView"
+                                                     owner:self options:nil];
+    StorageBoxDateSearchView * dateSearchView = (StorageBoxDateSearchView *)[nibArr objectAtIndex:0];
+    [dateSearchView setCenter:CGPointMake(parentView.center.x, dateSearchView.center.y)];
+    
+    CGRect dateSearchViewFrame      = dateSearchView.frame;
+    dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y;
+    [dateSearchView setFrame:dateSearchViewFrame];
+    
+    CGRect topViewSeperatorFrame    = topViewSeperator.frame;
+    topViewSeperatorFrame.origin.y += dateSearchViewFrame.size.height;
+    [topViewSeperator setFrame:topViewSeperatorFrame];
+    
+    CGRect tableviewFrame           = tableview.frame;
+    tableviewFrame.origin.y        += dateSearchViewFrame.size.height;
+    tableviewFrame.size.height     -= dateSearchViewFrame.size.height;
+    [tableview setFrame:tableviewFrame];
+    
+    [parentView addSubview:dateSearchView];
+    
+}
+
+- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
+                         moveTopViewSeperatorBack:(UILabel *)topViewSeperator
+                                moveTableviewBack:(UIView *)tableview {
+    
+    StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
+    
+    if (dateSearchView) {
+        
+        CGRect dateSearchViewFrame      = dateSearchView.frame;
+        CGRect topViewSeperatorFrame    = topViewSeperator.frame;
+        topViewSeperatorFrame.origin.y -= dateSearchViewFrame.size.height;
+        [topViewSeperator setFrame:topViewSeperatorFrame];
+        
+        CGRect tableviewFrame           = tableview.frame;
+        tableviewFrame.origin.y        -= dateSearchViewFrame.size.height;
+        tableviewFrame.size.height     += dateSearchViewFrame.size.height;
+        [tableview setFrame:tableviewFrame];
+        
+        [dateSearchView removeFromSuperview];
+    }
+}
+
+- (StorageBoxDateSearchView *)hasStorageDateSearchViewInParentView:(UIView *)parentView {
+    
+    NSArray * subviews = [parentView subviews];
+    for (UIView * subview in subviews) {
+        if ([subview isKindOfClass:[StorageBoxDateSearchView class]]) {
+            return (StorageBoxDateSearchView *)subview;
+        }
+    }
+    return nil;
+}
+
+
+#pragma mark - Select items to remove
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
              moveTopViewSeperatorDown:(UILabel *)topViewSeperator
                     moveTableviewDown:(UIView *)tableview
@@ -26,6 +98,11 @@
     
     if ([self hasSelectAllViewInParentView:parentView]) {
         return;
+    }
+    
+    if ([self hasStorageDateSearchViewInParentView:parentView]) {
+        [self removeStorageDateSearchViewFromParentView:parentView
+                               moveTopViewSeperatorBack:topViewSeperator moveTableviewBack:tableview];
     }
     
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemRemoveAllSelectView"
@@ -121,7 +198,7 @@
     return nil;
 }
 
-
+#pragma mark - Memo Composer & SNS
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
     
     MemoCompositionViewController * memoComposer = [[MemoCompositionViewController alloc] initWithNibName:@"MemoCompositionViewController"

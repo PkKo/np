@@ -14,6 +14,7 @@
 #import "StoryLinkHelper.h"
 #import "StorageBoxUtil.h"
 #import "UIButton+BackgroundColor.h"
+#import "ConstantMaster.h"
 
 @interface SNSViewController () <MFMessageComposeViewControllerDelegate, EKEventEditViewDelegate>
 
@@ -41,10 +42,12 @@
  */
 - (void)composeSNSContent {
     
-    NSString *content = [NSString stringWithFormat:@"%@\r%@\r%@ %@ %@",
+    NSString *content = [NSString stringWithFormat:@"%@\n%@\n%@ %@ %@",
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],
-                         [self.transactionObject transactionDetails], [self.transactionObject transactionType], [self.transactionObject formattedTransactionAmount]];
+                         [self.transactionObject transactionDetails],
+                         [[self.transactionObject transactionType] isEqualToString:INCOME] ? @"입금" : @"출금",
+                         [self.transactionObject formattedTransactionAmount]];
     [_snsContent setText:content];
 }
 
@@ -64,7 +67,7 @@
 }
 
 - (NSArray *)kakaotalkMessage {
-    KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:[NSString stringWithFormat:@"[%@]\r%@",
+    KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:[NSString stringWithFormat:@"[%@]\n%@",
                                                                    [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
     
     KakaoTalkLinkAction *androidAppAction = [KakaoTalkLinkAction createAppAction:KakaoTalkLinkActionOSPlatformAndroid devicetype:KakaoTalkLinkActionDeviceTypePhone execparam:@{@"test1" : @"test1", @"test2" : @"test2"}];
@@ -129,7 +132,7 @@
     scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
     scrapInfo.type          = ScrapTypeArticle;
     
-    return [StoryLinkHelper makeStoryLinkWithPostingText:[NSString stringWithFormat:@"[%@]\r%@",
+    return [StoryLinkHelper makeStoryLinkWithPostingText:[NSString stringWithFormat:@"[%@]\n%@",
                                                           [bundle objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]
                                              appBundleID:[bundle bundleIdentifier]
                                               appVersion:[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
@@ -140,7 +143,7 @@
 - (IBAction)shareOnFacebook:(id)sender {
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     
-    [controller setInitialText:[NSString stringWithFormat:@"[%@]\r%@",
+    [controller setInitialText:[NSString stringWithFormat:@"[%@]\n%@",
                                 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
     [controller addImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:
                                                  [NSURL URLWithString:@"http://www.daumkakao.com/images/operating/temp_mov.jpg"]]]];
@@ -151,7 +154,7 @@
 - (IBAction)shareOnTwitter:(id)sender {
     
     SLComposeViewController * tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    [tweetSheet setInitialText:[NSString stringWithFormat:@"[%@]\r%@",
+    [tweetSheet setInitialText:[NSString stringWithFormat:@"[%@]\n%@",
                                 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
     [tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8"]];
     [self presentViewController:tweetSheet animated:YES completion:nil];
@@ -159,15 +162,13 @@
 
 - (IBAction)shareViaSMS:(id)sender {
     
-    NSLog(@"shareViaSMS");
-    
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
         return;
     }
 
-    NSString *message = [NSString stringWithFormat:@"[%@]\r%@",
+    NSString *message = [NSString stringWithFormat:@"[%@]\n%@",
                          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text];
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;

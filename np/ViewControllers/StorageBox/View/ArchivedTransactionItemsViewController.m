@@ -32,18 +32,20 @@
     [super viewDidLoad];
     
     [self refreshData];
-    // create table & insert dummy data.
-    /*
-    [[DBManager sharedInstance] deleteAllTransactions];
     
+/*
+    // create table & insert dummy data.
+    [[DBManager sharedInstance] deleteAllTransactions];
+
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     NSArray * arr = [controller getArchivedItems];
     for (TransactionObject * tranObj in arr) {
-        tranObj.transactionId = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
+        tranObj.transactionId           = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
+        tranObj.transactionActivePin    = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
         
         [[DBManager sharedInstance] saveTransaction:tranObj];
     }
-     */
+*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +59,6 @@
 }
 
 - (IBAction)toggleRemovalView:(id)sender {
-    NSLog(@"%s", __func__);
     
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     
@@ -72,8 +73,7 @@
                             closeSelectToRemoveViewAction:@selector(closeSelectToRemoveView)];
         
     } else {
-        [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                          moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+        [self closeSelectToRemoveView];
     }
     [self.tableview reloadData];
 }
@@ -107,7 +107,9 @@
 - (void)closeSelectToRemoveView {
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                      moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:self.tableview];
+                                      moveTopViewSeperatorBack:self.topViewSeperator
+                                             moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+    [self selectAllItems:[NSNumber numberWithBool:NO]];
 }
 
 - (void)selectAllItems:(id)sender {
@@ -118,20 +120,29 @@
         NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
         
         for (TransactionObject * transacObj in sectionItems) {
-            [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
+            if ([[transacObj transactionActivePin] boolValue]) {
+                [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
+            }
         }
     }
     [self.tableview reloadData];
 }
 
 - (IBAction)toggleSearchView {
-    NSLog(@"%s", __func__);
-    /*
-    NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView" owner:self options:nil];
-    StorageBoxDateSearchView * dateSearchView = [nibArr objectAtIndex:0];
-    CGRect dateSearchViewFrame = dateSearchView.frame;
-    [self.view addSubview:dateSearchView];
-    */
+    
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    
+    if (![dateSearchUtil hasStorageDateSearchViewInParentView:self.view]) {
+        
+        [dateSearchUtil addStorageDateSearchViewToParent:self.view
+                                    moveTopViewSeperatorDown:self.topViewSeperator
+                                           moveTableviewDown:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+        
+    } else {
+        [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view
+                                             moveTopViewSeperatorBack:self.topViewSeperator
+                                                    moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+    }
 }
 
 #pragma mark - data source
@@ -142,6 +153,7 @@
     
     [self.tableview setHidden:([[_transactions allKeys] count] == 0)];
     [self.noDataView setHidden:!self.tableview.hidden];
+    [self.noDataView setFrame:self.tableview.frame];
     
 }
 
@@ -204,7 +216,9 @@
         
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemCell" owner:self options:nil];
         cell            = (ArchivedTransItemCell *)[nibArr objectAtIndex:0];
-        cell.delegate   = self;
+        
+        cell.delegate               = self;
+        cell.editTextField.delegate = self;
         
         NSString        * sectionTitle = [_transactionTitles objectAtIndex:indexPath.section];
         NSMutableArray  * sectionItems = [_transactions objectForKey:sectionTitle];
@@ -215,7 +229,7 @@
         [cell setSection:indexPath.section];
         [cell setRow:indexPath.row];
         
-        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
+        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view] && [[transacObj transactionActivePin] boolValue]) {
             
             [cell.deleteBtn setHidden:NO];
             [cell.transacTypeImageView setHidden:YES];
@@ -228,6 +242,9 @@
             
             [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:INCOME] ? @"icon_sticker_01" : @"icon_sticker_02"]];
         }
+        
+        [cell.pinImageView setImage:[UIImage imageNamed:[[transacObj transactionActivePin] boolValue] ? @"icon_pin_01_sel" : @"icon_pin_01_dft"]];
+        
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
         
@@ -247,6 +264,51 @@
     
     TransactionObject * transacObj = [sectionItems objectAtIndex:row];
     [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isMarkedAsDeleted]];
+}
+
+-(void)updateMemo:(NSString *)memo ofItemSection:(NSInteger)section row:(NSInteger)row {
+    
+    NSString        * sectionTitle  = [_transactionTitles objectAtIndex:section];
+    NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+    
+    TransactionObject * transacObj = [sectionItems objectAtIndex:row];
+    [transacObj setTransactionMemo:memo];
+    
+    [[DBManager sharedInstance] updateTransactionMemo:memo byTransId:transacObj.transactionId];
+}
+
+#pragma mark - Keyboard
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        ArchivedTransItemCell * cell = (ArchivedTransItemCell*)textField.superview.superview.superview;
+        
+        CGPoint pointInTable    = [cell convertPoint:cell.editView.frame.origin toView:self.tableview];
+        CGPoint contentOffset   = self.tableview.contentOffset;
+        contentOffset.y         = pointInTable.y - cell.editView.frame.size.height;
+        
+        [self.tableview setContentOffset:contentOffset animated:YES];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        UITableViewCell * cell      = (UITableViewCell*)textField.superview.superview.superview;
+        NSIndexPath     * indexPath = [self.tableview indexPathForCell:cell];
+        
+        [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:TRUE];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

@@ -11,6 +11,7 @@
 @protocol ArchivedTransItemCellDelegate <NSObject>
 
 - (void)markAsDeleted:(BOOL)isMarkedAsDeleted ofItemSection:(NSInteger)section row:(NSInteger)row;
+- (void)updateMemo:(NSString *)memo ofItemSection:(NSInteger)section row:(NSInteger)row;
 
 @end
 
@@ -18,10 +19,11 @@
 
 @property (weak) id<ArchivedTransItemCellDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIImageView    * transacTypeImageView;
-@property (weak, nonatomic) IBOutlet UIButton       * deleteBtn;
 @property (nonatomic) NSInteger                     section;
 @property (nonatomic) NSInteger                     row;
+
+@property (weak, nonatomic) IBOutlet UIImageView    * transacTypeImageView;
+@property (weak, nonatomic) IBOutlet UIButton       * deleteBtn;
 - (IBAction)clickDeleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel        * transacTime;
 @property (weak, nonatomic) IBOutlet UILabel        * transacName;
@@ -31,5 +33,9 @@
 @property (weak, nonatomic) IBOutlet UILabel        * transacBalance;
 @property (weak, nonatomic) IBOutlet UILabel        * transacMemo;
 - (IBAction)editMemo;
-
+@property (weak, nonatomic) IBOutlet UIView         * editView;
+@property (weak, nonatomic) IBOutlet UITextField    * fakeEditTextField;
+@property (weak, nonatomic) IBOutlet UITextField    * editTextField;
+- (IBAction)saveNewMemo;
+- (IBAction)validateEditingText:(UITextField *)sender;
 @end

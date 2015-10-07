@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoCompositionViewController">
             <connections>
+                <outlet property="cancelBtn" destination="ep9-bR-BQ0" id="urm-nu-drb"/>
+                <outlet property="fakeMemo" destination="1pe-ee-LYp" id="MpV-TR-S0Y"/>
                 <outlet property="memo" destination="Izd-2O-VTU" id="afi-gK-eSq"/>
                 <outlet property="snsView" destination="taF-L2-BeT" id="oHa-BZ-Sxx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,8 +23,8 @@
                     <rect key="frame" x="0.0" y="361" width="320" height="207"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="메모를 입력하세요. (10자 이내)" textAlignment="natural" minimumFontSize="17" id="Izd-2O-VTU">
-                            <rect key="frame" x="18" y="18" width="284" height="40"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모를 입력하세요. (10자 이내)" textAlignment="natural" minimumFontSize="17" id="Izd-2O-VTU">
+                            <rect key="frame" x="31" y="18" width="271" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -30,6 +32,17 @@
                             <connections>
                                 <action selector="validateTextEditing:" destination="-1" eventType="editingChanged" id="DVV-PY-31j"/>
                                 <outlet property="delegate" destination="-1" id="OPU-83-JNw"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="1pe-ee-LYp">
+                            <rect key="frame" x="18" y="18" width="284" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <action selector="validateTextEditing:" destination="-1" eventType="editingChanged" id="Oke-lY-ogs"/>
+                                <outlet property="delegate" destination="-1" id="UOq-JA-fC0"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xoe-W5-ESG">
