@@ -11,6 +11,16 @@
 
 @implementation CommonUtil
 
++ (NSString *)getAppVersion
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+
++ (NSString *)getOSVersion
+{
+    return [[UIDevice currentDevice] systemVersion];
+}
+
 + (NSString *)getMaskingNumber:(NSString *)number
 {
     NSString *maskingNumber = @"";
@@ -103,5 +113,22 @@
     }
     
     return size;
+}
+
++ (void)runSpinAnimationWithDuration:(UIView *)view duration:(CGFloat)duration
+{
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:M_PI * 2.0 * duration];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:0.0f];
+    rotationAnimation.duration = duration;
+    rotationAnimation.repeatCount = INFINITY;
+    
+    [view.layer addAnimation:rotationAnimation forKey:@"SpinAnimation"];
+    
+}
+
++ (void)stopSpinAnimation:(UIView *)view
+{
+    [view.layer removeAnimationForKey:@"SpinAnimation"];
 }
 @end

@@ -64,7 +64,7 @@
 
 - (IBAction)closeMenu:(id)sender
 {
-    NSLog(@"%@", self.slidingViewController.topViewController);
+//    NSLog(@"%@", self.slidingViewController.topViewController);
     if([self.slidingViewController.topViewController respondsToSelector:@selector(closeMenuView)])
     {
         [self.slidingViewController.topViewController performSelector:@selector(closeMenuView) withObject:nil];
@@ -119,13 +119,13 @@
         case 0: // 전체
         {
             newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:0];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:TIMELINE];
             break;
         }
         case 1: // 입출금
         {
 //            newTopViewController = [[MainPageViewController alloc] init];
-//            [(MainPageViewController *)newTopViewController setStartPageIndex:1];
+//            [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
             // 임시 공인인증서 뷰 컨트롤러 적용
             newTopViewController = [[CertificateMenuViewController alloc] init];
             break;
@@ -133,7 +133,7 @@
         case 2: // 기타
         {
             newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:2];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:OTHER];
             break;
         }
         case 3: // 보관함
@@ -168,10 +168,16 @@
     
     if(newTopViewController)
     {
+        if([[((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController viewControllers] count] > 1)
+        {
+            [self closeMenu:nil];
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
         CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
         ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
         ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopViewAnimated:NO];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
     }
     else if(pushViewController)
     {

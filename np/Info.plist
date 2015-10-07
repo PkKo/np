@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>7f6f6caa697b1f5e34ababd0428a62e0</string>
 	<key>NSAppTransportSecurity</key>

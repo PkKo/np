@@ -12,8 +12,7 @@
 {
     UIView *refreshHeaderView;
     UILabel *refreshLabel;
-    UIImageView *refreshArrow;
-    UIActivityIndicatorView *refreshSpinner;
+    UIImageView *refreshIndicator;
     BOOL isDragging;
     BOOL isLoading;
     NSString *textPull;

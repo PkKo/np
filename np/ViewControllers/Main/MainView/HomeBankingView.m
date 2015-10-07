@@ -1,12 +1,12 @@
 //
-//  HomeTimeLineView.m
-//  np
+//  HomeBankingView.m
+//  입출금 내역 뷰
 //
-//  Created by Infobank1 on 2015. 9. 16..
-//  Copyright (c) 2015년 Infobank1. All rights reserved.
+//  Created by Infobank1 on 2015. 10. 6..
+//  Copyright © 2015년 Infobank1. All rights reserved.
 //
 
-#import "HomeTimeLineView.h"
+#import "HomeBankingView.h"
 #import "HomeTimeLineTableViewCell.h"
 
 #define REFRESH_HEADER_HEIGHT   76.0f
@@ -15,13 +15,13 @@
 
 #define AMOUNT_FONT_SIZE        18.0f
 
-@implementation HomeTimeLineView
+@implementation HomeBankingView
 
 @synthesize delegate;
-
-@synthesize mTimeLineSection;
-@synthesize mTimeLineDic;
-@synthesize mTimeLineTable;
+@synthesize timeLineSection;
+@synthesize timeLineDic;
+@synthesize bankingListTable;
+@synthesize statisticButton;
 
 - (id)init
 {
@@ -29,8 +29,8 @@
     
     if(self)
     {
-        mTimeLineSection = [[NSMutableArray alloc] init];
-        mTimeLineDic = [[NSMutableDictionary alloc] init];
+        timeLineSection = [[NSMutableArray alloc] init];
+        timeLineDic = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -38,52 +38,47 @@
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
-    mTimeLineSection = section;
-    mTimeLineDic = data;
+    timeLineSection = section;
+    timeLineDic = data;
     
     [self addPullToRefreshHeader];
 }
 
+#pragma mark - UIButton Action
 - (IBAction)listSortChange:(id)sender
 {
     listSortType = !listSortType;
     
     // section을 먼저 sorting한다.
-    mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
+    timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
     // sorting된 section을 가지고 dictionary를 구성한다.
     NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
-    for(NSString *key in mTimeLineSection)
+    for(NSString *key in timeLineSection)
     {
-        NSArray *reverseArray = [[[mTimeLineDic objectForKey:key] reverseObjectEnumerator] allObjects];
+        NSArray *reverseArray = [[[timeLineDic objectForKey:key] reverseObjectEnumerator] allObjects];
         [reverseDic setObject:reverseArray forKey:key];
     }
-    mTimeLineDic = reverseDic;
+    timeLineDic = reverseDic;
     
-    [mTimeLineTable reloadData];
+    [bankingListTable reloadData];
 }
 
-- (IBAction)searchViewShow:(id)sender {
-}
-
-- (IBAction)deleteMode:(id)sender {
-}
-
+#pragma mark - UITableView PullToRefreshView
 - (void)addPullToRefreshHeader
 {
     textPull = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
     textRelease = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
-    textLoading = @"Loading";
+    textLoading = @"Loading...";
     
-    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
+    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, bankingListTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
     refreshHeaderView.backgroundColor = [UIColor clearColor];
     [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
     [refreshIndicator setFrame:CGRectMake(floorf(floorf(refreshHeaderView.frame.size.width - 20) / 2), 11, 30, 30)];
     [refreshIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-    [refreshIndicator setContentMode:UIViewContentModeCenter];
     
-    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, refreshIndicator.frame.origin.y + refreshIndicator.frame.size.height, mTimeLineTable.frame.size.width, 16)];
+    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, refreshIndicator.frame.origin.y + refreshIndicator.frame.size.height, bankingListTable.frame.size.width, 16)];
     refreshLabel.backgroundColor = [UIColor clearColor];
     refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
     [refreshLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
@@ -92,7 +87,7 @@
     
     [refreshHeaderView addSubview:refreshLabel];
     [refreshHeaderView addSubview:refreshIndicator];
-    [mTimeLineTable addSubview:refreshHeaderView];
+    [bankingListTable addSubview:refreshHeaderView];
 }
 
 - (void)startLoading
@@ -102,7 +97,7 @@
     
     // Show the header
     [UIView animateWithDuration:0.3 animations:^{
-        mTimeLineTable.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        bankingListTable.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
         refreshLabel.text = textLoading;
         [CommonUtil runSpinAnimationWithDuration:refreshIndicator duration:10.0f];
     }];
@@ -118,7 +113,7 @@
     
     // Hide the header
     [UIView animateWithDuration:0.3 animations:^{
-        mTimeLineTable.contentInset = UIEdgeInsetsZero;
+        bankingListTable.contentInset = UIEdgeInsetsZero;
     }
                      completion:^(BOOL finished) {
                          [self performSelector:@selector(stopLoadingComplete)];
@@ -142,18 +137,18 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [mTimeLineSection count];
+    return [timeLineSection count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if([mTimeLineSection count] == 0)
+    if([timeLineSection count] == 0)
     {
         return 0;
     }
     else
     {
-        return [[mTimeLineDic objectForKey:[mTimeLineSection objectAtIndex:section]] count];
+        return [[timeLineDic objectForKey:[timeLineSection objectAtIndex:section]] count];
     }
 }
 
@@ -168,7 +163,7 @@
     
     [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]];
     
-    NSString *date = [mTimeLineSection objectAtIndex:section];
+    NSString *date = [timeLineSection objectAtIndex:section];
     NSString *day = @"일요일";
     
     CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12.0 bold:YES];
@@ -201,8 +196,8 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    NSString *section = [mTimeLineSection objectAtIndex:indexPath.section];
-    NSString *desc = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
+    NSString *section = [timeLineSection objectAtIndex:indexPath.section];
+    NSString *desc = [[timeLineDic objectForKey:section] objectAtIndex:indexPath.row];
     
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
@@ -219,14 +214,14 @@
         // 금액
         CGSize amountSize = [CommonUtil getStringFrameSize:@"100,000,000" fontSize:AMOUNT_FONT_SIZE bold:NO];
         [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
-                                             cell.amountLabel.frame.origin.y,
+                                              cell.amountLabel.frame.origin.y,
                                               amountSize.width, cell.amountLabel.frame.size.height)];
         [cell.amountLabel setText:@"100,000,000"];
         [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
         
         [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
-                                                 cell.amountDescLabel.frame.origin.y,
-                                                 cell.amountDescLabel.frame.size.width,
+                                                  cell.amountDescLabel.frame.origin.y,
+                                                  cell.amountDescLabel.frame.size.width,
                                                   cell.amountDescLabel.frame.size.height)];
     }
     else
@@ -254,6 +249,7 @@
     [cell.remainAmountLabel setText:@"잔액 123,432,000원"];
     
     // 고정핀
+    // 고정핀
     [cell.pinButton setIndexPath:indexPath];
     [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     // more 버튼
@@ -264,11 +260,11 @@
     {
         [cell.upperLine setHidden:YES];
     }
-    else if ([[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+    else if ([[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
     {
         [cell.underLine setHidden:YES];
     }
-        
+    
     return cell;
 }
 
@@ -285,9 +281,9 @@
     {
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
-            mTimeLineTable.contentInset = UIEdgeInsetsZero;
+            bankingListTable.contentInset = UIEdgeInsetsZero;
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
-            mTimeLineTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+            bankingListTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     }
     else if (isDragging && scrollView.contentOffset.y < 0)
     {
@@ -313,37 +309,10 @@
         // Released above the header
         [self startLoading];
     }
-    else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
+    else if(scrollView.contentOffset.y + bankingListTable.frame.size.height >= bankingListTable.contentSize.height)
     {
-        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
-        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
+        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, bankingListTable.contentSize.height, bankingListTable.frame.size.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
     }
 }
-
-#pragma mark - CellButtonClickEvent
-- (void)pinButtonClick:(id)sender
-{
-    IndexPathButton *currentBtn = (IndexPathButton *)sender;
-    NSIndexPath *indexPath = currentBtn.indexPath;
-    
-    NSLog(@"button indexPath = %@", currentBtn.indexPath);
-    
-    if([currentBtn isSelected])
-    {
-        // 고정핀 해제를 위해 디바이스에서 해당 인덱스패스에 있는 푸시 아이디를 삭제한다.
-    }
-    else
-    {
-        // 고정핀 적용을 위해 디바이스에 해당 인덱스패스의 푸시 아이디를 저장한다.
-    }
-    
-    [currentBtn setSelected:![currentBtn isSelected]];
-}
-
-- (void)moreButtonClick:(id)sender
-{
-    IndexPathButton *currentBtn = (IndexPathButton *)sender;
-}
-
 @end

@@ -46,7 +46,7 @@
     [pageViewController setDelegate:self];
     [pageViewController setDataSource:self];
     [pageViewController.view setFrame:CGRectMake(0, tabButtonView.frame.origin.y + tabButtonView.frame.size.height,
-                                                 self.view.frame.size.width, self.view.frame.size.height)];
+                                                 self.view.frame.size.width, self.view.frame.size.height - (tabButtonView.frame.origin.y + tabButtonView.frame.size.height))];
 //    [pageViewController setViewControllers:pageViewControllerArray direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self tabSelect:startPageIndex];
     
