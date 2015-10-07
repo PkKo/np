@@ -8,6 +8,9 @@
 
 #import "HomeTimeLineView.h"
 #import "HomeTimeLineTableViewCell.h"
+#import "TransactionObject.h"
+#import "StorageBoxUtil.h"
+#import "ConstantMaster.h"
 
 #define REFRESH_HEADER_HEIGHT   76.0f
 #define SECTION_HEADER_HEIGHT   31.0f
@@ -258,6 +261,7 @@
     [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     // more 버튼
     [cell.moreButton setIndexPath:indexPath];
+    [cell.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
     if(indexPath.row == 0)
@@ -343,7 +347,19 @@
 
 - (void)moreButtonClick:(id)sender
 {
+    NSLog(@"%s", __func__);
     IndexPathButton *currentBtn = (IndexPathButton *)sender;
+    
+    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
+                                                                                       transactionDate:[NSDate date]
+                                                                              transactionAccountNumber:@"111-22-***33"
+                                                                                    transactionDetails:@"당풍니"
+                                                                                       transactionType:INCOME
+                                                                                     transactionAmount:[NSNumber numberWithFloat:100000.0f]
+                                                                                    transactionBalance:[NSNumber numberWithFloat:200000.0f]
+                                                                                       transactionMemo:@""];
+    StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
+    [util showMemoComposerInViewController:self.delegate withTransationObject:transation];
 }
 
 @end

@@ -288,7 +288,6 @@
 		A2DA2BE21BA6A63A00E6BBDC /* CertificateRoamingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */; };
 		A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */; };
 		A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CA1BA116D1006F5F4A /* Security.framework */; };
-		A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */; };
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
 		A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBC3981BBE514600FFF357 /* IndexPathButton.m */; settings = {ASSET_TAGS = (); }; };
 		A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -379,6 +378,7 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
+		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
 		A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5E2C44E1BB26E5A006EE828 /* MemoCompositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4511BB28E79006EE828 /* TransactionObject.m */; settings = {ASSET_TAGS = (); }; };
@@ -722,7 +722,6 @@
 		A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingViewController.xib; sourceTree = "<group>"; };
 		A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A2DA68CA1BA116D1006F5F4A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A2DA68CE1BA13F85006F5F4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A2DBC3971BBE514600FFF357 /* IndexPathButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPathButton.h; sourceTree = "<group>"; };
 		A2DBC3981BBE514600FFF357 /* IndexPathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPathButton.m; sourceTree = "<group>"; };
@@ -884,6 +883,8 @@
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A5DD8BB41BC348FF002FEE79 /* UIButton+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+BackgroundColor.h"; path = "StorageBox/View/UIButton+BackgroundColor.h"; sourceTree = "<group>"; };
+		A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+BackgroundColor.m"; path = "StorageBox/View/UIButton+BackgroundColor.m"; sourceTree = "<group>"; };
 		A5E2C44A1BB26E5A006EE828 /* MemoCompositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoCompositionViewController.h; path = StorageBox/View/MemoCompositionViewController.h; sourceTree = "<group>"; };
 		A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemoCompositionViewController.m; path = StorageBox/View/MemoCompositionViewController.m; sourceTree = "<group>"; };
 		A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemoCompositionViewController.xib; path = StorageBox/View/MemoCompositionViewController.xib; sourceTree = "<group>"; };
@@ -927,7 +928,6 @@
 				A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */,
 				A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */,
 				A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */,
-				A2DA68CD1BA116D7006F5F4A /* libsqlite3.0.dylib in Frameworks */,
 				A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */,
 				A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */,
 				A2D95B071BA8F1DD00DC943D /* libNFilter.a in Frameworks */,
@@ -1429,7 +1429,6 @@
 				A54B94E61BAAA03A00D5D99B /* MessageUI.framework */,
 				A54B94E41BAA9B5800D5D99B /* Social.framework */,
 				A2DA68CE1BA13F85006F5F4A /* Foundation.framework */,
-				A2DA68CC1BA116D7006F5F4A /* libsqlite3.0.dylib */,
 				A2DA68CA1BA116D1006F5F4A /* Security.framework */,
 				A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */,
 				A2DEAE0F1B9FE6A400EDCCBA /* UIKit.framework */,
@@ -1884,6 +1883,8 @@
 		A5E2C4491BB25D5B006EE828 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5DD8BB41BC348FF002FEE79 /* UIButton+BackgroundColor.h */,
+				A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */,
 				A5E2C44A1BB26E5A006EE828 /* MemoCompositionViewController.h */,
 				A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */,
 				A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */,
@@ -2445,6 +2446,7 @@
 				A2DFD71B1BB14DD300838E09 /* RegistAccountViewController.m in Sources */,
 				A2DEAE531B9FE6D800EDCCBA /* CommonUtil.m in Sources */,
 				A2D95B061BA8F1DD00DC943D /* KNStringutil.m in Sources */,
+				A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */,
 				A2DFD7111BB0EAC800838E09 /* MenuTableEtcView.m in Sources */,
 				A2D95B041BA8F1DD00DC943D /* KnmRepUnicode.m in Sources */,
 				A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */,

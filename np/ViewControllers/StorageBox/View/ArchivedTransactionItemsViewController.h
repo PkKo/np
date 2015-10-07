@@ -10,11 +10,17 @@
 #import "CommonViewController.h"
 
 @interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *sortByDateBtn;
+@property (weak, nonatomic) IBOutlet UIButton       * sortByDateBtn;
 - (IBAction)sortByDate;
-- (IBAction)toggleRemovementView:(id)sender;
+- (IBAction)toggleRemovalView:(id)sender;
 - (IBAction)toggleSearchView;
-@property (weak, nonatomic) IBOutlet UILabel *topViewSeperator;
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UILabel        * topViewSeperator;
+@property (weak, nonatomic) IBOutlet UITableView    * tableview;
+
+#pragma mark - no data
+
+@property (weak, nonatomic) IBOutlet UIView         * noDataView;
+@property (weak, nonatomic) IBOutlet UIImageView    * noDataImageView;
+@property (weak, nonatomic) IBOutlet UILabel        * noDataNotice;
 
 @end

@@ -48,6 +48,7 @@
     
     [scrollView addSubview:dateSearchView];
     [dateSearchView updateCurrentYearMonth];
+    [dateSearchView updateUI];
     
     [self setContentSizeOfScrollView:scrollView];
     

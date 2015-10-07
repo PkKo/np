@@ -10,7 +10,10 @@
 #import "StorageBoxUtil.h"
 #import "DBManager.h"
 
-@interface MemoCompositionViewController ()
+
+@interface MemoCompositionViewController () {
+    BOOL isNewMemo;
+}
 
 @end
 
@@ -48,13 +51,22 @@
 - (IBAction)saveToStorageBox {
     
     [self.transactionObject setTransactionMemo:[self.memo text]];
-    [[DBManager sharedInstance] saveTransaction:self.transactionObject];
+    if (isNewMemo) {
+        [[DBManager sharedInstance] saveTransaction:self.transactionObject];
+    } else {
+        [[DBManager sharedInstance] updateTransactionMemo:self.memo.text byTransId:self.transactionObject.transactionId];
+    }
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"보관함에 저장되었습니다.\n보관함으로 이동하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+                                                     message:@"보관함에 저장되었습니다.\n보관함으로 이동하시겠습니까?"
+                                                    delegate:self
+                                           cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
     [alert show];
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
     switch (buttonIndex) {
         case 1: // 확인
             NSLog(@"show storage box.");
@@ -62,6 +74,7 @@
         default:
             break;
     }
+    
     [self removeComposer];
 }
 
@@ -74,11 +87,16 @@
 
 #pragma mark - database
 - (void)updateMemo {
-    NSString * memo = [[DBManager sharedInstance] findTransactionMemoById:self.transactionObject.transactionId];
-    if (memo == nil) {
-        NSLog(@"No saved memo");
+    
+    [self.memo.layer setBorderWidth:1.0f];
+    [self.memo.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+    
+    NSString * memoStr = [[DBManager sharedInstance] findTransactionMemoById:self.transactionObject.transactionId];
+    if (memoStr == nil) {
+        isNewMemo = YES;
     } else {
-        [self.memo setText:memo];
+        [self.memo setText:memoStr];
+        isNewMemo = NO;
     }
 }
 
@@ -95,7 +113,7 @@
 }
 
 - (void)onKeyboardShow:(NSNotification *)notifcation {
-    
+    NSLog(@"%s", __func__);
     CGFloat snsViewY    = 0;
     CGRect viewFrame    = self.view.frame;
     CGRect snsViewFrame = self.snsView.frame;
@@ -114,7 +132,7 @@
 }
 
 - (void)onKeyboardHide:(NSNotification *)notifcation {
-    
+    NSLog(@"%s", __func__);
     CGRect viewFrame    = self.view.frame;
     CGRect snsViewFrame = self.snsView.frame;
     CGFloat snsViewY    = viewFrame.size.height - snsViewFrame.size.height;

@@ -7,6 +7,7 @@
 //
 
 #import "ArchivedTransItemRemoveActionView.h"
+#import "UIButton+BackgroundColor.h"
 
 @interface ArchivedTransItemRemoveActionView()
 
@@ -21,28 +22,29 @@
 @implementation ArchivedTransItemRemoveActionView
 
 - (IBAction)removeSelectedItems {
-    NSLog(@"%s", __func__);
     if (self.removeBtnTarget) {
         [self.removeBtnTarget performSelector:self.removeBtnAction withObject:nil afterDelay:0];
     }
 }
 
 - (IBAction)closeSelectToDeleteView {
-    NSLog(@"%s", __func__);
     if (self.cancelBtnTarget) {
         [self.cancelBtnTarget performSelector:self.cancelBtnAction withObject:nil afterDelay:0];
     }
 }
 
 - (void)addTargetForRemoveButton:(id)target action:(SEL)action {
-    NSLog(@"%s", __func__);
     self.removeBtnTarget = target;
     self.removeBtnAction = action;
 }
 
 - (void)addTargetForCancelButton:(id)target action:(SEL)action {
-    NSLog(@"%s", __func__);
     self.cancelBtnTarget = target;
     self.cancelBtnAction = action;
+}
+
+- (void)updateHighlightBackgroundColor {
+    [self.removeBtn setBackgroundColor:[UIColor colorWithRed:213.0f/255.0f green:42.0f/255.0f blue:58.0f/255.0f alpha:1] forState:UIControlStateHighlighted];
+    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 @end

@@ -23,7 +23,7 @@
 @property (nonatomic, copy) NSString * transactionMemo;
 @property (nonatomic, copy) NSNumber * transactionMarkAsDeleted;
 
-- (instancetype)initTransactionObjectWithTransactionId:(NSDate *)transactionId
+- (instancetype)initTransactionObjectWithTransactionId:(NSString *)transactionId
                                        transactionDate:(NSDate *)transactionDate
                               transactionAccountNumber:(NSString *)transactionAccountNumber
                                     transactionDetails:(NSString *)transactionDetails
@@ -41,6 +41,7 @@
                                          transactionMemo:(NSString *)transactionMemo;
 
 - (NSString *)formattedTransactionDate;
+- (NSString *)formattedTransactionDateForDB;
 - (NSString *)formattedTransactionAmount;
 - (NSString *)formattedTransactionBalance;
 - (NSString *)getTransactionHourMinute;

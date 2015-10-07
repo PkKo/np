@@ -8,6 +8,7 @@
 
 #import "DBManager.h"
 #import <sqlite3.h>
+#import "StatisticMainUtil.h"
 
 @interface DBManager()
 
@@ -33,35 +34,28 @@
 
 - (void)createDB {
     
-    NSLog(@"%s", __func__);
     NSString *docsDir;
     NSArray *dirPaths;
     
     // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(
-                                                   NSDocumentDirectory, NSUserDomainMask, YES);
-    
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = dirPaths[0];
     
     // Build the path to the database file
-    _databasePath = [[NSString alloc]
-                     initWithString: [docsDir stringByAppendingPathComponent:
-                                      @"nhtransactions.db"]];
+    _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"nhtransactions.db"]];
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
-    
-    if ([filemgr fileExistsAtPath: _databasePath ] == NO)
-    {
+    if ([filemgr fileExistsAtPath: _databasePath ] == NO) {
+        
         const char *dbpath = [_databasePath UTF8String];
         
-        if (sqlite3_open(dbpath, &_nhTransactionDB) == SQLITE_OK)
-        {
+        if (sqlite3_open(dbpath, &_nhTransactionDB) == SQLITE_OK) {
+            
             char *errMsg;
             const char *sql_stmt =
             "CREATE TABLE IF NOT EXISTS transactions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANS_ID TEXT, TRANS_DATE TEXT, TRANS_ACCOUNT TEXT, TRANS_NAME TEXT, TRANS_TYPE TEXT, TRANS_AMOUNT TEXT, TRANS_BALANCE TEXT, TRANS_MEMO TEXT)";
             
-            if (sqlite3_exec(_nhTransactionDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
-            {
+            if (sqlite3_exec(_nhTransactionDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
             }
             sqlite3_close(_nhTransactionDB);
@@ -73,9 +67,46 @@
     }
 }
 
-- (NSString *)findTransactionMemoById:(NSString *)transactionId {
+- (NSArray *)selectAllTransactions { // array of TransactionObject
     
-    NSLog(@"%s", __func__);
+    NSMutableArray * transactions = [[NSMutableArray alloc] init];
+    
+    sqlite3_stmt * statement;
+    
+    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    if (openDB == SQLITE_OK) {
+        
+        NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO FROM transactions";
+        
+        if (sqlite3_prepare(_nhTransactionDB, [selectSQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                
+                TransactionObject * tranObj = [[TransactionObject alloc] init];
+                [tranObj setTransactionId:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)]];
+                [tranObj setTransactionDate:[[StatisticMainUtil getDateFormatterDateHourStyle] dateFromString:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)]]];
+                [tranObj setTransactionAccountNumber:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)]];
+                [tranObj setTransactionDetails:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)]];
+                [tranObj setTransactionType:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)]];
+                [tranObj setTransactionAmount:[NSNumber numberWithFloat:[[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)] floatValue]]];
+                [tranObj setTransactionBalance:[NSNumber numberWithFloat:[[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)] floatValue]]];
+                [tranObj setTransactionMemo:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)]];
+                
+                [transactions addObject:tranObj];
+            }
+            
+        } else {
+            NSLog(@"Failed to select data");
+        }
+        
+    } else {
+        NSLog(@"Failed to open db");
+    }
+    
+    return [transactions copy];
+}
+
+- (NSString *)findTransactionMemoById:(NSString *)transactionId {
     
     NSString * memo = nil;
     
@@ -99,17 +130,85 @@
     return memo;
 }
 
-- (void)saveTransaction:(TransactionObject *)transObj {
-    
-    NSLog(@"%s", __func__);
+- (void)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId {
     
     sqlite3_stmt * statement;
-    const char * encodedDBPath = [self.databasePath UTF8String];
     
-    NSLog(@"self.databasePath: %@", self.databasePath);
+    BOOL openDBResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     
-    if (sqlite3_open(encodedDBPath, &_nhTransactionDB)) {
-        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (trans_id, trans_memo) VALUES (\"%@\", \"%@\")", transObj.transactionId, transObj.transactionMemo];
+    if (openDBResult == SQLITE_OK) {
+        NSLog(@"opened db");
+        
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_memo = \"%@\" WHERE trans_id = \"%@\"", memo, transId];
+        
+        sqlite3_prepare(_nhTransactionDB, [updateSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"updated.");
+        } else {
+            NSLog(@"failed to update");
+        }
+    } else {
+        NSLog(@"failed to open db.");
+    }
+}
+
+- (void)deleteAllTransactions {
+    sqlite3_stmt * statement;
+    
+    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    
+    if (openDB == SQLITE_OK) {
+        
+        NSLog(@"opened db.");
+        NSString * deleteSQL = @"DELETE FROM transactions";
+        
+        sqlite3_prepare(_nhTransactionDB, [deleteSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"deleted");
+        } else {
+            NSLog(@"failed to delete");
+        }
+    } else {
+        NSLog(@"failed to open db");
+    }
+}
+
+- (void)deleteTransactionById:(NSString *)transId {
+    sqlite3_stmt * statement;
+    
+    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    
+    if (openDB == SQLITE_OK) {
+        
+        NSLog(@"opened db.");
+        NSString * deleteSQL = [NSString stringWithFormat:@"DELETE FROM transactions WHERE trans_id = \"%@\"", transId];
+        
+        sqlite3_prepare(_nhTransactionDB, [deleteSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"deleted");
+        } else {
+            NSLog(@"failed to delete");
+        }
+    } else {
+        NSLog(@"failed to open db");
+    }
+}
+
+- (void)saveTransaction:(TransactionObject *)transObj {
+    
+    sqlite3_stmt * statement;
+    
+    BOOL openDatabaseResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    if(openDatabaseResult == SQLITE_OK) {
+        
+        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
+                                transObj.transactionAccountNumber, transObj.transactionDetails,
+                                transObj.transactionType, [transObj.transactionAmount stringValue],
+                                [transObj.transactionBalance stringValue], transObj.transactionMemo];
+        
         const char * insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare(_nhTransactionDB, insert_stmt, -1, &statement, NULL);
         
@@ -120,10 +219,10 @@
         }
         sqlite3_finalize(statement);
         sqlite3_close(_nhTransactionDB);
+        
     } else {
-        NSLog(@"faied to open");
+        NSLog(@"failed to open");
     }
 }
-
 
 @end

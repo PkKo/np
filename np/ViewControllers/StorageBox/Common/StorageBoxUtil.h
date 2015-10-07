@@ -19,7 +19,7 @@
 - (ArchivedTransItemRemoveAllSelectView *)hasSelectAllViewInParentView:(UIView *)parentView;
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
              moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                    moveTableviewDown:(UITableView *)tableview
+                    moveTableviewDown:(UIView *)tableview
                                target:(id)target
                       selectAllAction:(SEL)selectAllAction
             removeSelectedItemsAction:(SEL)removeSelectedItemsAction
@@ -27,7 +27,7 @@
 
 - (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
                       moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                             moveTableviewBack:(UITableView *)tableview;
+                             moveTableviewBack:(UIView *)tableview;
 
 + (UIColor *)getDimmedBackgroundColor;
 

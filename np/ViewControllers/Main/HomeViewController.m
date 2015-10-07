@@ -98,7 +98,7 @@
             UIStoryboard        * archivedItemsStoryBoard       = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
             UIViewController    * archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
             
-            archivedItemsViewController.view.frame             = mMainContentView.bounds;
+            archivedItemsViewController.view.frame  = mMainContentView.bounds;
             archivedItemsViewController.view.autoresizingMask  = mMainContentView.autoresizingMask;
             
             [self addChildViewController:archivedItemsViewController];

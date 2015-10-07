@@ -176,7 +176,6 @@
 }
 
 - (IBAction)showMemoComposer {
-    
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
                                                                                        transactionDate:[NSDate date]
                                                                               transactionAccountNumber:@"111-22-***33"

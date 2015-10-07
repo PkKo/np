@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SNSViewController">
             <connections>
+                <outlet property="cancelBtn" destination="jwJ-PA-0Ce" id="xFe-FD-6e4"/>
                 <outlet property="snsContent" destination="goe-23-NDR" id="kLZ-cu-SMd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

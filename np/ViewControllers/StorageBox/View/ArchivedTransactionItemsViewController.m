@@ -16,6 +16,7 @@
 #import "StatisticMainUtil.h"
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
+#import "DBManager.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -29,9 +30,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self refreshData];
+    // create table & insert dummy data.
+    /*
+    [[DBManager sharedInstance] deleteAllTransactions];
+    
     StorageBoxController * controller = [[StorageBoxController alloc] init];
-    _transactions = [controller getIndexDicOutOfArray:[controller getArchivedItems]];
-    [self sortDataByAscending:NO];
+    NSArray * arr = [controller getArchivedItems];
+    for (TransactionObject * tranObj in arr) {
+        tranObj.transactionId = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
+        
+        [[DBManager sharedInstance] saveTransaction:tranObj];
+    }
+     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +55,7 @@
     NSLog(@"%s", __func__);
 }
 
-- (IBAction)toggleRemovementView:(id)sender {
+- (IBAction)toggleRemovalView:(id)sender {
     NSLog(@"%s", __func__);
     
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
@@ -53,7 +64,7 @@
         
         [selectToRemoveUtil addSelectToRemoveViewToParent:self.view
                                  moveTopViewSeperatorDown:self.topViewSeperator
-                                        moveTableviewDown:self.tableview
+                                        moveTableviewDown:(self.tableview.isHidden ? self.noDataView : self.tableview)
                                                    target:self
                                           selectAllAction:@selector(selectAllItems:)
                                 removeSelectedItemsAction:@selector(removeSelectedItems)
@@ -61,19 +72,38 @@
         
     } else {
         [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                          moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:self.tableview];
+                                          moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
     }
     [self.tableview reloadData];
 }
 
 - (void)removeSelectedItems {
-    NSLog(@"%s", __func__);
     
+    BOOL hasSelectedItems = NO;
+    
+    for (NSString * sectionTitle in _transactionTitles) {
+        
+        NSArray * sectionItems = [_transactions objectForKey:sectionTitle];
+        NSMutableArray * mutableSectionItems = [NSMutableArray arrayWithArray:sectionItems];
+        
+        for (TransactionObject * transacObj in mutableSectionItems) {
+            if ([[transacObj transactionMarkAsDeleted] boolValue]) {
+                hasSelectedItems = YES;
+                [[DBManager sharedInstance] deleteTransactionById:[transacObj transactionId]];
+            }
+        }
+    }
+    
+    if (!hasSelectedItems) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 메시지를 선택해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [self refreshData];
+        [self.tableview reloadData];
+    }
 }
 
 - (void)closeSelectToRemoveView {
-    NSLog(@"%s", __func__);
-    
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
                                       moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:self.tableview];
@@ -82,7 +112,6 @@
 - (void)selectAllItems:(id)sender {
     
     BOOL isSelectAll = [(NSNumber *)sender boolValue];
-    NSLog(@"%@", isSelectAll ? @"select all" : @"remove all");
     
     for (NSString * sectionTitle in _transactionTitles) {
         NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
@@ -91,10 +120,22 @@
             [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
         }
     }
+    [self.tableview reloadData];
 }
 
 - (IBAction)toggleSearchView {
     NSLog(@"%s", __func__);
+}
+
+#pragma mark - data source
+- (void)refreshData {
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    _transactions = [controller getIndexDicOutOfArray:[controller getArchivedItems]];
+    [self sortDataByAscending:NO];
+    
+    [self.tableview setHidden:([[_transactions allKeys] count] == 0)];
+    [self.noDataView setHidden:!self.tableview.hidden];
+    
 }
 
 - (void)sortDataByAscending:(BOOL)ascending {
