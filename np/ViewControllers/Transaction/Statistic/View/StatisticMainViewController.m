@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    [self.mNaviView.mBackButton setHidden:YES];
+    [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"입금/지출 통계"];
     
     NSDate * today          = [NSDate date];

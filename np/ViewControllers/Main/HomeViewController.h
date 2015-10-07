@@ -8,6 +8,7 @@
 
 #import "CommonViewController.h"
 #import "HomeTimeLineView.h"
+#import "HomeBankingView.h"
 
 typedef enum HomeViewType
 {
@@ -22,7 +23,10 @@ typedef enum HomeViewType
 @property (assign, nonatomic) HomeViewType viewType;
 // 타임라인 탭
 @property (strong, nonatomic) HomeTimeLineView  *mTimeLineView;
+// 입출금 탭 뷰
+@property (strong, nonatomic) HomeBankingView *bankingView;
 // 실제 내용을 보여줄 뷰
 @property (strong, nonatomic) IBOutlet UIView *mMainContentView;
-@property (strong, nonatomic) IBOutlet UILabel *indexView;
+
+- (void)refreshData:(BOOL)newData;
 @end

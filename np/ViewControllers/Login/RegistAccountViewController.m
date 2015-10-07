@@ -1,6 +1,6 @@
 //
 //  RegistAccountViewController.m
-//  공인인증서, 계좌인증 뷰컨트롤러
+//  가입 - 공인인증서, 계좌인증 뷰컨트롤러
 //
 //  Created by Infobank1 on 2015. 9. 22..
 //  Copyright © 2015년 Infobank1. All rights reserved.
