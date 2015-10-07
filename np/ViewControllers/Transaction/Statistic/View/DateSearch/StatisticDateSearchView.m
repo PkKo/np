@@ -74,18 +74,18 @@
     
     if (month != _lastLatestMaxMonthMonth && month != _currentMonth) {
         
-        fromDateStr = [NSString stringWithFormat:@"%d/%d/01 00:00:00", year, month];
-        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", year, month, [StatisticMainUtil getLastDayOfMonth:month year:year]];
+        fromDateStr = [NSString stringWithFormat:@"%d/%d/01 00:00:00", (int)year, (int)month];
+        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", (int)year, (int)month, (int)[StatisticMainUtil getLastDayOfMonth:month year:year]];
         
     } else if (month == _lastLatestMaxMonthMonth) {
         
-        fromDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", year, month, _lastLatestMaxMonthDay];
-        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", year, month, [StatisticMainUtil getLastDayOfMonth:month year:year]];
+        fromDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)year, (int)month, (int)_lastLatestMaxMonthDay];
+        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", (int)year, (int)month, (int)[StatisticMainUtil getLastDayOfMonth:month year:year]];
         
     } else if (month == _currentMonth) {
         
-        fromDateStr = [NSString stringWithFormat:@"%d/%d/01 00:00:00", year, month];
-        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", year, month, _currentDay];
+        fromDateStr = [NSString stringWithFormat:@"%d/%d/01 00:00:00", (int)year, (int)month];
+        toDateStr   = [NSString stringWithFormat:@"%d/%d/%d 23:59:59", (int)year, (int)month, (int)_currentDay];
     }
     
     fromDate = [dateFormatter dateFromString:fromDateStr];
@@ -167,14 +167,14 @@
 - (IBAction)chooseStartDate {
     
     NSDateFormatter *dateFormatter = [StatisticMainUtil getDateFormatterDateHourStyle];
-    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", _lastLatestMaxMonthYear, _lastLatestMaxMonthMonth, _lastLatestMaxMonthDay];
+    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
     [self.delegate showDatePickerForStartDateWithMinDate:[dateFormatter dateFromString:minDateStr] maxDate:[NSDate date]];
 }
 
 - (IBAction)chooseEndDate {
     
     NSDateFormatter *dateFormatter = [StatisticMainUtil getDateFormatterDateHourStyle];
-    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", _lastLatestMaxMonthYear, _lastLatestMaxMonthMonth, _lastLatestMaxMonthDay];
+    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
     [self.delegate showDatePickerForEndDateWithMinDate:[dateFormatter dateFromString:minDateStr] maxDate:[NSDate date]];
 }
 
@@ -231,7 +231,7 @@
                                                   options:NSCalendarWrapComponents];
     differentDays        = [components day];
     
-    NSLog(@"differentDays: %d - maxDaysOfStartMonth: %d", differentDays, maxDaysOfStartMonth);
+    NSLog(@"differentDays: %d - maxDaysOfStartMonth: %d", (int)differentDays, (int)maxDaysOfStartMonth);
     
     
     if (differentDays > maxDaysOfStartMonth) {

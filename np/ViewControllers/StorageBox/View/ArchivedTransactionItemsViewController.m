@@ -17,6 +17,7 @@
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
 #import "DBManager.h"
+#import "StorageBoxDateSearchView.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -125,6 +126,12 @@
 
 - (IBAction)toggleSearchView {
     NSLog(@"%s", __func__);
+    /*
+    NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView" owner:self options:nil];
+    StorageBoxDateSearchView * dateSearchView = [nibArr objectAtIndex:0];
+    CGRect dateSearchViewFrame = dateSearchView.frame;
+    [self.view addSubview:dateSearchView];
+    */
 }
 
 #pragma mark - data source
