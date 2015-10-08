@@ -41,7 +41,7 @@
     [self.mNaviView.mTitleLabel setText:@"입금/지출 통계"];
     
     NSDate * today          = [NSDate date];
-    NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDate:1 beforeThisDate:today];
+    NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
     [self updateSelectedDates:dateAmonthAgo toDate:today];
     
     [self loadData];
@@ -124,7 +124,7 @@
     
     for (ChartItemData * item in _dataSource) {
         
-        if ([item.itemType isEqualToString:INCOME]) {
+        if ([item.itemType isEqualToString:TRANS_TYPE_INCOME]) {
             [_incomeMutableArr addObject:item];
         } else {
             [_expenseMutableArr addObject:item];
@@ -180,7 +180,7 @@
                                                                                        transactionDate:[NSDate date]
                                                                               transactionAccountNumber:@"111-22-***33"
                                                                                     transactionDetails:@"당풍니"
-                                                                                       transactionType:INCOME
+                                                                                       transactionType:TRANS_TYPE_INCOME
                                                                                      transactionAmount:[NSNumber numberWithFloat:100000.0f]
                                                                                     transactionBalance:[NSNumber numberWithFloat:200000.0f]
                                                                                        transactionMemo:@""

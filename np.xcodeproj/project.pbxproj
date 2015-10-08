@@ -378,6 +378,8 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
+		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
 		A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */; settings = {ASSET_TAGS = (); }; };
 		A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E11DFF1BC3C2F70009B5AC /* StorageBoxDateSearchView.m */; settings = {ASSET_TAGS = (); }; };
@@ -897,6 +899,9 @@
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A5DA32351BC61160008DE464 /* CustomizedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedPickerViewController.h; sourceTree = "<group>"; };
+		A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedPickerViewController.m; sourceTree = "<group>"; };
+		A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomizedPickerViewController.xib; sourceTree = "<group>"; };
 		A5DD8BB41BC348FF002FEE79 /* UIButton+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+BackgroundColor.h"; path = "StorageBox/View/UIButton+BackgroundColor.h"; sourceTree = "<group>"; };
 		A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+BackgroundColor.m"; path = "StorageBox/View/UIButton+BackgroundColor.m"; sourceTree = "<group>"; };
 		A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StorageBoxDateSearchView.xib; path = StorageBox/View/StorageBoxDateSearchView.xib; sourceTree = "<group>"; };
@@ -2045,6 +2050,9 @@
 				A5ED26551BA943C0007E6689 /* StatisticDateSearchView.h */,
 				A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */,
 				A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */,
+				A5DA32351BC61160008DE464 /* CustomizedPickerViewController.h */,
+				A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */,
+				A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */,
 				17745DE11BB96355003609C7 /* CustomizedDatePickerViewController.h */,
 				17745DE21BB96355003609C7 /* CustomizedDatePickerViewController.m */,
 				17745DE31BB96355003609C7 /* CustomizedDatePickerViewController.xib */,
@@ -2364,6 +2372,7 @@
 				A2DFDD911BB3742C00DC1A78 /* NotiSettingMenuViewController.xib in Resources */,
 				A2D95B5D1BA8F1DD00DC943D /* nf_ios_icon_shift.png in Resources */,
 				A2D791241BBCB94500E817E7 /* icon_depth_01@2x.png in Resources */,
+				A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */,
 				A2D95B961BA8F1DD00DC943D /* nf_ios_toolbar@3x.png in Resources */,
 				A2E235471BAAACAF00BAEBEA /* HomeQuickViewController.xib in Resources */,
 				A2D95B691BA8F1DD00DC943D /* nf_ios_bg@2x.png in Resources */,
@@ -2532,6 +2541,7 @@
 				A2DFDD901BB3742C00DC1A78 /* NotiSettingMenuViewController.m in Sources */,
 				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,
 				A2DEAE5E1B9FE6D800EDCCBA /* MASConstraintMaker.m in Sources */,
+				A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */,
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,

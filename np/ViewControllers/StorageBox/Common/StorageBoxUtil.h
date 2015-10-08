@@ -35,10 +35,9 @@
 
 #pragma mark - Date Search
 - (StorageBoxDateSearchView *)hasStorageDateSearchViewInParentView:(UIView *)parentView;
-
-- (void)addStorageDateSearchViewToParent:(UIView *)parentView
-                moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                       moveTableviewDown:(UIView *)tableview;
+- (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
+                                      moveTopViewSeperatorDown:(UILabel *)topViewSeperator
+                                             moveTableviewDown:(UIView *)tableview;
 
 - (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
                          moveTopViewSeperatorBack:(UILabel *)topViewSeperator

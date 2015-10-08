@@ -46,7 +46,7 @@
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],
                          [self.transactionObject transactionDetails],
-                         [[self.transactionObject transactionType] isEqualToString:INCOME] ? @"입금" : @"출금",
+                         [self.transactionObject transactionType],
                          [self.transactionObject formattedTransactionAmount]];
     [_snsContent setText:content];
 }

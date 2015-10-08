@@ -87,6 +87,36 @@
 
 
 - (NSArray *)selectAllTransactions { // array of TransactionObject
+    NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions";
+    return [self selectAllTransactionsWithQuery:selectSQL];
+}
+
+- (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate
+                                 accountNo:(NSString *)accountNo transType:(NSString *)transType memo:(NSString *)memo {
+    
+    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions WHERE (trans_date BETWEEN \"%@\" AND \"%@\")", startDate, endDate];
+    
+    if (accountNo) {
+        selectSQL = [NSString stringWithFormat:@"%@ AND (trans_account = \"%@\")", selectSQL, accountNo];
+    }
+    
+    if (transType) {
+        selectSQL = [NSString stringWithFormat:@"%@ AND (trans_type = \"%@\")", selectSQL, transType];
+    }
+    
+    if (memo) {
+        selectSQL = [NSString stringWithFormat:@"%@ AND (trans_memo LIKE \"%%%@%%\")", selectSQL, memo];
+    }
+    return [self selectAllTransactionsWithQuery:selectSQL];
+}
+
+
+- (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate { // array of TransactionObject
+    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions WHERE trans_date BETWEEN \"%@\" AND \"%@\"", startDate, endDate];
+    return [self selectAllTransactionsWithQuery:selectSQL];
+}
+
+- (NSArray *)selectAllTransactionsWithQuery:(NSString *)query { // array of TransactionObject
     
     NSMutableArray * transactions = [[NSMutableArray alloc] init];
     
@@ -95,9 +125,7 @@
     BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     if (openDB == SQLITE_OK) {
         
-        NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions";
-        
-        if (sqlite3_prepare(_nhTransactionDB, [selectSQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_prepare(_nhTransactionDB, [query UTF8String], -1, &statement, NULL) == SQLITE_OK) {
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 

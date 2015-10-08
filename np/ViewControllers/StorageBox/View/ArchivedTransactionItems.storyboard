@@ -26,7 +26,7 @@
                                     <color key="titleColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="sortByDate" destination="YzV-4h-Hki" eventType="touchUpInside" id="P8E-C5-EUJ"/>
+                                    <action selector="clickSortByDate" destination="YzV-4h-Hki" eventType="touchUpInside" id="7Sa-lB-8Ob"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ULJ-5x-iue">

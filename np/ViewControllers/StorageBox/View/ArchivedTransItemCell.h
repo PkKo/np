@@ -38,4 +38,5 @@
 @property (weak, nonatomic) IBOutlet UITextField    * editTextField;
 - (IBAction)saveNewMemo;
 - (IBAction)validateEditingText:(UITextField *)sender;
+- (void)updateMemoTextBorder;
 @end

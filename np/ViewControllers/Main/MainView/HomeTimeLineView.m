@@ -351,7 +351,7 @@
                                                                                        transactionDate:[NSDate date]
                                                                               transactionAccountNumber:@"111-22-***33"
                                                                                     transactionDetails:@"당풍니"
-                                                                                       transactionType:INCOME
+                                                                                       transactionType:TRANS_TYPE_INCOME
                                                                                      transactionAmount:[NSNumber numberWithFloat:100000.0f]
                                                                                     transactionBalance:[NSNumber numberWithFloat:200000.0f]
                                                                                        transactionMemo:@""

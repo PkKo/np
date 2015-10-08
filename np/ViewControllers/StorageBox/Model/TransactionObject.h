@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSString * transactionId;
 @property (nonatomic, copy) NSDate * transactionDate;
 @property (nonatomic, copy) NSString * transactionAccountNumber;
+@property (nonatomic, copy) NSString * transactionAccountType;
 @property (nonatomic, copy) NSString * transactionDetails;
 @property (nonatomic, copy) NSString * transactionType;
 @property (nonatomic, copy) NSNumber * transactionAmount;

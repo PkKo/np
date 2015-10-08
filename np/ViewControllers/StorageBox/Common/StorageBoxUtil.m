@@ -18,12 +18,13 @@
 }
 
 #pragma mark - Date Search
-- (void)addStorageDateSearchViewToParent:(UIView *)parentView
-                moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                       moveTableviewDown:(UIView *)tableview {
+- (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
+                                      moveTopViewSeperatorDown:(UILabel *)topViewSeperator
+                                             moveTableviewDown:(UIView *)tableview {
     
-    if ([self hasStorageDateSearchViewInParentView:parentView]) {
-        return;
+    StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
+    if (dateSearchView) {
+        return dateSearchView;
     }
     
     if ([self hasSelectAllViewInParentView:parentView]) {
@@ -33,7 +34,7 @@
     
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView"
                                                      owner:self options:nil];
-    StorageBoxDateSearchView * dateSearchView = (StorageBoxDateSearchView *)[nibArr objectAtIndex:0];
+    dateSearchView = (StorageBoxDateSearchView *)[nibArr objectAtIndex:0];
     [dateSearchView setCenter:CGPointMake(parentView.center.x, dateSearchView.center.y)];
     
     CGRect dateSearchViewFrame      = dateSearchView.frame;
@@ -50,7 +51,9 @@
     [tableview setFrame:tableviewFrame];
     
     [parentView addSubview:dateSearchView];
+    [dateSearchView updateUI];
     
+    return dateSearchView;
 }
 
 - (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView

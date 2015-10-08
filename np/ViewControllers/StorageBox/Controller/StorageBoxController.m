@@ -16,7 +16,7 @@
 
 @implementation StorageBoxController
 
-- (NSArray *)getArchivedItems { // array of TransactionObject
+- (NSArray *)getAllTransactions { // array of TransactionObject
     
 #if USE_SQLITE
     return [[DBManager sharedInstance] selectAllTransactions];
@@ -28,30 +28,30 @@
     
     //2015/9/29
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:29 hour:11 minute:20]
-                                                                     transactionAccountNumber:@"111-2343-11**-**"
+                                                                     transactionAccountNumber:@"111-33-3433"
                                                                            transactionDetails:@"당풍니"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:29 hour:7 minute:40]
-                                                                     transactionAccountNumber:@"221-2343-11**-**"
+                                                                     transactionAccountNumber:@"333-66-2343"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:29 hour:8 minute:30]
-                                                                     transactionAccountNumber:@"131-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@30000
                                                                            transactionBalance:@3000000
                                                                               transactionMemo:@"이정호가 입금해준 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:29 hour:10 minute:10]
-                                                                     transactionAccountNumber:@"141-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"홍지연"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@40000
                                                                            transactionBalance:@1500000
                                                                               transactionMemo:@"홍지연가 입금해준 돈"]];
@@ -59,92 +59,92 @@
     
     //2015/9/27
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:27 hour:11 minute:20]
-                                                                     transactionAccountNumber:@"811-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"권기현"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 입금해준 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:27 hour:7 minute:40]
-                                                                     transactionAccountNumber:@"221-2343-11**-**"
+                                                                     transactionAccountNumber:@"333-66-2343"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];
     
     //2015/9/26
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:26 hour:11 minute:20]
-                                                                     transactionAccountNumber:@"711-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"최은선"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 입금해준 돈"]];
     
     //2015/9/24
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:24 hour:11 minute:20]
-                                                                     transactionAccountNumber:@"111-2343-11**-**"
+                                                                     transactionAccountNumber:@"111-33-3433"
                                                                            transactionDetails:@"당풍니"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:24 hour:7 minute:40]
-                                                                     transactionAccountNumber:@"221-2343-11**-**"
+                                                                     transactionAccountNumber:@"333-66-2343"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:24 hour:8 minute:30]
-                                                                     transactionAccountNumber:@"131-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@30000
                                                                            transactionBalance:@3000000
                                                                               transactionMemo:@"이정호가 입금해준 돈"]];
     
     //2015/9/21
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:11 minute:20]
-                                                                     transactionAccountNumber:@"111-2343-11**-**"
+                                                                     transactionAccountNumber:@"111-33-3433"
                                                                            transactionDetails:@"당풍니"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:7 minute:40]
-                                                                     transactionAccountNumber:@"221-2343-11**-**"
+                                                                     transactionAccountNumber:@"333-66-2343"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:8 minute:30]
-                                                                     transactionAccountNumber:@"131-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@30000
                                                                            transactionBalance:@3000000
                                                                               transactionMemo:@"이정호가 입금해준 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:12 minute:20]
-                                                                     transactionAccountNumber:@"111-2343-11**-**"
+                                                                     transactionAccountNumber:@"111-33-3433"
                                                                            transactionDetails:@"당풍니"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@50000
                                                                            transactionBalance:@1000000
                                                                               transactionMemo:@"당풍니가 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:8 minute:40]
-                                                                     transactionAccountNumber:@"221-2343-11**-**"
+                                                                     transactionAccountNumber:@"333-66-2343"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:EXPENSE
+                                                                              transactionType:TRANS_TYPE_EXPENSE
                                                                             transactionAmount:@10000
                                                                            transactionBalance:@2000000
                                                                               transactionMemo:@"매드포라릭에서 쓴 돈"]];
     [mutableArr addObject:[[TransactionObject alloc] initTransactionObjectWithTransactionDate:[self createDateWithYear:2015 month:9 day:21 hour:2 minute:30]
-                                                                     transactionAccountNumber:@"131-2343-11**-**"
+                                                                     transactionAccountNumber:@"442-83-3535"
                                                                            transactionDetails:@"이정호"
-                                                                              transactionType:INCOME
+                                                                              transactionType:TRANS_TYPE_INCOME
                                                                             transactionAmount:@30000
                                                                            transactionBalance:@3000000
                                                                               transactionMemo:@"이정호가 입금해준 돈"]];
@@ -183,6 +183,10 @@
     [newDateComponents setMinute:minute];
     
     return [calendar dateFromComponents:newDateComponents];
+}
+
+- (NSArray *)getAllAccounts {
+    return @[TRANS_ALL_ACCOUNT, @"111-33-3433", @"333-66-2343", @"442-83-3535"];
 }
 
 @end

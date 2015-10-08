@@ -24,15 +24,12 @@
 }
 - (IBAction)saveNewMemo {
     
-    [self updateMemoTextBorder];
-    
     [self.editTextField resignFirstResponder];
     
     [self.editView setHidden:YES];
     [self.transacMemo setText:self.editTextField.text];
     
     [self.delegate updateMemo:self.transacMemo.text ofItemSection:self.section row:self.row];
-    
 }
 
 - (void)updateMemoTextBorder {
