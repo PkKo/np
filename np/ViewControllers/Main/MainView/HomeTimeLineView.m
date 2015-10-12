@@ -26,6 +26,13 @@
 @synthesize mTimeLineDic;
 @synthesize mTimeLineTable;
 
+@synthesize deleteAllView;
+@synthesize deleteAllImg;
+@synthesize deleteAllLabel;
+@synthesize deleteButtonView;
+
+@synthesize searchView;
+
 - (id)init
 {
     self = [super init];
@@ -34,6 +41,7 @@
     {
         mTimeLineSection = [[NSMutableArray alloc] init];
         mTimeLineDic = [[NSMutableDictionary alloc] init];
+        deleteIdList = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -43,6 +51,7 @@
 {
     mTimeLineSection = section;
     mTimeLineDic = data;
+    deleteIdList = [[NSMutableArray alloc] init];
     
     [self addPullToRefreshHeader];
 }
@@ -65,10 +74,105 @@
     [mTimeLineTable reloadData];
 }
 
-- (IBAction)searchViewShow:(id)sender {
+- (IBAction)searchViewShow:(id)sender
+{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [searchView setHidden:NO];
+        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
+    }completion:nil];
 }
 
-- (IBAction)deleteMode:(id)sender {
+- (IBAction)deleteMode:(id)sender
+{
+    isDeleteMode = YES;
+    
+    [deleteAllView setHidden:NO];
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setHidden:NO];
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height - deleteButtonView.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }completion:nil];
+    
+    [mTimeLineTable reloadData];
+}
+
+- (IBAction)deleteSelectAll:(id)sender
+{
+    if([deleteAllImg isHighlighted])
+    {
+        // 전체선택 해제
+        if([deleteIdList count] > 0)
+        {
+            [deleteIdList removeAllObjects];
+        }
+        
+        [deleteAllImg setHighlighted:NO];
+        [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 전체선택 모드
+        if([mTimeLineSection count] > 0)
+        {
+            // 리스트가 있는 경우에만 진행한다
+            if([deleteIdList count] > 0)
+            {
+                [deleteIdList removeAllObjects];
+            }
+            
+            /*
+            for(NSString *key in mTimeLineSection)
+            {
+                NSArray *list = [mTimeLineDic objectForKey:key];
+                for (NSDictionary *item in list)
+                {
+                    [deleteIdList addObject:[item objectForKey:@"pushId"]];
+                }
+            }*/
+            
+            [deleteAllImg setHighlighted:YES];
+            [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
+        }
+    }
+}
+
+- (IBAction)deleteSelectedList:(id)sender
+{
+    // deleteIdList로 삭제를 진행한다.
+}
+
+- (IBAction)deleteViewHide:(id)sender
+{
+    // 삭제모드 해제
+    isDeleteMode = NO;
+    if([deleteIdList count] > 0)
+    {
+        [deleteIdList removeAllObjects];
+    }
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    [deleteAllView setHidden:YES];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [deleteButtonView setHidden:YES];
+    }];
+    
+    [mTimeLineTable reloadData];
+}
+
+- (IBAction)searchViewHide:(id)sender
+{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height, self.frame.size.width, searchView.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [searchView setHidden:YES];
+                     }];
 }
 
 - (void)addPullToRefreshHeader
@@ -209,6 +313,28 @@
     
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
+    if(isDeleteMode)
+    {
+        // 삭제 버튼으로 바꿔줌
+        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_dft.png"] forState:UIControlStateNormal];
+        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_sel.png"] forState:UIControlStateSelected];
+    }
+    else
+    {
+        // 기존 스티커 버튼
+        if(indexPath.row % 2 == 0)
+        {
+            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_01.png"] forState:UIControlStateNormal];
+            [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+        }
+        else
+        {
+            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_02.png"] forState:UIControlStateNormal];
+            [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+        }
+    }
+    
+    
     // 푸시 시간
     [cell.timeLabel setText:@"09:05"];
     // 거래명
@@ -326,6 +452,32 @@
 }
 
 #pragma mark - CellButtonClickEvent
+- (void)stickerButtonClick:(id)sender
+{
+    IndexPathButton *currentBtn = (IndexPathButton *)sender;
+    NSIndexPath *indexPath = currentBtn.indexPath;
+    
+    if(isDeleteMode)
+    {
+        NSString *pushId = [[[mTimeLineDic objectForKey:[mTimeLineSection objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row] objectForKey:@"pushId"];
+        
+        if([currentBtn isSelected])
+        {
+            if([deleteIdList containsObject:pushId])
+            {
+                [deleteIdList removeObject:pushId];
+            }
+        }
+        else
+        {
+            if(![deleteIdList containsObject:pushId])
+            {
+                [deleteIdList addObject:pushId];
+            }
+        }
+        [currentBtn setSelected:![currentBtn isSelected]];
+    }
+}
 - (void)pinButtonClick:(id)sender
 {
     IndexPathButton *currentBtn = (IndexPathButton *)sender;

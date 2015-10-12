@@ -7,6 +7,7 @@
 //
 
 #import "RegisterAccountViewController.h"
+#import "RegistCompleteViewController.h"
 
 @interface RegisterAccountViewController ()
 
@@ -39,4 +40,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)nextButtonClick:(id)sender
+{
+    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

@@ -36,6 +36,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)passwordCheck
+{
+    int rc = 0;
+    rc = [[CertManager sharedInstance] p12ImportWithUrl:p12Url password:mPassInputText.text];
+    
+    if (rc == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"완료" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+        [alert show];
+        
+        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:([[self.navigationController viewControllers] count] - 3)] animated:YES];
+    }
+    else if (rc == 100)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버와의 통신에 문제가 발생했습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+    else if (rc == 200)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -43,6 +71,7 @@
     [self showNFilterKeypad];
 }
 
+#pragma mark - NFilter
 - (void)showNFilterKeypad
 {
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
@@ -80,38 +109,17 @@
     
     [mPassInputText setText:plainText];
     
-    int rc = 0;
-    rc = [[CertManager sharedInstance] p12ImportWithUrl:p12Url password:plainText];
-    
-    if (rc == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"완료" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
-        [alert show];
-    }
-    else if (rc == 100)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버와의 통신에 문제가 발생했습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert show];
-    }
-    else if (rc == 200)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert show];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
+    [self passwordCheck];
 }
 
-- (void)onPasswordCancelNFilter:(NSString *)pPlainText encText:(NSString *)pEncText dummyText:(NSString *)pDummyText tagName:(NSString *)pTagName
-{
-    
-}
-
+#pragma mark - UIButtonAction
 - (IBAction)passInputButtonClick:(id)sender
 {
-    
+#ifdef DEV_MODE
+    NSLog(@"%s, viewController count = %lu", __FUNCTION__, [[self.navigationController viewControllers] count]);
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:([[self.navigationController viewControllers] count] - 3)] animated:YES];
+#else
+    [self passwordCheck];
+#endif
 }
 @end

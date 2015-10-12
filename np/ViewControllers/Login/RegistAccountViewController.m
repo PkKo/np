@@ -89,6 +89,7 @@
         [menuView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         [[menuView getCertFromPCBtn] addTarget:self action:@selector(moveToGetCertFromPcView) forControlEvents:UIControlEventTouchUpInside];
         [contentView addSubview:menuView];
+        isCertRoaming = YES;
     }
     
     // 1-4. 공인인증서로 가입 진행
@@ -214,7 +215,9 @@
 
 - (void)moveToCertListView
 {
+    isCertRoaming = NO;
     RegistCertListView *certListView = [RegistCertListView view];
+    [certListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [certListView initCertList];
     [certListView setViewDelegate:self];
     [contentView addSubview:certListView];
@@ -242,17 +245,17 @@
         NSString *strTbs = @"abc"; //서명할 원문
         [[CertManager sharedInstance] setTbs:strTbs];
         // 전자서명 API 호출
-        NSString *sig = [[CertManager sharedInstance] getSignature];
+//        NSString *sig = [[[CertManager sharedInstance] getSignature] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *sig = [[CertManager sharedInstance] getSignature];
+        NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
         NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, @"PMCNA100R.cmd"];
         
         NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
         [requestBody setObject:strTbs forKey:@"SSLSIGN_TBS_DATA"];
         [requestBody setObject:sig forKey:@"SSLSIGN_SIGNATURE"];
-#ifdef DEV_MODE
         [requestBody setObject:@"1" forKey:@"REQ_LOGINTYPE"];
 //        [requestBody setObject:@"Y" forKey:@"dummyYn"];
-#endif
         /*
         NSString *tbs = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_TBS_DATA", strTbs];
         NSString *sigStr = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_SIGNATURE", sig];
@@ -451,7 +454,14 @@
     
     if(![certSelectBtn isEnabled])
     {
-        [self certInfoRequest:plainText];
+        if(isCertRoaming)
+        {
+            [self passwordCheck];
+        }
+        else
+        {
+            [self certInfoRequest:plainText];
+        }
     }
     
     self.currentTextField = nil;

@@ -7,6 +7,7 @@
 //
 
 #import "RegisterTermsViewController.h"
+#import "RegisterAccountViewController.h"
 
 @interface RegisterTermsViewController ()
 
@@ -34,5 +35,7 @@
     // 약관동의 여부 체크
     
     // 계좌번호 등록 뷰 컨트롤러로 이동
+    RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
