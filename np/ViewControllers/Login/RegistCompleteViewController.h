@@ -8,6 +8,10 @@
 
 #import "CommonViewController.h"
 
-@interface RegistCompleteViewController : CommonViewController
+@interface RegistCompleteViewController : CommonViewController<UIAlertViewDelegate>
 
+- (IBAction)quickViewSettingClick:(id)sender;
+- (IBAction)currentNotiSettingClick:(id)sender;
+- (IBAction)addAccountClick:(id)sender;
+- (IBAction)moveMainPage:(id)sender;
 @end

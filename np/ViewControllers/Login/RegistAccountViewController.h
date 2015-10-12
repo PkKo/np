@@ -10,6 +10,9 @@
 #import "CertInfo.h"
 
 @interface RegistAccountViewController : CommonViewController<UIAlertViewDelegate, UITextFieldDelegate>
+{
+    BOOL isCertRoaming;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) NSMutableArray *certControllArray;

@@ -18,4 +18,5 @@
 + (CGSize)getStringFrameSize:(NSString *)string fontSize:(CGFloat)fontSize bold:(BOOL)isBold;
 + (void)runSpinAnimationWithDuration:(UIView *)view duration:(CGFloat)duration;
 + (void)stopSpinAnimation:(UIView *)view;
++ (NSString *)getURLEncodedString:(NSString *)unencodeString;
 @end

@@ -69,6 +69,10 @@
  */
 - (IBAction)nextViewClick:(id)sender
 {
+#ifdef DEV_MODE
+    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+#else
     // 휴대폰 번호 입력 체크
     if([[phoneNumberInput text] length] == 0)
     {
@@ -105,6 +109,7 @@
     
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+#endif
 }
 
 #pragma mark - Network Connect

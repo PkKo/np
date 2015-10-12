@@ -31,11 +31,6 @@
 {
     [super viewWillAppear:animated];
     
-    if(self.slidingViewController == nil)
-    {
-        NSLog(@"%s. slidingView nil", __FUNCTION__);
-    }
-    
     if(![self.slidingViewController.underRightViewController isKindOfClass:[MenuViewController class]])
     {
         self.slidingViewController.underRightViewController = [[MenuViewController alloc] init];

@@ -131,4 +131,11 @@
 {
     [view.layer removeAnimationForKey:@"SpinAnimation"];
 }
+
++ (NSString *)getURLEncodedString:(NSString *)unencodeString
+{
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)unencodeString, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+    
+    return encodedString;
+}
 @end

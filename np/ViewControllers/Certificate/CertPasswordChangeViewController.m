@@ -26,6 +26,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    if(certInfo != nil)
+    {
+        [[CertManager sharedInstance] setCertInfo:certInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning

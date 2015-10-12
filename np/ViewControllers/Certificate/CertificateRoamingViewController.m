@@ -66,6 +66,10 @@
 {
     // 농협 스마트뱅킹 리얼 주소
     int rc = [[CertManager sharedInstance] verifyP12Uploaded:@"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"];
+
+#ifdef DEV_MODE
+    rc = 0;
+#endif
     
     if (rc == 0)
     {
@@ -94,10 +98,12 @@
 {
     if (alertView.tag == 9999)
     {
+        ECSlidingViewController *eVc = [[ECSlidingViewController alloc] init];
         CertificateRoamingPassViewController *viewController = [[CertificateRoamingPassViewController alloc] init];
         // 농협 스마트뱅킹 리얼 주소
         viewController.p12Url = [NSString stringWithFormat:@"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"];
-        [self.navigationController pushViewController:viewController animated:YES];
+        eVc.topViewController = viewController;
+        [self.navigationController pushViewController:eVc animated:YES];
     }
 }
 @end

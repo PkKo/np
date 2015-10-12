@@ -10,4 +10,5 @@
 
 @interface RegisterAccountViewController : CommonViewController
 
+- (IBAction)nextButtonClick:(id)sender;
 @end
