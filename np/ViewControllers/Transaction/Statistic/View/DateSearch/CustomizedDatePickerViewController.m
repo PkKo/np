@@ -46,7 +46,6 @@
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
-    
 }
 
 - (IBAction)chooseDate:(id)sender {

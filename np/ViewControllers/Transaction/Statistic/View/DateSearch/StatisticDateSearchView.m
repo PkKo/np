@@ -46,7 +46,7 @@
     
     NSDateComponents * dateOf6MonthsAgoComponents = [[NSCalendar currentCalendar] components:
                                          NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
-                                                                        fromDate:[StatisticMainUtil getExactDate:LATEST_MAX_MONTH beforeThisDate:currentDate]];
+                                                                        fromDate:[StatisticMainUtil getExactDateOfMonthsAgo:LATEST_MAX_MONTH beforeThisDate:currentDate]];
     _lastLatestMaxMonthYear     = [dateOf6MonthsAgoComponents year];
     _lastLatestMaxMonthMonth    = [dateOf6MonthsAgoComponents month];
     _lastLatestMaxMonthDay      = [dateOf6MonthsAgoComponents day];

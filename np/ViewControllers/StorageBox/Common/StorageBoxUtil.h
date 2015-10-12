@@ -10,13 +10,17 @@
 #import "TransactionObject.h"
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
+#import "StorageBoxDateSearchView.h"
 
 @interface StorageBoxUtil : NSObject
 
+#pragma mark - Memo Composer & SNS
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 - (void)showSNSShareInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 
+#pragma mark - Select items to remove
 - (ArchivedTransItemRemoveAllSelectView *)hasSelectAllViewInParentView:(UIView *)parentView;
+
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
              moveTopViewSeperatorDown:(UILabel *)topViewSeperator
                     moveTableviewDown:(UIView *)tableview
@@ -28,6 +32,17 @@
 - (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
                       moveTopViewSeperatorBack:(UILabel *)topViewSeperator
                              moveTableviewBack:(UIView *)tableview;
+
+#pragma mark - Date Search
+- (StorageBoxDateSearchView *)hasStorageDateSearchViewInParentView:(UIView *)parentView;
+- (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
+                                      moveTopViewSeperatorDown:(UILabel *)topViewSeperator
+                                             moveTableviewDown:(UIView *)tableview;
+
+- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
+                         moveTopViewSeperatorBack:(UILabel *)topViewSeperator
+                                moveTableviewBack:(UIView *)tableview;
+
 
 + (UIColor *)getDimmedBackgroundColor;
 

@@ -16,6 +16,7 @@
     self = [super init];
     
     if (self != nil) {
+        self.transactionActivePin       = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
         self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
     }
     
@@ -29,7 +30,8 @@
                                        transactionType:(NSString *)transactionType
                                      transactionAmount:(NSNumber *)transactionAmount
                                     transactionBalance:(NSNumber *)transactionBalance
-                                       transactionMemo:(NSString *)transactionMemo {
+                                       transactionMemo:(NSString *)transactionMemo
+                                  transactionActivePin:(NSNumber *)transactionActivePin {
     self = [super init];
     if (self != nil) {
         self.transactionId              = transactionId;
@@ -40,6 +42,7 @@
         self.transactionAmount          = transactionAmount;
         self.transactionBalance         = transactionBalance;
         self.transactionMemo            = transactionMemo;
+        self.transactionActivePin       = transactionActivePin;
         self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
     }
     return self;
@@ -61,6 +64,7 @@
         self.transactionAmount          = transactionAmount;
         self.transactionBalance         = transactionBalance;
         self.transactionMemo            = transactionMemo;
+        self.transactionActivePin       = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
         self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
     }
     return self;

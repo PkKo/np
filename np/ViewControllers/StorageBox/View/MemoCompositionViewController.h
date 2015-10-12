@@ -12,9 +12,11 @@
 
 @interface MemoCompositionViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
-@property (nonatomic, strong) TransactionObject *transactionObject;
-@property (weak, nonatomic) IBOutlet UIView *snsView;
-@property (weak, nonatomic) IBOutlet UITextField *memo;
+@property (nonatomic, strong) TransactionObject     * transactionObject;
+@property (weak, nonatomic) IBOutlet UIView         * snsView;
+@property (weak, nonatomic) IBOutlet UITextField    * memo;
+@property (weak, nonatomic) IBOutlet UITextField    * fakeMemo;
+@property (weak, nonatomic) IBOutlet UIButton       * cancelBtn;
 
 - (IBAction)removeComposer;
 - (IBAction)saveToStorageBox;

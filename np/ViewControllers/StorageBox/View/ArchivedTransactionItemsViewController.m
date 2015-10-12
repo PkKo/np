@@ -17,7 +17,7 @@
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
 #import "DBManager.h"
-#import "StorageBoxDateSearchView.h"
+#import "CustomizedPickerViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -31,15 +31,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self refreshData];
-    // create table & insert dummy data.
-    /*
-    [[DBManager sharedInstance] deleteAllTransactions];
-    
     StorageBoxController * controller = [[StorageBoxController alloc] init];
-    NSArray * arr = [controller getArchivedItems];
+    [self refreshData:[controller getAllTransactions] sortByAscending:NO];
+    
+    /*
+    // create table & insert dummy data.
+    [[DBManager sharedInstance] deleteAllTransactions];
+    NSArray * arr = [controller getAllTransactions];
     for (TransactionObject * tranObj in arr) {
-        tranObj.transactionId = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
+        tranObj.transactionId           = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
+        tranObj.transactionActivePin    = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
         
         [[DBManager sharedInstance] saveTransaction:tranObj];
     }
@@ -52,12 +53,26 @@
 }
 
 #pragma mark - top controller
-- (IBAction)sortByDate {
-    NSLog(@"%s", __func__);
+- (IBAction)clickSortByDate {
+    
+    StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
+    [util showDataPickerInParentViewController:self dataSource:@[TIME_DECSENDING_ORDER, TIME_ACSENDING_ORDER]
+                                  selectAction:@selector(sortByOrder:)
+                                     selectRow:[self.sortByDateBtn titleForState:UIControlStateNormal]];
 }
 
+-(void)sortByOrder:(NSString *)order {
+    
+    if (![[self.sortByDateBtn titleForState:UIControlStateNormal] isEqualToString:order]) {
+        
+        [self.sortByDateBtn setTitle:order forState:UIControlStateNormal];
+        [self sortDataByAscending:[order isEqualToString:TIME_ACSENDING_ORDER] ? YES : NO];
+        [self.tableview reloadData];
+    }
+}
+
+#pragma mark - select to remove
 - (IBAction)toggleRemovalView:(id)sender {
-    NSLog(@"%s", __func__);
     
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     
@@ -71,11 +86,10 @@
                                 removeSelectedItemsAction:@selector(removeSelectedItems)
                             closeSelectToRemoveViewAction:@selector(closeSelectToRemoveView)];
         
+        [self.tableview reloadData];
     } else {
-        [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                          moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+        [self closeSelectToRemoveView];
     }
-    [self.tableview reloadData];
 }
 
 - (void)removeSelectedItems {
@@ -99,7 +113,10 @@
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 메시지를 선택해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
     } else {
-        [self refreshData];
+        
+        StorageBoxController * controller = [[StorageBoxController alloc] init];
+        [self refreshData:[controller getAllTransactions] sortByAscending:NO];
+        
         [self.tableview reloadData];
     }
 }
@@ -107,7 +124,9 @@
 - (void)closeSelectToRemoveView {
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                      moveTopViewSeperatorBack:self.topViewSeperator moveTableviewBack:self.tableview];
+                                      moveTopViewSeperatorBack:self.topViewSeperator
+                                             moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+    [self selectAllItems:[NSNumber numberWithBool:NO]];
 }
 
 - (void)selectAllItems:(id)sender {
@@ -118,30 +137,130 @@
         NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
         
         for (TransactionObject * transacObj in sectionItems) {
-            [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
+            if ([[transacObj transactionActivePin] boolValue]) {
+                [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
+            }
         }
     }
     [self.tableview reloadData];
 }
 
+#pragma mark - search view
 - (IBAction)toggleSearchView {
-    NSLog(@"%s", __func__);
-    /*
-    NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView" owner:self options:nil];
-    StorageBoxDateSearchView * dateSearchView = [nibArr objectAtIndex:0];
-    CGRect dateSearchViewFrame = dateSearchView.frame;
-    [self.view addSubview:dateSearchView];
-    */
+    
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    
+    if (![dateSearchUtil hasStorageDateSearchViewInParentView:self.view]) {
+        
+        if ([dateSearchUtil hasSelectAllViewInParentView:self.view]) {
+            [self selectAllItems:[NSNumber numberWithBool:NO]];
+        }
+        
+        StorageBoxDateSearchView * dateSearch = [dateSearchUtil addStorageDateSearchViewToParent:self.view
+                                                                        moveTopViewSeperatorDown:self.topViewSeperator
+                                                                               moveTableviewDown:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+        dateSearch.delegate                 = self;
+        dateSearch.memoTextField.delegate   = self;
+        
+    } else {
+        [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view
+                                             moveTopViewSeperatorBack:self.topViewSeperator
+                                                    moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+    }
+}
+
+- (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue {
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    
+    StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
+    [util showDataPickerInParentViewController:self dataSource:[controller getAllAccounts]
+                                  selectAction:@selector(updateAccount:)
+                                     selectRow:sltedValue];
+}
+
+- (void)updateAccount:(NSString *)account {
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    StorageBoxDateSearchView * dateSearch = [dateSearchUtil hasStorageDateSearchViewInParentView:self.view];
+    [dateSearch updateSelectedAccount:account];
+}
+
+- (void)showDataPickerToSelectTransTypeWithSelectedValue:(NSString *)sltedValue {
+    
+    StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
+    [util showDataPickerInParentViewController:self dataSource:@[TRANS_TYPE_GENERAL, TRANS_TYPE_INCOME, TRANS_TYPE_EXPENSE]
+                                  selectAction:@selector(updateTransType:)
+                                     selectRow:sltedValue];
+}
+
+- (void)updateTransType:(NSString *)type {
+    StorageBoxUtil * dateSearchUtil = [[StorageBoxUtil alloc] init];
+    StorageBoxDateSearchView * dateSearch = [dateSearchUtil hasStorageDateSearchViewInParentView:self.view];
+    [dateSearch updateSelectedTransType:type];
+}
+
+#pragma mark - date picker
+- (void)showDatePickerForStartDate {
+    
+    StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
+    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil inParentViewController:self
+                                   doneAction:@selector(chooseStartDate:)];
+}
+
+- (void)showDatePickerForEndDate {
+    
+    StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
+    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil inParentViewController:self
+                                   doneAction:@selector(chooseEndDate:)];
+}
+
+- (void)chooseStartDate:(id)sender {
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    StorageBoxDateSearchView * dateSearch = [dateSearchUtil hasStorageDateSearchViewInParentView:self.view];
+    [dateSearch updateStartDate:(NSDate *)sender];
+}
+
+- (void)chooseEndDate:(id)sender {
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    StorageBoxDateSearchView * dateSearch = [dateSearchUtil hasStorageDateSearchViewInParentView:self.view];
+    [dateSearch updateEndDate:(NSDate *)sender];
+}
+
+#pragma mark - search
+- (void)searchTransFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate account:(NSString *)account
+                  transType:(NSString *)transType memo:(NSString *)memo {
+    
+    NSDateFormatter * dateFormatter = [StatisticMainUtil getDateFormatterDateStyle];
+    
+    NSString * startDate    = [dateFormatter stringFromDate:fromDate];
+    NSString * endDate      = [dateFormatter stringFromDate:toDate];
+    startDate               = [NSString stringWithFormat:@"%@ 00:00:00", startDate];
+    endDate                 = [NSString stringWithFormat:@"%@ 23:59:59", endDate];
+    
+    NSString * checkedAccountNo = [account isEqualToString:TRANS_ALL_ACCOUNT] ? nil : account;
+    NSString * checkedTransType = [transType isEqualToString:TRANS_TYPE_GENERAL] ? nil : transType;
+    NSString * checkedMemo = [memo isEqualToString:@""] ? nil : memo;
+    
+    NSArray * searchedItems = [[DBManager sharedInstance] selectByTransactionsStartDate:startDate endDate:endDate
+                                                                              accountNo:checkedAccountNo
+                                                                              transType:checkedTransType
+                                                                                   memo:checkedMemo];
+    [self refreshData:searchedItems
+      sortByAscending:[[self.sortByDateBtn titleForState:UIControlStateNormal] isEqualToString:TIME_ACSENDING_ORDER] ? YES : NO];
+    
+    [self.tableview reloadData];
 }
 
 #pragma mark - data source
-- (void)refreshData {
+- (void)refreshData:(NSArray *)dataArr sortByAscending:(BOOL)isAscending {
+    
     StorageBoxController * controller = [[StorageBoxController alloc] init];
-    _transactions = [controller getIndexDicOutOfArray:[controller getArchivedItems]];
-    [self sortDataByAscending:NO];
+    _transactions = [controller getIndexDicOutOfArray:dataArr];//[controller getArchivedItems]
+    [self sortDataByAscending:isAscending]; //NO
     
     [self.tableview setHidden:([[_transactions allKeys] count] == 0)];
     [self.noDataView setHidden:!self.tableview.hidden];
+    [self.noDataView setFrame:self.tableview.frame];
     
 }
 
@@ -204,7 +323,9 @@
         
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemCell" owner:self options:nil];
         cell            = (ArchivedTransItemCell *)[nibArr objectAtIndex:0];
-        cell.delegate   = self;
+        
+        cell.delegate               = self;
+        cell.editTextField.delegate = self;
         
         NSString        * sectionTitle = [_transactionTitles objectAtIndex:indexPath.section];
         NSMutableArray  * sectionItems = [_transactions objectForKey:sectionTitle];
@@ -215,7 +336,7 @@
         [cell setSection:indexPath.section];
         [cell setRow:indexPath.row];
         
-        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
+        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view] && [[transacObj transactionActivePin] boolValue]) {
             
             [cell.deleteBtn setHidden:NO];
             [cell.transacTypeImageView setHidden:YES];
@@ -226,16 +347,20 @@
             [cell.deleteBtn setHidden:YES];
             [cell.transacTypeImageView setHidden:NO];
             
-            [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:INCOME] ? @"icon_sticker_01" : @"icon_sticker_02"]];
+            [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:TRANS_TYPE_INCOME] ? @"icon_sticker_01" : @"icon_sticker_02"]];
         }
+        
+        [cell.pinImageView setImage:[UIImage imageNamed:[[transacObj transactionActivePin] boolValue] ? @"icon_pin_01_sel" : @"icon_pin_01_dft"]];
+        
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
-        
-        [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [[transacObj transactionType] isEqualToString:INCOME] ? @"입금" : @"출금", [transacObj formattedTransactionAmount]]];
-        [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
+        [cell.transacAccountNo setText:[NSString stringWithFormat:@"급여통장 %@", [transacObj transactionAccountNumber]]];
+        [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? @"입금" : @"출금", [transacObj formattedTransactionAmount]]];
+        [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
         
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];
+        [cell updateMemoTextBorder];
     }
     return cell;
 }
@@ -247,6 +372,51 @@
     
     TransactionObject * transacObj = [sectionItems objectAtIndex:row];
     [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isMarkedAsDeleted]];
+}
+
+-(void)updateMemo:(NSString *)memo ofItemSection:(NSInteger)section row:(NSInteger)row {
+    
+    NSString        * sectionTitle  = [_transactionTitles objectAtIndex:section];
+    NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+    
+    TransactionObject * transacObj = [sectionItems objectAtIndex:row];
+    [transacObj setTransactionMemo:memo];
+    
+    [[DBManager sharedInstance] updateTransactionMemo:memo byTransId:transacObj.transactionId];
+}
+
+#pragma mark - Keyboard
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        ArchivedTransItemCell * cell = (ArchivedTransItemCell*)textField.superview.superview.superview;
+        
+        CGPoint pointInTable    = [cell convertPoint:cell.editView.frame.origin toView:self.tableview];
+        CGPoint contentOffset   = self.tableview.contentOffset;
+        contentOffset.y         = pointInTable.y - cell.editView.frame.size.height;
+        
+        [self.tableview setContentOffset:contentOffset animated:YES];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        UITableViewCell * cell      = (UITableViewCell*)textField.superview.superview.superview;
+        NSIndexPath     * indexPath = [self.tableview indexPathForCell:cell];
+        
+        [self.tableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:TRUE];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

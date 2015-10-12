@@ -10,6 +10,7 @@
 
 @interface StorageBoxController : NSObject
 
-- (NSArray *)getArchivedItems; // array of TransactionObject
+- (NSArray *)getAllAccounts;
+- (NSArray *)getAllTransactions; // array of TransactionObject
 - (NSDictionary *)getIndexDicOutOfArray:(NSArray *)arr; // array of TransactionObject
 @end

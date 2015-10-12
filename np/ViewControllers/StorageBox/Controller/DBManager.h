@@ -14,6 +14,10 @@
 + (instancetype)sharedInstance;
 
 - (NSArray *)selectAllTransactions; // array of TransactionObject
+- (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate;
+- (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate
+                                 accountNo:(NSString *)accountNo transType:(NSString *)transType memo:(NSString *)memo;
+
 - (NSString *)findTransactionMemoById:(NSString *)transactionId;
 - (BOOL)saveTransaction:(TransactionObject *)transObj;
 - (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId;

@@ -10,24 +10,38 @@
 
 @implementation ArchivedTransItemCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (IBAction)clickDeleteBtn {
-    NSLog(@"%s", __func__);
     [self.deleteBtn setSelected:!self.deleteBtn.selected];
     [self.delegate markAsDeleted:self.deleteBtn.isSelected ofItemSection:self.section row:self.row];
     
 }
 
 - (IBAction)editMemo {
-    NSLog(@"%s", __func__);
+    [self.editView setHidden:NO];
+    [self.editTextField setText:self.transacMemo.text];
+    [self.editTextField becomeFirstResponder];
+    
 }
+- (IBAction)saveNewMemo {
+    
+    [self.editTextField resignFirstResponder];
+    
+    [self.editView setHidden:YES];
+    [self.transacMemo setText:self.editTextField.text];
+    
+    [self.delegate updateMemo:self.transacMemo.text ofItemSection:self.section row:self.row];
+}
+
+- (void)updateMemoTextBorder {
+    [self.fakeEditTextField.layer setBorderWidth:1.0f];
+    [self.fakeEditTextField.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+}
+
+#pragma mark - Keyboard
+- (IBAction)validateEditingText:(UITextField *)sender {
+    if ([[sender text] length] > 10) {
+        [sender setText:[[sender text] substringToIndex:10]];
+    }
+}
+
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
+#import "StorageBoxDateSearchView.h"
 
-@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ArchivedTransactionItemsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, StorageBoxDateSearchViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton       * sortByDateBtn;
-- (IBAction)sortByDate;
+- (IBAction)clickSortByDate;
 - (IBAction)toggleRemovalView:(id)sender;
 - (IBAction)toggleSearchView;
 @property (weak, nonatomic) IBOutlet UILabel        * topViewSeperator;

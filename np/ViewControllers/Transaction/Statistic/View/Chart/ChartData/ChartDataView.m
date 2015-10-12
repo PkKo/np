@@ -64,7 +64,7 @@
         if (itemIdx == numberOfItem - 1) {
             mainViewWith    = itemViewFrame.size.width;
             mainViewHeight  = itemViewFrame.size.height * numberOfItem + MARGIN_TOP;
-            if ([[item itemType] isEqualToString:INCOME]) {
+            if ([[item itemType] isEqualToString:TRANS_TYPE_INCOME]) {
                 isIncome = YES;
             }
         }

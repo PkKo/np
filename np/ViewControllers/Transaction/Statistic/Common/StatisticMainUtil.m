@@ -91,8 +91,30 @@
     [parentVC.view addSubview:datePickerViewController.view];
     [datePickerViewController didMoveToParentViewController:parentVC];
     
-    [datePickerViewController setMinMaxDateToSelectWithMinDate:minDate maxDate:maxDate];
+    if (maxDate && minDate) {
+        [datePickerViewController setMinMaxDateToSelectWithMinDate:minDate maxDate:maxDate];
+    }
+    
     [datePickerViewController addTargetForDoneButton:parentVC action:doneAction];
+}
+
+- (void)showDataPickerInParentViewController:(UIViewController *)parentVC
+                                  dataSource:(NSArray *)items
+                                selectAction:(SEL)selectAction selectRow:(NSString *)value {
+    
+    CustomizedPickerViewController * pickerViewController = [[CustomizedPickerViewController alloc] initWithNibName:@"CustomizedPickerViewController" bundle:nil];
+    
+    [pickerViewController setItems:items];
+    
+    pickerViewController.view.frame             = parentVC.view.bounds;
+    pickerViewController.view.autoresizingMask  = parentVC.view.autoresizingMask;
+    
+    [parentVC addChildViewController:pickerViewController];
+    [parentVC.view addSubview:pickerViewController.view];
+    [pickerViewController didMoveToParentViewController:parentVC];
+    
+    [pickerViewController addTarget:parentVC action:selectAction];
+    [pickerViewController selectRowByValue:value];
 }
 
 #pragma mark - Doughnut Chart
@@ -138,7 +160,53 @@
 }
 
 #pragma mark - Date Util
-+ (NSDate *)getExactDate:(NSInteger)months beforeThisDate:(NSDate *)thisDate {
++ (NSDate *)getExactDateOfDaysAgo:(NSInteger)days beforeThisDate:(NSDate *)thisDate {
+    
+    NSInteger _resultYear;
+    NSInteger _resultMonth;
+    NSInteger _resultDay;
+    
+    
+    NSInteger _currentYear;
+    NSInteger _currentMonth;
+    NSInteger _currentDay;
+    
+    NSDateComponents * dateComponents = [[NSCalendar currentCalendar] components:
+                                         NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                        fromDate:thisDate];
+    _currentYear    = [dateComponents year];
+    _currentMonth   = [dateComponents month];
+    _currentDay     = [dateComponents day];
+    
+    if (_currentDay - days > 0) {
+        
+        _resultDay      = _currentDay - days;
+        _resultMonth    = _currentMonth;
+        _resultYear     = _currentYear;
+        
+    } else if (_currentMonth - 1 > 0) {
+        
+        _resultMonth    = _currentMonth - 1;
+        _resultYear     = _currentYear;
+        _resultDay      = _currentDay - days + [StatisticMainUtil getLastDayOfMonth:_resultMonth year:_resultYear];
+        
+    } else {
+        
+        _resultMonth    = 12;
+        _resultYear     = _currentYear - 1;
+        _resultDay      = _currentDay - days + [StatisticMainUtil getLastDayOfMonth:_resultMonth year:_resultYear];
+    }
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [dateComponents setMonth:_resultMonth];
+    [dateComponents setYear:_resultYear];
+    [dateComponents setDay:_resultDay];
+    
+    return [calendar dateFromComponents:dateComponents];
+}
+
++ (NSDate *)getExactDateOfMonthsAgo:(NSInteger)months beforeThisDate:(NSDate *)thisDate {
     
     NSInteger _lastLatestMaxMonthYear;
     NSInteger _lastLatestMaxMonthMonth;
