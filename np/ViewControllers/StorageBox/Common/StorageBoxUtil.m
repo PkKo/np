@@ -35,19 +35,15 @@
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView"
                                                      owner:self options:nil];
     dateSearchView = (StorageBoxDateSearchView *)[nibArr objectAtIndex:0];
-    [dateSearchView setCenter:CGPointMake(parentView.center.x, dateSearchView.center.y)];
     
     CGRect dateSearchViewFrame      = dateSearchView.frame;
-    dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y;
+    dateSearchViewFrame.size.width  = parentView.frame.size.width;
+    dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
     [dateSearchView setFrame:dateSearchViewFrame];
     
-    CGRect topViewSeperatorFrame    = topViewSeperator.frame;
-    topViewSeperatorFrame.origin.y += dateSearchViewFrame.size.height;
-    [topViewSeperator setFrame:topViewSeperatorFrame];
-    
     CGRect tableviewFrame           = tableview.frame;
-    tableviewFrame.origin.y        += dateSearchViewFrame.size.height;
-    tableviewFrame.size.height     -= dateSearchViewFrame.size.height;
+    tableviewFrame.origin.y         = tableviewFrame.origin.y + dateSearchViewFrame.size.height - 14; //14: shadow's height.
+    tableviewFrame.size.height      =  parentView.frame.size.height - tableviewFrame.origin.y;
     [tableview setFrame:tableviewFrame];
     
     [parentView addSubview:dateSearchView];
@@ -63,15 +59,10 @@
     StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
     
     if (dateSearchView) {
-        
-        CGRect dateSearchViewFrame      = dateSearchView.frame;
         CGRect topViewSeperatorFrame    = topViewSeperator.frame;
-        topViewSeperatorFrame.origin.y -= dateSearchViewFrame.size.height;
-        [topViewSeperator setFrame:topViewSeperatorFrame];
-        
         CGRect tableviewFrame           = tableview.frame;
-        tableviewFrame.origin.y        -= dateSearchViewFrame.size.height;
-        tableviewFrame.size.height     += dateSearchViewFrame.size.height;
+        tableviewFrame.origin.y         = topViewSeperatorFrame.origin.y + topViewSeperatorFrame.size.height;
+        tableviewFrame.size.height      = parentView.frame.size.height - tableviewFrame.origin.y;
         [tableview setFrame:tableviewFrame];
         
         [dateSearchView removeFromSuperview];

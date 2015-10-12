@@ -16,6 +16,7 @@
 
 - (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue;
 - (void)showDataPickerToSelectTransTypeWithSelectedValue:(NSString *)sltedValue;
+- (void)closeSearchView;
 
 @end
 
@@ -56,6 +57,8 @@
 
 - (IBAction)searchTransactions;
 
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+- (IBAction)closeSearchView;
 
 -(void)updateUI;
 

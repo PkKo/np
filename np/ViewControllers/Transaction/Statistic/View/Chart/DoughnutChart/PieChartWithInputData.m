@@ -25,10 +25,9 @@
     
     self = [super initWithFrame:frame];
     
-    NSLog(@"%s:%d", __func__, __LINE__);
-    
     if (self != nil) {
-        _pieChart = [[PieChart alloc] initWithFrame:frame];
+        
+        _pieChart = [[PieChart alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _pieChart.delegate = self;
         _pieChart.datasource = self;
         [self addSubview:_pieChart];

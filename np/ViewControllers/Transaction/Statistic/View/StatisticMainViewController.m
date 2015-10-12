@@ -15,6 +15,7 @@
 #import "ChartItemData.h"
 #import "CustomizedDatePickerViewController.h"
 #import "ConstantMaster.h"
+#import "StorageBoxController.h"
 
 @interface StatisticMainViewController () {
     
@@ -44,10 +45,13 @@
     NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
     [self updateSelectedDates:dateAmonthAgo toDate:today];
     
-    [self loadData];
+    ChartController * dataCtr   = [[ChartController alloc] init];
+    _dataSource                 = [dataCtr getChartDataFromDate:dateAmonthAgo toDate:today];
+    [self loadDataWithDataSource:_dataSource];
     [self addChart];
     [self addChartData];
     [self replaceNoticeView];
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,11 +78,6 @@
     }
 }
 
-- (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
-    
-    [self updateSelectedDates:fromDate toDate:toDate];
-}
-
 - (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
@@ -94,14 +93,12 @@
 }
 
 - (void)chooseStartDate:(id)sender {
-    NSLog(@"%s %d: %@", __func__, __LINE__, sender);
     StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
     StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
     [existedDateSearchView updateStartDate:(NSDate *)sender];
 }
 
 - (void)chooseEndDate:(id)sender {
-    NSLog(@"%s %d: %@", __func__, __LINE__, sender);
     StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
     StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
     [existedDateSearchView updateEndDate:(NSDate *)sender];
@@ -114,11 +111,60 @@
                                       [[StatisticMainUtil getDateFormatterDateStyle] stringFromDate:toDate]]];
 }
 
+- (void)closeDatePicker {
+    [self clickSearchButton];
+}
+
+#pragma mark - refresh
+- (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
+    [self updateSelectedDates:fromDate toDate:toDate];
+    
+    ChartController * dataCtr   = [[ChartController alloc] init];
+    [self refreshViewWithDataSource:[dataCtr getChartDataFromDate:fromDate toDate:toDate]];
+}
+
+- (void)refreshViewWithDataSource:(NSArray *)ds {
+    
+    [self removeChart];
+    [self removeChartData];
+    
+    [self loadDataWithDataSource:ds];
+    [self addChart];
+    [self addChartData];
+    [self replaceNoticeView];
+}
+
+#pragma mark - Select Account
+- (IBAction)selectAccount {
+    [self showDataPickerToSelectAccountWithSelectedValue:[self.selectAccountBtn titleForState:UIControlStateNormal]];
+}
+
+- (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue {
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    
+    StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
+    [util showDataPickerInParentViewController:self dataSource:[controller getAllAccounts]
+                                  selectAction:@selector(updateAccount:)
+                                     selectRow:sltedValue];
+}
+
+- (void)updateAccount:(NSString *)account {
+    
+    [self.selectAccountBtn setTitle:account forState:UIControlStateNormal];
+    ChartController * dataCtr   = [[ChartController alloc] init];
+    [self refreshViewWithDataSource:[dataCtr getChartDataByAccountNo:[self.selectAccountBtn titleForState:UIControlStateNormal]]];
+}
+
+-(void)updateUI {
+    [self.fakeAllAccounts.layer setBorderWidth:1];
+    [self.fakeAllAccounts.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+}
+
 #pragma mark - Chart
 
-- (void)loadData {
-    ChartController * dataCtr = [[ChartController alloc] init];
-    _dataSource = [dataCtr getChartData];
+- (void)loadDataWithDataSource:(NSArray *)ds {
+    _dataSource = ds;
     NSMutableArray * _incomeMutableArr  = [[NSMutableArray alloc] init];
     NSMutableArray * _expenseMutableArr = [[NSMutableArray alloc] init];
     
@@ -133,6 +179,12 @@
     
     _incomeDataSource   = [_incomeMutableArr copy];
     _expenseDataSource  = [_expenseMutableArr copy];
+}
+
+- (void)removeChart {
+    if (_doughnutChart) {
+        [_doughnutChart removeFromSuperview];
+    }
 }
 
 - (void)addChart {
@@ -150,11 +202,21 @@
     [_doughnutChart reloadChartWithColorArray:[colors copy] sliceArr:[percents copy]];
 }
 
+- (void)removeChartData {
+    if (_incomeDataView) {
+        [_incomeDataView removeFromSuperview];
+    }
+    
+    if (_expenseDataView) {
+        [_expenseDataView removeFromSuperview];
+    }
+}
+
 - (void)addChartData {
     
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
-    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 70;
+    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 23;
     _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
     
     CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
@@ -173,20 +235,6 @@
     [self.noticeView setCenter:noticeViewCenterPoint];
     
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
-}
-
-- (IBAction)showMemoComposer {
-    TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374397493"
-                                                                                       transactionDate:[NSDate date]
-                                                                              transactionAccountNumber:@"111-22-***33"
-                                                                                    transactionDetails:@"당풍니"
-                                                                                       transactionType:TRANS_TYPE_INCOME
-                                                                                     transactionAmount:[NSNumber numberWithFloat:100000.0f]
-                                                                                    transactionBalance:[NSNumber numberWithFloat:200000.0f]
-                                                                                       transactionMemo:@""
-                                                                                  transactionActivePin:[NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES]];
-    StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
-    [util showMemoComposerInViewController:self withTransationObject:transation];
 }
 
 @end

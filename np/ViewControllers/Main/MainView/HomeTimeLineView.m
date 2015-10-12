@@ -349,7 +349,8 @@
 {
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:@"9374797493"
                                                                                        transactionDate:[NSDate date]
-                                                                              transactionAccountNumber:@"111-22-***33"
+                                                                              transactionAccountNumber:@"442-83-3535"
+                                                                                transactionAccountType:@"급여통장"
                                                                                     transactionDetails:@"당풍니"
                                                                                        transactionType:TRANS_TYPE_INCOME
                                                                                      transactionAmount:[NSNumber numberWithFloat:100000.0f]

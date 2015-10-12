@@ -27,8 +27,6 @@
 
 - (void)reloadData:(NSArray *)arr {
     
-    NSLog(@"%s", __func__);
-    
     CGFloat mainViewWith    = 0.0;
     CGFloat mainViewHeight  = 0.0;
     

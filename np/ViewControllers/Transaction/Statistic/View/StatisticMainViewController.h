@@ -15,9 +15,12 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView   * scrollView;
 @property (weak, nonatomic) IBOutlet UIView         * topView;
+@property (weak, nonatomic) IBOutlet UIButton       * selectAccountBtn;
+@property (weak, nonatomic) IBOutlet UITextField    * fakeAllAccounts;
 @property (weak, nonatomic) IBOutlet UILabel        * selectedDatesLabel;
 @property (weak, nonatomic) IBOutlet UIView         * noticeView;
 
 - (IBAction)clickSearchButton;
-
+- (IBAction)selectAccount;
+-(void)updateUI;
 @end

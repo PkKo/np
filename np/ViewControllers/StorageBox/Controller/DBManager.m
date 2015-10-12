@@ -53,7 +53,7 @@
             
             char *errMsg;
             const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS transactions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANS_ID TEXT, TRANS_DATE TEXT, TRANS_ACCOUNT TEXT, TRANS_NAME TEXT, TRANS_TYPE TEXT, TRANS_AMOUNT TEXT, TRANS_BALANCE TEXT, TRANS_MEMO TEXT, TRANS_PINNABLE TEXT)";
+            "CREATE TABLE IF NOT EXISTS transactions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANS_ID TEXT, TRANS_DATE TEXT, TRANS_ACCOUNT TEXT, TRANS_ACCOUNT_TYPE TEXT, TRANS_NAME TEXT, TRANS_TYPE TEXT, TRANS_AMOUNT TEXT, TRANS_BALANCE TEXT, TRANS_MEMO TEXT, TRANS_PINNABLE TEXT)";
             
             if (sqlite3_exec(_nhTransactionDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
@@ -87,14 +87,14 @@
 
 
 - (NSArray *)selectAllTransactions { // array of TransactionObject
-    NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions";
+    NSString * selectSQL = @"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE FROM transactions";
     return [self selectAllTransactionsWithQuery:selectSQL];
 }
 
 - (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate
                                  accountNo:(NSString *)accountNo transType:(NSString *)transType memo:(NSString *)memo {
     
-    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions WHERE (trans_date BETWEEN \"%@\" AND \"%@\")", startDate, endDate];
+    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE FROM transactions WHERE (trans_date BETWEEN \"%@\" AND \"%@\")", startDate, endDate];
     
     if (accountNo) {
         selectSQL = [NSString stringWithFormat:@"%@ AND (trans_account = \"%@\")", selectSQL, accountNo];
@@ -112,7 +112,7 @@
 
 
 - (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate { // array of TransactionObject
-    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE FROM transactions WHERE trans_date BETWEEN \"%@\" AND \"%@\"", startDate, endDate];
+    NSString * selectSQL = [NSString stringWithFormat:@"SELECT TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE FROM transactions WHERE trans_date BETWEEN \"%@\" AND \"%@\"", startDate, endDate];
     return [self selectAllTransactionsWithQuery:selectSQL];
 }
 
@@ -155,6 +155,8 @@
                 
                 NSNumber * transPinnable    = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
                                                                         (const char *)sqlite3_column_text(statement, 8)] floatValue]];
+                NSString * transAccountType = [NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 9)];
                 
                 TransactionObject * tranObj = [[TransactionObject alloc] init];
                 [tranObj setTransactionId           :transId];
@@ -166,6 +168,7 @@
                 [tranObj setTransactionBalance      :transBalance];
                 [tranObj setTransactionMemo         :transMemo];
                 [tranObj setTransactionActivePin    :transPinnable];
+                [tranObj setTransactionAccountType  :transAccountType];
                 
                 [transactions addObject:tranObj];
             }
@@ -296,10 +299,10 @@
     BOOL openDatabaseResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
     if(openDatabaseResult == SQLITE_OK) {
         
-        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
+        NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
                                 transObj.transactionAccountNumber, transObj.transactionDetails,
                                 transObj.transactionType, [transObj.transactionAmount stringValue],
-                                [transObj.transactionBalance stringValue], transObj.transactionMemo, [transObj.transactionActivePin stringValue]];
+                                [transObj.transactionBalance stringValue], transObj.transactionMemo, [transObj.transactionActivePin stringValue], transObj.transactionAccountType];
         
         const char * insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare(_nhTransactionDB, insert_stmt, -1, &statement, NULL);

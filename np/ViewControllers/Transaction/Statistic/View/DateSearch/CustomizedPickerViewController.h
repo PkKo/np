@@ -16,5 +16,5 @@
 
 @property (nonatomic, strong) NSArray * _Nonnull items;
 - (void)addTarget:(nonnull id)target action:(nonnull SEL)action;
-- (void)selectRowByValue:(NSString * )value;
+- (void)selectRowByValue:(nonnull NSString * )value;
 @end

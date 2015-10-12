@@ -15,10 +15,7 @@
 @synthesize datasource;
 
 -(id)initWithFrame:(CGRect)frame
-{
-    
-    NSLog(@"[%s %d]", __func__, __LINE__);
-    
+{   
    self = [super initWithFrame:frame];
     
    if (self != nil)
@@ -36,7 +33,6 @@
 
 -(void)reloadData
 {
-    NSLog(@"reloadData");
    [self setNeedsDisplay];
 }
 
