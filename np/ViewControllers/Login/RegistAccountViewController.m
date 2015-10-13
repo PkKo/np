@@ -75,7 +75,7 @@
      * 공인인증서로 가입하려는 경우
      */
     // 1-1. 디바이스에 공인인증서가 있는지 체크
-//    certControllArray = [CertLoader getCertControlArray];
+    certControllArray = [CertLoader getCertControlArray];
     
     if([certControllArray count] > 0)
     {
@@ -283,13 +283,19 @@
 {
     [self stopIndicator];
     
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    NSLog(@"%@", cookies);
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
+//        [self certMakeSessionRequest];
+        /*
+        NSString *cookiesString = [response objectForKey:@"Cookie"];
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];*/
     }
     else
     {
@@ -297,6 +303,45 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+- (void)certMakeSessionRequest
+{
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    NSHTTPCookie *reqCookie = nil;
+    for(NSHTTPCookie *cookie in cookies)
+    {
+        if([cookie.name isEqualToString:@"MCPU_SSID"])
+        {
+            reqCookie = cookie;
+            break;
+        }
+    }
+    
+    if(reqCookie != nil)
+    {
+        HttpRequest *httpReq = [HttpRequest getInstance];
+        
+        [httpReq setDelegate:self selector:@selector(certMakeSessionResponse:)];
+        
+//        NSString *reqBody = [NSString stringWithFormat:@"%@=%@", reqCookie.name, reqCookie.value];
+        NSString *strTbs = @"abc";
+        NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, @"PMCNA100R.cmd"];
+        
+        NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+        [requestBody setObject:strTbs forKey:@"SSLSIGN_TBS_DATA"];
+        [requestBody setObject:sig forKey:@"SSLSIGN_SIGNATURE"];
+        [requestBody setObject:@"1" forKey:@"REQ_LOGINTYPE"];
+        [requestBody setObject:reqCookie.value forKey:reqCookie.name];
+        [httpReq requestUrl:url bodyObject:requestBody];
+    }
+}
+
+- (void)certMakeSessionResponse:(NSDictionary *)response
+{
+    NSLog(@"%s, response = %@", __FUNCTION__, response);
 }
 
 #pragma mark - 계좌인증 확인

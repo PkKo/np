@@ -40,8 +40,8 @@
 {
     [super viewDidAppear:animated];
     
-//    [self appVersionCheckRequest];
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self appVersionCheckRequest];
+//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 - (void)appVersionCheckRequest
@@ -59,9 +59,16 @@
 
 - (void)appVersionCheckResponse:(NSDictionary *)response
 {
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    NSLog(@"%s, %@", __FUNCTION__, cookies);
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        
+        for (NSHTTPCookie *cookie in cookies)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
+        }
+        [self sessionTestRequest];
     }
     else
     {
@@ -69,6 +76,20 @@
         [alertView show];
     }
     
+//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+}
+
+- (void)sessionTestRequest
+{
+    HttpRequest *req = [HttpRequest getInstance];
+    
+    [req setDelegate:self selector:@selector(sessionTestResponse:)];
+    [req requestUrl:[NSString stringWithFormat:@"%@/%@", SERVER_URL, @"sessionTest.cmd"] bodyString:@""];
+}
+
+- (void)sessionTestResponse:(NSDictionary *)response
+{
+    NSLog(@"%@", response);
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 

@@ -148,7 +148,7 @@
     }
     else
     {
-        return [[timeLineDic objectForKey:[timeLineSection objectAtIndex:section]] count];
+        return [(NSArray *)[timeLineDic objectForKey:[timeLineSection objectAtIndex:section]] count];
     }
 }
 
@@ -260,7 +260,7 @@
     {
         [cell.upperLine setHidden:YES];
     }
-    else if ([[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+    else if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
     {
         [cell.underLine setHidden:YES];
     }

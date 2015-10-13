@@ -44,5 +44,13 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"])
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"MCPU_SSID"];
+    }
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"PHAROSVISITOR"])
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PHAROSVISITOR"];
+    }
 }
 @end

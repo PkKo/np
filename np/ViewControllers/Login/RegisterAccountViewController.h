@@ -7,8 +7,14 @@
 //
 
 #import "CommonViewController.h"
+#import "RegistAccountAllListView.h"
 
 @interface RegisterAccountViewController : CommonViewController
+{
+    BOOL isCertMode;
+    RegistAccountAllListView *allListView;
+    NSMutableArray *allAccountList;
+}
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 

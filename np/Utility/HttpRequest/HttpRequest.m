@@ -84,6 +84,10 @@
     [requestUrl setHTTPMethod:@"POST"];
     //dictionary 형태를 JSON data로 바꿔준다
     postData = [bodyString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] != nil)
+    {
+        [requestUrl setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] forHTTPHeaderField:@"CooKie"];
+    }
     //data를 헤더에 붙여준다
     [requestUrl setHTTPBody:postData];
     

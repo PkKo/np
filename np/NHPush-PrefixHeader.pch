@@ -19,5 +19,7 @@
 #import "ECSlidingViewController.h"
 #import "HttpRequest.h"
 #import "CommonTextField.h"
+#import "CircleView.h"
+//#import <IBNgmService/IBNgmService.h>
 
 #endif

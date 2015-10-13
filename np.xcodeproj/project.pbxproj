@@ -345,7 +345,17 @@
 		A2DA2BDD1BA64C6600E6BBDC /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA2BDB1BA64C6600E6BBDC /* MenuTableCell.xib */; };
 		A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA2BDF1BA6A63A00E6BBDC /* CertificateRoamingViewController.m */; };
 		A2DA2BE21BA6A63A00E6BBDC /* CertificateRoamingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */; };
-		A2DA4F221BCC90E6009FB32F /* IBNgmService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F251BCC9761009FB32F /* RegistAccountAllListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA4F241BCC9761009FB32F /* RegistAccountAllListView.m */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F271BCC9785009FB32F /* RegistAccountAllListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA4F261BCC9785009FB32F /* RegistAccountAllListView.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F291BCCA287009FB32F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F281BCCA287009FB32F /* CFNetwork.framework */; };
+		A2DA4F2E1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA4F2C1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F2F1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA4F2D1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F321BCCC246009FB32F /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA4F311BCCC246009FB32F /* CircleView.m */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F351BCCDC0D009FB32F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F341BCCDC0D009FB32F /* QuartzCore.framework */; };
+		A2DA4F381BCCDC6C009FB32F /* RegistAccountInputAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA4F371BCCDC6C009FB32F /* RegistAccountInputAccountView.m */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F3A1BCCDC81009FB32F /* RegistAccountInputAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA4F391BCCDC81009FB32F /* RegistAccountInputAccountView.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F3C1BCCF20F009FB32F /* SystemConfiguration.framework */; };
+		A2DA4F3E1BCCF22A009FB32F /* IBNgmService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */; };
 		A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */; };
 		A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CA1BA116D1006F5F4A /* Security.framework */; };
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
@@ -844,6 +854,20 @@
 		A2DA2BDF1BA6A63A00E6BBDC /* CertificateRoamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingViewController.m; sourceTree = "<group>"; };
 		A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingViewController.xib; sourceTree = "<group>"; };
 		A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IBNgmService.framework; sourceTree = "<group>"; };
+		A2DA4F231BCC9761009FB32F /* RegistAccountAllListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountAllListView.h; sourceTree = "<group>"; };
+		A2DA4F241BCC9761009FB32F /* RegistAccountAllListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountAllListView.m; sourceTree = "<group>"; };
+		A2DA4F261BCC9785009FB32F /* RegistAccountAllListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountAllListView.xib; sourceTree = "<group>"; };
+		A2DA4F281BCCA287009FB32F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A2DA4F2B1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAllAccountListCellTableViewCell.h; sourceTree = "<group>"; };
+		A2DA4F2C1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAllAccountListCellTableViewCell.m; sourceTree = "<group>"; };
+		A2DA4F2D1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAllAccountListCellTableViewCell.xib; sourceTree = "<group>"; };
+		A2DA4F301BCCC246009FB32F /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
+		A2DA4F311BCCC246009FB32F /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
+		A2DA4F341BCCDC0D009FB32F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A2DA4F361BCCDC6C009FB32F /* RegistAccountInputAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountInputAccountView.h; sourceTree = "<group>"; };
+		A2DA4F371BCCDC6C009FB32F /* RegistAccountInputAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountInputAccountView.m; sourceTree = "<group>"; };
+		A2DA4F391BCCDC81009FB32F /* RegistAccountInputAccountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountInputAccountView.xib; sourceTree = "<group>"; };
+		A2DA4F3C1BCCF20F009FB32F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A2DA68CA1BA116D1006F5F4A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A2DA68CE1BA13F85006F5F4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1051,6 +1075,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2DA4F3E1BCCF22A009FB32F /* IBNgmService.framework in Frameworks */,
+				A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */,
+				A2DA4F351BCCDC0D009FB32F /* QuartzCore.framework in Frameworks */,
+				A2DA4F291BCCA287009FB32F /* CFNetwork.framework in Frameworks */,
 				A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */,
 				A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */,
 				A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */,
@@ -1059,7 +1087,6 @@
 				A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */,
 				A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */,
 				A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */,
-				A2DA4F221BCC90E6009FB32F /* IBNgmService.framework in Frameworks */,
 				A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */,
 				A2D95B071BA8F1DD00DC943D /* libNFilter.a in Frameworks */,
 				A2DEAE101B9FE6A400EDCCBA /* UIKit.framework in Frameworks */,
@@ -1497,6 +1524,16 @@
 			path = IBPush;
 			sourceTree = "<group>";
 		};
+		A2DA4F2A1BCCA5D5009FB32F /* RegistTableCellView */ = {
+			isa = PBXGroup;
+			children = (
+				A2DA4F2B1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.h */,
+				A2DA4F2C1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m */,
+				A2DA4F2D1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib */,
+			);
+			path = RegistTableCellView;
+			sourceTree = "<group>";
+		};
 		A2DEADDC1B9FE68600EDCCBA = {
 			isa = PBXGroup;
 			children = (
@@ -1563,6 +1600,9 @@
 		A2DEAE0E1B9FE69000EDCCBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2DA4F3C1BCCF20F009FB32F /* SystemConfiguration.framework */,
+				A2DA4F341BCCDC0D009FB32F /* QuartzCore.framework */,
+				A2DA4F281BCCA287009FB32F /* CFNetwork.framework */,
 				A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */,
 				A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */,
 				A54B94E61BAAA03A00D5D99B /* MessageUI.framework */,
@@ -1777,6 +1817,8 @@
 				A2DBC3981BBE514600FFF357 /* IndexPathButton.m */,
 				A2D9A3651BCB7CBD00FC2AC7 /* CommonTextField.h */,
 				A2D9A3661BCB7CBD00FC2AC7 /* CommonTextField.m */,
+				A2DA4F301BCCC246009FB32F /* CircleView.h */,
+				A2DA4F311BCCC246009FB32F /* CircleView.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1969,6 +2011,13 @@
 				A2DD874F1BC23B9B0013470D /* RegistAccountInputView.h */,
 				A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */,
 				A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */,
+				A2DA4F231BCC9761009FB32F /* RegistAccountAllListView.h */,
+				A2DA4F241BCC9761009FB32F /* RegistAccountAllListView.m */,
+				A2DA4F261BCC9785009FB32F /* RegistAccountAllListView.xib */,
+				A2DA4F361BCCDC6C009FB32F /* RegistAccountInputAccountView.h */,
+				A2DA4F371BCCDC6C009FB32F /* RegistAccountInputAccountView.m */,
+				A2DA4F391BCCDC81009FB32F /* RegistAccountInputAccountView.xib */,
+				A2DA4F2A1BCCA5D5009FB32F /* RegistTableCellView */,
 			);
 			path = RegistView;
 			sourceTree = "<group>";
@@ -2341,6 +2390,7 @@
 				A2D9A3241BCB34F800FC2AC7 /* icon_refresh_01@2x.png in Resources */,
 				A2D9A2F51BCB34F800FC2AC7 /* icon_deposit_02_dft@2x.png in Resources */,
 				A2D95B631BA8F1DD00DC943D /* nf_ios_prev.png in Resources */,
+				A2DA4F3A1BCCDC81009FB32F /* RegistAccountInputAccountView.xib in Resources */,
 				A2D95B351BA8F1DD00DC943D /* NFPadBtnPrevious@2x.png in Resources */,
 				A2D62D301BC36188001E16B0 /* HomeBankingView.xib in Resources */,
 				A2D9A3141BCB34F800FC2AC7 /* icon_notice_01_dft@2x.png in Resources */,
@@ -2494,7 +2544,9 @@
 				A2D95B331BA8F1DD00DC943D /* NFPadbtn_pressed@2x.png in Resources */,
 				A2D9A3311BCB34F800FC2AC7 /* icon_sticker_05_dft@2x.png in Resources */,
 				A2D95B721BA8F1DD00DC943D /* nf_ios_char@2x.png in Resources */,
+				A2DA4F271BCC9785009FB32F /* RegistAccountAllListView.xib in Resources */,
 				A2D95B0B1BA8F1DD00DC943D /* click2.wav in Resources */,
+				A2DA4F2F1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib in Resources */,
 				A2D95B4F1BA8F1DD00DC943D /* nFilterCharForPad.xib in Resources */,
 				A2D9A2D61BCB34F800FC2AC7 /* button_02_on@2x.png in Resources */,
 				A2D9A3071BCB34F800FC2AC7 /* icon_kt_01_sel@2x.png in Resources */,
@@ -2702,6 +2754,7 @@
 				A5EA7E361BBBA09C00626C74 /* ArchivedTransItemCell.m in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
 				A2DEAE5F1B9FE6D800EDCCBA /* MASLayoutConstraint.m in Sources */,
+				A2DA4F321BCCC246009FB32F /* CircleView.m in Sources */,
 				A2DEAE5C1B9FE6D800EDCCBA /* MASCompositeConstraint.m in Sources */,
 				A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */,
 				A54B94DD1BAA4EE400D5D99B /* PieChartWithInputData.m in Sources */,
@@ -2715,11 +2768,13 @@
 				A2D95B061BA8F1DD00DC943D /* KNStringutil.m in Sources */,
 				A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */,
 				A2DFD7111BB0EAC800838E09 /* MenuTableEtcView.m in Sources */,
+				A2DA4F2E1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m in Sources */,
 				A2D95B041BA8F1DD00DC943D /* KnmRepUnicode.m in Sources */,
 				A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */,
 				A2DEAE611B9FE6D800EDCCBA /* MASViewConstraint.m in Sources */,
 				A2DEADEB1B9FE68600EDCCBA /* main.m in Sources */,
 				A2D95BA11BA8FF1000DC943D /* HomeTimeLineView.m in Sources */,
+				A2DA4F251BCC9761009FB32F /* RegistAccountAllListView.m in Sources */,
 				A2D95B051BA8F1DD00DC943D /* EccEncryptor.m in Sources */,
 				A2DEAE571B9FE6D800EDCCBA /* ECSlidingInteractiveTransition.m in Sources */,
 				A2DEAE7B1B9FE6E600EDCCBA /* MenuViewController.m in Sources */,
@@ -2744,6 +2799,7 @@
 				A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */,
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
+				A2DA4F381BCCDC6C009FB32F /* RegistAccountInputAccountView.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,
 				A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */,
