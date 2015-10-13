@@ -16,6 +16,8 @@
     NSTimer *authNumTimer;
     NSInteger authNumCounter;
 }
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 // 캐리어 선택 버튼
 @property (strong, nonatomic) IBOutlet UIButton *carrierSelectButton;

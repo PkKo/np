@@ -75,7 +75,7 @@
      * 공인인증서로 가입하려는 경우
      */
     // 1-1. 디바이스에 공인인증서가 있는지 체크
-    certControllArray = [CertLoader getCertControlArray];
+//    certControllArray = [CertLoader getCertControlArray];
     
     if([certControllArray count] > 0)
     {
@@ -89,6 +89,7 @@
         [menuView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         [[menuView getCertFromPCBtn] addTarget:self action:@selector(moveToGetCertFromPcView) forControlEvents:UIControlEventTouchUpInside];
         [contentView addSubview:menuView];
+        [contentView setContentSize:menuView.frame.size];
         isCertRoaming = YES;
     }
     
@@ -110,6 +111,7 @@
     [[inputView accountInputField] setDelegate:self];
     [[inputView accountPassInputField] setDelegate:self];
     [[inputView birthInputField] setDelegate:self];
+    [[inputView phoneNumInputField] setDelegate:self];
     [inputView setDelegate:self];
     [contentView addSubview:inputView];
     
@@ -305,7 +307,7 @@
     HttpRequest *req = [HttpRequest getInstance];
     
     // Request Start
-    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1.5];
+    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1];
 }
 
 - (void)checkRegistAccountResponse:(NSDictionary *)response

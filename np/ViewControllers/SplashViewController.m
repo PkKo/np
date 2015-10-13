@@ -40,7 +40,8 @@
 {
     [super viewDidAppear:animated];
     
-    [self appVersionCheckRequest];
+//    [self appVersionCheckRequest];
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 - (void)appVersionCheckRequest

@@ -23,16 +23,9 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_01.png" id="Crv-AQ-Pfd">
-                            <rect key="frame" x="84" y="13" width="54" height="27"/>
+                            <rect key="frame" x="84" y="13" width="153" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스마트 알림" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="apc-Ek-MhQ">
-                            <rect key="frame" x="138" y="13" width="142" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2qV-5r-NlK">
@@ -67,7 +60,7 @@
     </objects>
     <resources>
         <image name="back_01.png" width="27" height="27"/>
-        <image name="logo_01.png" width="54" height="27"/>
+        <image name="logo_01.png" width="172" height="27"/>
         <image name="menu_01.png" width="27" height="27"/>
     </resources>
 </document>

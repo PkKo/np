@@ -14,7 +14,7 @@
     BOOL isCertRoaming;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIScrollView *contentView;
 @property (strong, nonatomic) NSMutableArray *certControllArray;
 @property (strong, nonatomic) IBOutlet UIButton *certSelectBtn;
 @property (strong, nonatomic) IBOutlet UIButton *accountSelectBtn;

@@ -19,6 +19,9 @@
 
 @implementation RegistPhoneViewController
 
+@synthesize scrollView;
+@synthesize contentView;
+
 @synthesize carrierSelectButton;
 @synthesize phoneNumberInput;
 @synthesize reqAuthNumButton;
@@ -32,6 +35,14 @@
     [self.mNaviView.mMenuButton setHidden:YES];
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
+    
+    if(scrollView.frame.size.height < contentView.frame.size.height)
+    {
+        [scrollView setContentSize:contentView.frame.size];
+    }
+    
+    carrierSelectButton.layer.borderWidth = 1.0f;
+    carrierSelectButton.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor;
     
     NSString *carrierListPath = [[NSBundle mainBundle] pathForResource:@"CarrierList" ofType:@"plist"];
     carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];
@@ -136,6 +147,11 @@
 }
 
 #pragma mark - UIPickerViewDataSource
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 40.0f;
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;

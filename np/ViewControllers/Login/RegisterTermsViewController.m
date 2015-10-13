@@ -15,6 +15,20 @@
 
 @implementation RegisterTermsViewController
 
+@synthesize scrollView;
+@synthesize contentView;
+
+@synthesize serviceTermWebView;
+@synthesize serviceTermAgreeImg;
+@synthesize serviceTermAgreeText;
+
+@synthesize personalDataTermWebView;
+@synthesize personalDataTermAgreeImg;
+@synthesize personalDataTermAgreeText;
+
+@synthesize pushAgreeImg;
+@synthesize pushAgreeText;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -22,12 +36,77 @@
     [self.mNaviView.mMenuButton setHidden:YES];
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
+    
+    if(scrollView.frame.size.height < contentView.frame.size.height)
+    {
+        [scrollView setContentSize:contentView.frame.size];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// 서비스 이용약관을 전체화면으로 보여준다.
+- (IBAction)showServiceTerm:(id)sender
+{
+}
+
+// 서비스 이용약관 체크
+- (IBAction)checkServiceTermAgree:(id)sender
+{
+    if([serviceTermAgreeImg isHighlighted])
+    {
+        // 체크 해제
+        [serviceTermAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 체크 실행
+        [serviceTermAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
+    }
+    
+    [serviceTermAgreeImg setHighlighted:![serviceTermAgreeImg isHighlighted]];
+}
+
+// 개인정보 이용동의 약관을 전체화면으로 보여준다
+- (IBAction)showPersonalTerm:(id)sender
+{
+}
+
+// 개인정보 이용동의 체크
+- (IBAction)checkPersonalTermAgree:(id)sender
+{
+    if([personalDataTermAgreeImg isHighlighted])
+    {
+        // 체크 해제
+        [personalDataTermAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 체크 실행
+        [personalDataTermAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
+    }
+    
+    [personalDataTermAgreeImg setHighlighted:![personalDataTermAgreeImg isHighlighted]];
+}
+
+- (IBAction)checkPushAgree:(id)sender
+{
+    if([pushAgreeImg isHighlighted])
+    {
+        // 체크 해제
+        [pushAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 체크 실행
+        [pushAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
+    }
+    
+    [pushAgreeImg setHighlighted:![pushAgreeImg isHighlighted]];
 }
 
 - (IBAction)nextButtonClick:(id)sender
