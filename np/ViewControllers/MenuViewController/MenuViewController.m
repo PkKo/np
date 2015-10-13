@@ -148,9 +148,7 @@
             break;
         }
         case 5: // 환경설정
-        {
-            UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
-            pushViewController = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
+        {   
             break;
         }
         case 6: // 고객센터
