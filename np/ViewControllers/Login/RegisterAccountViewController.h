@@ -9,6 +9,8 @@
 #import "CommonViewController.h"
 
 @interface RegisterAccountViewController : CommonViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 - (IBAction)nextButtonClick:(id)sender;
 @end

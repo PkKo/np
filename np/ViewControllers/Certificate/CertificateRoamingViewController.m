@@ -31,6 +31,15 @@
     
     [self.mNaviView.mTitleLabel setText:@"공인인증서 가져오기"];
     
+    certNum1.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
+    certNum1.layer.borderWidth = 3.0f;
+    certNum2.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
+    certNum2.layer.borderWidth = 3.0f;
+    certNum3.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
+    certNum3.layer.borderWidth = 3.0f;
+    certNum4.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
+    certNum4.layer.borderWidth = 3.0f;
+    
     // 인증번호 요청
     [self performSelector:@selector(requestAuthNumber) withObject:nil afterDelay:0.01f];
 }
@@ -66,10 +75,6 @@
 {
     // 농협 스마트뱅킹 리얼 주소
     int rc = [[CertManager sharedInstance] verifyP12Uploaded:@"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"];
-
-#ifdef DEV_MODE
-    rc = 0;
-#endif
     
     if (rc == 0)
     {

@@ -18,5 +18,6 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "ECSlidingViewController.h"
 #import "HttpRequest.h"
+#import "CommonTextField.h"
 
 #endif

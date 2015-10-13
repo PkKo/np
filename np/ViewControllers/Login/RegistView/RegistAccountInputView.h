@@ -15,6 +15,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *accountPassInputField;
 @property (strong, nonatomic) IBOutlet UITextField *birthInputField;
 @property (strong, nonatomic) IBOutlet UIButton *accountCheck;
+@property (strong, nonatomic) IBOutlet UIButton *carrierSelectBtn;
+@property (strong, nonatomic) IBOutlet CommonTextField *phoneNumInputField;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 - (IBAction)checkAccount:(id)sender;
 @end
