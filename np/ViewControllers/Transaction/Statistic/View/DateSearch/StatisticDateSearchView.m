@@ -8,6 +8,7 @@
 
 #import "StatisticDateSearchView.h"
 #import "StatisticMainUtil.h"
+#import "UIButton+BackgroundColor.h"
 
 #define LATEST_MAX_MONTH 6
 
@@ -206,7 +207,16 @@
     fromDateStr = [NSString stringWithFormat:@"%@ 00:00:00", [self.startDate text]];
     toDateStr = [NSString stringWithFormat:@"%@ 23:59:59", [self.endDate text]];
     
-    if (![self isWithinAMonthStartDate:[dateFormatter dateFromString:fromDateStr] endDate:[dateFormatter dateFromString:fromDateStr]]) {
+    NSDate * fromDate   = [dateFormatter dateFromString:fromDateStr];
+    NSDate * toDate     = [dateFormatter dateFromString:toDateStr];
+    
+    
+    if ([fromDate compare:toDate] == NSOrderedDescending) {
+        [self invalidSelectedDatesAlert];
+        return;
+    }
+    
+    if (![self isWithinAMonthStartDate:fromDate endDate:toDate]) {
         [self invalidSelectedDatesAlert];
         return;
     }
@@ -231,10 +241,7 @@
                                                   options:NSCalendarWrapComponents];
     differentDays        = [components day];
     
-    NSLog(@"differentDays: %d - maxDaysOfStartMonth: %d", (int)differentDays, (int)maxDaysOfStartMonth);
-    
-    
-    if (differentDays > maxDaysOfStartMonth) {
+    if (differentDays >= maxDaysOfStartMonth) {
         return NO;
     }
     
@@ -250,11 +257,18 @@
     [alert show];
 }
 
+- (IBAction)closeSearchView {
+    [self.delegate closeDatePicker];
+    [self removeFromSuperview];
+}
+
 -(void)updateUI {
     [self.fakeStartDate.layer setBorderWidth:1];
     [self.fakeStartDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
     [self.fakeEndDate.layer setBorderWidth:1];
     [self.fakeEndDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    
+    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 @end

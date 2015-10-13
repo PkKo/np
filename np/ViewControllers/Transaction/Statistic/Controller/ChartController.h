@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ChartController : NSObject
-- (NSArray *)getChartData;
+
+- (NSArray *)getChartDataByAccountNo:(NSString *)accountNo;
+
+- (NSArray *)getChartDataFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
 @end

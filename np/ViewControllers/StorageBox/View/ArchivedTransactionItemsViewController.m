@@ -33,7 +33,6 @@
     
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     [self refreshData:[controller getAllTransactions] sortByAscending:NO];
-    
     /*
     // create table & insert dummy data.
     [[DBManager sharedInstance] deleteAllTransactions];
@@ -41,10 +40,11 @@
     for (TransactionObject * tranObj in arr) {
         tranObj.transactionId           = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
         tranObj.transactionActivePin    = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
+        tranObj.transactionAccountType  = @"급여통장";
         
         [[DBManager sharedInstance] saveTransaction:tranObj];
     }
-     */
+    */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,6 +167,10 @@
                                              moveTopViewSeperatorBack:self.topViewSeperator
                                                     moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
     }
+}
+
+-(void)closeSearchView {
+    [self toggleSearchView];
 }
 
 - (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue {
@@ -354,7 +358,7 @@
         
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
-        [cell.transacAccountNo setText:[NSString stringWithFormat:@"급여통장 %@", [transacObj transactionAccountNumber]]];
+        [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionAccountType], [transacObj transactionAccountNumber]]];
         [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? @"입금" : @"출금", [transacObj formattedTransactionAmount]]];
         [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
         

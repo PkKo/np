@@ -31,6 +31,7 @@
 - (instancetype)initTransactionObjectWithTransactionId:(NSString *)transactionId
                                        transactionDate:(NSDate *)transactionDate
                               transactionAccountNumber:(NSString *)transactionAccountNumber
+                                transactionAccountType:(NSString *)transactionAccountType
                                     transactionDetails:(NSString *)transactionDetails
                                        transactionType:(NSString *)transactionType
                                      transactionAmount:(NSNumber *)transactionAmount

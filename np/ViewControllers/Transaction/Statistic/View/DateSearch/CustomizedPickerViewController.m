@@ -60,10 +60,6 @@
     return [self.items objectAtIndex:row];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"selected %@", [self.items objectAtIndex:row]);
-}
-
 #pragma mark - datasource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;

@@ -26,6 +26,7 @@
 - (instancetype)initTransactionObjectWithTransactionId:(NSString *)transactionId
                                        transactionDate:(NSDate *)transactionDate
                               transactionAccountNumber:(NSString *)transactionAccountNumber
+                                transactionAccountType:(NSString *)transactionAccountType
                                     transactionDetails:(NSString *)transactionDetails
                                        transactionType:(NSString *)transactionType
                                      transactionAmount:(NSNumber *)transactionAmount
@@ -37,6 +38,7 @@
         self.transactionId              = transactionId;
         self.transactionDate            = transactionDate;
         self.transactionAccountNumber   = transactionAccountNumber;
+        self.transactionAccountType     = transactionAccountType;
         self.transactionDetails         = transactionDetails;
         self.transactionType            = transactionType;
         self.transactionAmount          = transactionAmount;

@@ -13,6 +13,7 @@
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
 - (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
 - (void)showDatePickerForEndDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
+- (void)closeDatePicker;
 
 @end
 
@@ -29,10 +30,13 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *startDate;
 @property (weak, nonatomic) IBOutlet UITextField *endDate;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+
 - (IBAction)chooseStartDate;
 - (IBAction)chooseEndDate;
 
 - (IBAction)searchTransactions;
+- (IBAction)closeSearchView;
 
 -(void)updateUI;
 - (void)updateCurrentYearMonth;

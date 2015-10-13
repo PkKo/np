@@ -8,6 +8,7 @@
 
 #import "StorageBoxDateSearchView.h"
 #import "StatisticMainUtil.h"
+#import "UIButton+BackgroundColor.h"
 
 @implementation StorageBoxDateSearchView
 
@@ -94,8 +95,15 @@
     [dateTextField setText:[formatter stringFromDate:newDate]];
 }
 
+#pragma mark - Validate Selected Dates
 - (IBAction)searchTransactions {
-    NSLog(@"%s", __func__);
+    
+    BOOL isInvalidSelectedDates = [self validateSelectedDates];
+    
+    if (isInvalidSelectedDates) {
+        [self invalidSelectedDatesAlert];
+        return;
+    }
     
     NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterDateStyle];
     [self.delegate searchTransFromDate:[formatter dateFromString:self.startDate.text]
@@ -105,9 +113,40 @@
                                   memo:self.memoTextField.text];
 }
 
--(void)updateUI {
+- (BOOL)validateSelectedDates {
     
-    NSLog(@"%s", __func__);
+    BOOL isInvalidSelectedDates = NO;
+    
+    if ([self.startDate.text isEqualToString:@""] || [self.endDate.text isEqualToString:@""]) {
+        isInvalidSelectedDates = YES;
+    }
+    
+    NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterDateStyle];
+    
+    NSDate * fromDate   = [formatter dateFromString:self.startDate.text];
+    NSDate * toDate     = [formatter dateFromString:self.endDate.text];
+    
+    if ([fromDate compare:toDate] == NSOrderedDescending) {
+        isInvalidSelectedDates = YES;
+    }
+    return isInvalidSelectedDates;
+}
+
+- (void)invalidSelectedDatesAlert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림"
+                                                     message:@"검색 기간이 잘못 설정되었습니다. 기간을 다시 설정한 후 검색하시기바랍니다."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"확인"
+                                           otherButtonTitles:nil];
+    [alert show];
+}
+
+- (IBAction)closeSearchView {
+    [self.delegate closeSearchView];
+    [self removeFromSuperview];
+}
+
+-(void)updateUI {
     
     [self.fakeAllAccounts.layer setBorderWidth:1];
     [self.fakeAllAccounts.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
@@ -119,6 +158,8 @@
     [self.fakeStartDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
     [self.fakeEndDate.layer setBorderWidth:1];
     [self.fakeEndDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    
+    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 @end
