@@ -18,6 +18,9 @@
 #import "ArchivedTransItemRemoveActionView.h"
 #import "DBManager.h"
 #import "CustomizedPickerViewController.h"
+#import "LoginCertListViewController.h"
+#import "LoginAccountVerificationViewController.h"
+#import "LoginSimpleVerificationViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -421,6 +424,27 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (IBAction)gotoCertLogin:(id)sender {
+    
+    LoginCertListViewController *certLogin = [[LoginCertListViewController alloc] initWithNibName:@"LoginCertListViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
+//    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+
+- (IBAction)gotoAccountLogin:(id)sender {
+    
+    LoginAccountVerificationViewController *accountLogin = [[LoginAccountVerificationViewController alloc] initWithNibName:@"LoginAccountVerificationViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:accountLogin];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+- (IBAction)gotoSimpleLogin:(id)sender {
+    
+    LoginSimpleVerificationViewController *simpleLogin = [[LoginSimpleVerificationViewController alloc] initWithNibName:@"LoginSimpleVerificationViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:simpleLogin];
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 @end

@@ -451,6 +451,14 @@
 		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
+		A5E0177C1BCCD134007BD4EA /* LoginAccountVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0176D1BCCD134007BD4EA /* LoginAccountVerificationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0176E1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017751BCCD134007BD4EA /* LoginCertListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5E017811BCCD134007BD4EA /* LoginCertListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E017761BCCD134007BD4EA /* LoginCertListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5E017821BCCD134007BD4EA /* LoginSimpleVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0177A1BCCD134007BD4EA /* LoginSimpleVerificationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5E017831BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0177B1BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017861BCCD19F007BD4EA /* LoginUtil.m */; settings = {ASSET_TAGS = (); }; };
+		A5E0178F1BCCF6B1007BD4EA /* LoginCertController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0178E1BCCF6B1007BD4EA /* LoginCertController.m */; settings = {ASSET_TAGS = (); }; };
 		A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */; settings = {ASSET_TAGS = (); }; };
 		A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E11DFF1BC3C2F70009B5AC /* StorageBoxDateSearchView.m */; settings = {ASSET_TAGS = (); }; };
 		A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -1036,6 +1044,19 @@
 		A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomizedPickerViewController.xib; sourceTree = "<group>"; };
 		A5DD8BB41BC348FF002FEE79 /* UIButton+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+BackgroundColor.h"; path = "StorageBox/View/UIButton+BackgroundColor.h"; sourceTree = "<group>"; };
 		A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+BackgroundColor.m"; path = "StorageBox/View/UIButton+BackgroundColor.m"; sourceTree = "<group>"; };
+		A5E0176C1BCCD134007BD4EA /* LoginAccountVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAccountVerificationViewController.h; sourceTree = "<group>"; };
+		A5E0176D1BCCD134007BD4EA /* LoginAccountVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAccountVerificationViewController.m; sourceTree = "<group>"; };
+		A5E0176E1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginAccountVerificationViewController.xib; sourceTree = "<group>"; };
+		A5E017741BCCD134007BD4EA /* LoginCertListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginCertListViewController.h; sourceTree = "<group>"; };
+		A5E017751BCCD134007BD4EA /* LoginCertListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginCertListViewController.m; sourceTree = "<group>"; };
+		A5E017761BCCD134007BD4EA /* LoginCertListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCertListViewController.xib; sourceTree = "<group>"; };
+		A5E017791BCCD134007BD4EA /* LoginSimpleVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSimpleVerificationViewController.h; sourceTree = "<group>"; };
+		A5E0177A1BCCD134007BD4EA /* LoginSimpleVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSimpleVerificationViewController.m; sourceTree = "<group>"; };
+		A5E0177B1BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSimpleVerificationViewController.xib; sourceTree = "<group>"; };
+		A5E017851BCCD19F007BD4EA /* LoginUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginUtil.h; path = Common/LoginUtil.h; sourceTree = "<group>"; };
+		A5E017861BCCD19F007BD4EA /* LoginUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginUtil.m; path = Common/LoginUtil.m; sourceTree = "<group>"; };
+		A5E0178D1BCCF6B1007BD4EA /* LoginCertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginCertController.h; path = Controller/LoginCertController.h; sourceTree = "<group>"; };
+		A5E0178E1BCCF6B1007BD4EA /* LoginCertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginCertController.m; path = Controller/LoginCertController.m; sourceTree = "<group>"; };
 		A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StorageBoxDateSearchView.xib; path = StorageBox/View/StorageBoxDateSearchView.xib; sourceTree = "<group>"; };
 		A5E11DFE1BC3C2F70009B5AC /* StorageBoxDateSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorageBoxDateSearchView.h; path = StorageBox/View/StorageBoxDateSearchView.h; sourceTree = "<group>"; };
 		A5E11DFF1BC3C2F70009B5AC /* StorageBoxDateSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorageBoxDateSearchView.m; path = StorageBox/View/StorageBoxDateSearchView.m; sourceTree = "<group>"; };
@@ -1972,6 +1993,9 @@
 		A2DF41001BAF8577001389E7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A5E0176A1BCCD134007BD4EA /* LoginAccount */,
+				A5E0176F1BCCD134007BD4EA /* LoginCertificate */,
+				A5E017771BCCD134007BD4EA /* LoginSimple */,
 				A2DF41071BAF9945001389E7 /* RegistView */,
 				A2DFD7181BB14DD300838E09 /* RegistAccountViewController.h */,
 				A2DFD7191BB14DD300838E09 /* RegistAccountViewController.m */,
@@ -2107,6 +2131,88 @@
 				A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */,
 			);
 			path = PatternLogin;
+			sourceTree = "<group>";
+		};
+		A5E0176A1BCCD134007BD4EA /* LoginAccount */ = {
+			isa = PBXGroup;
+			children = (
+				A5E0176B1BCCD134007BD4EA /* View */,
+			);
+			path = LoginAccount;
+			sourceTree = "<group>";
+		};
+		A5E0176B1BCCD134007BD4EA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5E0176C1BCCD134007BD4EA /* LoginAccountVerificationViewController.h */,
+				A5E0176D1BCCD134007BD4EA /* LoginAccountVerificationViewController.m */,
+				A5E0176E1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5E0176F1BCCD134007BD4EA /* LoginCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				A5E0178C1BCCF643007BD4EA /* Controller */,
+				A5E017881BCCF2C2007BD4EA /* Model */,
+				A5E017841BCCD179007BD4EA /* Common */,
+				A5E017731BCCD134007BD4EA /* View */,
+			);
+			path = LoginCertificate;
+			sourceTree = "<group>";
+		};
+		A5E017731BCCD134007BD4EA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5E017741BCCD134007BD4EA /* LoginCertListViewController.h */,
+				A5E017751BCCD134007BD4EA /* LoginCertListViewController.m */,
+				A5E017761BCCD134007BD4EA /* LoginCertListViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5E017771BCCD134007BD4EA /* LoginSimple */ = {
+			isa = PBXGroup;
+			children = (
+				A5E017781BCCD134007BD4EA /* View */,
+			);
+			path = LoginSimple;
+			sourceTree = "<group>";
+		};
+		A5E017781BCCD134007BD4EA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5E017791BCCD134007BD4EA /* LoginSimpleVerificationViewController.h */,
+				A5E0177A1BCCD134007BD4EA /* LoginSimpleVerificationViewController.m */,
+				A5E0177B1BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5E017841BCCD179007BD4EA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A5E017851BCCD19F007BD4EA /* LoginUtil.h */,
+				A5E017861BCCD19F007BD4EA /* LoginUtil.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		A5E017881BCCF2C2007BD4EA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A5E0178C1BCCF643007BD4EA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5E0178D1BCCF6B1007BD4EA /* LoginCertController.h */,
+				A5E0178E1BCCF6B1007BD4EA /* LoginCertController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		A5E2C4471BB25D1B006EE828 /* StorageBox */ = {
@@ -2478,6 +2584,7 @@
 				A2D95B611BA8F1DD00DC943D /* nf_ios_num_btn.png in Resources */,
 				A2D95B741BA8F1DD00DC943D /* nf_ios_icon_refresh@2x.png in Resources */,
 				A2D9A3611BCB34F800FC2AC7 /* shadow_02@2x.png in Resources */,
+				A5E017811BCCD134007BD4EA /* LoginCertListViewController.xib in Resources */,
 				A2D9A3511BCB34F800FC2AC7 /* icon_withdraw_07_dft@2x.png in Resources */,
 				179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */,
 				A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */,
@@ -2593,6 +2700,7 @@
 				A2D9A3491BCB34F800FC2AC7 /* icon_withdraw_03_dft@2x.png in Resources */,
 				A2D9A3051BCB34F800FC2AC7 /* icon_ks_01_sel@2x.png in Resources */,
 				A2D95B261BA8F1DD00DC943D /* NFPadbtn_ok_wide_pressed.png in Resources */,
+				A5E017831BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib in Resources */,
 				A2D9A3291BCB34F800FC2AC7 /* icon_sharing_01@2x.png in Resources */,
 				A2D9A30E1BCB34F800FC2AC7 /* icon_more_02@2x.png in Resources */,
 				A2DFDD911BB3742C00DC1A78 /* NotiSettingMenuViewController.xib in Resources */,
@@ -2609,6 +2717,7 @@
 				A2D9A2FE1BCB34F800FC2AC7 /* icon_faq_01_dft@2x.png in Resources */,
 				A2D9A35D1BCB34F800FC2AC7 /* notice_bg_02_l@2x.png in Resources */,
 				A2D95B691BA8F1DD00DC943D /* nf_ios_bg@2x.png in Resources */,
+				A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */,
 				A2D9A35A1BCB34F800FC2AC7 /* menu_01@2x.png in Resources */,
 				A2D9A2F41BCB34F800FC2AC7 /* icon_deposit_01_sel@2x.png in Resources */,
 				A2D9A2F21BCB34F800FC2AC7 /* icon_delete_01@2x.png in Resources */,
@@ -2712,7 +2821,9 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
+				A5E0178F1BCCF6B1007BD4EA /* LoginCertController.m in Sources */,
 				A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */,
+				A5E017821BCCD134007BD4EA /* LoginSimpleVerificationViewController.m in Sources */,
 				A2D7916F1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m in Sources */,
 				A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
@@ -2732,6 +2843,7 @@
 				A2DEAE791B9FE6E600EDCCBA /* HomeViewController.m in Sources */,
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
 				A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */,
+				A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */,
 				177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */,
 				A2DEAE631B9FE6D800EDCCBA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */,
@@ -2800,11 +2912,13 @@
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA4F381BCCDC6C009FB32F /* RegistAccountInputAccountView.m in Sources */,
+				A5E0177C1BCCD134007BD4EA /* LoginAccountVerificationViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,
 				A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */,
 				172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */,
 				A2DEAE5A1B9FE6D800EDCCBA /* UIViewController+ECSlidingViewController.m in Sources */,
+				A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */,
 				A2DEAE641B9FE6D800EDCCBA /* View+MASAdditions.m in Sources */,
 				A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */,
 			);
