@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterAccountViewController">
             <connections>
                 <outlet property="contentView" destination="SIQ-DX-qY3" id="2cU-ev-oo0"/>
+                <outlet property="nextButton" destination="VHN-kg-nyN" id="DAW-h2-2Js"/>
                 <outlet property="scrollView" destination="F3c-p0-pEq" id="Ppd-Fc-u0X"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -65,7 +66,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" id="SIQ-DX-qY3">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>

@@ -10,6 +10,10 @@
 
 @interface RegistCompleteViewController : CommonViewController<UIAlertViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *registCompleteTextLabel;
+@property (strong, nonatomic) IBOutlet UIButton *addAccountButton;
+
+
 - (IBAction)quickViewSettingClick:(id)sender;
 - (IBAction)currentNotiSettingClick:(id)sender;
 - (IBAction)addAccountClick:(id)sender;

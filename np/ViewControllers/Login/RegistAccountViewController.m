@@ -227,6 +227,7 @@
 
 - (void)certInfoSelected:(CertInfo *)certInfo
 {
+//    [self sessionTestRequest];
     // 실제 사용가능한 인증서인지 확인한 후 가입 진행한다.
     NSLog(@"%s, certInfo = %@", __FUNCTION__, certInfo);
     [[CertManager sharedInstance] setCertInfo:certInfo];
@@ -289,8 +290,9 @@
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
 //        [self certMakeSessionRequest];
-        /*
+
         NSString *cookiesString = [response objectForKey:@"Cookie"];
+         /*
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
         // 인증 성공한 이후 휴대폰 인증으로 이동
@@ -512,6 +514,20 @@
     }
     
     self.currentTextField = nil;
+}
+
+#pragma mark - Session Test Code
+- (void)sessionTestRequest
+{
+    HttpRequest *req = [HttpRequest getInstance];
+    
+    [req setDelegate:self selector:@selector(sessionTestResponse:)];
+    [req requestUrl:[NSString stringWithFormat:@"%@/%@", SERVER_URL, @"sessionTest.cmd"] bodyString:@""];
+}
+
+- (void)sessionTestResponse:(NSDictionary *)response
+{
+    NSLog(@"%@", response);
 }
 
 @end

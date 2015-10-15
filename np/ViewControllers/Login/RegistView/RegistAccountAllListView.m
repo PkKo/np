@@ -9,9 +9,6 @@
 #import "RegistAccountAllListView.h"
 #import "RegistAllAccountListCellTableViewCell.h"
 
-#define BACKGROUND_COLOR_SELECTED   [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]
-#define BACKGROUND_COLOR_UNSELECTED [UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]
-
 @implementation RegistAccountAllListView
 
 @synthesize titleLabel;
@@ -65,13 +62,13 @@
     
     if(selectedIndex == indexPath.row)
     {
-        [cell.accountNum setTextColor:BACKGROUND_COLOR_SELECTED];
-        [cell.selectImg setBackgroundColor:BACKGROUND_COLOR_SELECTED];
+        [cell.accountNum setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [cell.selectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
     }
     else
     {
-        [cell.accountNum setTextColor:BACKGROUND_COLOR_UNSELECTED];
-        [cell.selectImg setBackgroundColor:BACKGROUND_COLOR_UNSELECTED];
+        [cell.accountNum setTextColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [cell.selectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
     }
     
     return cell;

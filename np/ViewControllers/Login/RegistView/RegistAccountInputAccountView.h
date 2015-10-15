@@ -10,9 +10,13 @@
 
 @interface RegistAccountInputAccountView : UIView
 
+@property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *certifiedAccountView;
 @property (strong, nonatomic) IBOutlet UIView *addNewAccountView;
+@property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountInput;
+@property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountPassInput;
+@property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountBirthInput;
 
 - (IBAction)changeAccountView:(id)sender;
 @end

@@ -40,8 +40,9 @@
 {
     [super viewDidAppear:animated];
     
-    [self appVersionCheckRequest];
-//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+//    [self appVersionCheckRequest];
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+//    [self sessionTestRequest];
 }
 
 - (void)appVersionCheckRequest
@@ -64,11 +65,16 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        for (NSHTTPCookie *cookie in cookies)
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
-        }
+//        for (NSHTTPCookie *cookie in cookies)
+//        {
+//            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
+//        }
         [self sessionTestRequest];
+//        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//        for (NSHTTPCookie *cookie in [storage cookies])
+//        {
+//            [storage deleteCookie:cookie];
+//        }
     }
     else
     {
@@ -76,7 +82,7 @@
         [alertView show];
     }
     
-//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 - (void)sessionTestRequest

@@ -55,6 +55,10 @@
 // 앱 버전 체크
 #define REQUEST_APP_VERSION         @"EFPU_INITAPP.cmd"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
+#define BUTTON_BGCOLOR_ENABLE       [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1.0f]
+#define BUTTON_BGCOLOR_DISABLE      [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
+#define CIRCLE_BACKGROUND_COLOR_SELECTED   [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]
+#define CIRCLE_BACKGROUND_COLOR_UNSELECTED [UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]
 
 #pragma mark - 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"

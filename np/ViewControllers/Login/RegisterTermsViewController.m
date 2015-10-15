@@ -37,10 +37,7 @@
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
     
-    if(scrollView.frame.size.height < contentView.frame.size.height)
-    {
-        [scrollView setContentSize:contentView.frame.size];
-    }
+    [scrollView setContentSize:contentView.frame.size];
 }
 
 - (void)didReceiveMemoryWarning

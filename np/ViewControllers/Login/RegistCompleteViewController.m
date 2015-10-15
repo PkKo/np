@@ -15,6 +15,9 @@
 
 @implementation RegistCompleteViewController
 
+@synthesize registCompleteTextLabel;
+@synthesize addAccountButton;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -23,6 +26,9 @@
     [self.mNaviView.mMenuButton setHidden:YES];
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
+    
+    [addAccountButton.layer setBorderColor:[UIColor colorWithRed:38.0f/255.0f green:156.0f/255.0f blue:255.0f/255.0f alpha:1.0f].CGColor];
+    [addAccountButton.layer setBorderWidth:1.0f];
 }
 
 - (void)didReceiveMemoryWarning
