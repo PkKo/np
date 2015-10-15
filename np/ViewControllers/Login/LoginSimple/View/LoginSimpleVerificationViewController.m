@@ -9,6 +9,8 @@
 #import "LoginSimpleVerificationViewController.h"
 #import "LoginUtil.h"
 #import "EccEncryptor.h"
+#import "LoginSettingsViewController.h"
+#import "LoginSettingsViewController.h"
 
 @interface LoginSimpleVerificationViewController ()
 
@@ -27,6 +29,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)gotoLoginSettings {
+    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:loginSettings animated:YES];
 }
 
 #pragma mark - Keyboard

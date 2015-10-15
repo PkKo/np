@@ -430,8 +430,9 @@
     
     LoginCertListViewController *certLogin = [[LoginCertListViewController alloc] initWithNibName:@"LoginCertListViewController" bundle:nil];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
-//    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
     [self.navigationController pushViewController:eVC animated:YES];
+    
+    
 }
 
 - (IBAction)gotoAccountLogin:(id)sender {

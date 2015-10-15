@@ -11,6 +11,7 @@
 #import "LoginUtil.h"
 #import "LoginCertController.h"
 #import "StatisticMainUtil.h"
+#import "LoginSettingsViewController.h"
 
 @interface LoginCertListViewController ()
 
@@ -47,6 +48,8 @@
 }
 
 - (IBAction)gotoLoginSettings {
+    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:loginSettings animated:YES];
 }
 
 - (IBAction)gotoNB {

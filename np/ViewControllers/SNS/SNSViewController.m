@@ -78,13 +78,13 @@
     
     KakaoTalkLinkAction *ipadAppAction = [KakaoTalkLinkAction createAppAction:KakaoTalkLinkActionOSPlatformIOS
                                                                    devicetype:KakaoTalkLinkActionDeviceTypePad
-                                                                    execparam:@{@"test1" : @"test1", @"test2" : @"test2"}];
+                                                                    execparam:nil];
     
     
     KakaoTalkLinkObject *appLink = [KakaoTalkLinkObject createAppButton:@"앱으로 연결"
                                                                 actions:@[androidAppAction, iphoneAppAction, ipadAppAction]];
     
-    return @[label, appLink];
+    return @[label];
 }
 
 - (IBAction)shareOnKakaoStory:(id)sender {
@@ -95,7 +95,7 @@
         return;
     }
     
-    [StoryLinkHelper openStoryLinkWithURLString:[self dummyStoryLinkURLString]];
+    [StoryLinkHelper openStoryLinkWithURLString:[self kakaoStoryContent]];
 }
 
 
@@ -130,10 +130,17 @@
     scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
     scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
-    scrapInfo.type          = ScrapTypeArticle;
+    scrapInfo.type          = ScrapTypeVideo;
     
-    return [StoryLinkHelper makeStoryLinkWithPostingText:[NSString stringWithFormat:@"[%@]\n%@",
-                                                          [bundle objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]
+    NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@ https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
+                         [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+                         [self.transactionObject formattedTransactionDate],
+                         [self.transactionObject transactionAccountNumber],
+                         [self.transactionObject transactionDetails],
+                         [self.transactionObject transactionType],
+                         [self.transactionObject formattedTransactionAmount]];
+    
+    return [StoryLinkHelper makeStoryLinkWithPostingText:content
                                              appBundleID:[bundle bundleIdentifier]
                                               appVersion:[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
                                                  appName:[bundle objectForInfoDictionaryKey:@"CFBundleName"]

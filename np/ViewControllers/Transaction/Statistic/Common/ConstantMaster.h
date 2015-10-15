@@ -19,4 +19,21 @@
 #define TIME_ACSENDING_ORDER    @"과거순"
 #define TIME_DECSENDING_ORDER   @"최신순"
 
+#define PREF_KEY_SIMPLE_LOGIN_SETT_PW           @"simpleLoginSettingsKeyPW"
+#define PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES @"simpleLoginSettingsKeyFailedTimes"
+
+#define PREF_KEY_LOGIN_METHOD                   @"loginMethodKey"
+typedef enum LoginMethod {
+    LOGIN_BY_NONE,
+    LOGIN_BY_ACCOUNT,
+    LOGIN_BY_CERTIFICATE,
+    LOGIN_BY_SIMPLEPW,
+    LOGIN_BY_PATTERN
+} LoginMethod;
+
+
+#define ALERT_GOTO_SELF_IDENTIFY    100
+#define ALERT_DO_NOTHING            0
+#define ALERT_SUCCEED_SAVE          1
+
 #endif /* ConstantMaster_h */

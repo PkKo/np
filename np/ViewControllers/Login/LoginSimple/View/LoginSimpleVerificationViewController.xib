@@ -75,6 +75,9 @@
                             <state key="normal" title="로그인 설정" image="icon_depth_03.png">
                                 <color key="titleColor" red="0.70196078429999997" green="0.81960784310000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoLoginSettings" destination="-1" eventType="touchUpInside" id="Uk3-ug-snc"/>
+                            </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="WJ7-ux-SvL">
                             <rect key="frame" x="0.0" y="161" width="249" height="58"/>
@@ -97,6 +100,16 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aPc-QQ-V1K">
+                            <rect key="frame" x="0.0" y="104" width="103" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="87" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="간편비밀번호 관리" image="icon_depth_03.png">
+                                <color key="titleColor" red="0.70196078429999997" green="0.81960784310000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>

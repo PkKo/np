@@ -9,6 +9,7 @@
 #import "LoginAccountVerificationViewController.h"
 #import "LoginUtil.h"
 #import "EccEncryptor.h"
+#import "LoginSettingsViewController.h"
 
 @interface LoginAccountVerificationViewController ()
 
@@ -29,15 +30,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)gotoLoginSettings {
+    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:loginSettings animated:YES];
 }
-*/
 
 #pragma mark - Keyboard
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

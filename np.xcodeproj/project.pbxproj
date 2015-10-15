@@ -429,6 +429,16 @@
 		A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235401BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib */; };
 		A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */; };
 		A2E235471BAAACAF00BAEBEA /* HomeQuickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */; };
+		A538C2DF1BCDE748005E3211 /* LoginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2DD1BCDE748005E3211 /* LoginSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A538C2E01BCDE748005E3211 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2DE1BCDE748005E3211 /* LoginSettingsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A538C2E41BCE2702005E3211 /* CertListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2E21BCE2702005E3211 /* CertListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A538C2E51BCE2702005E3211 /* CertListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2E31BCE2702005E3211 /* CertListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A538C2E91BCE2AC5005E3211 /* CertViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2E71BCE2AC5005E3211 /* CertViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		A538C2EA1BCE2AC5005E3211 /* CertViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2E81BCE2AC5005E3211 /* CertViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		A538C2F01BCE3EC1005E3211 /* SimplePwMgntNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2EE1BCE3EC1005E3211 /* SimplePwMgntNewViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A538C2F11BCE3EC1005E3211 /* SimplePwMgntNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2EF1BCE3EC1005E3211 /* SimplePwMgntNewViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A538C2F51BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2F31BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A538C2F61BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2F41BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A54B3B701BBE169900F883E9 /* ArchivedTransHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B3B6E1BBE169900F883E9 /* ArchivedTransHeaderCell.m */; settings = {ASSET_TAGS = (); }; };
 		A54B3B711BBE169900F883E9 /* ArchivedTransHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B3B6F1BBE169900F883E9 /* ArchivedTransHeaderCell.xib */; settings = {ASSET_TAGS = (); }; };
 		A54B3B741BBE26DE00F883E9 /* ArchivedTransItemRemoveActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54B3B731BBE26DE00F883E9 /* ArchivedTransItemRemoveActionView.m */; settings = {ASSET_TAGS = (); }; };
@@ -1011,6 +1021,21 @@
 		A2E235431BAAACAF00BAEBEA /* HomeQuickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQuickViewController.h; sourceTree = "<group>"; };
 		A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQuickViewController.m; sourceTree = "<group>"; };
 		A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQuickViewController.xib; sourceTree = "<group>"; };
+		A538C2DC1BCDE748005E3211 /* LoginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSettingsViewController.h; sourceTree = "<group>"; };
+		A538C2DD1BCDE748005E3211 /* LoginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSettingsViewController.m; sourceTree = "<group>"; };
+		A538C2DE1BCDE748005E3211 /* LoginSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSettingsViewController.xib; sourceTree = "<group>"; };
+		A538C2E11BCE2702005E3211 /* CertListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertListViewController.h; sourceTree = "<group>"; };
+		A538C2E21BCE2702005E3211 /* CertListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertListViewController.m; sourceTree = "<group>"; };
+		A538C2E31BCE2702005E3211 /* CertListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertListViewController.xib; sourceTree = "<group>"; };
+		A538C2E61BCE2AC5005E3211 /* CertViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertViewCell.h; sourceTree = "<group>"; };
+		A538C2E71BCE2AC5005E3211 /* CertViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertViewCell.m; sourceTree = "<group>"; };
+		A538C2E81BCE2AC5005E3211 /* CertViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertViewCell.xib; sourceTree = "<group>"; };
+		A538C2ED1BCE3EC1005E3211 /* SimplePwMgntNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePwMgntNewViewController.h; path = SimplePwMgmt/View/SimplePwMgntNewViewController.h; sourceTree = "<group>"; };
+		A538C2EE1BCE3EC1005E3211 /* SimplePwMgntNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePwMgntNewViewController.m; path = SimplePwMgmt/View/SimplePwMgntNewViewController.m; sourceTree = "<group>"; };
+		A538C2EF1BCE3EC1005E3211 /* SimplePwMgntNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SimplePwMgntNewViewController.xib; path = SimplePwMgmt/View/SimplePwMgntNewViewController.xib; sourceTree = "<group>"; };
+		A538C2F21BCE3FC5005E3211 /* SimplePwMgntChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePwMgntChangeViewController.h; path = SimplePwMgmt/View/SimplePwMgntChangeViewController.h; sourceTree = "<group>"; };
+		A538C2F31BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePwMgntChangeViewController.m; path = SimplePwMgmt/View/SimplePwMgntChangeViewController.m; sourceTree = "<group>"; };
+		A538C2F41BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SimplePwMgntChangeViewController.xib; path = SimplePwMgmt/View/SimplePwMgntChangeViewController.xib; sourceTree = "<group>"; };
 		A54B3B6D1BBE169900F883E9 /* ArchivedTransHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArchivedTransHeaderCell.h; path = StorageBox/View/ArchivedTransHeaderCell.h; sourceTree = "<group>"; };
 		A54B3B6E1BBE169900F883E9 /* ArchivedTransHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArchivedTransHeaderCell.m; path = StorageBox/View/ArchivedTransHeaderCell.m; sourceTree = "<group>"; };
 		A54B3B6F1BBE169900F883E9 /* ArchivedTransHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArchivedTransHeaderCell.xib; path = StorageBox/View/ArchivedTransHeaderCell.xib; sourceTree = "<group>"; };
@@ -1993,6 +2018,7 @@
 		A2DF41001BAF8577001389E7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A538C2D91BCDE728005E3211 /* EnvSettings */,
 				A5E0176A1BCCD134007BD4EA /* LoginAccount */,
 				A5E0176F1BCCD134007BD4EA /* LoginCertificate */,
 				A5E017771BCCD134007BD4EA /* LoginSimple */,
@@ -2070,6 +2096,60 @@
 			children = (
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		A538C2D91BCDE728005E3211 /* EnvSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A538C2EB1BCE3DC2005E3211 /* SimplePwMgmt */,
+				A538C2DA1BCDE728005E3211 /* LoginSettings */,
+			);
+			path = EnvSettings;
+			sourceTree = "<group>";
+		};
+		A538C2DA1BCDE728005E3211 /* LoginSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A538C2DB1BCDE728005E3211 /* View */,
+			);
+			path = LoginSettings;
+			sourceTree = "<group>";
+		};
+		A538C2DB1BCDE728005E3211 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A538C2DC1BCDE748005E3211 /* LoginSettingsViewController.h */,
+				A538C2DD1BCDE748005E3211 /* LoginSettingsViewController.m */,
+				A538C2DE1BCDE748005E3211 /* LoginSettingsViewController.xib */,
+				A538C2E11BCE2702005E3211 /* CertListViewController.h */,
+				A538C2E21BCE2702005E3211 /* CertListViewController.m */,
+				A538C2E31BCE2702005E3211 /* CertListViewController.xib */,
+				A538C2E61BCE2AC5005E3211 /* CertViewCell.h */,
+				A538C2E71BCE2AC5005E3211 /* CertViewCell.m */,
+				A538C2E81BCE2AC5005E3211 /* CertViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A538C2EB1BCE3DC2005E3211 /* SimplePwMgmt */ = {
+			isa = PBXGroup;
+			children = (
+				A538C2EC1BCE3E1B005E3211 /* View */,
+			);
+			name = SimplePwMgmt;
+			sourceTree = "<group>";
+		};
+		A538C2EC1BCE3E1B005E3211 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A538C2ED1BCE3EC1005E3211 /* SimplePwMgntNewViewController.h */,
+				A538C2EE1BCE3EC1005E3211 /* SimplePwMgntNewViewController.m */,
+				A538C2EF1BCE3EC1005E3211 /* SimplePwMgntNewViewController.xib */,
+				A538C2F21BCE3FC5005E3211 /* SimplePwMgntChangeViewController.h */,
+				A538C2F31BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m */,
+				A538C2F41BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		A54B94C31BAA454200D5D99B /* Chart */ = {
@@ -2450,6 +2530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2D9A2FC1BCB34F800FC2AC7 /* icon_depth_04@2x.png in Resources */,
+				A538C2F61BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib in Resources */,
 				A2D95B031BA8F1DD00DC943D /* emptynum1_NSHC.png in Resources */,
 				A2D9A2E21BCB34F800FC2AC7 /* button_08_on@2x.png in Resources */,
 				A2D9A2F91BCB34F800FC2AC7 /* icon_depth_01@2x.png in Resources */,
@@ -2627,6 +2708,7 @@
 				A2D9A2D21BCB34F800FC2AC7 /* botton_pattern@2x.png in Resources */,
 				A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */,
 				A2D95B341BA8F1DD00DC943D /* NFPadBtnNext@2x.png in Resources */,
+				A538C2EA1BCE2AC5005E3211 /* CertViewCell.xib in Resources */,
 				A2D95B8D1BA8F1DD00DC943D /* nf_ios_icon_shift@3x.png in Resources */,
 				A2D9A3391BCB34F800FC2AC7 /* icon_top_01_on@2x.png in Resources */,
 				A2D9A35C1BCB34F800FC2AC7 /* menu_tab_02@2x.png in Resources */,
@@ -2666,6 +2748,7 @@
 				A2D9A3461BCB34F800FC2AC7 /* icon_withdraw_01_sel@2x.png in Resources */,
 				A54B94E31BAA841C00D5D99B /* SNSViewController.xib in Resources */,
 				A2D95B461BA8F1DD00DC943D /* NFPadbtn_ok_wide_pressed@2x.png in Resources */,
+				A538C2E01BCDE748005E3211 /* LoginSettingsViewController.xib in Resources */,
 				A2D95B161BA8F1DD00DC943D /* NFPadchar.png in Resources */,
 				A2D9A3021BCB34F800FC2AC7 /* icon_indicator_dft@2x.png in Resources */,
 				A2D90D671BB2731900315425 /* RegistCertListView.xib in Resources */,
@@ -2779,6 +2862,7 @@
 				A2D95B971BA8F1DD00DC943D /* nf_ok@3x.png in Resources */,
 				A2D9A2D81BCB34F800FC2AC7 /* button_03_on@2x.png in Resources */,
 				A2D9A2E91BCB34F800FC2AC7 /* icon_cd_01_dft@2x.png in Resources */,
+				A538C2E51BCE2702005E3211 /* CertListViewController.xib in Resources */,
 				A2D95B831BA8F1DD00DC943D /* nf_ios_btn@3x.png in Resources */,
 				A2D95B671BA8F1DD00DC943D /* NFtopbg.png in Resources */,
 				A2D9A2E71BCB34F800FC2AC7 /* icon_app_zone_01_on@2x.png in Resources */,
@@ -2786,6 +2870,7 @@
 				A2D95B441BA8F1DD00DC943D /* NFPadbg_wide@2x.png in Resources */,
 				A2D95B0C1BA8F1DD00DC943D /* click3.wav in Resources */,
 				A2D9A32F1BCB34F800FC2AC7 /* icon_sticker_03@2x.png in Resources */,
+				A538C2F11BCE3EC1005E3211 /* SimplePwMgntNewViewController.xib in Resources */,
 				A2D95B141BA8F1DD00DC943D /* NFPadBtnNext.png in Resources */,
 				A2D95B271BA8F1DD00DC943D /* NFPadbtn_wide.png in Resources */,
 				A2D95B8E1BA8F1DD00DC943D /* nf_ios_icon_shift_pressed@3x.png in Resources */,
@@ -2854,6 +2939,7 @@
 				A5E2C4561BB2921A006EE828 /* StorageBoxUtil.m in Sources */,
 				A2DD87481BC216AE0013470D /* RegisterAccountViewController.m in Sources */,
 				A5ED26691BA943C0007E6689 /* StatisticMainViewController.m in Sources */,
+				A538C2F51BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m in Sources */,
 				A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */,
 				A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */,
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
@@ -2862,6 +2948,7 @@
 				17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */,
 				A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */,
 				A2D90D6C1BB2745000315425 /* CertTableCell.m in Sources */,
+				A538C2E91BCE2AC5005E3211 /* CertViewCell.m in Sources */,
 				A2D791741BBD202800E817E7 /* HomeTimeLineTableViewCell.m in Sources */,
 				A5EA7E361BBBA09C00626C74 /* ArchivedTransItemCell.m in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
@@ -2888,8 +2975,10 @@
 				A2D95BA11BA8FF1000DC943D /* HomeTimeLineView.m in Sources */,
 				A2DA4F251BCC9761009FB32F /* RegistAccountAllListView.m in Sources */,
 				A2D95B051BA8F1DD00DC943D /* EccEncryptor.m in Sources */,
+				A538C2DF1BCDE748005E3211 /* LoginSettingsViewController.m in Sources */,
 				A2DEAE571B9FE6D800EDCCBA /* ECSlidingInteractiveTransition.m in Sources */,
 				A2DEAE7B1B9FE6E600EDCCBA /* MenuViewController.m in Sources */,
+				A538C2E41BCE2702005E3211 /* CertListViewController.m in Sources */,
 				A2D95B511BA8F1DD00DC943D /* nFilterCharForPad.m in Sources */,
 				A54B3B791BBE273B00F883E9 /* ArchivedTransItemRemoveAllSelectView.m in Sources */,
 				179711A31BB80869007131A5 /* ChartDataView.m in Sources */,
@@ -2912,6 +3001,7 @@
 				A2DEAE551B9FE6D800EDCCBA /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				A2DEAE7D1B9FE6E600EDCCBA /* SplashViewController.m in Sources */,
 				A2DA4F381BCCDC6C009FB32F /* RegistAccountInputAccountView.m in Sources */,
+				A538C2F01BCE3EC1005E3211 /* SimplePwMgntNewViewController.m in Sources */,
 				A5E0177C1BCCD134007BD4EA /* LoginAccountVerificationViewController.m in Sources */,
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,

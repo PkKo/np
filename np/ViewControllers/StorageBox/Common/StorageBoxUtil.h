@@ -14,7 +14,8 @@
 
 @interface StorageBoxUtil : NSObject
 
-#pragma mark - Memo Composer & SNS
+#pragma mark - Memo Composer & SNS & Cert List
+- (void)showCertListInViewController:(UIViewController *)viewController;
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 - (void)showSNSShareInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 

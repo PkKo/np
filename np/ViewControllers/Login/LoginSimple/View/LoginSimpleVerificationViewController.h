@@ -12,5 +12,5 @@
 @interface LoginSimpleVerificationViewController : CommonViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *pwTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fakeNoticeTextField;
-
+- (IBAction)gotoLoginSettings;
 @end

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ChartDataItemView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *itemColor;
+@property (weak, nonatomic) IBOutlet UIButton *itemColor;
 @property (weak, nonatomic) IBOutlet UILabel *itemName;
 @property (weak, nonatomic) IBOutlet UILabel *itemValue;
 
+- (void)updateUI;
 @end
