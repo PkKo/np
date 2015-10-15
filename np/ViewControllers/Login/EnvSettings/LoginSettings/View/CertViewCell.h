@@ -10,4 +10,10 @@
 
 @interface CertViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *certName;
+@property (weak, nonatomic) IBOutlet UILabel *certIssuer;
+@property (weak, nonatomic) IBOutlet UILabel *certType;
+@property (weak, nonatomic) IBOutlet UILabel *issueDate;
+@property (weak, nonatomic) IBOutlet UILabel *expiryDate;
+
 @end

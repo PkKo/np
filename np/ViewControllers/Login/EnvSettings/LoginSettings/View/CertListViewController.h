@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CertListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray * certificates; // array of CertInfo
+
+@property (weak, nonatomic) IBOutlet UITableView *certTableView;
 - (IBAction)closeCertListView;
 
 @end

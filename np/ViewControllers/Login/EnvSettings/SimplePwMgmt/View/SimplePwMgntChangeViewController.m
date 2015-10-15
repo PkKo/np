@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mTitleLabel setText:@"간편비밀번호 관리"];
 }
 
 - (void)didReceiveMemoryWarning {

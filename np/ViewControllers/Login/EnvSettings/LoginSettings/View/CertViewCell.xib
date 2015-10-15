@@ -126,6 +126,13 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="certIssuer" destination="XgN-MY-rhd" id="fCw-xu-odw"/>
+                <outlet property="certName" destination="7h9-GP-0TY" id="ZwM-Zx-vIj"/>
+                <outlet property="certType" destination="nUw-vN-eZt" id="Nif-Ts-vXI"/>
+                <outlet property="expiryDate" destination="vAb-hq-M0D" id="BI3-Lr-gvf"/>
+                <outlet property="issueDate" destination="qRf-ZA-3Js" id="vyk-Hn-Fl1"/>
+            </connections>
             <point key="canvasLocation" x="253.5" y="436"/>
         </tableViewCell>
     </objects>

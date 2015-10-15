@@ -13,6 +13,7 @@
 #import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
 #import "ConstantMaster.h"
+#import "LoginCertController.h"
 
 #define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
@@ -37,6 +38,11 @@
     [self selectLoginBy:savedLoginMethod];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self updateAfterChangingSetting];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -58,7 +64,23 @@
 }
 
 - (IBAction)showCertList {
-    [[[StorageBoxUtil alloc] init] showCertListInViewController:self];
+    NSArray * certificates = [[[LoginCertController alloc] init] getCertList];
+    if (certificates) {
+        [[[StorageBoxUtil alloc] init] showCertListInViewController:self dataSource:certificates];
+    } else {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"등록된 공인인증서가 없습니다.\n공인인증센터로 이동하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            NSLog(@"공인인증센터로 이동");
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Simple Login
@@ -85,10 +107,20 @@
 }
 
 - (IBAction)doneLoginSettings {
-    if (selectedLoginMethod != LOGIN_BY_NONE) {
-        [[[LoginUtil alloc] init] saveLoginMethod:selectedLoginMethod];
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    CertInfo * savedCertToLogin = [util getCertToLogin];
+    
+    if (selectedLoginMethod == LOGIN_BY_CERTIFICATE && !savedCertToLogin) {
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"공인인증서를 선택해 주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+        
+    } else {
+        
+        [util saveLoginMethod:selectedLoginMethod];
+        [self removeLoginSettings];
     }
-    [self removeLoginSettings];
 }
 
 #pragma mark - UI
@@ -108,9 +140,24 @@
     self.patternRadioBtn.layer.cornerRadius = self.accountRadioBtn.layer.frame.size.width / 2;
     
     // oval buttons
-    self.certMgmtCenterBtn.layer.cornerRadius   = 10;
-    self.simpleLoginMgmtBtn.layer.cornerRadius  = 10;
-    self.patternLoginMgmtBtn.layer.cornerRadius = 10;
+    self.certMgmtCenterBtn.layer.cornerRadius   = 7;
+    self.simpleLoginMgmtBtn.layer.cornerRadius  = 7;
+    self.patternLoginMgmtBtn.layer.cornerRadius = 7;
+}
+
+- (void)updateAfterChangingSetting {
+    
+    LoginUtil * util            = [[LoginUtil alloc] init];
+    CertInfo * savedCertToLogin = [util getCertToLogin];
+    if (savedCertToLogin) {
+        [self.certListBtn setTitle:savedCertToLogin.subjectDN2 forState:UIControlStateNormal];
+    }
+    
+    NSString * simplePw     = [util getSimplePassword];
+    [self.simpleLoginBtn setEnabled:simplePw ? YES : NO];
+    
+    NSString * patternPw    = [util getPatternLoginPassword];
+    [self.patternLoginBtn setEnabled:patternPw ? YES : NO];
     
 }
 

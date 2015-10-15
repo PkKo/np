@@ -9,6 +9,9 @@
 #import "CertListViewController.h"
 #import "StorageBoxUtil.h"
 #import "CertViewCell.h"
+#import "LoginCertController.h"
+#import "StatisticMainUtil.h"
+#import "LoginUtil.h"
 
 @interface CertListViewController ()
 
@@ -42,7 +45,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return [self.certificates count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -55,10 +58,27 @@
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:@"CertViewCell" owner:self options:nil];
         cell            = (CertViewCell *)[nibArr objectAtIndex:0];
     }
+    
+    CertInfo * certInfo = [self.certificates objectAtIndex:[indexPath row]];
+    
+    NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd"];
+    cell.certName.text      = certInfo.subjectDN2;
+    cell.certIssuer.text    = certInfo.issuer;
+    cell.certType.text      = certInfo.policy;
+    cell.issueDate.text     = [formatter stringFromDate:certInfo.dtNotBefore];
+    cell.expiryDate.text    = [formatter stringFromDate:certInfo.dtNotAfter];
+    
     return cell;
 }
 
 - (IBAction)closeCertListView {
+    
+    NSIndexPath * indexPath = [self.certTableView indexPathForSelectedRow];
+    if (indexPath) {
+        NSLog(@"selected row: %d", [indexPath row]);
+        [[[LoginUtil alloc] init] saveCertToLogin:(CertInfo *)[self.certificates objectAtIndex:[indexPath row]]];
+    }
+    
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

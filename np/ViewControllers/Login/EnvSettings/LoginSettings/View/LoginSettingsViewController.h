@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface LoginSettingsViewController : CommonViewController
+@interface LoginSettingsViewController : CommonViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *accountRadioBtn;
 @property (weak, nonatomic) IBOutlet UIButton *accountCheckBtn;

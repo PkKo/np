@@ -11,6 +11,6 @@
 
 @interface LoginCertController : NSObject
 
-- (CertInfo *)getCert;
+- (NSArray *)getCertList;
 - (BOOL)checkPasswordOfCert:(NSString *)password;
 @end

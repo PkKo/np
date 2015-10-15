@@ -13,6 +13,7 @@
 #import "nFilterNumForPad.h"
 #import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
+#import "LoginCertController.h"
 
 @implementation LoginUtil
 
@@ -30,6 +31,33 @@
     } else {
         return LOGIN_BY_NONE;
     }
+}
+
+#pragma mark - Certificate Login
+- (void)removeCertToLogin {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:PREF_KEY_CERT_TO_LOGIN];
+    [prefs synchronize];
+}
+
+- (CertInfo *)getCertToLogin {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    NSString * certificateName = [prefs objectForKey:PREF_KEY_CERT_TO_LOGIN];
+    
+    NSArray * certificates = [[[LoginCertController alloc] init] getCertList];
+    for (CertInfo * cert in certificates) {
+        if ([cert.subjectDN2 isEqualToString:certificateName]) {
+            return cert;
+        }
+    }
+    return nil;
+}
+
+- (void)saveCertToLogin:(CertInfo *)cert {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:cert.subjectDN2 forKey:PREF_KEY_CERT_TO_LOGIN];
+    [prefs synchronize];
 }
 
 #pragma mark - Simple Login
@@ -74,6 +102,15 @@
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES];
     [prefs synchronize];
+}
+
+#pragma mark - Pattern Login
+- (NSString *)getPatternLoginPassword {
+    return nil;
+}
+
+- (void)savePatternLoginPassword:(NSString *)pw {
+    
 }
 
 #pragma mark - Secure Keyboard

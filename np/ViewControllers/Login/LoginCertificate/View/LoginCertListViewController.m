@@ -85,8 +85,7 @@
 #pragma mark - Refrest View
 - (void)refreshView {
     
-    LoginCertController * controller = [[LoginCertController alloc] init];
-    CertInfo * certInfo = [controller getCert];
+    CertInfo * certInfo = [[[LoginUtil alloc] init] getCertToLogin];
     
     if (certInfo) {
         

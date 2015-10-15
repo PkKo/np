@@ -193,9 +193,10 @@
 }
 
 #pragma mark - Memo Composer & SNS & Cert List
-- (void)showCertListInViewController:(UIViewController *)viewController {
+- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates {
     
     CertListViewController * certList = [[CertListViewController alloc] initWithNibName:@"CertListViewController" bundle:nil];
+    [certList setCertificates:certificates];
     [self showViewController:certList inParentViewController:viewController];
 }
 
