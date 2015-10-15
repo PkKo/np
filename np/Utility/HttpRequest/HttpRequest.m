@@ -84,10 +84,10 @@
     [requestUrl setHTTPMethod:@"POST"];
     //dictionary 형태를 JSON data로 바꿔준다
     postData = [bodyString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] != nil)
-    {
-        [requestUrl setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] forHTTPHeaderField:@"CooKie"];
-    }
+//    if([[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] != nil)
+//    {
+//        [requestUrl setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] forHTTPHeaderField:@"CooKie"];
+//    }
     //data를 헤더에 붙여준다
     [requestUrl setHTTPBody:postData];
     
@@ -143,6 +143,8 @@
 #pragma mark - connection response
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)mResponse
 {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)mResponse;
+    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, httpResponse.allHeaderFields);
     //데이터를 전송받기 전 헤더를 받아온다
     self.response = mResponse;
 }
@@ -166,7 +168,7 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     //데이터 전송이 끝났을 때 호출된다. 데이터 구성을 한다. 파싱을 같이 하자
-    //NSLog(@"receivedData = %@", receivedData);
+//    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, receivedData);
     result = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     
     NSLog(@"didFinishLoading result = %@", result);

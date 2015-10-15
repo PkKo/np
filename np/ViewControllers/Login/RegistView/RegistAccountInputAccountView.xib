@@ -11,11 +11,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2Zs-Ax-hiF">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="2Zs-Ax-hiF">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" id="B5d-Ef-hi7">
+                        <view contentMode="scaleToFill" id="B5d-Ef-hi7">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
@@ -118,8 +118,8 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" id="Gbs-do-HCd">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
+                        <view hidden="YES" contentMode="scaleToFill" id="Gbs-do-HCd">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" id="OvK-2o-JMO">
@@ -175,27 +175,44 @@
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌번호 입력(- 없이 입력)" minimumFontSize="17" id="wn2-yK-Vnn" customClass="CommonTextField">
                                             <rect key="frame" x="18" y="46" width="248" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌비밀번호(숫자 4자리)" minimumFontSize="17" id="uqI-Qi-Usc" customClass="CommonTextField">
                                             <rect key="frame" x="18" y="95" width="248" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="생년월일(년월일 숫자6자리)" minimumFontSize="17" id="63o-Mx-UJz" customClass="CommonTextField">
                                             <rect key="frame" x="18" y="144" width="248" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*등록 가능한 계좌는 입출식, 수익증권, 신탁, 외환 계좌만 가능합니다." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="fA1-QC-Cr1">
+                                    <rect key="frame" x="18" y="342" width="284" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*계좌비밀번호 오류 3회 초과 시 서비스가 제한됩니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="nnf-Ml-yB4">
+                                    <rect key="frame" x="18" y="378" width="284" height="16"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -209,6 +226,9 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addNewAccountBirthInput" destination="63o-Mx-UJz" id="kIW-05-Aok"/>
+                <outlet property="addNewAccountInput" destination="wn2-yK-Vnn" id="fPE-NV-3Sg"/>
+                <outlet property="addNewAccountPassInput" destination="uqI-Qi-Usc" id="QRe-Hq-JJG"/>
                 <outlet property="addNewAccountView" destination="Gbs-do-HCd" id="e4E-nc-SyH"/>
                 <outlet property="certifiedAccountView" destination="B5d-Ef-hi7" id="gma-bd-byW"/>
                 <outlet property="scrollView" destination="2Zs-Ax-hiF" id="kEc-1Q-bp5"/>

@@ -18,7 +18,7 @@ typedef enum HomeViewType
     INBOX
 } HomeViewType;
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController<IBInboxProtocol>
 
 @property (assign, nonatomic) HomeViewType viewType;
 // 타임라인 탭

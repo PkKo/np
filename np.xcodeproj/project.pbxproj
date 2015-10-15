@@ -355,10 +355,12 @@
 		A2DA4F381BCCDC6C009FB32F /* RegistAccountInputAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA4F371BCCDC6C009FB32F /* RegistAccountInputAccountView.m */; settings = {ASSET_TAGS = (); }; };
 		A2DA4F3A1BCCDC81009FB32F /* RegistAccountInputAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA4F391BCCDC81009FB32F /* RegistAccountInputAccountView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F3C1BCCF20F009FB32F /* SystemConfiguration.framework */; };
-		A2DA4F3E1BCCF22A009FB32F /* IBNgmService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */; };
 		A2DA68C91BA116CB006F5F4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */; };
 		A2DA68CB1BA116D1006F5F4A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CA1BA116D1006F5F4A /* Security.framework */; };
 		A2DA68CF1BA13F85006F5F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DA68CE1BA13F85006F5F4A /* Foundation.framework */; };
+		A2DB7CA11BCE0EC60088D844 /* RegistAccountOptionSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DB7CA01BCE0EC60088D844 /* RegistAccountOptionSettingView.m */; settings = {ASSET_TAGS = (); }; };
+		A2DB7CA31BCE0EE10088D844 /* RegistAccountOptionSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DB7CA21BCE0EE10088D844 /* RegistAccountOptionSettingView.xib */; settings = {ASSET_TAGS = (); }; };
+		A2DB7CA61BCE12BF0088D844 /* StrokeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DB7CA51BCE12BF0088D844 /* StrokeView.m */; settings = {ASSET_TAGS = (); }; };
 		A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBC3981BBE514600FFF357 /* IndexPathButton.m */; settings = {ASSET_TAGS = (); }; };
 		A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A2DD87441BC2155A0013470D /* RegisterTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -414,6 +416,7 @@
 		A2DF410A1BAF99D2001389E7 /* RegistTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DF41091BAF99D2001389E7 /* RegistTabView.m */; };
 		A2DF410C1BAF99DE001389E7 /* RegistTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DF410B1BAF99DE001389E7 /* RegistTabView.xib */; };
 		A2DF410E1BAFBD00001389E7 /* CarrierList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2DF410D1BAFBD00001389E7 /* CarrierList.plist */; };
+		A2DFB5221BCF714600FB440B /* IBNgmService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DFB5211BCF714600FB440B /* IBNgmService.framework */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7111BB0EAC800838E09 /* MenuTableEtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFD7101BB0EAC800838E09 /* MenuTableEtcView.m */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7131BB0EAD600838E09 /* MenuTableEtcView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFD7121BB0EAD600838E09 /* MenuTableEtcView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7171BB0F1A100838E09 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFD7161BB0F1A100838E09 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -871,7 +874,6 @@
 		A2DA2BDE1BA6A63A00E6BBDC /* CertificateRoamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingViewController.h; sourceTree = "<group>"; };
 		A2DA2BDF1BA6A63A00E6BBDC /* CertificateRoamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingViewController.m; sourceTree = "<group>"; };
 		A2DA2BE01BA6A63A00E6BBDC /* CertificateRoamingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingViewController.xib; sourceTree = "<group>"; };
-		A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IBNgmService.framework; sourceTree = "<group>"; };
 		A2DA4F231BCC9761009FB32F /* RegistAccountAllListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountAllListView.h; sourceTree = "<group>"; };
 		A2DA4F241BCC9761009FB32F /* RegistAccountAllListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountAllListView.m; sourceTree = "<group>"; };
 		A2DA4F261BCC9785009FB32F /* RegistAccountAllListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountAllListView.xib; sourceTree = "<group>"; };
@@ -889,6 +891,11 @@
 		A2DA68C81BA116CB006F5F4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A2DA68CA1BA116D1006F5F4A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A2DA68CE1BA13F85006F5F4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A2DB7C9F1BCE0EC60088D844 /* RegistAccountOptionSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountOptionSettingView.h; sourceTree = "<group>"; };
+		A2DB7CA01BCE0EC60088D844 /* RegistAccountOptionSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountOptionSettingView.m; sourceTree = "<group>"; };
+		A2DB7CA21BCE0EE10088D844 /* RegistAccountOptionSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountOptionSettingView.xib; sourceTree = "<group>"; };
+		A2DB7CA41BCE12BF0088D844 /* StrokeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrokeView.h; sourceTree = "<group>"; };
+		A2DB7CA51BCE12BF0088D844 /* StrokeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrokeView.m; sourceTree = "<group>"; };
 		A2DBC3971BBE514600FFF357 /* IndexPathButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPathButton.h; sourceTree = "<group>"; };
 		A2DBC3981BBE514600FFF357 /* IndexPathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPathButton.m; sourceTree = "<group>"; };
 		A2DD87401BC2155A0013470D /* RegisterTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTermsViewController.h; sourceTree = "<group>"; };
@@ -998,6 +1005,7 @@
 		A2DF41091BAF99D2001389E7 /* RegistTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistTabView.m; sourceTree = "<group>"; };
 		A2DF410B1BAF99DE001389E7 /* RegistTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistTabView.xib; sourceTree = "<group>"; };
 		A2DF410D1BAFBD00001389E7 /* CarrierList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CarrierList.plist; sourceTree = "<group>"; };
+		A2DFB5211BCF714600FB440B /* IBNgmService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IBNgmService.framework; sourceTree = "<group>"; };
 		A2DFD70F1BB0EAC800838E09 /* MenuTableEtcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableEtcView.h; sourceTree = "<group>"; };
 		A2DFD7101BB0EAC800838E09 /* MenuTableEtcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableEtcView.m; sourceTree = "<group>"; };
 		A2DFD7121BB0EAD600838E09 /* MenuTableEtcView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableEtcView.xib; sourceTree = "<group>"; };
@@ -1121,9 +1129,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2DA4F3E1BCCF22A009FB32F /* IBNgmService.framework in Frameworks */,
 				A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */,
 				A2DA4F351BCCDC0D009FB32F /* QuartzCore.framework in Frameworks */,
+				A2DFB5221BCF714600FB440B /* IBNgmService.framework in Frameworks */,
 				A2DA4F291BCCA287009FB32F /* CFNetwork.framework in Frameworks */,
 				A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */,
 				A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */,
@@ -1562,14 +1570,6 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
-		A2DA4F201BCC90E6009FB32F /* IBPush */ = {
-			isa = PBXGroup;
-			children = (
-				A2DA4F211BCC90E6009FB32F /* IBNgmService.framework */,
-			);
-			path = IBPush;
-			sourceTree = "<group>";
-		};
 		A2DA4F2A1BCCA5D5009FB32F /* RegistTableCellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1821,7 +1821,7 @@
 			children = (
 				A2DEAE131B9FE6CC00EDCCBA /* BTW-SSLSign */,
 				A2D95A371BA8F1DD00DC943D /* nFilter */,
-				A2DA4F201BCC90E6009FB32F /* IBPush */,
+				A2DFB5201BCF714600FB440B /* IBPush */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1865,6 +1865,8 @@
 				A2D9A3661BCB7CBD00FC2AC7 /* CommonTextField.m */,
 				A2DA4F301BCCC246009FB32F /* CircleView.h */,
 				A2DA4F311BCCC246009FB32F /* CircleView.m */,
+				A2DB7CA41BCE12BF0088D844 /* StrokeView.h */,
+				A2DB7CA51BCE12BF0088D844 /* StrokeView.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2067,9 +2069,20 @@
 				A2DA4F361BCCDC6C009FB32F /* RegistAccountInputAccountView.h */,
 				A2DA4F371BCCDC6C009FB32F /* RegistAccountInputAccountView.m */,
 				A2DA4F391BCCDC81009FB32F /* RegistAccountInputAccountView.xib */,
+				A2DB7C9F1BCE0EC60088D844 /* RegistAccountOptionSettingView.h */,
+				A2DB7CA01BCE0EC60088D844 /* RegistAccountOptionSettingView.m */,
+				A2DB7CA21BCE0EE10088D844 /* RegistAccountOptionSettingView.xib */,
 				A2DA4F2A1BCCA5D5009FB32F /* RegistTableCellView */,
 			);
 			path = RegistView;
+			sourceTree = "<group>";
+		};
+		A2DFB5201BCF714600FB440B /* IBPush */ = {
+			isa = PBXGroup;
+			children = (
+				A2DFB5211BCF714600FB440B /* IBNgmService.framework */,
+			);
+			path = IBPush;
 			sourceTree = "<group>";
 		};
 		A2DFD7141BB0F19100838E09 /* KeyChainItemWrapper */ = {
@@ -2626,6 +2639,7 @@
 				A2D95B6C1BA8F1DD00DC943D /* nf_ios_btn_cancel@2x.png in Resources */,
 				A2D95B101BA8F1DD00DC943D /* NFPadbtn.png in Resources */,
 				A2D9A2F71BCB34F800FC2AC7 /* icon_deposit_03_dft@2x.png in Resources */,
+				A2DB7CA31BCE0EE10088D844 /* RegistAccountOptionSettingView.xib in Resources */,
 				A2D9A32D1BCB34F800FC2AC7 /* icon_sticker_01@2x.png in Resources */,
 				A2D95B481BA8F1DD00DC943D /* NFPadbtn_wide_pressed@2x.png in Resources */,
 				A2D95B131BA8F1DD00DC943D /* NFPadbtn_pressed.png in Resources */,
@@ -2921,6 +2935,7 @@
 				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,
 				A54B3B701BBE169900F883E9 /* ArchivedTransHeaderCell.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
+				A2DB7CA11BCE0EC60088D844 /* RegistAccountOptionSettingView.m in Sources */,
 				A2D95B021BA8F1DD00DC943D /* NSStringKNAdditions.m in Sources */,
 				A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */,
 				A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */,
@@ -2969,6 +2984,7 @@
 				A2DFD7111BB0EAC800838E09 /* MenuTableEtcView.m in Sources */,
 				A2DA4F2E1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.m in Sources */,
 				A2D95B041BA8F1DD00DC943D /* KnmRepUnicode.m in Sources */,
+				A2DB7CA61BCE12BF0088D844 /* StrokeView.m in Sources */,
 				A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */,
 				A2DEAE611B9FE6D800EDCCBA /* MASViewConstraint.m in Sources */,
 				A2DEADEB1B9FE68600EDCCBA /* main.m in Sources */,

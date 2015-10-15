@@ -8,15 +8,18 @@
 
 #import "CommonViewController.h"
 #import "RegistAccountAllListView.h"
+#import "RegistAccountInputAccountView.h"
 
-@interface RegisterAccountViewController : CommonViewController
+@interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate>
 {
     BOOL isCertMode;
     RegistAccountAllListView *allListView;
+    RegistAccountInputAccountView *inputAccountView;
     NSMutableArray *allAccountList;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
 - (IBAction)nextButtonClick:(id)sender;
 @end

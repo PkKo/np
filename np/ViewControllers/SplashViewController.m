@@ -42,11 +42,13 @@
     
     [self appVersionCheckRequest];
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+//    [self sessionTestRequest];
 }
 
 - (void)appVersionCheckRequest
 {
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[CommonUtil getDeviceUUID] forKey:REQUEST_APP_VERSION_UUID];
     [reqBody setObject:[CommonUtil getAppVersion] forKey:REQUEST_APP_VERSION_APPVER];
     [reqBody setObject:@"N" forKey:@"forceUpdate"];
     [reqBody setObject:@"N" forKey:@"lpType"];
@@ -64,11 +66,16 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        for (NSHTTPCookie *cookie in cookies)
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
-        }
-        [self sessionTestRequest];
+//        for (NSHTTPCookie *cookie in cookies)
+//        {
+//            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
+//        }
+//        [self sessionTestRequest];
+//        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//        for (NSHTTPCookie *cookie in [storage cookies])
+//        {
+//            [storage deleteCookie:cookie];
+//        }
     }
     else
     {
@@ -76,7 +83,7 @@
         [alertView show];
     }
     
-//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 - (void)sessionTestRequest
