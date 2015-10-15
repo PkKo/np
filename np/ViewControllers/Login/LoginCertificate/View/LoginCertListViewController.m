@@ -11,6 +11,7 @@
 #import "LoginUtil.h"
 #import "LoginCertController.h"
 #import "StatisticMainUtil.h"
+#import "LoginSettingsViewController.h"
 
 @interface LoginCertListViewController ()
 
@@ -47,6 +48,8 @@
 }
 
 - (IBAction)gotoLoginSettings {
+    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:loginSettings animated:YES];
 }
 
 - (IBAction)gotoNB {
@@ -82,8 +85,7 @@
 #pragma mark - Refrest View
 - (void)refreshView {
     
-    LoginCertController * controller = [[LoginCertController alloc] init];
-    CertInfo * certInfo = [controller getCert];
+    CertInfo * certInfo = [[[LoginUtil alloc] init] getCertToLogin];
     
     if (certInfo) {
         

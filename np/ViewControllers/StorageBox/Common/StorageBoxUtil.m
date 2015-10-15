@@ -9,7 +9,7 @@
 #import "StorageBoxUtil.h"
 #import "MemoCompositionViewController.h"
 #import "SNSViewController.h"
-
+#import "CertListViewController.h"
 
 @implementation StorageBoxUtil
 
@@ -192,7 +192,15 @@
     return nil;
 }
 
-#pragma mark - Memo Composer & SNS
+#pragma mark - Memo Composer & SNS & Cert List
+- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates {
+    
+    CertListViewController * certList = [[CertListViewController alloc] initWithNibName:@"CertListViewController" bundle:nil];
+    [certList setCertificates:certificates];
+    [self showViewController:certList inParentViewController:viewController];
+}
+
+
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject {
     
     MemoCompositionViewController * memoComposer = [[MemoCompositionViewController alloc] initWithNibName:@"MemoCompositionViewController"

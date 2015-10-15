@@ -11,14 +11,8 @@
 
 @implementation LoginCertController
 
-- (CertInfo *)getCert {
-    
-    NSMutableArray * certArr = [CertLoader getCertControlArray];
-    if (certArr != nil && [certArr count] > 0) {
-        [certArr objectAtIndex:0];
-    }
-    
-    return nil;
+- (NSArray *)getCertList {
+    return [CertLoader getCertControlArray];
 }
 
 - (BOOL)checkPasswordOfCert:(NSString *)password {

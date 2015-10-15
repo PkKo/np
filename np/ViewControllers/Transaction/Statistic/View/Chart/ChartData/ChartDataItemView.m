@@ -17,5 +17,7 @@
     // Drawing code
 }
 */
-
+- (void)updateUI {
+    self.itemColor.layer.cornerRadius = self.itemColor.layer.frame.size.width / 2;
+}
 @end

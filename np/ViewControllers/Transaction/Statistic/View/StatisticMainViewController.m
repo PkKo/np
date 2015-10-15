@@ -158,7 +158,7 @@
 
 -(void)updateUI {
     [self.fakeAllAccounts.layer setBorderWidth:1];
-    [self.fakeAllAccounts.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeAllAccounts.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
 }
 
 #pragma mark - Chart

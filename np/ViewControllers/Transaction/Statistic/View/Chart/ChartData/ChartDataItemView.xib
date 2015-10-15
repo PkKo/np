@@ -11,14 +11,10 @@
             <rect key="frame" x="0.0" y="0.0" width="284" height="21"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j2U-aL-3S0">
-                    <rect key="frame" x="18" y="8.5" width="9" height="9"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Apf-fr-e5E">
+                    <rect key="frame" x="18" y="7" width="11" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.66666666669999997" green="0.19396726819999999" blue="0.2882865208" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="급여 (40%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHE-cb-ByM">
                     <rect key="frame" x="34" y="5" width="85" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -38,7 +34,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="itemColor" destination="j2U-aL-3S0" id="1J9-Kw-WBE"/>
+                <outlet property="itemColor" destination="Apf-fr-e5E" id="uas-Ws-FZN"/>
                 <outlet property="itemName" destination="aHE-cb-ByM" id="IOY-p1-CI1"/>
                 <outlet property="itemValue" destination="YCh-vl-Sey" id="FbT-ID-CCc"/>
             </connections>

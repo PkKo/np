@@ -58,6 +58,7 @@
         [itemView setFrame:itemViewFrame];
         
         [self addSubview:itemView];
+        [itemView updateUI];
         
         if (itemIdx == numberOfItem - 1) {
             mainViewWith    = itemViewFrame.size.width;

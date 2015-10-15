@@ -7,9 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ConstantMaster.h"
+#import "CertInfo.h"
 
 @interface LoginUtil : NSObject
 
+#pragma mark - Login Settings
+- (void)saveLoginMethod:(LoginMethod)loginMethod;
+- (LoginMethod)getLoginMethod;
+
+#pragma mark - Certificate Login
+- (void)removeCertToLogin;
+- (CertInfo *)getCertToLogin;
+- (void)saveCertToLogin:(CertInfo *)cert;
+
+#pragma mark - Simple Login
+- (UIViewController *)getSimpleLoginMgmt;
+- (NSString *)getSimplePassword;
+- (void)saveSimplePassword:(NSString *)simplePassword;
+- (void)removeSimplePassword;
+- (NSInteger)getSimplePasswordFailedTimes;
+- (void)saveSimplePasswordFailedTimes:(NSInteger)failedTimes;
+
+#pragma mark - Pattern Login
+- (NSString *)getPatternLoginPassword;
+- (void)savePatternLoginPassword:(NSString *)pw;
+
+#pragma mark - Secure Keyboard
 - (void)showSecureKeypadInParent:(UIViewController *)viewController
                           topBar:(NSString *)topBar title:(NSString *)title
                       textLength:(NSInteger)length

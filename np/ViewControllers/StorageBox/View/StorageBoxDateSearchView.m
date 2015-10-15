@@ -9,6 +9,7 @@
 #import "StorageBoxDateSearchView.h"
 #import "StatisticMainUtil.h"
 #import "UIButton+BackgroundColor.h"
+#import "ConstantMaster.h"
 
 @implementation StorageBoxDateSearchView
 
@@ -149,15 +150,15 @@
 -(void)updateUI {
     
     [self.fakeAllAccounts.layer setBorderWidth:1];
-    [self.fakeAllAccounts.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeAllAccounts.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeTrans.layer setBorderWidth:1];
-    [self.fakeTrans.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeTrans.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeMemo.layer setBorderWidth:1];
-    [self.fakeMemo.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeMemo.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeStartDate.layer setBorderWidth:1];
-    [self.fakeStartDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeStartDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeEndDate.layer setBorderWidth:1];
-    [self.fakeEndDate.layer setBorderColor:[[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]];
+    [self.fakeEndDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     
     [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
