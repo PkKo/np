@@ -14,11 +14,21 @@
 // server url 정보
 #ifdef DEV_MODE
 // 개발서버
-#define SERVER_URL      @"https://218.239.251.103:39190/servlet/"
+#define SERVER_URL          @"https://218.239.251.103:39190/servlet/"
+#define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
+#define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
+#define IPNS_ACCOUNT_HOST   @"133.130.97.64"
+#define IPNS_INBOX_HOST     @"133.130.97.64"
 #else
 // 운영서버
-#define SERVER_URL      @""
+#define SERVER_URL          @""
+#define PUSH_APP_ID         @""
+#define PUSH_APP_SECRET     @""
+#define IPNS_ACCOUNT_HOST   @""
+#define IPNS_INBOX_HOST     @""
 #endif
+
+
 
 // 공인인증서 NH은행 실제 주소
 #define NH_BANK_AUTH_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getauth.jsp"
@@ -54,6 +64,7 @@
 #pragma mark Common
 // 앱 버전 체크
 #define REQUEST_APP_VERSION         @"EFPU_INITAPP.cmd"
+#define REQUEST_APP_VERSION_UUID    @"uuid"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
 #define BUTTON_BGCOLOR_ENABLE       [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1.0f]
 #define BUTTON_BGCOLOR_DISABLE      [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]

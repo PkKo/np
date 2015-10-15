@@ -416,6 +416,7 @@
 		A2DF410A1BAF99D2001389E7 /* RegistTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DF41091BAF99D2001389E7 /* RegistTabView.m */; };
 		A2DF410C1BAF99DE001389E7 /* RegistTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DF410B1BAF99DE001389E7 /* RegistTabView.xib */; };
 		A2DF410E1BAFBD00001389E7 /* CarrierList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2DF410D1BAFBD00001389E7 /* CarrierList.plist */; };
+		A2DFB5221BCF714600FB440B /* IBNgmService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DFB5211BCF714600FB440B /* IBNgmService.framework */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7111BB0EAC800838E09 /* MenuTableEtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFD7101BB0EAC800838E09 /* MenuTableEtcView.m */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7131BB0EAD600838E09 /* MenuTableEtcView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFD7121BB0EAD600838E09 /* MenuTableEtcView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2DFD7171BB0F1A100838E09 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DFD7161BB0F1A100838E09 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -994,6 +995,7 @@
 		A2DF41091BAF99D2001389E7 /* RegistTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistTabView.m; sourceTree = "<group>"; };
 		A2DF410B1BAF99DE001389E7 /* RegistTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistTabView.xib; sourceTree = "<group>"; };
 		A2DF410D1BAFBD00001389E7 /* CarrierList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CarrierList.plist; sourceTree = "<group>"; };
+		A2DFB5211BCF714600FB440B /* IBNgmService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IBNgmService.framework; sourceTree = "<group>"; };
 		A2DFD70F1BB0EAC800838E09 /* MenuTableEtcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableEtcView.h; sourceTree = "<group>"; };
 		A2DFD7101BB0EAC800838E09 /* MenuTableEtcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableEtcView.m; sourceTree = "<group>"; };
 		A2DFD7121BB0EAD600838E09 /* MenuTableEtcView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableEtcView.xib; sourceTree = "<group>"; };
@@ -1104,6 +1106,7 @@
 			files = (
 				A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */,
 				A2DA4F351BCCDC0D009FB32F /* QuartzCore.framework in Frameworks */,
+				A2DFB5221BCF714600FB440B /* IBNgmService.framework in Frameworks */,
 				A2DA4F291BCCA287009FB32F /* CFNetwork.framework in Frameworks */,
 				A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */,
 				A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */,
@@ -1793,6 +1796,7 @@
 			children = (
 				A2DEAE131B9FE6CC00EDCCBA /* BTW-SSLSign */,
 				A2D95A371BA8F1DD00DC943D /* nFilter */,
+				A2DFB5201BCF714600FB440B /* IBPush */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -2045,6 +2049,14 @@
 				A2DA4F2A1BCCA5D5009FB32F /* RegistTableCellView */,
 			);
 			path = RegistView;
+			sourceTree = "<group>";
+		};
+		A2DFB5201BCF714600FB440B /* IBPush */ = {
+			isa = PBXGroup;
+			children = (
+				A2DFB5211BCF714600FB440B /* IBNgmService.framework */,
+			);
+			path = IBPush;
 			sourceTree = "<group>";
 		};
 		A2DFD7141BB0F19100838E09 /* KeyChainItemWrapper */ = {

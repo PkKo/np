@@ -40,14 +40,15 @@
 {
     [super viewDidAppear:animated];
     
-//    [self appVersionCheckRequest];
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self appVersionCheckRequest];
+//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
 }
 
 - (void)appVersionCheckRequest
 {
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[CommonUtil getDeviceUUID] forKey:REQUEST_APP_VERSION_UUID];
     [reqBody setObject:[CommonUtil getAppVersion] forKey:REQUEST_APP_VERSION_APPVER];
     [reqBody setObject:@"N" forKey:@"forceUpdate"];
     [reqBody setObject:@"N" forKey:@"lpType"];
@@ -69,7 +70,7 @@
 //        {
 //            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
 //        }
-        [self sessionTestRequest];
+//        [self sessionTestRequest];
 //        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
 //        for (NSHTTPCookie *cookie in [storage cookies])
 //        {

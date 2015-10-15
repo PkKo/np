@@ -21,6 +21,22 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    // IPNS 설정
+    NSMutableDictionary *appInfo = [[NSMutableDictionary alloc] init];
+    [appInfo setObject:PUSH_APP_ID forKey:IBNgmServiceInfoAppIdKey];
+    [appInfo setObject:PUSH_APP_SECRET forKey:IBNgmServiceInfoAppSecretKey];
+    
+    [IBNgmService startServiceWithApplicationInfo:appInfo];
+    
+    // account address 설정
+    [[IBNgmService sharedInstance] setUseCustomAddress:YES];
+    [[IBNgmService sharedInstance] setAccountServAddr:IPNS_ACCOUNT_HOST];
+    
+    // APN 데이터를 처리한 후 라이브러리로부터 메시지를 받을 Delegate 설정
+    [IBPush setApnsHelperReceiver:(AppDelegate *)[[UIApplication sharedApplication] delegate]];
+    // APNS Device 등록 및 Device Token 요청
+    [IBPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    
     return YES;
 }
 
@@ -52,5 +68,19 @@
     {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PHAROSVISITOR"];
     }
+    
+    [IBNgmService stopService];
+}
+
+// 푸시 설정 성공
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [IBPush registerApnsDeviceToken:deviceToken];
+}
+
+// 푸시 설정 에러
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"%s, %@", __FUNCTION__, error);
 }
 @end

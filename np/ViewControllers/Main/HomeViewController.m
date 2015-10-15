@@ -25,6 +25,10 @@
 {
     [super viewDidLoad];
     
+    [IBInbox loadWithListener:self];
+    [IBInbox requestInboxList];
+    [IBInbox requestInboxCategoryInfo];
+    
     /*
     mTimeLineView = [HomeTimeLineView view];
     [mTimeLineView setDelegate:self];
@@ -142,5 +146,21 @@
     UIViewController *vc = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     [self.navigationController pushViewController:eVC animated:YES];
+}
+
+#pragma mark - IBInbox Protocol
+- (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList
+{
+    NSLog(@"%s, %@", __FUNCTION__, messageList);
+}
+
+- (void)inboxLoadFailed:(int)responseCode
+{
+    NSLog(@"%s, %d", __FUNCTION__, responseCode);
+}
+
+- (void)loadedInboxCategoryList:(NSArray *)categoryList
+{
+    NSLog(@"%s, %@", __FUNCTION__, categoryList);
 }
 @end
