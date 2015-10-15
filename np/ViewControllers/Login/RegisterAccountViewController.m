@@ -126,6 +126,11 @@
         {
             // 계좌옵션 설정 뷰를 보여줌
             [nextButton setTag:1];
+            optionView = [RegistAccountOptionSettingView view];
+            [optionView setDelegate:self];
+            [optionView initData];
+            [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+            [contentView addSubview:optionView];
             break;
         }
         case 1:

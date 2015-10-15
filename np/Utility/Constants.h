@@ -61,11 +61,35 @@
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
 
-#pragma mark Common
+#pragma mark 앱버전 체크
 // 앱 버전 체크
 #define REQUEST_APP_VERSION         @"EFPU_INITAPP.cmd"
 #define REQUEST_APP_VERSION_UUID    @"uuid"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
+
+#pragma mark 공인인증서 인증
+// 공인인증서 인증
+#define REQUEST_CERT                @"PMCNA100R.cmd"
+#define REQUEST_CERT_LOGIN_TYPE     @"REQ_LOGINTYPE"
+#define REQUEST_CERT_SSLSIGN_TBS    @"SSLSIGN_TBS_DATA"
+#define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
+// crm 휴대폰 번호
+#define RESPONSE_CERT_CRM_MOBILE    @"crmMobile"
+// ums id
+#define RESPONSE_CERT_UMS_USER_ID   @"umsUserId"
+// 인터넷뱅킹 id
+#define RESPONSE_CERT_IB_USER_ID    @"ibUserId"
+// 주민등록번호
+#define RESPONSE_CERT_RLNO          @"rlno"
+// 전체 계좌번호
+#define RESPONSE_CERT_ACCOUNT_LIST  @"accountAllRecords"
+
+#pragma mark 휴대폰 인증번호 발송
+#define REQUEST_PHONE_AUTH          @"EFPUW031001.cmd"
+#define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
+#define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
+
+#pragma mark Common
 #define BUTTON_BGCOLOR_ENABLE       [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1.0f]
 #define BUTTON_BGCOLOR_DISABLE      [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
 #define CIRCLE_BACKGROUND_COLOR_SELECTED   [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]

@@ -37,6 +37,7 @@ typedef enum AmountSetting
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 @property (strong, nonatomic) IBOutlet UIButton *accountChangeButton;
 @property (strong, nonatomic) IBOutlet CircleView *bothSelectImg;
@@ -54,6 +55,7 @@ typedef enum AmountSetting
 @property (weak, nonatomic) IBOutlet UIView *amountSelectView;
 @property (weak, nonatomic) IBOutlet UIPickerView *amountSeletPickerView;
 
+- (void)initData;
 - (NSInteger)getAlarmSettingType;
 // 입출금 옵션 선택
 - (IBAction)selectDepWithType:(id)sender;

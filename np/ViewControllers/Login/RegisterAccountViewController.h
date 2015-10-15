@@ -9,12 +9,14 @@
 #import "CommonViewController.h"
 #import "RegistAccountAllListView.h"
 #import "RegistAccountInputAccountView.h"
+#import "RegistAccountOptionSettingView.h"
 
 @interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate>
 {
     BOOL isCertMode;
     RegistAccountAllListView *allListView;
     RegistAccountInputAccountView *inputAccountView;
+    RegistAccountOptionSettingView *optionView;
     NSMutableArray *allAccountList;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
