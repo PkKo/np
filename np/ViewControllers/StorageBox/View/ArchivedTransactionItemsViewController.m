@@ -83,7 +83,8 @@
         
         [selectToRemoveUtil addSelectToRemoveViewToParent:self.view
                                  moveTopViewSeperatorDown:self.topViewSeperator
-                                        moveTableviewDown:(self.tableview.isHidden ? self.noDataView : self.tableview)
+                                        moveTableviewDown:self.tableview
+                                       moveNoDataViewDown:self.noDataView
                                                    target:self
                                           selectAllAction:@selector(selectAllItems:)
                                 removeSelectedItemsAction:@selector(removeSelectedItems)
@@ -128,7 +129,8 @@
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
     [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
                                       moveTopViewSeperatorBack:self.topViewSeperator
-                                             moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+                                             moveTableviewBack:self.tableview
+                                            moveNoDataViewBack:self.noDataView];
     [self selectAllItems:[NSNumber numberWithBool:NO]];
 }
 
@@ -161,14 +163,16 @@
         
         StorageBoxDateSearchView * dateSearch = [dateSearchUtil addStorageDateSearchViewToParent:self.view
                                                                         moveTopViewSeperatorDown:self.topViewSeperator
-                                                                               moveTableviewDown:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+                                                                               moveTableviewDown:self.tableview
+                                                                              moveNoDataViewDown:self.noDataView];
         dateSearch.delegate                 = self;
         dateSearch.memoTextField.delegate   = self;
         
     } else {
         [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view
-                                             moveTopViewSeperatorBack:self.topViewSeperator
-                                                    moveTableviewBack:(self.tableview.isHidden ? self.noDataView : self.tableview)];
+                                         moveTopViewSeperatorBack:self.topViewSeperator
+                                                moveTableviewBack:self.tableview
+                                               moveNoDataViewBack:self.noDataView];
     }
 }
 
@@ -267,7 +271,6 @@
     
     [self.tableview setHidden:([[_transactions allKeys] count] == 0)];
     [self.noDataView setHidden:!self.tableview.hidden];
-    [self.noDataView setFrame:self.tableview.frame];
     
 }
 

@@ -25,6 +25,7 @@
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
              moveTopViewSeperatorDown:(UILabel *)topViewSeperator
                     moveTableviewDown:(UIView *)tableview
+                   moveNoDataViewDown:(UIView *)noDataView
                                target:(id)target
                       selectAllAction:(SEL)selectAllAction
             removeSelectedItemsAction:(SEL)removeSelectedItemsAction
@@ -32,17 +33,21 @@
 
 - (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
                       moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                             moveTableviewBack:(UIView *)tableview;
+                             moveTableviewBack:(UIView *)tableview
+                            moveNoDataViewBack:(UIView *)noDataView;
 
 #pragma mark - Date Search
 - (StorageBoxDateSearchView *)hasStorageDateSearchViewInParentView:(UIView *)parentView;
+
 - (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
                                       moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                                             moveTableviewDown:(UIView *)tableview;
+                                             moveTableviewDown:(UIView *)tableview
+                                            moveNoDataViewDown:(UIView *)noDataView;
 
 - (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
                          moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                                moveTableviewBack:(UIView *)tableview;
+                                moveTableviewBack:(UIView *)tableview
+                               moveNoDataViewBack:(UIView *)noDataView;
 
 
 + (UIColor *)getDimmedBackgroundColor;
