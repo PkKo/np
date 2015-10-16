@@ -49,6 +49,9 @@
 
 #define KEYCHAIN_ID     @"NHSMARTPUSH"
 
+#define BUTTON_INDEX_CANCEL     0
+#define BUTTON_INDEX_OK         1
+
 // 가입완료된 사용자 설정
 #define IS_USER                 @"isUser"
 // 간편보기 설정값

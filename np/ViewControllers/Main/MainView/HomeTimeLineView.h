@@ -40,7 +40,8 @@
 @property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
 // 검색 뷰
 @property (strong, nonatomic) IBOutlet UIView *searchView;
-
+// 보관함에 저장된 갯수 표시
+@property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 
@@ -56,4 +57,5 @@
 - (IBAction)deleteViewHide:(id)sender;
 
 - (IBAction)searchViewHide:(id)sender;
+- (IBAction)storageMoveClick:(id)sender;
 @end

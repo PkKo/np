@@ -11,6 +11,7 @@
                 <outlet property="emptyListView" destination="gur-lg-Bq5" id="4ay-k6-FzD"/>
                 <outlet property="listContentView" destination="UTP-lk-EXK" id="9pV-6n-juW"/>
                 <outlet property="noticeCountLabel" destination="Dt5-2P-R7y" id="zqP-8l-XTz"/>
+                <outlet property="noticeIconView" destination="Nfa-VV-GlG" id="Yhx-PD-KVR"/>
                 <outlet property="noticeMenuButton" destination="rdA-av-q3F" id="nXC-uF-4Zu"/>
                 <outlet property="noticeTableView" destination="CAg-tS-uqN" id="5Ar-kU-4l1"/>
                 <outlet property="noticeView" destination="sYc-q1-ckd" id="XkZ-AB-1GZ"/>
@@ -124,6 +125,16 @@
                         <view contentMode="scaleToFill" id="sYc-q1-ckd">
                             <rect key="frame" x="27" y="327" width="267" height="52"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="Nfa-VV-GlG">
+                                    <rect key="frame" x="0.0" y="16" width="37" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="uBy-b4-OSa">

@@ -29,7 +29,8 @@
 {
     [super viewDidLoad];
     
-    [self.mNaviView.mTitleLabel setText:@"공인인증서 가져오기"];
+    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mMenuButton setHidden:YES];
     
     certNum1.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
     certNum1.layer.borderWidth = 3.0f;

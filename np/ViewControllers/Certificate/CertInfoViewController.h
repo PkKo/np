@@ -13,5 +13,10 @@
 
 @property (strong, nonatomic) CertInfo *certInfo;
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *issuerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *policyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *expiredDateLabel;
+- (IBAction)deleteCertClick:(id)sender;
 - (IBAction)passwordChangeClick:(id)sender;
 @end

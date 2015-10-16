@@ -31,11 +31,18 @@
     // account address 설정
     [[IBNgmService sharedInstance] setUseCustomAddress:YES];
     [[IBNgmService sharedInstance] setAccountServAddr:IPNS_ACCOUNT_HOST];
+    [[IBNgmService sharedInstance] setPortNum:6100];
     
     // APN 데이터를 처리한 후 라이브러리로부터 메시지를 받을 Delegate 설정
     [IBPush setApnsHelperReceiver:(AppDelegate *)[[UIApplication sharedApplication] delegate]];
     // APNS Device 등록 및 Device Token 요청
     [IBPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    
+#ifdef DEV_MODE
+    [IBNgmService registerUserWithAccountId:@"ips_sample" verifyCode:[@"ips_sample" dataUsingEncoding:NSUTF8StringEncoding]];
+#else
+    [IBNgmService registerUserWithAccountId:[CommonUtil getDeviceUUID] verifyCode:[[CommonUtil getDeviceUUID] dataUsingEncoding:NSUTF8StringEncoding]];
+#endif
     
     return YES;
 }
