@@ -127,7 +127,7 @@
 //            newTopViewController = [[MainPageViewController alloc] init];
 //            [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
             // 임시 공인인증서 뷰 컨트롤러 적용
-            newTopViewController = [[CertificateMenuViewController alloc] init];
+            pushViewController = [[CertificateMenuViewController alloc] init];
             break;
         }
         case 2: // 기타

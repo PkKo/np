@@ -25,7 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mMenuButton setHidden:YES];
     
     if(certInfo != nil)
     {
@@ -74,6 +76,11 @@
     }
 }
 
+- (IBAction)cancelClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -102,6 +109,29 @@
 
 - (void)showNFilterKeypad:(NSString *)textFieldTag
 {
+    NSInteger tag = [textFieldTag integerValue];
+    NSString *titleText = @"";
+    switch (tag)
+    {
+        case CURRENT_PASSWORD:
+        {
+            titleText = @"기존 비밀번호 입력";
+            break;
+        }
+        case NEW_PASSWORD:
+        {
+            titleText = @"변경할 비밀번호 입력";
+            break;
+        }
+        case NEW_PASSWORD_CHECK:
+        {
+            titleText = @"변경할 비밀번호 확인";
+            break;
+        }
+        default:
+            break;
+    }
+    
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
@@ -113,7 +143,7 @@
         [vc setLengthWithTagName:textFieldTag length:20 webView:nil];
         [vc setFullMode:YES];
         [vc setTopBarText:@"비밀번호 입력"];
-        [vc setTitleText:@"기존 비밀번호"];
+        [vc setTitleText:titleText];
         [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
     }
     else

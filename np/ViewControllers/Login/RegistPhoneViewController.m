@@ -73,6 +73,14 @@
  */
 - (IBAction)requestAuthNumber:(id)sender
 {
+    if([[phoneNumberInput text] length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    [self authNumberRequest];
 }
 
 /**
@@ -129,9 +137,14 @@
  */
 - (void)authNumberRequest
 {
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_PHONE_AUTH];
+    
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text] forKey:REQUEST_PHONE_AUTH_NUMBER];
+    
     HttpRequest *req = [HttpRequest getInstance];
     [req setDelegate:self selector:@selector(authNumberResponse:)];
-    [req requestUrl:@"Server URL" bodyObject:nil];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
 }
 /**
  @brief 인증번호 Response
@@ -139,10 +152,15 @@
 - (void)authNumberResponse:(NSDictionary *)response
 {
     // Connection Success
-    if([[response objectForKey:@""] isEqualToString:@"200"])
+    if([[response objectForKey:RESULT] isEqualToString:@"0"])
     {
         // 인증번호 입력 대기 및 카운터 스타트
         [self authNumberTimerStart];
+        [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %d초)", AUTH_NUMBER_TIMER_MAX] forState:UIControlStateNormal];
+        
+        // 임시 코드
+        NSString *authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
+        [phoneAuthNumInput setText:authNumber];
     }
 }
 
@@ -225,7 +243,7 @@
         [authNumTimer invalidate];
         authNumTimer = nil;
     }
-    
+    authNumCounter = 0;
     authNumTimer = [NSTimer scheduledTimerWithTimeInterval:AUTH_NUMBER_TIMER_INTERVAL target:self selector:@selector(authNumberOnTime) userInfo:nil repeats:YES];
     [authNumTimer fire];
 }
@@ -249,6 +267,7 @@
     }
     
     // 타이머 숫자 표시
+    [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %ld초)", AUTH_NUMBER_TIMER_MAX - authNumCounter] forState:UIControlStateNormal];
 }
 
 @end

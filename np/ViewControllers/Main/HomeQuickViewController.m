@@ -34,6 +34,7 @@
 @synthesize noticeTableView;
 // 최근 공지사항 표시
 @synthesize noticeView;
+@synthesize noticeIconView;
 // 농민 뉴스 및 배너 영역
 @synthesize bannerView;
 
@@ -47,6 +48,9 @@
     
     [pushMenuButton setEnabled:NO];
     [noticeMenuButton setEnabled:YES];
+    
+    [noticeIconView.layer setCornerRadius:(noticeIconView.frame.size.height /2)];
+    [noticeIconView setAlpha:0.9f];
     
     // 1. IPS를 통해 신규 알림 및 공지사항 리스트를 가져온다.
     pushList = [[NSMutableArray alloc] init];

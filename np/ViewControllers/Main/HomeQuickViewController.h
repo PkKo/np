@@ -24,4 +24,5 @@
 @property (strong, nonatomic) IBOutlet UITableView *noticeTableView;
 @property (strong, nonatomic) IBOutlet UIView *noticeView;
 @property (strong, nonatomic) IBOutlet UIView *bannerView;
+@property (strong, nonatomic) IBOutlet UILabel *noticeIconView;
 @end

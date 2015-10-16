@@ -10,6 +10,9 @@
 
 @implementation RegistAccountOptionSettingView
 
+@synthesize scrollView;
+@synthesize contentView;
+
 @synthesize accountChangeButton;
 @synthesize bothSelectImg;
 @synthesize bothSelectText;
@@ -40,6 +43,8 @@
 
 - (void)initData
 {
+    [scrollView setContentSize:contentView.frame.size];
+    
     // 입출금 알림 선택
     selectedType = BOTH;
     [bothSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
@@ -53,7 +58,7 @@
     selectedAmount = 0;
     amountList = [[NSArray alloc] initWithObjects:@"천원 이상", @"만원 이상", @"십만원 이상", @"백만원 이상", @"천만원 이상", @"일억 이상", @"십억 이상", nil];
     [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-    [amountNoLimitText setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    [amountNoLimitText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
     [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
     [amountSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
 }
@@ -149,6 +154,11 @@
     }
     
     [self hideAmountSelectPickerView];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component

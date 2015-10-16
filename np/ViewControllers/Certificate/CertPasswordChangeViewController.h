@@ -31,4 +31,5 @@ typedef enum PASSWORD_TYPE
 @property (strong, nonatomic) IBOutlet UITextField *passwordNewCheck;
 
 - (IBAction)passwordChangeClick:(id)sender;
+- (IBAction)cancelClick:(id)sender;
 @end

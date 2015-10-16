@@ -252,12 +252,12 @@
 //        NSString *sig = [[CertManager sharedInstance] getSignature];
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, @"PMCNA100R.cmd"];
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_CERT];
         
         NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
-        [requestBody setObject:strTbs forKey:@"SSLSIGN_TBS_DATA"];
-        [requestBody setObject:sig forKey:@"SSLSIGN_SIGNATURE"];
-        [requestBody setObject:@"1" forKey:@"REQ_LOGINTYPE"];
+        [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
+        [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
+        [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
 //        [requestBody setObject:@"Y" forKey:@"dummyYn"];
         /*
         NSString *tbs = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_TBS_DATA", strTbs];
@@ -289,15 +289,20 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-//        [self certMakeSessionRequest];
-
-        NSString *cookiesString = [response objectForKey:@"Cookie"];
-         /*
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
+        if([(NSArray *)[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] count] > 0)
+        {
+            NSArray *allAccountList = [NSArray arrayWithArray:[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+            [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:@"AllAccounts"];
+        }
+        NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
+        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
+        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
+        NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];*/
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else
     {

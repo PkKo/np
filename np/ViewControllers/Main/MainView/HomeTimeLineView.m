@@ -11,6 +11,8 @@
 #import "TransactionObject.h"
 #import "StorageBoxUtil.h"
 #import "ConstantMaster.h"
+#import "MainPageViewController.h"
+#import "HomeViewController.h"
 
 #define REFRESH_HEADER_HEIGHT   76.0f
 #define SECTION_HEADER_HEIGHT   31.0f
@@ -32,6 +34,8 @@
 @synthesize deleteButtonView;
 
 @synthesize searchView;
+
+@synthesize storageCountLabel;
 
 - (id)init
 {
@@ -173,6 +177,17 @@
                      completion:^(BOOL finished){
                          [searchView setHidden:YES];
                      }];
+}
+
+- (IBAction)storageMoveClick:(id)sender
+{
+    MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
+    [newTopViewController setStartPageIndex:INBOX];
+    
+    CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
 }
 
 - (void)addPullToRefreshHeader

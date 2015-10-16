@@ -9,7 +9,7 @@
 #import "CertificateMenuViewController.h"
 #import "CertificateRoamingViewController.h"
 #import "CertificateListViewController.h"
-#import "MenuTableCell.h"
+#import "CertMenuCell.h"
 
 @interface CertificateMenuViewController ()
 
@@ -23,20 +23,18 @@
 {
     [super viewDidLoad];
     
-    [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"공인인증서센터"];
+    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mMenuButton setHidden:YES];
     
-    mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC -> 스마트폰 인증서 가져오기", @"스마트폰 -> 스마트폰 인증서 가져오기", @"인증서 관리", nil];
+    mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC > 스마트폰 인증서 가져오기", @"스마트폰 > 스마트폰 인증서 가져오기", @"인증서 관리", nil];
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertMenuTableView.frame.size.width, 0)];
     [mCertMenuTableView setTableFooterView:footerView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [mCertMenuTableView setFrame:CGRectMake(0, self.mNaviView.frame.origin.y + self.mNaviView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (self.mNaviView.frame.origin.y + self.mNaviView.frame.size.height))];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,15 +46,18 @@
 #pragma mark - UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseId = [NSString stringWithFormat:@"%@", [MenuTableCell class]];
-    MenuTableCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    NSString *reuseId = [NSString stringWithFormat:@"%@", [CertMenuCell class]];
+    CertMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     
     if(cell == nil)
     {
-        cell = [MenuTableCell cell];
+        cell = [CertMenuCell cell];
     }
     
-    [cell.mMenuTitleLabel setText:[mCertMenuArray objectAtIndex:indexPath.row]];
+    [cell.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
+    [cell.layer setBorderWidth:1.0f];
+    
+    [cell.titleLabel setText:[mCertMenuArray objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -75,6 +76,11 @@
     switch (indexPath.row)
     {
         case 0:// pc에서 인증서 가져오기
+        {
+            vc = [[CertificateRoamingViewController alloc] init];
+            break;
+        }
+        case 1:
         {
             vc = [[CertificateRoamingViewController alloc] init];
             break;

@@ -26,8 +26,7 @@
     [super viewDidLoad];
     
     [IBInbox loadWithListener:self];
-    [IBInbox requestInboxList];
-    [IBInbox requestInboxCategoryInfo];
+//    [IBInbox requestInboxList];
     
     /*
     mTimeLineView = [HomeTimeLineView view];
@@ -152,11 +151,13 @@
 - (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
     NSLog(@"%s, %@", __FUNCTION__, messageList);
+    [IBInbox requestInboxCategoryInfo];
 }
 
 - (void)inboxLoadFailed:(int)responseCode
 {
     NSLog(@"%s, %d", __FUNCTION__, responseCode);
+    [IBInbox requestInboxCategoryInfo];
 }
 
 - (void)loadedInboxCategoryList:(NSArray *)categoryList

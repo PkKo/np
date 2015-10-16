@@ -11,6 +11,7 @@
 #import "CertManager.h"
 #import "CertLoader.h"
 #import "CertInfoViewController.h"
+#import "CertTableCell.h"
 
 #define CERT_LIST_EMPTY     200
 
@@ -26,12 +27,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mMenuButton setHidden:YES];
 
     // 인증서 목록 로드
     mCertControllArray = [CertLoader getCertControlArray];
     
     // 인증서 삭제시 받을 노티피케이션
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCertList:) name:@"CertDeletedNotification" object:nil];
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertListTable.frame.size.width, 0)];
+    [mCertListTable setTableFooterView:footerView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,15 +68,51 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [mCertControllArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    CertInfo *certInfo = [mCertControllArray objectAtIndex:indexPath.row];
-
-    return nil;
+    NSString *reuseId = [NSString stringWithFormat:@"%@", [CertTableCell class]];
+    CertTableCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    
+    if(cell == nil)
+    {
+        cell = [CertTableCell cell];
+    }
+    
+    CertInfo *info = [mCertControllArray objectAtIndex:indexPath.row];
+    
+    // 사용자명
+    NSString *name = nil;
+    
+    NSArray *subjectDN2 = [info.subjectDN2 componentsSeparatedByString:@","];
+    if([subjectDN2 count] > 0)
+    {
+        NSArray *dnName = [[subjectDN2 objectAtIndex:0] componentsSeparatedByString:@"="];
+        if([dnName count] > 1)
+        {
+            name = [dnName objectAtIndex:1];
+        }
+    }
+    
+    if(name == nil)
+    {
+        name = info.subjectCN;
+    }
+    [cell.nameLabel setText:name];
+    
+    // 발급자
+    [cell.issuerLabel setText:info.issuer];
+    
+    // 구분
+    [cell.policyLabel setText:info.policy];
+    
+    // 만료일자
+    [cell.notAfterLabel setText:info.notAfter];
+    
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
