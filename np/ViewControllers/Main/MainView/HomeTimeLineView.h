@@ -23,6 +23,8 @@
     
     NSMutableArray *deleteIdList;
     BOOL isDeleteMode;
+    
+    NSInteger storageCount;
 }
 
 @property (strong, nonatomic) id delegate;

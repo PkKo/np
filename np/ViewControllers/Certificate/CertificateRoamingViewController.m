@@ -25,12 +25,17 @@
 
 @synthesize nextButton;
 
+@synthesize scrollView;
+@synthesize bottomView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
     [self.mNaviView.mMenuButton setHidden:YES];
+    
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, bottomView.frame.origin.y + bottomView.frame.size.height)];
     
     certNum1.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
     certNum1.layer.borderWidth = 3.0f;

@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *certNum4;
 @property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 - (IBAction)nextButtonClick:(id)sender;
 @end

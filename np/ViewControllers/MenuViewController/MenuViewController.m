@@ -103,7 +103,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return MENU_CELL_HEIGHT;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
+//    return MENU_CELL_HEIGHT;
 }
 
 #pragma mark - UITableViewDelegate

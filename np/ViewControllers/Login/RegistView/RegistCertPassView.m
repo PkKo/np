@@ -12,5 +12,6 @@
 
 @synthesize certPasswordInput;
 @synthesize certPasswordButton;
+@synthesize certPassCancelButton;
 
 @end

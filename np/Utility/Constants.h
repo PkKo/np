@@ -17,8 +17,12 @@
 #define SERVER_URL          @"https://218.239.251.103:39190/servlet/"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
+// cloud server
 #define IPNS_ACCOUNT_HOST   @"133.130.97.64"
 #define IPNS_INBOX_HOST     @"133.130.97.64"
+/* 농협 개발서버 주소
+@"218.239.251.112"
+@"218.239.251.113"*/
 #else
 // 운영서버
 #define SERVER_URL          @""

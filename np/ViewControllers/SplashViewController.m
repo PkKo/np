@@ -86,6 +86,12 @@
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
+- (void)didFailWithError:(NSError *)error
+{
+    NSLog(@"%s, error = %@", __FUNCTION__, error);
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+}
+
 - (void)sessionTestRequest
 {
     HttpRequest *req = [HttpRequest getInstance];

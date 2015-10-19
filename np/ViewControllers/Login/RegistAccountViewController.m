@@ -65,6 +65,12 @@
     }
 }
 
+- (void)certPopView
+{
+    UIView *lastView = [[contentView subviews] lastObject];
+    [lastView removeFromSuperview];
+}
+
 - (void)showRegistCertView
 {
     if([[contentView subviews] count] > 0)
@@ -156,6 +162,8 @@
     // 농협 스마트뱅킹 리얼 주소
     int rc = [[CertManager sharedInstance] verifyP12Uploaded:NH_BANK_CERT_URL];
     
+    rc = 0;
+    
     if (rc == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드 되었습니다. 계속 진행하세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -186,12 +194,15 @@
     
     [passView.certPasswordInput setDelegate:self];
     [passView.certPasswordButton addTarget:self action:@selector(passwordCheck) forControlEvents:UIControlEventTouchUpInside];
+    [passView.certPassCancelButton addTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)passwordCheck
 {
     int rc = 0;
     rc = [[CertManager sharedInstance] p12ImportWithUrl:NH_BANK_CERT_URL password:self.currentTextField.text];
+    
+    rc = 0;
     
     if (rc == 0)
     {

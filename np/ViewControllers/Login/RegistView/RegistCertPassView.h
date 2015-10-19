@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *certPasswordInput;
 @property (strong, nonatomic) IBOutlet UIButton *certPasswordButton;
+@property (strong, nonatomic) IBOutlet UIButton *certPassCancelButton;
 @end

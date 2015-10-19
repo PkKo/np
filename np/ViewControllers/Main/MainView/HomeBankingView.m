@@ -13,7 +13,7 @@
 #define SECTION_HEADER_HEIGHT   31.0f
 #define SECTION_FOOTER_HEIGHT   93.0f
 
-#define AMOUNT_FONT_SIZE        18.0f
+#define AMOUNT_FONT_SIZE        20.0f
 
 @implementation HomeBankingView
 
@@ -166,17 +166,17 @@
     NSString *date = [timeLineSection objectAtIndex:section];
     NSString *day = @"일요일";
     
-    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12.0 bold:YES];
+    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:14.0 bold:YES];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, dateSize.width, SECTION_HEADER_HEIGHT)];
     [dateLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dateLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [dateLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
     [dateLabel setText:date];
     [sectionHeaderView addSubview:dateLabel];
     
-    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:12 bold:NO];
+    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:14 bold:NO];
     UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(dateLabel.frame.origin.x + dateSize.width, 0, daySize.width, SECTION_HEADER_HEIGHT)];
     [dayLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dayLabel setFont:[UIFont systemFontOfSize:12.0F]];
+    [dayLabel setFont:[UIFont systemFontOfSize:14.0f]];
     [dayLabel setText:day];
     [sectionHeaderView addSubview:dayLabel];
     
