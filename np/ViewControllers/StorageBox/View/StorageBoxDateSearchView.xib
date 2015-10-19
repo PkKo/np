@@ -80,7 +80,7 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="CVs-Ft-RFM">
-                            <rect key="frame" x="18" y="115" width="71" height="27"/>
+                            <rect key="frame" x="17" y="115" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="1주일" backgroundImage="button_04_dft.png">
@@ -94,7 +94,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mmd-9x-YmY">
-                            <rect key="frame" x="88.5" y="115" width="71" height="27"/>
+                            <rect key="frame" x="88" y="115" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="1개월" backgroundImage="button_05_dft.png">
@@ -108,7 +108,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="anY-qp-tRL">
-                            <rect key="frame" x="158.5" y="115" width="71" height="27"/>
+                            <rect key="frame" x="159" y="115" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="3개월" backgroundImage="button_05_dft.png">
@@ -122,7 +122,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ila-94-ui2">
-                            <rect key="frame" x="229" y="115" width="71" height="27"/>
+                            <rect key="frame" x="230" y="115" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="6개월" backgroundImage="button_06_dft.png">

@@ -47,9 +47,8 @@
     NSFileManager *filemgr = [NSFileManager defaultManager];
     if ([filemgr fileExistsAtPath: _databasePath ] == NO) {
         
-        const char *dbpath = [_databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &_nhTransactionDB) == SQLITE_OK) {
+        BOOL openDB = [self openDB];
+        if (openDB == SQLITE_OK) {
             
             char *errMsg;
             const char *sql_stmt =
@@ -69,7 +68,7 @@
 
 - (void)deleteTableTransactions {
     
-    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    BOOL openDB = [self openDB];
     
     if (openDB == SQLITE_OK) {
         char * error;
@@ -122,7 +121,7 @@
     
     sqlite3_stmt * statement;
     
-    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    BOOL openDB = [self openDB];
     if (openDB == SQLITE_OK) {
         
         if (sqlite3_prepare(_nhTransactionDB, [query UTF8String], -1, &statement, NULL) == SQLITE_OK) {
@@ -188,10 +187,10 @@
     
     NSString * memo = nil;
     
-    const char * encodedDBPath = [self.databasePath UTF8String];
     sqlite3_stmt * statement;
     
-    if (sqlite3_open(encodedDBPath, &_nhTransactionDB) == SQLITE_OK) {
+    BOOL openDB = [self openDB];
+    if (openDB == SQLITE_OK) {
         NSString * querySQL = [NSString stringWithFormat:@"SELECT trans_memo FROM transactions WHERE trans_id = \"%@\"", transactionId];
         const char * encodedQuerySQL = [querySQL UTF8String];
         
@@ -214,9 +213,9 @@
     
     BOOL updated = NO;
     
-    BOOL openDBResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
+    BOOL openDB = [self openDB];
     
-    if (openDBResult == SQLITE_OK) {
+    if (openDB == SQLITE_OK) {
         NSLog(@"opened db");
         
         NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_memo = \"%@\" WHERE trans_id = \"%@\"", memo, transId];
@@ -243,8 +242,7 @@
     
     BOOL deleted = NO;
     
-    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
-    
+    BOOL openDB = [self openDB];
     if (openDB == SQLITE_OK) {
         
         NSLog(@"opened db.");
@@ -269,8 +267,7 @@
     
     BOOL deleted = NO;
     
-    BOOL openDB = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
-    
+    BOOL openDB = [self openDB];
     if (openDB == SQLITE_OK) {
         
         NSLog(@"opened db.");
@@ -296,8 +293,8 @@
     
     BOOL saved = NO;
     
-    BOOL openDatabaseResult = sqlite3_open([self.databasePath UTF8String], &_nhTransactionDB);
-    if(openDatabaseResult == SQLITE_OK) {
+    BOOL openDB = [self openDB];
+    if(openDB == SQLITE_OK) {
         
         NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
                                 transObj.transactionAccountNumber, transObj.transactionDetails,
@@ -320,6 +317,11 @@
         NSLog(@"failed to open");
     }
     return saved;
+}
+
+-(BOOL)openDB {
+     BOOL succeedToOpenDB = sqlite3_open_v2([self.databasePath UTF8String], &_nhTransactionDB, SQLITE_OPEN_FILEPROTECTION_COMPLETE | SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE, NULL);
+    return succeedToOpenDB;
 }
 
 @end
