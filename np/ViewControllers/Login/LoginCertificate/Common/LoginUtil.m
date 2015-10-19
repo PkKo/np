@@ -14,10 +14,16 @@
 #import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
 #import "LoginCertController.h"
+#import "LoginSettingsViewController.h"
 
 @implementation LoginUtil
 
-#pragma mark - Login Settings 
+#pragma mark - Login Settings
+- (void)gotoLoginSettings:(UINavigationController *)navController {
+    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+    [navController pushViewController:loginSettings animated:YES];
+}
+
 - (void)saveLoginMethod:(LoginMethod)loginMethod {
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:[NSNumber numberWithInt:loginMethod] forKey:PREF_KEY_LOGIN_METHOD];
@@ -61,6 +67,10 @@
 }
 
 #pragma mark - Simple Login
+- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController {
+    [navController pushViewController:[self getSimpleLoginMgmt] animated:YES];
+}
+
 - (UIViewController *)getSimpleLoginMgmt {
     UIViewController * vc = [self getSimplePassword] ?
         [[SimplePwMgntChangeViewController alloc] initWithNibName:@"SimplePwMgntChangeViewController" bundle:nil] :

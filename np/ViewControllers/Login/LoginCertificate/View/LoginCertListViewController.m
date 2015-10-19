@@ -12,7 +12,7 @@
 #import "LoginCertController.h"
 #import "StatisticMainUtil.h"
 #import "LoginSettingsViewController.h"
-
+#import "StorageBoxUtil.h"
 @interface LoginCertListViewController ()
 
 @end
@@ -48,8 +48,7 @@
 }
 
 - (IBAction)gotoLoginSettings {
-    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
-    [self.navigationController pushViewController:loginSettings animated:YES];
+    [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
 }
 
 - (IBAction)gotoNB {
@@ -98,7 +97,6 @@
         self.issueDate.text     = [formatter stringFromDate:certInfo.dtNotBefore];
         self.expiryDate.text    = [formatter stringFromDate:certInfo.dtNotAfter];
         
-        
     } else {
         
         self.certView.hidden = YES;
@@ -120,9 +118,7 @@
 }
 
 - (void)updateUI {
-    
-    [self.fakeNoticeTextField.layer setBorderWidth:1.0f];
-    [self.fakeNoticeTextField.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
 }
 
 @end

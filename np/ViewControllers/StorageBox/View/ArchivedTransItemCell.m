@@ -7,6 +7,7 @@
 //
 
 #import "ArchivedTransItemCell.h"
+#import "StorageBoxUtil.h"
 
 @implementation ArchivedTransItemCell
 
@@ -33,8 +34,7 @@
 }
 
 - (void)updateMemoTextBorder {
-    [self.fakeEditTextField.layer setBorderWidth:1.0f];
-    [self.fakeEditTextField.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeEditTextField];
 }
 
 #pragma mark - Keyboard

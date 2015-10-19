@@ -9,7 +9,7 @@
 #ifndef ConstantMaster_h
 #define ConstantMaster_h
 
-#define TEXT_FIELD_BORDER_COLOR [[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1] CGColor]
+#define TEXT_FIELD_BORDER_COLOR [[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]
 
 #define TRANS_ALL_ACCOUNT  @"전체계좌"
 

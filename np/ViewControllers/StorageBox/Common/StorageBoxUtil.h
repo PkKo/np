@@ -15,7 +15,8 @@
 @interface StorageBoxUtil : NSObject
 
 #pragma mark - Memo Composer & SNS & Cert List
-- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates;
+- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates
+                     updateSltedCert:(SEL)updateSltedCert;
 - (void)showMemoComposerInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 - (void)showSNSShareInViewController:(UIViewController *)viewController withTransationObject:(TransactionObject *)transactionObject;
 
@@ -49,7 +50,7 @@
                                 moveTableviewBack:(UIView *)tableview
                                moveNoDataViewBack:(UIView *)noDataView;
 
-
+#pragma mark - UI Customization
 + (UIColor *)getDimmedBackgroundColor;
-
+- (void)updateTextFieldBorder:(UITextField *)textField;
 @end

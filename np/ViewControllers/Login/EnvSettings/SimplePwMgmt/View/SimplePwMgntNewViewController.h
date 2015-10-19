@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *myNewPw;
 @property (weak, nonatomic) IBOutlet UITextField *myNewPwConfirm;
 
+@property (weak, nonatomic) IBOutlet UITextField *fakeMyNewPw;
+@property (weak, nonatomic) IBOutlet UITextField *fakeMyNewPwConfirm;
+
 - (IBAction)clickCancel;
 - (IBAction)clickDone;
 

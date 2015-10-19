@@ -11,6 +11,7 @@
 @interface CertListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray * certificates; // array of CertInfo
+- (void)addTargetForCloseBtn:(id)target action:(SEL)action;
 
 @property (weak, nonatomic) IBOutlet UITableView *certTableView;
 - (IBAction)closeCertListView;

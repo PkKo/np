@@ -96,8 +96,7 @@
 #pragma mark - database
 - (void)updateMemo {
     
-    [self.fakeMemo.layer setBorderWidth:1.0f];
-    [self.fakeMemo.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeMemo];
     [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
     
     NSString * memoStr = [[DBManager sharedInstance] findTransactionMemoById:self.transactionObject.transactionId];

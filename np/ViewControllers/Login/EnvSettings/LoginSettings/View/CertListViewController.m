@@ -14,6 +14,8 @@
 #import "LoginUtil.h"
 
 @interface CertListViewController ()
+@property (nonatomic, assign) id closeBtnTarget;
+@property (nonatomic, assign) SEL closeBtnAction;
 
 @end
 
@@ -71,16 +73,29 @@
     return cell;
 }
 
+#pragma mark - Close View
 - (IBAction)closeCertListView {
     
     NSIndexPath * indexPath = [self.certTableView indexPathForSelectedRow];
     if (indexPath) {
-        NSLog(@"selected row: %d", [indexPath row]);
-        [[[LoginUtil alloc] init] saveCertToLogin:(CertInfo *)[self.certificates objectAtIndex:[indexPath row]]];
+        
+        CertInfo * selectedCert = (CertInfo *)[self.certificates objectAtIndex:[indexPath row]];
+        
+        [[[LoginUtil alloc] init] saveCertToLogin:selectedCert];
+        
+        if (self.closeBtnTarget) {
+            [self.closeBtnTarget performSelector:self.closeBtnAction withObject:selectedCert afterDelay:0];
+        }
     }
+    
     
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
+}
+
+- (void)addTargetForCloseBtn:(id)target action:(SEL)action {
+    self.closeBtnTarget = target;
+    self.closeBtnAction = action;
 }
 @end

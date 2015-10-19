@@ -15,6 +15,8 @@
 #import "SNSViewController.h"
 #import "MenuTableEtcView.h"
 #import "NotiSettingMenuViewController.h"
+#import "EnvMgmtViewController.h"
+#import "CustomerCenterViewController.h"
 
 #define MENU_CELL_HEIGHT    37
 
@@ -151,11 +153,13 @@
             break;
         }
         case 5: // 환경설정
-        {   
+        {
+            pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
             break;
         }
         case 6: // 고객센터
         {
+            pushViewController = [[CustomerCenterViewController alloc] initWithNibName:@"CustomerCenterViewController" bundle:nil];
             break;
         }
         case 7: // NH APPZONE
