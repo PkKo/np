@@ -337,6 +337,20 @@
     NSString *section = [mTimeLineSection objectAtIndex:indexPath.section];
     NSString *desc = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
     
+    /* 데이터 구성
+    NHInboxMessageData
+    NSString * serverMessageKey;
+    int64_t regDate;
+    NSString * inboxType;
+    NSString * title;
+    NSString * text;
+    NSString * linkUrl;
+    NSString * nhAccountNumber;
+    int64_t amount;
+    int64_t balance;
+    NSString * oppositeUser;
+    int32_t stickerCode;*/
+    
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
     if(isDeleteMode)
@@ -360,6 +374,8 @@
         }
     }
     
+    [cell.stickerButton setTag:(indexPath.row%2)];
+    [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 푸시 시간
     [cell.timeLabel setText:@"09:05"];
@@ -503,7 +519,38 @@
         }
         [currentBtn setSelected:![currentBtn isSelected]];
     }
+    else
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(stickerButtonClick:)])
+        {
+            [delegate performSelector:@selector(stickerButtonClick:) withObject:sender];
+        }
+        /*
+        if(indexPath.row % 2 == 0)
+        {
+            // 입금 스티커
+            if(depositStickerView == nil)
+            {
+                depositStickerView = [DepositStickerView view];
+                [depositStickerView setFrame:CGRectMake(0, 0, self.frame.size.width, ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+                [depositStickerView setDelegate:self];
+            }
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:depositStickerView];
+        }
+        else
+        {
+            // 출금 스티커
+            if(withdrawStickerView == nil)
+            {
+                withdrawStickerView = [WithdrawStickerSettingView view];
+                [withdrawStickerView setFrame:CGRectMake(0, 0, self.frame.size.width, ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+                [withdrawStickerView setDelegate:self];
+            }
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:withdrawStickerView];
+        }*/
+    }
 }
+
 - (void)pinButtonClick:(id)sender
 {
     IndexPathButton *currentBtn = (IndexPathButton *)sender;

@@ -28,6 +28,18 @@
     [IBInbox loadWithListener:self];
 //    [IBInbox requestInboxList];
     
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.size = 20;
+    /*
+     필수 설정값
+     */
+    // 정렬 순서
+//    reqData.ascending;
+    // 알림받는 계좌번호 리스트
+//    reqData.accountNumberList;
+    // 입출금 구분
+//    reqData.queryType;
+    [IBInbox reqQueryAccountInboxListWithSize:reqData];
     /*
     mTimeLineView = [HomeTimeLineView view];
     [mTimeLineView setDelegate:self];
@@ -147,11 +159,83 @@
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
+- (void)stickerButtonClick:(id)sender
+{
+    currentStickerIndexPath = ((IndexPathButton *)sender).indexPath;
+    
+    switch ([sender tag])
+    {
+        case STICKER_DEPOSIT_NORMAL:
+        case STICKER_DEPOSIT_SALARY:
+        case STICKER_DEPOSIT_POCKET:
+        case STICKER_DEPOSIT_ETC:
+        {
+            // 입금 스티커
+            if(depositStickerView == nil)
+            {
+                depositStickerView = [DepositStickerView view];
+                [depositStickerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+                [depositStickerView setDelegate:self];
+            }
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:depositStickerView];
+            break;
+        }
+        case STICKER_WITHDRAW_NORMAL:
+        case STICKER_WITHDRAW_FOOD:
+        case STICKER_WITHDRAW_TELEPHONE:
+        case STICKER_WITHDRAW_HOUSING:
+        case STICKER_WITHDRAW_SHOPPING:
+        case STICKER_WITHDRAW_CULTURE:
+        case STICKER_WITHDRAW_EDUCATION:
+        case STICKER_WITHDRAW_CREDIT:
+        case STICKER_WITHDRAW_SAVING:
+        case STICKER_WITHDRAW_ETC:
+        {
+            // 출금 스티커
+            if(withdrawStickerView == nil)
+            {
+                withdrawStickerView = [WithdrawStickerSettingView view];
+                [withdrawStickerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+                [withdrawStickerView setDelegate:self];
+            }
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:withdrawStickerView];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)selectedStickerIndex:(NSNumber *)index
+{
+    NSInteger stickerIndex = index.integerValue;
+    NSLog(@"%s, %ld", __FUNCTION__, (long)stickerIndex);
+    /*
+    if(currentStickerIndexPath != nil)
+    {
+        // 스티커 정보 세팅
+        currentStickerIndexPath = nil;
+        
+        // 인박스에 스티커 정보를 저장한다.
+        [IBInbox reqAddStickerInfoWithMsgKey:@"serverMessageKey" stickerCode:(int)stickerIndex];
+    }*/
+}
+
 #pragma mark - IBInbox Protocol
 - (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
     NSLog(@"%s, %@", __FUNCTION__, messageList);
+    for(InboxMessageData *data in messageList)
+    {
+        NSLog(@"inbox message data = %@", data);
+    }
     [IBInbox requestInboxCategoryInfo];
+}
+
+- (void)loadedAccountQueryInboxList:(BOOL)success messageList:(NSArray *)messageList
+{
+    NSLog(@"%s, %@", __FUNCTION__, messageList);
 }
 
 - (void)inboxLoadFailed:(int)responseCode

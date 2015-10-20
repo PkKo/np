@@ -138,4 +138,88 @@
     
     return encodedString;
 }
+
++ (UIImage *)getStickerImage:(StickerType)stickerType
+{
+    NSString *stickerImageName = @"";
+    
+    switch (stickerType)
+    {
+        case STICKER_DEPOSIT_NORMAL:
+        {
+            stickerImageName = @"icon_sticker_01.png";
+            break;
+        }
+        case STICKER_DEPOSIT_SALARY:
+        {
+            stickerImageName = @"icon_deposit_01_dft.png";
+            break;
+        }
+        case STICKER_DEPOSIT_POCKET:
+        {
+            stickerImageName = @"icon_deposit_02_dft.png";
+            break;
+        }
+        case STICKER_DEPOSIT_ETC:
+        {
+            stickerImageName = @"icon_deposit_03_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_NORMAL:
+        {
+            stickerImageName = @"icon_sticker_02.png";
+            break;
+        }
+        case STICKER_WITHDRAW_FOOD:
+        {
+            stickerImageName = @"icon_withdraw_01_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_TELEPHONE:
+        {
+            stickerImageName = @"icon_withdraw_02_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_HOUSING:
+        {
+            stickerImageName = @"icon_withdraw_03_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_SHOPPING:
+        {
+            stickerImageName = @"icon_withdraw_04_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_CULTURE:
+        {
+            stickerImageName = @"icon_withdraw_05_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_EDUCATION:
+        {
+            stickerImageName = @"icon_withdraw_06_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_CREDIT:
+        {
+            stickerImageName = @"icon_withdraw_07_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_SAVING:
+        {
+            stickerImageName = @"icon_withdraw_08_dft.png";
+            break;
+        }
+        case STICKER_WITHDRAW_ETC:
+        {
+            stickerImageName = @"icon_withdraw_09_dft.png";
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIImage *stickerImage = [UIImage imageNamed:stickerImageName];
+    return stickerImage;
+}
 @end

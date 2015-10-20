@@ -9,6 +9,8 @@
 #import "CommonViewController.h"
 #import "HomeTimeLineView.h"
 #import "HomeBankingView.h"
+#import "DepositStickerView.h"
+#import "WithdrawStickerSettingView.h"
 
 typedef enum HomeViewType
 {
@@ -18,7 +20,20 @@ typedef enum HomeViewType
     INBOX
 } HomeViewType;
 
-@interface HomeViewController : UIViewController<IBInboxProtocol>
+@interface HomeViewController : UIViewController<IBInboxProtocol, StickerSettingDelegate>
+{
+    // 푸시 날짜 데이터 리스트
+    NSMutableArray *sectionList;
+    // 날짜를 키로 한 푸시 데이터 딕셔너리 리스트
+    NSMutableArray *timelineMessageList;
+    
+    // 입금 스티커 뷰
+    DepositStickerView *depositStickerView;
+    // 출금 스티커 뷰
+    WithdrawStickerSettingView *withdrawStickerView;
+    // 선택한 스티커 인덱스
+    NSIndexPath *currentStickerIndexPath;
+}
 
 @property (assign, nonatomic) HomeViewType viewType;
 // 타임라인 탭

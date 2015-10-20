@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WithdrawStickerSettingView.h"
+#import "DepositStickerView.h"
 
 @interface HomeTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
@@ -25,6 +27,10 @@
     BOOL isDeleteMode;
     
     NSInteger storageCount;
+    
+    DepositStickerView *depositStickerView;
+    WithdrawStickerSettingView *withdrawStickerView;
+    NSIndexPath *currentStickerIndexPath;
 }
 
 @property (strong, nonatomic) id delegate;
