@@ -38,7 +38,7 @@
     // APNS Device 등록 및 Device Token 요청
     [IBPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
     
-#ifdef DEV_MODE
+#if 0
     [IBNgmService registerUserWithAccountId:@"ips_sample" verifyCode:[@"ips_sample" dataUsingEncoding:NSUTF8StringEncoding]];
 #else
     [IBNgmService registerUserWithAccountId:[CommonUtil getDeviceUUID] verifyCode:[[CommonUtil getDeviceUUID] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -89,5 +89,26 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
     NSLog(@"%s, %@", __FUNCTION__, error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"##########################################################");
+    NSLog(@"didReceiveRemoteNotification");
+    NSLog(@"##########################################################");
+    
+    NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, userInfo);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:[userInfo description]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    [IBPush apnsHandleRemoteNotification:userInfo];
 }
 @end

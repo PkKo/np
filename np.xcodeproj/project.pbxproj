@@ -51,6 +51,10 @@
 		A2D8608C1BD472E70003CBB6 /* tutorial_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D860701BD472E70003CBB6 /* tutorial_02@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D8608D1BD472E70003CBB6 /* tutorial_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D860711BD472E70003CBB6 /* tutorial_03@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D8608E1BD472E70003CBB6 /* tutorial_04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D860721BD472E70003CBB6 /* tutorial_04@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860901BD48C880003CBB6 /* WithdrawStickerSettingView.m */; settings = {ASSET_TAGS = (); }; };
+		A2D860931BD48C940003CBB6 /* WithdrawStickerSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D860921BD48C940003CBB6 /* WithdrawStickerSettingView.xib */; settings = {ASSET_TAGS = (); }; };
+		A2D860961BD4C7570003CBB6 /* DepositStickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860951BD4C7570003CBB6 /* DepositStickerView.m */; settings = {ASSET_TAGS = (); }; };
+		A2D860981BD4C7620003CBB6 /* DepositStickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */; settings = {ASSET_TAGS = (); }; };
 		A2D90D5D1BB2304900315425 /* RegistCertMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2D90D601BB2489300315425 /* RegistCertPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5F1BB2489300315425 /* RegistCertPassView.m */; settings = {ASSET_TAGS = (); }; };
@@ -587,6 +591,12 @@
 		A2D860701BD472E70003CBB6 /* tutorial_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_02@2x.png"; sourceTree = "<group>"; };
 		A2D860711BD472E70003CBB6 /* tutorial_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_03@2x.png"; sourceTree = "<group>"; };
 		A2D860721BD472E70003CBB6 /* tutorial_04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_04@2x.png"; sourceTree = "<group>"; };
+		A2D8608F1BD48C880003CBB6 /* WithdrawStickerSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WithdrawStickerSettingView.h; sourceTree = "<group>"; };
+		A2D860901BD48C880003CBB6 /* WithdrawStickerSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithdrawStickerSettingView.m; sourceTree = "<group>"; };
+		A2D860921BD48C940003CBB6 /* WithdrawStickerSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawStickerSettingView.xib; sourceTree = "<group>"; };
+		A2D860941BD4C7570003CBB6 /* DepositStickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepositStickerView.h; sourceTree = "<group>"; };
+		A2D860951BD4C7570003CBB6 /* DepositStickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepositStickerView.m; sourceTree = "<group>"; };
+		A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositStickerView.xib; sourceTree = "<group>"; };
 		A2D90D591BB2303900315425 /* RegistCertMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistCertMenuView.h; sourceTree = "<group>"; };
 		A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistCertMenuView.m; sourceTree = "<group>"; };
 		A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistCertMenuView.xib; sourceTree = "<group>"; };
@@ -1618,6 +1628,9 @@
 				A2D95B9F1BA8FF1000DC943D /* HomeTimeLineView.h */,
 				A2D95BA01BA8FF1000DC943D /* HomeTimeLineView.m */,
 				A2D95BA21BA8FF2400DC943D /* HomeTimeLineView.xib */,
+				A2D62D2C1BC3617B001E16B0 /* HomeBankingView.h */,
+				A2D62D2D1BC3617B001E16B0 /* HomeBankingView.m */,
+				A2D62D2F1BC36188001E16B0 /* HomeBankingView.xib */,
 				A2D791711BBD202800E817E7 /* HomeTimeLineTableViewCell.h */,
 				A2D791721BBD202800E817E7 /* HomeTimeLineTableViewCell.m */,
 				A2D791731BBD202800E817E7 /* HomeTimeLineTableViewCell.xib */,
@@ -1627,9 +1640,12 @@
 				A2D7916C1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.h */,
 				A2D7916D1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m */,
 				A2D7916E1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.xib */,
-				A2D62D2C1BC3617B001E16B0 /* HomeBankingView.h */,
-				A2D62D2D1BC3617B001E16B0 /* HomeBankingView.m */,
-				A2D62D2F1BC36188001E16B0 /* HomeBankingView.xib */,
+				A2D8608F1BD48C880003CBB6 /* WithdrawStickerSettingView.h */,
+				A2D860901BD48C880003CBB6 /* WithdrawStickerSettingView.m */,
+				A2D860921BD48C940003CBB6 /* WithdrawStickerSettingView.xib */,
+				A2D860941BD4C7570003CBB6 /* DepositStickerView.h */,
+				A2D860951BD4C7570003CBB6 /* DepositStickerView.m */,
+				A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -2713,6 +2729,7 @@
 				A2D9A33E1BCB34F800FC2AC7 /* icon_top_04_off@2x.png in Resources */,
 				A2D9A3531BCB34F800FC2AC7 /* icon_withdraw_08_dft@2x.png in Resources */,
 				A2D9A3481BCB34F800FC2AC7 /* icon_withdraw_02_sel@2x.png in Resources */,
+				A2D860981BD4C7620003CBB6 /* DepositStickerView.xib in Resources */,
 				A2D9A3641BCB34F800FC2AC7 /* toggle_01_on@2x.png in Resources */,
 				A2D95B091BA8F1DD00DC943D /* clear.wav in Resources */,
 				A2D9A35E1BCB34F800FC2AC7 /* notice_bg_02_m@2x.png in Resources */,
@@ -2756,6 +2773,7 @@
 				A2D95B4B1BA8F1DD00DC943D /* NFPadnum_bg_wide@2x.png in Resources */,
 				A2D95B371BA8F1DD00DC943D /* NFPadchar_pressed@2x.png in Resources */,
 				A2D9A3451BCB34F800FC2AC7 /* icon_withdraw_01_dft@2x.png in Resources */,
+				A2D860931BD48C940003CBB6 /* WithdrawStickerSettingView.xib in Resources */,
 				A55BDEED1BB0EB8100646C79 /* dot_on.png in Resources */,
 				A2D9A3161BCB34F800FC2AC7 /* icon_notice_02_dft@2x.png in Resources */,
 				A2D9A35B1BCB34F800FC2AC7 /* menu_tab_01@2x.png in Resources */,
@@ -3041,6 +3059,7 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
+				A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */,
 				A5E0178F1BCCF6B1007BD4EA /* LoginCertController.m in Sources */,
 				A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */,
 				A5E017821BCCD134007BD4EA /* LoginSimpleVerificationViewController.m in Sources */,
@@ -3127,6 +3146,7 @@
 				A2D95B991BA8F1DD00DC943D /* NFilterChar.m in Sources */,
 				A2DEAE651B9FE6D800EDCCBA /* NavigationView.m in Sources */,
 				A2D95B081BA8F1DD00DC943D /* PublicKeyDownloader.m in Sources */,
+				A2D860961BD4C7570003CBB6 /* DepositStickerView.m in Sources */,
 				A2DEAE561B9FE6D800EDCCBA /* ECSlidingAnimationController.m in Sources */,
 				A2D90D651BB2730D00315425 /* RegistCertListView.m in Sources */,
 				A2DEAE541B9FE6D800EDCCBA /* CommonViewController.m in Sources */,
