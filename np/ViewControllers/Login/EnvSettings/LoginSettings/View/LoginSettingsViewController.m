@@ -60,13 +60,13 @@
 }
 
 - (IBAction)gotoCertMgmtCenter {
-    
+    NSLog(@"공인인증센터로 이동");
 }
 
 - (IBAction)showCertList {
     NSArray * certificates = [[[LoginCertController alloc] init] getCertList];
-    if (certificates) {
-        [[[StorageBoxUtil alloc] init] showCertListInViewController:self dataSource:certificates];
+    if (certificates && [certificates count] > 0) {
+        [[[StorageBoxUtil alloc] init] showCertListInViewController:self dataSource:certificates updateSltedCert:@selector(updateSelectedCert:)];
     } else {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"등록된 공인인증서가 없습니다.\n공인인증센터로 이동하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
         [alert show];
@@ -83,13 +83,20 @@
     }
 }
 
+- (void)updateSelectedCert:(CertInfo *)sltedCert {
+    if (sltedCert) {
+        NSLog(@"%s", __func__);
+        [self.certListBtn setTitle:sltedCert.subjectDN2 forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Simple Login
 - (IBAction)selectSimpleLogin:(id)sender {
     [self selectLoginBy:LOGIN_BY_SIMPLEPW];
 }
 
 - (IBAction)gotoSimpleLoginMgmt {
-    [self.navigationController pushViewController:[[[LoginUtil alloc] init] getSimpleLoginMgmt] animated:YES];
+    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
 }
 
 #pragma mark - Pattern Login
@@ -149,9 +156,7 @@
     
     LoginUtil * util            = [[LoginUtil alloc] init];
     CertInfo * savedCertToLogin = [util getCertToLogin];
-    if (savedCertToLogin) {
-        [self.certListBtn setTitle:savedCertToLogin.subjectDN2 forState:UIControlStateNormal];
-    }
+    [self updateSelectedCert:savedCertToLogin];
     
     NSString * simplePw     = [util getSimplePassword];
     [self.simpleLoginBtn setEnabled:simplePw ? YES : NO];
@@ -160,7 +165,6 @@
     [self.patternLoginBtn setEnabled:patternPw ? YES : NO];
     
 }
-
 
 - (void)selectLoginBy:(LoginMethod)loginMethod {
     

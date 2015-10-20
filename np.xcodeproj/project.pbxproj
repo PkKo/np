@@ -495,6 +495,14 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
+		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5D50AF21BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AF01BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B041BD4E55900D7A2DD /* CustomerCenterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5D50B071BD4E55900D7A2DD /* CustomerCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
@@ -1143,6 +1151,18 @@
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A5D50AE71BD48F0500D7A2DD /* EnvMgmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvMgmtViewController.h; sourceTree = "<group>"; };
+		A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvMgmtViewController.m; sourceTree = "<group>"; };
+		A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvMgmtViewController.xib; sourceTree = "<group>"; };
+		A5D50AEE1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeBackgroundSettingsViewController.h; sourceTree = "<group>"; };
+		A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeBackgroundSettingsViewController.m; sourceTree = "<group>"; };
+		A5D50AF01BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeBackgroundSettingsViewController.xib; sourceTree = "<group>"; };
+		A5D50B031BD4E55900D7A2DD /* CustomerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerCenterViewController.h; sourceTree = "<group>"; };
+		A5D50B041BD4E55900D7A2DD /* CustomerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerCenterViewController.m; sourceTree = "<group>"; };
+		A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerCenterViewController.xib; sourceTree = "<group>"; };
+		A5D50B081BD4EABC00D7A2DD /* TelInquiryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelInquiryViewController.h; sourceTree = "<group>"; };
+		A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelInquiryViewController.m; sourceTree = "<group>"; };
+		A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TelInquiryViewController.xib; sourceTree = "<group>"; };
 		A5DA32351BC61160008DE464 /* CustomizedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedPickerViewController.h; sourceTree = "<group>"; };
 		A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedPickerViewController.m; sourceTree = "<group>"; };
 		A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomizedPickerViewController.xib; sourceTree = "<group>"; };
@@ -2050,6 +2070,7 @@
 		A2DEAE681B9FE6E600EDCCBA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A5D50AF51BD4E53900D7A2DD /* CustomerCenter */,
 				A5E2C4471BB25D1B006EE828 /* StorageBox */,
 				A55BDEE41BB0EB8100646C79 /* PatternLogin */,
 				A54B94DE1BAA837300D5D99B /* SNS */,
@@ -2222,6 +2243,8 @@
 		A538C2D91BCDE728005E3211 /* EnvSettings */ = {
 			isa = PBXGroup;
 			children = (
+				A5D50AEC1BD4B36E00D7A2DD /* NoticeBackgroundSettings */,
+				A5D50AE51BD48EC100D7A2DD /* EnvMgmt */,
 				A538C2EB1BCE3DC2005E3211 /* SimplePwMgmt */,
 				A538C2DA1BCDE728005E3211 /* LoginSettings */,
 			);
@@ -2332,6 +2355,159 @@
 				A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */,
 			);
 			path = PatternLogin;
+			sourceTree = "<group>";
+		};
+		A5D50AE51BD48EC100D7A2DD /* EnvMgmt */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AE61BD48EC100D7A2DD /* View */,
+			);
+			path = EnvMgmt;
+			sourceTree = "<group>";
+		};
+		A5D50AE61BD48EC100D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AE71BD48F0500D7A2DD /* EnvMgmtViewController.h */,
+				A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */,
+				A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50AEC1BD4B36E00D7A2DD /* NoticeBackgroundSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AED1BD4B36E00D7A2DD /* View */,
+			);
+			path = NoticeBackgroundSettings;
+			sourceTree = "<group>";
+		};
+		A5D50AED1BD4B36E00D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AEE1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.h */,
+				A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */,
+				A5D50AF01BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50AF51BD4E53900D7A2DD /* CustomerCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AF61BD4E53900D7A2DD /* FAQ */,
+				A5D50AF71BD4E53900D7A2DD /* Main */,
+				A5D50AF91BD4E53900D7A2DD /* Notice */,
+				A5D50AFA1BD4E53900D7A2DD /* ServiceDeactivation */,
+				A5D50AFC1BD4E53900D7A2DD /* ServiceGuide */,
+				A5D50AFE1BD4E53900D7A2DD /* TelInquiry */,
+				A5D50B001BD4E53900D7A2DD /* TermsOfUse */,
+				A5D50B011BD4E53900D7A2DD /* VersionInfo */,
+			);
+			path = CustomerCenter;
+			sourceTree = "<group>";
+		};
+		A5D50AF61BD4E53900D7A2DD /* FAQ */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FAQ;
+			sourceTree = "<group>";
+		};
+		A5D50AF71BD4E53900D7A2DD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AF81BD4E53900D7A2DD /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		A5D50AF81BD4E53900D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50B031BD4E55900D7A2DD /* CustomerCenterViewController.h */,
+				A5D50B041BD4E55900D7A2DD /* CustomerCenterViewController.m */,
+				A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50AF91BD4E53900D7A2DD /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		A5D50AFA1BD4E53900D7A2DD /* ServiceDeactivation */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AFB1BD4E53900D7A2DD /* View */,
+			);
+			path = ServiceDeactivation;
+			sourceTree = "<group>";
+		};
+		A5D50AFB1BD4E53900D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50AFC1BD4E53900D7A2DD /* ServiceGuide */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AFD1BD4E53900D7A2DD /* View */,
+			);
+			path = ServiceGuide;
+			sourceTree = "<group>";
+		};
+		A5D50AFD1BD4E53900D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50AFE1BD4E53900D7A2DD /* TelInquiry */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50AFF1BD4E53900D7A2DD /* View */,
+			);
+			path = TelInquiry;
+			sourceTree = "<group>";
+		};
+		A5D50AFF1BD4E53900D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50B081BD4EABC00D7A2DD /* TelInquiryViewController.h */,
+				A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */,
+				A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5D50B001BD4E53900D7A2DD /* TermsOfUse */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TermsOfUse;
+			sourceTree = "<group>";
+		};
+		A5D50B011BD4E53900D7A2DD /* VersionInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A5D50B021BD4E53900D7A2DD /* View */,
+			);
+			path = VersionInfo;
+			sourceTree = "<group>";
+		};
+		A5D50B021BD4E53900D7A2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A5E0176A1BCCD134007BD4EA /* LoginAccount */ = {
@@ -2703,6 +2879,7 @@
 				A2D95B5F1BA8F1DD00DC943D /* nf_ios_icon_special.png in Resources */,
 				A2D9A2F61BCB34F800FC2AC7 /* icon_deposit_02_sel@2x.png in Resources */,
 				A2D9A30A1BCB34F800FC2AC7 /* icon_logout_01@2x.png in Resources */,
+				A5D50AF21BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib in Resources */,
 				A2D9A3241BCB34F800FC2AC7 /* icon_refresh_01@2x.png in Resources */,
 				A2D9A2F51BCB34F800FC2AC7 /* icon_deposit_02_dft@2x.png in Resources */,
 				A2D95B631BA8F1DD00DC943D /* nf_ios_prev.png in Resources */,
@@ -2867,9 +3044,11 @@
 				A2D95B4C1BA8F1DD00DC943D /* NFPadspacebar_wide@2x.png in Resources */,
 				A2D9A3361BCB34F800FC2AC7 /* icon_tel_01_dft@2x.png in Resources */,
 				A2D9A2EB1BCB34F800FC2AC7 /* icon_check_01_dft@2x.png in Resources */,
+				A5D50B071BD4E55900D7A2DD /* CustomerCenterViewController.xib in Resources */,
 				A2D791751BBD202800E817E7 /* HomeTimeLineTableViewCell.xib in Resources */,
 				A2D9A3601BCB34F800FC2AC7 /* shadow_01@2x.png in Resources */,
 				A2D95B361BA8F1DD00DC943D /* NFPadchar@2x.png in Resources */,
+				A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */,
 				A2D95B331BA8F1DD00DC943D /* NFPadbtn_pressed@2x.png in Resources */,
 				A2D9A3311BCB34F800FC2AC7 /* icon_sticker_05_dft@2x.png in Resources */,
 				A2D8607D1BD472E70003CBB6 /* img_service_02@2x.png in Resources */,
@@ -2947,6 +3126,7 @@
 				A2D9A2E61BCB34F800FC2AC7 /* icon_app_zone_01_dft@2x.png in Resources */,
 				A2D9A2FE1BCB34F800FC2AC7 /* icon_faq_01_dft@2x.png in Resources */,
 				A2D8608C1BD472E70003CBB6 /* tutorial_02@2x.png in Resources */,
+				A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */,
 				A2D9A35D1BCB34F800FC2AC7 /* notice_bg_02_l@2x.png in Resources */,
 				A2D95B691BA8F1DD00DC943D /* nf_ios_bg@2x.png in Resources */,
 				A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */,
@@ -3057,6 +3237,7 @@
 			files = (
 				A2DEAE771B9FE6E600EDCCBA /* CertificateMenuViewController.m in Sources */,
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
+				A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
 				A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */,
@@ -3101,6 +3282,7 @@
 				A2D95B9A1BA8F1DD00DC943D /* NFilterNum.m in Sources */,
 				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
 				A2DE50BE1BD0852300A40BF3 /* CertMenuCell.m in Sources */,
+				A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */,
 				17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */,
 				A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */,
 				A2D90D6C1BB2745000315425 /* CertTableCell.m in Sources */,
@@ -3148,6 +3330,7 @@
 				A2D95B081BA8F1DD00DC943D /* PublicKeyDownloader.m in Sources */,
 				A2D860961BD4C7570003CBB6 /* DepositStickerView.m in Sources */,
 				A2DEAE561B9FE6D800EDCCBA /* ECSlidingAnimationController.m in Sources */,
+				A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */,
 				A2D90D651BB2730D00315425 /* RegistCertListView.m in Sources */,
 				A2DEAE541B9FE6D800EDCCBA /* CommonViewController.m in Sources */,
 				A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */,
@@ -3164,6 +3347,7 @@
 				A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */,
 				A2DEAE5D1B9FE6D800EDCCBA /* MASConstraint.m in Sources */,
 				A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */,
+				A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */,
 				172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */,
 				A2DEAE5A1B9FE6D800EDCCBA /* UIViewController+ECSlidingViewController.m in Sources */,
 				A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */,

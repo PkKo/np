@@ -11,6 +11,7 @@
 #import "EccEncryptor.h"
 #import "LoginSettingsViewController.h"
 #import "LoginSettingsViewController.h"
+#import "StorageBoxUtil.h"
 
 @interface LoginSimpleVerificationViewController ()
 
@@ -32,8 +33,7 @@
 }
 
 - (IBAction)gotoLoginSettings {
-    LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
-    [self.navigationController pushViewController:loginSettings animated:YES];
+    [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
 }
 
 #pragma mark - Keyboard
@@ -60,9 +60,7 @@
 }
 
 - (void)updateUI {
-    
-    [self.fakeNoticeTextField.layer setBorderWidth:1.0f];
-    [self.fakeNoticeTextField.layer setBorderColor:[[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
 }
 
 @end

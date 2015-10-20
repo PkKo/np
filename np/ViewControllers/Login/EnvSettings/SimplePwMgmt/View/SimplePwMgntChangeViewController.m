@@ -10,6 +10,7 @@
 #import "EccEncryptor.h"
 #import "LoginUtil.h"
 #import "ConstantMaster.h"
+#import "StorageBoxUtil.h"
 
 @interface SimplePwMgntChangeViewController ()
 
@@ -21,6 +22,7 @@
     [super viewDidLoad];
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"간편비밀번호 관리"];
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +78,7 @@
     textField.text = plainText;
 }
 
-
+#pragma mark - Cancel/Done
 - (IBAction)clickCancel {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -146,4 +148,12 @@
     }
     
 }
+
+#pragma mark - UI
+- (void)updateUI {
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeExistingPw];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeMyNewPw];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeMyNewPwConfirm];
+}
+
 @end

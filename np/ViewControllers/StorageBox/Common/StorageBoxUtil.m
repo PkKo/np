@@ -10,11 +10,18 @@
 #import "MemoCompositionViewController.h"
 #import "SNSViewController.h"
 #import "CertListViewController.h"
+#import "ConstantMaster.h"
 
 @implementation StorageBoxUtil
 
+#pragma mark - UI Customization
 + (UIColor *)getDimmedBackgroundColor {
     return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+}
+
+- (void)updateTextFieldBorder:(UITextField *)textField {
+    [textField.layer setBorderWidth:1.0f];
+    [textField.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
 }
 
 #pragma mark - Date Search
@@ -205,10 +212,11 @@
 }
 
 #pragma mark - Memo Composer & SNS & Cert List
-- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates {
+- (void)showCertListInViewController:(UIViewController *)viewController dataSource:(NSArray *)certificates updateSltedCert:(SEL)updateSltedCert {
     
     CertListViewController * certList = [[CertListViewController alloc] initWithNibName:@"CertListViewController" bundle:nil];
     [certList setCertificates:certificates];
+    [certList addTargetForCloseBtn:viewController action:updateSltedCert];
     [self showViewController:certList inParentViewController:viewController];
 }
 

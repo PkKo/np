@@ -13,6 +13,7 @@
 @interface LoginUtil : NSObject
 
 #pragma mark - Login Settings
+- (void)gotoLoginSettings:(UINavigationController *)navController;
 - (void)saveLoginMethod:(LoginMethod)loginMethod;
 - (LoginMethod)getLoginMethod;
 
@@ -22,6 +23,7 @@
 - (void)saveCertToLogin:(CertInfo *)cert;
 
 #pragma mark - Simple Login
+- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController;
 - (UIViewController *)getSimpleLoginMgmt;
 - (NSString *)getSimplePassword;
 - (void)saveSimplePassword:(NSString *)simplePassword;
