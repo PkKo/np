@@ -21,6 +21,7 @@
 #import "LoginCertListViewController.h"
 #import "LoginAccountVerificationViewController.h"
 #import "LoginSimpleVerificationViewController.h"
+#import "DrawPatternLockViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -431,9 +432,15 @@
 
 - (IBAction)gotoCertLogin:(id)sender {
     
+    DrawPatternLockViewController *certLogin = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
+    [self.navigationController pushViewController:eVC animated:YES];
+    
+    /*
     LoginCertListViewController *certLogin = [[LoginCertListViewController alloc] initWithNibName:@"LoginCertListViewController" bundle:nil];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
     [self.navigationController pushViewController:eVC animated:YES];
+    */
 }
 
 - (IBAction)gotoAccountLogin:(id)sender {

@@ -11,66 +11,25 @@
 @implementation DrawPatternLockView
 
 
-- (id)initWithFrame:(CGRect)frame
-{
-  self = [super initWithFrame:frame];
-    
-    NSLog(@"initWithFrame");
-    
-  if (self) {
-    // Initialization code
-  }
-
-  return self;
-}
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-  NSLog(@"drawrect...");
-  
-  if (!_trackPointValue)
-    return;
-
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextSetLineWidth(context, 10.0);
-  CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-  CGFloat components[] = {0.5, 0.5, 0.5, 0.8};
-  CGColorRef color = CGColorCreate(colorspace, components);
-  CGContextSetStrokeColorWithColor(context, color);
-
-  CGPoint from;
-  UIView *lastDot;
-  for (UIView *dotView in _dotViews) {
-    from = dotView.center;
-    NSLog(@"drwaing dotview: %@", dotView);
-    NSLog(@"\tdrawing from: %f, %f", from.x, from.y);
-
-    if (!lastDot)
-      CGContextMoveToPoint(context, from.x, from.y);
-    else
-      CGContextAddLineToPoint(context, from.x, from.y);
+- (void)drawRect:(CGRect)rect {
     
-    lastDot = dotView;
-  }
-
-  CGPoint pt = [_trackPointValue CGPointValue];
-  NSLog(@"\t to: %f, %f", pt.x, pt.y);
-  CGContextAddLineToPoint(context, pt.x, pt.y);
-  
-  CGContextStrokePath(context);
-  CGColorSpaceRelease(colorspace);
-  CGColorRelease(color);
-
-  _trackPointValue = nil;
+    if (self.isIncorrectPattern) {
+        [self drawLineAutomatically];
+    } else {
+        [self drawLineManually];
+    }
 }
 
+- (void)drawLineFromLastDotTo:(CGPoint)pt {
+    _trackPointValue = [NSValue valueWithCGPoint:pt];
+    [self setNeedsDisplay];
+}
 
 - (void)clearDotViews {
   [_dotViews removeAllObjects];
 }
-
 
 - (void)addDotView:(UIView *)view {
   if (!_dotViews)
@@ -79,11 +38,64 @@
   [_dotViews addObject:view];
 }
 
-
-- (void)drawLineFromLastDotTo:(CGPoint)pt {
-  _trackPointValue = [NSValue valueWithCGPoint:pt];
-  [self setNeedsDisplay];
+- (void)drawLineManually {
+    
+    if (!_trackPointValue)
+        return;
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 3.0);
+    
+    CGColorRef color = self.strokeColor.CGColor;
+    CGContextSetStrokeColorWithColor(context, color);
+    
+    CGPoint from;
+    UIView * lastDot;
+    for (UIView * dotView in _dotViews) {
+        
+        from = dotView.center;
+        
+        if (!lastDot) {
+            
+            CGContextMoveToPoint(context, from.x, from.y);
+            
+        } else {
+            CGContextAddLineToPoint(context, from.x, from.y);
+        }
+        
+        lastDot = dotView;
+    }
+    
+    CGPoint pt = [_trackPointValue CGPointValue];
+    CGContextAddLineToPoint(context, pt.x, pt.y);
+    
+    CGContextStrokePath(context);
+    _trackPointValue = nil;
 }
 
+- (void)drawLineAutomatically {
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 3.0);
+    
+    CGColorRef color =  [UIColor colorWithRed:248.0f/255.0f green:76.0f/255.0f blue:116.0f/255.0f alpha:1].CGColor;
+    CGContextSetStrokeColorWithColor(context, color);
+    
+    CGPoint from, to;
+    
+    for (int dotIndex = 0; dotIndex < [_dotViews count] - 1; dotIndex++) {
+        
+        UIView * fromdotView    = [_dotViews objectAtIndex:dotIndex];
+        UIView * todotView      = [_dotViews objectAtIndex:(dotIndex + 1)];
+        
+        from    = fromdotView.center;
+        to      = todotView.center;
+        
+        CGContextMoveToPoint(context, from.x, from.y);
+        CGContextAddLineToPoint(context, to.x, to.y);
+    }
+    
+    CGContextStrokePath(context);
+}
 
 @end

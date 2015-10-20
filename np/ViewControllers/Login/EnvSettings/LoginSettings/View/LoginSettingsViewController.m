@@ -105,7 +105,7 @@
 }
 
 - (IBAction)gotoPatternLoginMgmt {
-    
+    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
 }
 
 #pragma mark - cancel/done
@@ -161,7 +161,7 @@
     NSString * simplePw     = [util getSimplePassword];
     [self.simpleLoginBtn setEnabled:simplePw ? YES : NO];
     
-    NSString * patternPw    = [util getPatternLoginPassword];
+    NSString * patternPw    = [util getPatternPassword];
     [self.patternLoginBtn setEnabled:patternPw ? YES : NO];
     
 }

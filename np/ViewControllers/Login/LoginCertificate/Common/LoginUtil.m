@@ -15,6 +15,7 @@
 #import "SimplePwMgntChangeViewController.h"
 #import "LoginCertController.h"
 #import "LoginSettingsViewController.h"
+#import "DrawPatternMgmtViewController.h"
 
 @implementation LoginUtil
 
@@ -115,12 +116,48 @@
 }
 
 #pragma mark - Pattern Login
-- (NSString *)getPatternLoginPassword {
-    return nil;
+- (void)gotoPatternLoginMgmt:(UINavigationController *)navController {
+    [navController pushViewController:[self getPatternLoginMgmt] animated:YES];
 }
 
-- (void)savePatternLoginPassword:(NSString *)pw {
+- (UIViewController *)getPatternLoginMgmt {
+    UIViewController * vc = [[DrawPatternMgmtViewController alloc] initWithNibName:@"DrawPatternMgmtViewController"
+                                                                            bundle:nil];
+    return vc;
+}
+
+- (NSString *)getPatternPassword {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+}
+
+- (void)savePatternPassword:(NSString *)pw {
     
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:pw forKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
+}
+
+- (void)removePatternPassword {
+    
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
+}
+
+- (NSInteger)getPatternPasswordFailedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [[prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES] integerValue];
+}
+
+- (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
 }
 
 #pragma mark - Secure Keyboard

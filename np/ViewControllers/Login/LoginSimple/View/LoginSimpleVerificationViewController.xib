@@ -65,6 +65,9 @@
                             <state key="normal" title="로그인">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="doLogin" destination="-1" eventType="touchUpInside" id="iFz-SV-FwB"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZQH-Rt-yXX">
                             <rect key="frame" x="168" y="103" width="81" height="22"/>
@@ -109,6 +112,9 @@
                             <state key="normal" title="간편비밀번호 관리" image="icon_depth_03.png">
                                 <color key="titleColor" red="0.70196078429999997" green="0.81960784310000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoSimpleLoginSettings" destination="-1" eventType="touchUpInside" id="M3o-Xp-dJN"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -13,5 +13,6 @@
 
 -(IBAction)gotoLoginSettings;
 -(IBAction)gotoSimpleLoginMgmt;
+-(IBAction)gotoPatternLoginMgmt;
 -(IBAction)gotoNoticeBgColorSettings;
 @end

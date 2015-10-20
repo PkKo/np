@@ -36,6 +36,10 @@
     [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
 }
 
+-(IBAction)gotoPatternLoginMgmt {
+    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
+}
+
 -(IBAction)gotoNoticeBgColorSettings {
     NoticeBackgroundSettingsViewController *noticeBgColorSettings = [[NoticeBackgroundSettingsViewController alloc] initWithNibName:@"NoticeBackgroundSettingsViewController" bundle:nil];
     [self.navigationController pushViewController:noticeBgColorSettings animated:YES];

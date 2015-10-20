@@ -10,16 +10,18 @@
 #import "CommonViewController.h"
 #import "DrawPatternLockView.h"
 
-@interface DrawPatternLockViewController : CommonViewController {
+@interface DrawPatternLockViewController : CommonViewController <UIAlertViewDelegate> {
     NSMutableArray* _paths;
     
     // after pattern is drawn, call this:
     id _target;
     SEL _action;
 }
-@property (weak, nonatomic) IBOutlet DrawPatternLockView *patternView;
-// get key from the pattern drawn
+@property (weak, nonatomic) IBOutlet DrawPatternLockView * patternView;
+
 - (NSString*)getKey;
 - (void)setTarget:(id)target withAction:(SEL)action;
 
+- (IBAction)gotoPatternLoginMgmt;
+- (IBAction)gotoLoginSettings;
 @end
