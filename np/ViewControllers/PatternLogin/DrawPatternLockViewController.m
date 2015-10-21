@@ -117,12 +117,20 @@
 
 - (void)clearDotConnections {
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
+    [v setIsIncorrectPattern:NO];
     [v clearDotViews];
     
     for (UIView *view in _patternView.subviews)
         if ([view isKindOfClass:[UIImageView class]])
             [(UIImageView*)view setHighlighted:NO];
     
+    [_patternView setNeedsDisplay];
+}
+
+- (void)redrawCorrectDotConnections {
+    
+    DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
+    [v setIsIncorrectPattern:YES];
     [_patternView setNeedsDisplay];
 }
 
@@ -147,6 +155,8 @@
 
 #pragma mark - Logic 
 - (void)validatePW:(NSString *)password {
+    
+    [self redrawCorrectDotConnections];
     
     LoginUtil * util = [[LoginUtil alloc] init];
     

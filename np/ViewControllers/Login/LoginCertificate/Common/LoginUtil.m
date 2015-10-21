@@ -22,7 +22,8 @@
 #pragma mark - Login Settings
 - (void)gotoLoginSettings:(UINavigationController *)navController {
     LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
-    [navController pushViewController:loginSettings animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:loginSettings];
+    [navController pushViewController:eVC animated:YES];
 }
 
 - (void)saveLoginMethod:(LoginMethod)loginMethod {
@@ -69,7 +70,8 @@
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController {
-    [navController pushViewController:[self getSimpleLoginMgmt] animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getSimpleLoginMgmt]];
+    [navController pushViewController:eVC animated:YES];
 }
 
 - (UIViewController *)getSimpleLoginMgmt {
@@ -117,6 +119,7 @@
 
 #pragma mark - Pattern Login
 - (void)gotoPatternLoginMgmt:(UINavigationController *)navController {
+    //ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
     [navController pushViewController:[self getPatternLoginMgmt] animated:YES];
 }
 

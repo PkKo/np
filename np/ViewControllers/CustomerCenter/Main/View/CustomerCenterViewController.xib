@@ -91,6 +91,9 @@
                             <state key="highlighted">
                                 <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoTelEnquiry" destination="-1" eventType="touchUpInside" id="zS6-Sb-FYf"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FTQ-O1-eKc">
                             <rect key="frame" x="293" y="118" width="18" height="18"/>
@@ -127,7 +130,7 @@
                             <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5dL-LK-TnA" userLabel="로그인 설정">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5dL-LK-TnA">
                             <rect key="frame" x="0.0" y="168" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,13 +150,16 @@
                             <state key="highlighted">
                                 <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoServiceGuide" destination="-1" eventType="touchUpInside" id="x9R-dY-FA8"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3No-eE-LXl">
                             <rect key="frame" x="293" y="182" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" backgroundImage="icon_depth_02.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hme-ke-4g5" userLabel="알림 배경 설정">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hme-ke-4g5">
                             <rect key="frame" x="0.0" y="214" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -179,7 +185,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" backgroundImage="icon_depth_02.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Mu-QA-QjS" userLabel="데이터 초기화">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Mu-QA-QjS">
                             <rect key="frame" x="0.0" y="260" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -199,13 +205,16 @@
                             <state key="highlighted">
                                 <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoVersionInfo" destination="-1" eventType="touchUpInside" id="4ve-S2-C64"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ngj-HR-NlD">
                             <rect key="frame" x="293" y="274" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" backgroundImage="icon_depth_02.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j3l-eS-wuq" userLabel="데이터 초기화">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j3l-eS-wuq">
                             <rect key="frame" x="0.0" y="306" width="320" height="46"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -225,6 +234,14 @@
                             <state key="highlighted">
                                 <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoServiceDeactivation" destination="-1" eventType="touchUpInside" id="fkm-FT-FNs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SKH-YN-WMZ">
+                            <rect key="frame" x="293" y="320" width="18" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="icon_depth_02.png"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bbe-pe-9Gw" userLabel="second_section_top_border">
                             <rect key="frame" x="0.0" y="168" width="320" height="1"/>
@@ -263,11 +280,6 @@
                             <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SKH-YN-WMZ">
-                            <rect key="frame" x="293" y="320" width="18" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="icon_depth_02.png"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

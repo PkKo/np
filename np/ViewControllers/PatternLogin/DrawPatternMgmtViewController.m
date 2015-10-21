@@ -18,7 +18,8 @@ typedef enum SetupStatus {
     
 } SetupStatus;
 
-
+#define STROKE_COLOR_BLUE [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
+#define STROKE_COLOR_RED [UIColor colorWithRed:248.0f/255.0f green:76.0f/255.0f blue:116.0f/255.0f alpha:1]
 @interface DrawPatternMgmtViewController () {
     int         _setupStatus;
     NSString  * _pw;
@@ -46,7 +47,7 @@ typedef enum SetupStatus {
     
     [self checkSavedPassword];
     
-    [_patternView setStrokeColor:[UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]];
+    [_patternView setStrokeColor:STROKE_COLOR_BLUE];
     
     for (int i=0; i<MATRIX_SIZE; i++) {
         for (int j=0; j<MATRIX_SIZE; j++) {
@@ -95,7 +96,7 @@ typedef enum SetupStatus {
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     _paths = [[NSMutableArray alloc] init];
     
-    [self clearDotConnections];
+    //[self clearDotConnections];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -106,6 +107,8 @@ typedef enum SetupStatus {
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
     [v drawLineFromLastDotTo:pt];
     
+    NSLog(@"touched: %d", touched.tag);
+    
     if (touched!=_patternView && 1 <= touched.tag && touched.tag <= 9) {
         
         BOOL found = NO;
@@ -115,8 +118,10 @@ typedef enum SetupStatus {
                 break;
         }
         
-        if (found)
+        if (found) {
+            NSLog(@"found touched.tag:%d", touched.tag);
             return;
+        }
         
         [_paths addObject:[NSNumber numberWithInteger:touched.tag]];
         [v addDotView:touched];
@@ -135,6 +140,7 @@ typedef enum SetupStatus {
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
     [v clearDotViews];
     [v setIsIncorrectPattern:NO];
+    [v setStrokeColor:STROKE_COLOR_BLUE];
     
     for (UIView *view in _patternView.subviews) {
         if ([view isKindOfClass:[UIImageView class]]) {
@@ -150,6 +156,7 @@ typedef enum SetupStatus {
     
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
     [v setIsIncorrectPattern:YES];
+    [v setStrokeColor:STROKE_COLOR_RED];
     
     for (UIView *view in _patternView.subviews) {
         if ([view isKindOfClass:[UIImageView class]]) {
@@ -161,6 +168,15 @@ typedef enum SetupStatus {
     }
     [_patternView setNeedsDisplay];
 }
+
+- (void)redrawCorrectDotConnections {
+    
+    DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
+    [v setIsIncorrectPattern:YES];
+    [v setStrokeColor:STROKE_COLOR_BLUE];
+    [_patternView setNeedsDisplay];
+}
+
 
 // get key from the pattern drawn
 // replace this method with your own key-generation algorithm
@@ -236,8 +252,10 @@ typedef enum SetupStatus {
     }
     
     if (alertMessage) {
-        [self drawIncorrectDotConnections];
+        //[self drawIncorrectDotConnections];
         [self showAlert:alertMessage tag:tag];
+    } else {
+        //[self redrawCorrectDotConnections];
     }
 }
 
@@ -289,7 +307,7 @@ typedef enum SetupStatus {
 }
 
 #pragma mark - Alert
-- (void)showAlert:(NSString *)alertMessage tag:(int)tag {
+- (void)showAlert:(NSString *)alertMessage tag:(NSInteger)tag {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                     delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
     alert.tag = tag;

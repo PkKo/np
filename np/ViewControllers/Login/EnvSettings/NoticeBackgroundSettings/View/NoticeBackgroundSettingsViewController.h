@@ -11,9 +11,11 @@
 
 @interface NoticeBackgroundSettingsViewController : CommonViewController
 
+@property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+
 - (IBAction)selectBackgroundColor:(UITapGestureRecognizer *)sender;
-
 - (IBAction)clickCancel;
-
 - (IBAction)clickDone;
 @end

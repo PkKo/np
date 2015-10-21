@@ -11,6 +11,7 @@
 
 @interface EnvMgmtViewController : CommonViewController
 
+-(IBAction)toggleUsingSimpleView:(UIButton *)simpleViewSwitch;
 -(IBAction)gotoLoginSettings;
 -(IBAction)gotoSimpleLoginMgmt;
 -(IBAction)gotoPatternLoginMgmt;

@@ -78,7 +78,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     
-    CGColorRef color =  [UIColor colorWithRed:248.0f/255.0f green:76.0f/255.0f blue:116.0f/255.0f alpha:1].CGColor;
+    CGColorRef color =  self.strokeColor.CGColor;
     CGContextSetStrokeColorWithColor(context, color);
     
     CGPoint from, to;
