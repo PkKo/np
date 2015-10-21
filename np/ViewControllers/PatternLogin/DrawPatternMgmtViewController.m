@@ -23,6 +23,7 @@ typedef enum SetupStatus {
 @interface DrawPatternMgmtViewController () {
     int         _setupStatus;
     NSString  * _pw;
+    NSString  * _pwConfirm;
 }
 
 @end
@@ -94,9 +95,13 @@ typedef enum SetupStatus {
 
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (_paths && [_paths count] > 0) {
+        [self clearDotConnections];
+    }
+    
     _paths = [[NSMutableArray alloc] init];
     
-    //[self clearDotConnections];
+    
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -105,7 +110,9 @@ typedef enum SetupStatus {
     UIView *touched = [_patternView hitTest:pt withEvent:event];
     
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
-    [v drawLineFromLastDotTo:pt];
+    if ([_paths count] > 0) {
+        [v drawLineFromLastDotTo:pt];
+    }
     
     NSLog(@"touched: %d", touched.tag);
     
@@ -132,7 +139,6 @@ typedef enum SetupStatus {
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self validatePW:[self getKey]];
 }
 
@@ -181,6 +187,11 @@ typedef enum SetupStatus {
 // get key from the pattern drawn
 // replace this method with your own key-generation algorithm
 - (NSString*)getKey {
+    
+    if (!_paths || [_paths count] == 0) {
+        return nil;
+    }
+
     NSMutableString *key;
     key = [NSMutableString string];
     
@@ -190,11 +201,6 @@ typedef enum SetupStatus {
     }
     
     return key;
-}
-
-- (void)setTarget:(id)target withAction:(SEL)action {
-    _target = target;
-    _action = action;
 }
 
 #pragma mark - Logic
@@ -215,6 +221,10 @@ typedef enum SetupStatus {
 }
 
 - (void)validatePW:(NSString *)password {
+    
+    if (!password || [password isEqualToString:@""]) {
+        return;
+    }
     
     LoginUtil * util = [[LoginUtil alloc] init];
     
@@ -245,17 +255,21 @@ typedef enum SetupStatus {
         
         _pw = password;
         
-    } else if (_setupStatus == SETUP_PW_CONFIRM && ![password isEqualToString:_pw]) {
+    } else if (_setupStatus == SETUP_PW_CONFIRM) {
         
-        alertMessage = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
-        
+        if (![password isEqualToString:_pw]) {
+            alertMessage    = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
+            _pwConfirm      = nil;
+        } else {
+            _pwConfirm      = password;
+        }
     }
     
     if (alertMessage) {
-        //[self drawIncorrectDotConnections];
+        [self drawIncorrectDotConnections];
         [self showAlert:alertMessage tag:tag];
     } else {
-        //[self redrawCorrectDotConnections];
+        [self redrawCorrectDotConnections];
     }
 }
 
@@ -300,14 +314,18 @@ typedef enum SetupStatus {
         [self refreshUI:++_setupStatus];
         
     } else  if (_setupStatus == SETUP_PW_CONFIRM) {
-        
-        [util savePatternPassword:_pw];
-        [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
+        if (!_pwConfirm) {
+            [self showAlert:@"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요." tag:ALERT_DO_NOTHING];
+        } else if ([_pw isEqualToString:_pwConfirm]) {
+            [util savePatternPassword:_pw];
+            [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
+        }
     }
 }
 
 #pragma mark - Alert
 - (void)showAlert:(NSString *)alertMessage tag:(NSInteger)tag {
+    
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                     delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
     alert.tag = tag;

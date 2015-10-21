@@ -20,8 +20,6 @@
 @property (weak, nonatomic) IBOutlet DrawPatternLockView * patternView;
 
 - (NSString*)getKey;
-- (void)setTarget:(id)target withAction:(SEL)action;
-
 - (IBAction)gotoPatternLoginMgmt;
 - (IBAction)gotoLoginSettings;
 @end

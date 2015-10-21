@@ -26,6 +26,5 @@
 - (IBAction)clickNext;
 
 - (NSString*)getKey;
-- (void)setTarget:(id)target withAction:(SEL)action;
 
 @end

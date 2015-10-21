@@ -119,8 +119,8 @@
 
 #pragma mark - Pattern Login
 - (void)gotoPatternLoginMgmt:(UINavigationController *)navController {
-    //ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
-    [navController pushViewController:[self getPatternLoginMgmt] animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
+    [navController pushViewController:eVC animated:YES];
 }
 
 - (UIViewController *)getPatternLoginMgmt {

@@ -88,7 +88,9 @@
     UIView *touched = [_patternView hitTest:pt withEvent:event];
     
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
-    [v drawLineFromLastDotTo:pt];
+    if ([_paths count] > 0) {
+        [v drawLineFromLastDotTo:pt];
+    }
     
     if (touched!=_patternView && 1 <= touched.tag && touched.tag <= 9) {
         
@@ -111,7 +113,6 @@
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self validatePW:[self getKey]];
 }
 
@@ -128,13 +129,15 @@
 }
 
 - (void)redrawCorrectDotConnections {
-    
     DrawPatternLockView *v = (DrawPatternLockView*)_patternView;
     [v setIsIncorrectPattern:YES];
     [_patternView setNeedsDisplay];
 }
 
 - (NSString*)getKey {
+    if (!_paths || [_paths count] == 0) {
+        return nil;
+    }
     
     NSMutableString *key;
     key = [NSMutableString string];
@@ -147,14 +150,14 @@
     return key;
 }
 
-
-- (void)setTarget:(id)target withAction:(SEL)action {
-    _target = target;
-    _action = action;
-}
-
 #pragma mark - Logic 
 - (void)validatePW:(NSString *)password {
+    
+    NSLog(@"%s, password: %@", __func__, password);
+    
+    if (!password || [password isEqualToString:@""]) {
+        return;
+    }
     
     [self redrawCorrectDotConnections];
     
@@ -194,6 +197,7 @@
 
 #pragma mark - Alert
 - (void)showAlert:(NSString *)alertMessage tag:(int)tag {
+    
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                     delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
     alert.tag = tag;

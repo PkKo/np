@@ -28,17 +28,18 @@
 }
 
 - (void)clearDotViews {
-  [_dotViews removeAllObjects];
+    [_dotViews removeAllObjects];
 }
 
 - (void)addDotView:(UIView *)view {
-  if (!_dotViews)
-    _dotViews = [NSMutableArray array];
+    if (!_dotViews)
+        _dotViews = [NSMutableArray array];
 
-  [_dotViews addObject:view];
+    [_dotViews addObject:view];
 }
 
 - (void)drawLineManually {
+    
     
     if (!_trackPointValue)
         return;
