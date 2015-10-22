@@ -104,6 +104,11 @@
         if (found)
             return;
         
+        if ([_paths count] > 0) {
+            int missedDot = [self findMissedDotBetweenFirstDot:[(NSNumber *)[_paths lastObject] intValue] lastDot:(int)touched.tag];
+            [self forceTohighlightTheMissedDot:missedDot];
+        }
+        
         [_paths addObject:[NSNumber numberWithInteger:touched.tag]];
         [v addDotView:touched];
         
@@ -150,10 +155,91 @@
     return key;
 }
 
+#pragma mark - Refresh UI
+- (int)findMissedDotBetweenFirstDot:(int)firstDot lastDot:(int)lastDot {
+    
+    NSArray * dots = @[
+                       @[@1, @2, @3],
+                       @[@4, @5, @6],
+                       @[@7, @8, @9]
+                       ];
+    
+    // find first dot position
+    int firstDotRow = 0;
+    int firstDotCol = 0;
+    BOOL found = NO;
+    NSArray * dotsOnRow;
+    
+    for (firstDotRow = 0; firstDotRow < [dots count]; firstDotRow++) {
+        
+        dotsOnRow = [dots objectAtIndex:firstDotRow];
+        
+        for (firstDotCol = 0; firstDotCol < [dotsOnRow count]; firstDotCol++) {
+            
+            int dot = [[dotsOnRow objectAtIndex:firstDotCol] intValue];
+            
+            if (dot == firstDot) {
+                found = YES;
+                break;
+            }
+        }
+        if (found) {
+            break;
+        }
+    }
+    
+    // check the dot on the same row
+    int sameRowDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
+    if (sameRowDot == lastDot) {
+        int sameRowMidDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:1] intValue];
+        return sameRowMidDot;
+    }
+    
+    // check the dot across
+    
+    if (!(firstDotRow == 1 || firstDotCol == 1)) {
+        
+        int crossLineDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
+        
+        if (crossLineDot == lastDot) {
+            
+            int crossLineMidDot = [[[dots objectAtIndex:1] objectAtIndex:1] intValue];
+            return crossLineMidDot;
+        }
+    }
+    
+    
+    // check the dot on the same col
+    int sameColDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol] intValue];
+    if (sameColDot == lastDot) {
+        int sameColMidDot = [[[dots objectAtIndex:1] objectAtIndex:firstDotCol] intValue];
+        return sameColMidDot;
+    }
+    
+    return 0;
+}
+
+- (void)forceTohighlightTheMissedDot:(int)dot {
+    
+    if (dot < 0 || dot > 9) {
+        return;
+    }
+    
+    for (UIView *view in _patternView.subviews) {
+        
+        if ([view isKindOfClass:[UIImageView class]]) {
+            
+            if ((int)view.tag == dot) {
+                [_paths addObject:[NSNumber numberWithInteger:dot]];
+                [(UIImageView*)view setHighlighted:YES];
+            }
+        }
+    }
+}
+
+
 #pragma mark - Logic 
 - (void)validatePW:(NSString *)password {
-    
-    NSLog(@"%s, password: %@", __func__, password);
     
     if (!password || [password isEqualToString:@""]) {
         return;

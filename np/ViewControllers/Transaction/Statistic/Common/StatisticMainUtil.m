@@ -332,4 +332,13 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
++ (NSString *)hexStringFromColor:(UIColor *)color {
+    
+    const CGFloat   * components        = CGColorGetComponents(color.CGColor);
+    NSString        * colorAsHexString  = [NSString stringWithFormat:@"#%02X%02X%02X",
+                                       (int)(components[0] *255), (int)(components[1] *255), (int)(components[2] *255)];
+    return colorAsHexString;
+}
+
+
 @end

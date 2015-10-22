@@ -27,9 +27,7 @@
 #define PREF_KEY_PATTERN_LOGIN_SETT_PW           @"patternLoginSettingsKeyPW"
 #define PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES @"patternLoginSettingsKeyFailedTimes"
 
-
 #define PREF_KEY_CERT_TO_LOGIN                  @"certificateToLogin"
-
 #define PREF_KEY_LOGIN_METHOD                   @"loginMethodKey"
 typedef enum LoginMethod {
     LOGIN_BY_NONE,
@@ -39,6 +37,8 @@ typedef enum LoginMethod {
     LOGIN_BY_PATTERN
 } LoginMethod;
 
+#define PREF_KEY_NOTICE_BACKGROUND_COLOUR        @"noticeBackgroundColour"
+#define PREF_KEY_USING_SIMPLE_VIEW               @"usingSimpleView"
 
 #define ALERT_GOTO_SELF_IDENTIFY    100
 #define ALERT_DO_NOTHING            0

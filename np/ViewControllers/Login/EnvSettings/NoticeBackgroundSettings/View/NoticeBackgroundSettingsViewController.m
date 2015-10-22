@@ -7,6 +7,9 @@
 //
 
 #import "NoticeBackgroundSettingsViewController.h"
+#import "LoginUtil.h"
+#import "StatisticMainUtil.h"
+
 @interface NoticeBackgroundSettingsViewController () {
     UIView * _selectedBgColorView;
 }
@@ -21,6 +24,7 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"알림 배경 설정"];
     [self resizeContainerScrollView];
+    [self showSavedBackgroundColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,8 +33,31 @@
 }
 
 #pragma mark - Background color Selection
+- (void)showSavedBackgroundColor {
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    UIColor * savedBgColor = [util getNoticeBackgroundColour];
+    
+    for (UIView * view in self.containerView.subviews) {
+        
+        if (![view isKindOfClass:[UILabel class]]) {
+            
+            NSString * viewBgColorStr   = [StatisticMainUtil hexStringFromColor:[view backgroundColor]];
+            NSString * savedBgColorStr  = [StatisticMainUtil hexStringFromColor:savedBgColor];
+            
+            if ([viewBgColorStr isEqualToString:savedBgColorStr]) {
+                [self doSelectBackgroundColor:view];
+                break;
+            }
+        }
+    }
+}
+
 - (IBAction)selectBackgroundColor:(UITapGestureRecognizer *)sender {
-    UIView * view = [sender view];
+    [self doSelectBackgroundColor:[sender view]];
+}
+
+- (void)doSelectBackgroundColor:(UIView *)view {
     
     if (_selectedBgColorView == view) {
         return;
@@ -43,6 +70,10 @@
 }
 
 - (void)toggleBgColorSelecting:(UIView *)bgColorSelectingView {
+    
+    if (!bgColorSelectingView) {
+        return;
+    }
     
     NSArray * subviews = [bgColorSelectingView subviews];
     
@@ -75,6 +106,7 @@
 }
 
 - (IBAction)clickDone {
+    [[[LoginUtil alloc] init] saveNoticeBackgroundColour:[_selectedBgColorView backgroundColor]];
     [self clickCancel];
 }
 

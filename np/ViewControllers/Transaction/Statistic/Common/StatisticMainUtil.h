@@ -47,5 +47,5 @@
 
 + (NSNumberFormatter *)getNumberFormatter;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
-
++ (NSString *)hexStringFromColor:(UIColor *)color;
 @end

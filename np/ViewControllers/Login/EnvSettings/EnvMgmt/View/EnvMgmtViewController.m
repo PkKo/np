@@ -21,6 +21,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"환경설정"];
+    [self refreshUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +31,8 @@
 
 -(IBAction)toggleUsingSimpleView:(UIButton *)simpleViewSwitch {
     [simpleViewSwitch setSelected:!simpleViewSwitch.isSelected];
+    LoginUtil * util = [[LoginUtil alloc] init];
+    [util saveUsingSimpleViewFlag:simpleViewSwitch.isSelected];
 }
 
 -(IBAction)gotoLoginSettings {
@@ -50,4 +53,8 @@
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
+-(void)refreshUI {
+    LoginUtil * util = [[LoginUtil alloc] init];
+    [self.usingSimpleViewBtn setSelected:[util isUsingSimpleView]];
+}
 @end

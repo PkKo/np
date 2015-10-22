@@ -21,6 +21,7 @@
 - (void)removeCertToLogin;
 - (CertInfo *)getCertToLogin;
 - (void)saveCertToLogin:(CertInfo *)cert;
+- (void)gotoCertCentre:(UINavigationController *)navController;
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController;
@@ -40,6 +41,13 @@
 - (NSInteger)getPatternPasswordFailedTimes;
 - (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes;
 
+#pragma mark - Notice Background Colour
+- (UIColor *)getNoticeBackgroundColour;
+- (void)saveNoticeBackgroundColour:(UIColor *)colour;
+
+#pragma mark - Using Simple View
+- (void)saveUsingSimpleViewFlag:(BOOL)isUsingSimpleView;
+- (BOOL)isUsingSimpleView;
 
 #pragma mark - Secure Keyboard
 - (void)showSecureKeypadInParent:(UIViewController *)viewController
