@@ -230,6 +230,7 @@
                 <outlet property="addNewAccountInput" destination="wn2-yK-Vnn" id="fPE-NV-3Sg"/>
                 <outlet property="addNewAccountPassInput" destination="uqI-Qi-Usc" id="QRe-Hq-JJG"/>
                 <outlet property="addNewAccountView" destination="Gbs-do-HCd" id="e4E-nc-SyH"/>
+                <outlet property="certifiedAccountNumberLabel" destination="2Sh-vX-t2p" id="nbt-Ia-2Se"/>
                 <outlet property="certifiedAccountView" destination="B5d-Ef-hi7" id="gma-bd-byW"/>
                 <outlet property="scrollView" destination="2Zs-Ax-hiF" id="kEc-1Q-bp5"/>
             </connections>

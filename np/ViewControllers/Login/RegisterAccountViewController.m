@@ -81,6 +81,7 @@
     [allListView initAccountList:allAccountList customerName:@"김농협"];
     [allListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [contentView addSubview:allListView];
+    [nextButton setTag:0];
 }
 
 #pragma mark - 계좌인증 : 계좌번호 확인 및 입력 뷰 구성
@@ -93,6 +94,7 @@
     [[inputAccountView addNewAccountBirthInput] setDelegate:self];
     [inputAccountView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [contentView addSubview:inputAccountView];
+    [nextButton setTag:1];
 }
 
 - (void)changeAccountInputView:(NSNumber *)isInputView
@@ -125,16 +127,26 @@
         case 0:
         {
             // 계좌옵션 설정 뷰를 보여줌
-            [nextButton setTag:1];
+            NSString *accountNum = @"";
+            [nextButton setTag:2];
+            accountNum = [allAccountList objectAtIndex:[allListView getSelectedIndex]];
             optionView = [RegistAccountOptionSettingView view];
             [optionView setDelegate:self];
-            [optionView initData];
+            [optionView initDataWithAccountNumber:accountNum];
             [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
             [contentView addSubview:optionView];
             break;
         }
         case 1:
         {
+            // 계좌 인증 루틴 실행 - UMS 서버와 통신
+            [nextButton setTag:0];
+            break;
+        }
+        case 2:
+        {
+            // option view에서 데이터 가져와서 해당 계좌에 대한 옵션 설정을 마친 후
+            
             // 등록완료 뷰 컨트롤러로 이동
             RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];

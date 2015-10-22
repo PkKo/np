@@ -7,9 +7,6 @@
 //
 
 #import "RegistCertListView.h"
-#import "CertInfo.h"
-#import "CertManager.h"
-#import "CertLoader.h"
 #import "CertTableCell.h"
 
 @implementation RegistCertListView

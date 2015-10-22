@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CertInfo.h"
+#import "CertManager.h"
+#import "CertLoader.h"
+
+@protocol RegistCertListDelegate <NSObject>
+
+- (void)certInfoSelected:(CertInfo *)certInfo;
+@end
 
 @interface RegistCertListView : UIView<UITableViewDataSource, UITableViewDelegate>
 
-@property (assign, nonatomic) id viewDelegate;
+@property (assign, nonatomic) id<RegistCertListDelegate> viewDelegate;
 @property (strong, nonatomic) IBOutlet UITableView *certTableView;
 @property (strong, nonatomic) NSMutableArray *certControllArray;
 

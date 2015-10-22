@@ -200,7 +200,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" id="4Zq-TD-RCz">
+                                                <view contentMode="scaleToFill" id="4Zq-TD-RCz" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="130" y="9" width="137" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -208,7 +208,7 @@
                                                             <rect key="frame" x="13" y="0.0" width="87" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="asu-eb-cva">
@@ -246,7 +246,7 @@
                                             <rect key="frame" x="0.0" y="47" width="284" height="47"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" id="eiZ-Ne-ATF">
+                                                <view contentMode="scaleToFill" id="eiZ-Ne-ATF" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="18" y="9" width="98" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -254,7 +254,7 @@
                                                             <rect key="frame" x="13" y="0.0" width="87" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="PMw-qB-qKh">
@@ -272,10 +272,10 @@
                                                     <rect key="frame" x="117" y="9" width="22" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" id="wh4-Km-EkK">
+                                                <view contentMode="scaleToFill" id="wh4-Km-EkK" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="159" y="9" width="98" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -283,7 +283,7 @@
                                                             <rect key="frame" x="13" y="0.0" width="87" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="71I-Ir-k9d">
@@ -301,7 +301,7 @@
                                                     <rect key="frame" x="258" y="9" width="22" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="OTQ-gX-Gfb">
@@ -330,7 +330,7 @@
                                             <rect key="frame" x="0.0" y="47" width="284" height="47"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" id="Lxd-F4-oNp">
+                                                <view contentMode="scaleToFill" id="Lxd-F4-oNp" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="18" y="9" width="248" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -338,7 +338,7 @@
                                                             <rect key="frame" x="13" y="0.0" width="200" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="sgO-S0-xXa">
@@ -404,7 +404,7 @@
                                                     <color key="textColor" red="0.18823529410000001" green="0.61960784310000006" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" id="OAj-xT-fIV">
+                                                <view contentMode="scaleToFill" id="OAj-xT-fIV" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="99" y="40" width="53" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -412,7 +412,7 @@
                                                             <rect key="frame" x="5" y="0.0" width="30" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="HMl-we-69i">
@@ -426,7 +426,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" id="DHt-MG-rgC">
+                                                <view contentMode="scaleToFill" id="DHt-MG-rgC" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="156" y="40" width="53" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -434,7 +434,7 @@
                                                             <rect key="frame" x="5" y="0.0" width="30" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="uyp-K2-htT">
@@ -448,7 +448,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" id="tcF-vY-bSs">
+                                                <view contentMode="scaleToFill" id="tcF-vY-bSs" customClass="DropboxStrokeView">
                                                     <rect key="frame" x="213" y="40" width="53" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
@@ -456,7 +456,7 @@
                                                             <rect key="frame" x="5" y="0.0" width="30" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="9U7-uG-Far">
@@ -529,6 +529,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="accountChangeButton" destination="NLU-f0-0Gz" id="CZ1-fd-EkI"/>
+                <outlet property="accountNumberLabel" destination="fEr-qu-bxX" id="gYH-km-6b9"/>
                 <outlet property="amountLimitBgView" destination="4Zq-TD-RCz" id="wYy-xF-K68"/>
                 <outlet property="amountNoLimitImg" destination="PKV-Ga-aJq" id="gX9-gA-ZVE"/>
                 <outlet property="amountNoLimitText" destination="4jg-PJ-erU" id="HLh-QI-eFI"/>

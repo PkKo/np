@@ -13,6 +13,7 @@
 @synthesize scrollView;
 @synthesize contentView;
 
+@synthesize accountNumberLabel;
 @synthesize accountChangeButton;
 @synthesize bothSelectImg;
 @synthesize bothSelectText;
@@ -41,10 +42,11 @@
     [amountLimitBgView.layer setBorderWidth:1.0f];
 }
 
-- (void)initData
+- (void)initDataWithAccountNumber:(NSString *)accountNum
 {
     [scrollView setContentSize:contentView.frame.size];
     
+    [accountNumberLabel setText:accountNum];
     // 입출금 알림 선택
     selectedType = BOTH;
     [bothSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];

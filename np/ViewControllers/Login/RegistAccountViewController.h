@@ -8,8 +8,9 @@
 
 #import "CommonViewController.h"
 #import "CertInfo.h"
+#import "RegistCertListView.h"
 
-@interface RegistAccountViewController : CommonViewController<UIAlertViewDelegate, UITextFieldDelegate>
+@interface RegistAccountViewController : CommonViewController<UIAlertViewDelegate, UITextFieldDelegate, RegistCertListDelegate>
 {
     BOOL isCertRoaming;
 }
