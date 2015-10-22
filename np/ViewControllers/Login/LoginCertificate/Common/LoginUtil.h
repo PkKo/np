@@ -32,8 +32,14 @@
 - (void)saveSimplePasswordFailedTimes:(NSInteger)failedTimes;
 
 #pragma mark - Pattern Login
-- (NSString *)getPatternLoginPassword;
-- (void)savePatternLoginPassword:(NSString *)pw;
+- (void)gotoPatternLoginMgmt:(UINavigationController *)navController;
+- (UIViewController *)getPatternLoginMgmt;
+- (NSString *)getPatternPassword;
+- (void)savePatternPassword:(NSString *)pw;
+- (void)removePatternPassword;
+- (NSInteger)getPatternPasswordFailedTimes;
+- (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes;
+
 
 #pragma mark - Secure Keyboard
 - (void)showSecureKeypadInParent:(UIViewController *)viewController

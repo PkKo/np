@@ -52,7 +52,6 @@
 		A2D8608D1BD472E70003CBB6 /* tutorial_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D860711BD472E70003CBB6 /* tutorial_03@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D8608E1BD472E70003CBB6 /* tutorial_04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D860721BD472E70003CBB6 /* tutorial_04@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860901BD48C880003CBB6 /* WithdrawStickerSettingView.m */; settings = {ASSET_TAGS = (); }; };
-		A2D860931BD48C940003CBB6 /* WithdrawStickerSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D860921BD48C940003CBB6 /* WithdrawStickerSettingView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2D860961BD4C7570003CBB6 /* DepositStickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860951BD4C7570003CBB6 /* DepositStickerView.m */; settings = {ASSET_TAGS = (); }; };
 		A2D860981BD4C7620003CBB6 /* DepositStickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */; settings = {ASSET_TAGS = (); }; };
 		A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */; settings = {ASSET_TAGS = (); }; };
@@ -503,8 +502,12 @@
 		A54B94E31BAA841C00D5D99B /* SNSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94E11BAA841C00D5D99B /* SNSViewController.xib */; };
 		A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E41BAA9B5800D5D99B /* Social.framework */; };
 		A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E61BAAA03A00D5D99B /* MessageUI.framework */; };
-		A55BDEEC1BB0EB8100646C79 /* dot_off.png in Resources */ = {isa = PBXBuildFile; fileRef = A55BDEE51BB0EB8100646C79 /* dot_off.png */; settings = {ASSET_TAGS = (); }; };
-		A55BDEED1BB0EB8100646C79 /* dot_on.png in Resources */ = {isa = PBXBuildFile; fileRef = A55BDEE61BB0EB8100646C79 /* dot_on.png */; settings = {ASSET_TAGS = (); }; };
+		A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB471BD713FD00B9364A /* VersionInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A557DB4E1BD7181900B9364A /* ServiceDeactivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A557DB4F1BD7181900B9364A /* ServiceDeactivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB4D1BD7181900B9364A /* ServiceDeactivationViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A557DB531BD71BDD00B9364A /* ServiceGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB511BD71BDD00B9364A /* ServiceGuideViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A557DB541BD71BDD00B9364A /* ServiceGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB521BD71BDD00B9364A /* ServiceGuideViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */; settings = {ASSET_TAGS = (); }; };
 		A55BDEF01BB0EB8100646C79 /* DrawPatternLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -548,6 +551,8 @@
 		A5ED26681BA943C0007E6689 /* StatisticMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26581BA943C0007E6689 /* StatisticMainStoryboard.storyboard */; };
 		A5ED26691BA943C0007E6689 /* StatisticMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED265A1BA943C0007E6689 /* StatisticMainViewController.m */; };
 		A5ED266C1BA961F7007E6689 /* ChartItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED266B1BA961F7007E6689 /* ChartItemData.m */; };
+		A5F251A11BD5D03D000867A9 /* DrawPatternMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F2519F1BD5D03D000867A9 /* DrawPatternMgmtViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5F251A21BD5D03D000867A9 /* DrawPatternMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F251A01BD5D03D000867A9 /* DrawPatternMgmtViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1179,8 +1184,15 @@
 		A54B94E11BAA841C00D5D99B /* SNSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNSViewController.xib; path = SNS/SNSViewController.xib; sourceTree = "<group>"; };
 		A54B94E41BAA9B5800D5D99B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A54B94E61BAAA03A00D5D99B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		A55BDEE51BB0EB8100646C79 /* dot_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_off.png; sourceTree = "<group>"; };
-		A55BDEE61BB0EB8100646C79 /* dot_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_on.png; sourceTree = "<group>"; };
+		A557DB461BD713FD00B9364A /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
+		A557DB471BD713FD00B9364A /* VersionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionInfoViewController.m; sourceTree = "<group>"; };
+		A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionInfoViewController.xib; sourceTree = "<group>"; };
+		A557DB4B1BD7181900B9364A /* ServiceDeactivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDeactivationViewController.h; sourceTree = "<group>"; };
+		A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDeactivationViewController.m; sourceTree = "<group>"; };
+		A557DB4D1BD7181900B9364A /* ServiceDeactivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDeactivationViewController.xib; sourceTree = "<group>"; };
+		A557DB501BD71BDD00B9364A /* ServiceGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGuideViewController.h; sourceTree = "<group>"; };
+		A557DB511BD71BDD00B9364A /* ServiceGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGuideViewController.m; sourceTree = "<group>"; };
+		A557DB521BD71BDD00B9364A /* ServiceGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceGuideViewController.xib; sourceTree = "<group>"; };
 		A55BDEE71BB0EB8100646C79 /* DrawPatternLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockView.h; sourceTree = "<group>"; };
 		A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternLockView.m; sourceTree = "<group>"; };
 		A55BDEE91BB0EB8100646C79 /* DrawPatternLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockViewController.h; sourceTree = "<group>"; };
@@ -1251,6 +1263,9 @@
 		A5ED265A1BA943C0007E6689 /* StatisticMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticMainViewController.m; sourceTree = "<group>"; };
 		A5ED266A1BA961F7007E6689 /* ChartItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartItemData.h; sourceTree = "<group>"; };
 		A5ED266B1BA961F7007E6689 /* ChartItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartItemData.m; sourceTree = "<group>"; };
+		A5F2519E1BD5D03D000867A9 /* DrawPatternMgmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternMgmtViewController.h; sourceTree = "<group>"; };
+		A5F2519F1BD5D03D000867A9 /* DrawPatternMgmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternMgmtViewController.m; sourceTree = "<group>"; };
+		A5F251A01BD5D03D000867A9 /* DrawPatternMgmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawPatternMgmtViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2407,13 +2422,14 @@
 		A55BDEE41BB0EB8100646C79 /* PatternLogin */ = {
 			isa = PBXGroup;
 			children = (
-				A55BDEE51BB0EB8100646C79 /* dot_off.png */,
-				A55BDEE61BB0EB8100646C79 /* dot_on.png */,
 				A55BDEE71BB0EB8100646C79 /* DrawPatternLockView.h */,
 				A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */,
 				A55BDEE91BB0EB8100646C79 /* DrawPatternLockViewController.h */,
 				A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */,
 				A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */,
+				A5F2519E1BD5D03D000867A9 /* DrawPatternMgmtViewController.h */,
+				A5F2519F1BD5D03D000867A9 /* DrawPatternMgmtViewController.m */,
+				A5F251A01BD5D03D000867A9 /* DrawPatternMgmtViewController.xib */,
 			);
 			path = PatternLogin;
 			sourceTree = "<group>";
@@ -2512,6 +2528,9 @@
 		A5D50AFB1BD4E53900D7A2DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A557DB4B1BD7181900B9364A /* ServiceDeactivationViewController.h */,
+				A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */,
+				A557DB4D1BD7181900B9364A /* ServiceDeactivationViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2527,6 +2546,9 @@
 		A5D50AFD1BD4E53900D7A2DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A557DB501BD71BDD00B9364A /* ServiceGuideViewController.h */,
+				A557DB511BD71BDD00B9364A /* ServiceGuideViewController.m */,
+				A557DB521BD71BDD00B9364A /* ServiceGuideViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2567,6 +2589,9 @@
 		A5D50B021BD4E53900D7A2DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A557DB461BD713FD00B9364A /* VersionInfoViewController.h */,
+				A557DB471BD713FD00B9364A /* VersionInfoViewController.m */,
+				A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2953,6 +2978,7 @@
 				A2D9A2DC1BCB34F800FC2AC7 /* button_05_on@2x.png in Resources */,
 				A2D9A2DF1BCB34F800FC2AC7 /* button_07_dft@2x.png in Resources */,
 				A2D9A3441BCB34F800FC2AC7 /* icon_user_02@2x.png in Resources */,
+				A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */,
 				A2D9A2E11BCB34F800FC2AC7 /* button_08_dft@2x.png in Resources */,
 				A2DF41051BAF9902001389E7 /* RegistPhoneViewController.xib in Resources */,
 				A2DEAE781B9FE6E600EDCCBA /* CertificateMenuViewController.xib in Resources */,
@@ -2968,6 +2994,7 @@
 				A2D9A33E1BCB34F800FC2AC7 /* icon_top_04_off@2x.png in Resources */,
 				A2D9A3531BCB34F800FC2AC7 /* icon_withdraw_08_dft@2x.png in Resources */,
 				A2D9A3481BCB34F800FC2AC7 /* icon_withdraw_02_sel@2x.png in Resources */,
+				A557DB4F1BD7181900B9364A /* ServiceDeactivationViewController.xib in Resources */,
 				A2D860981BD4C7620003CBB6 /* DepositStickerView.xib in Resources */,
 				A2D9A3641BCB34F800FC2AC7 /* toggle_01_on@2x.png in Resources */,
 				A2D95B091BA8F1DD00DC943D /* clear.wav in Resources */,
@@ -3013,8 +3040,6 @@
 				A2D95B4B1BA8F1DD00DC943D /* NFPadnum_bg_wide@2x.png in Resources */,
 				A2D95B371BA8F1DD00DC943D /* NFPadchar_pressed@2x.png in Resources */,
 				A2D9A3451BCB34F800FC2AC7 /* icon_withdraw_01_dft@2x.png in Resources */,
-				A2D860931BD48C940003CBB6 /* WithdrawStickerSettingView.xib in Resources */,
-				A55BDEED1BB0EB8100646C79 /* dot_on.png in Resources */,
 				A2D9A3161BCB34F800FC2AC7 /* icon_notice_02_dft@2x.png in Resources */,
 				A2D9A35B1BCB34F800FC2AC7 /* menu_tab_01@2x.png in Resources */,
 				A2D9A2DE1BCB34F800FC2AC7 /* button_06_on@2x.png in Resources */,
@@ -3167,11 +3192,11 @@
 				A2D9A2DA1BCB34F800FC2AC7 /* button_04_on@2x.png in Resources */,
 				A2D9A30C1BCB34F800FC2AC7 /* icon_more_01_dft@2x.png in Resources */,
 				A2D95B311BA8F1DD00DC943D /* NFPadbtn_ok@2x.png in Resources */,
-				A55BDEEC1BB0EB8100646C79 /* dot_off.png in Resources */,
 				A2D9A3491BCB34F800FC2AC7 /* icon_withdraw_03_dft@2x.png in Resources */,
 				A2D8608D1BD472E70003CBB6 /* tutorial_03@2x.png in Resources */,
 				A2DE64761BD62628009EC403 /* AccountOptionSettingViewController.xib in Resources */,
 				A2D9A3051BCB34F800FC2AC7 /* icon_ks_01_sel@2x.png in Resources */,
+				A557DB541BD71BDD00B9364A /* ServiceGuideViewController.xib in Resources */,
 				A2D95B261BA8F1DD00DC943D /* NFPadbtn_ok_wide_pressed.png in Resources */,
 				A5E017831BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib in Resources */,
 				A2D9A3291BCB34F800FC2AC7 /* icon_sharing_01@2x.png in Resources */,
@@ -3192,6 +3217,7 @@
 				A2D9A2FE1BCB34F800FC2AC7 /* icon_faq_01_dft@2x.png in Resources */,
 				A2D8608C1BD472E70003CBB6 /* tutorial_02@2x.png in Resources */,
 				A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */,
+				A5F251A21BD5D03D000867A9 /* DrawPatternMgmtViewController.xib in Resources */,
 				A2D9A35D1BCB34F800FC2AC7 /* notice_bg_02_l@2x.png in Resources */,
 				A2D95B691BA8F1DD00DC943D /* nf_ios_bg@2x.png in Resources */,
 				A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */,
@@ -3334,6 +3360,7 @@
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
 				A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */,
 				A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */,
+				A5F251A11BD5D03D000867A9 /* DrawPatternMgmtViewController.m in Sources */,
 				177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */,
 				A2DEAE631B9FE6D800EDCCBA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */,
@@ -3370,9 +3397,11 @@
 				A54B94DD1BAA4EE400D5D99B /* PieChartWithInputData.m in Sources */,
 				A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */,
 				A54B3B741BBE26DE00F883E9 /* ArchivedTransItemRemoveActionView.m in Sources */,
+				A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */,
 				A5EA7E3D1BBBB36000626C74 /* StorageBoxController.m in Sources */,
 				A2DEAE581B9FE6D800EDCCBA /* ECSlidingSegue.m in Sources */,
 				A2DEAE671B9FE6D800EDCCBA /* UIView+LoadFromXib.m in Sources */,
+				A557DB531BD71BDD00B9364A /* ServiceGuideViewController.m in Sources */,
 				A2DFD71B1BB14DD300838E09 /* RegistAccountViewController.m in Sources */,
 				A2DEAE531B9FE6D800EDCCBA /* CommonUtil.m in Sources */,
 				A2D95B061BA8F1DD00DC943D /* KNStringutil.m in Sources */,
@@ -3382,6 +3411,7 @@
 				A2D95B041BA8F1DD00DC943D /* KnmRepUnicode.m in Sources */,
 				A2DB7CA61BCE12BF0088D844 /* StrokeView.m in Sources */,
 				A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */,
+				A557DB4E1BD7181900B9364A /* ServiceDeactivationViewController.m in Sources */,
 				A2DEAE611B9FE6D800EDCCBA /* MASViewConstraint.m in Sources */,
 				A2DEADEB1B9FE68600EDCCBA /* main.m in Sources */,
 				A2D95BA11BA8FF1000DC943D /* HomeTimeLineView.m in Sources */,

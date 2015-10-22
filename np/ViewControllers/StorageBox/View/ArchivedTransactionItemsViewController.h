@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView         * noDataView;
 @property (weak, nonatomic) IBOutlet UIImageView    * noDataImageView;
 @property (weak, nonatomic) IBOutlet UILabel        * noDataNotice;
+- (IBAction)gotoPatternLogin:(id)sender;
 - (IBAction)gotoCertLogin:(id)sender;
 - (IBAction)gotoAccountLogin:(id)sender;
 - (IBAction)gotoSimpleLogin:(id)sender;

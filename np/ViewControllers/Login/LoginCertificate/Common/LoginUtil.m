@@ -15,13 +15,15 @@
 #import "SimplePwMgntChangeViewController.h"
 #import "LoginCertController.h"
 #import "LoginSettingsViewController.h"
+#import "DrawPatternMgmtViewController.h"
 
 @implementation LoginUtil
 
 #pragma mark - Login Settings
 - (void)gotoLoginSettings:(UINavigationController *)navController {
     LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
-    [navController pushViewController:loginSettings animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:loginSettings];
+    [navController pushViewController:eVC animated:YES];
 }
 
 - (void)saveLoginMethod:(LoginMethod)loginMethod {
@@ -68,7 +70,8 @@
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController {
-    [navController pushViewController:[self getSimpleLoginMgmt] animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getSimpleLoginMgmt]];
+    [navController pushViewController:eVC animated:YES];
 }
 
 - (UIViewController *)getSimpleLoginMgmt {
@@ -115,12 +118,49 @@
 }
 
 #pragma mark - Pattern Login
-- (NSString *)getPatternLoginPassword {
-    return nil;
+- (void)gotoPatternLoginMgmt:(UINavigationController *)navController {
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
+    [navController pushViewController:eVC animated:YES];
 }
 
-- (void)savePatternLoginPassword:(NSString *)pw {
+- (UIViewController *)getPatternLoginMgmt {
+    UIViewController * vc = [[DrawPatternMgmtViewController alloc] initWithNibName:@"DrawPatternMgmtViewController"
+                                                                            bundle:nil];
+    return vc;
+}
+
+- (NSString *)getPatternPassword {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+}
+
+- (void)savePatternPassword:(NSString *)pw {
     
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:pw forKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
+}
+
+- (void)removePatternPassword {
+    
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
+}
+
+- (NSInteger)getPatternPasswordFailedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [[prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES] integerValue];
+}
+
+- (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
 }
 
 #pragma mark - Secure Keyboard

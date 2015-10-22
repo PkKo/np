@@ -21,6 +21,7 @@
 #import "LoginCertListViewController.h"
 #import "LoginAccountVerificationViewController.h"
 #import "LoginSimpleVerificationViewController.h"
+#import "DrawPatternLockViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -427,6 +428,14 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (IBAction)gotoPatternLogin:(id)sender {
+    
+    DrawPatternLockViewController *certLogin = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
+    [self.navigationController pushViewController:eVC animated:YES];
+    
 }
 
 - (IBAction)gotoCertLogin:(id)sender {

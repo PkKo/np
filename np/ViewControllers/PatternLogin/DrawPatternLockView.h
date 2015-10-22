@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface DrawPatternLockView : UIView {
-  NSValue *_trackPointValue;
-  NSMutableArray *_dotViews;
+    NSValue           * _trackPointValue;
+    NSMutableArray    * _dotViews;
 }
 
+@property (strong, nonatomic) UIColor * strokeColor;
+@property (assign) BOOL isIncorrectPattern;
 
 - (void)clearDotViews;
-- (void)addDotView:(UIView*)view;
+- (void)addDotView:(UIView *)view;
 - (void)drawLineFromLastDotTo:(CGPoint)pt;
 @end

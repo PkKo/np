@@ -1,24 +1,24 @@
 //
-//  TelInquiryViewController.m
+//  VersionInfoViewController.m
 //  np
 //
-//  Created by Infobank2 on 10/19/15.
+//  Created by Infobank2 on 10/21/15.
 //  Copyright © 2015 Infobank1. All rights reserved.
 //
 
-#import "TelInquiryViewController.h"
+#import "VersionInfoViewController.h"
 
-@interface TelInquiryViewController ()
+@interface VersionInfoViewController ()
 
 @end
 
-@implementation TelInquiryViewController
+@implementation VersionInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:NO];
-    [self.mNaviView.mTitleLabel setText:@"전화문의"];
+    [self.mNaviView.mTitleLabel setText:@"버전정보"];
 }
 
 - (void)didReceiveMemoryWarning {

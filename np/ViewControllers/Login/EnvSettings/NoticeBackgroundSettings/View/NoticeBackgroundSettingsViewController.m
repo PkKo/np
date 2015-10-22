@@ -20,6 +20,7 @@
     
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"알림 배경 설정"];
+    [self resizeContainerScrollView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,6 +56,18 @@
         }
     }
 }
+
+#pragma mark - Customize
+- (void)resizeContainerScrollView {
+    
+    CGFloat screenHeight                    = [[UIScreen mainScreen] bounds].size.height;
+    CGRect containerScrollViewFrame         = self.containerScrollView.frame;
+    containerScrollViewFrame.size.height    = screenHeight - self.containerScrollView.superview.frame.origin.y - 40;
+    [self.containerScrollView setFrame:containerScrollViewFrame];
+    
+    [self.containerScrollView setContentSize:self.containerView.frame.size];
+}
+
 
 #pragma mark - Cancel/Done
 - (IBAction)clickCancel {

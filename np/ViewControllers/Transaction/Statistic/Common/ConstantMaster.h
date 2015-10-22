@@ -24,6 +24,10 @@
 #define PREF_KEY_SIMPLE_LOGIN_SETT_PW           @"simpleLoginSettingsKeyPW"
 #define PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES @"simpleLoginSettingsKeyFailedTimes"
 
+#define PREF_KEY_PATTERN_LOGIN_SETT_PW           @"patternLoginSettingsKeyPW"
+#define PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES @"patternLoginSettingsKeyFailedTimes"
+
+
 #define PREF_KEY_CERT_TO_LOGIN                  @"certificateToLogin"
 
 #define PREF_KEY_LOGIN_METHOD                   @"loginMethodKey"

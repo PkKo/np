@@ -28,6 +28,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)toggleUsingSimpleView:(UIButton *)simpleViewSwitch {
+    [simpleViewSwitch setSelected:!simpleViewSwitch.isSelected];
+}
+
 -(IBAction)gotoLoginSettings {
     [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
 }
@@ -36,9 +40,14 @@
     [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
 }
 
+-(IBAction)gotoPatternLoginMgmt {
+    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
+}
+
 -(IBAction)gotoNoticeBgColorSettings {
     NoticeBackgroundSettingsViewController *noticeBgColorSettings = [[NoticeBackgroundSettingsViewController alloc] initWithNibName:@"NoticeBackgroundSettingsViewController" bundle:nil];
-    [self.navigationController pushViewController:noticeBgColorSettings animated:YES];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:noticeBgColorSettings];
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 @end
