@@ -129,10 +129,10 @@
         }
         case 1: // 입출금
         {
-//            newTopViewController = [[MainPageViewController alloc] init];
-//            [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
+            newTopViewController = [[MainPageViewController alloc] init];
+            [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
             // 임시 공인인증서 뷰 컨트롤러 적용
-            pushViewController = [[CertificateMenuViewController alloc] init];
+//            pushViewController = [[CertificateMenuViewController alloc] init];
             break;
         }
         case 2: // 기타

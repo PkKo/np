@@ -222,4 +222,32 @@
     UIImage *stickerImage = [UIImage imageNamed:stickerImageName];
     return stickerImage;
 }
+
++ (NSString *)getTodayDateString
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy.MM.dd EEEE"];
+    NSString *todayString = [dateFormat stringFromDate:today];
+    
+    return todayString;
+}
+
++ (NSString *)getDateString:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy.MM.dd EEEE"];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    
+    return dateString;
+}
+
++ (NSString *)getTimeString:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"HH:mm"];
+    NSString *timeString = [dateFormat stringFromDate:date];
+    
+    return timeString;
+}
 @end

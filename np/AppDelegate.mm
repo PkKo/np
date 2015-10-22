@@ -104,7 +104,7 @@
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
-    [alert show];
+//    [alert show];
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달

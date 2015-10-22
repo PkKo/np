@@ -39,4 +39,7 @@ typedef enum StickerType
 + (void)stopSpinAnimation:(UIView *)view;
 + (NSString *)getURLEncodedString:(NSString *)unencodeString;
 + (UIImage *)getStickerImage:(StickerType)stickerType;
++ (NSString *)getTodayDateString;
++ (NSString *)getDateString:(NSDate *)date;
++ (NSString *)getTimeString:(NSDate *)date;
 @end

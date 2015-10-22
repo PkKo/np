@@ -19,7 +19,6 @@
 #import "nFilterCharForPad.h"
 #import "nFilterNumForPad.h"
 #import "EccEncryptor.h"
-#import "RegistCertListView.h"
 #import "RegistPhoneViewController.h"
 #import "RegistAccountInputView.h"
 

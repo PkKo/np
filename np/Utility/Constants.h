@@ -59,6 +59,16 @@
 #define BUTTON_BGCOLOR_DISABLE      [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
 #define CIRCLE_BACKGROUND_COLOR_SELECTED   [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]
 #define CIRCLE_BACKGROUND_COLOR_UNSELECTED [UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]
+#define REFRESH_HEADER_HEIGHT   76.0f
+#define SECTION_HEADER_HEIGHT   31.0f
+#define SECTION_FOOTER_HEIGHT   93.0f
+#define AMOUNT_FONT_SIZE        20.0f
+
+#define TIMELINE_EVENT_TYPE     @"event_type"
+#define TIMELINE_ACCOUNT_NUMBER @"account_number"
+#define TIMELINE_TRN_AMT        @"trn_amt"
+#define TIMELINE_TRN_AF_AMT     @"trn_af_amt"
+#define TIMELINE_TXT_MSG        @"txt_msg"
 
 #pragma mark 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"

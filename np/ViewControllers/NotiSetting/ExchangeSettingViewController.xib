@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExchangeSettingViewController">
+            <connections>
+                <outlet property="countryListTable" destination="EG9-tW-GRn" id="EYS-aV-uE7"/>
+                <outlet property="emptyView" destination="5Bt-66-6sv" id="rN4-ZN-Ukp"/>
+                <outlet property="listView" destination="Y7z-bu-vbj" id="qqE-eT-bq5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="9Uq-s2-fwC">
+                    <rect key="frame" x="0.0" y="75" width="320" height="493"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" id="5Bt-66-6sv">
+                            <rect key="frame" x="0.0" y="15" width="320" height="139"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환율 정보를 받을 통화국가를 추가하시려면," textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="0ae-hH-6RZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="통화국가 추가" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="HcN-mS-yqo">
+                                    <rect key="frame" x="0.0" y="22" width="140" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 버튼을 선택해 주세요." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="aSE-Te-Te0">
+                                    <rect key="frame" x="140" y="22" width="180" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BIJ-LF-AkV">
+                                    <rect key="frame" x="18" y="56" width="284" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="통화국가 추가"/>
+                                    <connections>
+                                        <action selector="addCurrencyCountry:" destination="-1" eventType="touchUpInside" id="cVf-b8-hq1"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" id="Y7z-bu-vbj">
+                            <rect key="frame" x="0.0" y="15" width="320" height="478"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환율 정보를 제공하는 통화국가 목록입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="U5q-3K-aM7">
+                                    <rect key="frame" x="18" y="0.0" width="284" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="5NJ-jb-7t0">
+                                    <rect key="frame" x="18" y="21" width="284" height="36"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <string key="text">통화국가 삭제/편집을 원하시면 해당 통화국가를
+선택하세요.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
+                                    <rect key="frame" x="18" y="72" width="284" height="341"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="Kwy-Qa-LbC"/>
+                                        <outlet property="delegate" destination="-1" id="pak-Gs-6lm"/>
+                                    </connections>
+                                </tableView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XHH-eO-daC">
+                                    <rect key="frame" x="18" y="422" width="284" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="통화국가 추가"/>
+                                    <connections>
+                                        <action selector="addCurrencyCountry:" destination="-1" eventType="touchUpInside" id="guK-3q-RSr"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="313" y="374"/>
+        </view>
+    </objects>
+</document>

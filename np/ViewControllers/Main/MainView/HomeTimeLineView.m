@@ -15,12 +15,6 @@
 #import "HomeViewController.h"
 #import "StorageBoxController.h"
 
-#define REFRESH_HEADER_HEIGHT   76.0f
-#define SECTION_HEADER_HEIGHT   31.0f
-#define SECTION_FOOTER_HEIGHT   93.0f
-
-#define AMOUNT_FONT_SIZE        20.0f
-
 @implementation HomeTimeLineView
 
 @synthesize delegate;
