@@ -11,6 +11,7 @@
 
 @interface EnvMgmtViewController : CommonViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *usingSimpleViewBtn;
 -(IBAction)toggleUsingSimpleView:(UIButton *)simpleViewSwitch;
 -(IBAction)gotoLoginSettings;
 -(IBAction)gotoSimpleLoginMgmt;

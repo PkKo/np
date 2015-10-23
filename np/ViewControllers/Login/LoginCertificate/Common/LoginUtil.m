@@ -16,6 +16,8 @@
 #import "LoginCertController.h"
 #import "LoginSettingsViewController.h"
 #import "DrawPatternMgmtViewController.h"
+#import "StatisticMainUtil.h"
+#import "CertificateMenuViewController.h"
 
 @implementation LoginUtil
 
@@ -66,6 +68,12 @@
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:cert.subjectDN2 forKey:PREF_KEY_CERT_TO_LOGIN];
     [prefs synchronize];
+}
+
+- (void)gotoCertCentre:(UINavigationController *)navController {
+    CertificateMenuViewController * certCentre = [[CertificateMenuViewController alloc] init];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certCentre];
+    [navController pushViewController:eVC animated:YES];
 }
 
 #pragma mark - Simple Login
@@ -161,6 +169,38 @@
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
     [prefs synchronize];
+}
+
+#pragma mark - Notice Background Colour
+- (UIColor *)getNoticeBackgroundColour {
+    
+    NSUserDefaults  * prefs             = [NSUserDefaults standardUserDefaults];
+    NSString        * colourAsHexString = [prefs stringForKey:PREF_KEY_NOTICE_BACKGROUND_COLOUR];
+    
+    if (!colourAsHexString) {
+        UIColor * whiteColour = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+        [self saveNoticeBackgroundColour:whiteColour];
+        return whiteColour;
+    } else {
+        return [StatisticMainUtil colorFromHexString:colourAsHexString];
+    }
+}
+
+- (void)saveNoticeBackgroundColour:(UIColor *)colour {
+    NSUserDefaults  * prefs             = [NSUserDefaults standardUserDefaults];
+    NSString        * colourAsHexString = [StatisticMainUtil hexStringFromColor:colour];
+    [prefs setValue:colourAsHexString forKey:PREF_KEY_NOTICE_BACKGROUND_COLOUR];
+}
+
+#pragma mark - Using Simple View
+- (void)saveUsingSimpleViewFlag:(BOOL)isUsingSimpleView {
+    NSUserDefaults  * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setValue:[NSNumber numberWithBool:isUsingSimpleView] forKey:PREF_KEY_USING_SIMPLE_VIEW];
+}
+
+- (BOOL)isUsingSimpleView {
+    NSUserDefaults  * prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:PREF_KEY_USING_SIMPLE_VIEW];
 }
 
 #pragma mark - Secure Keyboard

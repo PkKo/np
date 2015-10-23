@@ -62,10 +62,7 @@
 
 - (IBAction)gotoCertMgmtCenter {
     NSLog(@"공인인증센터로 이동");
-    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
-    
-    [self.navigationController pushViewController:eVC animated:YES];
+    [[[LoginUtil alloc] init] gotoCertCentre:self.navigationController];
 }
 
 - (IBAction)showCertList {
@@ -81,7 +78,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 1:
-            NSLog(@"공인인증센터로 이동");
+            [[[LoginUtil alloc] init] gotoCertCentre:self.navigationController];
             break;
         default:
             break;
@@ -90,7 +87,6 @@
 
 - (void)updateSelectedCert:(CertInfo *)sltedCert {
     if (sltedCert) {
-        NSLog(@"%s", __func__);
         [self.certListBtn setTitle:sltedCert.subjectDN2 forState:UIControlStateNormal];
     }
 }
