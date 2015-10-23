@@ -19,6 +19,7 @@
 #import "CustomerCenterViewController.h"
 
 #define MENU_CELL_HEIGHT    37
+#define IPHONE_FIVE_FRAME_HEIGHT    568
 
 @interface MenuViewController ()
 
@@ -105,10 +106,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+//    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
-//    return MENU_CELL_HEIGHT;
+//    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
+    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
 }
 
 #pragma mark - UITableViewDelegate

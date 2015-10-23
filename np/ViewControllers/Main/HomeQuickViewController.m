@@ -61,6 +61,13 @@
     // 2. 최신순으로 5개만 선택해 보여준다.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [IBInbox loadWithListener:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

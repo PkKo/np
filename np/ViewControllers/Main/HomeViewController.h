@@ -12,6 +12,7 @@
 #import "HomeEtcTimeLineView.h"
 #import "DepositStickerView.h"
 #import "WithdrawStickerSettingView.h"
+#import "TimelineSectionData.h"
 
 typedef enum HomeViewType
 {
@@ -34,6 +35,8 @@ typedef enum HomeViewType
     WithdrawStickerSettingView *withdrawStickerView;
     // 선택한 스티커 인덱스
     NSIndexPath *currentStickerIndexPath;
+    
+    BOOL isRefresh;
 }
 
 @property (assign, nonatomic) HomeViewType viewType;

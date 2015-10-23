@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "MainPageViewController.h"
 
 @interface HomeViewController ()
 
@@ -28,39 +29,82 @@
     
     sectionList = [[NSMutableArray alloc] init];
     timelineMessageList = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
     [IBInbox loadWithListener:self];
-//    [IBInbox requestInboxList];
     
-    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = @[@"1111-22-333333"];
-    reqData.queryType = @"1";
-    reqData.ascending = YES;
-    reqData.size = 20;
-    /*
-     필수 설정값
-     */
-    // 정렬 순서
-//    reqData.ascending;
-    // 알림받는 계좌번호 리스트
-//    reqData.accountNumberList;
-    // 입출금 구분
-//    reqData.queryType;
-    [IBInbox reqQueryAccountInboxListWithSize:reqData];
-    /*
-    mTimeLineView = [HomeTimeLineView view];
-    [mTimeLineView setDelegate:self];
-    [mTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-    NSMutableArray *section = [[NSMutableArray alloc] init];
-    NSMutableDictionary *timeLine = [[NSMutableDictionary alloc] init];
-    [section addObject:@"09/15"];
-    [section addObject:@"09/16"];
-    [timeLine setObject:@[@"입금:100000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/15"];
-    [timeLine setObject:@[@"입금:10000", @"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"출금:23000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/16"];
-    [mTimeLineView initData:section timeLineDic:timeLine];
-    [mMainContentView addSubview:mTimeLineView];
-    
-    [indexView setText:[NSString stringWithFormat:@"%d", viewType]];*/
+    switch (viewType)
+    {
+        case TIMELINE:
+        {
+//            [IBInbox requestInboxList];
+            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+            reqData.accountNumberList = @[@"1111-22-333333"];
+            reqData.queryType = @"1,2,3,4,5,6";
+            reqData.ascending = YES;
+            reqData.size = 20;
+            /*
+             필수 설정값
+             */
+            // 정렬 순서
+            //    reqData.ascending;
+            // 알림받는 계좌번호 리스트
+            //    reqData.accountNumberList;
+            // 입출금 구분
+            //    reqData.queryType;
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+            break;
+        }
+        case BANKING:
+        {
+            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+            reqData.accountNumberList = @[@"1111-22-333333"];
+            reqData.queryType = @"1,2";
+            reqData.ascending = YES;
+            reqData.size = 20;
+            /*
+             필수 설정값
+             */
+            // 정렬 순서
+            //    reqData.ascending;
+            // 알림받는 계좌번호 리스트
+            //    reqData.accountNumberList;
+            // 입출금 구분
+            //    reqData.queryType;
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+            break;
+        }
+        case OTHER:
+        {
+            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+            reqData.accountNumberList = @[@"1111-22-333333"];
+            reqData.queryType = @"3,4,5,6";
+            reqData.ascending = YES;
+            reqData.size = 20;
+            /*
+             필수 설정값
+             */
+            // 정렬 순서
+            //    reqData.ascending;
+            // 알림받는 계좌번호 리스트
+            //    reqData.accountNumberList;
+            // 입출금 구분
+            //    reqData.queryType;
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+//            [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151022"];
+            break;
+        }
+            
+        default:
+        {
+            [self makeTimelineView];
+            break;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,6 +114,8 @@
 
 - (void)makeTimelineView
 {
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+    
     switch (viewType)
     {
         case TIMELINE:
@@ -77,12 +123,6 @@
             mTimeLineView = [HomeTimeLineView view];
             [mTimeLineView setDelegate:self];
             [mTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            NSMutableArray *section = [[NSMutableArray alloc] init];
-            NSMutableDictionary *timeLine = [[NSMutableDictionary alloc] init];
-            [section addObject:@"09/15"];
-            [section addObject:@"09/16"];
-            [timeLine setObject:@[@"입금:100000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/15"];
-            [timeLine setObject:@[@"입금:10000", @"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"출금:23000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/16"];
             [mTimeLineView initData:sectionList timeLineDic:timelineMessageList];
             [mMainContentView addSubview:mTimeLineView];
             
@@ -93,13 +133,7 @@
             bankingView = [HomeBankingView view];
             [bankingView setDelegate:self];
             [bankingView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            NSMutableArray *section = [[NSMutableArray alloc] init];
-            NSMutableDictionary *timeLine = [[NSMutableDictionary alloc] init];
-            [section addObject:@"09/15"];
-            [section addObject:@"09/16"];
-            [timeLine setObject:@[@"입금:100000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/15"];
-            [timeLine setObject:@[@"입금:10000", @"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"출금:23000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/16"];
-            [bankingView initData:section timeLineDic:timeLine];
+            [bankingView initData:sectionList timeLineDic:timelineMessageList];
             // 수입/지출 통계 뷰컨트롤러 액션 붙여줌
             [bankingView.statisticButton addTarget:self action:@selector(moveStatisticViewController:) forControlEvents:UIControlEventTouchUpInside];
             [mMainContentView addSubview:bankingView];
@@ -111,13 +145,7 @@
             etcTimeLineView = [HomeEtcTimeLineView view];
             [etcTimeLineView setDelegate:self];
             [etcTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            NSMutableArray *section = [[NSMutableArray alloc] init];
-            NSMutableDictionary *timeLine = [[NSMutableDictionary alloc] init];
-            [section addObject:@"09/15"];
-            [section addObject:@"09/16"];
-            [timeLine setObject:@[@"입금:100000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/15"];
-            [timeLine setObject:@[@"입금:10000", @"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"입금:10000",@"출금:23000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000", @"출금:50000"] forKey:@"09/16"];
-            [etcTimeLineView initData:section timeLineDic:timeLine];
+            [etcTimeLineView initData:sectionList timeLineDic:timelineMessageList];
             [mMainContentView addSubview:etcTimeLineView];
             
             break;
@@ -141,6 +169,8 @@
         default:
             break;
     }
+    
+    [mMainContentView layoutIfNeeded];
 }
 
 /**
@@ -148,6 +178,8 @@
  */
 - (void)refreshData:(BOOL)newData
 {
+    isRefresh = YES;
+    
     if(newData)
     {
         // 최신 데이터를 가져온다.
@@ -235,26 +267,29 @@
 #pragma mark - IBInbox Protocol
 - (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
-    NSLog(@"%s, %@", __FUNCTION__, messageList);
+//    NSLog(@"%s, %@", __FUNCTION__, messageList);
+    
     NSString *todayString = [CommonUtil getTodayDateString];
-    [sectionList addObject:todayString];
+    TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+    todaySectionData.date = todayString;
+    todaySectionData.day = [CommonUtil getDayString:[NSDate date]];
+    [sectionList addObject:todaySectionData];
     
     for(InboxMessageData *data in messageList)
     {
         NSLog(@"inbox message data = %@", data);
         if([data.payloadList count] >= 6)
         {
-            NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSinceNow:data.date]];
+            NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(data.date/1000)]];
             
             NSMutableDictionary *timelineItem = [[NSMutableDictionary alloc] init];
-            for(NSDictionary *payloadItem in data.payloadList)
-            {
-                NSEnumerator *keys = [payloadItem keyEnumerator];
-                for(NSString *key in keys)
-                {
-                    [timelineItem setObject:[payloadItem objectForKey:key] forKey:key];
-                }
-            }
+            NHInboxMessageData *inboxData = [[NHInboxMessageData alloc] init];
+            
+            // message key
+            inboxData.serverMessageKey = data.serverMessageKey;
+            inboxData.regDate = data.date;
+            inboxData.title = data.title;
+            inboxData.text = data.text;
             
             if([dateString isEqualToString:todayString])
             {
@@ -272,6 +307,11 @@
                 if(itemList == nil)
                 {
                     itemList = [[NSMutableArray alloc] init];
+                    NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                    dateSectionData.date = dateString;
+                    dateSectionData.day = dateDayString;
+                    [sectionList addObject:dateSectionData];
                 }
                 [itemList addObject:timelineItem];
                 [timelineMessageList setObject:itemList forKey:dateString];
@@ -285,16 +325,77 @@
 - (void)loadedAccountQueryInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
     NSLog(@"%s, %@", __FUNCTION__, messageList);
+    
+    if(!isRefresh)
+    {
+        if([sectionList count] > 0)
+        {
+            [sectionList removeAllObjects];
+        }
+        
+        if(timelineMessageList)
+        {
+            [timelineMessageList removeAllObjects];
+        }
+        
+        NSString *todayString = [CommonUtil getTodayDateString];
+        NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
+        TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+        todaySectionData.date = todayString;
+        todaySectionData.day = todayDayString;
+        [sectionList addObject:todaySectionData];
+        
+        for(NHInboxMessageData *inboxData in messageList)
+        {
+            NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+            if([dateString isEqualToString:todayString])
+            {
+                NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                if(todayItemList == nil)
+                {
+                    todayItemList = [[NSMutableArray alloc] init];
+                }
+                
+                [todayItemList addObject:inboxData];
+                
+                [timelineMessageList setObject:todayItemList forKey:todayString];
+            }
+            else
+            {
+                NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                if(itemList == nil)
+                {
+                    itemList = [[NSMutableArray alloc] init];
+                    NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                    dateSectionData.date = dateString;
+                    dateSectionData.day = dateDayString;
+                    [sectionList addObject:dateSectionData];
+                }
+                
+                [itemList addObject:inboxData];
+                
+                [timelineMessageList setObject:itemList forKey:dateString];
+            }
+        }
+    }
+    
+    [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
 - (void)inboxLoadFailed:(int)responseCode
 {
     NSLog(@"%s, %d", __FUNCTION__, responseCode);
-    [IBInbox requestInboxCategoryInfo];
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
 
 - (void)loadedInboxCategoryList:(NSArray *)categoryList
 {
     NSLog(@"%s, %@", __FUNCTION__, categoryList);
+}
+
+- (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
+{
+    NSLog(@"%s, %@", __FUNCTION__, summaryList);
 }
 @end

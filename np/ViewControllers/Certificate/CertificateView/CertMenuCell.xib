@@ -29,6 +29,7 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="iconDepthImg" destination="z7e-7w-FGz" id="kUn-XO-881"/>
                 <outlet property="titleLabel" destination="r4f-12-sW1" id="swo-7p-egv"/>
             </connections>
             <point key="canvasLocation" x="313" y="374"/>

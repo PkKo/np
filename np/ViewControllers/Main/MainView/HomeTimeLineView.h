@@ -39,6 +39,7 @@
 // 날짜를 키로 
 @property (strong, nonatomic) NSMutableDictionary   *mTimeLineDic;
 @property (strong, nonatomic) IBOutlet UITableView  *mTimeLineTable;
+@property (strong, nonatomic) IBOutlet UILabel *sortLabel;
 
 // 삭제시 전체선택 뷰
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;

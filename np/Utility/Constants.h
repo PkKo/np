@@ -62,13 +62,16 @@
 #define REFRESH_HEADER_HEIGHT   76.0f
 #define SECTION_HEADER_HEIGHT   31.0f
 #define SECTION_FOOTER_HEIGHT   93.0f
-#define AMOUNT_FONT_SIZE        20.0f
+#define AMOUNT_FONT_SIZE        19.0f
 
 #define TIMELINE_EVENT_TYPE     @"event_type"
 #define TIMELINE_ACCOUNT_NUMBER @"account_number"
 #define TIMELINE_TRN_AMT        @"trn_amt"
 #define TIMELINE_TRN_AF_AMT     @"trn_af_amt"
 #define TIMELINE_TXT_MSG        @"txt_msg"
+
+// timeline에서 고정핀을 사용한 메시지 id
+#define TIMELINE_PIN_MESSAGE_ID @"pinnedServerMessageId"
 
 #pragma mark 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"

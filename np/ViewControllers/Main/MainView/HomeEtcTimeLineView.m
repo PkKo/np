@@ -8,6 +8,7 @@
 
 #import "HomeEtcTimeLineView.h"
 #import "HomeEtcTimeLineCell.h"
+#import "TimelineSectionData.h"
 
 @implementation HomeEtcTimeLineView
 
@@ -113,7 +114,7 @@
     }
     else
     {
-        return [(NSArray *)[timelineDic objectForKey:[timelineSection objectAtIndex:section]] count];
+        return [(NSArray *)[timelineDic objectForKey:((TimelineSectionData *)[timelineSection objectAtIndex:section]).date] count];
     }
 }
 
@@ -128,20 +129,21 @@
     
     [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]];
     
-    NSString *date = [timelineSection objectAtIndex:section];
-    NSString *day = @"일요일";
+    TimelineSectionData *sectionData = [timelineSection objectAtIndex:section];
+    NSString *date = sectionData.date;
+    NSString *day = sectionData.day;
     
-    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:14 bold:YES];
+    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12 bold:YES];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, dateSize.width, SECTION_HEADER_HEIGHT)];
     [dateLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dateLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+    [dateLabel setFont:[UIFont boldSystemFontOfSize:12.0f]];
     [dateLabel setText:date];
     [sectionHeaderView addSubview:dateLabel];
     
-    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:14 bold:NO];
+    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:12 bold:NO];
     UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(dateLabel.frame.origin.x + dateSize.width, 0, daySize.width, SECTION_HEADER_HEIGHT)];
     [dayLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dayLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    [dayLabel setFont:[UIFont systemFontOfSize:12.0f]];
     [dayLabel setText:day];
     [sectionHeaderView addSubview:dayLabel];
     
@@ -161,8 +163,8 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    NSString *section = [timelineSection objectAtIndex:indexPath.section];
-//    InboxMessageData *inboxMessageData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
+    NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
 //    NSArray *payload = inboxMessageData.payloadList;
     
     /* 데이터 구성
@@ -190,27 +192,19 @@
     else
     {
         // 기존 스티커 버튼
-        if(indexPath.row % 2 == 0)
-        {
-            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_01.png"] forState:UIControlStateNormal];
-            [cell.stickerButton setImage:nil forState:UIControlStateSelected];
-        }
-        else
-        {
-            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_02.png"] forState:UIControlStateNormal];
-            [cell.stickerButton setImage:nil forState:UIControlStateSelected];
-        }
+        [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)[inboxData.inboxType integerValue]] forState:UIControlStateNormal];
+        [cell.stickerButton setImage:nil forState:UIControlStateSelected];
     }
     
-    [cell.stickerButton setTag:(indexPath.row%2)];
+    [cell.stickerButton setTag:(StickerType)[inboxData.inboxType integerValue]];
     [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 푸시 시간
-    [cell.timeLabel setText:@"09:05"];
+    [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
     // 공지 타이틀
-    [cell.titleLabel setText:@"환율 알림"];
+    [cell.titleLabel setText:inboxData.title];
     // 공지 내용
-    [cell.contentLabel setText:@"덴마트 살때180.78 팔때171.98 보낼178.12 받을174.64 매매176.38"];
+    [cell.contentLabel setText:inboxData.text];
     
     if(indexPath.row == 0)
     {
@@ -281,7 +275,7 @@
     
     if(isDeleteMode)
     {
-        NSString *pushId = [[[timelineDic objectForKey:[timelineSection objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row] objectForKey:@"server_message_key"];
+        NSString *pushId = ((NHInboxMessageData *)[[timelineDic objectForKey:((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
         
         if([currentBtn isSelected])
         {

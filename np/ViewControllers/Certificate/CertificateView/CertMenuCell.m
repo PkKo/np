@@ -10,6 +10,9 @@
 
 @implementation CertMenuCell
 
+@synthesize titleLabel;
+@synthesize iconDepthImg;
+
 - (void)awakeFromNib {
     // Initialization code
 }

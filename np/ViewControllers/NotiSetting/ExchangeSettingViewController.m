@@ -19,6 +19,7 @@
 @synthesize emptyView;
 @synthesize listView;
 @synthesize countryListTable;
+@synthesize serviceNotiAlertView;
 
 - (void)viewDidLoad
 {
@@ -31,7 +32,11 @@
 
     countryList = [[NSMutableArray alloc] init];
     
-    // 서버에서 환율알림 국가 목록을 조회해온다.
+    // 1. 기존에 가입된 서비스가 있는지 확인해본다.
+    [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:serviceNotiAlertView];
+    
+    // 2. 서버에서 환율알림 국가 목록을 조회해온다.
     [self currencyCountryListRequest];
 }
 
@@ -72,6 +77,18 @@
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
     [self.navigationController pushViewController:eVC animated:YES];
+}
+
+- (IBAction)serviceNotiButtonClick:(id)sender
+{
+    if([sender tag] == BUTTON_INDEX_OK)
+    {
+        // 환율알림 서비스 서버 조회 루틴
+    }
+    else
+    {
+        [serviceNotiAlertView removeFromSuperview];
+    }
 }
 
 #pragma mark - UITableDataSource

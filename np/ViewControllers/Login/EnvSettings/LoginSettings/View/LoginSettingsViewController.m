@@ -14,6 +14,7 @@
 #import "SimplePwMgntChangeViewController.h"
 #import "ConstantMaster.h"
 #import "LoginCertController.h"
+#import "CertificateMenuViewController.h"
 
 #define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
@@ -61,6 +62,10 @@
 
 - (IBAction)gotoCertMgmtCenter {
     NSLog(@"공인인증센터로 이동");
+    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 - (IBAction)showCertList {
