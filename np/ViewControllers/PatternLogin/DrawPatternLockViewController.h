@@ -12,11 +12,10 @@
 
 @interface DrawPatternLockViewController : CommonViewController <UIAlertViewDelegate> {
     NSMutableArray* _paths;
-    
-    // after pattern is drawn, call this:
-    id _target;
-    SEL _action;
 }
+
+@property (weak, nonatomic) IBOutlet UIView * footer;
+@property (weak, nonatomic) IBOutlet UIView * settingsView;
 @property (weak, nonatomic) IBOutlet DrawPatternLockView * patternView;
 
 - (NSString*)getKey;

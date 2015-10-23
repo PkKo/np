@@ -33,6 +33,11 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     
+    CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
+    CGRect patternViewFrame         = _patternView.frame;
+    patternViewFrame.size.width     = (screenWidth - patternViewFrame.origin.x * 2);
+    patternViewFrame.size.height    = patternViewFrame.size.width;
+    [_patternView setFrame:patternViewFrame];
     [_patternView setStrokeColor:[UIColor colorWithWhite:1 alpha:0.5]];
     
     for (int i=0; i<MATRIX_SIZE; i++) {
@@ -54,8 +59,13 @@
     int w = _patternView.frame.size.width/MATRIX_SIZE;
     int h = _patternView.frame.size.height/MATRIX_SIZE;
     
+    CGFloat spaceBtwPatternAndFooter    = self.footer.frame.origin.y - (_patternView.frame.origin.y + _patternView.frame.size.height);
+    CGRect setttingsViewFrame           = self.settingsView.frame;
+    setttingsViewFrame.origin.y         = _patternView.frame.origin.y + _patternView.frame.size.height + (spaceBtwPatternAndFooter - setttingsViewFrame.size.height)/2;
+    [self.settingsView setFrame:setttingsViewFrame];
+    
     int i=0;
-    for (UIView *view in _patternView.subviews)
+    for (UIView *view in _patternView.subviews) {
         if ([view isKindOfClass:[UIImageView class]]) {
             int x = w*(i/MATRIX_SIZE) + w/2;
             int y = h*(i%MATRIX_SIZE) + h/2;
@@ -63,7 +73,7 @@
             view.center = CGPointMake(x, y);
             i++;
         }
-    
+    }
 }
 
 

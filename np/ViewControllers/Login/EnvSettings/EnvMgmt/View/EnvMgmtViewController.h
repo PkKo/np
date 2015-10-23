@@ -17,4 +17,18 @@
 -(IBAction)gotoSimpleLoginMgmt;
 -(IBAction)gotoPatternLoginMgmt;
 -(IBAction)gotoNoticeBgColorSettings;
+
+
+
+
+
+
+
+
+
+- (IBAction)gotoPatternLogin:(id)sender;
+- (IBAction)gotoCertLogin:(id)sender;
+- (IBAction)gotoAccountLogin:(id)sender;
+- (IBAction)gotoSimpleLogin:(id)sender;
+    
 @end
