@@ -14,6 +14,7 @@
 #import "SimplePwMgntChangeViewController.h"
 #import "ConstantMaster.h"
 #import "LoginCertController.h"
+#import "CertificateMenuViewController.h"
 
 #define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 

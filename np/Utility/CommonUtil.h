@@ -10,13 +10,13 @@
 
 typedef enum StickerType
 {
-    STICKER_DEPOSIT_NORMAL      = 0,
-    STICKER_DEPOSIT_SALARY      = 200,
+    STICKER_DEPOSIT_NORMAL      = 1,
+    STICKER_DEPOSIT_SALARY      = 100,
     STICKER_DEPOSIT_POCKET,
     STICKER_DEPOSIT_ETC,
     
-    STICKER_WITHDRAW_NORMAL     = 1,
-    STICKER_WITHDRAW_FOOD       = 300,
+    STICKER_WITHDRAW_NORMAL     = 2,
+    STICKER_WITHDRAW_FOOD       = 200,
     STICKER_WITHDRAW_TELEPHONE,
     STICKER_WITHDRAW_HOUSING,
     STICKER_WITHDRAW_SHOPPING,
@@ -41,5 +41,6 @@ typedef enum StickerType
 + (UIImage *)getStickerImage:(StickerType)stickerType;
 + (NSString *)getTodayDateString;
 + (NSString *)getDateString:(NSDate *)date;
++ (NSString *)getDayString:(NSDate *)date;
 + (NSString *)getTimeString:(NSDate *)date;
 @end

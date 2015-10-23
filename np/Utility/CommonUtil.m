@@ -227,7 +227,7 @@
 {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy.MM.dd EEEE"];
+    [dateFormat setDateFormat:@"yyyy.MM.dd"];
     NSString *todayString = [dateFormat stringFromDate:today];
     
     return todayString;
@@ -236,7 +236,16 @@
 + (NSString *)getDateString:(NSDate *)date
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy.MM.dd EEEE"];
+    [dateFormat setDateFormat:@"yyyy.MM.dd"];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    
+    return dateString;
+}
+
++ (NSString *)getDayString:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEEE"];
     NSString *dateString = [dateFormat stringFromDate:date];
     
     return dateString;

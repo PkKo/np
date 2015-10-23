@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface HomeQuickViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
+@interface HomeQuickViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, IBInboxProtocol>
 {
     NSMutableArray *pushList;
     NSMutableArray *noticeList;

@@ -223,6 +223,8 @@
 		A2D95B9D1BA8F1DD00DC943D /* NFilterSerialNum.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D95AFE1BA8F1DD00DC943D /* NFilterSerialNum.xib */; };
 		A2D95BA11BA8FF1000DC943D /* HomeTimeLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D95BA01BA8FF1000DC943D /* HomeTimeLineView.m */; };
 		A2D95BA31BA8FF2400DC943D /* HomeTimeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D95BA21BA8FF2400DC943D /* HomeTimeLineView.xib */; };
+		A2D994B61BD8615000A6A325 /* icon_depth_05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D994B51BD8615000A6A325 /* icon_depth_05@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A2D994B91BD8824700A6A325 /* TimelineSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D994B81BD8824700A6A325 /* TimelineSectionData.m */; settings = {ASSET_TAGS = (); }; };
 		A2D9A2D11BCB34F800FC2AC7 /* back_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D9A23D1BCB34F800FC2AC7 /* back_01@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D9A2D21BCB34F800FC2AC7 /* botton_pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D9A23E1BCB34F800FC2AC7 /* botton_pattern@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A2D9A2D31BCB34F800FC2AC7 /* button_01_dft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2D9A23F1BCB34F800FC2AC7 /* button_01_dft@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -814,6 +816,9 @@
 		A2D95B9F1BA8FF1000DC943D /* HomeTimeLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTimeLineView.h; sourceTree = "<group>"; };
 		A2D95BA01BA8FF1000DC943D /* HomeTimeLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTimeLineView.m; sourceTree = "<group>"; };
 		A2D95BA21BA8FF2400DC943D /* HomeTimeLineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTimeLineView.xib; sourceTree = "<group>"; };
+		A2D994B51BD8615000A6A325 /* icon_depth_05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_depth_05@2x.png"; sourceTree = "<group>"; };
+		A2D994B71BD8824700A6A325 /* TimelineSectionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineSectionData.h; sourceTree = "<group>"; };
+		A2D994B81BD8824700A6A325 /* TimelineSectionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineSectionData.m; sourceTree = "<group>"; };
 		A2D9A23D1BCB34F800FC2AC7 /* back_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_01@2x.png"; sourceTree = "<group>"; };
 		A2D9A23E1BCB34F800FC2AC7 /* botton_pattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botton_pattern@2x.png"; sourceTree = "<group>"; };
 		A2D9A23F1BCB34F800FC2AC7 /* button_01_dft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_01_dft@2x.png"; sourceTree = "<group>"; };
@@ -1867,6 +1872,7 @@
 				A2D9A2661BCB34F800FC2AC7 /* icon_depth_02@2x.png */,
 				A2D9A2671BCB34F800FC2AC7 /* icon_depth_03@2x.png */,
 				A2D9A2681BCB34F800FC2AC7 /* icon_depth_04@2x.png */,
+				A2D994B51BD8615000A6A325 /* icon_depth_05@2x.png */,
 				A2D9A2691BCB34F800FC2AC7 /* icon_dropdown_01@2x.png */,
 				A2D9A26A1BCB34F800FC2AC7 /* icon_faq_01_dft@2x.png */,
 				A2D9A26B1BCB34F800FC2AC7 /* icon_faq_01_on@2x.png */,
@@ -2056,6 +2062,8 @@
 				A2DB7CA51BCE12BF0088D844 /* StrokeView.m */,
 				A2E0FE151BD7676900D528BA /* DropboxStrokeView.h */,
 				A2E0FE161BD7676900D528BA /* DropboxStrokeView.m */,
+				A2D994B71BD8824700A6A325 /* TimelineSectionData.h */,
+				A2D994B81BD8824700A6A325 /* TimelineSectionData.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -3012,6 +3020,7 @@
 				A2DEADF91B9FE68600EDCCBA /* LaunchScreen.xib in Resources */,
 				A2D95B851BA8F1DD00DC943D /* nf_ios_btn_confirm@3x.png in Resources */,
 				A2D95B151BA8F1DD00DC943D /* NFPadBtnPrevious.png in Resources */,
+				A2D994B61BD8615000A6A325 /* icon_depth_05@2x.png in Resources */,
 				A2D9A2E81BCB34F800FC2AC7 /* icon_calendar_01@2x.png in Resources */,
 				A2D95B2C1BA8F1DD00DC943D /* NFPadspacebar_wide.png in Resources */,
 				A2D95B5C1BA8F1DD00DC943D /* nf_ios_icon_refresh.png in Resources */,
@@ -3333,6 +3342,7 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
+				A2D994B91BD8824700A6A325 /* TimelineSectionData.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
 				A2DE64751BD62628009EC403 /* AccountOptionSettingViewController.m in Sources */,
 				A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */,

@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (strong, nonatomic) IBOutlet UIView *listView;
 @property (strong, nonatomic) IBOutlet UITableView *countryListTable;
+@property (strong, nonatomic) IBOutlet UIView *serviceNotiAlertView;
 
 - (IBAction)addCurrencyCountry:(id)sender;
+- (IBAction)serviceNotiButtonClick:(id)sender;
 @end

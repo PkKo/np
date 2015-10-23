@@ -10,6 +10,7 @@
                 <outlet property="countryListTable" destination="EG9-tW-GRn" id="EYS-aV-uE7"/>
                 <outlet property="emptyView" destination="5Bt-66-6sv" id="rN4-ZN-Ukp"/>
                 <outlet property="listView" destination="Y7z-bu-vbj" id="qqE-eT-bq5"/>
+                <outlet property="serviceNotiAlertView" destination="4UA-Og-rKD" id="xP7-gT-gY4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -108,6 +109,92 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="313" y="374"/>
+        </view>
+        <view contentMode="scaleToFill" id="4UA-Og-rKD">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" id="QXf-Mo-ooU">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="gVu-Qi-bd4">
+                    <rect key="frame" x="18" y="83" width="284" height="402"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" id="2aG-yv-nxY">
+                            <rect key="frame" x="36" y="32" width="212" height="43"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <string key="text">고객님은 현재 SMS 프리미엄 서비스
+(유료)로 환율정보를 받고 계십니다.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="10" id="GBM-R9-lVW">
+                            <rect key="frame" x="36" y="81" width="212" height="124"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <string key="text">하단 '확인'버튼을 누르시면 기존에
+가입하신 SMS프리미엄 서비스는 자동으로
+해지가 되며, 본 NH스마트알림 서비스
+App(무료)으로 계속해서 환율정보를
+받으실 수 있습니다. 또한, 기존 프리미엄
+서비스에서 설정하셨던 통화국가에 대한
+정보는 자동으로 적용됩니다.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="13" id="ouX-4G-eON">
+                            <rect key="frame" x="36" y="269" width="212" height="64"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <string key="text">프리미엄 서비스를 해지하시고,
+NH스마트알림의 환율정보를
+받으시겠습니까?</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="ZMH-Vr-xhX">
+                            <rect key="frame" x="36" y="238" width="212" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="AyA-Wv-G7t">
+                            <rect key="frame" x="0.0" y="362" width="284" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JTi-ih-g1q">
+                                    <rect key="frame" x="0.0" y="0.0" width="142" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
+                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="취소"/>
+                                    <connections>
+                                        <action selector="serviceNotiButtonClick:" destination="-1" eventType="touchUpInside" id="gsp-qv-0II"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rmq-uU-SGa">
+                                    <rect key="frame" x="142" y="0.0" width="142" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
+                                    <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="확인"/>
+                                    <connections>
+                                        <action selector="serviceNotiButtonClick:" destination="-1" eventType="touchUpInside" id="WkT-rI-sHy"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="686" y="370"/>
         </view>
     </objects>
 </document>
