@@ -33,6 +33,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
     [IBInbox loadWithListener:self];
@@ -41,7 +43,7 @@
     {
         case TIMELINE:
         {
-//            [IBInbox requestInboxList];
+            [IBInbox requestInboxList];
             AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
             reqData.accountNumberList = @[@"1111-22-333333"];
             reqData.queryType = @"1,2,3,4,5,6";
@@ -56,7 +58,7 @@
             //    reqData.accountNumberList;
             // 입출금 구분
             //    reqData.queryType;
-            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+            //            [IBInbox reqQueryAccountInboxListWithSize:reqData];
             break;
         }
         case BANKING:
@@ -82,7 +84,7 @@
         {
             AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
             reqData.accountNumberList = @[@"1111-22-333333"];
-            reqData.queryType = @"3,4,5,6";
+            reqData.queryType = @"3";
             reqData.ascending = YES;
             reqData.size = 20;
             /*
@@ -95,7 +97,7 @@
             // 입출금 구분
             //    reqData.queryType;
             [IBInbox reqQueryAccountInboxListWithSize:reqData];
-//            [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151022"];
+            //            [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151022"];
             break;
         }
             
@@ -114,8 +116,6 @@
 
 - (void)makeTimelineView
 {
-    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
-    
     switch (viewType)
     {
         case TIMELINE:
@@ -170,7 +170,8 @@
             break;
     }
     
-    [mMainContentView layoutIfNeeded];
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+//    [mMainContentView layoutIfNeeded];
 }
 
 /**
@@ -251,38 +252,54 @@
 
 - (void)selectedStickerIndex:(NSNumber *)index
 {
-    NSInteger stickerIndex = index.integerValue;
-    NSLog(@"%s, %ld", __FUNCTION__, (long)stickerIndex);
-    /*
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
+    selectedStickerCode = (StickerType)index.integerValue;
+    NSLog(@"%s, %d", __FUNCTION__, (int)selectedStickerCode);
+    
     if(currentStickerIndexPath != nil)
     {
         // 스티커 정보 세팅
-        currentStickerIndexPath = nil;
+        NHInboxMessageData *inboxData = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
         
         // 인박스에 스티커 정보를 저장한다.
-        [IBInbox reqAddStickerInfoWithMsgKey:@"serverMessageKey" stickerCode:(int)stickerIndex];
-    }*/
+        [IBInbox reqAddStickerInfoWithMsgKey:inboxData.serverMessageKey stickerCode:(int)selectedStickerCode];
+    }
+}
+
+- (void)deletePushItems:(NSArray *)deleteIdList
+{
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
+    [IBInbox requestDeleteMessages:deleteIdList];
 }
 
 #pragma mark - IBInbox Protocol
 - (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
 //    NSLog(@"%s, %@", __FUNCTION__, messageList);
-    
-    NSString *todayString = [CommonUtil getTodayDateString];
-    TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-    todaySectionData.date = todayString;
-    todaySectionData.day = [CommonUtil getDayString:[NSDate date]];
-    [sectionList addObject:todaySectionData];
-    
-    for(InboxMessageData *data in messageList)
+    if(!isRefresh)
     {
-        NSLog(@"inbox message data = %@", data);
-        if([data.payloadList count] >= 6)
+        if([sectionList count] > 0)
+        {
+            [sectionList removeAllObjects];
+        }
+        
+        if(timelineMessageList)
+        {
+            [timelineMessageList removeAllObjects];
+        }
+        
+        NSString *todayString = [CommonUtil getTodayDateString];
+        TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+        todaySectionData.date = todayString;
+        todaySectionData.day = [CommonUtil getDayString:[NSDate date]];
+        [sectionList addObject:todaySectionData];
+        
+        for(InboxMessageData *data in messageList)
         {
             NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(data.date/1000)]];
             
-            NSMutableDictionary *timelineItem = [[NSMutableDictionary alloc] init];
             NHInboxMessageData *inboxData = [[NHInboxMessageData alloc] init];
             
             // message key
@@ -291,6 +308,49 @@
             inboxData.title = data.title;
             inboxData.text = data.text;
             
+            for(ContentsPayload *payload in data.payloadList)
+            {
+                if([payload.key isEqualToString:TIMELINE_EVENT_TYPE])
+                {
+                    inboxData.inboxType = payload.value;
+                }
+                
+                if([payload.key isEqualToString:TIMELINE_ACCOUNT_NUMBER])
+                {
+                    inboxData.nhAccountNumber = payload.value;
+                }
+                
+                if([payload.key isEqualToString:TIMELINE_TRN_AMT])
+                {
+                    inboxData.amount = [payload.value intValue];
+                }
+                
+                if([payload.key isEqualToString:TIMELINE_TRN_AF_AMT])
+                {
+                    inboxData.balance = [payload.value intValue];
+                }
+                
+                if([payload.key isEqualToString:TIMELINE_TXT_MSG])
+                {
+                    inboxData.oppositeUser = payload.value;
+                }
+                /*
+                 if([payload.key isEqualToString:TIMELINE_ACCOUNT_GB])
+                 {
+                 inboxData.accountGb = payload.value;
+                 }*/
+            }
+            
+            if(inboxData.inboxType == nil)
+            {
+                continue;
+            }
+            
+            if(inboxData.stickerCode <= 0)
+            {
+                inboxData.stickerCode = [inboxData.inboxType intValue];
+            }
+            
             if([dateString isEqualToString:todayString])
             {
                 NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
@@ -298,7 +358,7 @@
                 {
                     todayItemList = [[NSMutableArray alloc] init];
                 }
-                [todayItemList addObject:timelineItem];
+                [todayItemList addObject:inboxData];
                 [timelineMessageList setObject:todayItemList forKey:todayString];
             }
             else
@@ -313,12 +373,12 @@
                     dateSectionData.day = dateDayString;
                     [sectionList addObject:dateSectionData];
                 }
-                [itemList addObject:timelineItem];
+                [itemList addObject:inboxData];
                 [timelineMessageList setObject:itemList forKey:dateString];
             }
         }
     }
-        
+    
     [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
@@ -326,42 +386,31 @@
 {
     NSLog(@"%s, %@", __FUNCTION__, messageList);
     
-    if(!isRefresh)
+    if(success)
     {
-        if([sectionList count] > 0)
+        if(!isRefresh)
         {
-            [sectionList removeAllObjects];
-        }
-        
-        if(timelineMessageList)
-        {
-            [timelineMessageList removeAllObjects];
-        }
-        
-        NSString *todayString = [CommonUtil getTodayDateString];
-        NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
-        TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-        todaySectionData.date = todayString;
-        todaySectionData.day = todayDayString;
-        [sectionList addObject:todaySectionData];
-        
-        for(NHInboxMessageData *inboxData in messageList)
-        {
-            NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-            if([dateString isEqualToString:todayString])
+            if([sectionList count] > 0)
             {
-                NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
-                if(todayItemList == nil)
-                {
-                    todayItemList = [[NSMutableArray alloc] init];
-                }
-                
-                [todayItemList addObject:inboxData];
-                
-                [timelineMessageList setObject:todayItemList forKey:todayString];
+                [sectionList removeAllObjects];
             }
-            else
+            
+            if(timelineMessageList)
             {
+                [timelineMessageList removeAllObjects];
+            }
+            /*
+             NSString *todayString = [CommonUtil getTodayDateString];
+             NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
+             TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+             todaySectionData.date = todayString;
+             todaySectionData.day = todayDayString;
+             [sectionList addObject:todaySectionData];*/
+            
+            for(NHInboxMessageData *inboxData in messageList)
+            {
+                NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                
                 NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
                 if(itemList == nil)
                 {
@@ -376,11 +425,41 @@
                 [itemList addObject:inboxData];
                 
                 [timelineMessageList setObject:itemList forKey:dateString];
+                /*
+                 if([dateString isEqualToString:todayString])
+                 {
+                 NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                 if(todayItemList == nil)
+                 {
+                 todayItemList = [[NSMutableArray alloc] init];
+                 }
+                 
+                 [todayItemList addObject:inboxData];
+                 
+                 [timelineMessageList setObject:todayItemList forKey:todayString];
+                 }
+                 else
+                 {
+                 NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                 if(itemList == nil)
+                 {
+                 itemList = [[NSMutableArray alloc] init];
+                 NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                 TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                 dateSectionData.date = dateString;
+                 dateSectionData.day = dateDayString;
+                 [sectionList addObject:dateSectionData];
+                 }
+                 
+                 [itemList addObject:inboxData];
+                 
+                 [timelineMessageList setObject:itemList forKey:dateString];
+                 }*/
             }
         }
+        
+        [self performSelector:@selector(makeTimelineView) withObject:nil];
     }
-    
-    [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
 - (void)inboxLoadFailed:(int)responseCode
@@ -397,5 +476,61 @@
 - (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
 {
     NSLog(@"%s, %@", __FUNCTION__, summaryList);
+}
+
+- (void)addedSticker:(BOOL)success
+{
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+    
+    if(success)
+    {
+        NHInboxMessageData *inboxData = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+        inboxData.stickerCode = selectedStickerCode;
+        [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
+        
+        // 각 뷰가 있으면 테이블 갱신
+        if(mTimeLineView)
+        {
+            [mTimeLineView.mTimeLineTable reloadData];
+        }
+        else if(bankingView)
+        {
+            [bankingView.bankingListTable reloadData];
+        }
+    }
+    
+    currentStickerIndexPath = nil;
+    selectedStickerCode = -1;
+}
+
+- (void)removedMessages:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys
+{
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+    
+    if(success)
+    {
+        for(NSString *msgKey in sMsgKeys)
+        {
+            for(TimelineSectionData *sectionData in sectionList)
+            {
+                NSMutableArray *array = [NSMutableArray arrayWithArray:[timelineMessageList objectForKey:sectionData.date]];
+                if([array containsObject:msgKey])
+                {
+                    [array removeObject:msgKey];
+                    [timelineMessageList setObject:array forKey:sectionData.date];
+                }
+            }
+        }
+        
+        // 각 뷰가 있으면 테이블 갱신
+        if(mTimeLineView)
+        {
+            [mTimeLineView.mTimeLineTable reloadData];
+        }
+        else if(bankingView)
+        {
+            [bankingView.bankingListTable reloadData];
+        }
+    }
 }
 @end

@@ -25,7 +25,8 @@
 @synthesize pinButton;
 @synthesize moreButton;
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // Initialization code
 }
 

@@ -19,7 +19,7 @@
 #import "CustomerCenterViewController.h"
 
 #define MENU_CELL_HEIGHT    37
-#define IPHONE_FIVE_FRAME_HEIGHT    568
+#define TABLE_VIEW_HEADER_HEIGHT    23
 
 @interface MenuViewController ()
 
@@ -28,6 +28,7 @@
 @implementation MenuViewController
 
 @synthesize menuTableView;
+@synthesize bottomMenuView;
 // 로그인 여부 확인 후 Highlight처리
 @synthesize loginImg;
 // 로그인 여부 확인 후 메시지 변경
@@ -51,12 +52,15 @@
   @[@"고객센터", @"icon_customer_01_dft.png", @"icon_customer_01_on.png"],
   @[@"NH APPZONE", @"icon_app_zone_01_dft.png", @"icon_app_zone_01_on.png"], nil];
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, 23)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT)];
     [menuTableView setTableHeaderView:headerView];
 	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
-    MenuTableEtcView *footerView = [MenuTableEtcView view];
-    [footerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, footerView.frame.size.height)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, 0)];
     [menuTableView setTableFooterView:footerView];
+    
+    MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
+    [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, bottomMenu.frame.size.height)];
+    [bottomMenuView addSubview:bottomMenu];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +78,20 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if(cellHeight > MENU_CELL_HEIGHT)
+    {
+        [menuTableView setScrollEnabled:NO];
+    }
+    else
+    {
+        [menuTableView setScrollEnabled:YES];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -84,6 +102,8 @@
     {
         cell = [MenuTableCell cell];
     }
+    
+    [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cellHeight)];
     
     NSString *title = [[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:0];
     
@@ -109,7 +129,13 @@
 //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
 //    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
-    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+//    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT) / [mMenuTitleArray count]);
+    if(cellHeight < MENU_CELL_HEIGHT)
+    {
+        cellHeight = MENU_CELL_HEIGHT;
+    }
+    return cellHeight;
 }
 
 #pragma mark - UITableViewDelegate

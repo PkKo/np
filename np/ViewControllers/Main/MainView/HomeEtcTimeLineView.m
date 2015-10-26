@@ -192,11 +192,11 @@
     else
     {
         // 기존 스티커 버튼
-        [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)[inboxData.inboxType integerValue]] forState:UIControlStateNormal];
+        [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
         [cell.stickerButton setImage:nil forState:UIControlStateSelected];
     }
     
-    [cell.stickerButton setTag:(StickerType)[inboxData.inboxType integerValue]];
+    [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
     [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // 푸시 시간

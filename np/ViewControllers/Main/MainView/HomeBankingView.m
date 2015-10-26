@@ -215,7 +215,7 @@
     
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
-    [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)[inboxData.inboxType integerValue]] forState:UIControlStateNormal];
+    [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
     // 푸시 시간
     [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
     // 거래명
@@ -226,9 +226,9 @@
     NSString *amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
     NSString *balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
     // 금액 String size
-    CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:NO];
+    CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
     
-    switch ([inboxData.inboxType integerValue])
+    switch (inboxData.stickerCode)
     {
         case STICKER_DEPOSIT_NORMAL:
         case STICKER_DEPOSIT_SALARY:
@@ -249,6 +249,7 @@
                                                       cell.amountDescLabel.frame.origin.y,
                                                       cell.amountDescLabel.frame.size.width,
                                                       cell.amountDescLabel.frame.size.height)];
+            [cell.amountDescLabel setTextColor:INCOME_STRING_COLOR];
             break;
         }
             
@@ -277,6 +278,7 @@
                                                       cell.amountDescLabel.frame.origin.y,
                                                       cell.amountDescLabel.frame.size.width,
                                                       cell.amountDescLabel.frame.size.height)];
+            [cell.amountDescLabel setTextColor:WITHDRAW_STRING_COLOR];
             break;
         }
             

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
@@ -58,7 +57,7 @@
                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" tag="300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VMo-6T-ggc">
+                        <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VMo-6T-ggc">
                             <rect key="frame" x="39" y="115" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_01_dft.png"/>
@@ -67,7 +66,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="5Ds-Dd-K2f"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="301" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n4A-w0-UA4">
+                        <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n4A-w0-UA4">
                             <rect key="frame" x="124" y="115" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_02_dft.png"/>
@@ -76,7 +75,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="tCE-Wo-BCa"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qBY-93-CfU">
+                        <button opaque="NO" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qBY-93-CfU">
                             <rect key="frame" x="209" y="115" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_03_dft.png"/>
@@ -84,7 +83,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="aRV-Mk-AUi"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="303" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uWL-HA-Uc4">
+                        <button opaque="NO" tag="203" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uWL-HA-Uc4">
                             <rect key="frame" x="39" y="194" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_04_dft.png"/>
@@ -93,7 +92,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="wD8-qm-GLa"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="304" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XhX-0L-yD3">
+                        <button opaque="NO" tag="204" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XhX-0L-yD3">
                             <rect key="frame" x="124" y="194" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_05_dft.png"/>
@@ -102,7 +101,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="wf7-FB-5fq"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="305" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="far-J3-q9B">
+                        <button opaque="NO" tag="205" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="far-J3-q9B">
                             <rect key="frame" x="209" y="194" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_06_dft.png"/>
@@ -111,7 +110,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="zTM-Fo-hK3"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="306" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pNT-pZ-d0G">
+                        <button opaque="NO" tag="206" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pNT-pZ-d0G">
                             <rect key="frame" x="39" y="276" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_07_dft.png"/>
@@ -120,7 +119,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="g1c-za-zZ8"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="307" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1TR-5F-AFa">
+                        <button opaque="NO" tag="207" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1TR-5F-AFa">
                             <rect key="frame" x="124" y="276" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_08_dft.png"/>
@@ -129,7 +128,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="Y91-Fi-EYK"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="308" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8f2-6n-k5L">
+                        <button opaque="NO" tag="208" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8f2-6n-k5L">
                             <rect key="frame" x="209" y="276" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_09_dft.png"/>

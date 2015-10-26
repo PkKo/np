@@ -11,9 +11,11 @@
 @interface MenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *mMenuTitleArray;
+    float cellHeight;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *menuTableView;
+@property (strong, nonatomic) IBOutlet UIView *bottomMenuView;
 @property (strong, nonatomic) IBOutlet UIImageView *loginImg;
 @property (strong, nonatomic) IBOutlet UILabel *loginTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *loginButtonTextLabel;

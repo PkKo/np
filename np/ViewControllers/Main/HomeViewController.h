@@ -35,6 +35,7 @@ typedef enum HomeViewType
     WithdrawStickerSettingView *withdrawStickerView;
     // 선택한 스티커 인덱스
     NSIndexPath *currentStickerIndexPath;
+    int selectedStickerCode;
     
     BOOL isRefresh;
 }

@@ -24,6 +24,7 @@
     BOOL listSortType;
     
     NSMutableArray *deleteIdList;
+    NSMutableArray *pinnedIdList;
     BOOL isDeleteMode;
     
     NSInteger storageCount;
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) NSMutableDictionary   *mTimeLineDic;
 @property (strong, nonatomic) IBOutlet UITableView  *mTimeLineTable;
 @property (strong, nonatomic) IBOutlet UILabel *sortLabel;
+@property (strong, nonatomic) IBOutlet UIView *topMenuView;
 
 // 삭제시 전체선택 뷰
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;
@@ -51,6 +53,7 @@
 @property (strong, nonatomic) IBOutlet UIView *searchView;
 // 보관함에 저장된 갯수 표시
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
+@property (assign, nonatomic) NSInteger bannerIndex;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 

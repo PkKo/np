@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController">
             <connections>
+                <outlet property="bottomMenuView" destination="iac-2l-FhN" id="PFl-Ny-udV"/>
                 <outlet property="loginButtonTextLabel" destination="LUP-Sv-fEP" id="xx0-By-7L3"/>
                 <outlet property="loginImg" destination="pO1-hM-3fS" id="udk-7w-aP5"/>
                 <outlet property="loginTextLabel" destination="3Tg-G4-9Xd" id="bl7-1z-YPC"/>
@@ -41,8 +42,8 @@
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xeE-6y-bQT">
-                    <rect key="frame" x="75" y="139" width="245" height="429"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="37" sectionHeaderHeight="22" sectionFooterHeight="22" id="xeE-6y-bQT">
+                    <rect key="frame" x="75" y="139" width="245" height="329"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,6 +80,11 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" id="iac-2l-FhN">
+                    <rect key="frame" x="75" y="468" width="245" height="100"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

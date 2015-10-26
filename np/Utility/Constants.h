@@ -20,9 +20,9 @@
 // cloud server
 #define IPNS_ACCOUNT_HOST   @"133.130.97.64"
 #define IPNS_INBOX_HOST     @"133.130.97.64"
-/* 농협 개발서버 주소
-@"218.239.251.112"
-@"218.239.251.113"*/
+/* 농협 개발서버 주소*/
+//#define IPNS_ACCOUNT_HOST   @"218.239.251.112"
+//#define IPNS_INBOX_HOST     @"218.239.251.113"
 #else
 // 운영서버
 #define SERVER_URL          @""
@@ -62,13 +62,18 @@
 #define REFRESH_HEADER_HEIGHT   76.0f
 #define SECTION_HEADER_HEIGHT   31.0f
 #define SECTION_FOOTER_HEIGHT   93.0f
-#define AMOUNT_FONT_SIZE        19.0f
+#define TIMELINE_BANKING_HEIGHT 117.0f
+#define TIMELINE_ETC_HEIGHT     103.0f
+#define TIMELINE_BANNER_HEIGHT  93.0f
+#define AMOUNT_FONT_SIZE        20.0f
+#define IPHONE_FIVE_FRAME_HEIGHT    568
 
 #define TIMELINE_EVENT_TYPE     @"event_type"
 #define TIMELINE_ACCOUNT_NUMBER @"account_number"
 #define TIMELINE_TRN_AMT        @"trn_amt"
 #define TIMELINE_TRN_AF_AMT     @"trn_af_amt"
 #define TIMELINE_TXT_MSG        @"txt_msg"
+#define TIMELINE_ACCOUNT_GB     @"account_gb"
 
 // timeline에서 고정핀을 사용한 메시지 id
 #define TIMELINE_PIN_MESSAGE_ID @"pinnedServerMessageId"
@@ -118,6 +123,9 @@
 #define REQUEST_PHONE_AUTH          @"EFPUW031001.cmd"
 #define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
 #define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
+
+#pragma mark 최근 공지사항 1건
+#define REQUEST_RECENT_NOTICE       @"SBAB1010First.cmd"
 
 #pragma mark 가입 플로우 관련
 // 인증방식 저장(공인인증서 or 계좌)

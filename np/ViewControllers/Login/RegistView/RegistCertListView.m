@@ -40,6 +40,8 @@
         cell = [CertTableCell cell];
     }
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     CertInfo *info = [certControllArray objectAtIndex:indexPath.row];
     
     // 사용자명
