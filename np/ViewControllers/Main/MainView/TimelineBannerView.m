@@ -1,22 +1,21 @@
 //
-//  CircleView.m
+//  TimelineBannerView.m
 //  np
 //
-//  Created by Infobank1 on 2015. 10. 13..
+//  Created by Infobank1 on 2015. 10. 23..
 //  Copyright © 2015년 Infobank1. All rights reserved.
 //
 
-#import "CircleView.h"
+#import "TimelineBannerView.h"
 
-@implementation CircleView
+@implementation TimelineBannerView
 
+/*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    self.alpha = 0.9f;
+- (void)drawRect:(CGRect)rect {
     // Drawing code
-    self.layer.cornerRadius = rect.size.height / 2;
 }
+*/
 
 @end

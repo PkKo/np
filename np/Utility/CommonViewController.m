@@ -35,6 +35,8 @@
     {
         self.slidingViewController.underRightViewController = [[MenuViewController alloc] init];
     }
+    
+    [self.view bringSubviewToFront:loadingIndicatorBg];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +46,6 @@
 
 - (void)makeNaviAndMenuView
 {
-    
     [self.view setBackgroundColor:[UIColor colorWithRed:0.0f green:101.0f/255.0f blue:179.0f/255.0f alpha:1.0f]];
     
     self.mNaviView = [NavigationView view];
@@ -87,7 +88,6 @@
             make.bottom.equalTo(self.view.mas_bottom);
         }];
     }*/
-    
     [self.view bringSubviewToFront:mMenuCloseButton];
     
     keyboardCloseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -96,16 +96,16 @@
     [keyboardCloseButton setEnabled:NO];
     [keyboardCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.view addSubview:keyboardCloseButton];
-    
     [self.view bringSubviewToFront:keyboardCloseButton];
     
     loadingIndicatorBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithWhite:0.3f alpha:0.3f]];
+    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6f]];
     [loadingIndicatorBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [loadingIndicatorBg setAutoresizesSubviews:YES];
     [loadingIndicatorBg setHidden:YES];
     
     [self.view addSubview:loadingIndicatorBg];
+    [self.view bringSubviewToFront:loadingIndicatorBg];
 }
 
 - (void)showMenuView
@@ -147,6 +147,7 @@
 
 - (void)startIndicator
 {
+    [self.view bringSubviewToFront:loadingIndicatorBg];
     [loadingIndicatorBg setHidden:NO];
 }
 

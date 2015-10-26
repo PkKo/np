@@ -15,6 +15,7 @@
 @synthesize typeLabel;
 @synthesize accountLabel;
 @synthesize dateLabel;
+@synthesize amountDescLabel;
 
 - (void)awakeFromNib {
     // Initialization code

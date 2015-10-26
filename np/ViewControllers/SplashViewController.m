@@ -61,10 +61,10 @@
 
 - (void)appVersionCheckResponse:(NSDictionary *)response
 {
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    NSLog(@"%s, %@", __FUNCTION__, cookies);
+//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+//    NSLog(@"%s, %@", __FUNCTION__, cookies);
     
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    if([[response objectForKey:RESULT] isEqualToString:@"0"])
     {
 //        for (NSHTTPCookie *cookie in cookies)
 //        {
@@ -110,17 +110,17 @@
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     // 가입시작
-    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
+//    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
     // 메인 시작
 //    MainPageViewController *vc = [[MainPageViewController alloc] init];
 //    [vc setStartPageIndex:0];
     // 퀵뷰
-//    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
+    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
     slidingViewController.topViewController = vc;
     
-//    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-//    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

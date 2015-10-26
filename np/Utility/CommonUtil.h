@@ -24,7 +24,10 @@ typedef enum StickerType
     STICKER_WITHDRAW_EDUCATION,
     STICKER_WITHDRAW_CREDIT,
     STICKER_WITHDRAW_SAVING,
-    STICKER_WITHDRAW_ETC
+    STICKER_WITHDRAW_ETC,
+    
+    STICKER_EXCHANGE_RATE       = 3,
+    STICKER_NOTICE_NORMAL       = 4
 } StickerType;
 
 @interface CommonUtil : NSObject
@@ -43,4 +46,5 @@ typedef enum StickerType
 + (NSString *)getDateString:(NSDate *)date;
 + (NSString *)getDayString:(NSDate *)date;
 + (NSString *)getTimeString:(NSDate *)date;
++ (NSString *)getQuickViewDateString:(NSDate *)date;
 @end

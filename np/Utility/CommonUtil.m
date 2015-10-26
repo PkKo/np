@@ -215,6 +215,16 @@
             stickerImageName = @"icon_withdraw_09_dft.png";
             break;
         }
+        case STICKER_EXCHANGE_RATE:
+        {
+            stickerImageName = @"icon_sticker_03.png";
+            break;
+        }
+        case STICKER_NOTICE_NORMAL:
+        {
+            stickerImageName = @"icon_sticekr_04.png";
+            break;
+        }
         default:
             break;
     }
@@ -258,5 +268,14 @@
     NSString *timeString = [dateFormat stringFromDate:date];
     
     return timeString;
+}
+
++ (NSString *)getQuickViewDateString:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM.dd HH:mm"];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    
+    return dateString;
 }
 @end

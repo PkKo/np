@@ -12,6 +12,9 @@
 {
     NSMutableArray *pushList;
     NSMutableArray *noticeList;
+    NSMutableDictionary *recentNotice;
+    CGFloat cellHeight;
+    BOOL isPushListRequest;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *pushMenuButton;
@@ -25,4 +28,6 @@
 @property (strong, nonatomic) IBOutlet UIView *noticeView;
 @property (strong, nonatomic) IBOutlet UIView *bannerView;
 @property (strong, nonatomic) IBOutlet UILabel *noticeIconView;
+@property (strong, nonatomic) IBOutlet UILabel *noticeTitleLabel;
+- (IBAction)selectTabButton:(id)sender;
 @end
