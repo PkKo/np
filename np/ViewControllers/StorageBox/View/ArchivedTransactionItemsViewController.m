@@ -37,18 +37,6 @@
     
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     [self refreshData:[controller getAllTransactions] sortByAscending:NO];
-    /*
-    // create table & insert dummy data.
-    [[DBManager sharedInstance] deleteAllTransactions];
-    NSArray * arr = [controller getAllTransactions];
-    for (TransactionObject * tranObj in arr) {
-        tranObj.transactionId           = [NSString stringWithFormat:@"%d", (arc4random() * 1000)];
-        tranObj.transactionActivePin    = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
-        tranObj.transactionAccountType  = @"급여통장";
-        
-        [[DBManager sharedInstance] saveTransaction:tranObj];
-    }
-    */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -358,7 +346,7 @@
             [cell.deleteBtn setHidden:YES];
             [cell.transacTypeImageView setHidden:NO];
             
-            [cell.transacTypeImageView setImage:[UIImage imageNamed:[transacObj.transactionType isEqualToString:TRANS_TYPE_INCOME] ? @"icon_sticker_01" : @"icon_sticker_02"]];
+            [cell.transacTypeImageView setImage:[CommonUtil getStickerImage:(StickerType)[transacObj.transactionType integerValue]]];
         }
         
         [cell.pinImageView setImage:[UIImage imageNamed:[[transacObj transactionActivePin] boolValue] ? @"icon_pin_01_sel" : @"icon_pin_01_dft"]];
@@ -366,8 +354,8 @@
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
         [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionAccountType], [transacObj transactionAccountNumber]]];
-        [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? @"입금" : @"출금", [transacObj formattedTransactionAmount]]];
-        [cell.transacAmount setTextColor:[[transacObj transactionType] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
+        [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionTypeDesc], [transacObj formattedTransactionAmount]]];
+        [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
         
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];
@@ -427,6 +415,13 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    
+    if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        ArchivedTransItemCell * cell      = (ArchivedTransItemCell *)textField.superview.superview.superview;
+        [cell saveNewMemo];
+    }
+    
     return YES;
 }
 

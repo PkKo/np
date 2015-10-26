@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface LoginSimpleVerificationViewController : CommonViewController <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *pwTextField;
+@interface LoginSimpleVerificationViewController : CommonViewController
+@property (weak, nonatomic) IBOutlet UIView *loginBtns;
 @property (weak, nonatomic) IBOutlet UITextField *fakeNoticeTextField;
+-(IBAction)clickEnterPassword;
 - (IBAction)gotoLoginSettings;
 - (IBAction)gotoSimpleLoginSettings;
 - (IBAction)doLogin;

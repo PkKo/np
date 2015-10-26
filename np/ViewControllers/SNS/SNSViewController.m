@@ -46,7 +46,7 @@
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],
                          [self.transactionObject transactionDetails],
-                         [self.transactionObject transactionType],
+                         [self.transactionObject transactionTypeDesc],
                          [self.transactionObject formattedTransactionAmount]];
     [_snsContent setText:content];
 }
@@ -137,7 +137,7 @@
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],
                          [self.transactionObject transactionDetails],
-                         [self.transactionObject transactionType],
+                         [self.transactionObject transactionTypeDesc],
                          [self.transactionObject formattedTransactionAmount]];
     
     return [StoryLinkHelper makeStoryLinkWithPostingText:content

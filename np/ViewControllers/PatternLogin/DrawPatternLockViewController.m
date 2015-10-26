@@ -199,10 +199,12 @@
     }
     
     // check the dot on the same row
-    int sameRowDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
-    if (sameRowDot == lastDot) {
-        int sameRowMidDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:1] intValue];
-        return sameRowMidDot;
+    if (firstDotCol != 1) {
+        int sameRowDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
+        if (sameRowDot == lastDot) {
+            int sameRowMidDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:1] intValue];
+            return sameRowMidDot;
+        }
     }
     
     // check the dot across
@@ -220,12 +222,13 @@
     
     
     // check the dot on the same col
-    int sameColDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol] intValue];
-    if (sameColDot == lastDot) {
-        int sameColMidDot = [[[dots objectAtIndex:1] objectAtIndex:firstDotCol] intValue];
-        return sameColMidDot;
+    if (firstDotRow != 1) {
+        int sameColDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol] intValue];
+        if (sameColDot == lastDot) {
+            int sameColMidDot = [[[dots objectAtIndex:1] objectAtIndex:firstDotCol] intValue];
+            return sameColMidDot;
+        }
     }
-    
     return 0;
 }
 
@@ -286,9 +289,14 @@
     if (alertMessage) {
         [self showAlert:alertMessage tag:tag];
     } else {
-        [util savePatternPasswordFailedTimes:0];
-        [self closeView];
+        [self performSelector:@selector(showMainView) withObject:nil afterDelay:0.02];
     }
+}
+
+- (void)showMainView {
+    LoginUtil * util = [[LoginUtil alloc] init];
+    [util savePatternPasswordFailedTimes:0];
+    [self closeView];
 }
 
 #pragma mark - Alert

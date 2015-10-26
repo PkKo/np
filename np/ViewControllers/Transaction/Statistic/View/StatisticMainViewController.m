@@ -229,10 +229,10 @@
     CGRect noticeViewFrame = self.noticeView.frame;
     noticeViewFrame.origin.y = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
     [self.noticeView setFrame:noticeViewFrame];
-    
+    /*
     CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
     [self.noticeView setCenter:noticeViewCenterPoint];
-    
+    */
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
 }
 

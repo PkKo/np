@@ -13,7 +13,9 @@
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
 
-@interface LoginSimpleVerificationViewController ()
+@interface LoginSimpleVerificationViewController () {
+    NSString * _pw;
+}
 
 @end
 
@@ -33,6 +35,16 @@
 }
 
 #pragma mark - Action
+-(IBAction)clickEnterPassword {
+    
+    [self toggleBtnBgColor:NO textLength:0];
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    [util showSecureNumpadInParent:self topBar:@"간편 로그인" title:@"비밀번호 입력"
+                        textLength:6
+                        doneAction:@selector(confirmPassword:) cancelAction:nil];
+}
+
 - (IBAction)gotoLoginSettings {
     [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
 }
@@ -42,34 +54,20 @@
 }
 
 - (IBAction)doLogin {
-    if ([self validatePW:self.pwTextField.text]) {
-        [[[LoginUtil alloc] init] savePatternPasswordFailedTimes:0];
+    if ([self validatePW:_pw]) {
+        [[[LoginUtil alloc] init] saveSimplePasswordFailedTimes:0];
         [self closeView];
     }
-}
-
-#pragma mark - Keyboard
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    [textField resignFirstResponder];
-    
-    LoginUtil * util = [[LoginUtil alloc] init];
-    [util showSecureNumpadInParent:self topBar:@"간편 로그인" title:@"비밀번호 입력"
-                        textLength:6
-                        doneAction:@selector(confirmPassword:) cancelAction:nil];
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-    textField.text = @"";
-    return NO;
 }
 
 #pragma mark - Logic
 - (void)confirmPassword:(NSString *)pw {
     
-    EccEncryptor *ec = [EccEncryptor sharedInstance];
+    EccEncryptor *ec    = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
-    self.pwTextField.text = plainText;
+    _pw                 = plainText;
+    
+    [self toggleBtnBgColor:YES textLength:_pw.length];
 }
 
 - (BOOL)validatePW:(NSString *)pw {
@@ -133,7 +131,39 @@
 }
 
 - (void)updateUI {
+    
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
+    
+    for (UIButton * loginBtn in self.loginBtns.subviews) {
+        loginBtn.layer.cornerRadius = loginBtn.layer.frame.size.width / 2;
+    }
 }
+
+- (void)toggleBtnBgColor:(BOOL)isSelected textLength:(int)textLength {
+    
+    if (isSelected) {
+        
+        int numberOfBtns            = (int)[[self.loginBtns subviews] count];
+        int maxSelectedNumberOfBtns = numberOfBtns < textLength ? numberOfBtns : textLength;
+        int btnIdx                  = 0;
+        
+        for (UIButton * loginBtn in self.loginBtns.subviews) {
+            
+            if (btnIdx >= maxSelectedNumberOfBtns) {
+                break;
+            }
+            btnIdx++;
+            
+            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:1]];
+        }
+        
+    } else {
+        for (UIButton * loginBtn in self.loginBtns.subviews) {
+            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+        }
+    }
+    
+}
+
 
 @end

@@ -22,6 +22,7 @@ typedef enum SetupStatus {
 #define STROKE_COLOR_RED [UIColor colorWithRed:248.0f/255.0f green:76.0f/255.0f blue:116.0f/255.0f alpha:1]
 @interface DrawPatternMgmtViewController () {
     int         _setupStatus;
+    NSString  * _savedPw;
     NSString  * _pw;
     NSString  * _pwConfirm;
 }
@@ -214,14 +215,7 @@ typedef enum SetupStatus {
     LoginUtil * util = [[LoginUtil alloc] init];
     NSString * savedPw = [util getPatternPassword];
     
-    if (savedPw) {
-        _pw             = savedPw;
-        _setupStatus    = SETUP_UPDATE;
-    } else {
-        _pw             = nil;
-        _setupStatus    = SETUP_PW;
-    }
-    
+    _setupStatus    = savedPw ? SETUP_UPDATE : SETUP_PW;
     [self refreshUI:_setupStatus];
 }
 
@@ -241,19 +235,27 @@ typedef enum SetupStatus {
     if ([password length] < 8) {
         alertMessage = @"4개 이상의 점을 연결해 주세요.";
         
-    } else if (_setupStatus == SETUP_UPDATE && ![password isEqualToString:savedPassword]) {
+    } else if (_setupStatus == SETUP_UPDATE) {
         
-        
-        failedTimes++;
-        if (failedTimes >= 5) {
+        if (![password isEqualToString:savedPassword]) {
             
-            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-            tag             = ALERT_GOTO_SELF_IDENTIFY;
-            [util removePatternPassword];
+            _savedPw = nil;
+            
+            failedTimes++;
+            if (failedTimes >= 5) {
+                
+                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                tag             = ALERT_GOTO_SELF_IDENTIFY;
+                [util removePatternPassword];
+                
+            } else {
+                alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
+                [util savePatternPasswordFailedTimes:failedTimes];
+            }
             
         } else {
-            alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
-            [util savePatternPasswordFailedTimes:failedTimes];
+            _savedPw = password;
+            [util savePatternPasswordFailedTimes:0];
         }
         
     } else if (_setupStatus == SETUP_PW) {
@@ -271,6 +273,13 @@ typedef enum SetupStatus {
     }
     
     if (alertMessage) {
+        
+        if (_setupStatus == SETUP_PW_CONFIRM) {
+            _pwConfirm  = nil;
+        } else if (_setupStatus == SETUP_PW) {
+            _pw         = nil;
+        }
+        
         [self drawIncorrectDotConnections];
         [self showAlert:alertMessage tag:tag];
     } else {
@@ -335,10 +344,12 @@ typedef enum SetupStatus {
     }
     
     // check the dot on the same row
-    int sameRowDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
-    if (sameRowDot == lastDot) {
-        int sameRowMidDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:1] intValue];
-        return sameRowMidDot;
+    if (firstDotCol != 1) {
+        int sameRowDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:firstDotCol == 0 ? 2 : 0] intValue];
+        if (sameRowDot == lastDot) {
+            int sameRowMidDot = [[[dots objectAtIndex:firstDotRow] objectAtIndex:1] intValue];
+            return sameRowMidDot;
+        }
     }
     
     // check the dot across
@@ -356,12 +367,13 @@ typedef enum SetupStatus {
     
     
     // check the dot on the same col
-    int sameColDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol] intValue];
-    if (sameColDot == lastDot) {
-        int sameColMidDot = [[[dots objectAtIndex:1] objectAtIndex:firstDotCol] intValue];
-        return sameColMidDot;
+    if (firstDotRow != 1) {
+        int sameColDot = [[[dots objectAtIndex:firstDotRow == 0 ? 2 : 0] objectAtIndex:firstDotCol] intValue];
+        if (sameColDot == lastDot) {
+            int sameColMidDot = [[[dots objectAtIndex:1] objectAtIndex:firstDotCol] intValue];
+            return sameColMidDot;
+        }
     }
-    
     return 0;
 }
 
@@ -394,12 +406,17 @@ typedef enum SetupStatus {
     
     if (_setupStatus < SETUP_PW_CONFIRM) {
         
-        if (_setupStatus == SETUP_UPDATE) { // reset pw failed times
-            [util savePatternPasswordFailedTimes:0];
-        }
+        BOOL clickNextWithoutEnteringPattern = (_setupStatus == SETUP_PW && _pw == nil) || (_setupStatus == SETUP_UPDATE && _savedPw == nil);
         
-        [self clearDotConnections];
-        [self refreshUI:++_setupStatus];
+        if (clickNextWithoutEnteringPattern) {
+            
+            [self showAlert:@"4개 이상의 점을 연결하여 패턴을 그려주세요." tag:ALERT_DO_NOTHING];
+            
+        } else {
+            
+            [self clearDotConnections];
+            [self refreshUI:++_setupStatus];
+        }
         
     } else  if (_setupStatus == SETUP_PW_CONFIRM) {
         if (!_pwConfirm) {

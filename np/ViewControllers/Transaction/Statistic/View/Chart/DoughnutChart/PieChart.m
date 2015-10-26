@@ -22,10 +22,12 @@
    {
       //initialization
       self.backgroundColor      = [UIColor clearColor];
+       /*
       self.layer.shadowColor    = [[UIColor blackColor] CGColor];
       self.layer.shadowOffset   = CGSizeMake(0.0f, 2.5f);
       self.layer.shadowRadius   = 1.9f;
       self.layer.shadowOpacity  = 0.9f;
+        */
    
    }
    return self;

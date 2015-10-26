@@ -27,6 +27,12 @@
     
     if (self != nil) {
         
+        CGFloat size = 114;
+        
+        UIView * whiteBgView = [[UIView alloc] initWithFrame:CGRectMake((frame.size.width - 114)/2, (frame.size.height - 114)/2, size, size)];
+        [whiteBgView setBackgroundColor:[UIColor whiteColor]];
+        [self addSubview:whiteBgView];
+        
         _pieChart = [[PieChart alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _pieChart.delegate = self;
         _pieChart.datasource = self;
