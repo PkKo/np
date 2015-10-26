@@ -47,7 +47,11 @@ typedef enum SetupStatus {
     [self.mNaviView.mTitleLabel setText:@"패턴 관리"];
     
     [self checkSavedPassword];
-    
+    CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
+    CGRect patternViewFrame         = _patternView.frame;
+    patternViewFrame.size.width     = (screenWidth - patternViewFrame.origin.x * 2);
+    patternViewFrame.size.height    = patternViewFrame.size.width;
+    [_patternView setFrame:patternViewFrame];
     [_patternView setStrokeColor:STROKE_COLOR_BLUE];
     
     for (int i=0; i<MATRIX_SIZE; i++) {

@@ -19,8 +19,6 @@
     
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"서비스안내"];
-    
-    [self initPages];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,19 +58,19 @@
     [self changePage:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    CGRect containerScrollViewFrame         = self.containerScrollView.frame;
+    [self initPages];
+}
+
 #pragma mark - Scroll View
 - (void)initPages {
-    
-    [self resizeContainerScrollView];
     
     CGFloat numberOfPages       = self.pageControl.numberOfPages;
     CGFloat scrollViewWith      = self.scrollView.frame.size.width;
     CGFloat scrollViewHeight    = self.scrollView.frame.size.height;
-    
-    NSLog(@"bound height: %f - app frame height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] applicationFrame].size.height);
-    
-    
-    
     
     self.scrollView.contentSize = CGSizeMake(scrollViewWith * numberOfPages, scrollViewHeight);
     
