@@ -67,7 +67,7 @@
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     _pw                 = plainText;
     
-    [self toggleBtnBgColor:YES textLength:_pw.length];
+    [self toggleBtnBgColor:YES textLength:((int)_pw.length)];
 }
 
 - (BOOL)validatePW:(NSString *)pw {

@@ -21,6 +21,7 @@
 - (NSString *)findTransactionMemoById:(NSString *)transactionId;
 - (BOOL)saveTransaction:(TransactionObject *)transObj;
 - (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId;
+- (BOOL)updateTransaction:(TransactionObject *)transObj;
 - (BOOL)deleteAllTransactions;
 - (BOOL)deleteTransactionById:(NSString *)transId;
 

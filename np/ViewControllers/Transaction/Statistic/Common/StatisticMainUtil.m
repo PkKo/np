@@ -308,6 +308,10 @@
     return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy.MM.dd"];
 }
 
++ (NSDateFormatter *)getDateFormatterDateServerStyle {
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyyMMdd"];
+}
+
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

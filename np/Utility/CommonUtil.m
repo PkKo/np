@@ -233,6 +233,149 @@
     return stickerImage;
 }
 
++ (StickerInfo *)getStickerInfo:(StickerType)stickerType
+{
+    NSString *stickerImageName = @"";
+    NSString * stickerName = @"기타";
+    NSString * stickerColorHexStr = @"#3E9BE9";
+    
+    switch (stickerType)
+    {
+        case STICKER_DEPOSIT_NORMAL:
+        {
+            stickerImageName    = @"icon_sticker_01.png";
+            stickerName         = @"입금기타";
+            stickerColorHexStr  = @"#3E9BE9";
+            break;
+        }
+        case STICKER_DEPOSIT_SALARY:
+        {
+            stickerImageName    = @"icon_deposit_01_dft.png";
+            stickerName         = @"급여";
+            stickerColorHexStr  = @"#77A8FD";
+            break;
+        }
+        case STICKER_DEPOSIT_POCKET:
+        {
+            stickerImageName    = @"icon_deposit_02_dft.png";
+            stickerName         = @"용돈";
+            stickerColorHexStr  = @"#71C6F2";
+            break;
+        }
+        case STICKER_DEPOSIT_ETC:
+        {
+            stickerImageName    = @"icon_deposit_03_dft.png";
+            stickerName         = @"기타";
+            stickerColorHexStr  = @"#3E9BE9";
+            break;
+        }
+        case STICKER_WITHDRAW_NORMAL:
+        {
+            stickerImageName    = @"icon_sticker_02.png";
+            stickerName         = @"지출기타";
+            stickerColorHexStr  = @"#F4607C";
+            break;
+        }
+        case STICKER_WITHDRAW_FOOD:
+        {
+            stickerImageName    = @"icon_withdraw_01_dft.png";
+            stickerName         = @"식비";
+            stickerColorHexStr  = @"#F97BB6";
+            break;
+        }
+        case STICKER_WITHDRAW_TELEPHONE:
+        {
+            stickerImageName    = @"icon_withdraw_02_dft.png";
+            stickerName         = @"통신";
+            stickerColorHexStr  = @"#FF9FEE";
+            break;
+        }
+        case STICKER_WITHDRAW_HOUSING:
+        {
+            stickerImageName    = @"icon_withdraw_03_dft.png";
+            stickerName         = @"주거";
+            stickerColorHexStr  = @"#E276F8";
+            break;
+        }
+        case STICKER_WITHDRAW_SHOPPING:
+        {
+            stickerImageName    = @"icon_withdraw_04_dft.png";
+            stickerName         = @"쇼핑";
+            stickerColorHexStr  = @"#EB84E7";
+            break;
+        }
+        case STICKER_WITHDRAW_CULTURE:
+        {
+            stickerImageName    = @"icon_withdraw_05_dft.png";
+            stickerName         = @"문화";
+            stickerColorHexStr  = @"#FE86B1";
+            break;
+        }
+        case STICKER_WITHDRAW_EDUCATION:
+        {
+            stickerImageName    = @"icon_withdraw_06_dft.png";
+            stickerName         = @"교육";
+            stickerColorHexStr  = @"#FF9ADA";
+            break;
+        }
+        case STICKER_WITHDRAW_CREDIT:
+        {
+            stickerImageName    = @"icon_withdraw_07_dft.png";
+            stickerName         = @"카드";
+            stickerColorHexStr  = @"#F8986F";
+            break;
+        }
+        case STICKER_WITHDRAW_SAVING:
+        {
+            stickerImageName    = @"icon_withdraw_08_dft.png";
+            stickerName         = @"저축";
+            stickerColorHexStr  = @"#FA7575";
+            break;
+        }
+        case STICKER_WITHDRAW_ETC:
+        {
+            stickerImageName    = @"icon_withdraw_09_dft.png";
+            stickerName         = @"기타";
+            stickerColorHexStr  = @"#F4607C";
+            break;
+        }
+        case STICKER_EXCHANGE_RATE:
+        {
+            stickerImageName    = @"icon_sticker_03.png";
+            stickerName         = @"기타";
+            stickerColorHexStr  = @"#3E9BE9";
+            break;
+        }
+        case STICKER_NOTICE_NORMAL:
+        {
+            stickerImageName    = @"icon_sticekr_04.png";
+            stickerName         = @"기타";
+            stickerColorHexStr  = @"#3E9BE9";
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return [[StickerInfo alloc] initStickerInfoWithStickerName:stickerName
+                                            stickerColorHexStr:stickerColorHexStr
+                                                  stickerImage:[UIImage imageNamed:stickerImageName]];
+}
+
++ (NSString *)getTransactionTypeByStickerType:(StickerType)stickerType {
+    
+    switch (stickerType) {
+        case STICKER_DEPOSIT_NORMAL:
+        case STICKER_DEPOSIT_SALARY:
+        case STICKER_DEPOSIT_POCKET:
+        case STICKER_DEPOSIT_ETC:
+            return INCOME_TYPE_STRING;
+        default:
+            return WITHDRAW_TYPE_STRING;
+    }
+}
+
 + (NSString *)getTodayDateString
 {
     NSDate *today = [NSDate date];

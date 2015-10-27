@@ -59,7 +59,7 @@
     if (isNewMemo) {
         [[DBManager sharedInstance] saveTransaction:self.transactionObject];
     } else {
-        [[DBManager sharedInstance] updateTransactionMemo:self.memo.text byTransId:self.transactionObject.transactionId];
+        [[DBManager sharedInstance] updateTransaction:self.transactionObject];
     }
     
     [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.6];
@@ -80,8 +80,6 @@
     switch (buttonIndex) {
         case 1: // 확인
         {
-            NSLog(@"show storage box.");
-            
             MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
             [newTopViewController setStartPageIndex:INBOX];
             

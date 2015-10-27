@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "StickerInfo.h"
 
 typedef enum StickerType
 {
@@ -42,6 +43,8 @@ typedef enum StickerType
 + (void)stopSpinAnimation:(UIView *)view;
 + (NSString *)getURLEncodedString:(NSString *)unencodeString;
 + (UIImage *)getStickerImage:(StickerType)stickerType;
++ (StickerInfo *)getStickerInfo:(StickerType)stickerType;
++ (NSString *)getTransactionTypeByStickerType:(StickerType)stickerType;
 + (NSString *)getTodayDateString;
 + (NSString *)getDateString:(NSDate *)date;
 + (NSString *)getDayString:(NSDate *)date;

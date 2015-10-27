@@ -236,6 +236,35 @@
     return updated;
 }
 
+- (BOOL)updateTransaction:(TransactionObject *)transObj {
+    
+    sqlite3_stmt * statement;
+    
+    BOOL updated = NO;
+    
+    BOOL openDB = [self openDB];
+    
+    if (openDB == SQLITE_OK) {
+        NSLog(@"opened db");
+        
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_memo = \"%@\", trans_type = \"%@\", trans_pinnable = \"%@\" WHERE trans_id = \"%@\"", transObj.transactionMemo, transObj.transactionType, [transObj.transactionActivePin stringValue], transObj.transactionId];
+        
+        sqlite3_prepare(_nhTransactionDB, [updateSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"updated.");
+            updated = YES;
+        } else {
+            NSLog(@"failed to update");
+            updated = NO;
+        }
+    } else {
+        NSLog(@"failed to open db.");
+        updated = NO;
+    }
+    return updated;
+}
+
 - (BOOL)deleteAllTransactions {
     
     sqlite3_stmt * statement;

@@ -124,7 +124,9 @@
                                 <rect key="frame" x="177" y="5" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="패턴"/>
+                                <state key="normal" title="패턴">
+                                    <color key="titleColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="gotoPatternLogin:" destination="YzV-4h-Hki" eventType="touchUpInside" id="WJu-Sk-KWW"/>
                                 </connections>

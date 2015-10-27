@@ -11,10 +11,11 @@
 #import "StatisticDateSearchView.h"
 #import "PieChartWithInputData.h"
 
-@interface StatisticMainViewController : CommonViewController <StatisticDateSearchViewDelegate>
+@interface StatisticMainViewController : CommonViewController <StatisticDateSearchViewDelegate, IBInboxProtocol>
 
 @property (weak, nonatomic) IBOutlet UIScrollView   * scrollView;
 @property (weak, nonatomic) IBOutlet UIView         * topView;
+@property (weak, nonatomic) IBOutlet UIView         * noDataView;
 @property (weak, nonatomic) IBOutlet UIButton       * selectAccountBtn;
 @property (weak, nonatomic) IBOutlet UITextField    * fakeAllAccounts;
 @property (weak, nonatomic) IBOutlet UILabel        * selectedDatesLabel;
@@ -22,5 +23,5 @@
 
 - (IBAction)clickSearchButton;
 - (IBAction)selectAccount;
--(void)updateUI;
+- (void)updateUI;
 @end

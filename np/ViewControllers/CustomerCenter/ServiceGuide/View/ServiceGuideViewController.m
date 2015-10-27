@@ -60,8 +60,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    CGRect containerScrollViewFrame         = self.containerScrollView.frame;
     [self initPages];
 }
 
