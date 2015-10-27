@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface RegisterTermsViewController : CommonViewController
+@interface RegisterTermsViewController : CommonViewController<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *personalDataTermAgreeText;
 @property (strong, nonatomic) IBOutlet UIImageView *pushAgreeImg;
 @property (strong, nonatomic) IBOutlet UILabel *pushAgreeText;
+@property (strong, nonatomic) IBOutlet UIView *serviceTermsView;
+@property (strong, nonatomic) IBOutlet UIWebView *totalTermsWebView;
 
 - (IBAction)showServiceTerm:(id)sender;
 - (IBAction)checkServiceTermAgree:(id)sender;
@@ -29,4 +31,5 @@
 - (IBAction)checkPushAgree:(id)sender;
 
 - (IBAction)nextButtonClick:(id)sender;
+- (IBAction)closeServiceTermsView:(id)sender;
 @end

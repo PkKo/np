@@ -13,4 +13,13 @@
 @synthesize getCertFromPCBtn;
 @synthesize getCertFromPhoneBtn;
 
+- (void)drawRect:(CGRect)rect
+{
+    /*
+    [getCertFromPCBtn.layer setBorderColor:STROKE_LINE_COLOR.CGColor];
+    [getCertFromPCBtn.layer setBorderWidth:1.0f];
+    [getCertFromPhoneBtn.layer setBorderColor:STROKE_LINE_COLOR.CGColor];
+    [getCertFromPhoneBtn.layer setBorderWidth:1.0f];*/
+}
+
 @end

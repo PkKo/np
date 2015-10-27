@@ -15,6 +15,7 @@
 @implementation AppDelegate
 
 @synthesize slidingViewController;
+@synthesize serverKey;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -40,6 +41,7 @@
     
 #if 0
     [IBNgmService registerUserWithAccountId:@"8C5B196D-FD00-4814-BCA6-0C19300B58F0" verifyCode:[@"8C5B196D-FD00-4814-BCA6-0C19300B58F0" dataUsingEncoding:NSUTF8StringEncoding]];
+//    [IBNgmService registerUserWithAccountId:@"150324104128890" verifyCode:[@"150324104128890" dataUsingEncoding:NSUTF8StringEncoding]];
 #else
     [IBNgmService registerUserWithAccountId:[CommonUtil getDeviceUUID] verifyCode:[[CommonUtil getDeviceUUID] dataUsingEncoding:NSUTF8StringEncoding]];
 #endif

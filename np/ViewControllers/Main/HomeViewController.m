@@ -97,7 +97,7 @@
             // 입출금 구분
             //    reqData.queryType;
             [IBInbox reqQueryAccountInboxListWithSize:reqData];
-            //            [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151022"];
+//                        [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151027"];
             break;
         }
             
@@ -476,6 +476,19 @@
 - (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
 {
     NSLog(@"%s, %@", __FUNCTION__, summaryList);
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+    
+    float total = 0;
+    for(StickerSummaryData *data in summaryList)
+    {
+        StickerType type = data.stickerCode;
+        int sum = (int)data.sum;
+        int count = (int)data.count;
+        
+        total += sum;
+    }
+    
+
 }
 
 - (void)addedSticker:(BOOL)success

@@ -41,9 +41,9 @@
     if(delegate != nil && [delegate respondsToSelector:@selector(checkRegistAccountRequest:)])
     {
         NSMutableDictionary *accountInfo = [[NSMutableDictionary alloc] init];
-        [accountInfo setObject:[accountInputField text] forKey:@"AccountNumber"];
-        [accountInfo setObject:[accountPassInputField text] forKey:@"AccountPassword"];
-        [accountInfo setObject:[birthInputField text] forKey:@"BirthDay"];
+        [accountInfo setObject:[accountInputField text] forKey:REQUEST_ACCOUNT_NUMBER];
+        [accountInfo setObject:[accountPassInputField text] forKey:REQUEST_ACCOUNT_PASSWORD];
+        [accountInfo setObject:[birthInputField text] forKey:REQUEST_ACCOUNT_BIRTHDAY];
         [delegate performSelector:@selector(checkRegistAccountRequest:) withObject:accountInfo];
     }
 }

@@ -9,6 +9,11 @@
 #import "RegisterTermsViewController.h"
 #import "RegisterAccountViewController.h"
 
+#define SERVICE_TERMS_URL_SHORT     @"https://8.1.2.119:39190/content/html/ef/pu/efpu0911m.html"
+#define SERVICE_TERMS_URL_TOTAL     @"https://8.1.2.119:39190/content/html/ef/pu/efpu0911r.html"
+#define PERSONAL_TERMS_URL_SHORT    @"https://8.1.2.119:39190/content/html/ef/pu/efpu0912m.html"
+#define PERSONAL_TERMS_URL_TOTAL    @"https://8.1.2.119:39190/content/html/ef/pu/efpu0912r.html"
+
 @interface RegisterTermsViewController ()
 
 @end
@@ -29,6 +34,9 @@
 @synthesize pushAgreeImg;
 @synthesize pushAgreeText;
 
+@synthesize serviceTermsView;
+@synthesize totalTermsWebView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,6 +46,9 @@
     [self.mNaviView.imgTitleView setHidden:NO];
     
     [scrollView setContentSize:contentView.frame.size];
+    
+    [serviceTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_SHORT]]];
+    [personalDataTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_SHORT]]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +60,9 @@
 // 서비스 이용약관을 전체화면으로 보여준다.
 - (IBAction)showServiceTerm:(id)sender
 {
+    [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_TOTAL]]];
+    [self.view addSubview:serviceTermsView];
 }
 
 // 서비스 이용약관 체크
@@ -71,6 +85,9 @@
 // 개인정보 이용동의 약관을 전체화면으로 보여준다
 - (IBAction)showPersonalTerm:(id)sender
 {
+    [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_TOTAL]]];
+    [self.view addSubview:serviceTermsView];
 }
 
 // 개인정보 이용동의 체크
@@ -109,9 +126,58 @@
 - (IBAction)nextButtonClick:(id)sender
 {
     // 약관동의 여부 체크
+    if(![serviceTermAgreeImg isHighlighted])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(![personalDataTermAgreeImg isHighlighted])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(![pushAgreeImg isHighlighted])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"금융정보/기타 알림메시지 수신에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    // 약관 버전을 서버에 보낸다.
     
     // 계좌번호 등록 뷰 컨트롤러로 이동
     RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)closeServiceTermsView:(id)sender
+{
+    [serviceTermsView removeFromSuperview];
+}
+
+#pragma mark - UIWebViewDelegate
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSLog(@"%s", __FUNCTION__);
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSLog(@"%s", __FUNCTION__);
 }
 @end

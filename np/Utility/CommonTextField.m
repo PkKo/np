@@ -16,7 +16,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    self.layer.borderColor = [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor;
+    self.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor;
     self.layer.borderWidth = 1.0f;
     
     [self setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];

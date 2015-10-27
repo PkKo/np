@@ -36,12 +36,15 @@
         // 공인인증서 인증 - 전 계좌 조회하여 계좌리스트 구성
         isCertMode = YES;
         // 전 계좌 조회 루틴 실행
-        [self allAccountListRequest];
+//        [self allAccountListRequest];
+        allAccountList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+        [self makeAllAccountListView];
     }
     else if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
     {
         // 계좌인증 - 입력한 계좌 혹은 다른 계좌번호를 입력받을 수 있도록 뷰 구성
         isCertMode = NO;
+        certifiedAccountNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST];
         [self makeInputAccountView];
     }
 }
@@ -89,6 +92,7 @@
 {
     inputAccountView = [RegistAccountInputAccountView view];
     [inputAccountView setDelegate:self];
+    [[inputAccountView certifiedAccountNumberLabel] setText:certifiedAccountNumber];
     [[inputAccountView addNewAccountInput] setDelegate:self];
     [[inputAccountView addNewAccountPassInput] setDelegate:self];
     [[inputAccountView addNewAccountBirthInput] setDelegate:self];
@@ -140,7 +144,20 @@
         case 1:
         {
             // 계좌 인증 루틴 실행 - UMS 서버와 통신
-            [nextButton setTag:0];
+            if(![inputAccountView.certifiedAccountView isHidden])
+            {
+                [nextButton setTag:2];
+                optionView = [RegistAccountOptionSettingView view];
+                [optionView setDelegate:self];
+                [optionView initDataWithAccountNumber:inputAccountView.certifiedAccountNumberLabel.text];
+                [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+                [contentView addSubview:optionView];
+            }
+            else if(![inputAccountView.addNewAccountView isHidden])
+            {
+                [nextButton setTag:2];
+                [self checkRegistAccountRequest];
+            }
             break;
         }
         case 2:
@@ -155,6 +172,41 @@
             
         default:
             break;
+    }
+}
+
+#pragma mark - 계좌인증 확인
+- (void)checkRegistAccountRequest
+{
+    [self startIndicator];
+    
+    certifiedAccountNumber = inputAccountView.addNewAccountInput.text;
+    
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
+    [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
+    [reqBody setObject:inputAccountView.addNewAccountBirthInput.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
+    
+    // Request Start
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(checkRegistAccountResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)checkRegistAccountResponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        // 계좌번호로 인증한걸로 저장한다.
+        optionView = [RegistAccountOptionSettingView view];
+        [optionView setDelegate:self];
+        [optionView initDataWithAccountNumber:inputAccountView.addNewAccountInput.text];
+        [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+        [contentView addSubview:optionView];
     }
 }
 

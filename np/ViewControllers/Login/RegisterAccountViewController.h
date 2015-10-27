@@ -18,6 +18,7 @@
     RegistAccountInputAccountView *inputAccountView;
     RegistAccountOptionSettingView *optionView;
     NSMutableArray *allAccountList;
+    NSString *certifiedAccountNumber;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;

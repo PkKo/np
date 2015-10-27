@@ -11,10 +11,10 @@
 @interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
     NSArray *carrierListArray;
-    BOOL isAuthNumberConfirm;
-    BOOL isPhoneNumberConfirm;
     NSTimer *authNumTimer;
     NSInteger authNumCounter;
+    NSString *authNumber;
+    NSString *crmPhoneNumber;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
