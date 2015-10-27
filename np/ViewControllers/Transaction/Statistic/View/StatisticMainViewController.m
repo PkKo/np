@@ -28,6 +28,9 @@
     NSArray * _dataSource; // array of ChartItemData
     NSArray * _incomeDataSource;
     NSArray * _expenseDataSource;
+    
+    NSString * _startDate;
+    NSString * _endDate;
 }
 
 @end
@@ -42,15 +45,11 @@
     
     NSDate * today          = [NSDate date];
     NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
-    [self updateSelectedDates:dateAmonthAgo toDate:today];
     
-    ChartController * dataCtr   = [[ChartController alloc] init];
-    _dataSource                 = [dataCtr getChartDataFromDate:dateAmonthAgo toDate:today];
-    [self loadDataWithDataSource:_dataSource];
-    [self addChart];
-    [self addChartData];
-    [self replaceNoticeView];
+    [self updateSelectedDates:dateAmonthAgo toDate:today];
     [self updateUI];
+    
+    [self getChartData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,9 +104,15 @@
 
 - (void)updateSelectedDates:(NSDate *)fromDate toDate:(NSDate *)toDate {
     
+    NSDateFormatter * dateToDisplayFormatter = [StatisticMainUtil getDateFormatterDateStyle];
+    
     [self.selectedDatesLabel setText:[NSString stringWithFormat:@"%@ ~ %@",
-                                      [[StatisticMainUtil getDateFormatterDateStyle] stringFromDate:fromDate],
-                                      [[StatisticMainUtil getDateFormatterDateStyle] stringFromDate:toDate]]];
+                                      [dateToDisplayFormatter stringFromDate:fromDate],
+                                      [dateToDisplayFormatter stringFromDate:toDate]]];
+    
+    NSDateFormatter * dateToSendToServerFormatter = [StatisticMainUtil getDateFormatterDateServerStyle];
+    _startDate  = [dateToSendToServerFormatter stringFromDate:fromDate];
+    _endDate    = [dateToSendToServerFormatter stringFromDate:toDate];
 }
 
 - (void)closeDatePicker {
@@ -117,15 +122,10 @@
 #pragma mark - refresh
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
     [self updateSelectedDates:fromDate toDate:toDate];
-    
-    ChartController * dataCtr   = [[ChartController alloc] init];
-    [self refreshViewWithDataSource:[dataCtr getChartDataFromDate:fromDate toDate:toDate]];
+    [self getChartData];
 }
 
-- (void)refreshViewWithDataSource:(NSArray *)ds {
-    
-    [self removeChart];
-    [self removeChartData];
+- (void)drawChartWithDataSource:(NSArray *)ds {
     
     [self loadDataWithDataSource:ds];
     [self addChart];
@@ -134,6 +134,22 @@
 }
 
 #pragma mark - Select Account
+- (NSArray *)getAccountList {
+    
+    if ([[self.selectAccountBtn titleForState:UIControlStateNormal] isEqualToString:TRANS_ALL_ACCOUNT]) {
+        
+        StorageBoxController    * controller    = [[StorageBoxController alloc] init];
+        NSArray                 * allAccounts   = [controller getAllAccounts];
+        
+        return [allAccounts subarrayWithRange:NSMakeRange(1, [allAccounts count] - 1)]; // remove 전체계좌 item
+        
+    } else {
+        
+        return @[[self.selectAccountBtn titleForState:UIControlStateNormal]];
+    }
+    
+}
+
 - (IBAction)selectAccount {
     [self showDataPickerToSelectAccountWithSelectedValue:[self.selectAccountBtn titleForState:UIControlStateNormal]];
 }
@@ -149,15 +165,23 @@
 }
 
 - (void)updateAccount:(NSString *)account {
-    
     [self.selectAccountBtn setTitle:account forState:UIControlStateNormal];
-    ChartController * dataCtr   = [[ChartController alloc] init];
-    [self refreshViewWithDataSource:[dataCtr getChartDataByAccountNo:[self.selectAccountBtn titleForState:UIControlStateNormal]]];
+    [self getChartData];
 }
 
 -(void)updateUI {
     [self.fakeAllAccounts.layer setBorderWidth:1];
     [self.fakeAllAccounts.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
+}
+
+- (void)showNoDataView:(BOOL)isShown {
+    
+    [self.noDataView setHidden:!isShown];
+    [self.selectedDatesLabel setHidden:isShown];
+    [self.noticeView setHidden:isShown];
+    
+    [self removeChart];
+    [self removeChartData];
 }
 
 #pragma mark - Chart
@@ -226,14 +250,73 @@
     
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
-    CGRect noticeViewFrame = self.noticeView.frame;
-    noticeViewFrame.origin.y = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
+    CGRect noticeViewFrame      = self.noticeView.frame;
+    noticeViewFrame.origin.y    = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
     [self.noticeView setFrame:noticeViewFrame];
-    
+    /*
     CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
     [self.noticeView setCenter:noticeViewCenterPoint];
-    
+    */
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
+}
+
+#pragma mark - Get data
+- (void)getChartData {
+    
+    BOOL test = YES;
+    NSArray * accounts = test ? @[@"1111-22-333333"] : [self getAccountList];
+    
+    [IBInbox loadWithListener:self];
+    [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
+}
+
+
+#pragma mark - IBInbox Protocol
+- (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
+{
+    if (!summaryList || [summaryList count] == 0) {
+        
+        [self showNoDataView:YES];
+        return;
+    }
+    
+    [self showNoDataView:NO];
+    
+    int numberOfItems       = [summaryList count];
+    NSMutableArray * items  = [NSMutableArray arrayWithCapacity:numberOfItems];
+    int total               = [[summaryList valueForKeyPath:@"@sum.sum"] intValue];
+    
+    float addUpPercentage     = 0;
+    
+    for (int itemIdx = 0; itemIdx < numberOfItems; itemIdx++) {
+        
+        StickerSummaryData * chartData = (StickerSummaryData *)[summaryList objectAtIndex:itemIdx];
+        
+        int percentage;
+        if (itemIdx == numberOfItems - 1) {
+            percentage       = 100 - addUpPercentage;
+        } else {
+            percentage       = roundf([@(chartData.sum) floatValue] / total * 100);
+            addUpPercentage += percentage;
+        }
+        
+        StickerInfo * stickerInfo = [CommonUtil getStickerInfo:(StickerType)chartData.stickerCode];
+        ChartItemData * item = [[ChartItemData alloc] initWithColor:stickerInfo.stickerColorHexString
+                                                                name:stickerInfo.stickerName
+                                                             percent:[NSString stringWithFormat:@"%d", percentage]
+                                                               value:[NSString stringWithFormat:@"%f", [@(chartData.sum) floatValue]]
+                                                                type:[CommonUtil getTransactionTypeByStickerType:(StickerType)chartData.stickerCode]];
+        [items addObject:item];
+    }
+    
+    _dataSource = [items copy];
+    
+    [self drawChartWithDataSource:_dataSource];
+}
+
+- (void)inboxLoadFailed:(int)responseCode
+{
+    NSLog(@"%s, %d", __FUNCTION__, responseCode);
 }
 
 @end

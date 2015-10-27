@@ -43,6 +43,7 @@
 + (NSDateFormatter *)getDateFormatterDateHourMinuteStyle;
 + (NSDateFormatter *)getDateFormatterDateStyle;
 + (NSDateFormatter *)getDateFormatterHourMinuteStyle;
++ (NSDateFormatter *)getDateFormatterDateServerStyle;
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style;
 
 + (NSNumberFormatter *)getNumberFormatter;

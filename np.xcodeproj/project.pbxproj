@@ -518,6 +518,9 @@
 		A54B94E31BAA841C00D5D99B /* SNSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54B94E11BAA841C00D5D99B /* SNSViewController.xib */; };
 		A54B94E51BAA9B5800D5D99B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E41BAA9B5800D5D99B /* Social.framework */; };
 		A54B94E71BAAA03A00D5D99B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B94E61BAAA03A00D5D99B /* MessageUI.framework */; };
+		A550470B1BDEFCF7000D4524 /* AppZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55047091BDEFCF7000D4524 /* AppZoneViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A550470C1BDEFCF7000D4524 /* AppZoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A550470A1BDEFCF7000D4524 /* AppZoneViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A550470F1BDF1423000D4524 /* StickerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A550470E1BDF1423000D4524 /* StickerInfo.m */; settings = {ASSET_TAGS = (); }; };
 		A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB471BD713FD00B9364A /* VersionInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A557DB4E1BD7181900B9364A /* ServiceDeactivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -569,6 +572,12 @@
 		A5ED266C1BA961F7007E6689 /* ChartItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED266B1BA961F7007E6689 /* ChartItemData.m */; };
 		A5F251A11BD5D03D000867A9 /* DrawPatternMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F2519F1BD5D03D000867A9 /* DrawPatternMgmtViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5F251A21BD5D03D000867A9 /* DrawPatternMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F251A01BD5D03D000867A9 /* DrawPatternMgmtViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5F89D551BDE226B000A24CB /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F89D531BDE226B000A24CB /* NoticeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5F89D561BDE226B000A24CB /* NoticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F89D541BDE226B000A24CB /* NoticeViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5F89D5B1BDE2A12000A24CB /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F89D591BDE2A12000A24CB /* FaqViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5F89D5C1BDE2A12000A24CB /* FaqViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F89D5A1BDE2A12000A24CB /* FaqViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5F89D621BDE2BA5000A24CB /* TermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1218,6 +1227,11 @@
 		A54B94E11BAA841C00D5D99B /* SNSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNSViewController.xib; path = SNS/SNSViewController.xib; sourceTree = "<group>"; };
 		A54B94E41BAA9B5800D5D99B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A54B94E61BAAA03A00D5D99B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A55047081BDEFCF7000D4524 /* AppZoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppZoneViewController.h; path = AppZone/View/AppZoneViewController.h; sourceTree = "<group>"; };
+		A55047091BDEFCF7000D4524 /* AppZoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppZoneViewController.m; path = AppZone/View/AppZoneViewController.m; sourceTree = "<group>"; };
+		A550470A1BDEFCF7000D4524 /* AppZoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppZoneViewController.xib; path = AppZone/View/AppZoneViewController.xib; sourceTree = "<group>"; };
+		A550470D1BDF1423000D4524 /* StickerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerInfo.h; sourceTree = "<group>"; };
+		A550470E1BDF1423000D4524 /* StickerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerInfo.m; sourceTree = "<group>"; };
 		A557DB461BD713FD00B9364A /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
 		A557DB471BD713FD00B9364A /* VersionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionInfoViewController.m; sourceTree = "<group>"; };
 		A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionInfoViewController.xib; sourceTree = "<group>"; };
@@ -1300,6 +1314,15 @@
 		A5F2519E1BD5D03D000867A9 /* DrawPatternMgmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternMgmtViewController.h; sourceTree = "<group>"; };
 		A5F2519F1BD5D03D000867A9 /* DrawPatternMgmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternMgmtViewController.m; sourceTree = "<group>"; };
 		A5F251A01BD5D03D000867A9 /* DrawPatternMgmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawPatternMgmtViewController.xib; sourceTree = "<group>"; };
+		A5F89D521BDE226B000A24CB /* NoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoticeViewController.h; path = View/NoticeViewController.h; sourceTree = "<group>"; };
+		A5F89D531BDE226B000A24CB /* NoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoticeViewController.m; path = View/NoticeViewController.m; sourceTree = "<group>"; };
+		A5F89D541BDE226B000A24CB /* NoticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoticeViewController.xib; path = View/NoticeViewController.xib; sourceTree = "<group>"; };
+		A5F89D581BDE2A12000A24CB /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaqViewController.h; path = View/FaqViewController.h; sourceTree = "<group>"; };
+		A5F89D591BDE2A12000A24CB /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = View/FaqViewController.m; sourceTree = "<group>"; };
+		A5F89D5A1BDE2A12000A24CB /* FaqViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FaqViewController.xib; path = View/FaqViewController.xib; sourceTree = "<group>"; };
+		A5F89D5E1BDE2BA5000A24CB /* TermsOfUseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TermsOfUseViewController.h; path = View/TermsOfUseViewController.h; sourceTree = "<group>"; };
+		A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TermsOfUseViewController.m; path = View/TermsOfUseViewController.m; sourceTree = "<group>"; };
+		A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsOfUseViewController.xib; path = View/TermsOfUseViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2479,6 +2502,24 @@
 			name = SNS;
 			sourceTree = "<group>";
 		};
+		A55047061BDEFCCF000D4524 /* AppZone */ = {
+			isa = PBXGroup;
+			children = (
+				A55047071BDEFCD8000D4524 /* View */,
+			);
+			name = AppZone;
+			sourceTree = "<group>";
+		};
+		A55047071BDEFCD8000D4524 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A55047081BDEFCF7000D4524 /* AppZoneViewController.h */,
+				A55047091BDEFCF7000D4524 /* AppZoneViewController.m */,
+				A550470A1BDEFCF7000D4524 /* AppZoneViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		A55BDEE41BB0EB8100646C79 /* PatternLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -2533,6 +2574,7 @@
 		A5D50AF51BD4E53900D7A2DD /* CustomerCenter */ = {
 			isa = PBXGroup;
 			children = (
+				A55047061BDEFCCF000D4524 /* AppZone */,
 				A5D50AF61BD4E53900D7A2DD /* FAQ */,
 				A5D50AF71BD4E53900D7A2DD /* Main */,
 				A5D50AF91BD4E53900D7A2DD /* Notice */,
@@ -2548,6 +2590,7 @@
 		A5D50AF61BD4E53900D7A2DD /* FAQ */ = {
 			isa = PBXGroup;
 			children = (
+				A5F89D571BDE29F6000A24CB /* View */,
 			);
 			path = FAQ;
 			sourceTree = "<group>";
@@ -2573,6 +2616,7 @@
 		A5D50AF91BD4E53900D7A2DD /* Notice */ = {
 			isa = PBXGroup;
 			children = (
+				A5F89D511BDE223D000A24CB /* View */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -2634,6 +2678,7 @@
 		A5D50B001BD4E53900D7A2DD /* TermsOfUse */ = {
 			isa = PBXGroup;
 			children = (
+				A5F89D5D1BDE2B8D000A24CB /* View */,
 			);
 			path = TermsOfUse;
 			sourceTree = "<group>";
@@ -2859,6 +2904,8 @@
 			children = (
 				A5ED266A1BA961F7007E6689 /* ChartItemData.h */,
 				A5ED266B1BA961F7007E6689 /* ChartItemData.m */,
+				A550470D1BDF1423000D4524 /* StickerInfo.h */,
+				A550470E1BDF1423000D4524 /* StickerInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2889,6 +2936,36 @@
 				17745DE31BB96355003609C7 /* CustomizedDatePickerViewController.xib */,
 			);
 			path = DateSearch;
+			sourceTree = "<group>";
+		};
+		A5F89D511BDE223D000A24CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5F89D521BDE226B000A24CB /* NoticeViewController.h */,
+				A5F89D531BDE226B000A24CB /* NoticeViewController.m */,
+				A5F89D541BDE226B000A24CB /* NoticeViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A5F89D571BDE29F6000A24CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5F89D581BDE2A12000A24CB /* FaqViewController.h */,
+				A5F89D591BDE2A12000A24CB /* FaqViewController.m */,
+				A5F89D5A1BDE2A12000A24CB /* FaqViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A5F89D5D1BDE2B8D000A24CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5F89D5E1BDE2BA5000A24CB /* TermsOfUseViewController.h */,
+				A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */,
+				A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3016,6 +3093,11 @@
 				A2DA4F3A1BCCDC81009FB32F /* RegistAccountInputAccountView.xib in Resources */,
 				A2D95B351BA8F1DD00DC943D /* NFPadBtnPrevious@2x.png in Resources */,
 				A2D62D301BC36188001E16B0 /* HomeBankingView.xib in Resources */,
+				A5F89D561BDE226B000A24CB /* NoticeViewController.xib in Resources */,
+				A2D9A3141BCB34F800FC2AC7 /* icon_notice_01_dft@2x.png in Resources */,
+				A2D9A2DC1BCB34F800FC2AC7 /* button_05_on@2x.png in Resources */,
+				A2D9A2DF1BCB34F800FC2AC7 /* button_07_dft@2x.png in Resources */,
+				A2D9A3441BCB34F800FC2AC7 /* icon_user_02@2x.png in Resources */,
 				A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */,
 				A2DF41051BAF9902001389E7 /* RegistPhoneViewController.xib in Resources */,
 				A2DADE1A1BDF008300457E9A /* icon_ks_01_dft@2x.png in Resources */,
@@ -3092,6 +3174,8 @@
 				A2DD87491BC216AE0013470D /* RegisterAccountViewController.xib in Resources */,
 				A2DADE591BDF008300457E9A /* icon_storage_02@2x.png in Resources */,
 				A2D95B891BA8F1DD00DC943D /* nf_ios_bubble@3x.png in Resources */,
+				A5F89D5C1BDE2A12000A24CB /* FaqViewController.xib in Resources */,
+				A5F89D621BDE2BA5000A24CB /* TermsOfUseViewController.xib in Resources */,
 				A2D95B281BA8F1DD00DC943D /* NFPadbtn_wide_pressed.png in Resources */,
 				A2D791701BBD171300E817E7 /* HomeQuickNoticeTableViewCell.xib in Resources */,
 				A2D95B1A1BA8F1DD00DC943D /* NFPadicon_shift_pressed.png in Resources */,
@@ -3350,7 +3434,7 @@
 				A2DFDD961BB398FD00DC1A78 /* MainPageViewController.xib in Resources */,
 				A2D95B3E1BA8F1DD00DC943D /* NFPadnum_btn_ok_pressed@2x.png in Resources */,
 				A2DADE231BDF008300457E9A /* icon_more_01_sel@2x.png in Resources */,
-				A2D95B5B1BA8F1DD00DC943D /* nf_ios_icon_backspace.png in Resources */,
+				A550470C1BDEFCF7000D4524 /* AppZoneViewController.xib in Resources */,
 				A2D95B321BA8F1DD00DC943D /* NFPadbtn_ok_pressed@2x.png in Resources */,
 				A2D95B431BA8F1DD00DC943D /* NFPadspacebar_pressed@2x.png in Resources */,
 				A2DADE281BDF008300457E9A /* icon_new_01_on@2x.png in Resources */,
@@ -3416,6 +3500,7 @@
 				A2D7916F1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m in Sources */,
 				A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
+				A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
@@ -3423,6 +3508,7 @@
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
 				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,
+				A5F89D5B1BDE2A12000A24CB /* FaqViewController.m in Sources */,
 				A54B3B701BBE169900F883E9 /* ArchivedTransHeaderCell.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
 				A2DB82CD1BD9C5A1001ABFE5 /* TimelineBannerView.m in Sources */,
@@ -3454,6 +3540,7 @@
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
 				A2D95B9A1BA8F1DD00DC943D /* NFilterNum.m in Sources */,
 				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
+				A550470B1BDEFCF7000D4524 /* AppZoneViewController.m in Sources */,
 				A2DE50BE1BD0852300A40BF3 /* CertMenuCell.m in Sources */,
 				A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */,
 				17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */,
@@ -3465,6 +3552,7 @@
 				A2E0FE171BD7676900D528BA /* DropboxStrokeView.m in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
 				A2DEAE5F1B9FE6D800EDCCBA /* MASLayoutConstraint.m in Sources */,
+				A550470F1BDF1423000D4524 /* StickerInfo.m in Sources */,
 				A2DA4F321BCCC246009FB32F /* CircleView.m in Sources */,
 				A2DEAE5C1B9FE6D800EDCCBA /* MASCompositeConstraint.m in Sources */,
 				A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */,
@@ -3515,6 +3603,7 @@
 				A2D90D651BB2730D00315425 /* RegistCertListView.m in Sources */,
 				A2DEAE541B9FE6D800EDCCBA /* CommonViewController.m in Sources */,
 				A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */,
+				A5F89D551BDE226B000A24CB /* NoticeViewController.m in Sources */,
 				A2DF41041BAF9902001389E7 /* RegistPhoneViewController.m in Sources */,
 				A2DFDD901BB3742C00DC1A78 /* NotiSettingMenuViewController.m in Sources */,
 				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,

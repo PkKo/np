@@ -39,18 +39,10 @@
                                        transactionMemo:(NSString *)transactionMemo
                                   transactionActivePin:(NSNumber *)transactionActivePin;
 
-- (instancetype)initTransactionObjectWithTransactionDate:(NSDate *)transactionDate
-                                transactionAccountNumber:(NSString *)transactionAccountNumber
-                                      transactionDetails:(NSString *)transactionDetails
-                                         transactionType:(NSString *)transactionType
-                                       transactionAmount:(NSNumber *)transactionAmount
-                                       transactionBalance:(NSNumber *)transactionBalance
-                                         transactionMemo:(NSString *)transactionMemo;
-
 - (NSString *)formattedTransactionDate;
 - (NSString *)formattedTransactionDateForDB;
 - (NSString *)formattedTransactionAmount;
 - (NSString *)formattedTransactionBalance;
 - (NSString *)getTransactionHourMinute;
-
+- (NSString *)transactionTypeDesc;
 @end

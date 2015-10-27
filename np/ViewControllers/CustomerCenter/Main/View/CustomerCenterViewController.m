@@ -11,6 +11,9 @@
 #import "VersionInfoViewController.h"
 #import "ServiceDeactivationViewController.h"
 #import "ServiceGuideViewController.h"
+#import "NoticeViewController.h"
+#import "FaqViewController.h"
+#import "TermsOfUseViewController.h"
 
 @interface CustomerCenterViewController ()
 
@@ -30,10 +33,38 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)gotoNotice {
+    NoticeViewController * notice = [[NoticeViewController alloc] initWithNibName:@"NoticeViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:notice];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+
+- (IBAction)gotoFAQ {
+    FaqViewController * faq = [[FaqViewController alloc] initWithNibName:@"FaqViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:faq];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+
 - (IBAction)gotoTelEnquiry {
     TelInquiryViewController * telInquiry = [[TelInquiryViewController alloc] initWithNibName:@"TelInquiryViewController"
                                                                                        bundle:nil];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:telInquiry];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+
+/*===================*/
+
+- (IBAction)gotoServiceGuide {
+    ServiceGuideViewController * serviceGuide = [[ServiceGuideViewController alloc] initWithNibName:@"ServiceGuideViewController"
+                                                                                             bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:serviceGuide];
+    [self.navigationController pushViewController:eVC animated:YES];
+}
+
+- (IBAction)gotoTermsOfUse {
+    TermsOfUseViewController * termsOfUse = [[TermsOfUseViewController alloc] initWithNibName:@"TermsOfUseViewController"
+                                                                                             bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:termsOfUse];
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
@@ -52,10 +83,4 @@
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
-- (IBAction)gotoServiceGuide {
-    ServiceGuideViewController * serviceGuide = [[ServiceGuideViewController alloc] initWithNibName:@"ServiceGuideViewController"
-                                                                                                                  bundle:nil];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:serviceGuide];
-    [self.navigationController pushViewController:eVC animated:YES];
-}
 @end

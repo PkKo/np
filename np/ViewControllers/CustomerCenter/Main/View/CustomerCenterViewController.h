@@ -11,8 +11,13 @@
 
 @interface CustomerCenterViewController : CommonViewController
 
+- (IBAction)gotoNotice;
+- (IBAction)gotoFAQ;
 - (IBAction)gotoTelEnquiry;
+
+- (IBAction)gotoServiceGuide;
+- (IBAction)gotoTermsOfUse;
 - (IBAction)gotoVersionInfo;
 - (IBAction)gotoServiceDeactivation;
-- (IBAction)gotoServiceGuide;
+
 @end

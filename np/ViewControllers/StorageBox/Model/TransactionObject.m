@@ -50,28 +50,6 @@
     return self;
 }
 
-- (instancetype)initTransactionObjectWithTransactionDate:(NSDate *)transactionDate
-                                transactionAccountNumber:(NSString *)transactionAccountNumber
-                                      transactionDetails:(NSString *)transactionDetails
-                                         transactionType:(NSString *)transactionType
-                                       transactionAmount:(NSNumber *)transactionAmount
-                                      transactionBalance:(NSNumber *)transactionBalance
-                                         transactionMemo:(NSString *)transactionMemo {
-    self = [super init];
-    if (self != nil) {
-        self.transactionDate            = transactionDate;
-        self.transactionAccountNumber   = transactionAccountNumber;
-        self.transactionDetails         = transactionDetails;
-        self.transactionType            = transactionType;
-        self.transactionAmount          = transactionAmount;
-        self.transactionBalance         = transactionBalance;
-        self.transactionMemo            = transactionMemo;
-        self.transactionActivePin       = [NSNumber numberWithBool:TRANS_ACTIVE_PIN_YES];
-        self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
-    }
-    return self;
-}
-
 - (NSString *)formattedTransactionDate {
     return [[StatisticMainUtil getDateFormatterDateHourMinuteStyle] stringFromDate:self.transactionDate];
 }
@@ -93,6 +71,19 @@
     return [[StatisticMainUtil getDateFormatterHourMinuteStyle] stringFromDate:self.transactionDate];
 }
 
+- (NSString *)transactionTypeDesc {
+    
+    int sticker = (StickerType)[self.transactionType intValue];
+    switch (sticker) {
+        case STICKER_DEPOSIT_NORMAL:
+        case STICKER_DEPOSIT_SALARY:
+        case STICKER_DEPOSIT_POCKET:
+        case STICKER_DEPOSIT_ETC:
+            return INCOME_TYPE_STRING;
+        default:
+            return WITHDRAW_TYPE_STRING;
+    }
+}
 
 
 @end

@@ -17,6 +17,7 @@
 #import "NotiSettingMenuViewController.h"
 #import "EnvMgmtViewController.h"
 #import "CustomerCenterViewController.h"
+#import "AppZoneViewController.h"
 
 #define MENU_CELL_HEIGHT    37
 #define TABLE_VIEW_HEADER_HEIGHT    23
@@ -191,6 +192,7 @@
         }
         case 7: // NH APPZONE
         {
+            pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
             break;
         }
             

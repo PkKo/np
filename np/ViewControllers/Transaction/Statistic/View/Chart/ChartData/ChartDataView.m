@@ -17,14 +17,6 @@
 
 @implementation ChartDataView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)reloadData:(NSArray *)arr {
     
     CGFloat mainViewWith    = 0.0;
@@ -51,8 +43,10 @@
         
         total += [item.itemValue floatValue];
         
-        CGRect itemViewFrame    = itemView.frame;
-        itemViewFrame.origin.y  = itemIdx * itemViewFrame.size.height + MARGIN_TOP;
+        CGRect itemViewFrame        = itemView.frame;
+        itemViewFrame.origin.y      = itemIdx * itemViewFrame.size.height + MARGIN_TOP;
+        itemViewFrame.size.width    = [[UIScreen mainScreen] bounds].size.width - 36;
+        NSLog(@"self.frame.size.width: %f", itemViewFrame.size.width);
         
         
         [itemView setFrame:itemViewFrame];
@@ -75,8 +69,9 @@
     [[totalView totalName] setText:isIncome ? @"수입합계" : @"지출합계"];
     [[totalView totalValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]]];
     
-    CGRect totalViewFrame    = totalView.frame;
-    totalViewFrame.origin.y  = mainViewHeight;
+    CGRect totalViewFrame       = totalView.frame;
+    totalViewFrame.origin.y     = mainViewHeight;
+    totalViewFrame.size.width    = [[UIScreen mainScreen] bounds].size.width - 36;
     [totalView setFrame:totalViewFrame];
     
     [self addSubview:totalView];

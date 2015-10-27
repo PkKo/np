@@ -10,6 +10,8 @@
 #import "StorageBoxUtil.h"
 #import "DBManager.h"
 #import "UIButton+BackgroundColor.h"
+#import "MainPageViewController.h"
+#import "HomeViewController.h"
 
 
 @interface MemoCompositionViewController () {
@@ -57,7 +59,7 @@
     if (isNewMemo) {
         [[DBManager sharedInstance] saveTransaction:self.transactionObject];
     } else {
-        [[DBManager sharedInstance] updateTransactionMemo:self.memo.text byTransId:self.transactionObject.transactionId];
+        [[DBManager sharedInstance] updateTransaction:self.transactionObject];
     }
     
     [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.6];
@@ -77,8 +79,16 @@
     
     switch (buttonIndex) {
         case 1: // 확인
-            NSLog(@"show storage box.");
+        {
+            MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
+            [newTopViewController setStartPageIndex:INBOX];
+            
+            CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
             break;
+        }
         default:
             break;
     }

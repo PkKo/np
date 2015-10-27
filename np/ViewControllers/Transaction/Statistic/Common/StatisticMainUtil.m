@@ -141,8 +141,8 @@
     ChartDataView *chartDataView = [[ChartDataView alloc] init];
     [chartDataView reloadData:dataSource];
     
-    CGRect chartDataViewFrame        = chartDataView.frame;
-    chartDataViewFrame.origin.y      = chartDataViewY;
+    CGRect chartDataViewFrame           = chartDataView.frame;
+    chartDataViewFrame.origin.y         = chartDataViewY;
     [chartDataView setFrame:chartDataViewFrame];
     [chartDataView setBackgroundColor:[UIColor whiteColor]];
     
@@ -306,6 +306,10 @@
 
 + (NSDateFormatter *)getDateFormatterDateStyle {
     return [StatisticMainUtil getDateFormatterWithStyle:@"yyyy.MM.dd"];
+}
+
++ (NSDateFormatter *)getDateFormatterDateServerStyle {
+    return [StatisticMainUtil getDateFormatterWithStyle:@"yyyyMMdd"];
 }
 
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style {

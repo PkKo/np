@@ -391,9 +391,9 @@
                                                                               transactionAccountNumber:inboxData.nhAccountNumber
                                                                                 transactionAccountType:@""
                                                                                     transactionDetails:inboxData.oppositeUser
-                                                                                       transactionType:[NSString stringWithFormat:@"%d", inboxData.stickerCode]
-                                                                                     transactionAmount:[NSNumber numberWithInteger:inboxData.amount]
-                                                                                    transactionBalance:[NSNumber numberWithInteger:inboxData.balance]
+                                                                                           transactionType:inboxData.inboxType
+                                                                                     transactionAmount:@(inboxData.amount)
+                                                                                    transactionBalance:@(inboxData.balance)
                                                                                        transactionMemo:@""
                                                                                   transactionActivePin:[NSNumber numberWithBool:[cell isSelected]]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];

@@ -250,9 +250,9 @@
         [vc setServerPublickey:@""];
         
         //콜백함수 설정
-        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction];
+        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction]; // methodOnPress:(SEL)pMethodOnPress
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
-        [vc setFullMode:YES];
+        [vc setFullMode:YES]; //NO
         [vc setTopBarText:topBar];
         [vc setTitleText:title];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];
