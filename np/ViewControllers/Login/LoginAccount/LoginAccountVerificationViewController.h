@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface LoginAccountVerificationViewController : CommonViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface LoginAccountVerificationViewController : CommonViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField * accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField * passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField * fakeNoticeTextField;
-
-- (IBAction)clickToLogin;
-- (IBAction)gotoLoginSettings;
 @end

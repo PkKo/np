@@ -12,6 +12,11 @@
 #import "RegistAccountViewController.h"
 #import "MainPageViewController.h"
 #import "AppDelegate.h"
+#import "LoginUtil.h"
+#import "LoginCertListViewController.h"
+#import "LoginAccountVerificationViewController.h"
+#import "DrawPatternLockViewController.h"
+#import "LoginSimpleVerificationViewController.h"
 
 #import "RegistCompleteViewController.h"
 
@@ -111,6 +116,8 @@
 
 - (void)setMainViewController
 {
+    //[[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];

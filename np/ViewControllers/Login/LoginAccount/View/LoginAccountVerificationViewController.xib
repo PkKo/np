@@ -77,6 +77,9 @@
                             <state key="normal" title="로그인">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="clickToLogin" destination="-1" eventType="touchUpInside" id="yDD-mT-Srn"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7qa-xj-2VP">
                             <rect key="frame" x="156" y="140" width="93" height="22"/>

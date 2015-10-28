@@ -18,6 +18,11 @@
 #import "DrawPatternMgmtViewController.h"
 #import "StatisticMainUtil.h"
 #import "CertificateMenuViewController.h"
+#import "MainPageViewController.h"
+#import "LoginCertListViewController.h"
+#import "LoginAccountVerificationViewController.h"
+#import "DrawPatternLockViewController.h"
+#import "LoginSimpleVerificationViewController.h"
 
 @implementation LoginUtil
 
@@ -39,8 +44,54 @@
     if ([prefs objectForKey:PREF_KEY_LOGIN_METHOD]) {
         return (LoginMethod)[[prefs objectForKey:PREF_KEY_LOGIN_METHOD] intValue];
     } else {
-        return LOGIN_BY_NONE;
+        return LOGIN_BY_ACCOUNT; //LOGIN_BY_NONE
     }
+}
+
+- (void)showMainPage {
+    
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
+    
+    UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
+    [navController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+}
+
+- (void)showLoginPage:(UINavigationController *)navController {
+    
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    UIViewController * vc = nil;
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    LoginMethod loginMethod = [util getLoginMethod];
+    
+    switch (loginMethod) {
+        case LOGIN_BY_CERTIFICATE:
+            vc = [[LoginCertListViewController alloc] initWithNibName:@"LoginCertListViewController" bundle:nil];
+            break;
+            
+        case LOGIN_BY_ACCOUNT:
+            vc = [[LoginAccountVerificationViewController alloc] initWithNibName:@"LoginAccountVerificationViewController" bundle:nil];
+            break;
+            
+        case LOGIN_BY_PATTERN:
+            vc = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
+            break;
+            
+        case LOGIN_BY_SIMPLEPW:
+            vc = [[LoginSimpleVerificationViewController alloc] initWithNibName:@"LoginSimpleVerificationViewController" bundle:nil];
+            break;
+            
+        default:
+            break;
+    }
+    
+    slidingViewController.topViewController = vc;
+    [navController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
 #pragma mark - Certificate Login
@@ -74,6 +125,43 @@
     CertificateMenuViewController * certCentre = [[CertificateMenuViewController alloc] init];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certCentre];
     [navController pushViewController:eVC animated:YES];
+}
+
+- (NSInteger)getCertPasswordFailedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [[prefs objectForKey:PREF_KEY_CERT_LOGIN_SETT_FAILED_TIMES] integerValue];
+}
+
+- (void)saveCertPasswordFailedTimes:(NSInteger)failedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_CERT_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
+}
+
+#pragma mark - Account Login
+- (NSArray *)getAllAccounts {
+    
+    return [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_ACCOUNT];
+}
+
+- (void)saveAllAccounts:(NSArray *)allAccounts {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_ACCOUNT];
+}
+
+- (NSInteger)getAccountPasswordFailedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [[prefs objectForKey:PREF_KEY_ACCOUNT_LOGIN_SETT_FAILED_TIMES] integerValue];
+}
+
+- (void)saveAccountPasswordFailedTimes:(NSInteger)failedTimes {
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_ACCOUNT_LOGIN_SETT_FAILED_TIMES];
+    [prefs synchronize];
 }
 
 #pragma mark - Simple Login
@@ -195,12 +283,12 @@
 #pragma mark - Using Simple View
 - (void)saveUsingSimpleViewFlag:(BOOL)isUsingSimpleView {
     NSUserDefaults  * prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setValue:[NSNumber numberWithBool:isUsingSimpleView] forKey:PREF_KEY_USING_SIMPLE_VIEW];
+    [prefs setValue:[NSNumber numberWithBool:isUsingSimpleView] forKey:QUICK_VIEW_SETTING];
 }
 
 - (BOOL)isUsingSimpleView {
     NSUserDefaults  * prefs = [NSUserDefaults standardUserDefaults];
-    return [prefs boolForKey:PREF_KEY_USING_SIMPLE_VIEW];
+    return [prefs boolForKey:QUICK_VIEW_SETTING];
 }
 
 #pragma mark - Secure Keyboard

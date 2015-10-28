@@ -9,7 +9,6 @@
 #import "StorageBoxDateSearchView.h"
 #import "StatisticMainUtil.h"
 #import "UIButton+BackgroundColor.h"
-#import "ConstantMaster.h"
 
 @implementation StorageBoxDateSearchView
 

@@ -255,38 +255,6 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" backgroundImage="icon_depth_02.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KsT-BJ-W1i">
-                            <rect key="frame" x="34" y="332" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="공인"/>
-                            <connections>
-                                <action selector="gotoCertLogin:" destination="-1" eventType="touchUpInside" id="qhZ-N2-nMk"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MvL-7d-K7S">
-                            <rect key="frame" x="198" y="332" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="간편"/>
-                            <connections>
-                                <action selector="gotoSimpleLogin:" destination="-1" eventType="touchUpInside" id="Jze-2g-Qet"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gYf-8D-SJc">
-                            <rect key="frame" x="258" y="332" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="패턴"/>
-                            <connections>
-                                <action selector="gotoPatternLogin:" destination="-1" eventType="touchUpInside" id="KKN-pe-sqM"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9ta-yI-CHe">
-                            <rect key="frame" x="121" y="332" width="30" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="계좌"/>
-                            <connections>
-                                <action selector="gotoAccountLogin:" destination="-1" eventType="touchUpInside" id="tXD-QK-Def"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>

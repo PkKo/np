@@ -10,7 +10,6 @@
 #import "MemoCompositionViewController.h"
 #import "SNSViewController.h"
 #import "CertListViewController.h"
-#import "ConstantMaster.h"
 
 @implementation StorageBoxUtil
 

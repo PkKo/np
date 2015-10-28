@@ -397,7 +397,7 @@ typedef enum SetupStatus {
 
 #pragma mark - Action
 - (IBAction)clickCancel {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)clickNext {

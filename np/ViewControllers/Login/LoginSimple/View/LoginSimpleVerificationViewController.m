@@ -12,6 +12,7 @@
 #import "LoginSettingsViewController.h"
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
+#import "LoginSimpleController.h"
 
 @interface LoginSimpleVerificationViewController () {
     NSString * _pw;
@@ -55,6 +56,7 @@
 
 - (IBAction)doLogin {
     if ([self validatePW:_pw]) {
+        [[[LoginSimpleController alloc] init] validateLoginSimple];
         [[[LoginUtil alloc] init] saveSimplePasswordFailedTimes:0];
         [self closeView];
     }
@@ -123,11 +125,10 @@
         default:
             break;
     }
-    
 }
 
 - (void)closeView {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[[LoginUtil alloc] init] showMainPage];
 }
 
 - (void)updateUI {
@@ -162,7 +163,6 @@
             [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
         }
     }
-    
 }
 
 

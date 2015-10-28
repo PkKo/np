@@ -11,7 +11,6 @@
 #import "ChartItemData.h"
 #import "ChartDataTotalView.h"
 #import "StatisticMainUtil.h"
-#import "ConstantMaster.h"
 
 #define MARGIN_TOP 5
 
