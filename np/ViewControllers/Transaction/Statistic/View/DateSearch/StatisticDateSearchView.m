@@ -9,7 +9,6 @@
 #import "StatisticDateSearchView.h"
 #import "StatisticMainUtil.h"
 #import "UIButton+BackgroundColor.h"
-#import "ConstantMaster.h"
 
 #define LATEST_MAX_MONTH 6
 

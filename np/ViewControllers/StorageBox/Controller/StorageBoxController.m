@@ -8,9 +8,9 @@
 
 #import "StorageBoxController.h"
 #import "TransactionObject.h"
-#import "ConstantMaster.h"
 #import "StatisticMainUtil.h"
 #import "DBManager.h"
+#import "LoginUtil.h"
 
 @implementation StorageBoxController
 
@@ -53,7 +53,18 @@
 }
 
 - (NSArray *)getAllAccounts {
-    return @[TRANS_ALL_ACCOUNT, @"111-33-3433", @"333-66-2343", @"442-83-3535"];
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    NSArray * allAccounts = [util getAllAccounts];
+    
+    
+    if (allAccounts && [allAccounts count] > 0) {
+        NSMutableArray * accountsWithAll = [NSMutableArray arrayWithArray:allAccounts];
+        [accountsWithAll insertObject:TRANS_ALL_ACCOUNT atIndex:0];
+        return [accountsWithAll copy];
+    }
+    
+    return @[TRANS_ALL_ACCOUNT];
 }
 
 @end

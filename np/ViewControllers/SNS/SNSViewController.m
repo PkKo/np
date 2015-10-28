@@ -14,7 +14,6 @@
 #import "StoryLinkHelper.h"
 #import "StorageBoxUtil.h"
 #import "UIButton+BackgroundColor.h"
-#import "ConstantMaster.h"
 
 @interface SNSViewController () <MFMessageComposeViewControllerDelegate, EKEventEditViewDelegate>
 

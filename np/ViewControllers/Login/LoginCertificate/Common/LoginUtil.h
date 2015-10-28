@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ConstantMaster.h"
 #import "CertInfo.h"
 
 @interface LoginUtil : NSObject
@@ -16,12 +15,22 @@
 - (void)gotoLoginSettings:(UINavigationController *)navController;
 - (void)saveLoginMethod:(LoginMethod)loginMethod;
 - (LoginMethod)getLoginMethod;
+- (void)showMainPage;
+- (void)showLoginPage:(UINavigationController *)navController;
 
 #pragma mark - Certificate Login
 - (void)removeCertToLogin;
 - (CertInfo *)getCertToLogin;
 - (void)saveCertToLogin:(CertInfo *)cert;
 - (void)gotoCertCentre:(UINavigationController *)navController;
+- (NSInteger)getCertPasswordFailedTimes;
+- (void)saveCertPasswordFailedTimes:(NSInteger)failedTimes;
+
+#pragma mark - Account Login
+- (NSInteger)getAccountPasswordFailedTimes;
+- (void)saveAccountPasswordFailedTimes:(NSInteger)failedTimes;
+- (NSArray *)getAllAccounts;
+- (void)saveAllAccounts:(NSArray *)allAccounts;
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController;

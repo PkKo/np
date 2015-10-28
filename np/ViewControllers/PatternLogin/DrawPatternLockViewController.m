@@ -9,6 +9,7 @@
 #import "DrawPatternLockViewController.h"
 #import "DrawPatternLockView.h"
 #import "LoginUtil.h"
+#import "LoginPatternController.h"
 
 
 #define MATRIX_SIZE 3
@@ -289,6 +290,9 @@
     if (alertMessage) {
         [self showAlert:alertMessage tag:tag];
     } else {
+        
+        [[[LoginPatternController alloc] init] validateLoginPattern];
+        
         [self performSelector:@selector(showMainView) withObject:nil afterDelay:0.02];
     }
 }
@@ -296,7 +300,7 @@
 - (void)showMainView {
     LoginUtil * util = [[LoginUtil alloc] init];
     [util savePatternPasswordFailedTimes:0];
-    [self closeView];
+    [util showMainPage];
 }
 
 #pragma mark - Alert

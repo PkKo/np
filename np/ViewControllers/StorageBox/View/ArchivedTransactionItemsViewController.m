@@ -11,17 +11,12 @@
 #import "StorageBoxController.h"
 #import "StorageBoxUtil.h"
 #import "TransactionObject.h"
-#import "ConstantMaster.h"
 #import "ArchivedTransHeaderCell.h"
 #import "StatisticMainUtil.h"
 #import "ArchivedTransItemRemoveAllSelectView.h"
 #import "ArchivedTransItemRemoveActionView.h"
 #import "DBManager.h"
 #import "CustomizedPickerViewController.h"
-#import "LoginCertListViewController.h"
-#import "LoginAccountVerificationViewController.h"
-#import "LoginSimpleVerificationViewController.h"
-#import "DrawPatternLockViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -423,34 +418,6 @@
     }
     
     return YES;
-}
-
-- (IBAction)gotoPatternLogin:(id)sender {
-    
-    DrawPatternLockViewController *certLogin = [[DrawPatternLockViewController alloc] initWithNibName:@"DrawPatternLockViewController" bundle:nil];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
-    [self.navigationController pushViewController:eVC animated:YES];
-    
-}
-
-- (IBAction)gotoCertLogin:(id)sender {
-    
-    LoginCertListViewController *certLogin = [[LoginCertListViewController alloc] initWithNibName:@"LoginCertListViewController" bundle:nil];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:certLogin];
-    [self.navigationController pushViewController:eVC animated:YES];
-}
-
-- (IBAction)gotoAccountLogin:(id)sender {
-    
-    LoginAccountVerificationViewController *accountLogin = [[LoginAccountVerificationViewController alloc] initWithNibName:@"LoginAccountVerificationViewController" bundle:nil];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:accountLogin];
-    [self.navigationController pushViewController:eVC animated:YES];
-}
-- (IBAction)gotoSimpleLogin:(id)sender {
-    
-    LoginSimpleVerificationViewController *simpleLogin = [[LoginSimpleVerificationViewController alloc] initWithNibName:@"LoginSimpleVerificationViewController" bundle:nil];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:simpleLogin];
-    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 @end

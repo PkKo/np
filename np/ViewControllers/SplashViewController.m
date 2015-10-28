@@ -12,6 +12,11 @@
 #import "RegistAccountViewController.h"
 #import "MainPageViewController.h"
 #import "AppDelegate.h"
+#import "LoginUtil.h"
+#import "LoginCertListViewController.h"
+#import "LoginAccountVerificationViewController.h"
+#import "DrawPatternLockViewController.h"
+#import "LoginSimpleVerificationViewController.h"
 
 @interface SplashViewController ()
 
@@ -108,19 +113,7 @@
 
 - (void)setMainViewController
 {
-    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    // 가입시작
-//    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
-    // 메인 시작
-//    MainPageViewController *vc = [[MainPageViewController alloc] init];
-//    [vc setStartPageIndex:0];
-    // 퀵뷰
-    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
-    slidingViewController.topViewController = vc;
-    
-    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
-//    [self.navigationController pushViewController:vc animated:YES];
+    [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 }
 
 @end

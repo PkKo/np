@@ -12,9 +12,9 @@
 #import "LoginUtil.h"
 #import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
-#import "ConstantMaster.h"
 #import "LoginCertController.h"
 #import "CertificateMenuViewController.h"
+#import "EnvMgmtViewController.h"
 
 #define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
@@ -126,8 +126,32 @@
         
     } else {
         
-        [util saveLoginMethod:selectedLoginMethod];
-        [self removeLoginSettings];
+        LoginMethod loggedInMethod = [util getLoginMethod];
+        if (loggedInMethod == selectedLoginMethod) {
+            
+            [self removeLoginSettings];
+            
+        } else {
+            [util saveLoginMethod:selectedLoginMethod];
+            
+            
+            NSArray * viewControllers = [self.navigationController viewControllers];
+            UIViewController * loginSettingsParent = nil;
+            int numberOfViewControllers = [viewControllers count];
+            
+            if (numberOfViewControllers >= 2) {
+                
+                loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
+                
+                NSLog(@"loginSettingsParent:%@ - %@", loginSettingsParent, [(ECSlidingViewController *)loginSettingsParent topViewController]);
+                
+                if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[EnvMgmtViewController class]]) {
+                    [self removeLoginSettings];
+                } else {
+                    [util showLoginPage:self.navigationController];
+                }
+            }
+        }
     }
 }
 

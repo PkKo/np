@@ -79,9 +79,9 @@
         case STICKER_DEPOSIT_SALARY:
         case STICKER_DEPOSIT_POCKET:
         case STICKER_DEPOSIT_ETC:
-            return INCOME_TYPE_STRING;
+            return TRANS_TYPE_INCOME;
         default:
-            return WITHDRAW_TYPE_STRING;
+            return TRANS_TYPE_EXPENSE;
     }
 }
 

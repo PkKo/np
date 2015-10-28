@@ -9,7 +9,6 @@
 #import "SimplePwMgntNewViewController.h"
 #import "LoginUtil.h"
 #import "EccEncryptor.h"
-#import "ConstantMaster.h"
 #import "StorageBoxUtil.h"
 
 @interface SimplePwMgntNewViewController ()
