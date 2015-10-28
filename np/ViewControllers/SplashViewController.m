@@ -129,7 +129,6 @@
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 //    [self.navigationController pushViewController:vc animated:YES];
->>>>>>> 12c348a0a398767fc220235705d1cffaee429f12
 }
 
 @end
