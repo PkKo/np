@@ -39,4 +39,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIButtonAction
+/**
+ @brief 확인버튼 클릭
+ */
+- (IBAction)optionSettingConfirm:(id)sender
+{
+    // 옵션 갑 확인해서 세팅한다.
+}
+
+#pragma mark - AccountOption API
+- (void)accountOptionSettingRequest
+{
+    HttpRequest *req = [HttpRequest getInstance];
+    
+    [req setDelegate:self selector:@selector(accountOptionSettingResponse:)];
+}
+
+- (void)accountOptionSettingResponse:(NSDictionary *)response
+{
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.currentTextField = textField;
+    [self.keyboardCloseButton setEnabled:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self.keyboardCloseButton setEnabled:NO];
+    self.currentTextField = nil;
+}
 @end

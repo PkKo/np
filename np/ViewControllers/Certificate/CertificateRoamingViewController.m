@@ -38,13 +38,13 @@
     [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, bottomView.frame.origin.y + bottomView.frame.size.height)];
     
     certNum1.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
-    certNum1.layer.borderWidth = 3.0f;
+    certNum1.layer.borderWidth = 1.0f;
     certNum2.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
-    certNum2.layer.borderWidth = 3.0f;
+    certNum2.layer.borderWidth = 1.0f;
     certNum3.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
-    certNum3.layer.borderWidth = 3.0f;
+    certNum3.layer.borderWidth = 1.0f;
     certNum4.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.f alpha:1.0f].CGColor;
-    certNum4.layer.borderWidth = 3.0f;
+    certNum4.layer.borderWidth = 1.0f;
     
     // 인증번호 요청
     [self performSelector:@selector(requestAuthNumber) withObject:nil afterDelay:0.01f];

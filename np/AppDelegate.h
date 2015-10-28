@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ECSlidingViewController *slidingViewController;
+@property (strong, nonatomic) NSString *serverKey;
 @end
 

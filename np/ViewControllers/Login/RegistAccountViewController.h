@@ -13,6 +13,7 @@
 @interface RegistAccountViewController : CommonViewController<UIAlertViewDelegate, UITextFieldDelegate, RegistCertListDelegate>
 {
     BOOL isCertRoaming;
+    NSString *tempAccountNum;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;

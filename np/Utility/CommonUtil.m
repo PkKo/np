@@ -8,6 +8,10 @@
 
 #import "CommonUtil.h"
 #import "KeychainItemWrapper.h"
+#import <CommonCrypto/CommonCryptor.h>
+#import "nsdataadditions.h"
+#import <mach/mach.h>
+#import <mach/mach_host.h>
 
 @implementation CommonUtil
 
@@ -152,17 +156,17 @@
         }
         case STICKER_DEPOSIT_SALARY:
         {
-            stickerImageName = @"icon_deposit_01_dft.png";
+            stickerImageName = @"icon_sticker_01_sel_01.png";
             break;
         }
         case STICKER_DEPOSIT_POCKET:
         {
-            stickerImageName = @"icon_deposit_02_dft.png";
+            stickerImageName = @"icon_sticker_01_sel_02.png";
             break;
         }
         case STICKER_DEPOSIT_ETC:
         {
-            stickerImageName = @"icon_deposit_03_dft.png";
+            stickerImageName = @"icon_sticker_01.png";
             break;
         }
         case STICKER_WITHDRAW_NORMAL:
@@ -172,47 +176,47 @@
         }
         case STICKER_WITHDRAW_FOOD:
         {
-            stickerImageName = @"icon_withdraw_01_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_01.png";
             break;
         }
         case STICKER_WITHDRAW_TELEPHONE:
         {
-            stickerImageName = @"icon_withdraw_02_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_02.png";
             break;
         }
         case STICKER_WITHDRAW_HOUSING:
         {
-            stickerImageName = @"icon_withdraw_03_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_03.png";
             break;
         }
         case STICKER_WITHDRAW_SHOPPING:
         {
-            stickerImageName = @"icon_withdraw_04_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_04.png";
             break;
         }
         case STICKER_WITHDRAW_CULTURE:
         {
-            stickerImageName = @"icon_withdraw_05_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_05.png";
             break;
         }
         case STICKER_WITHDRAW_EDUCATION:
         {
-            stickerImageName = @"icon_withdraw_06_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_06.png";
             break;
         }
         case STICKER_WITHDRAW_CREDIT:
         {
-            stickerImageName = @"icon_withdraw_07_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_07.png";
             break;
         }
         case STICKER_WITHDRAW_SAVING:
         {
-            stickerImageName = @"icon_withdraw_08_dft.png";
+            stickerImageName = @"icon_sticker_02_sel_08.png";
             break;
         }
         case STICKER_WITHDRAW_ETC:
         {
-            stickerImageName = @"icon_withdraw_09_dft.png";
+            stickerImageName = @"icon_sticker_02.png";
             break;
         }
         case STICKER_EXCHANGE_RATE:
@@ -420,5 +424,182 @@
     NSString *dateString = [dateFormat stringFromDate:date];
     
     return dateString;
+}
+
+// 3DES 암호화
++ (NSString *)encrypt3DES:(NSString *)str
+{
+    //NSLog(@"encrypt input string : %@", str);
+    //NSLog(@"input length : %d", [str length]);
+    NSData *data = [str dataUsingEncoding: NSUTF8StringEncoding];
+    //NSLog(@"data : %@", data);
+    unsigned char *input = (unsigned char*)[data bytes];
+    NSUInteger inLength = [data length];
+    NSInteger outLength = ((inLength + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1));
+    unsigned char *output =(unsigned char *)calloc(outLength, sizeof(unsigned char));
+    bzero(output, outLength*sizeof(unsigned char));
+    size_t additionalNeeded = 0;
+    
+    unsigned char *iv = (unsigned char *)calloc(kCCBlockSize3DES, sizeof(unsigned char));
+    bzero(iv, kCCBlockSize3DES * sizeof(unsigned char));
+    
+    NSString *key = @"abcdefg123123123";
+    const void *vkey = (const void *) [key UTF8String];
+    
+    
+    CCCryptorStatus err = CCCrypt(kCCEncrypt,
+                                  kCCAlgorithm3DES,
+                                  kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                  vkey,
+                                  kCCKeySize3DES,
+                                  iv,
+                                  input,
+                                  inLength,
+                                  output,
+                                  outLength,
+                                  &additionalNeeded);
+    //NSLog(@"encrypt err: %d", err);
+    
+    if(0);
+    else if (err == kCCParamError) NSLog(@"PARAM ERROR");
+    else if (err == kCCBufferTooSmall) NSLog(@"BUFFER TOO SMALL");
+    else if (err == kCCMemoryFailure) NSLog(@"MEMORY FAILURE");
+    else if (err == kCCAlignmentError) NSLog(@"ALIGNMENT");
+    else if (err == kCCDecodeError) NSLog(@"DECODE ERROR");
+    else if (err == kCCUnimplemented) NSLog(@"UNIMPLEMENTED");
+    
+    free(iv);
+    
+    NSString *result;
+    //NSData *myData = [NSData dataWithBytesNoCopy:output length:outLength freeWhenDone:YES];
+    NSData *myData = [NSData dataWithBytesNoCopy:output length:(NSUInteger)additionalNeeded freeWhenDone:YES];
+    //NSLog(@"data : %@", myData);
+    //NSLog(@"encrypted string : %s", [myData bytes]);
+    //NSLog(@"encrypted length : %d", [myData length]);
+    result = [myData base64Encoding];
+    
+    //NSLog(@"base64encoded : %@", result);
+    
+    return result;
+}
+
+//키를 입력받아 암호화한다
++ (NSString *)encrypt3DESWithKey:(NSString *)str key:(NSString *)key
+{
+    //NSLog(@"encrypt input string : %@", str);
+    //NSLog(@"input length : %d", [str length]);
+    NSData *data = [str dataUsingEncoding: NSUTF8StringEncoding];
+    //NSLog(@"data : %@", data);
+    unsigned char *input = (unsigned char*)[data bytes];
+    NSUInteger inLength = [data length];
+    NSInteger outLength = ((inLength + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1));
+    unsigned char *output =(unsigned char *)calloc(outLength, sizeof(unsigned char));
+    bzero(output, outLength*sizeof(unsigned char));
+    size_t additionalNeeded = 0;
+    
+    unsigned char *iv = (unsigned char *)calloc(kCCBlockSize3DES, sizeof(unsigned char));
+    bzero(iv, kCCBlockSize3DES * sizeof(unsigned char));
+    
+    const void *vkey = (const void *) [key UTF8String];
+    
+    
+    CCCryptorStatus err = CCCrypt(kCCEncrypt,
+                                  kCCAlgorithm3DES,
+                                  kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                  vkey,
+                                  kCCKeySize3DES,
+                                  iv,
+                                  input,
+                                  inLength,
+                                  output,
+                                  outLength,
+                                  &additionalNeeded);
+    //NSLog(@"encrypt err: %d", err);
+    
+    if(0);
+    else if (err == kCCParamError) NSLog(@"PARAM ERROR");
+    else if (err == kCCBufferTooSmall) NSLog(@"BUFFER TOO SMALL");
+    else if (err == kCCMemoryFailure) NSLog(@"MEMORY FAILURE");
+    else if (err == kCCAlignmentError) NSLog(@"ALIGNMENT");
+    else if (err == kCCDecodeError) NSLog(@"DECODE ERROR");
+    else if (err == kCCUnimplemented) NSLog(@"UNIMPLEMENTED");
+    
+    free(iv);
+    
+    NSString *result;
+    //NSData *myData = [NSData dataWithBytesNoCopy:output length:outLength freeWhenDone:YES];
+    NSData *myData = [NSData dataWithBytesNoCopy:output length:(NSUInteger)additionalNeeded freeWhenDone:YES];
+    //NSLog(@"data : %@", myData);
+    //NSLog(@"encrypted string : %s", [myData bytes]);
+    //NSLog(@"encrypted length : %d", [myData length]);
+    result = [myData base64Encoding];
+    
+    //NSLog(@"base64encoded : %@", result);
+    
+    return result;
+}
+
+// 3DES 복호화
++ (NSString *)decrypt3DES:(NSString *)str decodingKey:(NSString *)decodingKey
+{
+    //NSLog(@"decrypt input string : %@", str);
+    NSData *decodedData = [NSData dataWithBase64EncodedString:str];
+    //NSLog(@"data : %@", decodedData);
+    //NSLog(@"base64decoded : %s", [decodedData bytes]);
+    
+    unsigned char *input = (unsigned char*)[decodedData bytes];
+    NSUInteger inLength = [decodedData length];
+    NSInteger outLength = ((inLength + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1));
+    unsigned char *output =(unsigned char *)calloc(outLength, sizeof(unsigned char));
+    bzero(output, outLength*sizeof(unsigned char));
+    size_t additionalNeeded = 0;
+    
+    
+    unsigned char *iv = (unsigned char *)calloc(kCCBlockSize3DES, sizeof(unsigned char));
+    bzero(iv, kCCBlockSize3DES * sizeof(unsigned char));
+    
+    NSString *key = decodingKey;
+    const void *vkey = (const void *) [key UTF8String];
+    
+    
+    CCCryptorStatus err = CCCrypt(kCCDecrypt,
+                                  kCCAlgorithm3DES,
+                                  kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                  vkey,
+                                  kCCKeySize3DES,
+                                  iv,
+                                  input,
+                                  inLength,
+                                  output,
+                                  outLength,
+                                  &additionalNeeded);
+    //NSLog(@"encrypt err: %d", err);
+    
+    if(0);
+    else if (err == kCCParamError) NSLog(@"PARAM ERROR");
+    else if (err == kCCBufferTooSmall) NSLog(@"BUFFER TOO SMALL");
+    else if (err == kCCMemoryFailure) NSLog(@"MEMORY FAILURE");
+    else if (err == kCCAlignmentError) NSLog(@"ALIGNMENT");
+    else if (err == kCCDecodeError) NSLog(@"DECODE ERROR");
+    else if (err == kCCUnimplemented) NSLog(@"UNIMPLEMENTED");
+    
+    free(iv);
+    
+    NSString *result;
+    //NSData *myData = [NSData dataWithBytes:(const void *)output length:(NSUInteger)additionalNeeded];
+    //NSData *myData = [NSData dataWithBytesNoCopy:output length:outLength freeWhenDone:YES];
+    NSData *myData = [NSData dataWithBytesNoCopy:output length:(NSUInteger)additionalNeeded freeWhenDone:YES];
+    //NSLog(@"data : %@", myData);
+    //NSLog(@"decrypted string : %s", [myData bytes]);
+    //NSLog(@"decrypted length : %d", [myData length]);
+    
+    result = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+    //result = [NSString stringWithFormat:@"%.*s",[myData length], [myData bytes]];
+    //result = [NSString stringWithUTF8String:[myData bytes]];
+    
+    //NSLog(@"output length : %d", [result length]);
+    //NSLog(@"result : %@", result);
+    
+    return result;
 }
 @end

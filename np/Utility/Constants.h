@@ -57,8 +57,9 @@
 #pragma mark Common
 #define BUTTON_BGCOLOR_ENABLE       [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1.0f]
 #define BUTTON_BGCOLOR_DISABLE      [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
-#define CIRCLE_BACKGROUND_COLOR_SELECTED   [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]
-#define CIRCLE_BACKGROUND_COLOR_UNSELECTED [UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]
+#define CIRCLE_BACKGROUND_COLOR_SELECTED    [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]
+#define CIRCLE_BACKGROUND_COLOR_UNSELECTED  [UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]
+#define CIRCLE_TEXT_COLOR_UNSELECTED        [UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]
 #define REFRESH_HEADER_HEIGHT   76.0f
 #define SECTION_HEADER_HEIGHT   31.0f
 #define SECTION_FOOTER_HEIGHT   93.0f
@@ -78,11 +79,14 @@
 // timeline에서 고정핀을 사용한 메시지 id
 #define TIMELINE_PIN_MESSAGE_ID @"pinnedServerMessageId"
 
+#define ACCOUNT_NICKNAME_DICTIONARY     @"accountNicknameDictionary"
+
 #pragma mark 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"
 #define WITHDRAW_TYPE_STRING           @"출금"
 #define INCOME_STRING_COLOR     [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1.0f]
 #define WITHDRAW_STRING_COLOR   [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1.0f]
+#define STROKE_LINE_COLOR       [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
 
 // 가입완료된 사용자 설정
 #define IS_USER                 @"isUser"
@@ -93,12 +97,13 @@
 // 통신 결과 값
 #define RESULT                  @"result"
 #define RESULT_SUCCESS          @"00000"
+#define RESULT_SUCCESS_ZERO     @"0"
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
 
 #pragma mark 앱버전 체크
 // 앱 버전 체크
-#define REQUEST_APP_VERSION         @"EFPU_INITAPP.cmd"
+#define REQUEST_APP_VERSION         @"EFPU0000R.cmd"
 #define REQUEST_APP_VERSION_UUID    @"uuid"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
 
@@ -109,15 +114,24 @@
 #define REQUEST_CERT_SSLSIGN_TBS    @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
 // crm 휴대폰 번호
-#define RESPONSE_CERT_CRM_MOBILE    @"crmMobile"
+#define RESPONSE_CERT_CRM_MOBILE    @"mobile_number"
 // ums id
 #define RESPONSE_CERT_UMS_USER_ID   @"umsUserId"
 // 인터넷뱅킹 id
 #define RESPONSE_CERT_IB_USER_ID    @"ibUserId"
 // 주민등록번호
-#define RESPONSE_CERT_RLNO          @"rlno"
+#define RESPONSE_CERT_RLNO          @"resident_no"
 // 전체 계좌번호
-#define RESPONSE_CERT_ACCOUNT_LIST  @"accountAllRecords"
+#define RESPONSE_CERT_ACCOUNT_LIST  @"sub"
+
+// 계좌 인증
+#define REQUEST_ACCOUNT             @"EFPU1002R.cmd"
+// 계좌번호
+#define REQUEST_ACCOUNT_NUMBER      @"account_number"
+// 계좌 비밀번호
+#define REQUEST_ACCOUNT_PASSWORD    @"account_password"
+// 생년월일
+#define REQUEST_ACCOUNT_BIRTHDAY    @"user_birthday"
 
 #pragma mark 휴대폰 인증번호 발송
 #define REQUEST_PHONE_AUTH          @"EFPUW031001.cmd"

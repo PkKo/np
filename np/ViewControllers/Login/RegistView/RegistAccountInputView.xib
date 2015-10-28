@@ -19,18 +19,19 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="325"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ul-Aw-w6F">
-                                    <rect key="frame" x="0.0" y="18" width="320" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="1Ul-Aw-w6F">
+                                    <rect key="frame" x="0.0" y="15" width="320" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <string key="text">본인인증을 위해 고객님의 계좌번호와 
 비밀번호를 입력해주세요.</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌번호 (-없이 입력)" minimumFontSize="17" id="lYW-2z-S45" customClass="CommonTextField">
                                     <rect key="frame" x="18" y="63" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -38,6 +39,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌비밀번호" minimumFontSize="17" id="U1b-JR-Jup" customClass="CommonTextField">
                                     <rect key="frame" x="18" y="112" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -45,6 +47,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="생년월일" minimumFontSize="17" id="xm9-fF-INu" customClass="CommonTextField">
                                     <rect key="frame" x="18" y="161" width="284" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -52,6 +55,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vs4-sB-g6n">
                                     <rect key="frame" x="18" y="210" width="72" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="010">
@@ -65,6 +69,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="zzV-gv-Ygn" customClass="CommonTextField">
                                     <rect key="frame" x="98" y="210" width="204" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
@@ -75,11 +80,9 @@
                                     <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nah-5K-PVX">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*휴대폰번호는 NH농렵 고개 정보에 등록된 번호와 일치해야 서비스 신청이 가능합니다." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nah-5K-PVX">
                                     <rect key="frame" x="18" y="283" width="284" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <string key="text">*휴대폰번호는 NH농렵 고개 정보에 등록된 번호와 일치해야
-  서비스 신청이 가능합니다.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>

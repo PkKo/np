@@ -47,9 +47,7 @@
     NSString *carrierListPath = [[NSBundle mainBundle] pathForResource:@"CarrierList" ofType:@"plist"];
     carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];
     
-    isAuthNumberConfirm = false;
-    isPhoneNumberConfirm = false;
-    
+    crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
     authNumCounter = 0;
 }
 
@@ -88,10 +86,13 @@
  */
 - (IBAction)nextViewClick:(id)sender
 {
-#ifdef DEV_MODE
+#if 0
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
+    
+    [self authNumberTimerStop];
+    
     // 휴대폰 번호 입력 체크
     if([[phoneNumberInput text] length] == 0)
     {
@@ -109,7 +110,7 @@
     }
     
     // 인증번호 유효성 체크
-    if(!isAuthNumberConfirm)
+    if(![authNumber isEqualToString:phoneAuthNumInput.text])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 인증번호가 일치하지 않습니다.\n다시 확인해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
@@ -117,7 +118,7 @@
     }
     
     // 휴대폰 번호 유효성 체크(CRM 확인)
-    if(!isPhoneNumberConfirm)
+    if([crmPhoneNumber isEqualToString:phoneNumberInput.text])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
@@ -125,6 +126,12 @@
     }
     
     // 인증번호 인증유효시간 체크
+    if(authNumCounter == AUTH_NUMBER_TIMER_MAX)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증번호 입력 시간을 초과했습니다.\n인증번호 재요청 후 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -159,7 +166,7 @@
         [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %d초)", AUTH_NUMBER_TIMER_MAX] forState:UIControlStateNormal];
         
         // 임시 코드
-        NSString *authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
+        authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
         [phoneAuthNumInput setText:authNumber];
     }
 }

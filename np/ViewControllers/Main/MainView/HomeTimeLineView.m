@@ -540,7 +540,17 @@
             }
             
             // 계좌별명 + 계좌명
-            [cell.accountLabel setText:inboxData.nhAccountNumber];
+            NSString *accountNickName = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:inboxData.nhAccountNumber];
+            
+            if(accountNickName != nil && [accountNickName length] > 0)
+            {
+                [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, inboxData.nhAccountNumber]];
+            }
+            else
+            {
+                [cell.accountLabel setText:inboxData.nhAccountNumber];
+            }
+            
             // 잔액
             if(balance != nil && [balance length] > 0)
             {
@@ -585,9 +595,14 @@
             if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
             {
                 CGFloat pinButtonHeight = cell.pinButton.frame.size.height * (viewHeight / IPHONE_FIVE_FRAME_HEIGHT);
-                /*
-                cell.pinButton setFrame:CGRectMake(cell.pinButton.frame.origin.x
-                                                    - (pinButtonHeight / 2),*/
+                [cell.pinButton setFrame:CGRectMake(cell.pinButton.frame.origin.x
+                                                    - (pinButtonHeight / 2),
+                                                   cell.pinButton.frame.origin.y - (pinButtonHeight / 2),
+                                                    pinButtonHeight, pinButtonHeight)];
+                [cell.moreButton setFrame:CGRectMake(cell.moreButton.frame.origin.x
+                                                    - (pinButtonHeight / 2),
+                                                    cell.moreButton.frame.origin.y - (pinButtonHeight / 2),
+                                                    pinButtonHeight, pinButtonHeight)];
             }
             
             return cell;

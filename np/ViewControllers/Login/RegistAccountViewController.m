@@ -293,19 +293,22 @@
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     NSLog(@"%@", cookies);
     
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
         if([(NSArray *)[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] count] > 0)
         {
-            NSArray *allAccountList = [NSArray arrayWithArray:[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
-            [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:@"AllAccounts"];
+            NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+            [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
         }
         NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
-        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
-        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
+//        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
+//        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
         NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
+        [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -362,27 +365,43 @@
 {
     [self startIndicator];
     
-    HttpRequest *req = [HttpRequest getInstance];
+    tempAccountNum = [accountInfo objectForKey:REQUEST_ACCOUNT_NUMBER];
+    
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_NUMBER] forKey:REQUEST_ACCOUNT_NUMBER];
+    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_PASSWORD] forKey:REQUEST_ACCOUNT_PASSWORD];
+    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_BIRTHDAY] forKey:REQUEST_ACCOUNT_BIRTHDAY];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
     
     // Request Start
-    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1];
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(checkRegistAccountResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+    
+//    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1];
 }
 
 - (void)checkRegistAccountResponse:(NSDictionary *)response
 {
     [self stopIndicator];
     
-#ifdef DEV_MODE
+#if 0
     // 계좌번호로 인증한걸로 저장한다.
     [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
     // 인증 성공한 이후 휴대폰 인증으로 이동
     RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         // 계좌번호로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
+        NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
+        NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+        [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
+        [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
+        [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

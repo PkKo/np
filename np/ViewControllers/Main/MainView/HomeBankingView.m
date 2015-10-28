@@ -286,7 +286,17 @@
     }
     
     // 계좌별명 + 계좌명
-    [cell.accountLabel setText:inboxData.nhAccountNumber];
+    NSString *accountNickName = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:inboxData.nhAccountNumber];
+    
+    if(accountNickName != nil && [accountNickName length] > 0)
+    {
+        [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, inboxData.nhAccountNumber]];
+    }
+    else
+    {
+        [cell.accountLabel setText:inboxData.nhAccountNumber];
+    }
+    
     // 잔액
     [cell.remainAmountLabel setText:[NSString stringWithFormat:@"잔액 %@원", balance]];
     
@@ -295,6 +305,7 @@
     [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     // more 버튼
     [cell.moreButton setIndexPath:indexPath];
+    [cell.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     if(indexPath.row == 0)
     {
@@ -309,6 +320,20 @@
     if(pinIdList != nil && [pinIdList containsObject:inboxData.serverMessageKey])
     {
         [cell.pinButton setSelected:YES];
+    }
+    
+    CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
+    if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
+    {
+        CGFloat pinButtonHeight = cell.pinButton.frame.size.height * (viewHeight / IPHONE_FIVE_FRAME_HEIGHT);
+        [cell.pinButton setFrame:CGRectMake(cell.pinButton.frame.origin.x
+                                            - (pinButtonHeight / 2),
+                                            cell.pinButton.frame.origin.y - (pinButtonHeight / 2),
+                                            pinButtonHeight, pinButtonHeight)];
+        [cell.moreButton setFrame:CGRectMake(cell.moreButton.frame.origin.x
+                                             - (pinButtonHeight / 2),
+                                             cell.moreButton.frame.origin.y - (pinButtonHeight / 2),
+                                             pinButtonHeight, pinButtonHeight)];
     }
     
     return cell;
@@ -363,7 +388,7 @@
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:inboxData.serverMessageKey
                                                                                        transactionDate:[NSDate dateWithTimeIntervalSince1970:inboxData.regDate]
                                                                               transactionAccountNumber:inboxData.nhAccountNumber
-                                                                                transactionAccountType:@"급여통장"
+                                                                                transactionAccountType:@""
                                                                                     transactionDetails:inboxData.oppositeUser
                                                                                            transactionType:inboxData.inboxType
                                                                                      transactionAmount:@(inboxData.amount)
