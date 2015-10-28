@@ -79,7 +79,7 @@
 
 + (void)requestDeleteMessages:(NSArray *)sMsgKeys;
 
-+ (void)requestReadMessageWithMsgKey:(NSString *)sMsgKey readMethod:(int)readMethod;
++ (void)requestReadMessageWithMsgKey:(NSArray *)sMsgKeys readMethod:(int)readMethod;
 
 + (void)requestContents:(NSString *)contentKey;
 

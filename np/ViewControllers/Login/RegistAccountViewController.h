@@ -14,6 +14,11 @@
 {
     BOOL isCertRoaming;
     NSString *tempAccountNum;
+    
+    NSString *certNumOneString;
+    NSString *certNumTwoString;
+    NSString *certNumThreeString;
+    NSString *certNumFourString;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;

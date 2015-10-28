@@ -30,6 +30,10 @@
 // 캐리어 선택 피커 뷰
 @property (strong, nonatomic) IBOutlet UIPickerView *carrierPickerView;
 
+@property (strong, nonatomic) IBOutlet UILabel *descLabelOne;
+@property (strong, nonatomic) IBOutlet UILabel *descLabelTwo;
+@property (strong, nonatomic) IBOutlet UILabel *descLabelThree;
+
 - (IBAction)carrierNumClick:(id)sender;
 - (IBAction)requestAuthNumber:(id)sender;
 - (IBAction)nextViewClick:(id)sender;

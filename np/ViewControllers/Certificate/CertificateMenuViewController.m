@@ -8,6 +8,7 @@
 
 #import "CertificateMenuViewController.h"
 #import "CertificateRoamingViewController.h"
+#import "CertificateRoamingPhoneViewController.h"
 #import "CertificateListViewController.h"
 #import "CertMenuCell.h"
 
@@ -80,9 +81,9 @@
             vc = [[CertificateRoamingViewController alloc] init];
             break;
         }
-        case 1:
+        case 1:// 스마트폰에서 인증서 가져오기
         {
-            vc = [[CertificateRoamingViewController alloc] init];
+            vc = [[CertificateRoamingPhoneViewController alloc] init];
             break;
         }
             

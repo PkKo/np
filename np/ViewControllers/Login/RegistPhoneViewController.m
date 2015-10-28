@@ -28,6 +28,10 @@
 @synthesize phoneAuthNumInput;
 @synthesize carrierPickerView;
 
+@synthesize descLabelOne;
+@synthesize descLabelTwo;
+@synthesize descLabelThree;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,6 +53,21 @@
     
     crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
     authNumCounter = 0;
+    
+    NSMutableAttributedString *textOne = [[NSMutableAttributedString alloc] initWithString:descLabelOne.text];
+    [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(0, 11)];
+    [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(11, 40)];
+    [descLabelOne setAttributedText:textOne];
+    
+    NSMutableAttributedString *textTwo = [[NSMutableAttributedString alloc] initWithString:descLabelTwo.text];
+    [textTwo addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(0, 13)];
+    [textTwo addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(13, textTwo.length - 13)];
+    [descLabelTwo setAttributedText:textTwo];
+    
+    NSMutableAttributedString *textThree = [[NSMutableAttributedString alloc] initWithString:descLabelThree.text];
+    [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(0, 19)];
+    [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(19, textThree.length - 19)];
+    [descLabelThree setAttributedText:textThree];
 }
 
 - (void)didReceiveMemoryWarning

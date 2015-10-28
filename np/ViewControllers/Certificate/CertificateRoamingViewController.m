@@ -28,6 +28,10 @@
 @synthesize scrollView;
 @synthesize bottomView;
 
+@synthesize descriptionOneLabel;
+@synthesize descriptionTwoLabel;
+@synthesize descriptionThreeLabel;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,6 +52,25 @@
     
     // 인증번호 요청
     [self performSelector:@selector(requestAuthNumber) withObject:nil afterDelay:0.01f];
+    
+    NSMutableAttributedString *textOne = [[NSMutableAttributedString alloc] initWithString:descriptionOneLabel.text];
+    [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(0, 13)];
+    [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(13, 28)];
+    [textOne addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(13, 28)];
+    [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(41, 8)];
+    [descriptionOneLabel setAttributedText:textOne];
+    
+    NSMutableAttributedString *textTwo = [[NSMutableAttributedString alloc] initWithString:descriptionTwoLabel.text];
+    [textTwo addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(0, 23)];
+    [textTwo addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(23, 15)];
+    [textTwo addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(38, 8)];
+    [descriptionTwoLabel setAttributedText:textTwo];
+    
+    NSMutableAttributedString *texthree = [[NSMutableAttributedString alloc] initWithString:descriptionThreeLabel.text];
+    [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(0, 19)];
+    [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(19, 9)];
+    [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(28, 8)];
+    [descriptionThreeLabel setAttributedText:texthree];
 }
 
 - (void)didReceiveMemoryWarning

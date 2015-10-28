@@ -78,7 +78,7 @@
 
 // timeline에서 고정핀을 사용한 메시지 id
 #define TIMELINE_PIN_MESSAGE_ID @"pinnedServerMessageId"
-
+// 계좌별칭
 #define ACCOUNT_NICKNAME_DICTIONARY     @"accountNicknameDictionary"
 
 #pragma mark 입출금 내역 스트링
@@ -137,6 +137,21 @@
 #define REQUEST_PHONE_AUTH          @"EFPUW031001.cmd"
 #define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
 #define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
+
+#pragma mark 계좌 알림 옵션
+#define REQUEST_NOTI_OPTION                 @"EFPUW022000.cmd"
+#define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
+#define REQUEST_NOTI_OPTION_EVENT_TYPE      @"noti_event_type"
+#define REQUEST_NOTI_OPTION_PRICE           @"noti_price"
+#define REQUEST_NOTI_OPTION_TIME_FLAG       @"noti_time_flag"
+#define REQUEST_NOTI_OPTION_UNNOTI_ST       @"unnoti_st"
+#define REQUEST_NOTI_OPTION_UNNOTI_ET       @"unnoti_et"
+#define REQUEST_NOTI_OPTION_BALANCE_FLAG    @"moneyview_flag"
+#define REQUEST_NOTI_OPTION_AUTO_FLAG       @"noti_auto_flag"
+#define REQUEST_NOTI_OPTION_PERIOD_TYPE     @"noti_period_type"
+#define REQUEST_NOTI_OPTION_NOTI_TIME_ONE   @"noti_time1"
+#define REQUEST_NOTI_OPTION_NOTI_TIME_TWO   @"noti_time2"
+#define REQUEST_NOTI_OPTION_NOTI_TIME_THREE @"noti_time3"
 
 #pragma mark 최근 공지사항 1건
 #define REQUEST_RECENT_NOTICE       @"SBAB1010First.cmd"
