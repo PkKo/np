@@ -163,10 +163,7 @@
         case 2:
         {
             // option view에서 데이터 가져와서 해당 계좌에 대한 옵션 설정을 마친 후
-            
-            // 등록완료 뷰 컨트롤러로 이동
-            RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self accountOptionSetReqeust];
             break;
         }
             
@@ -207,6 +204,89 @@
         [optionView initDataWithAccountNumber:inputAccountView.addNewAccountInput.text];
         [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         [contentView addSubview:optionView];
+    }
+}
+
+#pragma mark - 계좌옵션 설정
+- (void)accountOptionSetReqeust
+{
+    /*
+     // 입출금 선택(1:입출 2:입금 3:출금)
+     @synthesize selectedType;
+     // 통지금액(0:x, 1:천, 2:만, 3:십만, 4:백만, 5:천만, 6:일억, 7:십억)
+     @synthesize selectedAmount;
+     // 제한시간 설정(0:미설정, 1:설정)
+     @synthesize notiTimeFlag;
+     // 알림제한시간(시작)(-1:미설정, 0~23시)
+     @synthesize notiStartTime;
+     // 알림제한시간(종료)(-1:미설정, 0~23시)
+     @synthesize notiEndTime;
+     // 잔액표시여부(1:표시, 2:미표시)
+     @synthesize balanceFlag;
+     // 자동이체 선택(1:발송, 2:미발송, 3:실시간)
+     @synthesize notiAutoFlag;
+     // 알림주기(1:실시간 2:지정)
+     @synthesize notiPeriodType;
+     // 지정시간 1(-1:미설정, 0~23시)
+     @synthesize notiPeriodTime1;
+     @synthesize notiPeriodTime2;
+     @synthesize notiPeriodTime3;
+     */
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    
+    [reqBody setObject:optionView.accountNumberLabel.text forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.selectedType] forKey:REQUEST_NOTI_OPTION_EVENT_TYPE];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.selectedAmount] forKey:REQUEST_NOTI_OPTION_PRICE];
+    [reqBody setObject:[NSNumber numberWithBool:optionView.notiTimeFlag] forKey:REQUEST_NOTI_OPTION_TIME_FLAG];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiStartTime] forKey:REQUEST_NOTI_OPTION_UNNOTI_ST];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiEndTime] forKey:REQUEST_NOTI_OPTION_UNNOTI_ET];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.balanceFlag] forKey:REQUEST_NOTI_OPTION_BALANCE_FLAG];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiAutoFlag] forKey:REQUEST_NOTI_OPTION_AUTO_FLAG];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiPeriodType] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiPeriodTime1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiPeriodTime2] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInteger:optionView.notiPeriodTime3] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(accountOptionSetResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)accountOptionSetResponse:(NSDictionary *)response
+{
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        NSString *umsId = [response objectForKey:@"user_id"];
+        if(umsId != nil)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:umsId forKey:RESPONSE_CERT_UMS_USER_ID];
+            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:IS_USER];
+        
+        if([optionView.accountNicknameInput.text length] > 0)
+        {
+            NSMutableDictionary *nickNameDic = [[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY];
+            if(nickNameDic == nil)
+            {
+                nickNameDic = [[NSMutableDictionary alloc] init];
+            }
+            [nickNameDic setObject:optionView.accountNicknameInput.text forKey:optionView.accountNumberLabel.text];
+
+            [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
+        }
+        
+        // 등록완료 뷰 컨트롤러로 이동
+        RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
     }
 }
 

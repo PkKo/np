@@ -141,7 +141,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 
 - (void)loadedInboxCategoryList:(NSArray *)categoryList;
 
-- (void)readMessage:(BOOL)success sMsgKey:(NSString *)sMsgKey;
+- (void)readMessage:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys;
 
 - (void)loadedContents:(BOOL)success contents:(ContentsData *)contents;
 

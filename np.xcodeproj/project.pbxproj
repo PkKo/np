@@ -15,6 +15,8 @@
 		1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1797119D1BB805F3007131A5 /* ChartDataItemView.m */; settings = {ASSET_TAGS = (); }; };
 		179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1797119F1BB80604007131A5 /* ChartDataItemView.xib */; settings = {ASSET_TAGS = (); }; };
 		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; settings = {ASSET_TAGS = (); }; };
+		A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D62D2D1BC3617B001E16B0 /* HomeBankingView.m */; settings = {ASSET_TAGS = (); }; };
 		A2D62D301BC36188001E16B0 /* HomeBankingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D62D2F1BC36188001E16B0 /* HomeBankingView.xib */; settings = {ASSET_TAGS = (); }; };
@@ -606,6 +608,9 @@
 		1797119F1BB80604007131A5 /* ChartDataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartDataItemView.xib; sourceTree = "<group>"; };
 		179711A11BB80869007131A5 /* ChartDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataView.h; sourceTree = "<group>"; };
 		179711A21BB80869007131A5 /* ChartDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataView.m; sourceTree = "<group>"; };
+		A2BE45B21BE0908B007D915E /* CertificateRoamingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingPhoneViewController.h; sourceTree = "<group>"; };
+		A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingPhoneViewController.m; sourceTree = "<group>"; };
+		A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingPhoneViewController.xib; sourceTree = "<group>"; };
 		A2CAD8BB1BDF8084008C1244 /* nsdataadditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nsdataadditions.h; sourceTree = "<group>"; };
 		A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nsdataadditions.m; sourceTree = "<group>"; };
 		A2D62D2C1BC3617B001E16B0 /* HomeBankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBankingView.h; sourceTree = "<group>"; };
@@ -2261,6 +2266,9 @@
 				A2E2353E1BAA4AF500BAEBEA /* CertPasswordChangeViewController.h */,
 				A2E2353F1BAA4AF500BAEBEA /* CertPasswordChangeViewController.m */,
 				A2E235401BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib */,
+				A2BE45B21BE0908B007D915E /* CertificateRoamingPhoneViewController.h */,
+				A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */,
+				A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */,
 			);
 			path = Certificate;
 			sourceTree = "<group>";
@@ -3325,6 +3333,7 @@
 				A2DADE1E1BDF008300457E9A /* icon_left_01@2x.png in Resources */,
 				A2DADE191BDF008300457E9A /* icon_indicator_on@2x.png in Resources */,
 				A2DADE761BDF008300457E9A /* icon_withdraw_07_sel@2x.png in Resources */,
+				A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */,
 				A2DADE531BDF008300457E9A /* icon_sticker_03@2x.png in Resources */,
 				A2D95B4F1BA8F1DD00DC943D /* nFilterCharForPad.xib in Resources */,
 				A2DADE7A1BDF008300457E9A /* icon_withdraw_09_sel@2x.png in Resources */,
@@ -3596,6 +3605,7 @@
 				A54B94DD1BAA4EE400D5D99B /* PieChartWithInputData.m in Sources */,
 				A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */,
 				A54B3B741BBE26DE00F883E9 /* ArchivedTransItemRemoveActionView.m in Sources */,
+				A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */,
 				A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */,
 				A5EA7E3D1BBBB36000626C74 /* StorageBoxController.m in Sources */,
 				A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */,

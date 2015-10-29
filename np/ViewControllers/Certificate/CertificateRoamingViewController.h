@@ -20,5 +20,10 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
+
+@property (strong, nonatomic) IBOutlet UILabel *descriptionOneLabel;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionTwoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionThreeLabel;
+
 - (IBAction)nextButtonClick:(id)sender;
 @end

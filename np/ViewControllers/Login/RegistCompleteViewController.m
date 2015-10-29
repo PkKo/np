@@ -8,6 +8,8 @@
 
 #import "RegistCompleteViewController.h"
 #import "MainPageViewController.h"
+#import "ExchangeSettingViewController.h"
+#import "AccountAddViewController.h"
 
 @interface RegistCompleteViewController ()
 
@@ -23,9 +25,9 @@
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mMenuButton setHidden:YES];
+    [self.mNaviView.mMenuButton setHidden:NO];
     [self.mNaviView.mTitleLabel setHidden:YES];
-    [self.mNaviView.imgTitleView setHidden:NO];
+    [self.mNaviView.imgTitleView setHidden:YES];
     
     [addAccountButton.layer setBorderColor:[UIColor colorWithRed:38.0f/255.0f green:156.0f/255.0f blue:255.0f/255.0f alpha:1.0f].CGColor];
     [addAccountButton.layer setBorderWidth:1.0f];
@@ -42,7 +44,7 @@
  */
 - (IBAction)quickViewSettingClick:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비로그인 상태에서 입출금 알림과\n기타알림 간편보기 조회 기능을\n사용하시겠습니까?" delegate:self cancelButtonTitle:@"확인" otherButtonTitles:@"취소", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비로그인 상태에서 입출금 알림과\n기타알림 간편보기 조회 기능을\n사용하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
     [alertView setTag:111];
     [alertView show];
 }
@@ -52,10 +54,18 @@
  */
 - (IBAction)currentNotiSettingClick:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"환율 알림 설정 페이지로 이동한다.\n상세 동작은 추후 페이지 구성이 완료되면 구현\n현재는 메인페이지로만 이동" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-    [alertView show];
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    // 메인 시작
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
     
-    [self moveMainPage:nil];
+    [self.navigationController setViewControllers:@[slidingViewController] animated:NO];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    
+    ExchangeSettingViewController *exchangeVC = [[ExchangeSettingViewController alloc] init];
+    ECSlidingViewController *exchangeEcVc = [[ECSlidingViewController alloc] initWithTopViewController:exchangeVC];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:exchangeEcVc animated:YES];
 }
 
 /**
@@ -63,10 +73,18 @@
  */
 - (IBAction)addAccountClick:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌 추가 페이지로 이동한다.\n상세 동작은 추후 페이지 구성이 완료되면 구현\n현재는 메인페이지로만 이동" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-    [alertView show];
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    // 메인 시작
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
     
-    [self moveMainPage:nil];
+    [self.navigationController setViewControllers:@[slidingViewController] animated:NO];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    
+    AccountAddViewController *accountAddVc = [[AccountAddViewController alloc] init];
+    ECSlidingViewController *accountEcVc = [[ECSlidingViewController alloc] initWithTopViewController:accountAddVc];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:accountEcVc animated:YES];
 }
 
 /**
@@ -91,15 +109,9 @@
     {
         case 111:
         {
-            if(buttonIndex == 0)
+            if(buttonIndex == 1)
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"간편보기 설정 값 입력 후 메인페이지로 이동" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-            }
-            else
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"간편보기 설정없이 메인페이지로 이동" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
+                [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:QUICK_VIEW_SETTING];
             }
             break;
         }

@@ -18,6 +18,8 @@
 #import "DrawPatternLockViewController.h"
 #import "LoginSimpleVerificationViewController.h"
 
+#import "RegistCompleteViewController.h"
+
 @interface SplashViewController ()
 
 @end
@@ -117,18 +119,37 @@
     //[[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    // 가입시작
-//    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
-    // 메인 시작
-    MainPageViewController *vc = [[MainPageViewController alloc] init];
-    [vc setStartPageIndex:0];
-    // 퀵뷰
-//    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
-    slidingViewController.topViewController = vc;
+    UIViewController *vc = nil;
+    NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
-    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
-//    [self.navigationController pushViewController:vc animated:YES];
+    if(isUser != nil && [isUser isEqualToString:@"Y"])
+    {
+        NSString *quickView = [[NSUserDefaults standardUserDefaults] objectForKey:QUICK_VIEW_SETTING];
+        // 간편보기 확인
+        if(quickView != nil && [quickView isEqualToString:@"Y"])
+        {
+            // 퀵뷰
+            vc = [[HomeQuickViewController alloc] init];
+        }
+        else
+        {
+            //Login
+        }
+        // 메인 시작
+        //    MainPageViewController *vc = [[MainPageViewController alloc] init];
+        //    [vc setStartPageIndex:0];
+        slidingViewController.topViewController = vc;
+        
+        [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    }
+    else
+    {
+        // 가입시작
+        vc = [[RegistAccountViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+//    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
 }
 
 @end
