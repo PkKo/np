@@ -352,14 +352,14 @@
 {
     [self stopIndicator];
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    NSLog(@"%@", cookies);
+//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+//    NSLog(@"%@", cookies);
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
-        if([(NSArray *)[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] count] > 0)
+        if([(NSArray *)[[response objectForKey:@"list"] objectForKey:RESPONSE_CERT_ACCOUNT_LIST] count] > 0)
         {
             NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
             [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
@@ -609,6 +609,7 @@
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
             [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
             [vc setFullMode:YES];
+            [vc setSupportRetinaHD:YES];
             [vc setTopBarText:@"공인인증센터"];
             [vc setTitleText:@"공인인증서 비밀번호 입력"];
             [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
@@ -638,6 +639,8 @@
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
             [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
             [vc setFullMode:YES];
+//            [vc setToolBar:YES];
+            [vc setSupportRetinaHD:YES];
             [vc setTopBarText:@"계좌비밀번호"];
             [vc setTitleText:@"계좌 비밀번호 입력"];
             [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];

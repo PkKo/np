@@ -56,7 +56,7 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    [cell.accountNum setText:[accountList objectAtIndex:indexPath.row]];
+    [cell.accountNum setText:[[accountList objectAtIndex:indexPath.row] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
     
     [cell.selectImg.layer setCornerRadius:50];
     

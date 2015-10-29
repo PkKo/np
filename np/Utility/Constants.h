@@ -84,8 +84,8 @@
 #pragma mark 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"
 #define WITHDRAW_TYPE_STRING           @"출금"
-#define INCOME_STRING_COLOR     [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1.0f]
-#define WITHDRAW_STRING_COLOR   [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1.0f]
+#define INCOME_STRING_COLOR     [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1.0f]
+#define WITHDRAW_STRING_COLOR   [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1.0f]
 #define STROKE_LINE_COLOR       [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
 
 // 가입완료된 사용자 설정
@@ -109,7 +109,7 @@
 
 #pragma mark 공인인증서 인증
 // 공인인증서 인증
-#define REQUEST_CERT                    @"PMCNA100R.cmd"
+#define REQUEST_CERT                    @"EFPU1001R.cmd"
 #define REQUEST_CERT_LOGIN_TYPE         @"REQ_LOGINTYPE"
 #define REQUEST_CERT_SSLSIGN_TBS        @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
@@ -161,7 +161,7 @@
 #define RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE @"UMSW022001_OUT_SUB.noti_time3"
 
 #pragma mark 계좌 알림 옵션 설정
-#define REQUEST_NOTI_OPTION                 @"EFPUW022000.cmd"
+#define REQUEST_NOTI_OPTION                 @"EFPU1009R.cmd"
 #define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
 #define REQUEST_NOTI_OPTION_RECEIPTS_ID     @"receipts_payment_id"
 #define REQUEST_NOTI_OPTION_EVENT_TYPE      @"noti_event_type"

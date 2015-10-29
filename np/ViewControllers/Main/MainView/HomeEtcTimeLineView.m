@@ -9,6 +9,7 @@
 #import "HomeEtcTimeLineView.h"
 #import "HomeEtcTimeLineCell.h"
 #import "TimelineSectionData.h"
+#import "LoginUtil.h"
 
 @implementation HomeEtcTimeLineView
 
@@ -27,6 +28,14 @@
     deleteIdList = [[NSMutableArray alloc] init];
     
     [self addPullToRefreshHeader];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [timelineTableView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)addPullToRefreshHeader
@@ -127,7 +136,7 @@
 {
     UIView *sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEADER_HEIGHT)];
     
-    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]];
+    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
     
     TimelineSectionData *sectionData = [timelineSection objectAtIndex:section];
     NSString *date = sectionData.date;
@@ -162,6 +171,8 @@
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     
     NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];

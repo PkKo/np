@@ -10,6 +10,7 @@
                 <outlet property="accountListTable" destination="Sfj-SM-U10" id="vkA-wI-erk"/>
                 <outlet property="contentView" destination="Cmz-uO-L5c" id="n9i-pw-KD6"/>
                 <outlet property="emptyView" destination="Uhp-Ew-PbG" id="znl-bz-Q5i"/>
+                <outlet property="tableBgStrokeView" destination="yLe-bW-vS3" id="2gk-t1-SGC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -61,10 +62,16 @@
                             <rect key="frame" x="0.0" y="35" width="320" height="458"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
+                                <view contentMode="scaleToFill" id="yLe-bW-vS3" customClass="StrokeView">
+                                    <rect key="frame" x="17" y="14" width="286" height="343"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sfj-SM-U10">
                                     <rect key="frame" x="18" y="15" width="284" height="341"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="separatorColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="8OL-WM-o2y"/>
                                         <outlet property="delegate" destination="-1" id="EhF-bv-VvB"/>
