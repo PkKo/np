@@ -116,8 +116,6 @@
 
 - (void)setMainViewController
 {
-    //[[[LoginUtil alloc] init] showLoginPage:self.navigationController];
-
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
@@ -130,18 +128,20 @@
         {
             // 퀵뷰
             vc = [[HomeQuickViewController alloc] init];
+            slidingViewController.topViewController = vc;
+            
+            [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
         }
         else
         {
-            //Login
+            // Login
+            [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
         }
+        
         // 메인 시작
         //    MainPageViewController *vc = [[MainPageViewController alloc] init];
         //    [vc setStartPageIndex:0];
-        slidingViewController.topViewController = vc;
-        
-        [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
     }
     else
     {

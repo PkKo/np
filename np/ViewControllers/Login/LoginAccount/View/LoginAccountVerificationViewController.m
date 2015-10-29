@@ -77,7 +77,7 @@
 - (IBAction)clickToLogin {
     
     LoginUtil * util        = [[LoginUtil alloc] init];
-    NSInteger failedTimes   = [util getCertPasswordFailedTimes];
+    NSInteger failedTimes   = [util getAccountPasswordFailedTimes];
     
     NSString * alertMessage = nil;
     NSInteger tag           = ALERT_DO_NOTHING;
@@ -131,10 +131,6 @@
 - (void)loginResult:(NSDictionary *)response {
     
     LoginUtil * util        = [[LoginUtil alloc] init];
-    NSInteger failedTimes   = [util getCertPasswordFailedTimes];
-    
-    NSString * alertMessage = nil;
-    NSInteger tag           = ALERT_DO_NOTHING;
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
@@ -143,7 +139,7 @@
         
         NSLog(@"accounts: %@", accounts);
         
-        int numberOfAccounts    = [accounts count];
+        int numberOfAccounts    = (int)[accounts count];
         
         if (numberOfAccounts > 0) {
             
@@ -157,13 +153,22 @@
             }
         }
         
-        [util saveCertPasswordFailedTimes:0];
+        [util saveAccountPasswordFailedTimes:0];
         [util showMainPage];
         
     } else {
         
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        
+        /*
+        NSString * alertMessage = nil;
+        NSInteger tag           = ALERT_DO_NOTHING;
+        NSInteger failedTimes   = [util getAccountPasswordFailedTimes];
+         
         failedTimes++;
-        [util saveCertPasswordFailedTimes:failedTimes];
+        [util saveAccountPasswordFailedTimes:failedTimes];
         if (failedTimes >= 3) {
             
             alertMessage    = @"비밀번호 오류가 3회 이상 발생하여 해당 계좌 인증이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 비밀번호를 재설정해주세요.";
@@ -181,6 +186,7 @@
             alert.tag = tag;
             [alert show];
         }
+         */
     }
 }
 
