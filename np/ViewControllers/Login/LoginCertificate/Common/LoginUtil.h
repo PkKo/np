@@ -17,6 +17,7 @@
 - (LoginMethod)getLoginMethod;
 - (void)showMainPage;
 - (void)showLoginPage:(UINavigationController *)navController;
+- (void)showSelfIdentifer:(LoginMethod)loginMethod;
 
 #pragma mark - Certificate Login
 - (void)removeCertToLogin;
@@ -34,7 +35,6 @@
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController;
-- (UIViewController *)getSimpleLoginMgmt;
 - (NSString *)getSimplePassword;
 - (void)saveSimplePassword:(NSString *)simplePassword;
 - (void)removeSimplePassword;

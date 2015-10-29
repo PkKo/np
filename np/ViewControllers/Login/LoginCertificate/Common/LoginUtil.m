@@ -11,7 +11,6 @@
 #import "nFilterCharForPad.h"
 #import "NFilterNum.h"
 #import "nFilterNumForPad.h"
-#import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
 #import "LoginCertController.h"
 #import "LoginSettingsViewController.h"
@@ -23,6 +22,7 @@
 #import "LoginAccountVerificationViewController.h"
 #import "DrawPatternLockViewController.h"
 #import "LoginSimpleVerificationViewController.h"
+#import "RegistAccountViewController.h"
 
 @implementation LoginUtil
 
@@ -94,6 +94,16 @@
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
+- (void)showSelfIdentifer:(LoginMethod)loginMethod {
+    RegistAccountViewController *vc = [[RegistAccountViewController alloc] initWithNibName:@"SelfIdentifyViewController" bundle:nil];
+    [vc setIsSelfIdentified:YES];
+    [vc setLoginMethod:loginMethod];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    
+    UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
+    [navController pushViewController:eVC animated:YES];
+}
+
 #pragma mark - Certificate Login
 - (void)removeCertToLogin {
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
@@ -106,7 +116,16 @@
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     NSString * certificateName = [prefs objectForKey:PREF_KEY_CERT_TO_LOGIN];
     
+    if (!certificateName) {
+        return nil;
+    }
+    
     NSArray * certificates = [[[LoginCertController alloc] init] getCertList];
+    
+    if (!certificates || [certificates count] == 0) {
+        return nil;
+    }
+    
     for (CertInfo * cert in certificates) {
         if ([cert.subjectDN2 isEqualToString:certificateName]) {
             return cert;
@@ -166,28 +185,27 @@
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController {
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getSimpleLoginMgmt]];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[[SimplePwMgntChangeViewController alloc] initWithNibName:@"SimplePwMgntChangeViewController" bundle:nil]];
     [navController pushViewController:eVC animated:YES];
-}
-
-- (UIViewController *)getSimpleLoginMgmt {
-    UIViewController * vc = [self getSimplePassword] ?
-        [[SimplePwMgntChangeViewController alloc] initWithNibName:@"SimplePwMgntChangeViewController" bundle:nil] :
-        [[SimplePwMgntNewViewController alloc] initWithNibName:@"SimplePwMgntNewViewController" bundle:nil];
-    
-    return vc;
 }
 
 - (NSString *)getSimplePassword {
     
-    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-    return [prefs objectForKey:PREF_KEY_SIMPLE_LOGIN_SETT_PW];
+    NSUserDefaults * prefs              = [NSUserDefaults standardUserDefaults];
+    NSString * encryptedSimplePassword  = [prefs objectForKey:PREF_KEY_SIMPLE_LOGIN_SETT_PW];
+    if (!encryptedSimplePassword) {
+        return nil;
+    }
+    NSString * simplePassword           = [CommonUtil decrypt3DES:encryptedSimplePassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    return simplePassword;
 }
 
 - (void)saveSimplePassword:(NSString *)simplePassword {
     
-    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:simplePassword forKey:PREF_KEY_SIMPLE_LOGIN_SETT_PW];
+    NSUserDefaults *prefs               = [NSUserDefaults standardUserDefaults];
+    NSString * encryptedSimplePassword  = [CommonUtil encrypt3DESWithKey:simplePassword key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    
+    [prefs setObject:encryptedSimplePassword forKey:PREF_KEY_SIMPLE_LOGIN_SETT_PW];
     [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES];
     [prefs synchronize];
 }
@@ -226,14 +244,22 @@
 }
 
 - (NSString *)getPatternPassword {
-    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-    return [prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    
+    NSUserDefaults * prefs          = [NSUserDefaults standardUserDefaults];
+    NSString * encryptedPassword    = [prefs objectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    if (!encryptedPassword) {
+        return nil;
+    }
+    NSString * password             = [CommonUtil decrypt3DES:encryptedPassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    return password;
 }
 
 - (void)savePatternPassword:(NSString *)pw {
     
-    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:pw forKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
+    NSUserDefaults *prefs           = [NSUserDefaults standardUserDefaults];
+    NSString * encryptedPassword    = [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    
+    [prefs setObject:encryptedPassword forKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
     [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
     [prefs synchronize];
 }

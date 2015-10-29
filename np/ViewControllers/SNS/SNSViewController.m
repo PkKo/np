@@ -83,7 +83,7 @@
     KakaoTalkLinkObject *appLink = [KakaoTalkLinkObject createAppButton:@"앱으로 연결"
                                                                 actions:@[androidAppAction, iphoneAppAction, ipadAppAction]];
     
-    return @[label];
+    return @[label, appLink];
 }
 
 - (IBAction)shareOnKakaoStory:(id)sender {

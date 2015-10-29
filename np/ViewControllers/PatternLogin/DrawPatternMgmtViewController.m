@@ -8,6 +8,7 @@
 
 #import "DrawPatternMgmtViewController.h"
 #import "LoginUtil.h"
+#import "RegistAccountViewController.h"
 
 #define MATRIX_SIZE 3
 
@@ -47,7 +48,6 @@ typedef enum SetupStatus {
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"패턴 관리"];
     
-    [self checkSavedPassword];
     CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
     CGRect patternViewFrame         = _patternView.frame;
     patternViewFrame.size.width     = (screenWidth - patternViewFrame.origin.x * 2);
@@ -84,7 +84,11 @@ typedef enum SetupStatus {
             view.center = CGPointMake(x, y);
             i++;
         }
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self checkSavedPassword];
 }
 
 
@@ -232,43 +236,50 @@ typedef enum SetupStatus {
     NSString * savedPassword    = [util getPatternPassword];
     NSInteger tag               = ALERT_DO_NOTHING;
     
-    if ([password length] < 8) {
-        alertMessage = @"4개 이상의 점을 연결해 주세요.";
+    if (failedTimes >= 5) {
         
-    } else if (_setupStatus == SETUP_UPDATE) {
+        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+        tag             = ALERT_GOTO_SELF_IDENTIFY;
         
-        if (![password isEqualToString:savedPassword]) {
+    } else {
+    
+        if ([password length] < 8) {
+            alertMessage = @"4개 이상의 점을 연결해 주세요.";
             
-            _savedPw = nil;
+        } else if (_setupStatus == SETUP_UPDATE) {
             
-            failedTimes++;
-            if (failedTimes >= 5) {
+            if (![password isEqualToString:savedPassword]) {
                 
-                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-                tag             = ALERT_GOTO_SELF_IDENTIFY;
-                [util removePatternPassword];
+                _savedPw = nil;
+                
+                failedTimes++;
+                [util savePatternPasswordFailedTimes:failedTimes];
+                if (failedTimes >= 5) {
+                    
+                    alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                    tag             = ALERT_GOTO_SELF_IDENTIFY;
+                    
+                } else {
+                    alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
+                }
                 
             } else {
-                alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
-                [util savePatternPasswordFailedTimes:failedTimes];
+                _savedPw = password;
+                [util savePatternPasswordFailedTimes:0];
             }
             
-        } else {
-            _savedPw = password;
-            [util savePatternPasswordFailedTimes:0];
-        }
-        
-    } else if (_setupStatus == SETUP_PW) {
-        
-        _pw = password;
-        
-    } else if (_setupStatus == SETUP_PW_CONFIRM) {
-        
-        if (![password isEqualToString:_pw]) {
-            alertMessage    = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
-            _pwConfirm      = nil;
-        } else {
-            _pwConfirm      = password;
+        } else if (_setupStatus == SETUP_PW) {
+            
+            _pw = password;
+            
+        } else if (_setupStatus == SETUP_PW_CONFIRM) {
+            
+            if (![password isEqualToString:_pw]) {
+                alertMessage    = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
+                _pwConfirm      = nil;
+            } else {
+                _pwConfirm      = password;
+            }
         }
     }
     
@@ -440,8 +451,11 @@ typedef enum SetupStatus {
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
-            NSLog(@"본인인증으로 이동");
-            [self clickCancel];
+        {
+            [self clearDotConnections];
+            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
+            break;
+        }
             break;
         case ALERT_SUCCEED_SAVE:
             [self clickCancel];

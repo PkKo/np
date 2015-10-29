@@ -10,7 +10,6 @@
 #import "StorageBoxUtil.h"
 #import "UIButton+BackgroundColor.h"
 #import "LoginUtil.h"
-#import "SimplePwMgntNewViewController.h"
 #import "SimplePwMgntChangeViewController.h"
 #import "LoginCertController.h"
 #import "CertificateMenuViewController.h"

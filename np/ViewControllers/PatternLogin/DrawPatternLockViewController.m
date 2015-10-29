@@ -14,7 +14,9 @@
 
 #define MATRIX_SIZE 3
 
-@interface DrawPatternLockViewController()
+@interface DrawPatternLockViewController() {
+    BOOL _backFromSelfIdentifer;
+}
 @end
 
 @implementation DrawPatternLockViewController
@@ -33,6 +35,8 @@
     
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
+    
+    _backFromSelfIdentifer          = NO;
     
     CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
     CGRect patternViewFrame         = _patternView.frame;
@@ -77,6 +81,17 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (_backFromSelfIdentifer) {
+        LoginUtil * util = [[LoginUtil alloc] init];
+        NSString * patternPw = [util getPatternPassword];
+        if (!patternPw) {
+            [util gotoPatternLoginMgmt:self.navigationController];
+        }
+    }
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -268,22 +283,28 @@
     NSString * savedPassword    = [util getPatternPassword];
     NSInteger tag               = ALERT_DO_NOTHING;
     
-    if ([password length] < 8) {
-        alertMessage = @"4개 이상의 점을 연결해 주세요.";
+    if (failedTimes >= 5) {
         
-    } else if (![password isEqualToString:savedPassword]) {
+        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+        tag             = ALERT_GOTO_SELF_IDENTIFY;
         
+    } else {
         
-        failedTimes++;
-        if (failedTimes >= 5) {
+        if ([password length] < 8) {
+            alertMessage = @"4개 이상의 점을 연결해 주세요.";
             
-            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-            tag             = ALERT_GOTO_SELF_IDENTIFY;
-            [util removePatternPassword];
+        } else if (![password isEqualToString:savedPassword]) {
             
-        } else {
-            alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
+            failedTimes++;
             [util savePatternPasswordFailedTimes:failedTimes];
+            if (failedTimes >= 5) {
+                
+                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                tag             = ALERT_GOTO_SELF_IDENTIFY;
+                
+            } else {
+                alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
+            }
         }
     }
     
@@ -313,13 +334,17 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    [self clearDotConnections];
+    
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
-            NSLog(@"본인인증으로 이동");
-            [self closeView];
+        {
+            _backFromSelfIdentifer = YES;
+            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
             break;
+        }
         default:
-            [self clearDotConnections];
             break;
     }
 }

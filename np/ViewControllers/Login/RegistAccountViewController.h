@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *certSelectBtn;
 @property (strong, nonatomic) IBOutlet UIButton *accountSelectBtn;
 
+@property (assign, nonatomic) BOOL isSelfIdentified;
+@property (assign, nonatomic) LoginMethod loginMethod;
+
 - (void)certInfoSelected:(CertInfo *)certInfo;
 - (IBAction)changeRegistView:(id)sender;
 - (void)checkRegistAccountRequest:(NSDictionary *)accountInfo;
