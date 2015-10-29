@@ -67,5 +67,5 @@
 - (void)showSecureNumpadInParent:(UIViewController *)viewController
                           topBar:(NSString *)topBar title:(NSString *)title
                       textLength:(NSInteger)length
-                      doneAction:(SEL)doneAction cancelAction:(SEL)cancelAction;
+                      doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress;
 @end

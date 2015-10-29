@@ -40,10 +40,8 @@
     
     [textField resignFirstResponder];
     
-    NSString * title;
+    NSString * title = textField.placeholder;;
     SEL action;
-    
-    title = textField.placeholder;
     
     if (textField == self.existingPw) {
         
@@ -61,7 +59,7 @@
     LoginUtil * util = [[LoginUtil alloc] init];
     [util showSecureNumpadInParent:self topBar:@"간편비밀번호 관리" title:title
                         textLength:6
-                        doneAction:action cancelAction:nil];
+                        doneAction:action methodOnPress:action];
 }
 
 - (void)currentPassword:(NSString *)pw {

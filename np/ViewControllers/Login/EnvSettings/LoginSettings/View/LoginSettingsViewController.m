@@ -174,6 +174,10 @@
     self.certMgmtCenterBtn.layer.cornerRadius   = 7;
     self.simpleLoginMgmtBtn.layer.cornerRadius  = 7;
     self.patternLoginMgmtBtn.layer.cornerRadius = 7;
+    
+    [self.certMgmtCenterBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.simpleLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.patternLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 }
 
 - (void)updateAfterChangingSetting {
@@ -205,27 +209,30 @@
     switch (loginMethod) {
             
         case LOGIN_BY_ACCOUNT:
-            self.accountLoginBtn.selected  = !self.accountLoginBtn.isSelected;
+            self.accountLoginBtn.selected   = !self.accountLoginBtn.isSelected;
             self.accountCheckBtn.hidden     = !self.accountLoginBtn.isSelected;
             self.accountRadioBtn.hidden     =  self.accountLoginBtn.isSelected;
             break;
             
         case LOGIN_BY_CERTIFICATE:
-            self.certLoginBtn.selected      = !self.certLoginBtn.isSelected;
-            self.certCheckBtn.hidden        = !self.certLoginBtn.isSelected;
-            self.certRadioBtn.hidden        =  self.certLoginBtn.isSelected;
+            self.certLoginBtn.selected          = !self.certLoginBtn.isSelected;
+            self.certCheckBtn.hidden            = !self.certLoginBtn.isSelected;
+            self.certRadioBtn.hidden            =  self.certLoginBtn.isSelected;
+            self.certMgmtCenterBtn.highlighted  = self.certLoginBtn.isSelected;
             break;
             
         case LOGIN_BY_SIMPLEPW:
-            self.simpleLoginBtn.selected    = !self.simpleLoginBtn.isSelected;
-            self.simpleCheckBtn.hidden      = !self.simpleLoginBtn.isSelected;
-            self.simpleRadioBtn.hidden      =  self.simpleLoginBtn.isSelected;
+            self.simpleLoginBtn.selected            = !self.simpleLoginBtn.isSelected;
+            self.simpleCheckBtn.hidden              = !self.simpleLoginBtn.isSelected;
+            self.simpleRadioBtn.hidden              =  self.simpleLoginBtn.isSelected;
+            self.simpleLoginMgmtBtn.highlighted     = self.simpleLoginBtn.isSelected;
             break;
             
         case LOGIN_BY_PATTERN:
-            self.patternLoginBtn.selected   = !self.patternLoginBtn.isSelected;
-            self.patternCheckBtn.hidden     = !self.patternLoginBtn.isSelected;
-            self.patternRadioBtn.hidden     =  self.patternLoginBtn.isSelected;
+            self.patternLoginBtn.selected           = !self.patternLoginBtn.isSelected;
+            self.patternCheckBtn.hidden             = !self.patternLoginBtn.isSelected;
+            self.patternRadioBtn.hidden             =  self.patternLoginBtn.isSelected;
+            self.patternLoginMgmtBtn.highlighted    = self.patternLoginBtn.isSelected;
             break;
             
         default:

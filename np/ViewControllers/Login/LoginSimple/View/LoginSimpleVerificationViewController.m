@@ -63,7 +63,7 @@
     LoginUtil * util = [[LoginUtil alloc] init];
     [util showSecureNumpadInParent:self topBar:@"간편 로그인" title:@"비밀번호 입력"
                         textLength:6
-                        doneAction:@selector(confirmPassword:) cancelAction:nil];
+                        doneAction:@selector(confirmPassword:) methodOnPress:@selector(confirmPassword:)];
 }
 
 - (IBAction)gotoLoginSettings {
@@ -89,6 +89,9 @@
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     _pw                 = plainText;
     
+    NSLog(@"pw: %@", _pw);
+    
+    [self toggleBtnBgColor:NO textLength:0];
     [self toggleBtnBgColor:YES textLength:((int)_pw.length)];
 }
 

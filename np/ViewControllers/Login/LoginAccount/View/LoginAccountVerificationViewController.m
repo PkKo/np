@@ -49,9 +49,12 @@
         isAccountNo = YES;
     }
     LoginUtil * util = [[LoginUtil alloc] init];
+    
+    SEL textEditingAction = isAccountNo ? @selector(confirmAccountNo:) : @selector(confirmPassword:);
+    
     [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:isAccountNo ? @"계좌번호 입력" : @"계좌비밀번호 입력"
                         textLength:isAccountNo ? 15 : 4
-                        doneAction:isAccountNo ? @selector(confirmAccountNo:) : @selector(confirmPassword:) cancelAction:nil];
+                        doneAction:textEditingAction methodOnPress:textEditingAction];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -65,7 +68,6 @@
     NSString * plainText = [ec makeDecNoPadWithSeedkey:accountNo];
     self.accountTextField.text = plainText;
 }
-
 
 - (void)confirmPassword:(NSString *)pw {
     

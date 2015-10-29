@@ -354,7 +354,7 @@
 - (void)showSecureNumpadInParent:(UIViewController *)viewController
                           topBar:(NSString *)topBar title:(NSString *)title
                       textLength:(NSInteger)length
-                      doneAction:(SEL)doneAction cancelAction:(SEL)cancelAction {
+                      doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress {
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
@@ -364,9 +364,11 @@
         [vc setServerPublickey:@""];
         
         //콜백함수 설정
-        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction]; // methodOnPress:(SEL)pMethodOnPress
+        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
-        [vc setFullMode:YES]; //NO
+        [vc setFullMode:NO];
+        [vc setToolBar:YES];
+        [vc setSupportRetinaHD:YES];
         [vc setTopBarText:topBar];
         [vc setTitleText:title];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];
@@ -378,7 +380,7 @@
         [vc setServerPublickey:@""];
         
         //콜백함수 설정
-        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction];
+        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress];
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];
     }
