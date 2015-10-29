@@ -143,8 +143,8 @@
 #pragma mark - connection response
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)mResponse
 {
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)mResponse;
-    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, httpResponse.allHeaderFields);
+//    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)mResponse;
+//    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, httpResponse.allHeaderFields);
     //데이터를 전송받기 전 헤더를 받아온다
     self.response = mResponse;
 }

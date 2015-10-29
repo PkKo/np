@@ -70,6 +70,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_03.png" id="mFQ-7N-00o">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                </imageView>
                                 <view contentMode="scaleToFill" id="M2f-KK-I5I">
                                     <rect key="frame" x="18" y="18" width="284" height="137"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -304,5 +308,6 @@
         <image name="icon_top_03_on.png" width="25" height="25"/>
         <image name="icon_top_04_off.png" width="25" height="25"/>
         <image name="icon_top_04_on.png" width="25" height="25"/>
+        <image name="shadow_03.png" width="12" height="12"/>
     </resources>
 </document>

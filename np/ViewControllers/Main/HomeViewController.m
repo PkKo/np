@@ -43,7 +43,7 @@
     {
         case TIMELINE:
         {
-            [IBInbox requestInboxList];
+//            [IBInbox requestInboxList];
             AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
             reqData.accountNumberList = @[@"1111-22-333333"];
             reqData.queryType = @"1,2,3,4,5,6";
@@ -58,7 +58,7 @@
             //    reqData.accountNumberList;
             // 입출금 구분
             //    reqData.queryType;
-            //            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
             break;
         }
         case BANKING:
@@ -125,6 +125,7 @@
             [mTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
             [mTimeLineView initData:sectionList timeLineDic:timelineMessageList];
             [mMainContentView addSubview:mTimeLineView];
+            [mTimeLineView refreshData];
             
             break;
         }
@@ -137,6 +138,7 @@
             // 수입/지출 통계 뷰컨트롤러 액션 붙여줌
             [bankingView.statisticButton addTarget:self action:@selector(moveStatisticViewController:) forControlEvents:UIControlEventTouchUpInside];
             [mMainContentView addSubview:bankingView];
+            [bankingView refreshData];
             
             break;
         }
@@ -399,62 +401,107 @@
             {
                 [timelineMessageList removeAllObjects];
             }
-            /*
-             NSString *todayString = [CommonUtil getTodayDateString];
-             NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
-             TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-             todaySectionData.date = todayString;
-             todaySectionData.day = todayDayString;
-             [sectionList addObject:todaySectionData];*/
             
-            for(NHInboxMessageData *inboxData in messageList)
+            if(viewType == TIMELINE)
             {
-                NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                 NSString *todayString = [CommonUtil getTodayDateString];
+                 NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
+                 TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+                 todaySectionData.date = todayString;
+                 todaySectionData.day = todayDayString;
+                 [sectionList addObject:todaySectionData];
                 
-                NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                if(itemList == nil)
+                for(NHInboxMessageData *inboxData in messageList)
                 {
-                    itemList = [[NSMutableArray alloc] init];
-                    NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                    TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                    dateSectionData.date = dateString;
-                    dateSectionData.day = dateDayString;
-                    [sectionList addObject:dateSectionData];
+                    NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    
+                    if([dateString isEqualToString:todayString])
+                    {
+                        NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                        if(todayItemList == nil)
+                        {
+                            todayItemList = [[NSMutableArray alloc] init];
+                        }
+                     
+                        [todayItemList addObject:inboxData];
+                        [timelineMessageList setObject:todayItemList forKey:todayString];
+                    }
+                    else
+                    {
+                        NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                        if(itemList == nil)
+                        {
+                            itemList = [[NSMutableArray alloc] init];
+                            NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                            TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                            dateSectionData.date = dateString;
+                            dateSectionData.day = dateDayString;
+                            [sectionList addObject:dateSectionData];
+                        }
+                        [itemList addObject:inboxData];
+                        [timelineMessageList setObject:itemList forKey:dateString];
+                    }
                 }
-                
-                [itemList addObject:inboxData];
-                
-                [timelineMessageList setObject:itemList forKey:dateString];
+            }
+            else
+            {
                 /*
-                 if([dateString isEqualToString:todayString])
-                 {
-                 NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
-                 if(todayItemList == nil)
-                 {
-                 todayItemList = [[NSMutableArray alloc] init];
-                 }
-                 
-                 [todayItemList addObject:inboxData];
-                 
-                 [timelineMessageList setObject:todayItemList forKey:todayString];
-                 }
-                 else
-                 {
-                 NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                 if(itemList == nil)
-                 {
-                 itemList = [[NSMutableArray alloc] init];
-                 NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                 TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                 dateSectionData.date = dateString;
-                 dateSectionData.day = dateDayString;
-                 [sectionList addObject:dateSectionData];
-                 }
-                 
-                 [itemList addObject:inboxData];
-                 
-                 [timelineMessageList setObject:itemList forKey:dateString];
-                 }*/
+                 NSString *todayString = [CommonUtil getTodayDateString];
+                 NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
+                 TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+                 todaySectionData.date = todayString;
+                 todaySectionData.day = todayDayString;
+                 [sectionList addObject:todaySectionData];*/
+                
+                for(NHInboxMessageData *inboxData in messageList)
+                {
+                    NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    
+                    NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                    if(itemList == nil)
+                    {
+                        itemList = [[NSMutableArray alloc] init];
+                        NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                        dateSectionData.date = dateString;
+                        dateSectionData.day = dateDayString;
+                        [sectionList addObject:dateSectionData];
+                    }
+                    
+                    [itemList addObject:inboxData];
+                    
+                    [timelineMessageList setObject:itemList forKey:dateString];
+                    /*
+                     if([dateString isEqualToString:todayString])
+                     {
+                     NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                     if(todayItemList == nil)
+                     {
+                     todayItemList = [[NSMutableArray alloc] init];
+                     }
+                     
+                     [todayItemList addObject:inboxData];
+                     
+                     [timelineMessageList setObject:todayItemList forKey:todayString];
+                     }
+                     else
+                     {
+                     NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                     if(itemList == nil)
+                     {
+                     itemList = [[NSMutableArray alloc] init];
+                     NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                     TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                     dateSectionData.date = dateString;
+                     dateSectionData.day = dateDayString;
+                     [sectionList addObject:dateSectionData];
+                     }
+                     
+                     [itemList addObject:inboxData];
+                     
+                     [timelineMessageList setObject:itemList forKey:dateString];
+                     }*/
+                }
             }
         }
         

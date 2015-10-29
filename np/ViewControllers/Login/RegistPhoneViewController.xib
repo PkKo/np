@@ -68,6 +68,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_03.png" id="4kI-0d-Br5">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FeO-ib-PV7" userLabel="휴대폰 번호를 입력해주세요. NH농협 고객정보에 등록된 휴대폰번호와 일치해야 NH스마트알림 서비스를 이용하실 수 있습니다.">
                                     <rect key="frame" x="0.0" y="15" width="320" height="39"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -226,5 +230,6 @@
         <image name="icon_top_03_on.png" width="25" height="25"/>
         <image name="icon_top_04_off.png" width="25" height="25"/>
         <image name="icon_top_04_on.png" width="25" height="25"/>
+        <image name="shadow_03.png" width="12" height="12"/>
     </resources>
 </document>

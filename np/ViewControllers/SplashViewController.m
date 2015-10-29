@@ -73,7 +73,7 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        ((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey = [response objectForKey:@"encKey"];
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey = [response objectForKey:@"encodeKey"];
 //        for (NSHTTPCookie *cookie in cookies)
 //        {
 //            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
@@ -117,6 +117,7 @@
 - (void)setMainViewController
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    /*
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
@@ -148,8 +149,17 @@
         // 가입시작
         vc = [[RegistAccountViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+    }*/
 //    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
+    
+    /* main test 진입 code*/
+    // 메인 시작
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
+    
+    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
 @end

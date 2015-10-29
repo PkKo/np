@@ -15,6 +15,7 @@
 		1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1797119D1BB805F3007131A5 /* ChartDataItemView.m */; settings = {ASSET_TAGS = (); }; };
 		179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1797119F1BB80604007131A5 /* ChartDataItemView.xib */; settings = {ASSET_TAGS = (); }; };
 		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; settings = {ASSET_TAGS = (); }; };
+		A2129F821BE2015E007C2A9F /* icon_top_03_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DADDA51BDF008300457E9A /* icon_top_03_off@2x.png */; };
 		A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -3095,6 +3096,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2129F821BE2015E007C2A9F /* icon_top_03_off@2x.png in Resources */,
 				A2DADE9E1BDF02E200457E9A /* WithdrawStickerSettingView.xib in Resources */,
 				A2DE64671BD5C44C009EC403 /* HomeEtcTimeLineCell.xib in Resources */,
 				A538C2F61BCE3FC5005E3211 /* SimplePwMgntChangeViewController.xib in Resources */,

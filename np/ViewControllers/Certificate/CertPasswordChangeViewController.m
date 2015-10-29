@@ -136,7 +136,7 @@
     {
         NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -150,7 +150,7 @@
     {
         nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];

@@ -147,8 +147,6 @@
         return;
     }
     
-    // 약관 버전을 서버에 보낸다.
-    
     // 계좌번호 등록 뷰 컨트롤러로 이동
     RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

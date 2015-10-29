@@ -110,7 +110,7 @@
     [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     
     // 알림 시간 제한 선택
-    alarmTimeList = [NSArray arrayWithObjects:@"00:00", @"01:00", @"02:00", @"03:00", @"04:00", @"05:00", @"06:00", @"07:00", @"08:00", @"09:00", @"10:00", @"11:00", @"12:00", @"13:00", @"14:00", @"15:00", @"16:00", @"17:00", @"18:00", @"19:00", @"20:00", @"21:00", @"22:00", @"23:00", nil];
+    alarmTimeList = [NSArray arrayWithObjects:@"선택", @"00:00", @"01:00", @"02:00", @"03:00", @"04:00", @"05:00", @"06:00", @"07:00", @"08:00", @"09:00", @"10:00", @"11:00", @"12:00", @"13:00", @"14:00", @"15:00", @"16:00", @"17:00", @"18:00", @"19:00", @"20:00", @"21:00", @"22:00", @"23:00", nil];
     
     // 잔액 표시
     [balanceOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
@@ -126,6 +126,7 @@
     [notiNoTimeText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
     [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
     [notiTimeOnText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+    alarmPeriodList = [NSArray arrayWithObjects:@"선택", @"00시", @"01시", @"02시", @"03시", @"04시", @"05시", @"06시", @"07시", @"08시", @"09시", @"10시", @"11시", @"12시", @"13시", @"14시", @"15시", @"16시", @"17시", @"18시", @"19시", @"20시", @"21시", @"22시", @"23시", nil];
     
     notiTimeFlag = NO;
     notiStartTime = -1;
@@ -138,89 +139,28 @@
     notiPeriodTime3 = -1;
 }
 
-- (void)makePickerSelectResult
+- (void)makeAllOptionDataView
 {
-    switch (currentPickerView)
-    {
-        case AMOUNT:
-        {
-            [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-            [amountNoLimitText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [amountSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            selectedAmount = (AmountSettingType)pickerSelectIndex + 1;
-            [amountSelectText setText:[amountList objectAtIndex:pickerSelectIndex]];
-            pickerSelectIndex = -1;
-            break;
-        }
-        case NOTI_TIME_START:
-        {
-            [notiTimeStart setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
-            [notiTimeStart setText:[alarmTimeList objectAtIndex:pickerSelectIndex]];
-            notiStartTime = pickerSelectIndex;
-            break;
-        }
-        case NOTI_TIME_END:
-        {
-            [notiTimeEnd setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
-            [notiTimeEnd setText:[alarmTimeList objectAtIndex:pickerSelectIndex]];
-            notiEndTime = pickerSelectIndex;
-            break;
-        }
-        case NOTI_PERIOD_ONE:
-        {
-            [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-            [notiNoTimeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeOneText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeOneText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
-            notiPeriodType = 2;
-            notiPeriodTime1 = pickerSelectIndex;
-            break;
-        }
-        case NOTI_PERIOD_TWO:
-        {
-            [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-            [notiNoTimeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeTwoText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeTwoText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
-            notiPeriodType = 2;
-            notiPeriodTime2 = pickerSelectIndex;
-            break;
-        }
-        case NOTI_PERIOD_THREE:
-        {
-            [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-            [notiNoTimeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeThreeText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [notiTimeThreeText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
-            notiPeriodType = 2;
-            notiPeriodTime3 = pickerSelectIndex;
-            break;
-        }
-        case NOTI_LIMIT_AUTO:
-        {
-            [notiAutoText setText:[notiAutoList objectAtIndex:pickerSelectIndex]];
-            notiAutoFlag = pickerSelectIndex + 1;
-            break;
-        }
-            
-        default:
-            break;
-    }
+    // 입출금 알림 선택
+    [self notiEventViewSetting];
+    // 통지금액 뷰
+    [self notiAmountViewSetting];
+    // 알림제한시간 뷰
+    [self notiUnnotiTimeViewSetting];
+    // 잔액 표시 뷰
+    [self notiBalanceViewSetting];
+    // 자동이체 선택
+    [self notiAutoSelectViewSetting];
+    // 알림주기
+    [self notiPeriodSelectViewSetting];
 }
 
-#pragma mark - 입출금 알림 옵션 선택
-- (NSInteger)getAlarmSettingType
+/**
+ @brief 입출금 알림 뷰
+ */
+- (void)notiEventViewSetting
 {
-    return (NSInteger)selectedType;
-}
-
-- (IBAction)selectDepWithType:(id)sender
-{
-    switch ([sender tag])
+    switch (selectedType)
     {
         case BOTH:
         {
@@ -230,7 +170,6 @@
             [depositSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
             [withdrawSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
             [withdrawSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            selectedType = BOTH;
             break;
         }
         case DEPOSIT:
@@ -241,7 +180,6 @@
             [depositSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
             [withdrawSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
             [withdrawSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-            selectedType = DEPOSIT;
             break;
         }
         case WITHDRAW:
@@ -252,7 +190,218 @@
             [depositSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
             [withdrawSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
             [withdrawSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            selectedType = WITHDRAW;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+/**
+ @brief 통지금액 뷰 설정
+ */
+- (void)notiAmountViewSetting
+{
+    if(selectedAmount == 0)
+    {
+        [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [amountNoLimitText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+    }
+    else
+    {
+        [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [amountNoLimitText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [amountSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [amountSelectText setText:[amountList objectAtIndex:selectedAmount - 1]];
+    }
+}
+
+/**
+ @brief 알림시간 제한 뷰 설정
+ */
+- (void)notiUnnotiTimeViewSetting
+{
+    if(notiStartTime < 0 && notiEndTime < 0)
+    {
+        notiTimeFlag = NO;
+    }
+    else
+    {
+        notiTimeFlag = YES;
+    }
+    
+    if(notiTimeFlag)
+    {
+        if(notiStartTime < 0)
+        {
+            [notiTimeStart setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [notiTimeStart setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
+        
+        if(notiEndTime < 0)
+        {
+            [notiTimeEnd setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [notiTimeEnd setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
+    }
+    else
+    {
+        [notiTimeStart setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [notiTimeEnd setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+    }
+    [notiTimeStart setText:[alarmTimeList objectAtIndex:notiStartTime + 1]];
+    [notiTimeEnd setText:[alarmTimeList objectAtIndex:notiEndTime + 1]];
+}
+
+/**
+ @brief 잔액표시 뷰 설정
+ */
+- (void)notiBalanceViewSetting
+{
+    if(balanceFlag == 1)
+    {
+        // 잔액 표시
+        [balanceOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [balanceOnText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [balanceOffImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [balanceOffText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+    }
+    else if(balanceFlag == 2)
+    {
+        // 잔액 미표시
+        [balanceOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [balanceOnText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [balanceOffImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [balanceOffText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    }
+}
+
+/**
+ @brief 자동이체 선택 뷰 설정
+ */
+- (void)notiAutoSelectViewSetting
+{
+    [notiAutoText setText:[notiAutoList objectAtIndex:notiAutoFlag - 1]];
+}
+
+/**
+ @brief 알림 주기 뷰 설정
+ */
+- (void)notiPeriodSelectViewSetting
+{
+    if(notiPeriodTime1 < 0 && notiPeriodTime2 < 0 && notiPeriodTime3 < 0)
+    {
+        notiPeriodType = 1;
+    }
+    else
+    {
+        notiPeriodType = 2;
+    }
+    
+    if(notiPeriodType == 1)
+    {
+        [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiNoTimeText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [notiTimeOnText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeOneText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [notiTimeTwoText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [notiTimeThreeText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+    }
+    else if (notiPeriodType == 2)
+    {
+        [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [notiNoTimeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiTimeOnText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        
+        if(notiPeriodTime1 < 0)
+        {
+            [notiTimeOneText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [notiTimeOneText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
+        
+        if(notiPeriodTime2 < 0)
+        {
+            [notiTimeTwoText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [notiTimeTwoText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
+        
+        if(notiPeriodTime3 < 0)
+        {
+            [notiTimeThreeText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [notiTimeThreeText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
+    }
+    
+    [notiTimeOneText setText:[alarmPeriodList objectAtIndex:notiPeriodTime1 + 1]];
+    [notiTimeTwoText setText:[alarmPeriodList objectAtIndex:notiPeriodTime2 + 1]];
+    [notiTimeThreeText setText:[alarmPeriodList objectAtIndex:notiPeriodTime3 + 1]];
+}
+
+#pragma mark - 피커뷰 선택
+- (void)makePickerSelectResult
+{
+    switch (currentPickerView)
+    {
+        case AMOUNT:
+        {
+            selectedAmount = (AmountSettingType)pickerSelectIndex + 1;
+            [self notiAmountViewSetting];
+            break;
+        }
+        case NOTI_TIME_START:
+        {
+            notiStartTime = pickerSelectIndex - 1;
+            [self notiUnnotiTimeViewSetting];
+            break;
+        }
+        case NOTI_TIME_END:
+        {
+            notiEndTime = pickerSelectIndex - 1;
+            [self notiUnnotiTimeViewSetting];
+            break;
+        }
+        case NOTI_PERIOD_ONE:
+        {
+            notiPeriodTime1 = pickerSelectIndex - 1;
+            [self notiPeriodSelectViewSetting];
+            break;
+        }
+        case NOTI_PERIOD_TWO:
+        {
+            notiPeriodTime2 = pickerSelectIndex - 1;
+            [self notiPeriodSelectViewSetting];
+            break;
+        }
+        case NOTI_PERIOD_THREE:
+        {
+            notiPeriodTime3 = pickerSelectIndex - 1;
+            [self notiPeriodSelectViewSetting];
+            break;
+        }
+        case NOTI_LIMIT_AUTO:
+        {
+            notiAutoFlag = pickerSelectIndex + 1;
+            [self notiAutoSelectViewSetting];
             break;
         }
             
@@ -260,7 +409,19 @@
             break;
     }
     
+    pickerSelectIndex = -1;
+}
+
+#pragma mark - 입출금 알림 옵션 선택
+- (NSInteger)getAlarmSettingType
+{
+    return (NSInteger)selectedType;
+}
+
+- (IBAction)selectDepWithType:(id)sender
+{
     selectedType = (AlarmSettingType)[sender tag];
+    [self notiEventViewSetting];
 }
 
 #pragma mark - 통지금액 옵션 선택
@@ -275,11 +436,8 @@
     {
         case 0:
         {
-            [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [amountNoLimitText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-            [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-            [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
             selectedAmount = NOLIMIT;
+            [self notiAmountViewSetting];
             break;
         }
         case 1:
@@ -335,6 +493,10 @@
     {
         return [notiAutoList count];
     }
+    else if (currentPickerView == NOTI_PERIOD_ONE || currentPickerView == NOTI_PERIOD_TWO || currentPickerView == NOTI_PERIOD_THREE)
+    {
+        return [alarmPeriodList count];
+    }
     else
     {
         return [alarmTimeList count];
@@ -351,6 +513,10 @@
     {
         return [notiAutoList objectAtIndex:row];
     }
+    else if (currentPickerView == NOTI_PERIOD_ONE || currentPickerView == NOTI_PERIOD_TWO || currentPickerView == NOTI_PERIOD_THREE)
+    {
+        return [alarmPeriodList objectAtIndex:row];
+    }
     else
     {
         return [alarmTimeList objectAtIndex:row];
@@ -359,7 +525,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    pickerSelectIndex = row;
+    pickerSelectIndex = (int)row;
 }
 
 - (void)showAmountSelectPickerView
@@ -380,21 +546,8 @@
  */
 - (IBAction)selectBalanceSetting:(id)sender
 {
-    if([sender tag] == 1)
-    {
-        [balanceOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-        [balanceOnText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-        [balanceOffImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-        [balanceOffText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-    }
-    else if([sender tag] == 2)
-    {
-        [balanceOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-        [balanceOnText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-        [balanceOffImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-        [balanceOffText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
-    }
-    balanceFlag = [sender tag];
+    balanceFlag = (int)[sender tag];
+    [self notiBalanceViewSetting];
 }
 
 - (IBAction)selectNotiAutoSetting:(id)sender
@@ -418,6 +571,7 @@
         notiPeriodTime1 = -1;
         notiPeriodTime2 = -1;
         notiPeriodTime3 = -1;
+        [self notiPeriodSelectViewSetting];
     }
     else
     {
