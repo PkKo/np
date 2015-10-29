@@ -13,6 +13,7 @@
 #import "MainPageViewController.h"
 #import "HomeViewController.h"
 #import "StorageBoxController.h"
+#import "LoginUtil.h"
 
 @implementation HomeBankingView
 
@@ -73,6 +74,14 @@
     {
         [storageCountLabel setText:@"99+"];
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [bankingListTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 #pragma mark - UIButton Action
@@ -214,7 +223,7 @@
 {
     UIView *sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEADER_HEIGHT)];
     
-    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1.0f]];
+    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
     
     TimelineSectionData *sectionData = [timeLineSection objectAtIndex:section];
     NSString *date = sectionData.date;
@@ -249,6 +258,8 @@
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     
     NSString *section = ((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timeLineDic objectForKey:section] objectAtIndex:indexPath.row];

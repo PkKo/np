@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NFilterChar">
@@ -39,11 +39,11 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ah3-zV-3LR">
                     <rect key="frame" x="0.0" y="20" width="320" height="250"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -55,27 +55,26 @@
                 </button>
                 <view contentMode="scaleToFill" id="4531">
                     <rect key="frame" x="0.0" y="20" width="320" height="291"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="NFtopbg.png" id="4542">
                             <rect key="frame" x="0.0" y="37" width="320" height="292"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="4540">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="nf_ios_toolbar.png" id="4540">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.39607843139999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KeyPad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4536">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KeyPad" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4536">
                             <rect key="frame" x="126" y="9" width="69" height="22"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="5002" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="55">
                             <rect key="frame" x="27" y="90" width="266" height="30"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -119,7 +118,7 @@
                         </button>
                         <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5004" contentMode="scaleToFill" text="A" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="4556">
                             <rect key="frame" x="258" y="89" width="30" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -128,7 +127,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="비밀번호" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4541">
                             <rect key="frame" x="27" y="57" width="266" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -137,7 +136,7 @@
                 </view>
                 <view tag="5008" contentMode="scaleToFill" id="326">
                     <rect key="frame" x="0.0" y="200" width="320" height="280"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="nf_ios_bg.png" id="327">
                             <rect key="frame" x="0.0" y="40" width="320" height="240"/>
@@ -145,7 +144,7 @@
                         </imageView>
                         <view hidden="YES" contentMode="scaleToFill" id="918">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="nf_ios_toolbar.png" id="1039">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -212,7 +211,7 @@
                         </view>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="1" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="684">
                             <rect key="frame" x="4" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="1" backgroundImage="nf_ios_char.png">
@@ -229,7 +228,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="685">
                             <rect key="frame" x="32" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="2" backgroundImage="nf_ios_char.png">
@@ -246,7 +245,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="686">
                             <rect key="frame" x="60" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="3" backgroundImage="nf_ios_char.png">
@@ -263,7 +262,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="687">
                             <rect key="frame" x="88" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="4" backgroundImage="nf_ios_char.png">
@@ -280,7 +279,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="688">
                             <rect key="frame" x="116" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="5" backgroundImage="nf_ios_char.png">
@@ -297,7 +296,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="689">
                             <rect key="frame" x="144" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="6" backgroundImage="nf_ios_char.png">
@@ -314,7 +313,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="690">
                             <rect key="frame" x="172" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="7" backgroundImage="nf_ios_char.png">
@@ -331,7 +330,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="691">
                             <rect key="frame" x="200" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="8" backgroundImage="nf_ios_char.png">
@@ -348,7 +347,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="692">
                             <rect key="frame" x="228" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="9" backgroundImage="nf_ios_char.png">
@@ -365,7 +364,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="693">
                             <rect key="frame" x="256" y="43" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <state key="normal" title="0" backgroundImage="nf_ios_char.png">
@@ -382,7 +381,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="328">
                             <rect key="frame" x="4" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="a" backgroundImage="nf_ios_char.png">
@@ -399,7 +398,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="329">
                             <rect key="frame" x="32" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="s" backgroundImage="nf_ios_char.png">
@@ -416,7 +415,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="330">
                             <rect key="frame" x="60" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="d" backgroundImage="nf_ios_char.png">
@@ -433,7 +432,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="331">
                             <rect key="frame" x="88" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="f" backgroundImage="nf_ios_char.png">
@@ -450,7 +449,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="332">
                             <rect key="frame" x="116" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="g" backgroundImage="nf_ios_char.png">
@@ -467,7 +466,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="333">
                             <rect key="frame" x="144" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="h" backgroundImage="nf_ios_char.png">
@@ -484,7 +483,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="334">
                             <rect key="frame" x="172" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="j" backgroundImage="nf_ios_char.png">
@@ -501,7 +500,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="28" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="335">
                             <rect key="frame" x="200" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="k" backgroundImage="nf_ios_char.png">
@@ -518,7 +517,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="336">
                             <rect key="frame" x="228" y="137" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="l" backgroundImage="nf_ios_char.png">
@@ -535,7 +534,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="337">
                             <rect key="frame" x="4" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="q" backgroundImage="nf_ios_char.png">
@@ -552,7 +551,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="338">
                             <rect key="frame" x="32" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="w" backgroundImage="nf_ios_char.png">
@@ -569,7 +568,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="339">
                             <rect key="frame" x="60" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="e" backgroundImage="nf_ios_char.png">
@@ -586,7 +585,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="340">
                             <rect key="frame" x="88" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="r" backgroundImage="nf_ios_char.png">
@@ -603,7 +602,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="341">
                             <rect key="frame" x="116" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="t" backgroundImage="nf_ios_char.png">
@@ -620,7 +619,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="342">
                             <rect key="frame" x="144" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="y" backgroundImage="nf_ios_char.png">
@@ -637,7 +636,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="343">
                             <rect key="frame" x="172" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="u" backgroundImage="nf_ios_char.png">
@@ -654,7 +653,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="344">
                             <rect key="frame" x="200" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="i" backgroundImage="nf_ios_char.png">
@@ -671,7 +670,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="345">
                             <rect key="frame" x="228" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="o" backgroundImage="nf_ios_char.png">
@@ -688,7 +687,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="346">
                             <rect key="frame" x="256" y="90" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="p" backgroundImage="nf_ios_char.png">
@@ -705,7 +704,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="347">
                             <rect key="frame" x="44" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="z" backgroundImage="nf_ios_char.png">
@@ -722,7 +721,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="348">
                             <rect key="frame" x="72" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="x" backgroundImage="nf_ios_char.png">
@@ -739,7 +738,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="349">
                             <rect key="frame" x="100" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="c" backgroundImage="nf_ios_char.png">
@@ -756,7 +755,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="350">
                             <rect key="frame" x="128" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="v" backgroundImage="nf_ios_char.png">
@@ -773,7 +772,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="34" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="351">
                             <rect key="frame" x="156" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="b" backgroundImage="nf_ios_char.png">
@@ -790,7 +789,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="35" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="352">
                             <rect key="frame" x="184" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="n" backgroundImage="nf_ios_char.png">
@@ -807,7 +806,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="353">
                             <rect key="frame" x="212" y="184" width="25" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <size key="titleShadowOffset" width="1" height="1"/>
                             <state key="normal" title="m" backgroundImage="nf_ios_char.png">
@@ -824,7 +823,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="91" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="357">
                             <rect key="frame" x="3" y="184" width="39" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" backgroundImage="nf_ios_btn.png">
@@ -840,7 +839,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="38" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="364">
                             <rect key="frame" x="278" y="184" width="39" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                             <state key="normal" backgroundImage="nf_ios_btn.png">
                                 <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -856,7 +855,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="92" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="678">
                             <rect key="frame" x="3" y="231" width="39" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" title="#+=" backgroundImage="nf_ios_btn.png">
@@ -872,7 +871,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="93" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="680">
                             <rect key="frame" x="44" y="231" width="39" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" title="영어" backgroundImage="nf_ios_btn.png">
@@ -888,7 +887,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="676">
                             <rect key="frame" x="85" y="231" width="190" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                             <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" title="SPACE" backgroundImage="nf_ios_spacebar.png">
@@ -904,7 +903,7 @@
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="682">
                             <rect key="frame" x="278" y="231" width="39" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <size key="titleShadowOffset" width="0.0" height="1"/>
                             <state key="normal" backgroundImage="nf_ios_btn.png">
@@ -920,7 +919,7 @@
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="112" contentMode="left" text="ㅉ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="740">
                             <rect key="frame" x="29" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -928,7 +927,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="113" contentMode="left" text="ㄸ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="742">
                             <rect key="frame" x="57" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -936,7 +935,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="114" contentMode="left" text="ㄲ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="743">
                             <rect key="frame" x="85" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -944,7 +943,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="111" contentMode="left" text="ㅃ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="741">
                             <rect key="frame" x="1" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -952,7 +951,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="116" contentMode="left" text="ㅛ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="744">
                             <rect key="frame" x="141" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -960,7 +959,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="117" contentMode="left" text="ㅕ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="745">
                             <rect key="frame" x="169" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -968,7 +967,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="118" contentMode="left" text="ㅑ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="746">
                             <rect key="frame" x="197" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -976,7 +975,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="119" contentMode="left" text="ㅒ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="748">
                             <rect key="frame" x="225" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -984,7 +983,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="120" contentMode="left" text="ㅖ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="749">
                             <rect key="frame" x="253" y="117" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -992,7 +991,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="115" contentMode="left" text="ㅆ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="747">
                             <rect key="frame" x="113" y="117" width="30" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1000,7 +999,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="122" contentMode="left" text="ㄴ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="797">
                             <rect key="frame" x="29" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1008,7 +1007,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="123" contentMode="left" text="ㅇ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="798">
                             <rect key="frame" x="57" y="165" width="30" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1016,7 +1015,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="124" contentMode="left" text="ㄹ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="799">
                             <rect key="frame" x="85" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1024,7 +1023,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="121" contentMode="left" text="ㅁ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="800">
                             <rect key="frame" x="1" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1032,7 +1031,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="126" contentMode="left" text="ㅗ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="810">
                             <rect key="frame" x="141" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1040,7 +1039,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="127" contentMode="left" text="ㅓ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="811">
                             <rect key="frame" x="169" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1048,7 +1047,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="128" contentMode="left" text="ㅏ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="812">
                             <rect key="frame" x="197" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1056,7 +1055,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="129" contentMode="left" text="ㅣ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="813">
                             <rect key="frame" x="225" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1064,7 +1063,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="125" contentMode="left" text="ㅎ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="814">
                             <rect key="frame" x="113" y="165" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1072,7 +1071,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="131" contentMode="left" text="ㅌ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="815">
                             <rect key="frame" x="69" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1080,7 +1079,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="132" contentMode="left" text="ㅊ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="816">
                             <rect key="frame" x="97" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1088,7 +1087,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="133" contentMode="left" text="ㅍ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="817">
                             <rect key="frame" x="125" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1096,7 +1095,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="130" contentMode="left" text="ㅋ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="818">
                             <rect key="frame" x="41" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1104,7 +1103,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="135" contentMode="left" text="ㅜ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="826">
                             <rect key="frame" x="181" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1112,7 +1111,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="136" contentMode="left" text="ㅡ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="827">
                             <rect key="frame" x="209" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1120,7 +1119,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="134" contentMode="left" text="ㅠ" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="828">
                             <rect key="frame" x="153" y="212" width="30" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1128,7 +1127,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="211" contentMode="left" text="q" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="750">
                             <rect key="frame" x="1" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1136,7 +1135,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="212" contentMode="left" text="w" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="752">
                             <rect key="frame" x="29" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1144,7 +1143,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="213" contentMode="left" text="e" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="753">
                             <rect key="frame" x="57" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1152,7 +1151,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="214" contentMode="left" text="r" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="754">
                             <rect key="frame" x="85" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1160,7 +1159,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="215" contentMode="left" text="t" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="755">
                             <rect key="frame" x="113" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1168,7 +1167,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="216" contentMode="left" text="y" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="756">
                             <rect key="frame" x="141" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1176,7 +1175,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="217" contentMode="left" text="u" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="757">
                             <rect key="frame" x="169" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1184,7 +1183,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="218" contentMode="left" text="i" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="758">
                             <rect key="frame" x="197" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1192,7 +1191,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="219" contentMode="left" text="o" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="759">
                             <rect key="frame" x="225" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1200,7 +1199,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="220" contentMode="left" text="p" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="760">
                             <rect key="frame" x="253" y="92" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1208,7 +1207,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="221" contentMode="left" text="a" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="801">
                             <rect key="frame" x="1" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1216,7 +1215,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="222" contentMode="left" text="s" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="802">
                             <rect key="frame" x="29" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1224,7 +1223,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="223" contentMode="left" text="d" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="803">
                             <rect key="frame" x="57" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1232,7 +1231,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="224" contentMode="left" text="f" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="804">
                             <rect key="frame" x="85" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1240,7 +1239,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="225" contentMode="left" text="g" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="805">
                             <rect key="frame" x="113" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1248,7 +1247,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="226" contentMode="left" text="h" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="806">
                             <rect key="frame" x="141" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1256,7 +1255,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="227" contentMode="left" text="j" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="807">
                             <rect key="frame" x="169" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1264,7 +1263,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="228" contentMode="left" text="k" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="808">
                             <rect key="frame" x="197" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1272,7 +1271,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="229" contentMode="left" text="l" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="809">
                             <rect key="frame" x="225" y="140" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1280,7 +1279,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="230" contentMode="left" text="z" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="819">
                             <rect key="frame" x="41" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1288,7 +1287,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="231" contentMode="left" text="x" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="820">
                             <rect key="frame" x="69" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1296,7 +1295,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="232" contentMode="left" text="c" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="821">
                             <rect key="frame" x="97" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1304,7 +1303,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="233" contentMode="left" text="v" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="822">
                             <rect key="frame" x="125" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1312,7 +1311,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="234" contentMode="left" text="b" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="823">
                             <rect key="frame" x="153" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1320,7 +1319,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="235" contentMode="left" text="n" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="824">
                             <rect key="frame" x="181" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1328,7 +1327,7 @@
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="236" contentMode="left" text="m" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="825">
                             <rect key="frame" x="209" y="187" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1336,15 +1335,15 @@
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="nf_ios_icon_backspace.png" id="4571">
                             <rect key="frame" x="285" y="199" width="24" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="nf_ios_icon_shift.png" id="4572">
                             <rect key="frame" x="13" y="199" width="19" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nf_ios_icon_refresh.png" id="g5c-M1-4tS">
                             <rect key="frame" x="289" y="244" width="17" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1413,4 +1412,9 @@
         <image name="nf_ios_toolbar.png" width="320" height="44"/>
         <image name="nf_ok.png" width="90" height="38"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

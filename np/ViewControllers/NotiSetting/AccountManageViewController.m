@@ -11,6 +11,8 @@
 #import "AccountAddViewController.h"
 #import "CertMenuCell.h"
 
+#define CERT_MENU_CELL_HEIGHT   48
+
 @interface AccountManageViewController ()
 
 @end
@@ -19,6 +21,7 @@
 
 @synthesize emptyView;
 @synthesize contentView;
+@synthesize tableBgStrokeView;
 @synthesize accountListTable;
 
 - (void)viewDidLoad
@@ -51,10 +54,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    cellHeight = CERT_MENU_CELL_HEIGHT * (self.view.frame.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+    
+    if(cellHeight * [accountList count] > accountListTable.frame.size.height)
+    {
+        [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
+                                               tableBgStrokeView.frame.size.width, accountListTable.frame.size.height + 2)];
+    }
+    else
+    {
+        [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
+                                               tableBgStrokeView.frame.size.width, cellHeight * [accountList count])];
+        [accountListTable setScrollEnabled:NO];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [accountList count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

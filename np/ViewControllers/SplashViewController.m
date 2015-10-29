@@ -119,7 +119,7 @@
     //[[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    /*
+    
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
@@ -149,10 +149,10 @@
         // 가입시작
         vc = [[RegistAccountViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }*/
+    }
 //    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
-    
-    /* main test 진입 code*/
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* main test 진입 code
     // 메인 시작
     MainPageViewController *vc = [[MainPageViewController alloc] init];
     [vc setStartPageIndex:0];
@@ -160,6 +160,7 @@
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 }
 
 @end

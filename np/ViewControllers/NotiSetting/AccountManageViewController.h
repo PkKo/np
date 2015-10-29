@@ -11,10 +11,12 @@
 @interface AccountManageViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *accountList;
+    CGFloat cellHeight;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet StrokeView *tableBgStrokeView;
 @property (strong, nonatomic) IBOutlet UITableView *accountListTable;
 - (IBAction)addAccount:(id)sender;
 @end

@@ -131,7 +131,7 @@
         case 0:
         {
             // 계좌옵션 설정 뷰를 보여줌
-            certifiedAccountNumber = [allAccountList objectAtIndex:[allListView getSelectedIndex]];
+            certifiedAccountNumber = [[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"];
             [self accountOptionSearchReqeust];
             /*
             optionView = [RegistAccountOptionSettingView view];
@@ -230,41 +230,45 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        NSDictionary *optionData = [[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0];
         optionView = [RegistAccountOptionSettingView view];
         [optionView setDelegate:self];
         [optionView initDataWithAccountNumber:certifiedAccountNumber];
         [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         
-        // 옵션 초기화
-        receiptsPaymentId = [optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_RPID];
-        // 입출금 선택
-        optionView.selectedType = (AlarmSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_EVENT_TYPE] integerValue];
-        // 통지가격
-        if([[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue] < 0)
+        if([(NSArray *)[[response objectForKey:@"list"] objectForKey:@"sub"] count] > 0)
         {
-            optionView.selectedAmount = 0;
+            NSDictionary *optionData = [[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0];
+            // 옵션 초기화
+            receiptsPaymentId = [optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_RPID];
+            // 입출금 선택
+            optionView.selectedType = (AlarmSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_EVENT_TYPE] integerValue];
+            // 통지가격
+            if([[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue] < 0)
+            {
+                optionView.selectedAmount = 0;
+            }
+            else
+            {
+                optionView.selectedAmount = (AmountSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue];
+            }
+            // 제한시간 설정
+            optionView.notiTimeFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_TIME_FLAG] boolValue];
+            // 알림제한 시작
+            optionView.notiStartTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ST] intValue];
+            // 알림제한 종료
+            optionView.notiEndTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ET] intValue];
+            // 잔액표시 여부
+            optionView.balanceFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_BALANCE_FLAG] intValue];
+            // 자동이체 선택
+            optionView.notiAutoFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_AUTO_FLAG] intValue];
+            // 알림 주기
+            optionView.notiPeriodType = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PERIOD_TYPE] intValue];
+            // 지정시간
+            optionView.notiPeriodTime1 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE] intValue];
+            optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
+            optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
         }
-        else
-        {
-            optionView.selectedAmount = (AmountSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue];
-        }
-        // 제한시간 설정
-        optionView.notiTimeFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_TIME_FLAG] boolValue];
-        // 알림제한 시작
-        optionView.notiStartTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ST] intValue];
-        // 알림제한 종료
-        optionView.notiEndTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ET] intValue];
-        // 잔액표시 여부
-        optionView.balanceFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_BALANCE_FLAG] intValue];
-        // 자동이체 선택
-        optionView.notiAutoFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_AUTO_FLAG] intValue];
-        // 알림 주기
-        optionView.notiPeriodType = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PERIOD_TYPE] intValue];
-        // 지정시간
-        optionView.notiPeriodTime1 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE] intValue];
-        optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
-        optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
+        
         [optionView makeAllOptionDataView];
         [contentView addSubview:optionView];
         [nextButton setTag:2];
@@ -304,7 +308,10 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     
     [reqBody setObject:optionView.accountNumberLabel.text forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
-    [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
+    if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
+    {
+        [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
+    }
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedType] forKey:REQUEST_NOTI_OPTION_EVENT_TYPE];
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedAmount] forKey:REQUEST_NOTI_OPTION_PRICE];
     [reqBody setObject:[NSNumber numberWithBool:optionView.notiTimeFlag] forKey:REQUEST_NOTI_OPTION_TIME_FLAG];
