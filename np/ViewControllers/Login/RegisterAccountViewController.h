@@ -19,6 +19,7 @@
     RegistAccountOptionSettingView *optionView;
     NSMutableArray *allAccountList;
     NSString *certifiedAccountNumber;
+    NSString *receiptsPaymentId;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;

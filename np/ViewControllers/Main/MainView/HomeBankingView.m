@@ -23,6 +23,14 @@
 @synthesize statisticButton;
 @synthesize sortLabel;
 
+@synthesize deleteAllView;
+@synthesize deleteButtonView;
+@synthesize deleteButton;
+@synthesize deleteAllImg;
+@synthesize deleteAllLabel;
+
+@synthesize storageCountLabel;
+
 - (id)init
 {
     self = [super init];
@@ -41,8 +49,30 @@
     timeLineSection = section;
     timeLineDic = data;
     listSortType = YES;
+    isDeleteMode = NO;
+    pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
+    if(pinnedIdList == nil)
+    {
+        pinnedIdList = [[NSMutableArray alloc] init];
+    }
+    deleteIdList = [[NSMutableArray alloc] init];
     
     [self addPullToRefreshHeader];
+}
+
+- (void)refreshData
+{
+    pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    storageCount = [[controller getAllTransactions] count];
+    if(storageCount < 100)
+    {
+        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
+    }
+    else
+    {
+        [storageCountLabel setText:@"99+"];
+    }
 }
 
 #pragma mark - UIButton Action
@@ -71,6 +101,17 @@
     }
     
     [bankingListTable reloadData];
+}
+
+- (IBAction)storageMoveClick:(id)sender
+{
+    MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
+    [newTopViewController setStartPageIndex:INBOX];
+    
+    CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
 }
 
 #pragma mark - UITableView PullToRefreshView
@@ -214,7 +255,40 @@
     
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
-    [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
+    if(isDeleteMode)
+    {
+        // 삭제 버튼으로 바꿔줌
+        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_dft.png"] forState:UIControlStateNormal];
+        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_sel.png"] forState:UIControlStateSelected];
+        if(deleteIdList != nil && [deleteIdList containsObject:inboxData.serverMessageKey])
+        {
+            [cell.stickerButton setSelected:YES];
+        }
+        
+        [cell.pinButton setHidden:YES];
+        [cell.moreButton setHidden:YES];
+        [cell.upperLine setHidden:YES];
+        [cell.underLine setHidden:YES];
+    }
+    else
+    {
+        [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
+        [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+        
+        [cell.pinButton setHidden:NO];
+        [cell.moreButton setHidden:NO];
+        if(indexPath.row == 0)
+        {
+            [cell.upperLine setHidden:YES];
+        }
+        else if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+        {
+            [cell.underLine setHidden:YES];
+        }
+    }
+    [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
+    [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
     // 푸시 시간
     [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
     // 거래명
@@ -316,8 +390,7 @@
         [cell.underLine setHidden:YES];
     }
     
-    NSMutableArray *pinIdList = [[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID];
-    if(pinIdList != nil && [pinIdList containsObject:inboxData.serverMessageKey])
+    if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
     {
         [cell.pinButton setSelected:YES];
     }
@@ -340,6 +413,40 @@
 }
 
 #pragma mark - UIButtonAction
+- (void)stickerButtonClick:(id)sender
+{
+    IndexPathButton *currentBtn = (IndexPathButton *)sender;
+    NSIndexPath *indexPath = currentBtn.indexPath;
+    
+    if(isDeleteMode)
+    {
+        NSString *pushId = ((NHInboxMessageData *)[[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
+        
+        if([currentBtn isSelected])
+        {
+            if([deleteIdList containsObject:pushId])
+            {
+                [deleteIdList removeObject:pushId];
+            }
+        }
+        else
+        {
+            if(![deleteIdList containsObject:pushId])
+            {
+                [deleteIdList addObject:pushId];
+            }
+        }
+        [currentBtn setSelected:![currentBtn isSelected]];
+    }
+    else
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(stickerButtonClick:)])
+        {
+            [delegate performSelector:@selector(stickerButtonClick:) withObject:sender];
+        }
+    }
+}
+
 - (void)pinButtonClick:(id)sender
 {
     IndexPathButton *currentBtn = (IndexPathButton *)sender;
@@ -349,29 +456,22 @@
     
     NHInboxMessageData *inboxData = [[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     
-    NSMutableArray *pinIdList = [[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID];
-    
-    if(pinIdList == nil)
-    {
-        pinIdList = [[NSMutableArray alloc] init];
-    }
-    
     if([currentBtn isSelected])
     {
         // 고정핀 해제를 위해 디바이스에서 해당 인덱스패스에 있는 푸시 아이디를 삭제한다.
-        if([pinIdList containsObject:inboxData.serverMessageKey])
+        if([pinnedIdList containsObject:inboxData.serverMessageKey])
         {
-            [pinIdList removeObject:inboxData.serverMessageKey];
-            [[NSUserDefaults standardUserDefaults] setObject:pinIdList forKey:TIMELINE_PIN_MESSAGE_ID];
+            [pinnedIdList removeObject:inboxData.serverMessageKey];
+            [[NSUserDefaults standardUserDefaults] setObject:pinnedIdList forKey:TIMELINE_PIN_MESSAGE_ID];
         }
     }
     else
     {
         // 고정핀 적용을 위해 디바이스에 해당 인덱스패스의 푸시 아이디를 저장한다.
-        if([pinIdList containsObject:inboxData.serverMessageKey])
+        if(![pinnedIdList containsObject:inboxData.serverMessageKey])
         {
-            [pinIdList addObject:inboxData.serverMessageKey];
-            [[NSUserDefaults standardUserDefaults] setObject:pinIdList forKey:TIMELINE_PIN_MESSAGE_ID];
+            [pinnedIdList addObject:inboxData.serverMessageKey];
+            [[NSUserDefaults standardUserDefaults] setObject:pinnedIdList forKey:TIMELINE_PIN_MESSAGE_ID];
         }
     }
     
@@ -445,5 +545,101 @@
         NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, bankingListTable.contentSize.height, bankingListTable.frame.size.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
     }
+}
+
+#pragma mark - delete mode
+- (IBAction)deleteMode:(id)sender
+{
+    isDeleteMode = YES;
+    
+    [deleteAllView setHidden:NO];
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setHidden:NO];
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height - deleteButtonView.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }completion:nil];
+    
+    [bankingListTable reloadData];
+}
+
+- (IBAction)deleteSelectAll:(id)sender
+{
+    if([deleteAllImg isHighlighted])
+    {
+        // 전체선택 해제
+        if([deleteIdList count] > 0)
+        {
+            [deleteIdList removeAllObjects];
+        }
+        
+        [deleteAllImg setHighlighted:NO];
+        [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 전체선택 모드
+        if([timeLineSection count] > 0)
+        {
+            // 리스트가 있는 경우에만 진행한다
+            if([deleteIdList count] > 0)
+            {
+                [deleteIdList removeAllObjects];
+            }
+            
+            [deleteAllImg setHighlighted:YES];
+            [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+        }
+    }
+}
+
+- (IBAction)deleteSelectedList:(id)sender
+{
+    // deleteIdList로 삭제를 진행한다.
+    if([deleteIdList count] > 0)
+    {
+        for(NSString *serverMessageKey in deleteIdList)
+        {
+            if([pinnedIdList containsObject:serverMessageKey])
+            {
+                [deleteIdList removeObject:serverMessageKey];
+            }
+        }
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(deletePushItems:)])
+        {
+            [delegate performSelector:@selector(deletePushItems:) withObject:deleteIdList];
+        }
+    }
+}
+
+- (IBAction)deleteViewHide:(id)sender
+{
+    // 삭제모드 해제
+    isDeleteMode = NO;
+    if([deleteIdList count] > 0)
+    {
+        [deleteIdList removeAllObjects];
+    }
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    [deleteAllView setHidden:YES];
+    
+    [deleteButton setEnabled:NO];
+    [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [deleteButtonView setHidden:YES];
+                     }];
+    
+    [bankingListTable reloadData];
 }
 @end

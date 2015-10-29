@@ -109,9 +109,9 @@
 
 #pragma mark 공인인증서 인증
 // 공인인증서 인증
-#define REQUEST_CERT                @"PMCNA100R.cmd"
-#define REQUEST_CERT_LOGIN_TYPE     @"REQ_LOGINTYPE"
-#define REQUEST_CERT_SSLSIGN_TBS    @"SSLSIGN_TBS_DATA"
+#define REQUEST_CERT                    @"PMCNA100R.cmd"
+#define REQUEST_CERT_LOGIN_TYPE         @"REQ_LOGINTYPE"
+#define REQUEST_CERT_SSLSIGN_TBS        @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
 // crm 휴대폰 번호
 #define RESPONSE_CERT_CRM_MOBILE    @"mobile_number"
@@ -124,6 +124,7 @@
 // 전체 계좌번호
 #define RESPONSE_CERT_ACCOUNT_LIST  @"sub"
 
+#pragma mark 계좌 인증
 // 계좌 인증
 #define REQUEST_ACCOUNT             @"EFPU1002R.cmd"
 // 계좌번호
@@ -138,9 +139,31 @@
 #define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
 #define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
 
-#pragma mark 계좌 알림 옵션
+#pragma mark 계좌 알림 옵션 조회
+#define REQUEST_NOTI_OPTION_SEARCH          @"EFPUW022001.cmd"
+// 주민등록번호
+#define REQUEST_NOTI_OPTION_SEARCH_RLNO     @"resident_number"
+// 계좌번호
+#define REQUEST_NOTI_OPTION_SEARCH_ACNO     @"account_number"
+
+#define RESPONSE_NOTI_OPTION_SEARCH_ACNO    @"UMSW022001_OUT_SUB.account_number"
+#define RESPONSE_NOTI_OPTION_SEARCH_RPID    @"UMSW022001_OUT_SUB.receipts_payment_id"
+#define RESPONSE_NOTI_OPTION_SEARCH_EVENT_TYPE  @"UMSW022001_OUT_SUB.noti_event_type"
+#define RESPONSE_NOTI_OPTION_SEARCH_PRICE       @"UMSW022001_OUT_SUB.noti_price"
+#define RESPONSE_NOTI_OPTION_SEARCH_TIME_FLAG   @"UMSW022001_OUT_SUB.noti_time_flag"
+#define RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ST   @"UMSW022001_OUT_SUB.unnoti_starttime"
+#define RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ET   @"UMSW022001_OUT_SUB.unnoti_endtime"
+#define RESPONSE_NOTI_OPTION_SEARCH_BALANCE_FLAG    @"UMSW022001_OUT_SUB.moneyview_flag"
+#define RESPONSE_NOTI_OPTION_SEARCH_AUTO_FLAG       @"UMSW022001_OUT_SUB.noti_auto_flag"
+#define RESPONSE_NOTI_OPTION_SEARCH_PERIOD_TYPE     @"UMSW022001_OUT_SUB.noti_period_type"
+#define RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE   @"UMSW022001_OUT_SUB.noti_time1"
+#define RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO   @"UMSW022001_OUT_SUB.noti_time2"
+#define RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE @"UMSW022001_OUT_SUB.noti_time3"
+
+#pragma mark 계좌 알림 옵션 설정
 #define REQUEST_NOTI_OPTION                 @"EFPUW022000.cmd"
 #define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
+#define REQUEST_NOTI_OPTION_RECEIPTS_ID     @"receipts_payment_id"
 #define REQUEST_NOTI_OPTION_EVENT_TYPE      @"noti_event_type"
 #define REQUEST_NOTI_OPTION_PRICE           @"noti_price"
 #define REQUEST_NOTI_OPTION_TIME_FLAG       @"noti_time_flag"

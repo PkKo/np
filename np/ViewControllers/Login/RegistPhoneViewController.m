@@ -188,6 +188,11 @@
         authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
         [phoneAuthNumInput setText:authNumber];
     }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - UIPickerViewDataSource

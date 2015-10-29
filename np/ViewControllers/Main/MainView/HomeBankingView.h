@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WithdrawStickerSettingView.h"
+#import "DepositStickerView.h"
 
 @interface HomeBankingView : UIView
 {
+    BOOL isDeleteMode;
     UIView *refreshHeaderView;
     UILabel *refreshLabel;
     UIImageView *refreshIndicator;
@@ -20,6 +23,14 @@
     NSString *textLoading;
     
     BOOL listSortType;
+    NSMutableArray *pinnedIdList;
+    NSMutableArray *deleteIdList;
+    
+    NSInteger storageCount;
+    
+    DepositStickerView *depositStickerView;
+    WithdrawStickerSettingView *withdrawStickerView;
+    NSIndexPath *currentStickerIndexPath;
 }
 
 @property (strong, nonatomic) id delegate;
@@ -31,6 +42,24 @@
 @property (strong, nonatomic) IBOutlet UIButton *statisticButton;
 @property (strong, nonatomic) IBOutlet UILabel *sortLabel;
 
+@property (strong, nonatomic) IBOutlet UIView *deleteAllView;
+@property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+@property (strong, nonatomic) IBOutlet UIImageView *deleteAllImg;
+@property (strong, nonatomic) IBOutlet UILabel *deleteAllLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
+- (void)refreshData;
+
 - (IBAction)listSortChange:(id)sender;
+
+// 삭제 모드
+- (IBAction)deleteMode:(id)sender;
+- (IBAction)deleteSelectAll:(id)sender;
+- (IBAction)deleteSelectedList:(id)sender;
+- (IBAction)deleteViewHide:(id)sender;
+// 보관함 이동
+- (IBAction)storageMoveClick:(id)sender;
 @end

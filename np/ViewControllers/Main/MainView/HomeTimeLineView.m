@@ -31,6 +31,7 @@
 @synthesize deleteAllImg;
 @synthesize deleteAllLabel;
 @synthesize deleteButtonView;
+@synthesize deleteButton;
 
 @synthesize searchView;
 
@@ -85,6 +86,21 @@
     }
     
     [self addPullToRefreshHeader];
+}
+
+- (void)refreshData
+{
+    pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    storageCount = [[controller getAllTransactions] count];
+    if(storageCount < 100)
+    {
+        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
+    }
+    else
+    {
+        [storageCountLabel setText:@"99+"];
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -158,6 +174,8 @@
         
         [deleteAllImg setHighlighted:NO];
         [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
     }
     else
     {
@@ -182,6 +200,8 @@
             
             [deleteAllImg setHighlighted:YES];
             [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
         }
     }
 }
@@ -217,6 +237,9 @@
     [deleteAllImg setHighlighted:NO];
     [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
     [deleteAllView setHidden:YES];
+    
+    [deleteButton setEnabled:NO];
+    [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
@@ -459,11 +482,27 @@
                 {
                     [cell.stickerButton setSelected:YES];
                 }
+                
+                [cell.pinButton setHidden:YES];
+                [cell.moreButton setHidden:YES];
+                [cell.upperLine setHidden:YES];
+                [cell.underLine setHidden:YES];
             }
             else
             {
                 [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
                 [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+                
+                [cell.pinButton setHidden:NO];
+                [cell.moreButton setHidden:NO];
+                if(indexPath.row == 0)
+                {
+                    [cell.upperLine setHidden:YES];
+                }
+                else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+                {
+                    [cell.underLine setHidden:YES];
+                }
             }
             
             [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
@@ -568,16 +607,6 @@
             [cell.moreButton setIndexPath:indexPath];
             [cell.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            
-            if(indexPath.row == 0)
-            {
-                [cell.upperLine setHidden:YES];
-            }
-            else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
-            {
-                [cell.underLine setHidden:YES];
-            }
-            
             if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
             {
                 [cell.pinButton setSelected:YES];
@@ -633,12 +662,24 @@
                 {
                     [cell.stickerButton setSelected:YES];
                 }
+                
+                [cell.upperLine setHidden:YES];
+                [cell.underLine setHidden:YES];
             }
             else
             {
                 // 기존 스티커 버튼
                 [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
                 [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+                
+                if(indexPath.row == 0)
+                {
+                    [cell.upperLine setHidden:YES];
+                }
+                else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+                {
+                    [cell.underLine setHidden:YES];
+                }
             }
             
             [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
@@ -650,15 +691,6 @@
             [cell.titleLabel setText:inboxData.title];
             // 공지 내용
             [cell.contentLabel setText:inboxData.text];
-            
-            if(indexPath.row == 0)
-            {
-                [cell.upperLine setHidden:YES];
-            }
-            else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
-            {
-                [cell.underLine setHidden:YES];
-            }
             
             if(indexPath.section == 0 && indexPath.row == bannerIndex)
             {
@@ -747,6 +779,17 @@
             }
         }
         [currentBtn setSelected:![currentBtn isSelected]];
+        
+        if([deleteIdList count] > 0)
+        {
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [deleteButton setEnabled:NO];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        }
     }
     else
     {

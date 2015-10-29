@@ -49,6 +49,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *deleteAllLabel;
 // 삭제 하단 버튼 뷰
 @property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+
 // 검색 뷰
 @property (strong, nonatomic) IBOutlet UIView *searchView;
 // 보관함에 저장된 갯수 표시
@@ -56,6 +58,7 @@
 @property (assign, nonatomic) NSInteger bannerIndex;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
+- (void)refreshData;
 
 /**
  @brief 리스트 정렬 순서 변경

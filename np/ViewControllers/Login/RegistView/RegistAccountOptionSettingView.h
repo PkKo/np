@@ -44,7 +44,8 @@ typedef enum PickerViewType
     NSArray *amountList;
     NSArray *alarmTimeList;
     NSArray *notiAutoList;
-    NSInteger pickerSelectIndex;
+    NSArray *alarmPeriodList;
+    int pickerSelectIndex;
     PickerViewType currentPickerView;
 }
 
@@ -118,21 +119,22 @@ typedef enum PickerViewType
 // 제한시간 설정(0:미설정, 1:설정)
 @property (assign, nonatomic) BOOL notiTimeFlag;
 // 알림제한시간(시작)(-1:미설정, 0~23시)
-@property (assign, nonatomic) NSInteger notiStartTime;
+@property (assign, nonatomic) int notiStartTime;
 // 알림제한시간(종료)(-1:미설정, 0~23시)
-@property (assign, nonatomic) NSInteger notiEndTime;
+@property (assign, nonatomic) int notiEndTime;
 // 잔액표시여부(1:표시, 2:미표시)
-@property (assign, nonatomic) NSInteger balanceFlag;
+@property (assign, nonatomic) int balanceFlag;
 // 자동이체 선택(1:발송, 2:미발송, 3:실시간)
-@property (assign, nonatomic) NSInteger notiAutoFlag;
+@property (assign, nonatomic) int notiAutoFlag;
 // 알림주기(1:실시간 2:지정)
-@property (assign, nonatomic) NSInteger notiPeriodType;
+@property (assign, nonatomic) int notiPeriodType;
 // 지정시간 1(-1:미설정, 0~23시)
-@property (assign, nonatomic) NSInteger notiPeriodTime1;
-@property (assign, nonatomic) NSInteger notiPeriodTime2;
-@property (assign, nonatomic) NSInteger notiPeriodTime3;
+@property (assign, nonatomic) int notiPeriodTime1;
+@property (assign, nonatomic) int notiPeriodTime2;
+@property (assign, nonatomic) int notiPeriodTime3;
 
 - (void)initDataWithAccountNumber:(NSString *)accountNum;
+- (void)makeAllOptionDataView;
 - (NSInteger)getAlarmSettingType;
 // 입출금 옵션 선택
 - (IBAction)selectDepWithType:(id)sender;
