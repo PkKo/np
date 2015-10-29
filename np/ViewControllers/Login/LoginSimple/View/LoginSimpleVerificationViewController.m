@@ -16,6 +16,7 @@
 
 @interface LoginSimpleVerificationViewController () {
     NSString * _pw;
+    BOOL _backFromSelfIdentifer;
 }
 
 @end
@@ -25,14 +26,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%s", __func__);
+    
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
+    
+    _backFromSelfIdentifer = NO;
     [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSLog(@"%s", __func__);
+    
+    if (_backFromSelfIdentifer) {
+        LoginUtil * util = [[LoginUtil alloc] init];
+        NSString * patternPw = [util getSimplePassword];
+        if (!patternPw) {
+            [util gotoSimpleLoginMgmt:self.navigationController];
+        }
+    }
 }
 
 #pragma mark - Action
@@ -90,17 +110,15 @@
     } else if (![pw isEqualToString:savedPassword]) {
         
         failedTimes++;
+        [util saveSimplePasswordFailedTimes:failedTimes];
         if (failedTimes >= 5) {
             
             alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
             tag             = ALERT_GOTO_SELF_IDENTIFY;
             
-            [util removeSimplePassword];
-            
         } else {
             
             alertMessage = [NSString stringWithFormat:@"비밀번호가 일치하지 않습니다.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
-            [util saveSimplePasswordFailedTimes:failedTimes];
         }
     }
     
@@ -119,8 +137,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
-            NSLog(@"본인인증으로 이동");
-            [self closeView];
+            [self toggleBtnBgColor:NO textLength:0];
+            _backFromSelfIdentifer = YES;
+            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_SIMPLEPW];
             break;
         default:
             break;

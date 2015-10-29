@@ -65,38 +65,45 @@
 
 - (void)confirmPassword:(NSString *)pw {
     
-    EccEncryptor * ec   = [EccEncryptor sharedInstance];
-    NSString * password = [ec makeDecNoPadWithSeedkey:pw];
-    
-    LoginCertController * controller = [[LoginCertController alloc] init];
-    [controller addTargetForLoginResponse:self action:@selector(succeedToLogin:)];
-    BOOL succeed = [controller checkPasswordOfCert:password];
-    
     LoginUtil * util        = [[LoginUtil alloc] init];
     NSInteger failedTimes   = [util getCertPasswordFailedTimes];
     
     NSString * alertMessage = nil;
     NSInteger tag           = ALERT_DO_NOTHING;
     
-    if (succeed) {
+    if (failedTimes >= 5) {
         
-        [util saveCertPasswordFailedTimes:0];
+        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+        tag             = ALERT_GOTO_SELF_IDENTIFY;
         
     } else {
-        failedTimes++;
         
-        if (failedTimes >= 5) {
+        EccEncryptor * ec   = [EccEncryptor sharedInstance];
+        NSString * password = [ec makeDecNoPadWithSeedkey:pw];
+        
+        LoginCertController * controller = [[LoginCertController alloc] init];
+        [controller addTargetForLoginResponse:self action:@selector(succeedToLogin:)];
+        BOOL succeed = [controller checkPasswordOfCert:password];
+        
+        
+        if (succeed) {
             
-            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
-            tag             = ALERT_GOTO_SELF_IDENTIFY;
+            [util saveCertPasswordFailedTimes:0];
             
         } else {
-            
-            alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
+            failedTimes++;
             [util saveCertPasswordFailedTimes:failedTimes];
+            if (failedTimes >= 5) {
+                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+                tag             = ALERT_GOTO_SELF_IDENTIFY;
+                
+            } else {
+                
+                alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
+            }
         }
     }
-    
+
     if (alertMessage) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                         delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -115,7 +122,7 @@
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
         {
-            NSLog(@"본인인증으로 이동");
+            exit(0);
             break;
         }
         case ALERT_DO_NOTHING:

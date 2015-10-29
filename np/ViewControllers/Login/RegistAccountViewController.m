@@ -22,6 +22,7 @@
 #import "EccEncryptor.h"
 #import "RegistPhoneViewController.h"
 #import "RegistAccountInputView.h"
+#import "LoginUtil.h"
 
 @interface RegistAccountViewController ()
 
@@ -38,10 +39,18 @@
 {
     [super viewDidLoad];
     
-    [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mMenuButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setHidden:YES];
-    [self.mNaviView.imgTitleView setHidden:NO];
+    if (self.isSelfIdentified) {
+        
+        [self.mNaviView.mBackButton setHidden:YES];
+        [self.mNaviView.mTitleLabel setText:@"본인설정"];
+        
+    } else {
+        [self.mNaviView.mBackButton setHidden:YES];
+        [self.mNaviView.mMenuButton setHidden:YES];
+        [self.mNaviView.mTitleLabel setHidden:YES];
+        [self.mNaviView.imgTitleView setHidden:NO];
+    }
+    
     
     [self showRegistCertView];
 }
@@ -363,8 +372,19 @@
         [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
         [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
         // 인증 성공한 이후 휴대폰 인증으로 이동
-        RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (self.isSelfIdentified) {
+            LoginUtil * util = [[LoginUtil alloc] init];
+            if (self.loginMethod == LOGIN_BY_PATTERN) {
+                [util removePatternPassword];
+            } else if (self.loginMethod == LOGIN_BY_SIMPLEPW) {
+                [util removeSimplePassword];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     else
     {
@@ -455,9 +475,20 @@
         [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
         [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
         [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
-        // 인증 성공한 이후 휴대폰 인증으로 이동
-        RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (self.isSelfIdentified) {
+            LoginUtil * util = [[LoginUtil alloc] init];
+            if (self.loginMethod == LOGIN_BY_PATTERN) {
+                [util removePatternPassword];
+            } else if (self.loginMethod == LOGIN_BY_SIMPLEPW) {
+                [util removeSimplePassword];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            // 인증 성공한 이후 휴대폰 인증으로 이동
+            RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     else
     {
