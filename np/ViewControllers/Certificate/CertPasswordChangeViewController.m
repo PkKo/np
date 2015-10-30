@@ -142,6 +142,7 @@
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
         [vc setLengthWithTagName:textFieldTag length:20 webView:nil];
         [vc setFullMode:YES];
+        [vc setSupportRetinaHD:YES];
         [vc setTopBarText:@"비밀번호 입력"];
         [vc setTitleText:titleText];
         [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
