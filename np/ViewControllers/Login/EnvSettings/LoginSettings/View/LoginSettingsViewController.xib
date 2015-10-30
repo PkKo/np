@@ -166,6 +166,9 @@
                                                     <state key="normal" title="공인인증센터">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="gotoCertMgmtCenter" destination="-1" eventType="touchUpInside" id="EJd-ex-hya"/>
                                                     </connections>
@@ -289,6 +292,9 @@
                                             <state key="normal" title="간편비밀번호 관리">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                             <connections>
                                                 <action selector="gotoSimpleLoginMgmt" destination="-1" eventType="touchUpInside" id="tUO-wR-FdT"/>
                                             </connections>
@@ -371,6 +377,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="패턴 관리">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="gotoPatternLoginMgmt" destination="-1" eventType="touchUpInside" id="9Lb-U7-WrD"/>
