@@ -29,6 +29,7 @@
     
     sectionList = [[NSMutableArray alloc] init];
     timelineMessageList = [[NSMutableDictionary alloc] init];
+    isSearch = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -48,7 +49,7 @@
             reqData.accountNumberList = @[@"1111-22-333333"];
             reqData.queryType = @"1,2,3,4,5,6";
             reqData.ascending = YES;
-            reqData.size = 20;
+            reqData.size = 2;
             /*
              필수 설정값
              */
@@ -120,11 +121,22 @@
     {
         case TIMELINE:
         {
-            mTimeLineView = [HomeTimeLineView view];
-            [mTimeLineView setDelegate:self];
-            [mTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            [mTimeLineView initData:sectionList timeLineDic:timelineMessageList];
-            [mMainContentView addSubview:mTimeLineView];
+            if(mTimeLineView == nil)
+            {
+                mTimeLineView = [HomeTimeLineView view];
+                [mTimeLineView setDelegate:self];
+                [mTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
+                [mTimeLineView initData:sectionList timeLineDic:timelineMessageList];
+                [mMainContentView addSubview:mTimeLineView];
+            }
+            else
+            {
+                mTimeLineView.mTimeLineSection = sectionList;
+                mTimeLineView.mTimeLineDic = timelineMessageList;
+                [mTimeLineView setIsSearchResult:isSearch];
+                isSearch = NO;
+                [mTimeLineView.mTimeLineTable reloadData];
+            }
             [mTimeLineView refreshData];
             
             break;
@@ -179,18 +191,78 @@
 /**
  @brief 데이터 갱신
  */
-- (void)refreshData:(BOOL)newData
+- (void)refreshData:(BOOL)newData ascending:(BOOL)ascending
 {
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
     isRefresh = YES;
+    isNewData = newData;
+    isAscending = ascending;
+    
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.accountNumberList = @[@"1111-22-333333"];
+    reqData.ascending = YES;
+    reqData.size = 2;
+    
+    switch (viewType)
+    {
+        case TIMELINE:
+        {
+            sectionList = mTimeLineView.mTimeLineSection;
+            timelineMessageList = mTimeLineView.mTimeLineDic;
+            reqData.queryType = @"1,2,3,4,5,6";
+            break;
+        }
+        case BANKING:
+        {
+            sectionList = bankingView.timeLineSection;
+            timelineMessageList = bankingView.timeLineDic;
+            reqData.queryType = @"1,2";
+            break;
+        }
+        case OTHER:
+        {
+            sectionList = etcTimeLineView.timelineSection;
+            timelineMessageList = etcTimeLineView.timelineDic;
+            reqData.queryType = @"3,4,5,6";
+            break;
+        }
+        default:
+            break;
+    }
     
     if(newData)
     {
         // 최신 데이터를 가져온다.
+        if(ascending)
+        {
+            reqData.endDate = [CommonUtil getFormattedTodayString:@"yyyyMMdd"];
+        }
+        else
+        {
+            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject]).serverMessageKey;
+        }
     }
     else
     {
         // 현재 이전 데이터를 가져온다.
+        if(ascending)
+        {
+            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject]).serverMessageKey;
+        }
+        else
+        {
+            reqData.endDate = [CommonUtil getFormattedTodayString:@"yyyyMMdd"];
+        }
     }
+    
+    [IBInbox reqQueryAccountInboxListWithSize:reqData];
+}
+
+- (void)searchInboxDataWithQuery:(AccountInboxRequestData *)reqData
+{
+    isSearch = YES;
+    [IBInbox reqQueryAccountInboxListWithSize:reqData];
 }
 
 /**
@@ -402,7 +474,7 @@
                 [timelineMessageList removeAllObjects];
             }
             
-            if(viewType == TIMELINE)
+            if(viewType == TIMELINE && !isSearch)
             {
                  NSString *todayString = [CommonUtil getTodayDateString];
                  NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
@@ -503,6 +575,135 @@
                      }*/
                 }
             }
+        }
+        else
+        {
+            if(isNewData)
+            {
+                // 신규 목록
+                if(viewType == TIMELINE)
+                {
+                    NSString *todayString = [CommonUtil getTodayDateString];
+                    
+                    for(NHInboxMessageData *inboxData in messageList)
+                    {
+                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        
+                        if([dateString isEqualToString:todayString])
+                        {
+                            NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                            if(todayItemList == nil)
+                            {
+                                todayItemList = [[NSMutableArray alloc] init];
+                            }
+                            
+                            [todayItemList insertObject:inboxData atIndex:0];
+                            [timelineMessageList setObject:todayItemList forKey:todayString];
+                        }
+                        else
+                        {
+                            NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                            if(itemList == nil)
+                            {
+                                itemList = [[NSMutableArray alloc] init];
+                                NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                                TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                                dateSectionData.date = dateString;
+                                dateSectionData.day = dateDayString;
+                                [sectionList addObject:dateSectionData];
+                            }
+                            [itemList insertObject:inboxData atIndex:0];
+                            [timelineMessageList setObject:itemList forKey:dateString];
+                        }
+                    }
+                }
+                else
+                {
+                    for(NHInboxMessageData *inboxData in messageList)
+                    {
+                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        
+                        NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                        if(itemList == nil)
+                        {
+                            itemList = [[NSMutableArray alloc] init];
+                            NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                            TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                            dateSectionData.date = dateString;
+                            dateSectionData.day = dateDayString;
+                            [sectionList addObject:dateSectionData];
+                        }
+                        
+                        [itemList addObject:inboxData];
+                        
+                        [timelineMessageList setObject:itemList forKey:dateString];
+                    }
+                }
+            }
+            else
+            {
+                // 과거 목록
+                if(viewType == TIMELINE)
+                {
+                    NSString *todayString = [CommonUtil getTodayDateString];
+                    
+                    for(NHInboxMessageData *inboxData in messageList)
+                    {
+                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        
+                        if([dateString isEqualToString:todayString])
+                        {
+                            NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
+                            if(todayItemList == nil)
+                            {
+                                todayItemList = [[NSMutableArray alloc] init];
+                            }
+                            
+                            [todayItemList addObject:inboxData];
+                            [timelineMessageList setObject:todayItemList forKey:todayString];
+                        }
+                        else
+                        {
+                            NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                            if(itemList == nil)
+                            {
+                                itemList = [[NSMutableArray alloc] init];
+                                NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                                TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                                dateSectionData.date = dateString;
+                                dateSectionData.day = dateDayString;
+                                [sectionList addObject:dateSectionData];
+                            }
+                            [itemList addObject:inboxData];
+                            [timelineMessageList setObject:itemList forKey:dateString];
+                        }
+                    }
+                }
+                else
+                {
+                    for(NHInboxMessageData *inboxData in messageList)
+                    {
+                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        
+                        NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                        if(itemList == nil)
+                        {
+                            itemList = [[NSMutableArray alloc] init];
+                            NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                            TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                            dateSectionData.date = dateString;
+                            dateSectionData.day = dateDayString;
+                            [sectionList addObject:dateSectionData];
+                        }
+                        
+                        [itemList addObject:inboxData];
+                        
+                        [timelineMessageList setObject:itemList forKey:dateString];
+                    }
+                }
+            }
+            
+            isRefresh = NO;
         }
         
         [self performSelector:@selector(makeTimelineView) withObject:nil];

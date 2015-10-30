@@ -602,4 +602,35 @@
     
     return result;
 }
+
++ (NSString *)getFormattedTodayString:(NSString *)format
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:format];
+    NSString *todayString = [dateFormat stringFromDate:today];
+    
+    return todayString;
+}
+
++ (NSString *)getFormattedDateStringWithIndex:(NSString *)format indexDay:(NSInteger)indexDay
+{
+    NSTimeInterval secondsPerDay = 24 * 60 * 60 * indexDay;
+    NSDate *toDate = [NSDate dateWithTimeIntervalSinceNow:secondsPerDay];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:format];
+    NSString *todayString = [dateFormat stringFromDate:toDate];
+    
+    return todayString;
+}
+
++ (NSString *)getFormattedDateStringWithDate:(NSString *)format date:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:format];
+    NSString *todayString = [dateFormat stringFromDate:date];
+    
+    return todayString;
+}
 @end

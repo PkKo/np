@@ -38,14 +38,14 @@
     [IBPush setApnsHelperReceiver:(AppDelegate *)[[UIApplication sharedApplication] delegate]];
     // APNS Device 등록 및 Device Token 요청
     [IBPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-/*
-#if 0
+    
+#if 1
     [IBNgmService registerUserWithAccountId:@"8C5B196D-FD00-4814-BCA6-0C19300B58F0" verifyCode:[@"8C5B196D-FD00-4814-BCA6-0C19300B58F0" dataUsingEncoding:NSUTF8StringEncoding]];
 //    [IBNgmService registerUserWithAccountId:@"150324104128890" verifyCode:[@"150324104128890" dataUsingEncoding:NSUTF8StringEncoding]];
 #else
     [IBNgmService registerUserWithAccountId:[CommonUtil getDeviceUUID] verifyCode:[[CommonUtil getDeviceUUID] dataUsingEncoding:NSUTF8StringEncoding]];
 #endif
-*/
+    
     return YES;
 }
 
