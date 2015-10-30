@@ -123,9 +123,8 @@
     
     if(isUser != nil && [isUser isEqualToString:@"Y"])
     {
-        NSString *quickView = [[NSUserDefaults standardUserDefaults] objectForKey:QUICK_VIEW_SETTING];
         // 간편보기 확인
-        if(quickView != nil && [quickView isEqualToString:@"Y"])
+        if([[[LoginUtil alloc] init] isUsingSimpleView])
         {
             // 퀵뷰
             vc = [[HomeQuickViewController alloc] init];

@@ -13,9 +13,11 @@
 
 - (void)validateLoginPattern {
     
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    
     NSString * loginType        = @"PAT";
-    NSString * user_id          = @"150324104128890";
-    NSString * crmMobile        = @"01540051434";
+    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
+    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_PINPAT];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];

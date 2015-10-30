@@ -10,6 +10,7 @@
 #import "MainPageViewController.h"
 #import "ExchangeSettingViewController.h"
 #import "AccountAddViewController.h"
+#import "LoginUtil.h"
 
 @interface RegistCompleteViewController ()
 
@@ -111,7 +112,7 @@
         {
             if(buttonIndex == 1)
             {
-                [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:QUICK_VIEW_SETTING];
+                [[[LoginUtil alloc] init] saveUsingSimpleViewFlag:YES];
             }
             break;
         }
