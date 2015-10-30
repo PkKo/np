@@ -53,4 +53,7 @@ typedef enum StickerType
 + (NSString *)encrypt3DES:(NSString *)str;
 + (NSString *)encrypt3DESWithKey:(NSString *)str key:(NSString *)key;
 + (NSString *)decrypt3DES:(NSString *)str decodingKey:(NSString *)decodingKey;
++ (NSString *)getFormattedTodayString:(NSString *)format;
++ (NSString *)getFormattedDateStringWithIndex:(NSString *)format indexDay:(NSInteger)indexDay;
++ (NSString *)getFormattedDateStringWithDate:(NSString *)format date:(NSDate *)date;
 @end

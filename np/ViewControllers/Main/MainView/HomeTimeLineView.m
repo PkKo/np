@@ -34,6 +34,11 @@
 @synthesize deleteButton;
 
 @synthesize searchView;
+@synthesize searchStartDateLabel;
+@synthesize searchEndDateLabel;
+@synthesize datePickerView;
+@synthesize datePicker;
+@synthesize isSearchResult;
 
 @synthesize storageCountLabel;
 
@@ -105,12 +110,42 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    NSLog(@"%s", __FUNCTION__);
     // Drawing code
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
+
+- (void)addPullToRefreshHeader
+{
+    textPull = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
+    textRelease = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
+    textLoading = @"Loading";
+    
+    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
+    refreshHeaderView.backgroundColor = [UIColor clearColor];
+    [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
+    [refreshIndicator setFrame:CGRectMake(floorf(floorf(refreshHeaderView.frame.size.width - 20) / 2), 11, 30, 30)];
+    [refreshIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
+    [refreshIndicator setContentMode:UIViewContentModeCenter];
+    
+    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, refreshIndicator.frame.origin.y + refreshIndicator.frame.size.height, mTimeLineTable.frame.size.width, 16)];
+    refreshLabel.backgroundColor = [UIColor clearColor];
+    refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    [refreshLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    refreshLabel.textAlignment = NSTextAlignmentCenter;
+    [refreshLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    [refreshHeaderView addSubview:refreshLabel];
+    [refreshHeaderView addSubview:refreshIndicator];
+    [mTimeLineTable addSubview:refreshHeaderView];
+}
+
+#pragma mark - 리스트 정렬 변경
 - (IBAction)listSortChange:(id)sender
 {
     listSortType = !listSortType;
@@ -121,10 +156,27 @@
     NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
     for(TimelineSectionData *data in mTimeLineSection)
     {
-        NSArray *reverseArray = [[[mTimeLineDic objectForKey:data.date] reverseObjectEnumerator] allObjects];
-        [reverseDic setObject:reverseArray forKey:data.date];
+        if([mTimeLineDic objectForKey:data.date] != nil)
+        {
+            NSArray *reverseArray = [[[mTimeLineDic objectForKey:data.date] reverseObjectEnumerator] allObjects];
+            [reverseDic setObject:reverseArray forKey:data.date];
+        }
     }
     mTimeLineDic = reverseDic;
+    
+    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+    if([firstSectionArray count] >= 2)
+    {
+        bannerIndex = 1;
+    }
+    else if([firstSectionArray count] == 1)
+    {
+        bannerIndex = 0;
+    }
+    else
+    {
+        bannerIndex = 0;
+    }
     
     if(listSortType)
     {
@@ -138,14 +190,7 @@
     [mTimeLineTable reloadData];
 }
 
-- (IBAction)searchViewShow:(id)sender
-{
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [searchView setHidden:NO];
-        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
-    }completion:nil];
-}
-
+#pragma mark - 삭제 Action
 - (IBAction)deleteMode:(id)sender
 {
     isDeleteMode = YES;
@@ -251,6 +296,15 @@
     [mTimeLineTable reloadData];
 }
 
+#pragma mark - 검색 Action
+- (IBAction)searchViewShow:(id)sender
+{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [searchView setHidden:NO];
+        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
+    }completion:nil];
+}
+
 - (IBAction)searchViewHide:(id)sender
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -261,6 +315,118 @@
                      }];
 }
 
+// 기간 설정 버튼 클릭
+- (IBAction)searchPeriodSelect:(id)sender
+{
+    NSString *toDateString = [CommonUtil getFormattedTodayString:@"yyyy.MM.dd"];
+    [searchEndDateLabel setText:toDateString];
+    searchEndDate = [toDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString *fromDateString = [CommonUtil getFormattedDateStringWithIndex:@"yyyy.MM.dd" indexDay:-[sender tag]];
+    [searchStartDateLabel setText:fromDateString];
+    searchStartDate = [fromDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+}
+
+// 검색 실행
+- (IBAction)searchStart:(id)sender
+{
+    if(searchStartDate == nil || [searchStartDate length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(searchEndDate == nil || [searchEndDate length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 종료일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.accountNumberList = @[@"1111-22-333333"];
+    reqData.ascending = YES;
+    reqData.startDate = searchStartDate;
+    reqData.endDate = searchEndDate;
+    reqData.queryType = @"1,2,3,4,5,6";
+    
+    if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
+    {
+        [delegate performSelector:@selector(searchInboxDataWithQuery:) withObject:reqData];
+    }
+    
+    [self searchViewHide:nil];
+}
+
+// DatePicker 확인 버튼
+- (IBAction)searchDateSelect:(id)sender
+{
+    NSString *selectedDateString = [CommonUtil getFormattedDateStringWithDate:@"yyyy.MM.dd" date:datePicker.date];
+    if(searchDateSelectType)
+    {
+        [searchEndDateLabel setText:selectedDateString];
+        searchEndDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    }
+    else
+    {
+        [searchStartDateLabel setText:selectedDateString];
+        searchStartDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    }
+    
+    [datePickerView setHidden:YES];
+}
+
+// DatePickerView 보여줌
+- (IBAction)searchDatePickerShow:(id)sender
+{
+    searchDateSelectType = (BOOL)[sender tag];
+    
+    [datePickerView setHidden:NO];
+    
+    if(datePicker == nil)
+    {
+        datePicker = [[UIDatePicker alloc] init];
+    }
+    
+    if(searchDateSelectType)
+    {
+        // 종료일
+        if(searchEndDate == nil || [searchEndDate length] == 0)
+        {
+            [datePicker setDate:[NSDate date]];
+        }
+        else
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMdd"];
+            NSDate *currentDate = [formatter dateFromString:searchEndDate];
+            [datePicker setDate:currentDate];
+        }
+    }
+    else
+    {
+        // 시작일
+        if(searchStartDate == nil || [searchStartDate length] == 0)
+        {
+            [datePicker setDate:[NSDate date]];
+        }
+        else
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMdd"];
+            NSDate *currentDate = [formatter dateFromString:searchStartDate];
+            [datePicker setDate:currentDate animated:NO];
+        }
+    }
+}
+
+// DatePickerView 숨김
+- (IBAction)searchDatePickerHide:(id)sender
+{
+    [datePickerView setHidden:YES];
+}
+
+#pragma mark - 보관함 이동 Action
 - (IBAction)storageMoveClick:(id)sender
 {
     MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
@@ -272,33 +438,7 @@
     [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
 }
 
-- (void)addPullToRefreshHeader
-{
-    textPull = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
-    textRelease = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
-    textLoading = @"Loading";
-    
-    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
-    refreshHeaderView.backgroundColor = [UIColor clearColor];
-    [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
-    [refreshIndicator setFrame:CGRectMake(floorf(floorf(refreshHeaderView.frame.size.width - 20) / 2), 11, 30, 30)];
-    [refreshIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-    [refreshIndicator setContentMode:UIViewContentModeCenter];
-    
-    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, refreshIndicator.frame.origin.y + refreshIndicator.frame.size.height, mTimeLineTable.frame.size.width, 16)];
-    refreshLabel.backgroundColor = [UIColor clearColor];
-    refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [refreshLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
-    refreshLabel.textAlignment = NSTextAlignmentCenter;
-    [refreshLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    [refreshHeaderView addSubview:refreshLabel];
-    [refreshHeaderView addSubview:refreshIndicator];
-    [mTimeLineTable addSubview:refreshHeaderView];
-}
-
+#pragma mark - 새로고침
 - (void)startLoading
 {
     NSLog(@"%s", __FUNCTION__);
@@ -412,7 +552,7 @@
     {
         return TIMELINE_BANNER_HEIGHT;
     }
-    else if(indexPath.section == 0 && indexPath.row == bannerIndex)
+    else if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
     {
         return [self getTimelineCellHeight:(StickerType)inboxData.stickerCode] + TIMELINE_BANNER_HEIGHT;
     }
@@ -612,7 +752,7 @@
                 [cell.pinButton setSelected:YES];
             }
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
@@ -692,7 +832,7 @@
             // 공지 내용
             [cell.contentLabel setText:inboxData.text];
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
@@ -751,6 +891,10 @@
         NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
         NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:ascending:)])
+        {
+            [delegate refreshData:NO ascending:listSortType];
+        }
     }
 }
 
