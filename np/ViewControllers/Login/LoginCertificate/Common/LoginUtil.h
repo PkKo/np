@@ -12,6 +12,8 @@
 @interface LoginUtil : NSObject
 
 #pragma mark - Login Settings
+- (BOOL)isLoggedIn;
+- (void)setLogInStatus:(BOOL)isLoggedIn;
 - (void)gotoLoginSettings:(UINavigationController *)navController;
 - (void)saveLoginMethod:(LoginMethod)loginMethod;
 - (LoginMethod)getLoginMethod;

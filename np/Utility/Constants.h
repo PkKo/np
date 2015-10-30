@@ -214,6 +214,7 @@
 #define PREF_KEY_CERT_TO_LOGIN                      @"certificateToLogin"
 #define PREF_KEY_CERT_LOGIN_SETT_FAILED_TIMES       @"certLoginSettingsKeyFailedTimes"
 
+#define PREF_KEY_LOGIN_STATUS                       @"loginStatus"
 #define PREF_KEY_LOGIN_METHOD                       @"loginMethodKey"
 typedef enum LoginMethod {
     LOGIN_BY_NONE,

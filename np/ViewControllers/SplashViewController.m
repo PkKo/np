@@ -123,6 +123,7 @@
     
     if(isUser != nil && [isUser isEqualToString:@"Y"])
     {
+        [[[LoginUtil alloc] init] setLogInStatus:NO];
         // 간편보기 확인
         if([[[LoginUtil alloc] init] isUsingSimpleView])
         {
@@ -149,10 +150,11 @@
         vc = [[RegistAccountViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
+     
 //    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* main test 진입 code
-    // 메인 시작
+    // main test 진입 code
+    /* 메인 시작
     MainPageViewController *vc = [[MainPageViewController alloc] init];
     [vc setStartPageIndex:0];
     slidingViewController.topViewController = vc;
