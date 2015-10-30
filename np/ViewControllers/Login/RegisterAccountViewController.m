@@ -11,6 +11,7 @@
 #import "NFilterNum.h"
 #import "nFilterNumForPad.h"
 #import "EccEncryptor.h"
+#import "LoginUtil.h"
 
 @interface RegisterAccountViewController ()
 
@@ -356,6 +357,17 @@
             [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
         }
         
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_CERT])
+        {
+            // 공인인증 로그인으로 설정
+            [[[LoginUtil alloc] init] saveLoginMethod:LOGIN_BY_CERTIFICATE];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
+        {
+            // 계좌인증 로그인으로 설정
+            [[[LoginUtil alloc] init] saveLoginMethod:LOGIN_BY_ACCOUNT];
+        }
+        
         // 등록완료 뷰 컨트롤러로 이동
         RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -408,6 +420,7 @@
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
         [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
         [vc setFullMode:YES];
+        [vc setSupportRetinaHD:YES];
         [vc setTopBarText:@"계좌비밀번호"];
         [vc setTitleText:@"계좌 비밀번호 입력"];
         [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];

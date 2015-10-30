@@ -45,7 +45,7 @@
 #else
     [IBNgmService registerUserWithAccountId:[CommonUtil getDeviceUUID] verifyCode:[[CommonUtil getDeviceUUID] dataUsingEncoding:NSUTF8StringEncoding]];
 #endif
-*/    
+*/
     return YES;
 }
 

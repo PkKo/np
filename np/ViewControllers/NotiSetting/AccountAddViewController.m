@@ -128,6 +128,7 @@
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
             [vc setLengthWithTagName:@"PasswordInput" length:20 webView:nil];
             [vc setFullMode:YES];
+            [vc setSupportRetinaHD:YES];
             [vc setTopBarText:@"공인인증센터"];
             [vc setTitleText:@"공인인증서 비밀번호 입력"];
             [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];
@@ -157,6 +158,7 @@
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
             [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
             [vc setFullMode:YES];
+            [vc setSupportRetinaHD:YES];
             [vc setTopBarText:@"계좌비밀번호"];
             [vc setTitleText:@"계좌 비밀번호 입력"];
             [vc setRotateToInterfaceOrientation:self.interfaceOrientation parentView:self.view];

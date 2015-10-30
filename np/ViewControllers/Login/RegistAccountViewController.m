@@ -299,6 +299,7 @@
     // 실제 사용가능한 인증서인지 확인한 후 가입 진행한다.
     NSLog(@"%s, certInfo = %@", __FUNCTION__, certInfo);
     [[CertManager sharedInstance] setCertInfo:certInfo];
+    [[[LoginUtil alloc] init] saveCertToLogin:certInfo];
     
     [self showNFilterKeypad];
 }
