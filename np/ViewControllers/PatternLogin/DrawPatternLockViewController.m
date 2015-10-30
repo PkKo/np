@@ -9,7 +9,6 @@
 #import "DrawPatternLockViewController.h"
 #import "DrawPatternLockView.h"
 #import "LoginUtil.h"
-#import "LoginPatternController.h"
 
 
 #define MATRIX_SIZE 3

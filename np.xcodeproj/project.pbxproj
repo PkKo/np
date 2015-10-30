@@ -561,8 +561,6 @@
 		A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4511BB28E79006EE828 /* TransactionObject.m */; settings = {ASSET_TAGS = (); }; };
 		A5E2C4561BB2921A006EE828 /* StorageBoxUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4551BB2921A006EE828 /* StorageBoxUtil.m */; settings = {ASSET_TAGS = (); }; };
 		A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */; };
-		A5E449F01BE05B6E0007A9CA /* LoginSimpleController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E449EF1BE05B6E0007A9CA /* LoginSimpleController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E449F41BE05C700007A9CA /* LoginPatternController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E449F31BE05C700007A9CA /* LoginPatternController.m */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E2F1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E2E1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E311BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5EA7E361BBBA09C00626C74 /* ArchivedTransItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E341BBBA09C00626C74 /* ArchivedTransItemCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1301,10 +1299,6 @@
 		A5E2C4541BB2921A006EE828 /* StorageBoxUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorageBoxUtil.h; path = StorageBox/Common/StorageBoxUtil.h; sourceTree = "<group>"; };
 		A5E2C4551BB2921A006EE828 /* StorageBoxUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorageBoxUtil.m; path = StorageBox/Common/StorageBoxUtil.m; sourceTree = "<group>"; };
 		A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = np/Library/SNS/KakaoOpenSDK.framework; sourceTree = "<group>"; };
-		A5E449EE1BE05B6E0007A9CA /* LoginSimpleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginSimpleController.h; path = Controller/LoginSimpleController.h; sourceTree = "<group>"; };
-		A5E449EF1BE05B6E0007A9CA /* LoginSimpleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginSimpleController.m; path = Controller/LoginSimpleController.m; sourceTree = "<group>"; };
-		A5E449F21BE05C700007A9CA /* LoginPatternController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginPatternController.h; path = Controller/LoginPatternController.h; sourceTree = "<group>"; };
-		A5E449F31BE05C700007A9CA /* LoginPatternController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginPatternController.m; path = Controller/LoginPatternController.m; sourceTree = "<group>"; };
 		A5EA7E2E1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ArchivedTransactionItems.storyboard; path = StorageBox/View/ArchivedTransactionItems.storyboard; sourceTree = "<group>"; };
 		A5EA7E301BBB7FA000626C74 /* ArchivedTransactionItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArchivedTransactionItemsViewController.h; path = StorageBox/View/ArchivedTransactionItemsViewController.h; sourceTree = "<group>"; };
 		A5EA7E311BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArchivedTransactionItemsViewController.m; path = StorageBox/View/ArchivedTransactionItemsViewController.m; sourceTree = "<group>"; };
@@ -2547,7 +2541,6 @@
 		A55BDEE41BB0EB8100646C79 /* PatternLogin */ = {
 			isa = PBXGroup;
 			children = (
-				A5E449F11BE05C550007A9CA /* Controller */,
 				A55BDEE71BB0EB8100646C79 /* DrawPatternLockView.h */,
 				A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */,
 				A55BDEE91BB0EB8100646C79 /* DrawPatternLockViewController.h */,
@@ -2772,7 +2765,6 @@
 		A5E017771BCCD134007BD4EA /* LoginSimple */ = {
 			isa = PBXGroup;
 			children = (
-				A5E449ED1BE05B4C0007A9CA /* Controller */,
 				A5E017781BCCD134007BD4EA /* View */,
 			);
 			path = LoginSimple;
@@ -2878,24 +2870,6 @@
 				A5E2C4551BB2921A006EE828 /* StorageBoxUtil.m */,
 			);
 			name = Common;
-			sourceTree = "<group>";
-		};
-		A5E449ED1BE05B4C0007A9CA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A5E449EE1BE05B6E0007A9CA /* LoginSimpleController.h */,
-				A5E449EF1BE05B6E0007A9CA /* LoginSimpleController.m */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		A5E449F11BE05C550007A9CA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A5E449F21BE05C700007A9CA /* LoginPatternController.h */,
-				A5E449F31BE05C700007A9CA /* LoginPatternController.m */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		A5EA7E3A1BBBB33400626C74 /* Controller */ = {
@@ -3548,12 +3522,10 @@
 				A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
-				A5E449F01BE05B6E0007A9CA /* LoginSimpleController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
 				A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
-				A5E449F41BE05C700007A9CA /* LoginPatternController.m in Sources */,
 				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,
 				A5F89D5B1BDE2A12000A24CB /* FaqViewController.m in Sources */,
 				A54B3B701BBE169900F883E9 /* ArchivedTransHeaderCell.m in Sources */,
