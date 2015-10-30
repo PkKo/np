@@ -39,6 +39,9 @@
         NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
         NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
         
+        NSLog(@"user_id: %@", user_id);
+        NSLog(@"crmMobile: %@", crmMobile);
+        
         [[CertManager sharedInstance] setTbs:strTbs];
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
@@ -65,6 +68,8 @@
 }
 
 - (void)certInfoResponse:(NSDictionary *)response {
+    
+    NSLog(@"response: %@", response);
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         

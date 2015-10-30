@@ -20,6 +20,9 @@
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
     NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
     
+    NSLog(@"user_id: %@", user_id);
+    NSLog(@"crmMobile: %@", crmMobile);
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_PINPAT];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     

@@ -100,7 +100,7 @@
             tag             = ALERT_GOTO_SELF_IDENTIFY;
             
         } else {
-            
+            [self startIndicator];
             [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text password:self.passwordTextField.text ofViewController:self action:@selector(loginResult:)];
         }
     }
@@ -131,6 +131,8 @@
 }
 
 - (void)loginResult:(NSDictionary *)response {
+    
+    [self stopIndicator];
     
     LoginUtil * util        = [[LoginUtil alloc] init];
     
