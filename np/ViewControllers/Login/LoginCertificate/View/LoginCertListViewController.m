@@ -78,6 +78,8 @@
         
     } else {
         
+        [self startIndicator];
+        
         EccEncryptor * ec   = [EccEncryptor sharedInstance];
         NSString * password = [ec makeDecNoPadWithSeedkey:pw];
         
@@ -91,6 +93,9 @@
             [util saveCertPasswordFailedTimes:0];
             
         } else {
+            
+            [self stopIndicator];
+            
             failedTimes++;
             [util saveCertPasswordFailedTimes:failedTimes];
             if (failedTimes >= 5) {
@@ -114,6 +119,7 @@
 
 - (void)succeedToLogin:(BOOL)isSucceeded {
     if (isSucceeded) {
+        [self stopIndicator];
         [[[LoginUtil alloc] init] showMainPage];
     }
 }
