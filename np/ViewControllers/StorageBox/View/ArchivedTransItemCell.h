@@ -27,7 +27,10 @@
 - (IBAction)clickDeleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel        * transacTime;
 @property (weak, nonatomic) IBOutlet UILabel        * transacName;
+@property (weak, nonatomic) IBOutlet UIView         * transacAmountView;
+@property (weak, nonatomic) IBOutlet UILabel        * transacAmountType;
 @property (weak, nonatomic) IBOutlet UILabel        * transacAmount;
+@property (weak, nonatomic) IBOutlet UILabel        * transacAmountUnit;
 @property (weak, nonatomic) IBOutlet UIImageView    * pinImageView;
 @property (weak, nonatomic) IBOutlet UILabel        * transacAccountNo;
 @property (weak, nonatomic) IBOutlet UILabel        * transacBalance;

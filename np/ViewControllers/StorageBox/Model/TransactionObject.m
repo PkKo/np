@@ -60,7 +60,7 @@
 
 
 - (NSString *)formattedTransactionAmount {
-    return [NSString stringWithFormat:@"%@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]]];
+    return [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]];
 }
 
 - (NSString *)formattedTransactionBalance {

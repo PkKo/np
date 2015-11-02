@@ -78,7 +78,7 @@
         
         NSLog(@"accounts: %@", accounts);
         
-        int numberOfAccounts    = [accounts count];
+        int numberOfAccounts    = (int)[accounts count];
         
         if (numberOfAccounts > 0) {
             

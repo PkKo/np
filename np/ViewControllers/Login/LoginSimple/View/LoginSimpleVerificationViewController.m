@@ -214,7 +214,7 @@
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = [accounts count];
+        int numberOfAccounts    = (int)[accounts count];
         
         NSLog(@"accounts: %@", accounts);
         

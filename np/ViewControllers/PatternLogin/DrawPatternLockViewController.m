@@ -308,7 +308,7 @@
     }
     
     if (alertMessage) {
-        [self showAlert:alertMessage tag:tag];
+        [self showAlert:alertMessage tag:(int)tag];
     } else {
         [self startIndicator];
         [self validateLoginPattern];
@@ -401,7 +401,7 @@
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = [accounts count];
+        int numberOfAccounts    = (int)[accounts count];
         
         NSLog(@"accounts: %@", accounts);
         

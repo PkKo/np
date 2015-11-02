@@ -52,5 +52,6 @@
 
 #pragma mark - UI Customization
 + (UIColor *)getDimmedBackgroundColor;
++ (CGSize)contentSizeOfLabel:(UILabel *)label;
 - (void)updateTextFieldBorder:(UITextField *)textField;
 @end

@@ -247,4 +247,10 @@
     [viewController didMoveToParentViewController:parentViewController];
 }
 
++ (CGSize)contentSizeOfLabel:(UILabel *)label {
+    
+    CGSize contentSize = [label.text sizeWithAttributes:@{NSFontAttributeName: label.font}];
+    return contentSize;
+}
+
 @end
