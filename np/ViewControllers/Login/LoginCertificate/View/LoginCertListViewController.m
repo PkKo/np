@@ -128,6 +128,7 @@
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
         {
+            [[[LoginUtil alloc] init] saveCertPasswordFailedTimes:0];
             exit(0);
             break;
         }

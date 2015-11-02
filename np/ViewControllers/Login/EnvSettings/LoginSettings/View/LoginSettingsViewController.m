@@ -175,9 +175,9 @@
     self.simpleLoginMgmtBtn.layer.cornerRadius  = 7;
     self.patternLoginMgmtBtn.layer.cornerRadius = 7;
     
-    [self.certMgmtCenterBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.simpleLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self.patternLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self.certMgmtCenterBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.simpleLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [self.patternLoginMgmtBtn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateSelected];
 }
 
 - (void)updateAfterChangingSetting {
@@ -218,21 +218,21 @@
             self.certLoginBtn.selected          = !self.certLoginBtn.isSelected;
             self.certCheckBtn.hidden            = !self.certLoginBtn.isSelected;
             self.certRadioBtn.hidden            =  self.certLoginBtn.isSelected;
-            self.certMgmtCenterBtn.highlighted  = self.certLoginBtn.isSelected;
+            self.certMgmtCenterBtn.selected     = self.certLoginBtn.isSelected;
             break;
             
         case LOGIN_BY_SIMPLEPW:
             self.simpleLoginBtn.selected            = !self.simpleLoginBtn.isSelected;
             self.simpleCheckBtn.hidden              = !self.simpleLoginBtn.isSelected;
             self.simpleRadioBtn.hidden              =  self.simpleLoginBtn.isSelected;
-            self.simpleLoginMgmtBtn.highlighted     = self.simpleLoginBtn.isSelected;
+            self.simpleLoginMgmtBtn.selected        = self.simpleLoginBtn.isSelected;
             break;
             
         case LOGIN_BY_PATTERN:
             self.patternLoginBtn.selected           = !self.patternLoginBtn.isSelected;
             self.patternCheckBtn.hidden             = !self.patternLoginBtn.isSelected;
             self.patternRadioBtn.hidden             =  self.patternLoginBtn.isSelected;
-            self.patternLoginMgmtBtn.highlighted    = self.patternLoginBtn.isSelected;
+            self.patternLoginMgmtBtn.selected       = self.patternLoginBtn.isSelected;
             break;
             
         default:

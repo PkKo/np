@@ -27,6 +27,16 @@
 @implementation LoginUtil
 
 #pragma mark - Login Settings
+- (BOOL)isLoggedIn {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:PREF_KEY_LOGIN_STATUS];
+}
+
+- (void)setLogInStatus:(BOOL)isLoggedIn {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setBool:isLoggedIn forKey:PREF_KEY_LOGIN_STATUS];
+}
+
 - (void)gotoLoginSettings:(UINavigationController *)navController {
     LoginSettingsViewController * loginSettings = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:loginSettings];

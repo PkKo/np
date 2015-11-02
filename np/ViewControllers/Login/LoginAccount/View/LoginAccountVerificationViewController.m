@@ -132,8 +132,6 @@
 
 - (void)loginResult:(NSDictionary *)response {
     
-    [self stopIndicator];
-    
     LoginUtil * util        = [[LoginUtil alloc] init];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
@@ -158,6 +156,7 @@
         }
         
         [util saveAccountPasswordFailedTimes:0];
+        [self stopIndicator];
         [util showMainPage];
         
     } else {
