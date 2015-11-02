@@ -21,6 +21,7 @@
 @synthesize timeLineSection;
 @synthesize timeLineDic;
 @synthesize bankingListTable;
+@synthesize listEmptyView;
 @synthesize statisticButton;
 @synthesize sortLabel;
 
@@ -29,6 +30,13 @@
 @synthesize deleteButton;
 @synthesize deleteAllImg;
 @synthesize deleteAllLabel;
+
+@synthesize searchView;
+@synthesize searchStartDateLabel;
+@synthesize searchEndDateLabel;
+@synthesize datePickerView;
+@synthesize datePicker;
+@synthesize isSearchResult;
 
 @synthesize storageCountLabel;
 
@@ -73,6 +81,31 @@
     else
     {
         [storageCountLabel setText:@"99+"];
+    }
+    
+    if([timeLineSection count] == 0)
+    {
+        [bankingListTable setHidden:YES];
+        [listEmptyView setHidden:NO];
+    }
+    else
+    {
+        [bankingListTable setHidden:NO];
+        [listEmptyView setHidden:YES];
+    }
+    
+    if(!listSortType)
+    {
+        // section을 먼저 sorting한다.
+        timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
+        // sorting된 section을 가지고 dictionary를 구성한다.
+        NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
+        for(TimelineSectionData *sectionData in timeLineSection)
+        {
+            NSArray *reverseArray = [[[timeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
+            [reverseDic setObject:reverseArray forKey:sectionData.date];
+        }
+        timeLineDic = reverseDic;
     }
 }
 
@@ -152,7 +185,7 @@
 
 - (void)startLoading
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     isLoading = YES;
     
     // Show the header
@@ -168,7 +201,7 @@
 
 - (void)stopLoading
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     isLoading = NO;
     
     // Hide the header
@@ -191,7 +224,141 @@
 {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+    {
+        [delegate refreshData:YES];
+    }
+}
+
+#pragma mark - 검색 Action
+- (IBAction)searchViewShow:(id)sender
+{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [searchView setHidden:NO];
+        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
+    }completion:nil];
+}
+
+- (IBAction)searchViewHide:(id)sender
+{
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height, self.frame.size.width, searchView.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [searchView setHidden:YES];
+                     }];
+}
+
+// 기간 설정 버튼 클릭
+- (IBAction)searchPeriodSelect:(id)sender
+{
+    NSString *toDateString = [CommonUtil getFormattedTodayString:@"yyyy.MM.dd"];
+    [searchEndDateLabel setText:toDateString];
+    searchEndDate = [toDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString *fromDateString = [CommonUtil getFormattedDateStringWithIndex:@"yyyy.MM.dd" indexDay:-[sender tag]];
+    [searchStartDateLabel setText:fromDateString];
+    searchStartDate = [fromDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+}
+
+// 검색 실행
+- (IBAction)searchStart:(id)sender
+{
+    if(searchStartDate == nil || [searchStartDate length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(searchEndDate == nil || [searchEndDate length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 종료일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.accountNumberList = @[@"1111-22-333333"];
+    reqData.ascending = YES;
+    reqData.startDate = searchStartDate;
+    reqData.endDate = searchEndDate;
+    reqData.queryType = @"1,2";
+    
+    if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
+    {
+        [delegate performSelector:@selector(searchInboxDataWithQuery:) withObject:reqData];
+    }
+    
+    [self searchViewHide:nil];
+}
+
+// DatePicker 확인 버튼
+- (IBAction)searchDateSelect:(id)sender
+{
+    NSString *selectedDateString = [CommonUtil getFormattedDateStringWithDate:@"yyyy.MM.dd" date:datePicker.date];
+    if(searchDateSelectType)
+    {
+        [searchEndDateLabel setText:selectedDateString];
+        searchEndDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    }
+    else
+    {
+        [searchStartDateLabel setText:selectedDateString];
+        searchStartDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    }
+    
+    [datePickerView setHidden:YES];
+}
+
+// DatePickerView 보여줌
+- (IBAction)searchDatePickerShow:(id)sender
+{
+    searchDateSelectType = (BOOL)[sender tag];
+    
+    [datePickerView setHidden:NO];
+    
+    if(datePicker == nil)
+    {
+        datePicker = [[UIDatePicker alloc] init];
+    }
+    
+    if(searchDateSelectType)
+    {
+        // 종료일
+        if(searchEndDate == nil || [searchEndDate length] == 0)
+        {
+            [datePicker setDate:[NSDate date]];
+        }
+        else
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMdd"];
+            NSDate *currentDate = [formatter dateFromString:searchEndDate];
+            [datePicker setDate:currentDate];
+        }
+    }
+    else
+    {
+        // 시작일
+        if(searchStartDate == nil || [searchStartDate length] == 0)
+        {
+            [datePicker setDate:[NSDate date]];
+        }
+        else
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMdd"];
+            NSDate *currentDate = [formatter dateFromString:searchStartDate];
+            [datePicker setDate:currentDate animated:NO];
+        }
+    }
+}
+
+// DatePickerView 숨김
+- (IBAction)searchDatePickerHide:(id)sender
+{
+    [datePickerView setHidden:YES];
 }
 
 #pragma mark UITableViewDataSource
@@ -463,7 +630,7 @@
     IndexPathButton *currentBtn = (IndexPathButton *)sender;
     NSIndexPath *indexPath = currentBtn.indexPath;
     
-    NSLog(@"button indexPath = %@", currentBtn.indexPath);
+//    NSLog(@"button indexPath = %@", currentBtn.indexPath);
     
     NHInboxMessageData *inboxData = [[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     
@@ -553,8 +720,12 @@
     }
     else if(scrollView.contentOffset.y + bankingListTable.frame.size.height >= bankingListTable.contentSize.height)
     {
-        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, bankingListTable.contentSize.height, bankingListTable.frame.size.height);
+//        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, bankingListTable.contentSize.height, bankingListTable.frame.size.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        {
+            [delegate refreshData:NO];
+        }
     }
 }
 

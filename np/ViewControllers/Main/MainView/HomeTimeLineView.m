@@ -106,6 +106,39 @@
     {
         [storageCountLabel setText:@"99+"];
     }
+    
+    if(!listSortType)
+    {
+        // section을 먼저 sorting한다.
+        mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
+        // sorting된 section을 가지고 dictionary를 구성한다.
+        NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
+        for(TimelineSectionData *data in mTimeLineSection)
+        {
+            if([mTimeLineDic objectForKey:data.date] != nil)
+            {
+                NSArray *reverseArray = [[[mTimeLineDic objectForKey:data.date] reverseObjectEnumerator] allObjects];
+                [reverseDic setObject:reverseArray forKey:data.date];
+            }
+        }
+        mTimeLineDic = reverseDic;
+        
+        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+        if([firstSectionArray count] >= 2)
+        {
+            bannerIndex = 1;
+        }
+        else if([firstSectionArray count] == 1)
+        {
+            bannerIndex = 0;
+        }
+        else
+        {
+            bannerIndex = 0;
+        }
+    }
+    
+    [self stopLoading];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -441,7 +474,7 @@
 #pragma mark - 새로고침
 - (void)startLoading
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     isLoading = YES;
     
     // Show the header
@@ -457,7 +490,7 @@
 
 - (void)stopLoading
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     isLoading = NO;
     
     // Hide the header
@@ -480,7 +513,11 @@
 {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+    {
+        [delegate refreshData:YES];
+    }
+//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
 }
 
 #pragma mark UITableViewDataSource
@@ -888,12 +925,12 @@
     }
     else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
     {
-        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
-        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
+//        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
+//        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:ascending:)])
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
         {
-            [delegate refreshData:NO ascending:listSortType];
+            [delegate refreshData:NO];
         }
     }
 }
@@ -947,7 +984,7 @@
 - (void)pinButtonClick:(id)sender
 {
     IndexPathButton *currentBtn = (IndexPathButton *)sender;
-    NSLog(@"button indexPath = %@", currentBtn.indexPath);
+//    NSLog(@"button indexPath = %@", currentBtn.indexPath);
     NSIndexPath *indexPath = currentBtn.indexPath;
     
     NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];

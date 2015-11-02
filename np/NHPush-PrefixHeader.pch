@@ -23,5 +23,6 @@
 #import "StrokeView.h"
 #import "DropboxStrokeView.h"
 #import <IBNgmService/IBNgmService.h>
+#import "LoginUtil.h"
 
 #endif

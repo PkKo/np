@@ -116,8 +116,11 @@
     NSLog(@"%s, %@", __FUNCTION__, response);
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        recentNotice = [[[response objectForKey:@"list"] objectForKey:@"voList"] objectAtIndex:0];
-        [self noticeUpdate];
+        if([(NSArray*)[[response objectForKey:@"list"] objectForKey:@"voList"] count] > 0)
+        {
+            recentNotice = [[[response objectForKey:@"list"] objectForKey:@"voList"] objectAtIndex:0];
+            [self noticeUpdate];
+        }
     }
 }
 
@@ -261,6 +264,14 @@
     {
         return nil;
     }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    // Login
+    [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 }
 
 #pragma mark - IBInboxProtocol
