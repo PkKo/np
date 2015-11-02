@@ -31,6 +31,10 @@
     DepositStickerView *depositStickerView;
     WithdrawStickerSettingView *withdrawStickerView;
     NSIndexPath *currentStickerIndexPath;
+    
+    NSString *searchStartDate;
+    NSString *searchEndDate;
+    BOOL searchDateSelectType;
 }
 
 @property (strong, nonatomic) id delegate;
@@ -39,6 +43,8 @@
 // 날짜를 키로
 @property (strong, nonatomic) NSMutableDictionary   *timeLineDic;
 @property (strong, nonatomic) IBOutlet UITableView *bankingListTable;
+@property (strong, nonatomic) IBOutlet UIView *listEmptyView;
+
 @property (strong, nonatomic) IBOutlet UIButton *statisticButton;
 @property (strong, nonatomic) IBOutlet UILabel *sortLabel;
 
@@ -47,6 +53,14 @@
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) IBOutlet UIImageView *deleteAllImg;
 @property (strong, nonatomic) IBOutlet UILabel *deleteAllLabel;
+
+// 검색 뷰
+@property (strong, nonatomic) IBOutlet UIView *searchView;
+@property (strong, nonatomic) IBOutlet UILabel *searchStartDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *searchEndDateLabel;
+@property (strong, nonatomic) IBOutlet UIView *datePickerView;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (assign, nonatomic) BOOL isSearchResult;
 
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 
@@ -60,6 +74,14 @@
 - (IBAction)deleteSelectAll:(id)sender;
 - (IBAction)deleteSelectedList:(id)sender;
 - (IBAction)deleteViewHide:(id)sender;
+// 검색 관련 Action
+- (IBAction)searchViewShow:(id)sender;
+- (IBAction)searchViewHide:(id)sender;
+- (IBAction)searchPeriodSelect:(id)sender;
+- (IBAction)searchStart:(id)sender;
+- (IBAction)searchDateSelect:(id)sender;
+- (IBAction)searchDatePickerShow:(id)sender;
+- (IBAction)searchDatePickerHide:(id)sender;
 // 보관함 이동
 - (IBAction)storageMoveClick:(id)sender;
 @end

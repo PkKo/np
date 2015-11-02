@@ -40,7 +40,6 @@ typedef enum HomeViewType
     BOOL isRefresh;
     BOOL isNewData;
     BOOL isAscending;
-    
     BOOL isSearch;
 }
 
@@ -54,5 +53,5 @@ typedef enum HomeViewType
 // 실제 내용을 보여줄 뷰
 @property (strong, nonatomic) IBOutlet UIView *mMainContentView;
 
-- (void)refreshData:(BOOL)newData ascending:(BOOL)ascending;
+- (void)refreshData:(BOOL)newData;
 @end
