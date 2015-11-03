@@ -41,13 +41,16 @@
  */
 - (void)composeSNSContent {
     
-    NSString *content = [NSString stringWithFormat:@"%@\n%@\n%@ %@ %@",
+    NSString *content = [NSString stringWithFormat:@"%@\n%@\n%@ %@ %@원",
                          [self.transactionObject formattedTransactionDate],
-                         [self.transactionObject transactionAccountNumber],
+                         [self.transactionObject getMaskingTransactionAccountNumber],
                          [self.transactionObject transactionDetails],
                          [self.transactionObject transactionTypeDesc],
                          [self.transactionObject formattedTransactionAmount]];
+    
+    [_snsContent setSelectable:YES];
     [_snsContent setText:content];
+    [_snsContent setSelectable:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,7 +134,7 @@
     scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
     scrapInfo.type          = ScrapTypeVideo;
     
-    NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@ https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
+    NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
                          [bundle objectForInfoDictionaryKey:@"CFBundleName"],
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],

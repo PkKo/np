@@ -12,6 +12,7 @@
 #import "LoginSettingsViewController.h"
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
+#import "CustomerCenterUtil.h"
 
 @interface LoginSimpleVerificationViewController () {
     NSString * _pw;
@@ -24,8 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"%s", __func__);
     
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
@@ -42,8 +41,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    NSLog(@"%s", __func__);
     
     if (_backFromSelfIdentifer) {
         LoginUtil * util = [[LoginUtil alloc] init];
@@ -170,12 +167,12 @@
             }
             btnIdx++;
             
-            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:1]];
+            [loginBtn setBackgroundColor:[UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]];
         }
         
     } else {
         for (UIButton * loginBtn in self.loginBtns.subviews) {
-            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+            [loginBtn setBackgroundColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]];
         }
     }
 }
@@ -210,11 +207,13 @@
 
 - (void)loginResponse:(NSDictionary *)response {
     
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = [accounts count];
+        int numberOfAccounts    = (int)[accounts count];
         
         NSLog(@"accounts: %@", accounts);
         
@@ -225,11 +224,16 @@
                 [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
             }
             if ([accountNumbers count] > 0) {
+                
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [[[LoginUtil alloc] init] showMainPage];
+                
+            }  else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
             }
         }
-        [self stopIndicator];
-        [[[LoginUtil alloc] init] showMainPage];
         
     } else {
         
@@ -238,4 +242,17 @@
         [alertView show];
     }
 }
+
+#pragma mark - Footer
+- (IBAction)gotoNotice {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+}
+
+- (IBAction)gotoTelEnquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
+
 @end

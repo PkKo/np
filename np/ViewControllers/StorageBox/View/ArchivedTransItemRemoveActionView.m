@@ -8,6 +8,7 @@
 
 #import "ArchivedTransItemRemoveActionView.h"
 #import "UIButton+BackgroundColor.h"
+#import "TransactionObject.h"
 
 @interface ArchivedTransItemRemoveActionView()
 
@@ -44,7 +45,12 @@
 }
 
 - (void)updateHighlightBackgroundColor {
-    [self.removeBtn setBackgroundColor:[UIColor colorWithRed:213.0f/255.0f green:42.0f/255.0f blue:58.0f/255.0f alpha:1] forState:UIControlStateHighlighted];
-    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
+    [self.removeBtn setBackgroundColor:[UIColor colorWithRed:213.0f/255.0f green:42.0f/255.0f blue:58.0f/255.0f alpha:1] forState:UIControlStateSelected];
 }
+
+- (void)toggleDeleteBgColor:(BOOL)isRed { // array of TransactionObject
+    
+    self.removeBtn.selected = isRed;
+}
+
 @end

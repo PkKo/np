@@ -11,17 +11,19 @@
 
 @implementation LoginAccountController
 
-- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw ofViewController:(UIViewController *)viewController action:(SEL)action {
+- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw birthday:(NSString *)birthday ofViewController:(UIViewController *)viewController action:(SEL)action {
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
-    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
-    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
+    NSString * user_id      = @"150324104128890";//[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
+    NSString * crmMobile    = @"01540051434";//@"01011111111";//[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//
+    
+    //"mobile_number":"010 11111111","user_name":"조수헌","crmMobile":"01011111111",
     
     NSLog(@"user_id: %@", user_id);
-    NSLog(@"crmMobile: %@", crmMobile);
+    NSLog(@"crmMobile: %@ - saved crmMobile: %@", crmMobile, [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE]);
     
     NSString * account_number   = @"15702311194";
-    NSString * account_password = @"111";
+    NSString * account_password = @"1111";
     NSString * user_birthday    = @"830226";
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];

@@ -50,6 +50,14 @@
     return self;
 }
 
+- (NSString *)getMaskingTransactionAccountNumber {
+    NSString * maskingTransactionAccountNumber1 = [self.transactionAccountNumber substringToIndex:self.transactionAccountNumber.length - 6];
+    NSString * maskingTransactionAccountNumber2 = [self.transactionAccountNumber substringFromIndex:self.transactionAccountNumber.length - 2];
+    maskingTransactionAccountNumber1 = [NSString stringWithFormat:@"%@****%@", maskingTransactionAccountNumber1, maskingTransactionAccountNumber2];
+    
+    return maskingTransactionAccountNumber1;
+}
+
 - (NSString *)formattedTransactionDate {
     return [[StatisticMainUtil getDateFormatterDateHourMinuteStyle] stringFromDate:self.transactionDate];
 }
@@ -60,7 +68,7 @@
 
 
 - (NSString *)formattedTransactionAmount {
-    return [NSString stringWithFormat:@"%@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]]];
+    return [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]];
 }
 
 - (NSString *)formattedTransactionBalance {

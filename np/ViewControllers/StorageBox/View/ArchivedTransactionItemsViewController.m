@@ -131,6 +131,10 @@
             }
         }
     }
+    
+    // highlight delete button
+    [self highlightDeleteBtn];
+    
     [self.tableview reloadData];
 }
 
@@ -341,16 +345,39 @@
             [cell.deleteBtn setHidden:YES];
             [cell.transacTypeImageView setHidden:NO];
             
-            [cell.transacTypeImageView setImage:[CommonUtil getStickerImage:(StickerType)[transacObj.transactionType integerValue]]];
+            [cell.transacTypeImageView setImage:[CommonUtil getStickerImage:(StickerType)[transacObj.transactionType intValue]]];
         }
         
         [cell.pinImageView setImage:[UIImage imageNamed:[[transacObj transactionActivePin] boolValue] ? @"icon_pin_01_sel" : @"icon_pin_01_dft"]];
         
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
-        [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionAccountType], [transacObj transactionAccountNumber]]];
-        [cell.transacAmount setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionTypeDesc], [transacObj formattedTransactionAmount]]];
-        [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:29.0f/255.0f green:149.0f/255.0f blue:240.0f/255.0f alpha:1] : [UIColor colorWithRed:244.0f/255.0f green:96.0f/255.0f blue:124.0f/255.0f alpha:1]];
+        
+        if ([transacObj transactionAccountType] && ![[transacObj transactionAccountType] isEqualToString:@""]) {
+            [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionAccountType], [transacObj transactionAccountNumber]]];
+        } else {
+            [cell.transacAccountNo setText:[transacObj transactionAccountNumber]];
+        }
+        
+        [cell.transacAmountType setText:[transacObj transactionTypeDesc]];
+        [cell.transacAmount setText:[transacObj formattedTransactionAmount]];
+        
+        CGSize transacAmountSize = [StorageBoxUtil contentSizeOfLabel:cell.transacAmount];
+        CGRect transacAmountRect = cell.transacAmount.frame;
+        transacAmountRect.size.width = transacAmountSize.width;
+        [cell.transacAmount setFrame:transacAmountRect];
+        
+        CGRect transacAmountUnitRect = cell.transacAmountUnit.frame;
+        transacAmountUnitRect.origin.x = transacAmountRect.origin.x + transacAmountRect.size.width;
+        [cell.transacAmountUnit setFrame:transacAmountUnitRect];
+        
+        
+        [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1] : [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1]];
+        [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
+        [cell.transacAmountType setTextColor:cell.transacAmount.textColor];
+        
+        
+        
         
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];
@@ -366,6 +393,30 @@
     
     TransactionObject * transacObj = [sectionItems objectAtIndex:row];
     [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isMarkedAsDeleted]];
+    
+    // highlight delete button
+    [self highlightDeleteBtn];
+}
+
+- (void)highlightDeleteBtn {
+    
+    UIView * itemRemoveActionView = [[self.view subviews] objectAtIndex:self.view.subviews.count - 1];
+    if (itemRemoveActionView  && [itemRemoveActionView isKindOfClass:[ArchivedTransItemRemoveActionView class]]) {
+        
+        for (NSString * sectionTitle in _transactionTitles) {
+            
+            NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+            
+            for (TransactionObject * transacObj in sectionItems) {
+                if ([transacObj.transactionMarkAsDeleted boolValue]) {
+                    [(ArchivedTransItemRemoveActionView *)itemRemoveActionView toggleDeleteBgColor:YES];
+                    return;
+                }
+            }
+        }
+        
+        [(ArchivedTransItemRemoveActionView *)itemRemoveActionView toggleDeleteBgColor:NO];
+    }
 }
 
 -(void)updateMemo:(NSString *)memo ofItemSection:(NSInteger)section row:(NSInteger)row {

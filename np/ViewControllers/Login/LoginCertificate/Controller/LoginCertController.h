@@ -7,12 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CertInfo.h"
 
 @interface LoginCertController : NSObject
 
 - (NSArray *)getCertList;
-- (BOOL)checkPasswordOfCert:(NSString *)password;
-- (void)addTargetForLoginResponse:(id)target action:(SEL)action;
 
 @end

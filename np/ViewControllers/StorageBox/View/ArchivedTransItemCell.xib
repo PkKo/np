@@ -46,13 +46,34 @@
                         <rect key="frame" x="284" y="41" width="18" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입금 10,000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HaD-Cn-Ito">
+                    <view contentMode="scaleToFill" id="fsv-af-xyE">
                         <rect key="frame" x="104" y="38" width="176" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <color key="textColor" red="0.26606430191703212" green="0.55152644990262734" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ucJ-B6-LYj">
+                                <rect key="frame" x="0.0" y="0.0" width="37" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.14117647058823529" green="0.51764705882352935" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="900,000,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HaD-Cn-Ito">
+                                <rect key="frame" x="34" y="0.0" width="123" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.14117647059999999" green="0.51764705879999995" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="44H-4p-dmH">
+                                <rect key="frame" x="155" y="0.0" width="18" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.14117647059999999" green="0.51764705879999995" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="급여통장 111-2458-11**-**" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z9n-QJ-Qjh">
                         <rect key="frame" x="104" y="67" width="198" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
@@ -133,6 +154,9 @@
                 <outlet property="pinImageView" destination="7nl-gn-eag" id="ji2-jN-Gdg"/>
                 <outlet property="transacAccountNo" destination="Z9n-QJ-Qjh" id="IAN-gQ-KxK"/>
                 <outlet property="transacAmount" destination="HaD-Cn-Ito" id="945-K8-iXw"/>
+                <outlet property="transacAmountType" destination="ucJ-B6-LYj" id="2Gw-g9-Y2k"/>
+                <outlet property="transacAmountUnit" destination="44H-4p-dmH" id="Gbt-v6-VBI"/>
+                <outlet property="transacAmountView" destination="fsv-af-xyE" id="WeM-yx-HaH"/>
                 <outlet property="transacBalance" destination="qzo-IY-z4c" id="S09-zC-5Hd"/>
                 <outlet property="transacMemo" destination="GOK-sw-w3K" id="jFc-5o-oQR"/>
                 <outlet property="transacName" destination="YDX-JD-Jtm" id="bp1-KE-ePx"/>

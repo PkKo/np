@@ -14,6 +14,8 @@
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
 #import "MainPageViewController.h"
+#import "CertManager.h"
+#import "CustomerCenterUtil.h"
 
 @interface LoginCertListViewController ()
 
@@ -30,8 +32,8 @@
     [self updateUI];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self refreshView];
 }
 
@@ -47,12 +49,6 @@
 - (IBAction)gotoLoginSettings {
     [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
 }
-
-- (IBAction)gotoNB {
-}
-- (IBAction)gotoFAQ {}
-
-- (IBAction)gotoTelInquiry {}
 
 #pragma mark - Certificate Verification
 - (IBAction)clickOnCert:(UITapGestureRecognizer *)sender {
@@ -83,9 +79,7 @@
         EccEncryptor * ec   = [EccEncryptor sharedInstance];
         NSString * password = [ec makeDecNoPadWithSeedkey:pw];
         
-        LoginCertController * controller = [[LoginCertController alloc] init];
-        [controller addTargetForLoginResponse:self action:@selector(succeedToLogin:)];
-        BOOL succeed = [controller checkPasswordOfCert:password];
+        BOOL succeed = [self checkPasswordOfCert:password];
         
         
         if (succeed) {
@@ -118,8 +112,10 @@
 }
 
 - (void)succeedToLogin:(BOOL)isSucceeded {
+    
+    [self stopIndicator];
+    
     if (isSucceeded) {
-        [self stopIndicator];
         [[[LoginUtil alloc] init] showMainPage];
     }
 }
@@ -141,6 +137,95 @@
         }
         default:
             break;
+    }
+}
+
+#pragma mark - Server Connection
+
+- (BOOL)checkPasswordOfCert:(NSString *)password {
+    
+    CertInfo * certInfo = [[[LoginUtil alloc] init] getCertToLogin];
+    [[CertManager sharedInstance] setCertInfo:certInfo];
+    
+    int rc = [[CertManager sharedInstance] checkPassword:password];
+    
+    if(rc == 0) {
+        
+        NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+        
+        NSString * strTbs       = @"abc"; //서명할 원문
+        NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
+        NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
+        
+        NSLog(@"user_id: %@", user_id);
+        NSLog(@"crmMobile: %@", crmMobile);
+        
+        [[CertManager sharedInstance] setTbs:strTbs];
+        NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT];
+        
+        NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+        [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
+        [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
+        [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
+        
+        [requestBody setObject:user_id forKey:@"user_id"];
+        [requestBody setObject:crmMobile forKey:@"crmMobile"];
+        
+        NSString *bodyString = [CommonUtil getBodyString:requestBody];
+        
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(certInfoResponse:)];
+        [req requestUrl:url bodyString:bodyString];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)certInfoResponse:(NSDictionary *)response {
+    
+    NSLog(@"response: %@", response);
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
+        NSArray * accounts      = (NSArray *)(list[@"sub"]);
+        
+        int numberOfAccounts    = (int)[accounts count];
+        
+        if (numberOfAccounts > 0) {
+            
+            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
+            for (NSDictionary * accountDic in accounts) {
+                
+                NSString * account = (NSString *)(accountDic[@"UMSD060101_OUT_SUB.account_number"]);
+                if (account && ![account isEqualToString:@""]) {
+                    [accountNumbers addObject:account];
+                }
+            }
+            
+            if ([accountNumbers count] > 0) {
+                
+                [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [self succeedToLogin:YES];
+                
+            } else {
+                
+                [self succeedToLogin:NO];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+            }
+        }
+        
+    } else {
+        [self succeedToLogin:NO];
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
@@ -172,6 +257,20 @@
 
 - (void)updateUI {
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
+}
+
+#pragma mark - Footer
+
+- (IBAction)gotoNB {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+
+- (IBAction)gotoTelInquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
+
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
 }
 
 @end

@@ -22,6 +22,6 @@
 - (IBAction)saveToStorageBox;
 - (IBAction)shareSNS;
 - (IBAction)validateTextEditing:(UITextField *)sender;
-
+- (IBAction)closeComposer;
 
 @end

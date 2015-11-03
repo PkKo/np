@@ -67,6 +67,12 @@ typedef enum SetupStatus {
             [_patternView addSubview:imageView];
         }
     }
+    
+    CGFloat screenHeight        = [[UIScreen mainScreen] bounds].size.height;
+    CGRect initialBtnFrame      = [self.initialBtn frame];
+    CGFloat initialBtnY         = patternViewFrame.origin.y + patternViewFrame.size.height + (screenHeight == 480 ? 0 : 45); // GAP
+    initialBtnFrame.origin.y    = initialBtnY;
+    [self.initialBtn setFrame:initialBtnFrame];
 }
 
 
@@ -301,10 +307,13 @@ typedef enum SetupStatus {
 #pragma mark - UI
 - (void)refreshUI:(SetupStatus)setupStatus {
     
+    [self.initialBtn setHidden:YES];
+    
     switch (setupStatus) {
         case SETUP_UPDATE:
             self.guide.text = @"기존에 설정하신 패턴을 그려주세요.";
             [self.nextBtn setTitle:@"계속" forState:UIControlStateNormal];
+            [self.initialBtn setHidden:NO];
             break;
             
         case SETUP_PW:
@@ -437,6 +446,11 @@ typedef enum SetupStatus {
             [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
         }
     }
+}
+
+- (IBAction)clickToShowSelfIdentifier {
+    [self clearDotConnections];
+    [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
 }
 
 #pragma mark - Alert

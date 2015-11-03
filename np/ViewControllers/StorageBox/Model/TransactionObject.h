@@ -45,4 +45,5 @@
 - (NSString *)formattedTransactionBalance;
 - (NSString *)getTransactionHourMinute;
 - (NSString *)transactionTypeDesc;
+- (NSString *)getMaskingTransactionAccountNumber;
 @end

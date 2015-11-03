@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DrawPatternMgmtViewController">
             <connections>
                 <outlet property="guide" destination="8jB-ow-9dw" id="JNJ-X6-mrB"/>
+                <outlet property="initialBtn" destination="CrK-Tl-MWf" id="Ofu-qI-e14"/>
                 <outlet property="nextBtn" destination="36D-pO-6ST" id="RfD-Kg-JdX"/>
                 <outlet property="patternView" destination="0mb-eY-P6w" id="4o7-lq-Apv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,6 +57,17 @@
                             </state>
                             <connections>
                                 <action selector="clickNext" destination="-1" eventType="touchUpInside" id="Sbj-cB-eE8"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CrK-Tl-MWf">
+                            <rect key="frame" x="81" y="359" width="160" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="패턴 초기화 하기">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickToShowSelfIdentifier" destination="-1" eventType="touchUpInside" id="qBx-px-goG"/>
                             </connections>
                         </button>
                     </subviews>

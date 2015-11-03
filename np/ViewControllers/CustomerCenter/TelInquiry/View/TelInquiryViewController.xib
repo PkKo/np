@@ -71,6 +71,9 @@
                                     <state key="normal" title="확인">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="makeACall" destination="-1" eventType="touchUpInside" id="MCZ-7Z-0o8"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 전화 연결 시 통화료가 부과됩니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KTb-ju-F7x">
                                     <rect key="frame" x="0.0" y="276" width="280" height="16"/>

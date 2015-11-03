@@ -36,4 +36,7 @@
 }
 */
 
+- (IBAction)makeACall {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:15882100"]];
+}
 @end

@@ -30,8 +30,6 @@
 - (void)saveCertPasswordFailedTimes:(NSInteger)failedTimes;
 
 #pragma mark - Account Login
-- (NSInteger)getAccountPasswordFailedTimes;
-- (void)saveAccountPasswordFailedTimes:(NSInteger)failedTimes;
 - (NSArray *)getAllAccounts;
 - (void)saveAllAccounts:(NSArray *)allAccounts;
 

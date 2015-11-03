@@ -815,7 +815,7 @@
                                                                               transactionAccountNumber:inboxData.nhAccountNumber
                                                                                 transactionAccountType:@""
                                                                                     transactionDetails:inboxData.oppositeUser
-                                                                                           transactionType:inboxData.inboxType
+                                                                                           transactionType:[NSString stringWithFormat:@"%d", inboxData.stickerCode]
                                                                                      transactionAmount:@(inboxData.amount)
                                                                                     transactionBalance:@(inboxData.balance)
                                                                                        transactionMemo:@""
