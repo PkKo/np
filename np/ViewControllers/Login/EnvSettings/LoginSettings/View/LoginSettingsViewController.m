@@ -66,7 +66,6 @@
 }
 
 - (IBAction)gotoCertMgmtCenter {
-    NSLog(@"공인인증센터로 이동");
     [[[LoginUtil alloc] init] gotoCertCentre:self.navigationController];
 }
 

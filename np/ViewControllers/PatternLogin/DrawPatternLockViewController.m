@@ -318,8 +318,6 @@
 
 - (void)showMainView {
     
-    [self stopIndicator];
-    
     LoginUtil * util = [[LoginUtil alloc] init];
     [util savePatternPasswordFailedTimes:0];
     [util setLogInStatus:YES];
@@ -397,6 +395,8 @@
     
     NSLog(@"response: %@", response);
     
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
@@ -413,11 +413,16 @@
             }
             
             if ([accountNumbers count] > 0) {
+                
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [self showMainView];
+                
+            } else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
             }
         }
-        
-        [self showMainView];
         
     } else {
         

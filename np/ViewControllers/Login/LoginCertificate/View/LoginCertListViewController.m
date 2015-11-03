@@ -32,8 +32,8 @@
     [self updateUI];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self refreshView];
 }
 
@@ -194,8 +194,6 @@
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
         
-        NSLog(@"accounts: %@", accounts);
-        
         int numberOfAccounts    = (int)[accounts count];
         
         if (numberOfAccounts > 0) {
@@ -210,11 +208,17 @@
             }
             
             if ([accountNumbers count] > 0) {
+                
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [self succeedToLogin:YES];
+                
+            } else {
+                
+                [self succeedToLogin:NO];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
             }
         }
-        
-        [self succeedToLogin:YES];
         
     } else {
         [self succeedToLogin:NO];

@@ -80,7 +80,6 @@
 - (IBAction)clickToLogin {
     
     LoginUtil * util        = [[LoginUtil alloc] init];
-    NSInteger failedTimes   = [util getAccountPasswordFailedTimes];
     
     NSString * alertMessage = nil;
     NSInteger tag           = ALERT_DO_NOTHING;
@@ -95,15 +94,8 @@
         
     } else {
         
-        if (failedTimes >= 3) {
-            
-            alertMessage    = @"비밀번호 오류가 3회 이상 발생하여 해당 계좌 인증이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 비밀번호를 재설정해주세요.";
-            tag             = ALERT_GOTO_SELF_IDENTIFY;
-            
-        } else {
-            [self startIndicator];
-            [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text password:self.passwordTextField.text ofViewController:self action:@selector(loginResult:)];
-        }
+        [self startIndicator];
+        [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text password:self.passwordTextField.text ofViewController:self action:@selector(loginResult:)];
     }
     
     if (alertMessage) {
@@ -114,18 +106,6 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (alertView.tag) {
-        case ALERT_GOTO_SELF_IDENTIFY:
-        {
-            exit(0);
-            break;
-        }
-        default:
-            break;
-    }
-}
-
 - (void)updateUI {
     
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
@@ -133,14 +113,15 @@
 
 - (void)loginResult:(NSDictionary *)response {
     
+    NSLog(@"response: %@", response);
+    [self stopIndicator];
+    
     LoginUtil * util        = [[LoginUtil alloc] init];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        
-        NSLog(@"accounts: %@", accounts);
         
         int numberOfAccounts    = (int)[accounts count];
         
@@ -152,45 +133,22 @@
             }
             
             if ([accountNumbers count] > 0) {
+                
                 [util saveAllAccounts:[accountNumbers copy]];
+                [util showMainPage];
+                
+            } else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
             }
         }
         
-        [util saveAccountPasswordFailedTimes:0];
-        [self stopIndicator];
-        [util showMainPage];
-        
     } else {
         
-        NSString *message = [response objectForKey:RESULT_MESSAGE];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        NSString    * message   = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
-        
-        /*
-        NSString * alertMessage = nil;
-        NSInteger tag           = ALERT_DO_NOTHING;
-        NSInteger failedTimes   = [util getAccountPasswordFailedTimes];
-         
-        failedTimes++;
-        [util saveAccountPasswordFailedTimes:failedTimes];
-        if (failedTimes >= 3) {
-            
-            alertMessage    = @"비밀번호 오류가 3회 이상 발생하여 해당 계좌 인증이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 비밀번호를 재설정해주세요.";
-            tag             = ALERT_GOTO_SELF_IDENTIFY;
-            
-        } else {
-            
-            alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
-        }
-        
-        
-        if (alertMessage) {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
-                                                            delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            alert.tag = tag;
-            [alert show];
-        }
-         */
     }
 }
 

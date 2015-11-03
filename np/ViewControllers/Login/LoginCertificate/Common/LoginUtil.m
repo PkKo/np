@@ -54,7 +54,7 @@
     if ([prefs objectForKey:PREF_KEY_LOGIN_METHOD]) {
         return (LoginMethod)[[prefs objectForKey:PREF_KEY_LOGIN_METHOD] intValue];
     } else {
-        return LOGIN_BY_ACCOUNT; //LOGIN_BY_NONE
+        return LOGIN_BY_NONE;
     }
 }
 
@@ -178,19 +178,6 @@
 - (void)saveAllAccounts:(NSArray *)allAccounts {
     
     [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_ACCOUNT];
-}
-
-- (NSInteger)getAccountPasswordFailedTimes {
-    
-    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-    return [[prefs objectForKey:PREF_KEY_ACCOUNT_LOGIN_SETT_FAILED_TIMES] integerValue];
-}
-
-- (void)saveAccountPasswordFailedTimes:(NSInteger)failedTimes {
-    
-    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_ACCOUNT_LOGIN_SETT_FAILED_TIMES];
-    [prefs synchronize];
 }
 
 #pragma mark - Simple Login

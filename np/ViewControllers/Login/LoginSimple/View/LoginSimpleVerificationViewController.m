@@ -26,8 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%s", __func__);
-    
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     
@@ -43,8 +41,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    NSLog(@"%s", __func__);
     
     if (_backFromSelfIdentifer) {
         LoginUtil * util = [[LoginUtil alloc] init];
@@ -211,6 +207,8 @@
 
 - (void)loginResponse:(NSDictionary *)response {
     
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
@@ -226,11 +224,16 @@
                 [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
             }
             if ([accountNumbers count] > 0) {
+                
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [[[LoginUtil alloc] init] showMainPage];
+                
+            }  else {
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
             }
         }
-        [self stopIndicator];
-        [[[LoginUtil alloc] init] showMainPage];
         
     } else {
         
