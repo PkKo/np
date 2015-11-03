@@ -62,6 +62,20 @@
     MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
     [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, bottomMenu.frame.size.height)];
     [bottomMenuView addSubview:bottomMenu];
+    
+    if([[[LoginUtil alloc] init] isLoggedIn])
+    {
+        [loginTextLabel setText:[NSString stringWithFormat:@"%@님 환영합니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
+        [loginButtonTextLabel setText:@"로그아웃"];
+        [loginImg setHighlighted:YES];
+    }
+    else
+    {
+        [loginTextLabel setText:[NSString stringWithFormat:@"로그인해주세요."]];
+        [loginButtonTextLabel setText:@"로그인"];
+        [loginImg setHighlighted:NO];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +90,21 @@
     if([self.slidingViewController.topViewController respondsToSelector:@selector(closeMenuView)])
     {
         [self.slidingViewController.topViewController performSelector:@selector(closeMenuView) withObject:nil];
+    }
+}
+
+- (IBAction)loginButtonClick:(id)sender
+{
+    if([[[LoginUtil alloc] init] isLoggedIn])
+    {
+        [[[LoginUtil alloc] init] setLogInStatus:NO];
+        // Login
+        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+    }
+    else
+    {
+        // Login
+        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
     }
 }
 
@@ -147,78 +176,86 @@
     UIViewController *newTopViewController = nil;
     UIViewController *pushViewController = nil;
     
-    switch (indexPath.row)
+    if([[[LoginUtil alloc] init] isLoggedIn])
     {
-        case 0: // 전체
+        switch (indexPath.row)
         {
-            newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:TIMELINE];
-            break;
-        }
-        case 1: // 입출금
-        {
-            newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
-            // 임시 공인인증서 뷰 컨트롤러 적용
-//            pushViewController = [[CertificateMenuViewController alloc] init];
-            break;
-        }
-        case 2: // 기타
-        {
-            newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:OTHER];
-            break;
-        }
-        case 3: // 보관함
-        {
-            newTopViewController = [[MainPageViewController alloc] init];
-            [(MainPageViewController *)newTopViewController setStartPageIndex:INBOX];
-            break;
-        }
-        case 4: // 알림설정
-        {
-            pushViewController = [[NotiSettingMenuViewController alloc] init];
-            break;
-        }
-        case 5: // 환경설정
-        {
-            pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
-            break;
-        }
-        case 6: // 고객센터
-        {
-            pushViewController = [[CustomerCenterViewController alloc] initWithNibName:@"CustomerCenterViewController" bundle:nil];
-            break;
-        }
-        case 7: // NH APPZONE
-        {
-            pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
-            break;
-        }
-            
-        default:
-            break;
-    }
-    
-    if(newTopViewController)
-    {
-        if([[((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController viewControllers] count] > 1)
-        {
-            [self closeMenu:nil];
-            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:YES];
+            case 0: // 전체
+            {
+                newTopViewController = [[MainPageViewController alloc] init];
+                [(MainPageViewController *)newTopViewController setStartPageIndex:TIMELINE];
+                break;
+            }
+            case 1: // 입출금
+            {
+                newTopViewController = [[MainPageViewController alloc] init];
+                [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
+                // 임시 공인인증서 뷰 컨트롤러 적용
+                //            pushViewController = [[CertificateMenuViewController alloc] init];
+                break;
+            }
+            case 2: // 기타
+            {
+                newTopViewController = [[MainPageViewController alloc] init];
+                [(MainPageViewController *)newTopViewController setStartPageIndex:OTHER];
+                break;
+            }
+            case 3: // 보관함
+            {
+                newTopViewController = [[MainPageViewController alloc] init];
+                [(MainPageViewController *)newTopViewController setStartPageIndex:INBOX];
+                break;
+            }
+            case 4: // 알림설정
+            {
+                pushViewController = [[NotiSettingMenuViewController alloc] init];
+                break;
+            }
+            case 5: // 환경설정
+            {
+                pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
+                break;
+            }
+            case 6: // 고객센터
+            {
+                pushViewController = [[CustomerCenterViewController alloc] initWithNibName:@"CustomerCenterViewController" bundle:nil];
+                break;
+            }
+            case 7: // NH APPZONE
+            {
+                pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
+                break;
+            }
+                
+            default:
+                break;
         }
         
-        CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
-        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
-        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
-        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
+        if(newTopViewController)
+        {
+            if([[((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController viewControllers] count] > 1)
+            {
+                [self closeMenu:nil];
+                [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
+            CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
+        }
+        else if(pushViewController)
+        {
+            [self closeMenu:nil];
+            ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+        }
     }
-    else if(pushViewController)
+    else
     {
-        [self closeMenu:nil];
-        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
-        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
-        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+        // Login
+        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
     }
     
 }

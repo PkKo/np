@@ -62,27 +62,10 @@
 }
 
 #pragma mark - 공인인증 : 전계좌 리스트 뷰 구성
-- (void)allAccountListRequest
-{
-    [self startIndicator];
-    HttpRequest *req = [HttpRequest getInstance];
-    
-    // 전계좌 조회 실행
-    [self performSelector:@selector(allAccountListResponse:) withObject:nil afterDelay:1.0];
-}
-
-- (void)allAccountListResponse:(NSDictionary *)response
-{
-    [self stopIndicator];
-    allAccountList = [[NSMutableArray alloc] initWithArray:@[@"1111-22-333333(외환)", @"111111-22-333333(신탁)", @"111-2222-3333-44(입출식)", @"1111-222-333333(수익증권)"]];
-    
-    [self makeAllAccountListView];
-}
-
 - (void)makeAllAccountListView
 {
     allListView = [RegistAccountAllListView view];
-    [allListView initAccountList:allAccountList customerName:@"김농협"];
+    [allListView initAccountList:allAccountList customerName:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]];
     [allListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [contentView addSubview:allListView];
     [nextButton setTag:0];

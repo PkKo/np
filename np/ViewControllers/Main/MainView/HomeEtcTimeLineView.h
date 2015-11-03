@@ -34,6 +34,10 @@
 @property (strong, nonatomic) NSMutableDictionary *timelineDic;
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;
 @property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
+@property (strong, nonatomic) IBOutlet UIImageView *deleteAllImg;
+@property (strong, nonatomic) IBOutlet UILabel *deleteAllLabel;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+
 // 검색관련 View
 @property (strong, nonatomic) IBOutlet UIView *searchView;
 @property (strong, nonatomic) IBOutlet UILabel *searchStartDateLabel;
@@ -44,6 +48,7 @@
 
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
+- (void)refreshData;
 
 // 검색 관련 Action
 - (IBAction)searchViewShow:(id)sender;
@@ -54,4 +59,8 @@
 - (IBAction)searchDatePickerShow:(id)sender;
 - (IBAction)searchDatePickerHide:(id)sender;
 
+- (IBAction)deleteMode:(id)sender;
+- (IBAction)deleteSelectAll:(id)sender;
+- (IBAction)deleteSelectedList:(id)sender;
+- (IBAction)deleteViewHide:(id)sender;
 @end

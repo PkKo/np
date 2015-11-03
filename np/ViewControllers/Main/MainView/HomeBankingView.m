@@ -36,6 +36,10 @@
 @synthesize searchEndDateLabel;
 @synthesize datePickerView;
 @synthesize datePicker;
+@synthesize searchTypePickerView;
+@synthesize searchTypePicker;
+@synthesize searchTypeAccountLabel;
+@synthesize searchTypeInboxLabel;
 @synthesize isSearchResult;
 
 @synthesize storageCountLabel;
@@ -65,6 +69,37 @@
         pinnedIdList = [[NSMutableArray alloc] init];
     }
     deleteIdList = [[NSMutableArray alloc] init];
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    storageCount = [[controller getAllTransactions] count];
+    if(storageCount < 100)
+    {
+        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
+    }
+    else
+    {
+        [storageCountLabel setText:@"99+"];
+    }
+    
+    allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
+    [allAccountList insertObject:@"전체계좌" atIndex:0];
+    inboxTypeList = @[@"입출금", @"입금", @"출금"];
+    inboxAccountsIndex = 0;
+    inboxTypeIndex = 0;
+    inboxTypePickerMode = 0;
+    [searchTypePicker setDataSource:self];
+    [searchTypePicker setDelegate:self];
+    
+    if([timeLineSection count] == 0)
+    {
+        [bankingListTable setHidden:YES];
+        [listEmptyView setHidden:NO];
+    }
+    else
+    {
+        [bankingListTable setHidden:NO];
+        [listEmptyView setHidden:YES];
+    }
     
     [self addPullToRefreshHeader];
 }
@@ -107,6 +142,9 @@
         }
         timeLineDic = reverseDic;
     }
+    [self stopLoading];
+    isDeleteMode = NO;
+    [self deleteViewHide:nil];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -279,11 +317,30 @@
     }
     
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = @[@"1111-22-333333"];
+    if(inboxAccountsIndex == 0)
+    {
+        // 전체계좌 검색
+        NSMutableArray *accountList = [NSMutableArray arrayWithArray:allAccountList];
+        [accountList removeObjectAtIndex:0];
+        reqData.accountNumberList = accountList;
+    }
+    else
+    {
+        reqData.accountNumberList = @[[allAccountList objectAtIndex:inboxAccountsIndex]];
+    }
+
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"1,2";
+    
+    if(inboxTypeIndex == 0)
+    {
+        reqData.queryType = @"1,2";
+    }
+    else
+    {
+        reqData.queryType = [NSString stringWithFormat:@"%ld", (long)inboxTypeIndex];
+    }
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {
@@ -359,6 +416,85 @@
 - (IBAction)searchDatePickerHide:(id)sender
 {
     [datePickerView setHidden:YES];
+}
+
+- (IBAction)showInboxTypePickerShow:(id)sender
+{
+    inboxTypePickerMode = [sender tag];
+    [searchTypePickerView setHidden:NO];
+    [searchTypePicker reloadAllComponents];
+    if(inboxTypePickerMode == 0)
+    {
+        [searchTypePicker selectRow:inboxAccountsIndex inComponent:0 animated:YES];
+    }
+    else if(inboxTypePickerMode == 1)
+    {
+        [searchTypePicker selectRow:inboxTypeIndex inComponent:0 animated:YES];
+    }
+}
+
+- (IBAction)inboxTypeSelect:(id)sender
+{
+    if(inboxTypePickerMode == 0)
+    {
+        [searchTypeAccountLabel setText:[allAccountList objectAtIndex:inboxAccountsIndex]];
+    }
+    else if(inboxTypePickerMode == 1)
+    {
+        [searchTypeInboxLabel setText:[inboxTypeList objectAtIndex:inboxTypeIndex]];
+    }
+    
+    [self inboxTypePickerHide:nil];
+}
+
+- (IBAction)inboxTypePickerHide:(id)sender
+{
+    [searchTypePickerView setHidden:YES];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    if(inboxTypePickerMode == 0)
+    {
+        return [allAccountList count];
+    }
+    else if(inboxTypePickerMode == 1)
+    {
+        return [inboxTypeList count];
+    }
+    
+    return 0;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if(inboxTypePickerMode == 0)
+    {
+        return [allAccountList objectAtIndex:row];
+    }
+    else if(inboxTypePickerMode == 1)
+    {
+        return [inboxTypeList objectAtIndex:row];
+    }
+    
+    return @"";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(inboxTypePickerMode == 0)
+    {
+        inboxAccountsIndex = row;
+    }
+    else if(inboxTypePickerMode == 1)
+    {
+        inboxTypeIndex = row;
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -615,6 +751,17 @@
             }
         }
         [currentBtn setSelected:![currentBtn isSelected]];
+        
+        if([deleteIdList count] > 0)
+        {
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [deleteButton setEnabled:NO];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        }
     }
     else
     {
@@ -759,7 +906,7 @@
         [deleteAllImg setHighlighted:NO];
         [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
         [deleteButton setEnabled:NO];
-        [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     }
     else
     {
@@ -772,12 +919,35 @@
                 [deleteIdList removeAllObjects];
             }
             
+            for(TimelineSectionData *sectionData in timeLineSection)
+            {
+                NSString *key = sectionData.date;
+                NSArray *list = [timeLineDic objectForKey:key];
+                for (NHInboxMessageData *item in list)
+                {
+                    [deleteIdList addObject:item.serverMessageKey];
+                }
+            }
+            
             [deleteAllImg setHighlighted:YES];
             [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
             [deleteButton setEnabled:YES];
             [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
         }
     }
+    
+    if([deleteIdList count] > 0)
+    {
+        [deleteButton setEnabled:YES];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    }
+    
+    [bankingListTable reloadData];
 }
 
 - (IBAction)deleteSelectedList:(id)sender
@@ -813,7 +983,7 @@
     [deleteAllView setHidden:YES];
     
     [deleteButton setEnabled:NO];
-    [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+    [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];

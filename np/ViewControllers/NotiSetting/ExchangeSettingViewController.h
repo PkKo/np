@@ -10,13 +10,20 @@
 
 @interface ExchangeSettingViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *countryList;
+    NSArray *countryList;
+    NSMutableArray *regCountryList;
+    NSMutableArray *payAlarmList;
+    CGFloat countryCellHeight;
+    CGFloat payAlarmCellHeight;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (strong, nonatomic) IBOutlet UIView *listView;
 @property (strong, nonatomic) IBOutlet UITableView *countryListTable;
 @property (strong, nonatomic) IBOutlet UIView *serviceNotiAlertView;
+
+@property (strong, nonatomic) IBOutlet UIView *payAlarmView;
+@property (strong, nonatomic) IBOutlet UITableView *payAlarmListTable;
 
 - (IBAction)addCurrencyCountry:(id)sender;
 - (IBAction)serviceNotiButtonClick:(id)sender;

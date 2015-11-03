@@ -38,6 +38,8 @@
 @synthesize noticeTitleLabel;
 // 농민 뉴스 및 배너 영역
 @synthesize bannerView;
+@synthesize tabOneBg;
+@synthesize tabTwoBg;
 
 - (void)viewDidLoad
 {
@@ -49,6 +51,8 @@
     
     [pushMenuButton setEnabled:NO];
     [noticeMenuButton setEnabled:YES];
+    [tabOneBg setHidden:[pushMenuButton isEnabled]];
+    [tabTwoBg setHidden:[noticeMenuButton isEnabled]];
     
     [noticeIconView.layer setCornerRadius:(noticeIconView.frame.size.height /2)];
     [noticeIconView setAlpha:0.9f];
@@ -69,7 +73,7 @@
     [IBInbox loadWithListener:self];
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
-    [reqData setAccountNumberList:@[@"1111-22-333333"]];
+    [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
     [reqData setQueryType:@"1,2"];
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
@@ -95,7 +99,7 @@
     isPushListRequest = NO;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
-    [reqData setAccountNumberList:@[@"1111-22-333333"]];
+    [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
     [reqData setQueryType:@"3,4,5,6"];
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
@@ -258,6 +262,15 @@
             cell = [HomeQuickNoticeTableViewCell cell];
         }
         
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        NHInboxMessageData *inboxData = [noticeList objectAtIndex:indexPath.row];
+        
+        // 푸시 시간
+        [cell.noticeDateLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        // 공지 타이틀
+        [cell.noticeTitleLabel setText:inboxData.title];
+        
         return cell;
     }
     else
@@ -296,8 +309,7 @@
                 [noticeTableView setHidden:YES];
                 [emptyListView setHidden:NO];
             }
-            
-            [self requestNoticeList];
+            isPushListLoadingEnd = YES;
         }
         else
         {
@@ -305,8 +317,29 @@
             {
                 noticeList = [NSMutableArray arrayWithArray:messageList];
             }
+            
+            if([noticeList count] > 0)
+            {
+                [pushTableView setHidden:[pushMenuButton isEnabled]];
+                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
+                [emptyListView setHidden:YES];
+                [noticeTableView reloadData];
+            }
+            else
+            {
+                [pushTableView setHidden:YES];
+                [noticeTableView setHidden:YES];
+                [emptyListView setHidden:NO];
+            }
+            
+            isNoticeListLoadingEnd = YES;
         }
     }
+}
+
+- (void)loadingInboxList
+{
+    NSLog(@"%s", __FUNCTION__);
 }
 
 - (IBAction)selectTabButton:(id)sender
@@ -315,37 +348,49 @@
     
     [pushMenuButton setEnabled:![pushMenuButton isEnabled]];
     [noticeMenuButton setEnabled:![noticeMenuButton isEnabled]];
+    [tabOneBg setHidden:[pushMenuButton isEnabled]];
+    [tabTwoBg setHidden:[noticeMenuButton isEnabled]];
     
     if(currentButton == pushMenuButton)
     {
-        if([pushList count] > 0)
+        if(isPushListLoadingEnd)
         {
-            [pushTableView setHidden:[pushMenuButton isEnabled]];
-            [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-            [emptyListView setHidden:YES];
-            [pushTableView reloadData];
-        }
-        else
-        {
-            [pushTableView setHidden:YES];
-            [noticeTableView setHidden:YES];
-            [emptyListView setHidden:NO];
+            if([pushList count] > 0)
+            {
+                [pushTableView setHidden:[pushMenuButton isEnabled]];
+                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
+                [emptyListView setHidden:YES];
+                [pushTableView reloadData];
+            }
+            else
+            {
+                [pushTableView setHidden:YES];
+                [noticeTableView setHidden:YES];
+                [emptyListView setHidden:NO];
+            }
         }
     }
     else if (currentButton == noticeMenuButton)
     {
-        if([noticeList count] > 0)
+        if(isNoticeListLoadingEnd)
         {
-            [pushTableView setHidden:[pushMenuButton isEnabled]];
-            [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-            [emptyListView setHidden:YES];
-            [noticeTableView reloadData];
+            if([noticeList count] > 0)
+            {
+                [pushTableView setHidden:[pushMenuButton isEnabled]];
+                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
+                [emptyListView setHidden:YES];
+                [noticeTableView reloadData];
+            }
+            else
+            {
+                [pushTableView setHidden:YES];
+                [noticeTableView setHidden:YES];
+                [emptyListView setHidden:NO];
+            }
         }
         else
         {
-            [pushTableView setHidden:YES];
-            [noticeTableView setHidden:YES];
-            [emptyListView setHidden:NO];
+            [self requestNoticeList];
         }
     }
 }

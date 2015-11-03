@@ -114,7 +114,7 @@
 #define REQUEST_CERT_SSLSIGN_TBS        @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
 // crm 휴대폰 번호
-#define RESPONSE_CERT_CRM_MOBILE    @"mobile_number"
+#define RESPONSE_CERT_CRM_MOBILE    @"crmMobile"
 // ums id
 #define RESPONSE_CERT_UMS_USER_ID   @"umsUserId"
 // 인터넷뱅킹 id
@@ -122,7 +122,9 @@
 // 주민등록번호
 #define RESPONSE_CERT_RLNO          @"resident_no"
 // 전체 계좌번호
-#define RESPONSE_CERT_ACCOUNT_LIST  @"sub"
+#define RESPONSE_CERT_ACCOUNT_LIST  @"list"
+// 고객명
+#define RESPONSE_CERT_USER_NAME     @"user_name"
 
 #pragma mark 계좌 인증
 // 계좌 인증
@@ -161,7 +163,13 @@
 #define RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE @"UMSW022001_OUT_SUB.noti_time3"
 
 #pragma mark 계좌 알림 옵션 설정
+// 가입시
 #define REQUEST_NOTI_OPTION                 @"EFPU1009R.cmd"
+// 기존 계좌 알림 수정
+#define REQUEST_NOTI_OPTION_SET             @"EFPUW022004.cmd"
+// 신규 계좌 추가 알림 설정
+#define REQUEST_NOTI_OPTION_NEW_SET         @"EFPUD020001.cmd"
+//////////////////////////////////////////////////////////////////
 #define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
 #define REQUEST_NOTI_OPTION_RECEIPTS_ID     @"receipts_payment_id"
 #define REQUEST_NOTI_OPTION_EVENT_TYPE      @"noti_event_type"
@@ -175,11 +183,30 @@
 #define REQUEST_NOTI_OPTION_NOTI_TIME_ONE   @"noti_time1"
 #define REQUEST_NOTI_OPTION_NOTI_TIME_TWO   @"noti_time2"
 #define REQUEST_NOTI_OPTION_NOTI_TIME_THREE @"noti_time3"
+///////////////////////////////////////////////////////////////////
+// 계좌 삭제 요청
+#define REQUEST_NOTI_ACCOUNT_DELETE         @"EFPUD030001.cmd"
+
+#pragma mark 환율 설정
+// 환율 국가 목록
+#define REQUEST_EXCHANGE_CURRENCY_ALL_COUNTRY           @"EFPUW023004L.cmd"
+// 푸시서비스 가입한 환율 서비스 목록
+#define REQUEST_EXCHANGE_CURRENCY_REG_COUNTRY           @"EFPUW023001L.cmd"
+// 대상 국가 옵션 조회
+#define REQUEST_EXCHANGE_CURRENCY_COUNTRY_OPION         @"EFPUW023001S.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_NATION_ID             @"nation_id"
+#define RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID     @"exchange_rate_id"
+// 대상 국가 추가
+#define REQUEST_EXCHANGE_CURRENCY_ADD_COUNTRY           @"EFPUW023005A.cmd"
+// 대상 국가 옵션 변경
+#define REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION         @"EFPUW023006E.cmd"
+// 환율 알림 취소
+#define REQEUST_EXCHANGE_CURRENCY_COUNTRY_DELETE        @"EFPUW023003S.cmd"
 
 #pragma mark 최근 공지사항 1건
 #define REQUEST_RECENT_NOTICE       @"SBAB1010First.cmd"
 
-#pragma mark 가입 플로우 관련
+#pragma mark - 가입 플로우 관련
 // 인증방식 저장(공인인증서 or 계좌)
 #define REGIST_TYPE                     @"RegistType"
 #define REGIST_TYPE_CERT                @"RegistCert"

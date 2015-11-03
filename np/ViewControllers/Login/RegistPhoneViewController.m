@@ -137,7 +137,7 @@
     }
     
     // 휴대폰 번호 유효성 체크(CRM 확인)
-    if([crmPhoneNumber isEqualToString:phoneNumberInput.text])
+    if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];

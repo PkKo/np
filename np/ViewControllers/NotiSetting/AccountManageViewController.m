@@ -34,7 +34,8 @@
     [self.mNaviView.mTitleLabel setText:@"입출금 알림 계좌관리"];
     
     // 로그인 할 때 받아온 계좌번호 리스트를 가져온다
-    accountList = [[NSArray alloc] initWithObjects:@"1111-22-333333", @"1111-23-123321", nil];
+//    accountList = [[NSArray alloc] initWithObjects:@"1111-22-333333", @"1111-23-123321", nil];
+    accountList = [[[LoginUtil alloc] init] getAllAccounts];
     
     if([accountList count] == 0)
     {
@@ -108,6 +109,7 @@
     // 계좌번호가 있으면 옵션 설정 뷰 컨트롤러로 이동한다.
     AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
     [vc setAccountNumber:[accountList objectAtIndex:indexPath.row]];
+    [vc setIsNewAccount:NO];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
     [self.navigationController pushViewController:eVC animated:YES];

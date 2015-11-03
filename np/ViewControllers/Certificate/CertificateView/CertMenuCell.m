@@ -12,6 +12,7 @@
 
 @synthesize titleLabel;
 @synthesize iconDepthImg;
+@synthesize separateLine;
 
 - (void)awakeFromNib {
     // Initialization code

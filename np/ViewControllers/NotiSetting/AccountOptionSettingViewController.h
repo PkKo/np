@@ -9,13 +9,15 @@
 #import "CommonViewController.h"
 #import "RegistAccountOptionSettingView.h"
 
-@interface AccountOptionSettingViewController : CommonViewController<UITextFieldDelegate>
+@interface AccountOptionSettingViewController : CommonViewController<UITextFieldDelegate, UIAlertViewDelegate>
 {
     RegistAccountOptionSettingView *optionView;
+    NSString *receiptsPaymentId;
 }
 
 @property (strong, nonatomic) NSString *accountNumber;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (assign, nonatomic) BOOL isNewAccount;
 
 - (IBAction)optionSettingConfirm:(id)sender;
 @end

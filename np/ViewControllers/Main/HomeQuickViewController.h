@@ -15,6 +15,8 @@
     NSMutableDictionary *recentNotice;
     CGFloat cellHeight;
     BOOL isPushListRequest;
+    BOOL isPushListLoadingEnd;
+    BOOL isNoticeListLoadingEnd;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *pushMenuButton;
@@ -29,5 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIView *bannerView;
 @property (strong, nonatomic) IBOutlet UILabel *noticeIconView;
 @property (strong, nonatomic) IBOutlet UILabel *noticeTitleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *tabOneBg;
+@property (strong, nonatomic) IBOutlet UIImageView *tabTwoBg;
 - (IBAction)selectTabButton:(id)sender;
 @end

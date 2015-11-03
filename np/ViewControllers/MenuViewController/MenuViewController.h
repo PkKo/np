@@ -20,4 +20,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *loginTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *loginButtonTextLabel;
 - (IBAction)closeMenu:(id)sender;
+- (IBAction)loginButtonClick:(id)sender;
 @end

@@ -10,7 +10,7 @@
 #import "WithdrawStickerSettingView.h"
 #import "DepositStickerView.h"
 
-@interface HomeBankingView : UIView
+@interface HomeBankingView : UIView<UIPickerViewDataSource, UIPickerViewDelegate>
 {
     BOOL isDeleteMode;
     UIView *refreshHeaderView;
@@ -35,6 +35,12 @@
     NSString *searchStartDate;
     NSString *searchEndDate;
     BOOL searchDateSelectType;
+    
+    NSMutableArray *allAccountList;
+    NSArray *inboxTypeList;
+    NSInteger inboxAccountsIndex;
+    NSInteger inboxTypeIndex;
+    NSInteger inboxTypePickerMode;
 }
 
 @property (strong, nonatomic) id delegate;
@@ -60,6 +66,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *searchEndDateLabel;
 @property (strong, nonatomic) IBOutlet UIView *datePickerView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIView *searchTypePickerView;
+@property (strong, nonatomic) IBOutlet UIPickerView *searchTypePicker;
+@property (strong, nonatomic) IBOutlet UILabel *searchTypeAccountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *searchTypeInboxLabel;
 @property (assign, nonatomic) BOOL isSearchResult;
 
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
@@ -82,6 +92,10 @@
 - (IBAction)searchDateSelect:(id)sender;
 - (IBAction)searchDatePickerShow:(id)sender;
 - (IBAction)searchDatePickerHide:(id)sender;
+- (IBAction)showInboxTypePickerShow:(id)sender;
+- (IBAction)inboxTypeSelect:(id)sender;
+- (IBAction)inboxTypePickerHide:(id)sender;
+
 // 보관함 이동
 - (IBAction)storageMoveClick:(id)sender;
 @end

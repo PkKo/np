@@ -226,7 +226,7 @@
         }
         case STICKER_NOTICE_NORMAL:
         {
-            stickerImageName = @"icon_sticekr_04.png";
+            stickerImageName = @"icon_sticker_04.png";
             break;
         }
         default:

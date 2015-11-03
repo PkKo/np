@@ -24,6 +24,7 @@
 @synthesize mTimeLineSection;
 @synthesize mTimeLineDic;
 @synthesize mTimeLineTable;
+@synthesize listEmptyView;
 @synthesize sortLabel;
 
 @synthesize topMenuView;
@@ -138,7 +139,21 @@
         }
     }
     
+    if([mTimeLineSection count] == 0)
+    {
+        [listEmptyView setHidden:NO];
+        [mTimeLineTable setHidden:YES];
+        
+    }
+    else
+    {
+        [listEmptyView setHidden:YES];
+        [mTimeLineTable setHidden:NO];
+    }
     [self stopLoading];
+    
+    isDeleteMode = NO;
+    [self deleteViewHide:nil];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -253,7 +268,7 @@
         [deleteAllImg setHighlighted:NO];
         [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
         [deleteButton setEnabled:NO];
-        [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     }
     else
     {
@@ -266,15 +281,15 @@
                 [deleteIdList removeAllObjects];
             }
             
-            /*
-            for(NSString *key in mTimeLineSection)
+            for(TimelineSectionData *sectionData in mTimeLineSection)
             {
+                NSString *key = sectionData.date;
                 NSArray *list = [mTimeLineDic objectForKey:key];
-                for (NSDictionary *item in list)
+                for (NHInboxMessageData *item in list)
                 {
-                    [deleteIdList addObject:[item objectForKey:@"pushId"]];
+                    [deleteIdList addObject:item.serverMessageKey];
                 }
-            }*/
+            }
             
             [deleteAllImg setHighlighted:YES];
             [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
@@ -282,6 +297,19 @@
             [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
         }
     }
+    
+    if([deleteIdList count] > 0)
+    {
+        [deleteButton setEnabled:YES];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    }
+    
+    [mTimeLineTable reloadData];
 }
 
 - (IBAction)deleteSelectedList:(id)sender
@@ -302,6 +330,8 @@
             [delegate performSelector:@selector(deletePushItems:) withObject:deleteIdList];
         }
     }
+    
+//    [self deleteViewHide:nil];
 }
 
 - (IBAction)deleteViewHide:(id)sender
@@ -317,7 +347,7 @@
     [deleteAllView setHidden:YES];
     
     [deleteButton setEnabled:NO];
-    [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+    [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
@@ -886,6 +916,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
     isDragging = YES;
 }
 
@@ -916,7 +947,8 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (isLoading) return;
+    if(isLoading) return;
+    if(isDeleteMode) return;
     isDragging = NO;
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {
@@ -969,7 +1001,7 @@
         else
         {
             [deleteButton setEnabled:NO];
-            [deleteButton setBackgroundColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
         }
     }
     else

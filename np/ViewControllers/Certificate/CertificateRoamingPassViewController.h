@@ -15,4 +15,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *mPassInputText;
 
 - (IBAction)passInputButtonClick:(id)sender;
+- (IBAction)cancelButtonClick:(id)sender;
 @end

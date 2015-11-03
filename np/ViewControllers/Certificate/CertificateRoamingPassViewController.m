@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mTitleLabel setText:@"비밀번호 입력"];
     [self.mNaviView.mMenuButton setHidden:YES];
 }
 
@@ -117,11 +117,16 @@
 #pragma mark - UIButtonAction
 - (IBAction)passInputButtonClick:(id)sender
 {
-#ifdef DEV_MODE
+#if DEV_MODE
     NSLog(@"%s, viewController count = %lu", __FUNCTION__, [[self.navigationController viewControllers] count]);
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:([[self.navigationController viewControllers] count] - 3)] animated:YES];
 #else
     [self passwordCheck];
 #endif
+}
+
+- (IBAction)cancelButtonClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

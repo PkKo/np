@@ -360,18 +360,20 @@
     {
         // 공인인증서로 인증한걸로 저장한다.
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
-        if([(NSArray *)[[response objectForKey:@"list"] objectForKey:RESPONSE_CERT_ACCOUNT_LIST] count] > 0)
+        if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
         {
-            NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+            NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
             [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
         }
         NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
 //        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
 //        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
         NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+        NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
         
         [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
         [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
         // 인증 성공한 이후 휴대폰 인증으로 이동
         
         if (self.isSelfIdentified) {
@@ -473,9 +475,11 @@
         [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
         NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
         NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+        NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
         [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
         [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
         [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
         
         if (self.isSelfIdentified) {
             LoginUtil * util = [[LoginUtil alloc] init];

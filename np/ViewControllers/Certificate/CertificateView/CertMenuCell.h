@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *iconDepthImg;
+@property (strong, nonatomic) IBOutlet UIImageView *separateLine;
 @end

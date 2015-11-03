@@ -111,6 +111,11 @@ typedef enum PickerViewType
 @property (strong, nonatomic) IBOutlet UILabel *notiTimeOneText;
 @property (strong, nonatomic) IBOutlet UILabel *notiTimeTwoText;
 @property (strong, nonatomic) IBOutlet UILabel *notiTimeThreeText;
+/////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////
+@property (strong, nonatomic) IBOutlet UIButton *accountDeleteButton;
+/////////////////////////////////////////////////////////////////
 
 // 입출금 선택(1:입출 2:입금 3:출금)
 @property (assign, nonatomic) AlarmSettingType selectedType;

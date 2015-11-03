@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExchangeSettingViewController">
@@ -10,6 +10,8 @@
                 <outlet property="countryListTable" destination="EG9-tW-GRn" id="EYS-aV-uE7"/>
                 <outlet property="emptyView" destination="5Bt-66-6sv" id="rN4-ZN-Ukp"/>
                 <outlet property="listView" destination="Y7z-bu-vbj" id="qqE-eT-bq5"/>
+                <outlet property="payAlarmListTable" destination="pbK-Ue-2aW" id="1yK-IX-gag"/>
+                <outlet property="payAlarmView" destination="rbU-J2-N3Z" id="N3D-TU-pGj"/>
                 <outlet property="serviceNotiAlertView" destination="4UA-Og-rKD" id="xP7-gT-gY4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -49,7 +51,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BIJ-LF-AkV">
-                                    <rect key="frame" x="18" y="56" width="284" height="40"/>
+                                    <rect key="frame" x="80" y="56" width="160" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -81,18 +83,9 @@
                                     <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
-                                    <rect key="frame" x="18" y="72" width="284" height="341"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="Kwy-Qa-LbC"/>
-                                        <outlet property="delegate" destination="-1" id="pak-Gs-6lm"/>
-                                    </connections>
-                                </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XHH-eO-daC">
-                                    <rect key="frame" x="18" y="422" width="284" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <rect key="frame" x="80" y="72" width="160" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <state key="normal" title="통화국가 추가"/>
@@ -100,6 +93,50 @@
                                         <action selector="addCurrencyCountry:" destination="-1" eventType="touchUpInside" id="guK-3q-RSr"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" id="H4F-QN-yhI" customClass="StrokeView">
+                                    <rect key="frame" x="17" y="129" width="286" height="98"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
+                                    <rect key="frame" x="18" y="130" width="284" height="96"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="Kwy-Qa-LbC"/>
+                                        <outlet property="delegate" destination="-1" id="pak-Gs-6lm"/>
+                                    </connections>
+                                </tableView>
+                                <view contentMode="scaleToFill" id="rbU-J2-N3Z">
+                                    <rect key="frame" x="18" y="244" width="284" height="211"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="lfW-ew-ViG">
+                                            <rect key="frame" x="0.0" y="15" width="284" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <string key="text">고객님이 이용중인 유료 환율 정보를
+무료 PUSH 알림으로 변경 신청하세요.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="mPp-Iq-kqZ" customClass="StrokeView">
+                                            <rect key="frame" x="0.0" y="65" width="284" height="146"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="pbK-Ue-2aW">
+                                            <rect key="frame" x="1" y="66" width="282" height="144"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="-1" id="6dD-qP-XHm"/>
+                                                <outlet property="delegate" destination="-1" id="3E4-NW-5Mj"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>

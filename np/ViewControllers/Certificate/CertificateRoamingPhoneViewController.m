@@ -33,6 +33,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
+    [self.mNaviView.mMenuButton setHidden:YES];
+    
     certNumOne.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor;
     certNumOne.layer.borderWidth = 1.0f;
     certNumTwo.layer.borderColor = [UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor;

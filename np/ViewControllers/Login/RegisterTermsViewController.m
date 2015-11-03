@@ -9,10 +9,10 @@
 #import "RegisterTermsViewController.h"
 #import "RegisterAccountViewController.h"
 
-#define SERVICE_TERMS_URL_SHORT     @"https://8.1.2.119:39190/content/html/ef/pu/efpu0911m.html"
-#define SERVICE_TERMS_URL_TOTAL     @"https://8.1.2.119:39190/content/html/ef/pu/efpu0911r.html"
-#define PERSONAL_TERMS_URL_SHORT    @"https://8.1.2.119:39190/content/html/ef/pu/efpu0912m.html"
-#define PERSONAL_TERMS_URL_TOTAL    @"https://8.1.2.119:39190/content/html/ef/pu/efpu0912r.html"
+#define SERVICE_TERMS_URL_SHORT     @"https://218.239.251.103:39190/content/html/ef/pu/efpu0911m.html"
+#define SERVICE_TERMS_URL_TOTAL     @"https://218.239.251.103:39190/content/html/ef/pu/efpu0911r.html"
+#define PERSONAL_TERMS_URL_SHORT    @"https://218.239.251.103:39190/content/html/ef/pu/efpu0912m.html"
+#define PERSONAL_TERMS_URL_TOTAL    @"https://218.239.251.103:39190/content/html/ef/pu/efpu0912r.html"
 
 @interface RegisterTermsViewController ()
 

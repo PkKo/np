@@ -47,11 +47,11 @@
         {
 //            [IBInbox requestInboxList];
             AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-            reqData.accountNumberList = @[@"1111-22-333333"];
-//            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+//            reqData.accountNumberList = @[@"1111-22-333333"];
+            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
             reqData.queryType = @"1,2,3,4,5,6";
             reqData.ascending = YES;
-            reqData.size = 2;
+            reqData.size = 20;
             /*
              필수 설정값
              */
@@ -87,7 +87,7 @@
         {
             AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
             reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-            reqData.queryType = @"3";
+            reqData.queryType = @"3,4,5,6";
             reqData.ascending = YES;
             reqData.size = 20;
             /*
@@ -145,24 +145,47 @@
         }
         case BANKING:
         {
-            bankingView = [HomeBankingView view];
-            [bankingView setDelegate:self];
-            [bankingView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            [bankingView initData:sectionList timeLineDic:timelineMessageList];
-            // 수입/지출 통계 뷰컨트롤러 액션 붙여줌
-            [bankingView.statisticButton addTarget:self action:@selector(moveStatisticViewController:) forControlEvents:UIControlEventTouchUpInside];
-            [mMainContentView addSubview:bankingView];
-            [bankingView refreshData];
+            if(bankingView == nil)
+            {
+                bankingView = [HomeBankingView view];
+                [bankingView setDelegate:self];
+                [bankingView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
+                [bankingView initData:sectionList timeLineDic:timelineMessageList];
+                // 수입/지출 통계 뷰컨트롤러 액션 붙여줌
+                [bankingView.statisticButton addTarget:self action:@selector(moveStatisticViewController:) forControlEvents:UIControlEventTouchUpInside];
+                [mMainContentView addSubview:bankingView];
+            }
+            else
+            {
+                bankingView.timeLineSection = sectionList;
+                bankingView.timeLineDic = timelineMessageList;
+                [bankingView setIsSearchResult:isSearch];
+                isSearch = NO;
+                [bankingView refreshData];
+                [bankingView.bankingListTable reloadData];
+            }
             
             break;
         }
         case OTHER:
         {
-            etcTimeLineView = [HomeEtcTimeLineView view];
-            [etcTimeLineView setDelegate:self];
-            [etcTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
-            [etcTimeLineView initData:sectionList timeLineDic:timelineMessageList];
-            [mMainContentView addSubview:etcTimeLineView];
+            if(etcTimeLineView == nil)
+            {
+                etcTimeLineView = [HomeEtcTimeLineView view];
+                [etcTimeLineView setDelegate:self];
+                [etcTimeLineView setFrame:CGRectMake(0, 0, mMainContentView.frame.size.width, mMainContentView.frame.size.height)];
+                [etcTimeLineView initData:sectionList timeLineDic:timelineMessageList];
+                [mMainContentView addSubview:etcTimeLineView];
+            }
+            else
+            {
+                etcTimeLineView.timelineSection = sectionList;
+                etcTimeLineView.timelineDic = timelineMessageList;
+                [etcTimeLineView setIsSearchResult:isSearch];
+                isSearch = NO;
+                [etcTimeLineView refreshData];
+                [etcTimeLineView.timelineTableView reloadData];
+            }
             
             break;
         }
@@ -200,10 +223,9 @@
     isRefresh = YES;
     isNewData = newData;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-//    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-    reqData.accountNumberList = @[@"1111-22-333333"];
+    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = !newData;
-    reqData.size = 2;
+    reqData.size = 20;
     
     switch (viewType)
     {
@@ -230,20 +252,13 @@
     {
         
         // 최신 데이터를 가져온다.
-        if([sectionList count] > 1)
+        if(((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey != nil)
         {
-            if(((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey != nil)
-            {
-                reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey;
-            }
-            else
-            {
-                reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:1]).date] firstObject]).serverMessageKey;
-            }
+            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey;
         }
-        else
+        else if([sectionList count] > 1)
         {
-            [self makeTimelineView];
+            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:1]).date] firstObject]).serverMessageKey;
         }
     }
     else
@@ -454,7 +469,7 @@
 
 - (void)loadedAccountQueryInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
-    NSLog(@"%s, %@", __FUNCTION__, messageList);
+//    NSLog(@"%s, %@", __FUNCTION__, messageList);
     
     if(success)
     {
@@ -706,14 +721,21 @@
         [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
         
         // 각 뷰가 있으면 테이블 갱신
+        [self makeTimelineView];
+        /*
         if(mTimeLineView)
         {
             [mTimeLineView.mTimeLineTable reloadData];
+            
         }
         else if(bankingView)
         {
             [bankingView.bankingListTable reloadData];
         }
+        else if (etcTimeLineView)
+        {
+            [etcTimeLineView.timelineTableView reloadData];
+        }*/
     }
     
     currentStickerIndexPath = nil;
@@ -728,18 +750,41 @@
     {
         for(NSString *msgKey in sMsgKeys)
         {
-            for(TimelineSectionData *sectionData in sectionList)
+            NSMutableArray *deletedSectionList = sectionList;
+            for(TimelineSectionData *sectionData in deletedSectionList)
             {
-                NSMutableArray *array = [NSMutableArray arrayWithArray:[timelineMessageList objectForKey:sectionData.date]];
-                if([array containsObject:msgKey])
+                NSMutableArray *deletedList = [[NSMutableArray alloc] init];
+                for(NHInboxMessageData *inboxData in [timelineMessageList objectForKey:sectionData.date])
                 {
-                    [array removeObject:msgKey];
-                    [timelineMessageList setObject:array forKey:sectionData.date];
+                    if(![inboxData.serverMessageKey isEqualToString:msgKey])
+                    {
+                        [deletedList addObject:inboxData];
+                    }
+                }
+                
+                NSString *todayString = [CommonUtil getTodayDateString];
+                if(viewType == TIMELINE && [deletedList count] == 0 && [sectionData.date isEqualToString:todayString])
+                {
+                    [timelineMessageList removeObjectForKey:sectionData.date];
+                }
+                else
+                {
+                    if([deletedList count] == 0)
+                    {
+                        [timelineMessageList removeObjectForKey:sectionData.date];
+                        [sectionList removeObject:sectionData];
+                    }
+                    else
+                    {
+                        [timelineMessageList setObject:deletedList forKey:sectionData.date];
+                    }
                 }
             }
         }
         
         // 각 뷰가 있으면 테이블 갱신
+        [self makeTimelineView];
+        /*
         if(mTimeLineView)
         {
             [mTimeLineView.mTimeLineTable reloadData];
@@ -748,6 +793,10 @@
         {
             [bankingView.bankingListTable reloadData];
         }
+        else if (etcTimeLineView)
+        {
+            [etcTimeLineView.timelineTableView reloadData];
+        }*/
     }
 }
 @end

@@ -71,6 +71,9 @@
 @synthesize notiPeriodTime2;
 @synthesize notiPeriodTime3;
 
+// 계좌삭제버튼
+@synthesize accountDeleteButton;
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -533,7 +536,57 @@
     [amountSelectView setFrame:CGRectMake(0, ((UIViewController *)delegate).view.frame.size.height - amountSelectView.frame.size.height, ((UIViewController *)delegate).view.frame.size.width, amountSelectView.frame.size.height)];
     [((UIViewController *)delegate).view addSubview:amountSelectView];
     [amountSeletPickerView reloadAllComponents];
-    [amountSeletPickerView selectRow:0 inComponent:0 animated:NO];
+    
+    switch (currentPickerView)
+    {
+        case AMOUNT:
+        {
+            if(selectedAmount > 0)
+            {
+                pickerSelectIndex = selectedAmount - 1;
+            }
+            else
+            {
+                pickerSelectIndex = 0;
+            }
+            break;
+        }
+        case NOTI_TIME_START:
+        {
+            pickerSelectIndex = notiStartTime + 1;
+            break;
+        }
+        case NOTI_TIME_END:
+        {
+            pickerSelectIndex = notiEndTime + 1;
+            break;
+        }
+        case NOTI_PERIOD_ONE:
+        {
+            pickerSelectIndex = notiPeriodTime1 + 1;
+            break;
+        }
+        case NOTI_PERIOD_TWO:
+        {
+            pickerSelectIndex = notiPeriodTime2 + 1;
+            break;
+        }
+        case NOTI_PERIOD_THREE:
+        {
+            pickerSelectIndex = notiPeriodTime3 + 1;
+            break;
+        }
+        case NOTI_LIMIT_AUTO:
+        {
+            pickerSelectIndex = notiAutoFlag - 1;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    [amountSeletPickerView selectRow:pickerSelectIndex inComponent:0 animated:YES];
 }
 
 - (void)hideAmountSelectPickerView

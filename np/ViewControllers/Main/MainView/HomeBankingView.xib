@@ -210,7 +210,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체계좌" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="Fft-fM-xTL">
-                                            <rect key="frame" x="13" y="0.0" width="124" height="27"/>
+                                            <rect key="frame" x="13" y="0.0" width="124" height="31"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,9 +220,12 @@
                                             <rect key="frame" x="137" y="4" width="18" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUU-HO-AmG">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUU-HO-AmG">
                                             <rect key="frame" x="0.0" y="0.0" width="164" height="27"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="showInboxTypePickerShow:" destination="iN0-l3-epB" eventType="touchUpInside" id="z1M-uc-vQa"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -232,7 +235,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입출금" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="vNi-eg-SWR">
-                                            <rect key="frame" x="13" y="0.0" width="80" height="27"/>
+                                            <rect key="frame" x="13" y="0.0" width="80" height="31"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,6 +248,9 @@
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dgc-YO-9vu">
                                             <rect key="frame" x="0.0" y="0.0" width="111" height="27"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="showInboxTypePickerShow:" destination="iN0-l3-epB" eventType="touchUpInside" id="d9h-qm-Lbg"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -430,6 +436,45 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" id="qHn-HU-9QH">
+                    <rect key="frame" x="0.0" y="388" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vSi-KF-VMa">
+                            <rect key="frame" x="267" y="12" width="45" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="확인"/>
+                            <connections>
+                                <action selector="inboxTypeSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z3m-ge-ROx"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NS5-Vv-UvR">
+                            <rect key="frame" x="213" y="12" width="45" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="취소"/>
+                            <connections>
+                                <action selector="inboxTypePickerHide:" destination="iN0-l3-epB" eventType="touchUpInside" id="GsX-ra-vWg"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" id="Mpj-hU-uTb">
+                            <rect key="frame" x="0.0" y="45" width="320" height="135"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <outlet property="dataSource" destination="iN0-l3-epB" id="Tq0-dl-WjW"/>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="Lg4-Wl-5ZC"/>
+                            </connections>
+                        </pickerView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_03.png" id="to0-gb-0cI">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -449,6 +494,10 @@
                 <outlet property="listEmptyView" destination="zMY-eF-1Wh" id="6Vo-AD-Usq"/>
                 <outlet property="searchEndDateLabel" destination="DK2-GS-zZe" id="mkK-yt-TiV"/>
                 <outlet property="searchStartDateLabel" destination="a63-KL-5xi" id="EBr-4R-rST"/>
+                <outlet property="searchTypeAccountLabel" destination="Fft-fM-xTL" id="4FY-lK-RPs"/>
+                <outlet property="searchTypeInboxLabel" destination="vNi-eg-SWR" id="HVS-Bj-vSl"/>
+                <outlet property="searchTypePicker" destination="Mpj-hU-uTb" id="i27-kF-7hL"/>
+                <outlet property="searchTypePickerView" destination="qHn-HU-9QH" id="Bek-2M-qgA"/>
                 <outlet property="searchView" destination="ANT-zQ-KF2" id="v04-TV-jm5"/>
                 <outlet property="sortLabel" destination="HrA-9p-VoR" id="Sx8-JR-vz7"/>
                 <outlet property="statisticButton" destination="u2f-9m-3ji" id="Ihf-Ek-E7m"/>

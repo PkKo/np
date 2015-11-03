@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountAddViewController">
@@ -13,7 +13,9 @@
                 <outlet property="accountInputView" destination="LrU-Mu-9vq" id="Udf-pg-YeH"/>
                 <outlet property="accountPasswordField" destination="gQs-ki-J0S" id="Cpz-YM-sPs"/>
                 <outlet property="birthdayInputField" destination="zDn-gE-zUx" id="sVN-2L-Cud"/>
+                <outlet property="certMenuContentView" destination="tgD-ib-In0" id="rWJ-QA-hpn"/>
                 <outlet property="certMenuView" destination="TeU-qj-7hO" id="zmJ-5L-3if"/>
+                <outlet property="nextButton" destination="kMf-K5-IiX" id="rta-eu-zTR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -133,41 +135,10 @@
                                     <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" id="7aT-Xy-x9o" customClass="RegistCertMenuView">
-                                    <rect key="frame" x="0.0" y="51" width="284" height="140"/>
+                                <view contentMode="scaleToFill" id="tgD-ib-In0">
+                                    <rect key="frame" x="0.0" y="51" width="284" height="329"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Nev-iR-Bp3">
-                                            <rect key="frame" x="16" y="18" width="252" height="48"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <state key="normal" title="PC &gt; 스마트폰 인증서 가져오기">
-                                                <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CPV-tD-kN4">
-                                            <rect key="frame" x="16" y="68" width="252" height="48"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <state key="normal" title="스마트폰 &gt; 스마트폰 인증서 가져오기">
-                                                <color key="titleColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UoQ-OF-O4D">
-                                            <rect key="frame" x="0.0" y="66" width="284" height="1"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_depth_02.png" id="G7D-cy-3J6">
-                                            <rect key="frame" x="248" y="33" width="18" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_depth_02.png" id="qNC-13-TMP">
-                                            <rect key="frame" x="248" y="83" width="18" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -195,6 +166,5 @@
         <image name="button_07_on.png" width="142" height="40"/>
         <image name="button_08_dft.png" width="142" height="40"/>
         <image name="button_08_on.png" width="142" height="40"/>
-        <image name="icon_depth_02.png" width="18" height="18"/>
     </resources>
 </document>

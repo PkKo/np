@@ -10,6 +10,7 @@
 #import "HomeEtcTimeLineCell.h"
 #import "TimelineSectionData.h"
 #import "LoginUtil.h"
+#import "HomeViewController.h"
 
 @implementation HomeEtcTimeLineView
 
@@ -21,6 +22,9 @@
 
 @synthesize deleteAllView;
 @synthesize deleteButtonView;
+@synthesize deleteAllImg;
+@synthesize deleteAllLabel;
+@synthesize deleteButton;
 
 @synthesize searchView;
 @synthesize searchStartDateLabel;
@@ -60,7 +64,20 @@
 
 - (void)refreshData
 {
+    if([timelineSection count] == 0)
+    {
+        [timelineTableView setHidden:YES];
+        [listEmptyView setHidden:NO];
+    }
+    else
+    {
+        [timelineTableView setHidden:NO];
+        [listEmptyView setHidden:YES];
+    }
     
+    [self stopLoading];
+    isDeleteMode = NO;
+    [self deleteViewHide:nil];
 }
 
 - (void)addPullToRefreshHeader
@@ -131,7 +148,11 @@
 {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+    {
+        [delegate refreshData:YES];
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -224,6 +245,11 @@
         // 삭제 버튼으로 바꿔줌
         [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_dft.png"] forState:UIControlStateNormal];
         [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_sel.png"] forState:UIControlStateSelected];
+        
+        if(deleteIdList != nil && [deleteIdList containsObject:inboxData.serverMessageKey])
+        {
+            [cell.stickerButton setSelected:YES];
+        }
     }
     else
     {
@@ -297,9 +323,13 @@
     }
     else if(scrollView.contentOffset.y + timelineTableView.frame.size.height >= timelineTableView.contentSize.height)
     {
-        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, timelineTableView.contentSize.height, timelineTableView.frame.size.height);
-        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + timelineTableView.frame.size.height, timelineTableView.contentSize.height);
+//        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, timelineTableView.contentSize.height, timelineTableView.frame.size.height);
+//        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + timelineTableView.frame.size.height, timelineTableView.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        {
+            [delegate refreshData:NO];
+        }
     }
 }
 
@@ -328,6 +358,17 @@
             }
         }
         [currentBtn setSelected:![currentBtn isSelected]];
+        
+        if([deleteIdList count] > 0)
+        {
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+        }
+        else
+        {
+            [deleteButton setEnabled:NO];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        }
     }
 }
 
@@ -459,6 +500,117 @@
 - (IBAction)searchDatePickerHide:(id)sender
 {
     [datePickerView setHidden:YES];
+}
+
+#pragma mark - delete mode
+- (IBAction)deleteMode:(id)sender
+{
+    isDeleteMode = YES;
+    
+    [deleteAllView setHidden:NO];
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setHidden:NO];
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height - deleteButtonView.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }completion:nil];
+    
+    [timelineTableView reloadData];
+}
+
+- (IBAction)deleteSelectAll:(id)sender
+{
+    if([deleteAllImg isHighlighted])
+    {
+        // 전체선택 해제
+        if([deleteIdList count] > 0)
+        {
+            [deleteIdList removeAllObjects];
+        }
+        
+        [deleteAllImg setHighlighted:NO];
+        [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        // 전체선택 모드
+        if([timelineSection count] > 0)
+        {
+            // 리스트가 있는 경우에만 진행한다
+            if([deleteIdList count] > 0)
+            {
+                [deleteIdList removeAllObjects];
+            }
+            
+            for(TimelineSectionData *sectionData in timelineSection)
+            {
+                NSString *key = sectionData.date;
+                NSArray *list = [timelineDic objectForKey:key];
+                for (NHInboxMessageData *item in list)
+                {
+                    [deleteIdList addObject:item.serverMessageKey];
+                }
+            }
+            
+            [deleteAllImg setHighlighted:YES];
+            [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
+            [deleteButton setEnabled:YES];
+            [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+        }
+    }
+    
+    if([deleteIdList count] > 0)
+    {
+        [deleteButton setEnabled:YES];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
+    }
+    else
+    {
+        [deleteButton setEnabled:NO];
+        [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    }
+    
+    [timelineTableView reloadData];
+}
+
+- (IBAction)deleteSelectedList:(id)sender
+{
+    // deleteIdList로 삭제를 진행한다.
+    if([deleteIdList count] > 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(deletePushItems:)])
+        {
+            [delegate performSelector:@selector(deletePushItems:) withObject:deleteIdList];
+        }
+    }
+}
+
+- (IBAction)deleteViewHide:(id)sender
+{
+    // 삭제모드 해제
+    isDeleteMode = NO;
+    if([deleteIdList count] > 0)
+    {
+        [deleteIdList removeAllObjects];
+    }
+    [deleteAllImg setHighlighted:NO];
+    [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    [deleteAllView setHidden:YES];
+    
+    [deleteButton setEnabled:NO];
+    [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [deleteButtonView setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, deleteButtonView.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [deleteButtonView setHidden:YES];
+                     }];
+    
+    [timelineTableView reloadData];
 }
 
 @end

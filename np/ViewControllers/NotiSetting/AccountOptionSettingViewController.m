@@ -7,6 +7,7 @@
 //
 
 #import "AccountOptionSettingViewController.h"
+#import "AccountManageViewController.h"
 
 @interface AccountOptionSettingViewController ()
 
@@ -16,6 +17,7 @@
 
 @synthesize accountNumber;
 @synthesize contentView;
+@synthesize isNewAccount;
 
 - (void)viewDidLoad
 {
@@ -30,7 +32,11 @@
     [optionView setDelegate:self];
     [optionView initDataWithAccountNumber:accountNumber];
     [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+    [[optionView accountDeleteButton] setHidden:isNewAccount];
+    [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:optionView];
+    
+    [self accountOptionSearchReqeust];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,22 +51,215 @@
  */
 - (IBAction)optionSettingConfirm:(id)sender
 {
-    // 옵션 갑 확인해서 세팅한다.
+    // 옵션 값 확인해서 세팅한다.
+    [self accountOptionSetReqeust];
 }
 
-#pragma mark - AccountOption API
-- (void)accountOptionSettingRequest
+#pragma mark - 계좌옵션 조회
+- (void)accountOptionSearchReqeust
 {
-    HttpRequest *req = [HttpRequest getInstance];
+    [self startIndicator];
     
-    [req setDelegate:self selector:@selector(accountOptionSettingResponse:)];
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SEARCH];
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(accountOptionSearchResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
 }
 
-- (void)accountOptionSettingResponse:(NSDictionary *)response
+- (void)accountOptionSearchResponse:(NSDictionary *)response
 {
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        if([(NSArray *)[[response objectForKey:@"list"] objectForKey:@"sub"] count] > 0)
+        {
+            NSDictionary *optionData = [[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0];
+            // 옵션 초기화
+            receiptsPaymentId = [optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_RPID];
+            // 입출금 선택
+            optionView.selectedType = (AlarmSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_EVENT_TYPE] integerValue];
+            // 통지가격
+            if([[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue] < 0)
+            {
+                optionView.selectedAmount = 0;
+            }
+            else
+            {
+                optionView.selectedAmount = (AmountSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue];
+            }
+            // 제한시간 설정
+            optionView.notiTimeFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_TIME_FLAG] boolValue];
+            // 알림제한 시작
+            optionView.notiStartTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ST] intValue];
+            // 알림제한 종료
+            optionView.notiEndTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ET] intValue];
+            // 잔액표시 여부
+            optionView.balanceFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_BALANCE_FLAG] intValue];
+            // 자동이체 선택
+            optionView.notiAutoFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_AUTO_FLAG] intValue];
+            // 알림 주기
+            optionView.notiPeriodType = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PERIOD_TYPE] intValue];
+            // 지정시간
+            optionView.notiPeriodTime1 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE] intValue];
+            optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
+            optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
+        }
+        
+        [optionView makeAllOptionDataView];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+#pragma mark - 계좌옵션 설정
+- (void)accountOptionSetReqeust
+{
+    [self startIndicator];
+    /*
+     // 입출금 선택(1:입출 2:입금 3:출금)
+     @synthesize selectedType;
+     // 통지금액(0:x, 1:천, 2:만, 3:십만, 4:백만, 5:천만, 6:일억, 7:십억)
+     @synthesize selectedAmount;
+     // 제한시간 설정(0:미설정, 1:설정)
+     @synthesize notiTimeFlag;
+     // 알림제한시간(시작)(-1:미설정, 0~23시)
+     @synthesize notiStartTime;
+     // 알림제한시간(종료)(-1:미설정, 0~23시)
+     @synthesize notiEndTime;
+     // 잔액표시여부(1:표시, 2:미표시)
+     @synthesize balanceFlag;
+     // 자동이체 선택(1:발송, 2:미발송, 3:실시간)
+     @synthesize notiAutoFlag;
+     // 알림주기(1:실시간 2:지정)
+     @synthesize notiPeriodType;
+     // 지정시간 1(-1:미설정, 0~23시)
+     @synthesize notiPeriodTime1;
+     @synthesize notiPeriodTime2;
+     @synthesize notiPeriodTime3;
+     */
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    
+    [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
+    {
+        [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
+    }
+    [reqBody setObject:[NSNumber numberWithInt:optionView.selectedType] forKey:REQUEST_NOTI_OPTION_EVENT_TYPE];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.selectedAmount] forKey:REQUEST_NOTI_OPTION_PRICE];
+    [reqBody setObject:[NSNumber numberWithBool:optionView.notiTimeFlag] forKey:REQUEST_NOTI_OPTION_TIME_FLAG];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiStartTime] forKey:REQUEST_NOTI_OPTION_UNNOTI_ST];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiEndTime] forKey:REQUEST_NOTI_OPTION_UNNOTI_ET];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.balanceFlag] forKey:REQUEST_NOTI_OPTION_BALANCE_FLAG];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiAutoFlag] forKey:REQUEST_NOTI_OPTION_AUTO_FLAG];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodType] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime2] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime3] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    
+    NSString *url = @"";
+    if(isNewAccount)
+    {
+        url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_NEW_SET];
+    }
+    else
+    {
+        url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SET];
+    }
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(accountOptionSetResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)accountOptionSetResponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        if([optionView.accountNicknameInput.text length] > 0)
+        {
+            NSMutableDictionary *nickNameDic = [[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY];
+            if(nickNameDic == nil)
+            {
+                nickNameDic = [[NSMutableDictionary alloc] init];
+            }
+            [nickNameDic setObject:optionView.accountNicknameInput.text forKey:optionView.accountNumberLabel.text];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
+        }
+        
         [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark - 계좌 삭제
+- (void)accountDeleteAlert
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌삭제를 하시면 해당 계좌의 입출금 PUSH 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alertView setTag:90001];
+    [alertView show];
+}
+
+- (void)accountDeleteRequest
+{
+    [self startIndicator];
+    
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_ACCOUNT_DELETE];
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(accountDeleteResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)accountDeleteResponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
+        while(viewIndex >= 0)
+        {
+            if([[[self.navigationController viewControllers] objectAtIndex:viewIndex] isKindOfClass:[AccountManageViewController class]])
+            {
+                [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
+                break;
+            }
+            
+            viewIndex--;
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 90001 && buttonIndex == BUTTON_INDEX_OK)
+    {
+        [self accountDeleteRequest];
     }
 }
 
