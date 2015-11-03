@@ -12,19 +12,15 @@
 
 @interface DrawPatternMgmtViewController : CommonViewController <UIAlertViewDelegate> {
     NSMutableArray* _paths;
-    
-    // after pattern is drawn, call this:
-    id _target;
-    SEL _action;
 }
 
 @property (weak, nonatomic) IBOutlet DrawPatternLockView    * patternView;
 @property (weak, nonatomic) IBOutlet UILabel                * guide;
 @property (weak, nonatomic) IBOutlet UIButton               * nextBtn;
+@property (weak, nonatomic) IBOutlet UIButton               * initialBtn;
 
+- (IBAction)clickToShowSelfIdentifier;
 - (IBAction)clickCancel;
 - (IBAction)clickNext;
-
-- (NSString*)getKey;
 
 @end

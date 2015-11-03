@@ -22,8 +22,8 @@
                     <rect key="frame" x="144" y="79" width="34" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공인인증서 로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QEP-Xt-Zu6">
-                    <rect key="frame" x="37" y="125" width="249" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="패턴 로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QEP-Xt-Zu6">
+                    <rect key="frame" x="37" y="125" width="249" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,6 +83,9 @@
                             <state key="normal" title="공지사항">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoNotice" destination="-1" eventType="touchUpInside" id="3yF-we-9qx"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vZw-aU-wZM">
                             <rect key="frame" x="135" y="27" width="2" height="7"/>
@@ -98,6 +101,9 @@
                             <state key="normal" title="FAQ">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoFAQ" destination="-1" eventType="touchUpInside" id="qDE-TH-uEL"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="At0-1Q-nnL">
                             <rect key="frame" x="184" y="27" width="2" height="7"/>
@@ -113,6 +119,9 @@
                             <state key="normal" title="전화문의">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoTelEnquiry" destination="-1" eventType="touchUpInside" id="rAY-ge-DDq"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>

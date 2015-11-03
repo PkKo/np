@@ -13,6 +13,7 @@
 #import "StorageBoxUtil.h"
 #import "LoginAccountController.h"
 #import "LoginAccountVerificationViewController.h"
+#import "CustomerCenterUtil.h"
 
 @interface LoginAccountVerificationViewController ()
 
@@ -191,6 +192,18 @@
         }
          */
     }
+}
+
+#pragma mark - Footer
+- (IBAction)gotoNotice {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+}
+
+- (IBAction)gotoTelEnquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
 }
 
 @end

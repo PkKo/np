@@ -23,7 +23,7 @@
 - (void)makeNaviAndMenuView;
 - (void)closeMenuView;
 - (void)keyboardClose;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void)didFailWithError:(NSError *)error;
 - (void)startIndicator;
 - (void)stopIndicator;
 @end

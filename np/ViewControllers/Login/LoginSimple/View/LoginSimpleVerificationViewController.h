@@ -16,4 +16,9 @@
 - (IBAction)gotoLoginSettings;
 - (IBAction)gotoSimpleLoginSettings;
 - (IBAction)doLogin;
+
+#pragma mark - Footer
+- (IBAction)gotoNotice;
+- (IBAction)gotoFAQ;
+- (IBAction)gotoTelEnquiry;
 @end

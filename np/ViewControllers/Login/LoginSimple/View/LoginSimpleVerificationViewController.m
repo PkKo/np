@@ -12,6 +12,7 @@
 #import "LoginSettingsViewController.h"
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
+#import "CustomerCenterUtil.h"
 
 @interface LoginSimpleVerificationViewController () {
     NSString * _pw;
@@ -170,12 +171,12 @@
             }
             btnIdx++;
             
-            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:1]];
+            [loginBtn setBackgroundColor:[UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]];
         }
         
     } else {
         for (UIButton * loginBtn in self.loginBtns.subviews) {
-            [loginBtn setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+            [loginBtn setBackgroundColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]];
         }
     }
 }
@@ -238,4 +239,17 @@
         [alertView show];
     }
 }
+
+#pragma mark - Footer
+- (IBAction)gotoNotice {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+}
+
+- (IBAction)gotoTelEnquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
+
 @end

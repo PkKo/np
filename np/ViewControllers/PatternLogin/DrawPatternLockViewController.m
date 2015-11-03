@@ -9,7 +9,7 @@
 #import "DrawPatternLockViewController.h"
 #import "DrawPatternLockView.h"
 #import "LoginUtil.h"
-
+#import "CustomerCenterUtil.h"
 
 #define MATRIX_SIZE 3
 
@@ -427,5 +427,16 @@
     }
 }
 
+#pragma mark - Footer
+- (IBAction)gotoNotice {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+}
+
+- (IBAction)gotoTelEnquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
 
 @end

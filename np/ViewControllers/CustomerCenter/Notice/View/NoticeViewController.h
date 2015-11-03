@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface NoticeViewController : CommonViewController
+@interface NoticeViewController : CommonViewController <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

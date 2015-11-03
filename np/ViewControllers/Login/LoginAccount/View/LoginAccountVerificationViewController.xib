@@ -343,6 +343,9 @@
                             <state key="normal" title="공지사항">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoNotice" destination="-1" eventType="touchUpInside" id="aSQ-Mv-4hN"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1fX-FA-Fmm">
                             <rect key="frame" x="135" y="27" width="2" height="7"/>
@@ -358,6 +361,9 @@
                             <state key="normal" title="FAQ">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoFAQ" destination="-1" eventType="touchUpInside" id="LO4-mh-rEh"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUs-8t-AGF">
                             <rect key="frame" x="184" y="27" width="2" height="7"/>
@@ -373,6 +379,9 @@
                             <state key="normal" title="전화문의">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="gotoTelEnquiry" destination="-1" eventType="touchUpInside" id="m5e-az-93f"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>

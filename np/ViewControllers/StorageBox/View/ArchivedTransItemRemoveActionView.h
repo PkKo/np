@@ -20,4 +20,5 @@
 - (void)addTargetForCancelButton:(id)target action:(SEL)action;
 
 - (void)updateHighlightBackgroundColor;
+- (void)toggleDeleteBgColor:(BOOL)isRed;
 @end

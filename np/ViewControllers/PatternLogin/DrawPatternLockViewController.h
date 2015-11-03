@@ -21,4 +21,8 @@
 - (NSString*)getKey;
 - (IBAction)gotoPatternLoginMgmt;
 - (IBAction)gotoLoginSettings;
+
+- (IBAction)gotoNotice;
+- (IBAction)gotoFAQ;
+- (IBAction)gotoTelEnquiry;
 @end

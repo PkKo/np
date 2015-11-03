@@ -10,5 +10,6 @@
 #import "CommonViewController.h"
 
 @interface TelInquiryViewController : CommonViewController
+- (IBAction)makeACall;
 
 @end

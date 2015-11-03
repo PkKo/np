@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface FaqViewController : CommonViewController
+@interface FaqViewController : CommonViewController <UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
