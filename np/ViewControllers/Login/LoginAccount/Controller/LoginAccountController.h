@@ -10,6 +10,6 @@
 
 @interface LoginAccountController : NSObject
 
-- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw ofViewController:(UIViewController *)viewController action:(SEL)action;
+- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw birthday:(NSString *)birthday ofViewController:(UIViewController *)viewController action:(SEL)action;
 
 @end

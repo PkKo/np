@@ -19,21 +19,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SnN-PZ-jUD">
+                    <rect key="frame" x="282" y="327" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="close_01"/>
+                    <connections>
+                        <action selector="closeComposer" destination="-1" eventType="touchUpInside" id="d5I-WC-cia"/>
+                    </connections>
+                </button>
                 <view contentMode="scaleToFill" id="taF-L2-BeT">
                     <rect key="frame" x="0.0" y="361" width="320" height="207"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모를 입력하세요. (10자 이내)" textAlignment="natural" minimumFontSize="17" id="Izd-2O-VTU">
-                            <rect key="frame" x="31" y="18" width="271" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            <connections>
-                                <action selector="validateTextEditing:" destination="-1" eventType="editingChanged" id="DVV-PY-31j"/>
-                                <outlet property="delegate" destination="-1" id="OPU-83-JNw"/>
-                            </connections>
-                        </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="1pe-ee-LYp">
                             <rect key="frame" x="18" y="18" width="284" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -43,6 +40,17 @@
                             <connections>
                                 <action selector="validateTextEditing:" destination="-1" eventType="editingChanged" id="Oke-lY-ogs"/>
                                 <outlet property="delegate" destination="-1" id="UOq-JA-fC0"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모를 입력하세요. (10자 이내)" textAlignment="natural" minimumFontSize="17" id="Izd-2O-VTU">
+                            <rect key="frame" x="31" y="18" width="271" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <action selector="validateTextEditing:" destination="-1" eventType="editingChanged" id="DVV-PY-31j"/>
+                                <outlet property="delegate" destination="-1" id="OPU-83-JNw"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xoe-W5-ESG">
@@ -67,7 +75,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k5k-gn-hqQ">
                             <rect key="frame" x="0.0" y="127" width="320" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" title="공유하기" image="icon_sharing_01">
                                 <color key="titleColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -78,10 +86,10 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ep9-bR-BQ0">
                             <rect key="frame" x="0.0" y="167" width="320" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" red="0.91764705882352937" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="backgroundColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" title="취소">
-                                <color key="titleColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="removeComposer" destination="-1" eventType="touchUpInside" id="utD-sx-Fke"/>
@@ -96,6 +104,7 @@
         </view>
     </objects>
     <resources>
+        <image name="close_01" width="16" height="16"/>
         <image name="icon_sharing_01" width="18" height="18"/>
     </resources>
 </document>

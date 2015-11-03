@@ -18,7 +18,7 @@
 #define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
 #define OVAL_BUTTON_SELECTED_BG_COLOR [UIColor whiteColor]
-#define OVAL_BUTTON_SELECTED_TEXT_COLOR [UIColor colorWithRed:0.0f green:122.0f/255.0f blue:1.0f alpha:1]
+#define OVAL_BUTTON_SELECTED_TEXT_COLOR [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1]
 
 #define OVAL_BUTTON_NORMAL_BG_COLOR [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]
 #define OVAL_BUTTON_NORMAL_TEXT_COLOR [UIColor whiteColor]
@@ -174,9 +174,9 @@
     self.patternRadioBtn.layer.cornerRadius = self.accountRadioBtn.layer.frame.size.width / 2;
     
     // oval buttons
-    self.certMgmtCenterBtn.layer.cornerRadius   = 7;
-    self.simpleLoginMgmtBtn.layer.cornerRadius  = 7;
-    self.patternLoginMgmtBtn.layer.cornerRadius = 7;
+    self.certMgmtCenterBtn.layer.cornerRadius   = 10;
+    self.simpleLoginMgmtBtn.layer.cornerRadius  = 10;
+    self.patternLoginMgmtBtn.layer.cornerRadius = 10;
 }
 
 - (void)updateAfterChangingSetting {

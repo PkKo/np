@@ -12,6 +12,7 @@
 @interface LoginAccountVerificationViewController : CommonViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField * accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField * passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField * birthdayTextField;
 @property (weak, nonatomic) IBOutlet UITextField * fakeNoticeTextField;
 
 - (IBAction)clickToLogin;

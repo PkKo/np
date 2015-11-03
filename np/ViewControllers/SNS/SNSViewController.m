@@ -43,11 +43,14 @@
     
     NSString *content = [NSString stringWithFormat:@"%@\n%@\n%@ %@ %@원",
                          [self.transactionObject formattedTransactionDate],
-                         [self.transactionObject transactionAccountNumber],
+                         [self.transactionObject getMaskingTransactionAccountNumber],
                          [self.transactionObject transactionDetails],
                          [self.transactionObject transactionTypeDesc],
                          [self.transactionObject formattedTransactionAmount]];
+    
+    [_snsContent setSelectable:YES];
     [_snsContent setText:content];
+    [_snsContent setSelectable:NO];
 }
 
 - (void)didReceiveMemoryWarning {

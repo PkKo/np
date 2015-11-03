@@ -41,6 +41,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)closeComposer {
+    [self removeComposer];
+}
+
 - (IBAction)removeComposer {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];

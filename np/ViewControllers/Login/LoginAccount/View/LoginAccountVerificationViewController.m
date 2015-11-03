@@ -45,17 +45,34 @@
     [textField resignFirstResponder];
     
     BOOL isAccountNo = NO;
+    int textLength;
+    SEL confirmAction;
+    NSString * title;
     
     if (textField == self.accountTextField) {
-        isAccountNo = YES;
+        
+        textLength      = 15;
+        confirmAction   = @selector(confirmAccountNo:);
+        title           = @"계좌번호 입력";
+        
+    } else if (textField == self.passwordTextField) {
+        
+        textLength      = 4;
+        confirmAction   = @selector(confirmPassword:);
+        title           = @"계좌비밀번호 입력";
+        
+    } else if (textField == self.birthdayTextField) {
+        
+        textLength      = 6;
+        confirmAction   = @selector(confirmBirthday:);
+        title           = @"생년월일 입력";
     }
+    
     LoginUtil * util = [[LoginUtil alloc] init];
     
-    SEL textEditingAction = isAccountNo ? @selector(confirmAccountNo:) : @selector(confirmPassword:);
-    
-    [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:isAccountNo ? @"계좌번호 입력" : @"계좌비밀번호 입력"
-                        textLength:isAccountNo ? 15 : 4
-                        doneAction:textEditingAction methodOnPress:textEditingAction];
+    [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:title
+                        textLength:textLength
+                        doneAction:confirmAction methodOnPress:confirmAction];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -77,9 +94,15 @@
     self.passwordTextField.text = plainText;
 }
 
-- (IBAction)clickToLogin {
+- (void)confirmBirthday:(NSString *)birthday {
     
-    LoginUtil * util        = [[LoginUtil alloc] init];
+    EccEncryptor *ec = [EccEncryptor sharedInstance];
+    NSString *plainText = [ec makeDecNoPadWithSeedkey:birthday];
+    self.birthdayTextField.text = plainText;
+}
+
+
+- (IBAction)clickToLogin {
     
     NSString * alertMessage = nil;
     NSInteger tag           = ALERT_DO_NOTHING;
@@ -92,10 +115,17 @@
         
         alertMessage = @"비밀번호를 다시 확인해주세요.";
         
+    } else if (!self.birthdayTextField.text || [self.birthdayTextField.text length] < 6) {
+        
+        alertMessage = @"생년월일을 다시 확인해주세요.";
+        
     } else {
         
         [self startIndicator];
-        [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text password:self.passwordTextField.text ofViewController:self action:@selector(loginResult:)];
+        [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text
+                                                           password:self.passwordTextField.text
+                                                           birthday:self.birthdayTextField.text
+                                                   ofViewController:self action:@selector(loginResult:)];
     }
     
     if (alertMessage) {

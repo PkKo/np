@@ -11,7 +11,7 @@
 
 @implementation LoginAccountController
 
-- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw ofViewController:(UIViewController *)viewController action:(SEL)action {
+- (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw birthday:(NSString *)birthday ofViewController:(UIViewController *)viewController action:(SEL)action {
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = @"150324104128890";//[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
