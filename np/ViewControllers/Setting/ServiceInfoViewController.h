@@ -8,6 +8,8 @@
 
 #import "CommonViewController.h"
 
-@interface ServiceInfoViewController : CommonViewController
+@interface ServiceInfoViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+- (IBAction)registStart:(id)sender;
 @end
