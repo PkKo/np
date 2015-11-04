@@ -7,6 +7,7 @@
 //
 
 #import "MenuTableEtcView.h"
+#import "CustomerCenterUtil.h"
 
 @implementation MenuTableEtcView
 
@@ -17,5 +18,15 @@
     // Drawing code
 }
 */
+- (IBAction)gotoNotice {
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+- (IBAction)gotoFAQ {
+    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+}
+
+- (IBAction)gotoTelEnquiry {
+    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
 
 @end

@@ -31,10 +31,8 @@
     [super didReceiveMemoryWarning];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
+- (void)webViewDidStartLoad:(UIWebView *)webView {
     [self startIndicator];
-    return YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

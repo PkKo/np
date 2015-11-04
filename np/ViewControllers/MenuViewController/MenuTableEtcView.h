@@ -10,4 +10,8 @@
 
 @interface MenuTableEtcView : UIView
 
+- (IBAction)gotoNotice;
+- (IBAction)gotoFAQ;
+- (IBAction)gotoTelEnquiry;
+
 @end
