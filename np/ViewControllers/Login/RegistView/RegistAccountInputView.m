@@ -21,6 +21,17 @@
 @synthesize scrollView;
 @synthesize contentView;
 
+@synthesize carrierPickerView;
+@synthesize carrierPickerBgView;
+
+- (void)initData
+{
+    NSString *carrierListPath = [[NSBundle mainBundle] pathForResource:@"CarrierList" ofType:@"plist"];
+    carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];
+    
+    tempIndex = 0;
+    carrierIndex = 0;
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -47,4 +58,50 @@
         [delegate performSelector:@selector(checkRegistAccountRequest:) withObject:accountInfo];
     }
 }
+
+#pragma mark - UIPickerViewDataSource
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 40.0f;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [carrierListArray count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [carrierListArray objectAtIndex:row];
+}
+
+#pragma mark - UIPickerViewDelegate
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    tempIndex = row;
+}
+
+- (IBAction)carrierSelectConfirm:(id)sender
+{
+    carrierIndex = tempIndex;
+    [carrierSelectBtn setTitle:[carrierListArray objectAtIndex:carrierIndex] forState:UIControlStateNormal];
+    [self carrierPickerViewHide:nil];
+}
+
+- (IBAction)carrierPickerViewHide:(id)sender
+{
+    [carrierPickerBgView setHidden:YES];
+}
+
+- (IBAction)carrierPickerViewShow:(id)sender
+{
+    [carrierPickerBgView setHidden:NO];
+    [carrierPickerView selectRow:carrierIndex inComponent:0 animated:YES];
+}
+
 @end

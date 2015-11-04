@@ -267,6 +267,8 @@
 #pragma mark - 계좌옵션 설정
 - (void)accountOptionSetReqeust
 {
+    [self startIndicator];
+    
     /*
      // 입출금 선택(1:입출 2:입금 3:출금)
      @synthesize selectedType;
@@ -317,6 +319,8 @@
 
 - (void)accountOptionSetResponse:(NSDictionary *)response
 {
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         NSString *umsId = [response objectForKey:@"user_id"];
@@ -351,14 +355,82 @@
             [[[LoginUtil alloc] init] saveLoginMethod:LOGIN_BY_ACCOUNT];
         }
         
+        // 가입계좌 가져오기
+        [self validateLoginSimple];
+        /*
         // 등록완료 뷰 컨트롤러로 이동
         RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];*/
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
+    }
+}
+
+#pragma mark - 알림 가입된 계좌 가져오기(임시)
+- (void)validateLoginSimple
+{
+    [self startIndicator];
+    
+    NSString * loginType        = @"PIN";
+    NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
+    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
+    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_PINPAT];
+    NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+    
+    [requestBody setObject:user_id forKey:@"user_id"];
+    [requestBody setObject:crmMobile forKey:@"crmMobile"];
+    [requestBody setObject:loginType forKey:@"loginType"];
+    
+    NSString *bodyString = [CommonUtil getBodyString:requestBody];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(loginResponse:)];
+    [req requestUrl:url bodyString:bodyString];
+}
+
+- (void)loginResponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    {
+        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
+        NSArray * accounts      = (NSArray *)(list[@"sub"]);
+        int numberOfAccounts    = (int)[accounts count];
+        
+        if (numberOfAccounts > 0)
+        {
+            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
+            for (NSDictionary * account in accounts)
+            {
+                [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
+            }
+            if ([accountNumbers count] > 0)
+            {
+                
+                [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                
+            }
+        }
+        
+        [[[LoginUtil alloc] init] setLogInStatus:YES];
+        
+        // 등록완료 뷰 컨트롤러로 이동
+        RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    else
+    {
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 

@@ -405,6 +405,7 @@
 // 검색 실행
 - (IBAction)searchStart:(id)sender
 {
+    /*
     if(searchStartDate == nil || [searchStartDate length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -417,10 +418,10 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 종료일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
-    }
+    }*/
     
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = @[@"1111-22-333333"];
+    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;

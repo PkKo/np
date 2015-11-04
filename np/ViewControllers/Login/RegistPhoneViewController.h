@@ -11,10 +11,13 @@
 @interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
     NSArray *carrierListArray;
+    NSInteger carrierIndex;
     NSTimer *authNumTimer;
     NSInteger authNumCounter;
     NSString *authNumber;
     NSString *crmPhoneNumber;
+    
+    NSInteger tempIndex;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -29,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *phoneAuthNumInput;
 // 캐리어 선택 피커 뷰
 @property (strong, nonatomic) IBOutlet UIPickerView *carrierPickerView;
+@property (strong, nonatomic) IBOutlet UIView *carrierPickerBgView;
 
 @property (strong, nonatomic) IBOutlet UILabel *descLabelOne;
 @property (strong, nonatomic) IBOutlet UILabel *descLabelTwo;
@@ -37,4 +41,7 @@
 - (IBAction)carrierNumClick:(id)sender;
 - (IBAction)requestAuthNumber:(id)sender;
 - (IBAction)nextViewClick:(id)sender;
+
+- (IBAction)pickerSelectConfirm:(id)sender;
+- (IBAction)pickerViewHide:(id)sender;
 @end

@@ -302,6 +302,7 @@
 // 검색 실행
 - (IBAction)searchStart:(id)sender
 {
+    /*
     if(searchStartDate == nil || [searchStartDate length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -314,7 +315,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 종료일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
-    }
+    }*/
     
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     if(inboxAccountsIndex == 0)
@@ -329,7 +330,7 @@
         reqData.accountNumberList = @[[allAccountList objectAtIndex:inboxAccountsIndex]];
     }
 
-    reqData.ascending = YES;
+    reqData.ascending = listSortType;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
     
@@ -337,9 +338,13 @@
     {
         reqData.queryType = @"1,2";
     }
-    else
+    else if(inboxTypeIndex == 1)
     {
-        reqData.queryType = [NSString stringWithFormat:@"%ld", (long)inboxTypeIndex];
+        reqData.queryType = @"1";
+    }
+    else if(inboxTypeIndex == 2)
+    {
+        reqData.queryType = @"2";
     }
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])

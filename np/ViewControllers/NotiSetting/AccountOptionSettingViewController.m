@@ -34,6 +34,7 @@
     [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [[optionView accountDeleteButton] setHidden:isNewAccount];
     [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];
+    [[optionView accountChangeButton] addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:optionView];
     
     [self accountOptionSearchReqeust];
@@ -153,6 +154,10 @@
     {
         [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
     }
+    else
+    {
+        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"mobile_phone_01"];
+    }
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedType] forKey:REQUEST_NOTI_OPTION_EVENT_TYPE];
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedAmount] forKey:REQUEST_NOTI_OPTION_PRICE];
     [reqBody setObject:[NSNumber numberWithBool:optionView.notiTimeFlag] forKey:REQUEST_NOTI_OPTION_TIME_FLAG];
@@ -198,7 +203,30 @@
             [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
         }
         
-        [self.navigationController popViewControllerAnimated:YES];
+        if(isNewAccount)
+        {
+            NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
+            NSString *addedAccountNumber = [[[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0] objectForKey:@"UMSD020001_OUT_SUB.account_number"];
+            if(![allAccountList containsObject:addedAccountNumber])
+            {
+                [allAccountList addObject:addedAccountNumber];
+                [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
+            }
+        }
+        
+        // 뒤로가기
+        NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
+        while(viewIndex >= 0)
+        {
+            ECSlidingViewController *eVC = [[self.navigationController viewControllers] objectAtIndex:viewIndex];
+            if([eVC.topViewController isKindOfClass:[AccountManageViewController class]])
+            {
+                [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
+                break;
+            }
+            
+            viewIndex--;
+        }
     }
     else
     {
@@ -235,10 +263,20 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
+        NSString *deletedAccountNumber = [[[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0] objectForKey:@"UMSD030001_OUT_SUB.account_number"];
+        if([allAccountList containsObject:deletedAccountNumber])
+        {
+            [allAccountList removeObject:deletedAccountNumber];
+            [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
+        }
+        
+        // 뒤로가기
         NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
         while(viewIndex >= 0)
         {
-            if([[[self.navigationController viewControllers] objectAtIndex:viewIndex] isKindOfClass:[AccountManageViewController class]])
+            ECSlidingViewController *eVC = [[self.navigationController viewControllers] objectAtIndex:viewIndex];
+            if([eVC.topViewController isKindOfClass:[AccountManageViewController class]])
             {
                 [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
                 break;

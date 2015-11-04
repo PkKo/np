@@ -175,11 +175,22 @@
     NSError *error;
     //Dictionary 형태로 변환
     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:receivedData options:kNilOptions error:&error];
-        
-    //델리게이트가 있으면 실행한다
-    if([self target] && [[self target] respondsToSelector:[self selector]])
+    
+    if([[responseDic objectForKey:RESULT] isEqualToString:@"SBIP90007"])
     {
-        [[self target] performSelector:[self selector] withObject:responseDic];
+        if([self target] != nil && [[self target] respondsToSelector:@selector(timeoutError:)])
+        {
+            [[self target] performSelector:@selector(timeoutError:) withObject:responseDic];
+        }
+    }
+    else
+    {
+        //델리게이트가 있으면 실행한다
+        if([self target] && [[self target] respondsToSelector:[self selector]])
+        {
+            [[self target] performSelector:[self selector] withObject:responseDic];
+        }
+
     }
     
     requestUrl = nil;

@@ -7,6 +7,7 @@
 //
 
 #import "CommonViewController.h"
+#import "SplashViewController.h"
 
 #define TOP_LAYOUT_OFFSET   22
 
@@ -154,6 +155,24 @@
 - (void)stopIndicator
 {
     [loadingIndicatorBg setHidden:YES];
+}
+
+- (void)timeoutError:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alertView setTag:123456];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 123456)
+    {
+        SplashViewController *vc = [[SplashViewController alloc] init];
+        [self.navigationController setViewControllers:@[vc] animated:YES];
+    }
 }
 
 @end

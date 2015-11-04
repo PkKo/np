@@ -18,6 +18,7 @@
 #import "EnvMgmtViewController.h"
 #import "CustomerCenterViewController.h"
 #import "AppZoneViewController.h"
+#import "SplashViewController.h"
 
 #define MENU_CELL_HEIGHT    37
 #define TABLE_VIEW_HEADER_HEIGHT    23
@@ -97,9 +98,12 @@
 {
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
+        // 로그 아웃 시킨다
         [[[LoginUtil alloc] init] setLogInStatus:NO];
         // Login
-        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+        SplashViewController *vc = [[SplashViewController alloc] init];
+        [self.navigationController setViewControllers:@[vc] animated:NO];
+//        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
     }
     else
     {

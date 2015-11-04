@@ -31,83 +31,101 @@
     sectionList = [[NSMutableArray alloc] init];
     timelineMessageList = [[NSMutableDictionary alloc] init];
     isSearch = NO;
+    
+    if(viewType == TIMELINE)
+    {
+        if([sectionList count] == 0)
+        {
+            NSString *todayString = [CommonUtil getTodayDateString];
+            NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
+            TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
+            todaySectionData.date = todayString;
+            todaySectionData.day = todayDayString;
+            [sectionList addObject:todaySectionData];
+        }
+    }
+    [self makeTimelineView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
-    
     [IBInbox loadWithListener:self];
     
-    switch (viewType)
+    if([[[LoginUtil alloc] init] getAllAccounts] != nil && [[[[LoginUtil alloc] init] getAllAccounts] count] > 0)
     {
-        case TIMELINE:
+        [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+        
+        switch (viewType)
         {
-//            [IBInbox requestInboxList];
-            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-//            reqData.accountNumberList = @[@"1111-22-333333"];
-            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-            reqData.queryType = @"1,2,3,4,5,6";
-            reqData.ascending = YES;
-            reqData.size = 20;
-            /*
-             필수 설정값
-             */
-            // 정렬 순서
-            //    reqData.ascending;
-            // 알림받는 계좌번호 리스트
-            //    reqData.accountNumberList;
-            // 입출금 구분
-            //    reqData.queryType;
-            [IBInbox reqQueryAccountInboxListWithSize:reqData];
-            break;
-        }
-        case BANKING:
-        {
-            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-            reqData.queryType = @"1,2";
-            reqData.ascending = YES;
-            reqData.size = 20;
-            /*
-             필수 설정값
-             */
-            // 정렬 순서
-            //    reqData.ascending;
-            // 알림받는 계좌번호 리스트
-            //    reqData.accountNumberList;
-            // 입출금 구분
-            //    reqData.queryType;
-            [IBInbox reqQueryAccountInboxListWithSize:reqData];
-            break;
-        }
-        case OTHER:
-        {
-            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-            reqData.queryType = @"3,4,5,6";
-            reqData.ascending = YES;
-            reqData.size = 20;
-            /*
-             필수 설정값
-             */
-            // 정렬 순서
-            //    reqData.ascending;
-            // 알림받는 계좌번호 리스트
-            //    reqData.accountNumberList;
-            // 입출금 구분
-            //    reqData.queryType;
-            [IBInbox reqQueryAccountInboxListWithSize:reqData];
-//                        [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151027"];
-            break;
-        }
-            
-        default:
-        {
-            [self makeTimelineView];
-            break;
+            case TIMELINE:
+            {
+                //            [IBInbox requestInboxList];
+                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+                //            reqData.accountNumberList = @[@"1111-22-333333"];
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+                //                reqData.queryType = @"A";
+                reqData.queryType = @"1,2,3,4,5,6";
+                reqData.ascending = YES;
+                reqData.size = 20;
+                /*
+                 필수 설정값
+                 */
+                // 정렬 순서
+                //    reqData.ascending;
+                // 알림받는 계좌번호 리스트
+                //    reqData.accountNumberList;
+                // 입출금 구분
+                //    reqData.queryType;
+                [IBInbox reqQueryAccountInboxListWithSize:reqData];
+                break;
+            }
+            case BANKING:
+            {
+                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+                reqData.queryType = @"1,2";
+                reqData.ascending = YES;
+                reqData.size = 20;
+                /*
+                 필수 설정값
+                 */
+                // 정렬 순서
+                //    reqData.ascending;
+                // 알림받는 계좌번호 리스트
+                //    reqData.accountNumberList;
+                // 입출금 구분
+                //    reqData.queryType;
+                [IBInbox reqQueryAccountInboxListWithSize:reqData];
+                break;
+            }
+            case OTHER:
+            {
+                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+                reqData.queryType = @"3,4,5,6";
+                reqData.ascending = YES;
+                reqData.size = 20;
+                /*
+                 필수 설정값
+                 */
+                // 정렬 순서
+                //    reqData.ascending;
+                // 알림받는 계좌번호 리스트
+                //    reqData.accountNumberList;
+                // 입출금 구분
+                //    reqData.queryType;
+                [IBInbox reqQueryAccountInboxListWithSize:reqData];
+                //                        [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151027"];
+                break;
+            }
+                
+            default:
+            {
+                [self makeTimelineView];
+                break;
+            }
         }
     }
 }

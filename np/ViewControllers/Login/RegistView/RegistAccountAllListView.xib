@@ -17,7 +17,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" id="VW2-k6-hfD">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="385"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4pi-SI-okt">
                                     <rect key="frame" x="0.0" y="15" width="320" height="39"/>
@@ -44,7 +44,7 @@
                                     <color key="backgroundColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="29" sectionHeaderHeight="28" sectionFooterHeight="28" id="TzK-gf-9Oi">
-                                    <rect key="frame" x="18" y="113" width="284" height="133"/>
+                                    <rect key="frame" x="18" y="113" width="284" height="252"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>

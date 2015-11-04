@@ -311,8 +311,9 @@
         {
             allAccountList = [NSMutableArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
             allListView = [RegistAccountAllListView view];
-            [allListView initAccountList:allAccountList customerName:@"김농협"];
+            [allListView initAccountList:allAccountList customerName:[response objectForKey:@"user_name"]];
             [allListView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+            [allListView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
             [certMenuContentView addSubview:allListView];
             [nextButton setEnabled:YES];
             [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];

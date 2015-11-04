@@ -203,6 +203,8 @@
 		A2D95BA31BA8FF2400DC943D /* HomeTimeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D95BA21BA8FF2400DC943D /* HomeTimeLineView.xib */; };
 		A2D994B91BD8824700A6A325 /* TimelineSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D994B81BD8824700A6A325 /* TimelineSectionData.m */; };
 		A2D9A3671BCB7CBD00FC2AC7 /* CommonTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D9A3661BCB7CBD00FC2AC7 /* CommonTextField.m */; };
+		A2D9EAF91BEA129B00047BEC /* ServiceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D9EAF71BEA129B00047BEC /* ServiceInfoViewController.m */; };
+		A2D9EAFA1BEA129B00047BEC /* ServiceInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D9EAF81BEA129B00047BEC /* ServiceInfoViewController.xib */; };
 		A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA2BDA1BA64C6600E6BBDC /* MenuTableCell.m */; };
 		A2DA2BDD1BA64C6600E6BBDC /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DA2BDB1BA64C6600E6BBDC /* MenuTableCell.xib */; };
 		A2DA2BE11BA6A63A00E6BBDC /* CertificateRoamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DA2BDF1BA6A63A00E6BBDC /* CertificateRoamingViewController.m */; };
@@ -538,33 +540,33 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
-		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5D50AF21BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AF01BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B041BD4E55900D7A2DD /* CustomerCenterViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5D50B071BD4E55900D7A2DD /* CustomerCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5DA1BB91BE0C077000E04E6 /* SelfIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA1BB81BE0C077000E04E6 /* SelfIdentifyViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5DC2CAD1BE84F1100807999 /* CustomerCenterUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DC2CAC1BE84F1100807999 /* CustomerCenterUtil.m */; settings = {ASSET_TAGS = (); }; };
-		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
-		A5E0177C1BCCD134007BD4EA /* LoginAccountVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0176D1BCCD134007BD4EA /* LoginAccountVerificationViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0176E1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017751BCCD134007BD4EA /* LoginCertListViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E017811BCCD134007BD4EA /* LoginCertListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E017761BCCD134007BD4EA /* LoginCertListViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5E017821BCCD134007BD4EA /* LoginSimpleVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0177A1BCCD134007BD4EA /* LoginSimpleVerificationViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E017831BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0177B1BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017861BCCD19F007BD4EA /* LoginUtil.m */; settings = {ASSET_TAGS = (); }; };
-		A5E0178F1BCCF6B1007BD4EA /* LoginCertController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0178E1BCCF6B1007BD4EA /* LoginCertController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */; settings = {ASSET_TAGS = (); }; };
-		A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E11DFF1BC3C2F70009B5AC /* StorageBoxDateSearchView.m */; settings = {ASSET_TAGS = (); }; };
-		A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A5E2C44E1BB26E5A006EE828 /* MemoCompositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4511BB28E79006EE828 /* TransactionObject.m */; settings = {ASSET_TAGS = (); }; };
-		A5E2C4561BB2921A006EE828 /* StorageBoxUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4551BB2921A006EE828 /* StorageBoxUtil.m */; settings = {ASSET_TAGS = (); }; };
+		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; };
+		A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */; };
+		A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */; };
+		A5D50AF21BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AF01BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.xib */; };
+		A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B041BD4E55900D7A2DD /* CustomerCenterViewController.m */; };
+		A5D50B071BD4E55900D7A2DD /* CustomerCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */; };
+		A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */; };
+		A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */; };
+		A5DA1BB91BE0C077000E04E6 /* SelfIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA1BB81BE0C077000E04E6 /* SelfIdentifyViewController.xib */; };
+		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; };
+		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; };
+		A5DC2CAD1BE84F1100807999 /* CustomerCenterUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DC2CAC1BE84F1100807999 /* CustomerCenterUtil.m */; };
+		A5DD8BB61BC348FF002FEE79 /* UIButton+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD8BB51BC348FF002FEE79 /* UIButton+BackgroundColor.m */; };
+		A5E0177C1BCCD134007BD4EA /* LoginAccountVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0176D1BCCD134007BD4EA /* LoginAccountVerificationViewController.m */; };
+		A5E0177D1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0176E1BCCD134007BD4EA /* LoginAccountVerificationViewController.xib */; };
+		A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017751BCCD134007BD4EA /* LoginCertListViewController.m */; };
+		A5E017811BCCD134007BD4EA /* LoginCertListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E017761BCCD134007BD4EA /* LoginCertListViewController.xib */; };
+		A5E017821BCCD134007BD4EA /* LoginSimpleVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0177A1BCCD134007BD4EA /* LoginSimpleVerificationViewController.m */; };
+		A5E017831BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E0177B1BCCD134007BD4EA /* LoginSimpleVerificationViewController.xib */; };
+		A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E017861BCCD19F007BD4EA /* LoginUtil.m */; };
+		A5E0178F1BCCF6B1007BD4EA /* LoginCertController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E0178E1BCCF6B1007BD4EA /* LoginCertController.m */; };
+		A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E11DFC1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib */; };
+		A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E11DFF1BC3C2F70009B5AC /* StorageBoxDateSearchView.m */; };
+		A5E2C44D1BB26E5A006EE828 /* MemoCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C44B1BB26E5A006EE828 /* MemoCompositionViewController.m */; };
+		A5E2C44E1BB26E5A006EE828 /* MemoCompositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5E2C44C1BB26E5A006EE828 /* MemoCompositionViewController.xib */; };
+		A5E2C4521BB28E79006EE828 /* TransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4511BB28E79006EE828 /* TransactionObject.m */; };
+		A5E2C4561BB2921A006EE828 /* StorageBoxUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2C4551BB2921A006EE828 /* StorageBoxUtil.m */; };
 		A5E3EFCC1BAF832900C1B86A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E3EFCB1BAF832900C1B86A /* KakaoOpenSDK.framework */; };
 		A5EA7E2F1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E2E1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard */; };
 		A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E311BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m */; };
@@ -831,6 +833,9 @@
 		A2D994B81BD8824700A6A325 /* TimelineSectionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineSectionData.m; sourceTree = "<group>"; };
 		A2D9A3651BCB7CBD00FC2AC7 /* CommonTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTextField.h; sourceTree = "<group>"; };
 		A2D9A3661BCB7CBD00FC2AC7 /* CommonTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTextField.m; sourceTree = "<group>"; };
+		A2D9EAF61BEA129B00047BEC /* ServiceInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceInfoViewController.h; sourceTree = "<group>"; };
+		A2D9EAF71BEA129B00047BEC /* ServiceInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfoViewController.m; sourceTree = "<group>"; };
+		A2D9EAF81BEA129B00047BEC /* ServiceInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceInfoViewController.xib; sourceTree = "<group>"; };
 		A2DA2BD91BA64C6600E6BBDC /* MenuTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableCell.h; sourceTree = "<group>"; };
 		A2DA2BDA1BA64C6600E6BBDC /* MenuTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableCell.m; sourceTree = "<group>"; };
 		A2DA2BDB1BA64C6600E6BBDC /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
@@ -2422,6 +2427,9 @@
 		A2DFDD8C1BB3741200DC1A78 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				A2D9EAF61BEA129B00047BEC /* ServiceInfoViewController.h */,
+				A2D9EAF71BEA129B00047BEC /* ServiceInfoViewController.m */,
+				A2D9EAF81BEA129B00047BEC /* ServiceInfoViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -3447,6 +3455,7 @@
 				A2D95B2A1BA8F1DD00DC943D /* NFPadchar_wide_pressed.png in Resources */,
 				A2D95B0E1BA8F1DD00DC943D /* NFPadbar.png in Resources */,
 				A2D95B1E1BA8F1DD00DC943D /* NFPadnum_btn_ok_pressed.png in Resources */,
+				A2D9EAFA1BEA129B00047BEC /* ServiceInfoViewController.xib in Resources */,
 				A2DADE931BDF008300457E9A /* pattern_02_sel@2x.png in Resources */,
 				A2D95B9B1BA8F1DD00DC943D /* NFilterChar.xib in Resources */,
 				A2DADE0E1BDF008300457E9A /* icon_depth_01@2x.png in Resources */,
@@ -3560,6 +3569,7 @@
 				A54B3B701BBE169900F883E9 /* ArchivedTransHeaderCell.m in Sources */,
 				A2DA2BDC1BA64C6600E6BBDC /* MenuTableCell.m in Sources */,
 				A2DB82CD1BD9C5A1001ABFE5 /* TimelineBannerView.m in Sources */,
+				A2D9EAF91BEA129B00047BEC /* ServiceInfoViewController.m in Sources */,
 				A2DB7CA11BCE0EC60088D844 /* RegistAccountOptionSettingView.m in Sources */,
 				A2D95B021BA8F1DD00DC943D /* NSStringKNAdditions.m in Sources */,
 				A5E11E001BC3C2F70009B5AC /* StorageBoxDateSearchView.m in Sources */,

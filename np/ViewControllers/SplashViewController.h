@@ -8,6 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface SplashViewController : UIViewController
+@interface SplashViewController : UIViewController<UIWebViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 @end

@@ -27,6 +27,7 @@
 @synthesize reqAuthNumButton;
 @synthesize phoneAuthNumInput;
 @synthesize carrierPickerView;
+@synthesize carrierPickerBgView;
 
 @synthesize descLabelOne;
 @synthesize descLabelTwo;
@@ -68,6 +69,9 @@
     [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(0, 19)];
     [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(19, textThree.length - 19)];
     [descLabelThree setAttributedText:textThree];
+    
+    carrierIndex = 0;
+    tempIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,7 +86,8 @@
  */
 - (IBAction)carrierNumClick:(id)sender
 {
-    [carrierPickerView setHidden:NO];
+    [carrierPickerBgView setHidden:NO];
+    [carrierPickerView selectRow:carrierIndex inComponent:0 animated:YES];
 }
 
 /**
@@ -157,6 +162,19 @@
 #endif
 }
 
+#pragma mark - PickerView Action
+- (IBAction)pickerSelectConfirm:(id)sender
+{
+    carrierIndex = tempIndex;
+    [carrierSelectButton setTitle:[carrierListArray objectAtIndex:carrierIndex] forState:UIControlStateNormal];
+    [self pickerViewHide:nil];
+}
+
+- (IBAction)pickerViewHide:(id)sender
+{
+    [carrierPickerBgView setHidden:YES];
+}
+
 #pragma mark - Network Connect
 /**
  @brief 인증번호 Request
@@ -219,8 +237,10 @@
 #pragma mark - UIPickerViewDelegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    tempIndex = row;
+    /*
     [carrierSelectButton setTitle:[carrierListArray objectAtIndex:row] forState:UIControlStateNormal];
-    [carrierPickerView setHidden:YES];
+    [carrierPickerView setHidden:YES];*/
 }
 
 #pragma mark - UITextFieldDelegate

@@ -32,9 +32,19 @@
     [self.mNaviView.mTitleLabel setHidden:NO];
     [self.mNaviView.imgTitleView setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"입출금 알림 계좌관리"];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     // 로그인 할 때 받아온 계좌번호 리스트를 가져온다
-//    accountList = [[NSArray alloc] initWithObjects:@"1111-22-333333", @"1111-23-123321", nil];
     accountList = [[[LoginUtil alloc] init] getAllAccounts];
     
     if([accountList count] == 0)
@@ -47,17 +57,6 @@
         [emptyView setHidden:YES];
         [contentView setHidden:NO];
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     cellHeight = CERT_MENU_CELL_HEIGHT * (self.view.frame.size.height / IPHONE_FIVE_FRAME_HEIGHT);
     
@@ -72,6 +71,8 @@
                                                tableBgStrokeView.frame.size.width, cellHeight * [accountList count])];
         [accountListTable setScrollEnabled:NO];
     }
+    
+    [accountListTable reloadData];
 }
 
 #pragma mark - UITableViewDataSource

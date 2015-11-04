@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegistAccountInputView : UIView
+@interface RegistAccountInputView : UIView<UIPickerViewDataSource, UIPickerViewDelegate>
+{
+    NSInteger tempIndex;
+    NSInteger carrierIndex;
+    NSArray *carrierListArray;
+}
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) IBOutlet UITextField *accountInputField;
@@ -19,6 +24,12 @@
 @property (strong, nonatomic) IBOutlet CommonTextField *phoneNumInputField;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIView *carrierPickerBgView;
+@property (strong, nonatomic) IBOutlet UIPickerView *carrierPickerView;
 
+- (void)initData;
 - (IBAction)checkAccount:(id)sender;
+- (IBAction)carrierSelectConfirm:(id)sender;
+- (IBAction)carrierPickerViewHide:(id)sender;
+- (IBAction)carrierPickerViewShow:(id)sender;
 @end

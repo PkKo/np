@@ -9,7 +9,7 @@
 #import "NavigationView.h"
 #import "MenuViewController.h"
 
-@interface CommonViewController :UIViewController
+@interface CommonViewController :UIViewController<UIAlertViewDelegate>
 {
     UIView *loadingIndicatorBg;
     UIImageView *loadingIndicatorImg;
@@ -22,8 +22,10 @@
 
 - (void)makeNaviAndMenuView;
 - (void)closeMenuView;
+- (void)moveBack;
 - (void)keyboardClose;
 - (void)didFailWithError:(NSError *)error;
 - (void)startIndicator;
 - (void)stopIndicator;
+- (void)timeoutError:(NSDictionary *)response;
 @end

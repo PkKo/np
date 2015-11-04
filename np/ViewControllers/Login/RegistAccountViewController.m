@@ -129,6 +129,7 @@
     [[inputView birthInputField] setDelegate:self];
     [[inputView phoneNumInputField] setDelegate:self];
     [inputView setDelegate:self];
+    [inputView initData];
     [contentView addSubview:inputView];
     
     // 2-2. 이후 서버와 통신진행

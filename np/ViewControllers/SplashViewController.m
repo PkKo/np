@@ -26,6 +26,8 @@
 
 @implementation SplashViewController
 
+@synthesize webView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,6 +52,7 @@
     [self appVersionCheckRequest];
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
+//    [self htmlRequestTest];
 }
 
 - (void)appVersionCheckRequest
@@ -92,6 +95,25 @@
     }
     
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+}
+
+- (void)htmlRequestTest
+{
+    NSData *webData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"]];
+    [webView setDelegate:self];
+    [webView loadData:webData MIMEType:@"text/html" textEncodingName:@"euc-kr" baseURL:[NSURL URLWithString:@""]];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)mwebView
+{
+    NSString *webString = [mwebView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
+    webString = [webString stringByReplacingOccurrencesOfString:@"<html>" withString:@""];
+    webString = [webString stringByReplacingOccurrencesOfString:@"<body>" withString:@""];
+    webString = [webString stringByReplacingOccurrencesOfString:@"</body>" withString:@""];
+    webString = [webString stringByReplacingOccurrencesOfString:@"</html>" withString:@""];
+    webString = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"euc-kr\"?>%@", webString];
+        NSLog(@"%s, string = %@", __FUNCTION__, webString);
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[webString dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)didFailWithError:(NSError *)error
