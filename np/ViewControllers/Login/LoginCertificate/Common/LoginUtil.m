@@ -60,6 +60,8 @@
 
 - (void)showMainPage {
     
+    [self setLogInStatus:YES];
+    
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
     MainPageViewController *vc = [[MainPageViewController alloc] init];
     [vc setStartPageIndex:0];
@@ -331,6 +333,7 @@
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction];
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
         [vc setFullMode:YES];
+        [vc setSupportRetinaHD:YES];
         [vc setTopBarText:topBar];
         [vc setTitleText:title];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];

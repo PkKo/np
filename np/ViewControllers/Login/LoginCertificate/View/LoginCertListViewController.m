@@ -111,15 +111,6 @@
     }
 }
 
-- (void)succeedToLogin:(BOOL)isSucceeded {
-    
-    [self stopIndicator];
-    
-    if (isSucceeded) {
-        [[[LoginUtil alloc] init] showMainPage];
-    }
-}
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
@@ -189,16 +180,19 @@
     
     NSLog(@"response: %@", response);
     
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
         
         int numberOfAccounts    = (int)[accounts count];
+        BOOL hasAccounts        = NO;
         
         if (numberOfAccounts > 0) {
             
-            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
+            NSMutableArray * accountNumbers = [NSMutableArray array];
             for (NSDictionary * accountDic in accounts) {
                 
                 NSString * account = (NSString *)(accountDic[@"UMSD060101_OUT_SUB.account_number"]);
@@ -208,20 +202,18 @@
             }
             
             if ([accountNumbers count] > 0) {
-                
+                hasAccounts = YES;
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
-                [self succeedToLogin:YES];
-                
-            } else {
-                
-                [self succeedToLogin:NO];
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
+                [[[LoginUtil alloc] init] showMainPage];
             }
         }
         
+        if (!hasAccounts) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+        }
+        
     } else {
-        [self succeedToLogin:NO];
         
         NSString *message = [response objectForKey:RESULT_MESSAGE];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -239,7 +231,7 @@
         self.certView.hidden = NO;
         
         NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd"];
-        self.certName.text      = certInfo.subjectDN2;
+        self.certName.text      = [certInfo.subjectDN2 substringFromIndex:3];
         self.certIssuer.text    = certInfo.issuer;
         self.certType.text      = certInfo.policy;
         self.issueDate.text     = [formatter stringFromDate:certInfo.dtNotBefore];
@@ -256,7 +248,7 @@
 }
 
 - (void)updateUI {
-    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField color:TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE];
 }
 
 #pragma mark - Footer

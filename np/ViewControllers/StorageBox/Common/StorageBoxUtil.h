@@ -54,4 +54,5 @@
 + (UIColor *)getDimmedBackgroundColor;
 + (CGSize)contentSizeOfLabel:(UILabel *)label;
 - (void)updateTextFieldBorder:(UITextField *)textField;
+- (void)updateTextFieldBorder:(UITextField *)textField color:(CGColorRef)color;
 @end

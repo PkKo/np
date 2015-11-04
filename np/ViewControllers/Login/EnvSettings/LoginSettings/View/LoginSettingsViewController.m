@@ -91,7 +91,7 @@
 
 - (void)updateSelectedCert:(CertInfo *)sltedCert {
     if (sltedCert) {
-        [self.certListBtn setTitle:sltedCert.subjectDN2 forState:UIControlStateNormal];
+        [self.certListBtn setTitle:[sltedCert.subjectDN2 substringFromIndex:3] forState:UIControlStateNormal];
     }
 }
 

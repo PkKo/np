@@ -64,7 +64,7 @@
     CertInfo * certInfo = [self.certificates objectAtIndex:[indexPath row]];
     
     NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterWithStyle:@"yyyy/MM/dd"];
-    cell.certName.text      = certInfo.subjectDN2;
+    cell.certName.text      = [certInfo.subjectDN2 substringFromIndex:3];
     cell.certIssuer.text    = certInfo.issuer;
     cell.certType.text      = certInfo.policy;
     cell.issueDate.text     = [formatter stringFromDate:certInfo.dtNotBefore];

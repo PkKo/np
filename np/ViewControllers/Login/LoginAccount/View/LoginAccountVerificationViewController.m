@@ -44,7 +44,6 @@
     
     [textField resignFirstResponder];
     
-    BOOL isAccountNo = NO;
     int textLength;
     SEL confirmAction;
     NSString * title;
@@ -137,8 +136,7 @@
 }
 
 - (void)updateUI {
-    
-    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField];
+    [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField color:TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE];
 }
 
 - (void)loginResult:(NSDictionary *)response {
@@ -154,24 +152,25 @@
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
         
         int numberOfAccounts    = (int)[accounts count];
+        BOOL hasAccounts         = NO;
         
         if (numberOfAccounts > 0) {
             
-            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
+            NSMutableArray * accountNumbers = [NSMutableArray array];
             for (NSDictionary * account in accounts) {
                 [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
             }
             
             if ([accountNumbers count] > 0) {
-                
+                hasAccounts = YES;
                 [util saveAllAccounts:[accountNumbers copy]];
                 [util showMainPage];
-                
-            } else {
-                
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
             }
+        }
+        
+        if (!hasAccounts) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
         }
         
     } else {

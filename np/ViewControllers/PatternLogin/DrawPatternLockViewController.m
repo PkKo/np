@@ -320,7 +320,6 @@
     
     LoginUtil * util = [[LoginUtil alloc] init];
     [util savePatternPasswordFailedTimes:0];
-    [util setLogInStatus:YES];
     [util showMainPage];
 }
 
@@ -402,26 +401,26 @@
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
         int numberOfAccounts    = (int)[accounts count];
-        
-        NSLog(@"accounts: %@", accounts);
+        BOOL hasAccounts        = NO;
         
         if (numberOfAccounts > 0) {
             
-            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
+            NSMutableArray * accountNumbers = [NSMutableArray array];
             for (NSDictionary * account in accounts) {
                 [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
             }
             
             if ([accountNumbers count] > 0) {
-                
+                hasAccounts = YES;
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
                 [self showMainView];
                 
-            } else {
-                
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
             }
+        }
+        
+        if (!hasAccounts) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
         }
         
     } else {

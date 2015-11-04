@@ -19,8 +19,12 @@
 }
 
 - (void)updateTextFieldBorder:(UITextField *)textField {
+    [self updateTextFieldBorder:textField color:TEXT_FIELD_BORDER_COLOR];
+}
+
+- (void)updateTextFieldBorder:(UITextField *)textField color:(CGColorRef)color {
     [textField.layer setBorderWidth:1.0f];
-    [textField.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
+    [textField.layer setBorderColor:color];
 }
 
 #pragma mark - Date Search

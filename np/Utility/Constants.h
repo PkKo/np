@@ -213,7 +213,9 @@
 #define REGIST_TYPE_ACCOUNT             @"RegistAccount"
 
 
-#define TEXT_FIELD_BORDER_COLOR [[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]
+#define TEXT_FIELD_BORDER_COLOR                     [[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1] CGColor]
+#define TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE    [[UIColor colorWithRed:51.0f/255.0f green:132.0f/255.0f blue:194.0f/255.0f alpha:1] CGColor]
+
 
 #define TRANS_ALL_ACCOUNT  @"전체계좌"
 

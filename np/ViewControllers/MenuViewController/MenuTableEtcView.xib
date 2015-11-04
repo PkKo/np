@@ -24,12 +24,18 @@
                     <color key="backgroundColor" red="0.95287815295811396" green="0.41862560507191648" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="icon_tel_01_dft.png" backgroundImage="button_02_dft.png"/>
                     <state key="highlighted" image="icon_tel_01_on.png" backgroundImage="button_02_on.png"/>
+                    <connections>
+                        <action selector="gotoTelEnquiry" destination="iN0-l3-epB" eventType="touchUpInside" id="lzV-vi-bpq"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ynb-RC-TdS">
                     <rect key="frame" x="106" y="23" width="53" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="icon_faq_01_dft.png" backgroundImage="button_02_dft.png"/>
                     <state key="highlighted" image="icon_faq_01_on.png" backgroundImage="button_02_on.png"/>
+                    <connections>
+                        <action selector="gotoFAQ" destination="iN0-l3-epB" eventType="touchUpInside" id="S7c-xK-yqp"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y1C-LO-UFt">
                     <rect key="frame" x="159" y="23" width="53" height="49"/>
@@ -37,6 +43,9 @@
                     <color key="backgroundColor" red="1" green="0.98317833922663378" blue="0.18961002873448496" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="icon_notice_04_dft.png" backgroundImage="button_03_dft.png"/>
                     <state key="highlighted" image="icon_notice_04_on.png" backgroundImage="button_03_on.png"/>
+                    <connections>
+                        <action selector="gotoNotice" destination="iN0-l3-epB" eventType="touchUpInside" id="spq-d0-jsw"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="농민뉴스" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="qLw-Fd-i6V">
                     <rect key="frame" x="0.0" y="72" width="53" height="20"/>
@@ -83,13 +92,13 @@
         <image name="button_02_on.png" width="53" height="53"/>
         <image name="button_03_dft.png" width="53" height="53"/>
         <image name="button_03_on.png" width="53" height="53"/>
-        <image name="icon_faq_01_dft.png" width="32" height="32"/>
-        <image name="icon_faq_01_on.png" width="32" height="32"/>
+        <image name="icon_faq_01_dft.png" width="42" height="42"/>
+        <image name="icon_faq_01_on.png" width="42" height="42"/>
         <image name="icon_new_01_dft.png" width="32" height="32"/>
         <image name="icon_new_01_on.png" width="32" height="32"/>
-        <image name="icon_notice_04_dft.png" width="32" height="32"/>
-        <image name="icon_notice_04_on.png" width="32" height="32"/>
-        <image name="icon_tel_01_dft.png" width="32" height="32"/>
-        <image name="icon_tel_01_on.png" width="32" height="32"/>
+        <image name="icon_notice_04_dft.png" width="42" height="42"/>
+        <image name="icon_notice_04_on.png" width="42" height="42"/>
+        <image name="icon_tel_01_dft.png" width="42" height="42"/>
+        <image name="icon_tel_01_on.png" width="42" height="42"/>
     </resources>
 </document>
