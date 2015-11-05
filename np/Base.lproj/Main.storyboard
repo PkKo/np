@@ -34,25 +34,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <webView hidden="YES" contentMode="scaleToFill" id="cOb-dZ-kE7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="위변조 체크 중입니다. 잠시만 기다려주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="8zn-3D-8gF">
+                                <rect key="frame" x="62" y="461" width="195" height="16"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.55294117647058827" green="0.67843137254901964" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="JDe-7h-fBT">
+                                <rect key="frame" x="62" y="485" width="195" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NtB-fJ-Puu"/>
                     <connections>
-                        <outlet property="webView" destination="cOb-dZ-kE7" id="4p8-YM-VDu"/>
+                        <outlet property="loadingProgressBar" destination="JDe-7h-fBT" id="OQf-X1-Ugu"/>
+                        <outlet property="loadingTextLabel" destination="8zn-3D-8gF" id="Mb9-Be-mSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8.5333333333333332" y="277.37333333333333"/>
+            <point key="canvasLocation" x="-9" y="277"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bg_01.png" width="320" height="569"/>
+        <image name="bg_01.png" width="320" height="568"/>
     </resources>
 </document>

@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceInfoViewController">
             <connections>
-                <outlet property="contentView" destination="w9V-tX-Tp8" id="Pzb-Fv-fvV"/>
+                <outlet property="contentView" destination="dFX-5n-LFX" id="kBO-Sk-feQ"/>
+                <outlet property="initialImg" destination="Vc2-L5-cq2" id="5nM-bR-N94"/>
+                <outlet property="pageControl" destination="6qK-gR-eQ7" id="pnX-k4-sYi"/>
+                <outlet property="scrollView" destination="L9m-G5-jWs" id="3b2-rx-7ec"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,10 +27,48 @@
                         <action selector="registStart:" destination="-1" eventType="touchUpInside" id="Olh-BJ-wgO"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="w9V-tX-Tp8">
+                <view contentMode="scaleToFill" id="dFX-5n-LFX">
                     <rect key="frame" x="0.0" y="69" width="320" height="455"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_service_01.png" id="Vc2-L5-cq2">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="408"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="L9m-G5-jWs">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="408"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="uKa-dn-0Y3"/>
+                            </connections>
+                        </scrollView>
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" id="6qK-gR-eQ7">
+                            <rect key="frame" x="105" y="404" width="111" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <color key="pageIndicatorTintColor" red="0.87843137250000003" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="currentPageIndicatorTintColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="changePage:" destination="-1" eventType="valueChanged" id="IFb-Hi-1Sz"/>
+                            </connections>
+                        </pageControl>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PKM-ek-z9D">
+                            <rect key="frame" x="9" y="188" width="16" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="icon_next_01.png"/>
+                            <connections>
+                                <action selector="goPreviousPage" destination="-1" eventType="touchUpInside" id="AMZ-7C-aWu"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QWf-Nd-ds7">
+                            <rect key="frame" x="295" y="188" width="16" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="icon_next_02.png"/>
+                            <connections>
+                                <action selector="goNextPage" destination="-1" eventType="touchUpInside" id="nF2-QC-0ZG"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="18I-Wo-QJa">
                     <rect key="frame" x="0.0" y="524" width="320" height="44"/>
@@ -40,12 +81,15 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <point key="canvasLocation" x="282" y="369"/>
         </view>
     </objects>
     <resources>
         <image name="close_02.png" width="16" height="16"/>
+        <image name="icon_next_01.png" width="16" height="31"/>
+        <image name="icon_next_02.png" width="16" height="31"/>
+        <image name="img_service_01.png" width="320" height="411"/>
     </resources>
 </document>

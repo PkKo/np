@@ -637,11 +637,24 @@
     
     if(inboxData == nil)
     {
-        
-        TimelineBannerView *bannerView = [TimelineBannerView view];
         UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, TIMELINE_BANNER_HEIGHT)];
+        TimelineBannerView *bannerView = [TimelineBannerView view];
+        [bannerView setFrame:CGRectMake(0, TIMELINE_BANNER_HEIGHT - bannerView.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
+        NSLog(@"%s, banner frame = %f", __FUNCTION__, bannerView.frame.size.height);
         [cell addSubview:bannerView];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        if(bannerInfoView == nil)
+        {
+            bannerInfoView = [BannerInfoView view];
+        }
+        else
+        {
+            [bannerInfoView bannerTimerStop];
+        }
+        [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+        [bannerView.bannerContentView addSubview:bannerInfoView];
+        [bannerInfoView bannerTimerStart];
         
         LoginUtil *loginUtil = [[LoginUtil alloc] init];
         [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
@@ -823,9 +836,21 @@
             if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
-                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
+                if(bannerInfoView == nil)
+                {
+                    bannerInfoView = [BannerInfoView view];
+                }
+                else
+                {
+                    [bannerInfoView bannerTimerStop];
+                }
+                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                 [cell addSubview:bannerView];
+                
+                [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+                [bannerView.bannerContentView addSubview:bannerInfoView];
+                [bannerInfoView bannerTimerStart];
             }
             
             CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
@@ -903,9 +928,21 @@
             if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
-                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
+                if(bannerInfoView == nil)
+                {
+                    bannerInfoView = [BannerInfoView view];
+                }
+                else
+                {
+                    [bannerInfoView bannerTimerStop];
+                }
+                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                 [cell addSubview:bannerView];
+                
+                [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+                [bannerView.bannerContentView addSubview:bannerInfoView];
+                [bannerInfoView bannerTimerStart];
             }
             
             return cell;
@@ -931,7 +968,7 @@
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
             mTimeLineTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     }
-    else if (isDragging && scrollView.contentOffset.y < 0)
+    else if (isDragging && scrollView.contentOffset.y <= 0)
     {
         // Update the arrow direction and label
         [UIView animateWithDuration:0.25 animations:^{
@@ -943,6 +980,18 @@
                 refreshLabel.text = textPull;
             }
         }];
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
+        }
+    }
+    else if(isDragging && scrollView.contentOffset.y > 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
+        {
+            [delegate performSelector:@selector(showScrollTopButton) withObject:nil];
+        }
     }
 }
 
@@ -951,6 +1000,7 @@
     if(isLoading) return;
     if(isDeleteMode) return;
     isDragging = NO;
+    
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {
         // Released above the header
@@ -964,6 +1014,17 @@
         if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
         {
             [delegate refreshData:NO];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
 }
@@ -1128,6 +1189,15 @@
         default:
             return NO;
             break;
+    }
+}
+
+- (void)bannerTimerStop
+{
+    if(bannerInfoView != nil)
+    {
+        [bannerInfoView bannerTimerStop];
+        bannerInfoView = nil;
     }
 }
 @end

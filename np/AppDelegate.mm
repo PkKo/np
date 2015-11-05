@@ -16,6 +16,7 @@
 
 @synthesize slidingViewController;
 @synthesize serverKey;
+@synthesize bannerInfo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

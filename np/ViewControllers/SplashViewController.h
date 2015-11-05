@@ -8,7 +8,8 @@
 
 #import "CommonViewController.h"
 
-@interface SplashViewController : UIViewController<UIWebViewDelegate>
+@interface SplashViewController : UIViewController<UIAlertViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) IBOutlet UILabel *loadingTextLabel;
+@property (strong, nonatomic) IBOutlet UIProgressView *loadingProgressBar;
 @end

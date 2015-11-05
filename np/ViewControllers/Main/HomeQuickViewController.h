@@ -7,6 +7,7 @@
 //
 
 #import "CommonViewController.h"
+#import "BannerInfoView.h"
 
 @interface HomeQuickViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate, IBInboxProtocol>
 {
@@ -17,6 +18,8 @@
     BOOL isPushListRequest;
     BOOL isPushListLoadingEnd;
     BOOL isNoticeListLoadingEnd;
+    
+    BannerInfoView *bannerInfoView;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *pushMenuButton;

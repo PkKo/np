@@ -24,6 +24,8 @@
 
 @synthesize mMainContentView;
 
+@synthesize scrollMoveTopButton;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,8 +67,8 @@
                 AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
                 //            reqData.accountNumberList = @[@"1111-22-333333"];
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                //                reqData.queryType = @"A";
-                reqData.queryType = @"1,2,3,4,5,6";
+                reqData.queryType = @"A";
+//                reqData.queryType = @"1,2,3,4,5,6";
                 reqData.ascending = YES;
                 reqData.size = 20;
                 /*
@@ -127,6 +129,16 @@
                 break;
             }
         }
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if(viewType == TIMELINE)
+    {
+        [mTimeLineView bannerTimerStop];
     }
 }
 
@@ -816,5 +828,60 @@
             [etcTimeLineView.timelineTableView reloadData];
         }*/
     }
+}
+
+#pragma mark - 테이블리스트 상단 이동 버튼
+- (IBAction)scrollToTop:(id)sender
+{
+    switch (viewType)
+    {
+        case TIMELINE:
+            if(mTimeLineView != nil)
+            {
+                [mTimeLineView.mTimeLineTable setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+        case BANKING:
+            if(bankingView != nil)
+            {
+                [bankingView.bankingListTable setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+        case OTHER:
+            if(etcTimeLineView != nil)
+            {
+                [etcTimeLineView.timelineTableView setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self hideScrollTopButton];
+}
+
+- (void)showScrollTopButton
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setHidden:NO];
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width - scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }completion:nil];
+}
+
+- (void)hideScrollTopButton
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [scrollMoveTopButton setHidden:YES];
+                     }];
 }
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WithdrawStickerSettingView.h"
 #import "DepositStickerView.h"
+#import "BannerInfoView.h"
 
 @interface HomeTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
@@ -36,6 +37,8 @@
     NSString *searchStartDate;
     NSString *searchEndDate;
     BOOL searchDateSelectType;
+    
+    BannerInfoView *bannerInfoView;
 }
 
 @property (strong, nonatomic) id delegate;
@@ -66,7 +69,6 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (assign, nonatomic) BOOL isSearchResult;
 
-
 // 보관함에 저장된 갯수 표시
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 @property (assign, nonatomic) NSInteger bannerIndex;
@@ -93,4 +95,6 @@
 - (IBAction)searchDatePickerHide:(id)sender;
 // 보관함 이동
 - (IBAction)storageMoveClick:(id)sender;
+// 배너 타이머 스톱
+- (void)bannerTimerStop;
 @end

@@ -32,6 +32,7 @@
 @synthesize descLabelOne;
 @synthesize descLabelTwo;
 @synthesize descLabelThree;
+@synthesize bottomDescView;
 
 - (void)viewDidLoad
 {
@@ -72,6 +73,12 @@
     
     carrierIndex = 0;
     tempIndex = 0;
+    
+    orgBottomRect = bottomDescView.frame;
+    [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
+                                       phoneAuthNumInput.frame.origin.y,
+                                       bottomDescView.frame.size.width,
+                                        bottomDescView.frame.size.height)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -181,6 +188,9 @@
  */
 - (void)authNumberRequest
 {
+    [phoneAuthNumInput setHidden:NO];
+    [bottomDescView setFrame:orgBottomRect];
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_PHONE_AUTH];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];

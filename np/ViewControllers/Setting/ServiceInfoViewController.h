@@ -8,8 +8,15 @@
 
 #import "CommonViewController.h"
 
-@interface ServiceInfoViewController : UIViewController
+@interface ServiceInfoViewController : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UIImageView *initialImg;
+
 - (IBAction)registStart:(id)sender;
+- (IBAction)changePage:(id)sender;
+- (IBAction)goNextPage;
+- (IBAction)goPreviousPage;
 @end

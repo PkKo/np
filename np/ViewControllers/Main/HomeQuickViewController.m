@@ -86,6 +86,25 @@
     [super viewWillAppear:animated];
     
     cellHeight = pushTableView.frame.size.height / 5;
+    
+    bannerInfoView = [BannerInfoView view];
+    [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height)];
+    [bannerView addSubview:bannerInfoView];
+    [bannerInfoView bannerTimerStart];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [bannerInfoView bannerTimerStop];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    [bannerInfoView bannerTimerStop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,7 +137,7 @@
 - (void)getRecentNoticeResponse:(NSDictionary *)response
 {
     NSLog(@"%s, %@", __FUNCTION__, response);
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         if([(NSArray*)[[response objectForKey:@"list"] objectForKey:@"voList"] count] > 0)
         {
@@ -130,7 +149,7 @@
 
 - (void)noticeUpdate
 {
-    [noticeTitleLabel setText:[recentNotice objectForKey:@"SUMR_EXPL"]];
+    [noticeTitleLabel setText:[recentNotice objectForKey:@"BBRD_TINM"]];
 }
 
 #pragma mark - UITableViewDataSource

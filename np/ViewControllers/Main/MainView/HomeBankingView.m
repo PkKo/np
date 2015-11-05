@@ -846,7 +846,7 @@
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
             bankingListTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     }
-    else if (isDragging && scrollView.contentOffset.y < 0)
+    else if (isDragging && scrollView.contentOffset.y <= 0)
     {
         // Update the arrow direction and label
         [UIView animateWithDuration:0.25 animations:^{
@@ -858,6 +858,18 @@
                 refreshLabel.text = textPull;
             }
         }];
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
+        }
+    }
+    else if(isDragging && scrollView.contentOffset.y > 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
+        {
+            [delegate performSelector:@selector(showScrollTopButton) withObject:nil];
+        }
     }
 }
 
@@ -877,6 +889,17 @@
         if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
         {
             [delegate refreshData:NO];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
 }

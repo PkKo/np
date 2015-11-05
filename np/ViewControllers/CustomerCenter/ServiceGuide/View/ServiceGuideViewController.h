@@ -11,12 +11,13 @@
 
 @interface ServiceGuideViewController : CommonViewController <UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView   * containerScrollView;
-@property (weak, nonatomic) IBOutlet UIView         * containerView;
-@property (weak, nonatomic) IBOutlet UIScrollView   * scrollView;
-@property (weak, nonatomic) IBOutlet UIPageControl  * pageControl;
+@property (strong, nonatomic) IBOutlet UIScrollView   * containerScrollView;
+@property (strong, nonatomic) IBOutlet UIView         * containerView;
+@property (strong, nonatomic) IBOutlet UIScrollView   * scrollView;
+@property (strong, nonatomic) IBOutlet UIPageControl  * pageControl;
 
 - (IBAction)changePage:(id)sender;
 - (IBAction)goNextPage;
 - (IBAction)goPreviousPage;
+- (void)initPages;
 @end

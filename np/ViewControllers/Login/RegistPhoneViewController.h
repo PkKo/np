@@ -18,6 +18,8 @@
     NSString *crmPhoneNumber;
     
     NSInteger tempIndex;
+    
+    CGRect orgBottomRect;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -37,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *descLabelOne;
 @property (strong, nonatomic) IBOutlet UILabel *descLabelTwo;
 @property (strong, nonatomic) IBOutlet UILabel *descLabelThree;
+@property (strong, nonatomic) IBOutlet UIView *bottomDescView;
 
 - (IBAction)carrierNumClick:(id)sender;
 - (IBAction)requestAuthNumber:(id)sender;
