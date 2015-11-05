@@ -10,6 +10,7 @@
 
 @interface MenuTableEtcView : UIView
 
+- (IBAction)gotoFarmerNews;
 - (IBAction)gotoNotice;
 - (IBAction)gotoFAQ;
 - (IBAction)gotoTelEnquiry;

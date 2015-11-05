@@ -220,7 +220,7 @@
             
             NSMutableArray * accountNumbers = [NSMutableArray array];
             for (NSDictionary * account in accounts) {
-                [accountNumbers addObject:(NSString *)account[@"UMSD060101_OUT_SUB.account_number"]];
+                [accountNumbers addObject:(NSString *)account[@"UMSA360101_OUT_SUB.account_number"]];
             }
             
             if ([accountNumbers count] > 0) {

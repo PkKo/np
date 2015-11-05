@@ -10,6 +10,7 @@
 
 @interface CustomerCenterUtil : NSObject
 + (instancetype)sharedInstance;
+- (void)gotoFarmerNews;
 - (void)gotoNotice;
 - (void)gotoFAQ;
 - (void)gotoTelEnquiry;
