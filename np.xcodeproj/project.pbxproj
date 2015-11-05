@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17208CA31BEA64D300968498 /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17208CA21BEA64D300968498 /* ArticleObject.m */; settings = {ASSET_TAGS = (); }; };
+		17208CA71BEA702500968498 /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17208CA51BEA702500968498 /* ArticleTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		17208CA81BEA702500968498 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17208CA61BEA702500968498 /* ArticleTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 172356E61BAE621C001564A1 /* StoryLinkHelper.m */; };
 		1770448D1BB91515009638B0 /* ChartDataTotalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770448C1BB91515009638B0 /* ChartDataTotalView.xib */; };
 		177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1770448F1BB9152C009638B0 /* ChartDataTotalView.m */; };
@@ -556,6 +559,8 @@
 		A55BDEEE1BB0EB8100646C79 /* DrawPatternLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEE81BB0EB8100646C79 /* DrawPatternLockView.m */; };
 		A55BDEF01BB0EB8100646C79 /* DrawPatternLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */; };
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; };
+		A56171621BEA22550001F0BB /* FarmerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56171601BEA22550001F0BB /* FarmerNewsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
 		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; };
@@ -619,6 +624,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17208CA11BEA64D300968498 /* ArticleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleObject.h; path = Model/ArticleObject.h; sourceTree = "<group>"; };
+		17208CA21BEA64D300968498 /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
+		17208CA41BEA702500968498 /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewCell.h; sourceTree = "<group>"; };
+		17208CA51BEA702500968498 /* ArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewCell.m; sourceTree = "<group>"; };
+		17208CA61BEA702500968498 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		172356E51BAE621C001564A1 /* StoryLinkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryLinkHelper.h; path = SNS/StoryLinkHelper.h; sourceTree = "<group>"; };
 		172356E61BAE621C001564A1 /* StoryLinkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryLinkHelper.m; path = SNS/StoryLinkHelper.m; sourceTree = "<group>"; };
 		1770448C1BB91515009638B0 /* ChartDataTotalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartDataTotalView.xib; sourceTree = "<group>"; };
@@ -1307,6 +1317,9 @@
 		A55BDEE91BB0EB8100646C79 /* DrawPatternLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockViewController.h; sourceTree = "<group>"; };
 		A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternLockViewController.m; sourceTree = "<group>"; };
 		A55BDEEB1BB0EB8100646C79 /* DrawPatternLockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawPatternLockViewController.xib; sourceTree = "<group>"; };
+		A561715F1BEA22550001F0BB /* FarmerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FarmerNewsViewController.h; sourceTree = "<group>"; };
+		A56171601BEA22550001F0BB /* FarmerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FarmerNewsViewController.m; sourceTree = "<group>"; };
+		A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FarmerNewsViewController.xib; sourceTree = "<group>"; };
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1423,6 +1436,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17208CA01BEA64A100968498 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17208CA11BEA64D300968498 /* ArticleObject.h */,
+				17208CA21BEA64D300968498 /* ArticleObject.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A2CAD8BA1BDF8084008C1244 /* NDDatAdditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2646,6 +2668,28 @@
 			path = PatternLogin;
 			sourceTree = "<group>";
 		};
+		A561715D1BEA22250001F0BB /* FarmerNews */ = {
+			isa = PBXGroup;
+			children = (
+				17208CA01BEA64A100968498 /* Model */,
+				A561715E1BEA22250001F0BB /* View */,
+			);
+			path = FarmerNews;
+			sourceTree = "<group>";
+		};
+		A561715E1BEA22250001F0BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A561715F1BEA22550001F0BB /* FarmerNewsViewController.h */,
+				A56171601BEA22550001F0BB /* FarmerNewsViewController.m */,
+				A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */,
+				17208CA41BEA702500968498 /* ArticleTableViewCell.h */,
+				17208CA51BEA702500968498 /* ArticleTableViewCell.m */,
+				17208CA61BEA702500968498 /* ArticleTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A5D50AE51BD48EC100D7A2DD /* EnvMgmt */ = {
 			isa = PBXGroup;
 			children = (
@@ -2685,6 +2729,7 @@
 		A5D50AF51BD4E53900D7A2DD /* CustomerCenter */ = {
 			isa = PBXGroup;
 			children = (
+				A561715D1BEA22250001F0BB /* FarmerNews */,
 				A5DC2CAA1BE84EF400807999 /* Common */,
 				A55047061BDEFCCF000D4524 /* AppZone */,
 				A5D50AF61BD4E53900D7A2DD /* FAQ */,
@@ -3422,6 +3467,7 @@
 				A2D95B851BA8F1DD00DC943D /* nf_ios_btn_confirm@3x.png in Resources */,
 				A2D95B151BA8F1DD00DC943D /* NFPadBtnPrevious.png in Resources */,
 				A2D95B2C1BA8F1DD00DC943D /* NFPadspacebar_wide.png in Resources */,
+				A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */,
 				A2D95B5C1BA8F1DD00DC943D /* nf_ios_icon_refresh.png in Resources */,
 				A2D95B731BA8F1DD00DC943D /* nf_ios_icon_backspace@2x.png in Resources */,
 				A5EA7E2F1BBB7F8200626C74 /* ArchivedTransactionItems.storyboard in Resources */,
@@ -3507,6 +3553,7 @@
 				A2D95B331BA8F1DD00DC943D /* NFPadbtn_pressed@2x.png in Resources */,
 				A2D95B721BA8F1DD00DC943D /* nf_ios_char@2x.png in Resources */,
 				A2DA4F271BCC9785009FB32F /* RegistAccountAllListView.xib in Resources */,
+				17208CA81BEA702500968498 /* ArticleTableViewCell.xib in Resources */,
 				A2D95B0B1BA8F1DD00DC943D /* click2.wav in Resources */,
 				A2DA4F2F1BCCA5F6009FB32F /* RegistAllAccountListCellTableViewCell.xib in Resources */,
 				A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */,
@@ -3645,6 +3692,7 @@
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
+				17208CA71BEA702500968498 /* ArticleTableViewCell.m in Sources */,
 				A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
@@ -3685,6 +3733,7 @@
 				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
 				A550470B1BDEFCF7000D4524 /* AppZoneViewController.m in Sources */,
 				A2DE50BE1BD0852300A40BF3 /* CertMenuCell.m in Sources */,
+				A56171621BEA22550001F0BB /* FarmerNewsViewController.m in Sources */,
 				A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */,
 				17745DE41BB96355003609C7 /* CustomizedDatePickerViewController.m in Sources */,
 				A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */,
@@ -3728,6 +3777,7 @@
 				A2DA4F251BCC9761009FB32F /* RegistAccountAllListView.m in Sources */,
 				A2D95B051BA8F1DD00DC943D /* EccEncryptor.m in Sources */,
 				A538C2DF1BCDE748005E3211 /* LoginSettingsViewController.m in Sources */,
+				17208CA31BEA64D300968498 /* ArticleObject.m in Sources */,
 				A2DEAE571B9FE6D800EDCCBA /* ECSlidingInteractiveTransition.m in Sources */,
 				A2DEAE7B1B9FE6E600EDCCBA /* MenuViewController.m in Sources */,
 				A538C2E41BCE2702005E3211 /* CertListViewController.m in Sources */,
@@ -3927,7 +3977,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
+				PROVISIONING_PROFILE = "ccaeddb8-e9b6-4ce5-8620-69f0ec825db8";
 			};
 			name = Debug;
 		};
@@ -3959,7 +4009,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
+				PROVISIONING_PROFILE = "ccaeddb8-e9b6-4ce5-8620-69f0ec825db8";
 			};
 			name = Release;
 		};

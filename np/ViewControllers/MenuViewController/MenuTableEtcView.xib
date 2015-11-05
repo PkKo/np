@@ -17,6 +17,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <state key="normal" image="icon_new_01_dft.png" backgroundImage="button_01_dft.png"/>
                     <state key="highlighted" image="icon_new_01_on.png" backgroundImage="button_01_on.png"/>
+                    <connections>
+                        <action selector="gotoFarmerNews" destination="iN0-l3-epB" eventType="touchUpInside" id="1NB-wU-0lT"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Xk-3o-g0F">
                     <rect key="frame" x="53" y="23" width="53" height="49"/>

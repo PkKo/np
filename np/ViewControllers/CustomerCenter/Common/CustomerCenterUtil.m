@@ -10,6 +10,7 @@
 #import "NoticeViewController.h"
 #import "FaqViewController.h"
 #import "TelInquiryViewController.h"
+#import "FarmerNewsViewController.h"
 
 @implementation CustomerCenterUtil
 
@@ -25,6 +26,12 @@
     
     return _sharedObject;
 }
+
+- (void)gotoFarmerNews {
+    FarmerNewsViewController * farmerNews = [[FarmerNewsViewController alloc] initWithNibName:@"FarmerNewsViewController" bundle:nil];
+    [self gotoViewController:farmerNews];
+}
+
 
 - (void)gotoNotice {
     NoticeViewController * notice = [[NoticeViewController alloc] initWithNibName:@"NoticeViewController" bundle:nil];

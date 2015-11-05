@@ -18,6 +18,11 @@
     // Drawing code
 }
 */
+
+- (IBAction)gotoFarmerNews {
+    [[CustomerCenterUtil sharedInstance] gotoFarmerNews];
+}
+
 - (IBAction)gotoNotice {
     [[CustomerCenterUtil sharedInstance] gotoNotice];
 }

@@ -376,9 +376,6 @@
         [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
         [cell.transacAmountType setTextColor:cell.transacAmount.textColor];
         
-        
-        
-        
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];
         [cell updateMemoTextBorder];
