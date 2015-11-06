@@ -633,4 +633,24 @@
     
     return todayString;
 }
+
++ (void)setUnreadCountForBanking:(NSInteger)count
+{
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).unreadCountBanking = count;
+}
+
++ (NSInteger)getUnreadCountForBanking
+{
+    return ((AppDelegate *)[UIApplication sharedApplication].delegate).unreadCountBanking;
+}
+
++ (void)setUnreadCountForEtc:(NSInteger)count
+{
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).unreadCountEtc = count;
+}
+
++ (NSInteger)getUnreadCountForEtc
+{
+    return ((AppDelegate *)[UIApplication sharedApplication].delegate).unreadCountEtc;
+}
 @end

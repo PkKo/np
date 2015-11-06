@@ -1,83 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MenuTableEtcView">
-            <rect key="frame" x="0.0" y="0.0" width="222" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="267" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uNu-bl-Xxi">
-                    <rect key="frame" x="0.0" y="23" width="53" height="49"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <state key="normal" image="icon_new_01_dft.png" backgroundImage="button_01_dft.png"/>
-                    <state key="highlighted" image="icon_new_01_on.png" backgroundImage="button_01_on.png"/>
-                    <connections>
-                        <action selector="gotoFarmerNews" destination="iN0-l3-epB" eventType="touchUpInside" id="1NB-wU-0lT"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Xk-3o-g0F">
-                    <rect key="frame" x="53" y="23" width="53" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.95287815295811396" green="0.41862560507191648" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" image="icon_tel_01_dft.png" backgroundImage="button_02_dft.png"/>
-                    <state key="highlighted" image="icon_tel_01_on.png" backgroundImage="button_02_on.png"/>
-                    <connections>
-                        <action selector="gotoTelEnquiry" destination="iN0-l3-epB" eventType="touchUpInside" id="lzV-vi-bpq"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ynb-RC-TdS">
-                    <rect key="frame" x="106" y="23" width="53" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="icon_faq_01_dft.png" backgroundImage="button_02_dft.png"/>
-                    <state key="highlighted" image="icon_faq_01_on.png" backgroundImage="button_02_on.png"/>
-                    <connections>
-                        <action selector="gotoFAQ" destination="iN0-l3-epB" eventType="touchUpInside" id="S7c-xK-yqp"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y1C-LO-UFt">
-                    <rect key="frame" x="159" y="23" width="53" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.98317833922663378" blue="0.18961002873448496" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" image="icon_notice_04_dft.png" backgroundImage="button_03_dft.png"/>
-                    <state key="highlighted" image="icon_notice_04_on.png" backgroundImage="button_03_on.png"/>
-                    <connections>
-                        <action selector="gotoNotice" destination="iN0-l3-epB" eventType="touchUpInside" id="spq-d0-jsw"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="농민뉴스" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="qLw-Fd-i6V">
-                    <rect key="frame" x="0.0" y="72" width="53" height="20"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전화문의" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="BtI-wZ-u1T">
-                    <rect key="frame" x="53" y="72" width="53" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="lvZ-ue-8me">
-                    <rect key="frame" x="106" y="72" width="53" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="xWx-WG-ZLb">
-                    <rect key="frame" x="159" y="72" width="53" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" id="ghb-u0-dGw">
+                    <rect key="frame" x="0.0" y="10" width="267" height="75"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_01_dft.png" id="QYr-fh-dZI">
+                            <rect key="frame" x="0.0" y="0.0" width="271" height="75"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uNu-bl-Xxi">
+                            <rect key="frame" x="31" y="10" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" image="icon_news_01_dft.png"/>
+                            <state key="highlighted" image="icon_news_01_on.png"/>
+                            <connections>
+                                <action selector="gotoFarmerNews" destination="iN0-l3-epB" eventType="touchUpInside" id="1NB-wU-0lT"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="농민뉴스" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="qLw-Fd-i6V">
+                            <rect key="frame" x="31" y="52" width="42" height="13"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Xk-3o-g0F">
+                            <rect key="frame" x="85" y="10" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="icon_tel_01_dft.png"/>
+                            <state key="highlighted" image="icon_tel_01_on.png"/>
+                            <connections>
+                                <action selector="gotoTelEnquiry" destination="iN0-l3-epB" eventType="touchUpInside" id="lzV-vi-bpq"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전화문의" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="BtI-wZ-u1T">
+                            <rect key="frame" x="85" y="52" width="42" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ynb-RC-TdS">
+                            <rect key="frame" x="139" y="10" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="icon_faq_01_dft.png"/>
+                            <state key="highlighted" image="icon_faq_01_on.png"/>
+                            <connections>
+                                <action selector="gotoFAQ" destination="iN0-l3-epB" eventType="touchUpInside" id="S7c-xK-yqp"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="lvZ-ue-8me">
+                            <rect key="frame" x="139" y="52" width="42" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y1C-LO-UFt">
+                            <rect key="frame" x="193" y="10" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="icon_notice_04_dft.png"/>
+                            <state key="highlighted" image="icon_notice_04_on.png"/>
+                            <connections>
+                                <action selector="gotoNotice" destination="iN0-l3-epB" eventType="touchUpInside" id="spq-d0-jsw"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="xWx-WG-ZLb">
+                            <rect key="frame" x="193" y="52" width="42" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -85,20 +96,15 @@
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="275" y="374"/>
+            <point key="canvasLocation" x="274.5" y="356.5"/>
         </view>
     </objects>
     <resources>
         <image name="button_01_dft.png" width="53" height="53"/>
-        <image name="button_01_on.png" width="53" height="53"/>
-        <image name="button_02_dft.png" width="53" height="53"/>
-        <image name="button_02_on.png" width="53" height="53"/>
-        <image name="button_03_dft.png" width="53" height="53"/>
-        <image name="button_03_on.png" width="53" height="53"/>
         <image name="icon_faq_01_dft.png" width="42" height="42"/>
         <image name="icon_faq_01_on.png" width="42" height="42"/>
-        <image name="icon_new_01_dft.png" width="32" height="32"/>
-        <image name="icon_new_01_on.png" width="32" height="32"/>
+        <image name="icon_news_01_dft.png" width="42" height="42"/>
+        <image name="icon_news_01_on.png" width="42" height="42"/>
         <image name="icon_notice_04_dft.png" width="42" height="42"/>
         <image name="icon_notice_04_on.png" width="42" height="42"/>
         <image name="icon_tel_01_dft.png" width="42" height="42"/>

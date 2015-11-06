@@ -41,6 +41,7 @@
 @synthesize searchTypeAccountLabel;
 @synthesize searchTypeInboxLabel;
 @synthesize isSearchResult;
+@synthesize isMoreList;
 
 @synthesize storageCountLabel;
 
@@ -63,6 +64,7 @@
     timeLineDic = data;
     listSortType = YES;
     isDeleteMode = NO;
+    isMoreList = YES;
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     if(pinnedIdList == nil)
     {
@@ -833,6 +835,8 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -876,6 +880,8 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = NO;
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {

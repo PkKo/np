@@ -217,6 +217,7 @@
         optionView = [RegistAccountOptionSettingView view];
         [optionView setDelegate:self];
         [optionView initDataWithAccountNumber:certifiedAccountNumber];
+        [optionView.accountChangeButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
         [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         
         if([(NSArray *)[[response objectForKey:@"list"] objectForKey:@"sub"] count] > 0)
@@ -261,6 +262,21 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
+    }
+}
+
+- (void)accountChangeClick:(id)sender
+{
+    [optionView removeFromSuperview];
+    receiptsPaymentId = @"";
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_CERT])
+    {
+        [nextButton setTag:0];
+    }
+    else if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
+    {
+        [nextButton setTag:1];
     }
 }
 

@@ -43,7 +43,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="37" sectionHeaderHeight="22" sectionFooterHeight="22" id="xeE-6y-bQT">
-                    <rect key="frame" x="75" y="139" width="245" height="329"/>
+                    <rect key="frame" x="75" y="139" width="245" height="344"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,7 +84,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="iac-2l-FhN">
-                    <rect key="frame" x="75" y="468" width="245" height="100"/>
+                    <rect key="frame" x="40" y="483" width="280" height="85"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

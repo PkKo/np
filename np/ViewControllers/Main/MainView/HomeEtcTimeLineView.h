@@ -45,6 +45,7 @@
 @property (strong, nonatomic) IBOutlet UIView *datePickerView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (assign, nonatomic) BOOL isSearchResult;
+@property (assign, nonatomic) BOOL isMoreList;
 
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;

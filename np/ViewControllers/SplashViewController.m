@@ -55,6 +55,45 @@
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
 //    [self htmlRequestTest];
+//    [self ipsTest];
+    /*
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
+    
+    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;*/
+}
+
+- (void)getUnreadMessageCountFromIPS
+{
+//    [IBNgmService registerUserWithAccountId:@"151015104128899" verifyCode:[@"151015104128899" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [loadingProgressBar setProgress:0.6f animated:YES];
+    
+    [IBInbox loadWithListener:self];
+    [IBInbox requestInboxCategoryInfo];
+}
+
+- (void)loadedInboxCategoryList:(NSArray *)categoryList
+{
+    NSLog(@"%s, %@", __FUNCTION__, categoryList);
+    [loadingProgressBar setProgress:0.9f animated:YES];
+    
+    for(InboxCategotyData *data in categoryList)
+    {
+        if(data.categoryId == 1)
+        {
+            [CommonUtil setUnreadCountForBanking:data.unreadCount];
+        }
+        else if (data.categoryId == 2)
+        {
+            [CommonUtil setUnreadCountForEtc:data.unreadCount];
+        }
+    }
+    
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 #pragma mark - 세션 생성 init 및 앱 버전 확인
@@ -78,7 +117,7 @@
 {
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
-        [loadingProgressBar setProgress:0.5f animated:YES];
+        [loadingProgressBar setProgress:0.3f animated:YES];
         
         ((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey = [response objectForKey:@"encodeKey"];
         NSString *terms1Ver = [response objectForKey:@"terms1Ver"];
@@ -129,12 +168,34 @@
 #pragma mark - 배너정보 가져오기
 - (void)getBannerInfoRequest
 {
-    [loadingProgressBar setProgress:0.4f animated:YES];
+    [loadingProgressBar setProgress:0.5f animated:YES];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_BANNER_INFO];
-    HttpRequest *req = [HttpRequest getInstance];
-    [req setDelegate:self selector:@selector(getBannerInfoResponse:)];
-    [req requestUrl:url bodyString:@""];
+    // temp
+    NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
+    
+    if(isUser != nil && [isUser isEqualToString:@"Y"])
+    {
+        [self getUnreadMessageCountFromIPS];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }
+    
+    /*
+    NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
+    
+    if(isUser != nil && [isUser isEqualToString:@"Y"])
+    {
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_BANNER_INFO];
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(getBannerInfoResponse:)];
+        [req requestUrl:url bodyString:@""];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }*/
 }
 
 - (void)getBannerInfoResponse:(NSDictionary *)response
@@ -157,7 +218,8 @@
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
     }
     
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self getUnreadMessageCountFromIPS];
 }
 
 - (void)didFailWithError:(NSError *)error
@@ -182,10 +244,7 @@
 
 - (void)setMainViewController
 {
-    [loadingProgressBar setProgress:0.9f animated:YES];
-    
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     

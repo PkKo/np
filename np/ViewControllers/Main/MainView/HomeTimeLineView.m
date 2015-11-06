@@ -40,6 +40,7 @@
 @synthesize datePickerView;
 @synthesize datePicker;
 @synthesize isSearchResult;
+@synthesize isMoreList;
 
 @synthesize storageCountLabel;
 
@@ -64,6 +65,7 @@
     mTimeLineSection = section;
     mTimeLineDic = data;
     listSortType = YES;
+    isMoreList = YES;
     deleteIdList = [[NSMutableArray alloc] init];
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     StorageBoxController * controller = [[StorageBoxController alloc] init];
@@ -123,20 +125,20 @@
             }
         }
         mTimeLineDic = reverseDic;
-        
-        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
-        if([firstSectionArray count] >= 2)
-        {
-            bannerIndex = 1;
-        }
-        else if([firstSectionArray count] == 1)
-        {
-            bannerIndex = 0;
-        }
-        else
-        {
-            bannerIndex = 0;
-        }
+    }
+    
+    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+    if([firstSectionArray count] >= 2)
+    {
+        bannerIndex = 1;
+    }
+    else if([firstSectionArray count] == 1)
+    {
+        bannerIndex = 0;
+    }
+    else
+    {
+        bannerIndex = 0;
     }
     
     if([mTimeLineSection count] == 0)
@@ -853,6 +855,11 @@
                 [bannerInfoView bannerTimerStart];
             }
             
+            if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
+            {
+                [cell.upperLine setHidden:YES];
+            }
+            
             CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
             if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
             {
@@ -945,6 +952,11 @@
                 [bannerInfoView bannerTimerStart];
             }
             
+            if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
+            {
+                [cell.upperLine setHidden:YES];
+            }
+            
             return cell;
         }
     }
@@ -955,6 +967,7 @@
 {
     if (isLoading) return;
     if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -999,6 +1012,7 @@
 {
     if(isLoading) return;
     if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = NO;
     
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
@@ -1011,7 +1025,7 @@
 //        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
 //        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
         {
             [delegate refreshData:NO];
         }

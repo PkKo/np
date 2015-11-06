@@ -262,7 +262,7 @@
 #pragma mark - Get data
 - (void)getChartData {
     
-    BOOL test = YES;
+    BOOL test = NO;
     NSArray * accounts = test ? @[@"1111-22-333333"] : [self getAccountList];
     
     [IBInbox loadWithListener:self];
@@ -290,6 +290,11 @@
     for (int itemIdx = 0; itemIdx < numberOfItems; itemIdx++) {
         
         StickerSummaryData * chartData = (StickerSummaryData *)[summaryList objectAtIndex:itemIdx];
+        
+        if(chartData.stickerCode == STICKER_EXCHANGE_RATE || chartData.stickerCode == STICKER_NOTICE_NORMAL)
+        {
+            continue;
+        }
         
         int percentage;
         if (itemIdx == numberOfItems - 1) {

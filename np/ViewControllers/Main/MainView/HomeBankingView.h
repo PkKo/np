@@ -71,6 +71,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *searchTypeAccountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *searchTypeInboxLabel;
 @property (assign, nonatomic) BOOL isSearchResult;
+@property (assign, nonatomic) BOOL isMoreList;
 
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 

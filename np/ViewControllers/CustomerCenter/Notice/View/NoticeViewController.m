@@ -20,7 +20,7 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"공지사항"];
     
-    NSString * url = @"https://218.239.251.103:39190/servlet/SBAB1010R.view";
+    NSString * url = [NSString stringWithFormat:@"%@servlet/EFPU2010R.view", SERVER_URL];
     NSURL * nsUrl = [NSURL URLWithString:url];
     
     NSURLRequest * request = [NSURLRequest requestWithURL:nsUrl];

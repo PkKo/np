@@ -32,13 +32,15 @@
 @synthesize datePickerView;
 @synthesize datePicker;
 @synthesize isSearchResult;
-
+@synthesize isMoreList;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
     timelineSection = section;
     timelineDic = data;
     deleteIdList = [[NSMutableArray alloc] init];
+    isSearchResult = NO;
+    isMoreList = YES;
     
     if([timelineSection count] == 0)
     {
@@ -284,6 +286,8 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -327,6 +331,8 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = NO;
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {

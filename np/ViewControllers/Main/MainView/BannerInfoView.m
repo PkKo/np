@@ -18,12 +18,33 @@
 @synthesize nongminBanner;
 @synthesize noticeBanner;
 
+@synthesize leftView;
+@synthesize centerView;
+@synthesize rightView;
+
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
     [scrollView setContentSize:CGSizeMake(rect.size.width * 2, rect.size.height)];
+
     [nongminBanner setFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     [noticeBanner setFrame:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height)];
+    /*
+    [scrollView scrollRectToVisible:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height) animated:NO];
+    
+    nongminColor = [UIColor redColor];
+    noticeColor = [UIColor blueColor];
+    
+    leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [leftView setBackgroundColor:noticeColor];
+    centerView = [[UIView alloc] initWithFrame:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height)];
+    [centerView setBackgroundColor:nongminColor];
+    rightView = [[UIView alloc] initWithFrame:CGRectMake(rect.size.width*2, 0, rect.size.width, rect.size.height)];
+    [rightView setBackgroundColor:noticeColor];
+    
+    [scrollView addSubview:leftView];
+    [scrollView addSubview:centerView];
+    [scrollView addSubview:rightView];*/
 }
 
 - (void)bannerTimerStart

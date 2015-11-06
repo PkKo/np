@@ -12,12 +12,19 @@
 {
     NSTimer *scrollTimer;
     NSInteger bannerCount;
+    
+    UIColor *nongminColor;
+    UIColor *noticeColor;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIButton *nongminBanner;
 @property (strong, nonatomic) IBOutlet UIButton *noticeBanner;
+
+@property (strong, nonatomic) UIView *leftView;
+@property (strong, nonatomic) UIView *centerView;
+@property (strong, nonatomic) UIView *rightView;
 
 - (void)bannerTimerStart;
 - (void)bannerTimerStop;

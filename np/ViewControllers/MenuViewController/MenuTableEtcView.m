@@ -19,19 +19,36 @@
 }
 */
 
-- (IBAction)gotoFarmerNews {
+- (IBAction)gotoFarmerNews
+{
+    [self closeMenu];
     [[CustomerCenterUtil sharedInstance] gotoFarmerNews];
 }
 
-- (IBAction)gotoNotice {
+- (IBAction)gotoNotice
+{
+    [self closeMenu];
     [[CustomerCenterUtil sharedInstance] gotoNotice];
 }
-- (IBAction)gotoFAQ {
+
+- (IBAction)gotoFAQ
+{
+    [self closeMenu];
     [[CustomerCenterUtil sharedInstance] gotoFAQ];
 }
 
-- (IBAction)gotoTelEnquiry {
+- (IBAction)gotoTelEnquiry
+{
+    [self closeMenu];
     [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+}
+
+- (void)closeMenu
+{
+    if([((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController respondsToSelector:@selector(closeMenuView)])
+    {
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController performSelector:@selector(closeMenuView) withObject:nil];
+    }
 }
 
 @end
