@@ -231,6 +231,8 @@
 #define REQUEST_LOGIN_ACCOUNT                            @"EFPU1012R.cmd"
 #define REQUEST_LOGIN_PINPAT                             @"EFPU1013R.cmd"
 
+#define NOTIFICATION_REFRESH_BADGES                 @"notificationRefreshBadges"
+
 #define PREF_KEY_SIMPLE_LOGIN_SETT_PW               @"simpleLoginSettingsKeyPW"
 #define PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES     @"simpleLoginSettingsKeyFailedTimes"
 

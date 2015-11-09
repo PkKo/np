@@ -54,7 +54,7 @@
     if ([prefs objectForKey:PREF_KEY_LOGIN_METHOD]) {
         return (LoginMethod)[[prefs objectForKey:PREF_KEY_LOGIN_METHOD] intValue];
     } else {
-        return LOGIN_BY_NONE;
+        return LOGIN_BY_ACCOUNT;
     }
 }
 

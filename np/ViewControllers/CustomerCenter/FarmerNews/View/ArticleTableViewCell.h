@@ -19,18 +19,21 @@
 
 @property (weak) id<ArticleTableViewCellDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIView *headlineView;
-@property (weak, nonatomic) IBOutlet UIView *detailsView;
-@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UIView     * headlineView;
+@property (weak, nonatomic) IBOutlet UIView     * detailsView;
+@property (weak, nonatomic) IBOutlet UIView     * footerView;
 
-@property (weak, nonatomic) IBOutlet UILabel *regDate;
-@property (weak, nonatomic) IBOutlet UITextView *subject;
-@property (weak, nonatomic) IBOutlet UITextView *contents;
-@property (weak, nonatomic) IBOutlet UIImageView *photo;
+@property (weak, nonatomic) IBOutlet UILabel        * regDate;
+@property (weak, nonatomic) IBOutlet UILabel        * headline;
+@property (weak, nonatomic) IBOutlet UITextView     * subject;
+@property (weak, nonatomic) IBOutlet UILabel        * rowSeparator;
+@property (weak, nonatomic) IBOutlet UITextView     * contents;
+@property (weak, nonatomic) IBOutlet UIImageView    * photo;
 
 - (IBAction)toggleDetails:(UITapGestureRecognizer *)sender;
 - (IBAction)closeDetails:(UITapGestureRecognizer *)sender;
 
 - (void)updateSubject:(NSString *)subject;
 - (void)updateDetails:(NSString *)details;
+- (void)hideDetailsView:(BOOL)isHidden;
 @end

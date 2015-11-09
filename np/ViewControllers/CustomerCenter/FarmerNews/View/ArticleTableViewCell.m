@@ -21,20 +21,27 @@
 }
 
 - (IBAction)toggleDetails:(UITapGestureRecognizer *)sender {
-    [self.detailsView setHidden:!self.detailsView.isHidden];
-    [_delegate showDetails:!self.detailsView.isHidden ofDetailsView:self.detailsView];
+    [_delegate showDetails:self.detailsView.isHidden ofDetailsView:self.detailsView];
 }
 
 - (IBAction)closeDetails:(UITapGestureRecognizer *)sender {
-    [self.detailsView setHidden:YES];
     [_delegate showDetails:NO ofDetailsView:self.detailsView];
+}
+
+- (void)hideDetailsView:(BOOL)isHidden {
+    [self.headline setHidden:!isHidden];
+    [self.subject setHidden:isHidden];
+    [self.detailsView setHidden:isHidden];
+    [self.rowSeparator setHidden:!isHidden];
 }
 
 - (void)updateSubject:(NSString *)subject {
     
     [self.subject setSelectable:YES];
+    [self.subject setFont:[UIFont systemFontOfSize:16]];
     self.subject.text = subject;
     [self.subject setSelectable:NO];
+    /*
     [self.subject sizeToFit];
     [self.subject layoutIfNeeded];
     
@@ -42,19 +49,21 @@
     CGSize headlineViewSize     = self.headlineView.frame.size;
     headlineViewSize.height     = self.subject.frame.size.height + self.regDate.frame.size.height;
     
+    NSLog(@"\n\n======>self.subject.frame: %@", NSStringFromCGRect(self.subject.frame));
+    NSLog(@"headlineViewSize: %@\n\n", NSStringFromCGSize(headlineViewSize));
+    
     [self.headlineView setFrame:headlineViewFrame];
+     */
 }
 
 - (void )updateDetails:(NSString *)details {
     
     [self.contents setSelectable:YES];
     
-    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[details dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    
     self.contents.attributedText = attributedString;
+    [self.contents setFont:[UIFont systemFontOfSize:14]];
     
-    //self.contents.text = details;
     [self.contents setSelectable:NO];
     
     [self.contents sizeToFit];

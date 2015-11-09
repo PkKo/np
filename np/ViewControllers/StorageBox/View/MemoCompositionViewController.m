@@ -61,10 +61,15 @@
     
     [self.transactionObject setTransactionMemo:[self.memo text]];
     if (isNewMemo) {
+        
+        NSLog(@"self.transactionObject.transactionDate: %@", self.transactionObject.transactionDate);
+        
         [[DBManager sharedInstance] saveTransaction:self.transactionObject];
     } else {
         [[DBManager sharedInstance] updateTransaction:self.transactionObject];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REFRESH_BADGES object:nil];
     
     [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.6];
     
