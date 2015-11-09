@@ -20,10 +20,12 @@
 @synthesize pushMenuButton;
 // 신규 입출금 알림 갯수 표시
 @synthesize pushCountLabel;
+@synthesize pushCountBg;
 // 공지사항 선택 버튼
 @synthesize noticeMenuButton;
 // 신규 공지사항 갯수 표시
 @synthesize noticeCountLabel;
+@synthesize noticeCountBg;
 // 알림 내역 add subView 한다
 @synthesize listContentView;
 // 알림 내역이 없는 경우 보여줄 알림
@@ -78,6 +80,54 @@
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
     
+    NSInteger pushCount = [CommonUtil getUnreadCountForBanking];
+    if(pushCount > 99)
+    {
+        [pushCountLabel setText:@"99+"];
+        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x - 10,
+                                            pushCountLabel.frame.origin.y,
+                                            pushCountLabel.frame.size.width + 10,
+                                            pushCountLabel.frame.size.height)];
+        [pushCountBg setFrame:pushCountLabel.frame];
+    }
+    else if (pushCount > 9)
+    {
+        [pushCountLabel setText:[NSString stringWithFormat:@"%d", (int)pushCount]];
+        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x - 7,
+                                            pushCountLabel.frame.origin.y,
+                                            pushCountLabel.frame.size.width + 7,
+                                            pushCountLabel.frame.size.height)];
+        [pushCountBg setFrame:pushCountLabel.frame];
+    }
+    else
+    {
+        [pushCountLabel setText:[NSString stringWithFormat:@"%d", (int)pushCount]];
+    }
+    
+    NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
+    if(noticeCount > 99)
+    {
+        [noticeCountLabel setText:@"99+"];
+        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x - 10,
+                                              noticeCountLabel.frame.origin.y,
+                                              noticeCountLabel.frame.size.width + 10,
+                                              noticeCountLabel.frame.size.height)];
+        [noticeCountBg setFrame:noticeCountLabel.frame];
+    }
+    else if(noticeCount > 9)
+    {
+        [noticeCountLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x - 7,
+                                              noticeCountLabel.frame.origin.y,
+                                              noticeCountLabel.frame.size.width + 7,
+                                              noticeCountLabel.frame.size.height)];
+        [noticeCountBg setFrame:noticeCountLabel.frame];
+    }
+    else
+    {
+        [noticeCountLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+    }
+    
     [self getRecentNoticeRequest];
 }
 
@@ -86,6 +136,25 @@
     [super viewWillAppear:animated];
     
     cellHeight = pushTableView.frame.size.height / 5;
+    
+    bannerInfoView = [BannerInfoView view];
+    [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height)];
+    [bannerView addSubview:bannerInfoView];
+    [bannerInfoView bannerTimerStart];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [bannerInfoView bannerTimerStop];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    [bannerInfoView bannerTimerStop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,7 +187,7 @@
 - (void)getRecentNoticeResponse:(NSDictionary *)response
 {
     NSLog(@"%s, %@", __FUNCTION__, response);
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         if([(NSArray*)[[response objectForKey:@"list"] objectForKey:@"voList"] count] > 0)
         {
@@ -130,7 +199,7 @@
 
 - (void)noticeUpdate
 {
-    [noticeTitleLabel setText:[recentNotice objectForKey:@"SUMR_EXPL"]];
+    [noticeTitleLabel setText:[recentNotice objectForKey:@"BBRD_TINM"]];
 }
 
 #pragma mark - UITableViewDataSource

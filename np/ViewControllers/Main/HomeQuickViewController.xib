@@ -10,12 +10,14 @@
                 <outlet property="bannerView" destination="uBy-b4-OSa" id="LxR-cQ-GUU"/>
                 <outlet property="emptyListView" destination="gur-lg-Bq5" id="4ay-k6-FzD"/>
                 <outlet property="listContentView" destination="UTP-lk-EXK" id="9pV-6n-juW"/>
+                <outlet property="noticeCountBg" destination="TWE-c7-GFm" id="21t-ne-DVj"/>
                 <outlet property="noticeCountLabel" destination="Dt5-2P-R7y" id="zqP-8l-XTz"/>
                 <outlet property="noticeIconView" destination="Nfa-VV-GlG" id="Yhx-PD-KVR"/>
                 <outlet property="noticeMenuButton" destination="rdA-av-q3F" id="nXC-uF-4Zu"/>
                 <outlet property="noticeTableView" destination="CAg-tS-uqN" id="5Ar-kU-4l1"/>
                 <outlet property="noticeTitleLabel" destination="9Zr-qC-FPL" id="IQj-TT-LLf"/>
                 <outlet property="noticeView" destination="sYc-q1-ckd" id="XkZ-AB-1GZ"/>
+                <outlet property="pushCountBg" destination="uyQ-hf-bwx" id="1bM-Yf-36F"/>
                 <outlet property="pushCountLabel" destination="Ua1-ql-2um" id="NVS-WC-OV9"/>
                 <outlet property="pushMenuButton" destination="90M-Za-XZJ" id="U7w-3F-nDH"/>
                 <outlet property="pushTableView" destination="hb5-iQ-6Sj" id="wCF-6E-9o7"/>
@@ -112,9 +114,9 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="uBy-b4-OSa">
-                            <rect key="frame" x="27" y="387" width="267" height="62"/>
+                            <rect key="frame" x="27" y="387" width="267" height="65"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.8784313725490196" green="0.88235294117647056" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -170,12 +172,12 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="TWE-c7-GFm" customClass="CircleView">
-                            <rect key="frame" x="251" y="0.0" width="25" height="18"/>
+                            <rect key="frame" x="251" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.23529411759999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dt5-2P-R7y">
-                            <rect key="frame" x="251" y="0.0" width="25" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dt5-2P-R7y">
+                            <rect key="frame" x="251" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>

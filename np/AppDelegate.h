@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import "BannerInfo.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ECSlidingViewController *slidingViewController;
 @property (strong, nonatomic) NSString *serverKey;
+@property (strong, nonatomic) BannerInfo *bannerInfo;
+@property (assign, nonatomic) NSInteger unreadCountBanking;
+@property (assign, nonatomic) NSInteger unreadCountEtc;
+
 @end
 

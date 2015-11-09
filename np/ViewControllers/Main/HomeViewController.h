@@ -41,6 +41,7 @@ typedef enum HomeViewType
     BOOL isNewData;
     BOOL isAscending;
     BOOL isSearch;
+    BOOL isMoreList;
 }
 
 @property (assign, nonatomic) HomeViewType viewType;
@@ -52,6 +53,11 @@ typedef enum HomeViewType
 @property (strong, nonatomic) HomeEtcTimeLineView *etcTimeLineView;
 // 실제 내용을 보여줄 뷰
 @property (strong, nonatomic) IBOutlet UIView *mMainContentView;
+// 스크롤 위로 버튼
+@property (strong, nonatomic) IBOutlet UIButton *scrollMoveTopButton;
 
 - (void)refreshData:(BOOL)newData;
+- (IBAction)scrollToTop:(id)sender;
+- (void)showScrollTopButton;
+- (void)hideScrollTopButton;
 @end

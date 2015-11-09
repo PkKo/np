@@ -40,6 +40,7 @@
 @synthesize datePickerView;
 @synthesize datePicker;
 @synthesize isSearchResult;
+@synthesize isMoreList;
 
 @synthesize storageCountLabel;
 
@@ -64,6 +65,7 @@
     mTimeLineSection = section;
     mTimeLineDic = data;
     listSortType = YES;
+    isMoreList = YES;
     deleteIdList = [[NSMutableArray alloc] init];
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     [self refreshBadges];
@@ -106,20 +108,20 @@
             }
         }
         mTimeLineDic = reverseDic;
-        
-        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
-        if([firstSectionArray count] >= 2)
-        {
-            bannerIndex = 1;
-        }
-        else if([firstSectionArray count] == 1)
-        {
-            bannerIndex = 0;
-        }
-        else
-        {
-            bannerIndex = 0;
-        }
+    }
+    
+    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+    if([firstSectionArray count] >= 2)
+    {
+        bannerIndex = 1;
+    }
+    else if([firstSectionArray count] == 1)
+    {
+        bannerIndex = 0;
+    }
+    else
+    {
+        bannerIndex = 0;
     }
     
     if([mTimeLineSection count] == 0)
@@ -636,11 +638,24 @@
     
     if(inboxData == nil)
     {
-        
-        TimelineBannerView *bannerView = [TimelineBannerView view];
         UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, TIMELINE_BANNER_HEIGHT)];
+        TimelineBannerView *bannerView = [TimelineBannerView view];
+        [bannerView setFrame:CGRectMake(0, TIMELINE_BANNER_HEIGHT - bannerView.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
+        NSLog(@"%s, banner frame = %f", __FUNCTION__, bannerView.frame.size.height);
         [cell addSubview:bannerView];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        if(bannerInfoView == nil)
+        {
+            bannerInfoView = [BannerInfoView view];
+        }
+        else
+        {
+            [bannerInfoView bannerTimerStop];
+        }
+        [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+        [bannerView.bannerContentView addSubview:bannerInfoView];
+        [bannerInfoView bannerTimerStart];
         
         LoginUtil *loginUtil = [[LoginUtil alloc] init];
         [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
@@ -822,9 +837,26 @@
             if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
-                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
+                if(bannerInfoView == nil)
+                {
+                    bannerInfoView = [BannerInfoView view];
+                }
+                else
+                {
+                    [bannerInfoView bannerTimerStop];
+                }
+                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                 [cell addSubview:bannerView];
+                
+                [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+                [bannerView.bannerContentView addSubview:bannerInfoView];
+                [bannerInfoView bannerTimerStart];
+            }
+            
+            if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
+            {
+                [cell.upperLine setHidden:YES];
             }
             
             CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
@@ -902,9 +934,26 @@
             if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
-                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, bannerView.frame.size.width, bannerView.frame.size.height)];
+                if(bannerInfoView == nil)
+                {
+                    bannerInfoView = [BannerInfoView view];
+                }
+                else
+                {
+                    [bannerInfoView bannerTimerStop];
+                }
+                [bannerView setFrame:CGRectMake(0, cell.frame.size.height, cell.frame.size.width, bannerView.frame.size.height)];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                 [cell addSubview:bannerView];
+                
+                [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+                [bannerView.bannerContentView addSubview:bannerInfoView];
+                [bannerInfoView bannerTimerStart];
+            }
+            
+            if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
+            {
+                [cell.upperLine setHidden:YES];
             }
             
             return cell;
@@ -917,6 +966,7 @@
 {
     if (isLoading) return;
     if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -930,7 +980,7 @@
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
             mTimeLineTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     }
-    else if (isDragging && scrollView.contentOffset.y < 0)
+    else if (isDragging && scrollView.contentOffset.y <= 0)
     {
         // Update the arrow direction and label
         [UIView animateWithDuration:0.25 animations:^{
@@ -942,6 +992,18 @@
                 refreshLabel.text = textPull;
             }
         }];
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
+        }
+    }
+    else if(isDragging && scrollView.contentOffset.y > 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
+        {
+            [delegate performSelector:@selector(showScrollTopButton) withObject:nil];
+        }
     }
 }
 
@@ -949,7 +1011,9 @@
 {
     if(isLoading) return;
     if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = NO;
+    
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {
         // Released above the header
@@ -960,9 +1024,20 @@
 //        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
 //        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
         {
             [delegate refreshData:NO];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
 }
@@ -1129,6 +1204,15 @@
         default:
             return NO;
             break;
+    }
+}
+
+- (void)bannerTimerStop
+{
+    if(bannerInfoView != nil)
+    {
+        [bannerInfoView bannerTimerStop];
+        bannerInfoView = nil;
     }
 }
 @end

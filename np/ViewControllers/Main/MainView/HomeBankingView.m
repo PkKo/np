@@ -41,6 +41,7 @@
 @synthesize searchTypeAccountLabel;
 @synthesize searchTypeInboxLabel;
 @synthesize isSearchResult;
+@synthesize isMoreList;
 
 @synthesize storageCountLabel;
 
@@ -63,6 +64,7 @@
     timeLineDic = data;
     listSortType = YES;
     isDeleteMode = NO;
+    isMoreList = YES;
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     if(pinnedIdList == nil)
     {
@@ -834,6 +836,8 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -847,7 +851,7 @@
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
             bankingListTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     }
-    else if (isDragging && scrollView.contentOffset.y < 0)
+    else if (isDragging && scrollView.contentOffset.y <= 0)
     {
         // Update the arrow direction and label
         [UIView animateWithDuration:0.25 animations:^{
@@ -859,12 +863,26 @@
                 refreshLabel.text = textPull;
             }
         }];
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
+        }
+    }
+    else if(isDragging && scrollView.contentOffset.y > 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
+        {
+            [delegate performSelector:@selector(showScrollTopButton) withObject:nil];
+        }
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (isLoading) return;
+    if(isDeleteMode) return;
+    if(isSearchResult) return;
     isDragging = NO;
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {
@@ -878,6 +896,17 @@
         if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
         {
             [delegate refreshData:NO];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= 0)
+    {
+        if(delegate != nil && [delegate respondsToSelector:@selector(hideScrollTopButton)])
+        {
+            [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
 }

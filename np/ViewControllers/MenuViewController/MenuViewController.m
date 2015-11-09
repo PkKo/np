@@ -19,6 +19,7 @@
 #import "CustomerCenterViewController.h"
 #import "AppZoneViewController.h"
 #import "SplashViewController.h"
+#import "CertificateMenuViewController.h"
 
 #define MENU_CELL_HEIGHT    37
 #define TABLE_VIEW_HEADER_HEIGHT    23
@@ -52,6 +53,7 @@
   @[@"알림 설정", @"icon_notice_setting_01_dft.png", @"icon_notice_setting_01_on.png"],
   @[@"환경 설정", @"icon_settings_01_dft.png", @"icon_settings_01_on.png"],
   @[@"고객센터", @"icon_customer_01_dft.png", @"icon_customer_01_on.png"],
+  @[@"공인인증센터", @"icon_certificate_01_dft.png", @"icon_certificate_01_on.png"],
   @[@"NH APPZONE", @"icon_app_zone_01_dft.png", @"icon_app_zone_01_on.png"], nil];
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT)];
@@ -61,7 +63,7 @@
     [menuTableView setTableFooterView:footerView];
     
     MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
-    [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, bottomMenu.frame.size.height)];
+    [bottomMenu setFrame:CGRectMake(0, 0, bottomMenuView.frame.size.width, bottomMenu.frame.size.height)];
     [bottomMenuView addSubview:bottomMenu];
     
     if([[[LoginUtil alloc] init] isLoggedIn])
@@ -145,9 +147,103 @@
     [cell.menuTitleImg setImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:1]]];
     [cell.menuTitleImg setHighlightedImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:2]]];
     
-    if (indexPath.row == 7)
+    if (indexPath.row == 8)
     {
         [cell.menuSeparateLine setHidden:YES];
+    }
+    
+    if(indexPath.row == 0)
+    {
+        NSInteger totalCount = [CommonUtil getUnreadCountForBanking] + [CommonUtil getUnreadCountForEtc];
+        // 전체 목록 UnreadCount
+        if(totalCount > 99)
+        {
+            [cell.countLabel setText:@"99+"];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 10,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else if(totalCount > 9)
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 7,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
+        }
+
+        if(totalCount > 9)
+        {
+            
+        }
+    }
+    else if(indexPath.row == 1)
+    {
+        // 입출금 목록 UnreadCount
+        NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
+        
+        if(noticeCount > 99)
+        {
+            [cell.countLabel setText:@"99+"];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 10,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else if(noticeCount > 9)
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 7,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+        }
+    }
+    else if(indexPath.row == 2)
+    {
+        // 기타 목록 UnreadCount
+        NSInteger noticeCount = [CommonUtil getUnreadCountForBanking];
+        
+        if(noticeCount > 99)
+        {
+            [cell.countLabel setText:@"99+"];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 10,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else if(noticeCount > 9)
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
+                                                 cell.countLabel.frame.origin.y,
+                                                 cell.countLabel.frame.size.width + 7,
+                                                 cell.countLabel.frame.size.height)];
+            [cell.countBgView setFrame:cell.countLabel.frame];
+        }
+        else
+        {
+            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+        }
+    }
+    else
+    {
+        [cell.countLabel setHidden:YES];
+        [cell.countBgView setHidden:YES];
     }
     
     return cell;
@@ -225,7 +321,12 @@
                 pushViewController = [[CustomerCenterViewController alloc] initWithNibName:@"CustomerCenterViewController" bundle:nil];
                 break;
             }
-            case 7: // NH APPZONE
+            case 7: // 공인인증센터
+            {
+                pushViewController = [[CertificateMenuViewController alloc] initWithNibName:@"CertificateMenuViewController" bundle:nil];
+                break;
+            }
+            case 8: // NH APPZONE
             {
                 pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
                 break;

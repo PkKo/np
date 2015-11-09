@@ -14,7 +14,7 @@
 // server url 정보
 #ifdef DEV_MODE
 // 개발서버
-#define SERVER_URL          @"https://218.239.251.103:39190/servlet/"
+#define SERVER_URL          @"https://218.239.251.103:39190/"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 // cloud server
@@ -69,6 +69,7 @@
 #define AMOUNT_FONT_SIZE        20.0f
 #define IPHONE_FIVE_FRAME_HEIGHT    568
 
+#define TIMELINE_LOAD_COUNT     20
 #define TIMELINE_EVENT_TYPE     @"event_type"
 #define TIMELINE_ACCOUNT_NUMBER @"account_number"
 #define TIMELINE_TRN_AMT        @"trn_amt"
@@ -103,13 +104,13 @@
 
 #pragma mark 앱버전 체크
 // 앱 버전 체크
-#define REQUEST_APP_VERSION         @"EFPU0000R.cmd"
+#define REQUEST_APP_VERSION         @"servlet/EFPU0000R.cmd"
 #define REQUEST_APP_VERSION_UUID    @"uuid"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
 
 #pragma mark 공인인증서 인증
 // 공인인증서 인증
-#define REQUEST_CERT                    @"EFPU1001R.cmd"
+#define REQUEST_CERT                    @"servlet/EFPU1001R.cmd"
 #define REQUEST_CERT_LOGIN_TYPE         @"REQ_LOGINTYPE"
 #define REQUEST_CERT_SSLSIGN_TBS        @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
@@ -128,7 +129,7 @@
 
 #pragma mark 계좌 인증
 // 계좌 인증
-#define REQUEST_ACCOUNT             @"EFPU1002R.cmd"
+#define REQUEST_ACCOUNT             @"servlet/EFPU1002R.cmd"
 // 계좌번호
 #define REQUEST_ACCOUNT_NUMBER      @"account_number"
 // 계좌 비밀번호
@@ -137,12 +138,12 @@
 #define REQUEST_ACCOUNT_BIRTHDAY    @"user_birthday"
 
 #pragma mark 휴대폰 인증번호 발송
-#define REQUEST_PHONE_AUTH          @"EFPUW031001.cmd"
+#define REQUEST_PHONE_AUTH          @"servlet/EFPUW031001.cmd"
 #define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
 #define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
 
 #pragma mark 계좌 알림 옵션 조회
-#define REQUEST_NOTI_OPTION_SEARCH          @"EFPUW022001.cmd"
+#define REQUEST_NOTI_OPTION_SEARCH          @"servlet/EFPUW022001.cmd"
 // 주민등록번호
 #define REQUEST_NOTI_OPTION_SEARCH_RLNO     @"resident_number"
 // 계좌번호
@@ -164,11 +165,11 @@
 
 #pragma mark 계좌 알림 옵션 설정
 // 가입시
-#define REQUEST_NOTI_OPTION                 @"EFPU1009R.cmd"
+#define REQUEST_NOTI_OPTION                 @"servlet/EFPU1009R.cmd"
 // 기존 계좌 알림 수정
-#define REQUEST_NOTI_OPTION_SET             @"EFPUW022004.cmd"
+#define REQUEST_NOTI_OPTION_SET             @"servlet/EFPUW022004.cmd"
 // 신규 계좌 추가 알림 설정
-#define REQUEST_NOTI_OPTION_NEW_SET         @"EFPUD020001.cmd"
+#define REQUEST_NOTI_OPTION_NEW_SET         @"servlet/EFPUD020001.cmd"
 //////////////////////////////////////////////////////////////////
 #define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
 #define REQUEST_NOTI_OPTION_RECEIPTS_ID     @"receipts_payment_id"
@@ -185,26 +186,28 @@
 #define REQUEST_NOTI_OPTION_NOTI_TIME_THREE @"noti_time3"
 ///////////////////////////////////////////////////////////////////
 // 계좌 삭제 요청
-#define REQUEST_NOTI_ACCOUNT_DELETE         @"EFPUD030001.cmd"
+#define REQUEST_NOTI_ACCOUNT_DELETE         @"servlet/EFPUD030001.cmd"
 
 #pragma mark 환율 설정
 // 환율 국가 목록
-#define REQUEST_EXCHANGE_CURRENCY_ALL_COUNTRY           @"EFPUW023004L.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_ALL_COUNTRY           @"servlet/EFPUW023004L.cmd"
 // 푸시서비스 가입한 환율 서비스 목록
-#define REQUEST_EXCHANGE_CURRENCY_REG_COUNTRY           @"EFPUW023001L.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_REG_COUNTRY           @"servlet/EFPUW023001L.cmd"
 // 대상 국가 옵션 조회
-#define REQUEST_EXCHANGE_CURRENCY_COUNTRY_OPION         @"EFPUW023001S.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_COUNTRY_OPION         @"servlet/EFPUW023001S.cmd"
 #define REQUEST_EXCHANGE_CURRENCY_NATION_ID             @"nation_id"
 #define RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID     @"exchange_rate_id"
 // 대상 국가 추가
-#define REQUEST_EXCHANGE_CURRENCY_ADD_COUNTRY           @"EFPUW023005A.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_ADD_COUNTRY           @"servlet/EFPUW023005A.cmd"
 // 대상 국가 옵션 변경
-#define REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION         @"EFPUW023006E.cmd"
+#define REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION         @"servlet/EFPUW023006E.cmd"
 // 환율 알림 취소
-#define REQEUST_EXCHANGE_CURRENCY_COUNTRY_DELETE        @"EFPUW023003S.cmd"
+#define REQEUST_EXCHANGE_CURRENCY_COUNTRY_DELETE        @"servlet/EFPUW023003S.cmd"
 
 #pragma mark 최근 공지사항 1건
-#define REQUEST_RECENT_NOTICE       @"SBAB1010First.cmd"
+#define REQUEST_RECENT_NOTICE       @"servlet/EFPU2013R.cmd"
+#pragma mark 배너정보 조회
+#define REQUEST_BANNER_INFO         @"servlet/EFPU3011R.cmd"
 
 #pragma mark - 가입 플로우 관련
 // 인증방식 저장(공인인증서 or 계좌)
@@ -227,9 +230,9 @@
 #define TIME_ACSENDING_ORDER    @"과거순"
 #define TIME_DECSENDING_ORDER   @"최신순"
 
-#define REQUEST_LOGIN_CERT                               @"EFPU1011R.cmd"
-#define REQUEST_LOGIN_ACCOUNT                            @"EFPU1012R.cmd"
-#define REQUEST_LOGIN_PINPAT                             @"EFPU1013R.cmd"
+#define REQUEST_LOGIN_CERT                               @"servlet/EFPU1011R.cmd"
+#define REQUEST_LOGIN_ACCOUNT                            @"servlet/EFPU1012R.cmd"
+#define REQUEST_LOGIN_PINPAT                             @"servlet/EFPU1013R.cmd"
 
 #define NOTIFICATION_REFRESH_BADGES                 @"notificationRefreshBadges"
 

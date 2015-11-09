@@ -24,6 +24,8 @@
 
 @synthesize mMainContentView;
 
+@synthesize scrollMoveTopButton;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,6 +33,7 @@
     sectionList = [[NSMutableArray alloc] init];
     timelineMessageList = [[NSMutableDictionary alloc] init];
     isSearch = NO;
+    isMoreList = YES;
     
     if(viewType == TIMELINE)
     {
@@ -65,10 +68,10 @@
                 AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
                 //            reqData.accountNumberList = @[@"1111-22-333333"];
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                //                reqData.queryType = @"A";
-                reqData.queryType = @"1,2,3,4,5,6";
+                reqData.queryType = @"A";
+//                reqData.queryType = @"1,2,3,4,5,6";
                 reqData.ascending = YES;
-                reqData.size = 20;
+                reqData.size = TIMELINE_LOAD_COUNT;
                 /*
                  필수 설정값
                  */
@@ -87,7 +90,7 @@
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
                 reqData.queryType = @"1,2";
                 reqData.ascending = YES;
-                reqData.size = 20;
+                reqData.size = TIMELINE_LOAD_COUNT;
                 /*
                  필수 설정값
                  */
@@ -104,9 +107,9 @@
             {
                 AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                reqData.queryType = @"3,4,5,6";
+                reqData.queryType = @"E";
                 reqData.ascending = YES;
-                reqData.size = 20;
+                reqData.size = TIMELINE_LOAD_COUNT;
                 /*
                  필수 설정값
                  */
@@ -127,6 +130,16 @@
                 break;
             }
         }
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if(viewType == TIMELINE)
+    {
+        [mTimeLineView bannerTimerStop];
     }
 }
 
@@ -155,6 +168,8 @@
                 mTimeLineView.mTimeLineDic = timelineMessageList;
                 [mTimeLineView setIsSearchResult:isSearch];
                 isSearch = NO;
+                [mTimeLineView setIsMoreList:isMoreList];
+                isMoreList = YES;
                 [mTimeLineView refreshData];
                 [mTimeLineView.mTimeLineTable reloadData];
             }
@@ -179,6 +194,8 @@
                 bankingView.timeLineDic = timelineMessageList;
                 [bankingView setIsSearchResult:isSearch];
                 isSearch = NO;
+                [bankingView setIsMoreList:isMoreList];
+                isMoreList = YES;
                 [bankingView refreshData];
                 [bankingView.bankingListTable reloadData];
             }
@@ -201,6 +218,8 @@
                 etcTimeLineView.timelineDic = timelineMessageList;
                 [etcTimeLineView setIsSearchResult:isSearch];
                 isSearch = NO;
+                [etcTimeLineView setIsMoreList:isMoreList];
+                isMoreList = YES;
                 [etcTimeLineView refreshData];
                 [etcTimeLineView.timelineTableView reloadData];
             }
@@ -243,23 +262,23 @@
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = !newData;
-    reqData.size = 20;
+    reqData.size = TIMELINE_LOAD_COUNT;
     
     switch (viewType)
     {
         case TIMELINE:
         {
-            reqData.queryType = @"1,2,3,4,5,6";
+            reqData.queryType = @"A";
             break;
         }
         case BANKING:
         {
-            reqData.queryType = @"1,2";
+            reqData.queryType = @"IO";
             break;
         }
         case OTHER:
         {
-            reqData.queryType = @"3,4,5,6";
+            reqData.queryType = @"E";
             break;
         }
         default:
@@ -514,6 +533,11 @@
                 
                 for(NHInboxMessageData *inboxData in messageList)
                 {
+                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    {
+                        inboxData.inboxType = @"4";
+                        inboxData.stickerCode = 4;
+                    }
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
                     
                     if([dateString isEqualToString:todayString])
@@ -556,6 +580,12 @@
                 
                 for(NHInboxMessageData *inboxData in messageList)
                 {
+                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    {
+                        inboxData.inboxType = @"4";
+                        inboxData.stickerCode = 4;
+                    }
+                    
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
                     
                     NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
@@ -612,6 +642,12 @@
                 // 신규 목록
                 for(NHInboxMessageData *inboxData in messageList)
                 {
+                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    {
+                        inboxData.inboxType = @"4";
+                        inboxData.stickerCode = 4;
+                    }
+                    
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
                     
                     NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
@@ -631,6 +667,11 @@
             }
             else
             {
+                if ([messageList count] == 0)
+                {
+                    isMoreList = NO;
+                }
+                
                 // 과거 목록
                 if(viewType == TIMELINE)
                 {
@@ -638,6 +679,12 @@
                     
                     for(NHInboxMessageData *inboxData in messageList)
                     {
+                        if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                        {
+                            inboxData.inboxType = @"4";
+                            inboxData.stickerCode = 4;
+                        }
+                        
                         NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
                         
                         if([dateString isEqualToString:todayString])
@@ -672,6 +719,12 @@
                 {
                     for(NHInboxMessageData *inboxData in messageList)
                     {
+                        if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                        {
+                            inboxData.inboxType = @"4";
+                            inboxData.stickerCode = 4;
+                        }
+                        
                         NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
                         
                         NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
@@ -696,6 +749,8 @@
         }
         
         [self performSelector:@selector(makeTimelineView) withObject:nil];
+        
+//        [self sendReadStatus];
     }
 }
 
@@ -726,6 +781,18 @@
     }
     
 
+}
+
+- (void)sendReadStatus
+{
+    NHInboxMessageData *data = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject];
+    
+    [IBInbox requestReadMessageWithMsgKey:@[data.serverMessageKey] readMethod:1];
+}
+
+- (void)readMessage:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys
+{
+    NSLog(@"%s, %d, keys = %@", __FUNCTION__, success, sMsgKeys);
 }
 
 - (void)addedSticker:(BOOL)success
@@ -816,5 +883,60 @@
             [etcTimeLineView.timelineTableView reloadData];
         }*/
     }
+}
+
+#pragma mark - 테이블리스트 상단 이동 버튼
+- (IBAction)scrollToTop:(id)sender
+{
+    switch (viewType)
+    {
+        case TIMELINE:
+            if(mTimeLineView != nil)
+            {
+                [mTimeLineView.mTimeLineTable setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+        case BANKING:
+            if(bankingView != nil)
+            {
+                [bankingView.bankingListTable setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+        case OTHER:
+            if(etcTimeLineView != nil)
+            {
+                [etcTimeLineView.timelineTableView setContentOffset:CGPointZero animated:YES];
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self hideScrollTopButton];
+}
+
+- (void)showScrollTopButton
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setHidden:NO];
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width - scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }completion:nil];
+}
+
+- (void)hideScrollTopButton
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [scrollMoveTopButton setHidden:YES];
+                     }];
 }
 @end

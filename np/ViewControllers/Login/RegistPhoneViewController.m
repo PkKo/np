@@ -32,6 +32,7 @@
 @synthesize descLabelOne;
 @synthesize descLabelTwo;
 @synthesize descLabelThree;
+@synthesize bottomDescView;
 
 - (void)viewDidLoad
 {
@@ -78,6 +79,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    orgBottomRect = bottomDescView.frame;
+    [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
+                                        phoneAuthNumInput.frame.origin.y,
+                                        bottomDescView.frame.size.width,
+                                        bottomDescView.frame.size.height)];
 }
 
 #pragma mark - UIButtonAction
@@ -181,6 +193,9 @@
  */
 - (void)authNumberRequest
 {
+    [phoneAuthNumInput setHidden:NO];
+    [bottomDescView setFrame:CGRectMake(orgBottomRect.origin.x, orgBottomRect.origin.y, bottomDescView.frame.size.width, bottomDescView.frame.size.height)];
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_PHONE_AUTH];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];

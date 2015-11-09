@@ -33,13 +33,45 @@
     [addAccountButton.layer setBorderColor:[UIColor colorWithRed:38.0f/255.0f green:156.0f/255.0f blue:255.0f/255.0f alpha:1.0f].CGColor];
     [addAccountButton.layer setBorderWidth:1.0f];
     
-    [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@000님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
+    [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
+    
+    [self getBannerInfoRequest];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 배너정보 가져오기
+- (void)getBannerInfoRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_BANNER_INFO];
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(getBannerInfoResponse:)];
+    [req requestUrl:url bodyString:@""];
+}
+
+- (void)getBannerInfoResponse:(NSDictionary *)response
+{
+    NSLog(@"%s, %@", __FUNCTION__, response);
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        BannerInfo *bannerInfo = [[BannerInfo alloc] init];
+        bannerInfo.bannerSeq        = [response objectForKey:@"banner_seq"];
+        bannerInfo.createDate       = [response objectForKey:@"create_date"];
+        bannerInfo.editDate         = [response objectForKey:@"edit_date"];
+        bannerInfo.imagePath        = [response objectForKey:@"image_path"];
+        bannerInfo.linkInUrl        = [response objectForKey:@"link_in_url"];
+        bannerInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
+        bannerInfo.linkType         = [response objectForKey:@"link_type"];
+        bannerInfo.viewEndDate      = [response objectForKey:@"view_enddate"];
+        bannerInfo.viewStartDate    = [response objectForKey:@"view_startdate"];
+        bannerInfo.viewType         = [response objectForKey:@"view_type"];
+        
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
+    }
 }
 
 /**

@@ -56,4 +56,8 @@ typedef enum StickerType
 + (NSString *)getFormattedTodayString:(NSString *)format;
 + (NSString *)getFormattedDateStringWithIndex:(NSString *)format indexDay:(NSInteger)indexDay;
 + (NSString *)getFormattedDateStringWithDate:(NSString *)format date:(NSDate *)date;
++ (void)setUnreadCountForBanking:(NSInteger)count;
++ (NSInteger)getUnreadCountForBanking;
++ (void)setUnreadCountForEtc:(NSInteger)count;
++ (NSInteger)getUnreadCountForEtc;
 @end

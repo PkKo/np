@@ -17,8 +17,9 @@
 #import "LoginAccountVerificationViewController.h"
 #import "DrawPatternLockViewController.h"
 #import "LoginSimpleVerificationViewController.h"
-
+#import "ServiceInfoViewController.h"
 #import "RegistCompleteViewController.h"
+#import "BannerInfo.h"
 
 @interface SplashViewController ()
 
@@ -26,7 +27,8 @@
 
 @implementation SplashViewController
 
-@synthesize webView;
+@synthesize loadingTextLabel;
+@synthesize loadingProgressBar;
 
 - (void)viewDidLoad
 {
@@ -53,10 +55,52 @@
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
 //    [self htmlRequestTest];
+//    [self ipsTest];
+    /*
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
+    slidingViewController.topViewController = vc;
+    
+    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;*/
 }
 
+- (void)getUnreadMessageCountFromIPS
+{
+//    [IBNgmService registerUserWithAccountId:@"151015104128899" verifyCode:[@"151015104128899" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [loadingProgressBar setProgress:0.6f animated:YES];
+    
+    [IBInbox loadWithListener:self];
+    [IBInbox requestInboxCategoryInfo];
+}
+
+- (void)loadedInboxCategoryList:(NSArray *)categoryList
+{
+    NSLog(@"%s, %@", __FUNCTION__, categoryList);
+    [loadingProgressBar setProgress:0.9f animated:YES];
+    
+    for(InboxCategotyData *data in categoryList)
+    {
+        if(data.categoryId == 1)
+        {
+            [CommonUtil setUnreadCountForBanking:data.unreadCount];
+        }
+        else if (data.categoryId == 2)
+        {
+            [CommonUtil setUnreadCountForEtc:data.unreadCount];
+        }
+    }
+    
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+}
+
+#pragma mark - 세션 생성 init 및 앱 버전 확인
 - (void)appVersionCheckRequest
 {
+    [loadingProgressBar setProgress:0.2f animated:YES];
+    
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[CommonUtil getDeviceUUID] forKey:REQUEST_APP_VERSION_UUID];
     [reqBody setObject:[CommonUtil getAppVersion] forKey:REQUEST_APP_VERSION_APPVER];
@@ -71,49 +115,111 @@
 
 - (void)appVersionCheckResponse:(NSDictionary *)response
 {
-//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-//    NSLog(@"%s, %@", __FUNCTION__, cookies);
-    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
+        [loadingProgressBar setProgress:0.3f animated:YES];
+        
         ((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey = [response objectForKey:@"encodeKey"];
-//        for (NSHTTPCookie *cookie in cookies)
-//        {
-//            [[NSUserDefaults standardUserDefaults] setObject:cookie.value forKey:cookie.name];
-//        }
-//        [self sessionTestRequest];
-//        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-//        for (NSHTTPCookie *cookie in [storage cookies])
-//        {
-//            [storage deleteCookie:cookie];
-//        }
+        NSString *terms1Ver = [response objectForKey:@"terms1Ver"];
+        NSString *terms2Ver = [response objectForKey:@"terms2Ver"];
+        
+        if(terms1Ver != nil)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:terms1Ver forKey:@"terms1Ver"];
+        }
+        if(terms2Ver != nil)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:terms2Ver forKey:@"terms2Ver"];
+        }
+        
+        NSString *updateYN = [response objectForKey:@"updateNotiYn"];
+        if([updateYN isEqualToString:@"Y"])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"최신버전 업데이트가 있습니다.\n업데이트 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+            [alertView setTag:1100];
+            [alertView show];
+        }
+        else if([updateYN isEqualToString:@"F"])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"최신버전 업데이트가\n필요합니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView setTag:1101];
+            [alertView show];
+        }
+        else
+        {
+            [self getBannerInfoRequest];
+        }
     }
     else
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
-    
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 
 - (void)htmlRequestTest
 {
-    NSData *webData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"]];
-    [webView setDelegate:self];
-    [webView loadData:webData MIMEType:@"text/html" textEncodingName:@"euc-kr" baseURL:[NSURL URLWithString:@""]];
+    NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"] encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSKorean) error:nil];
+    NSLog(@"%s, string = %@", __FUNCTION__, string);
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)mwebView
+#pragma mark - 위변조 체크
+
+#pragma mark - 배너정보 가져오기
+- (void)getBannerInfoRequest
 {
-    NSString *webString = [mwebView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-    webString = [webString stringByReplacingOccurrencesOfString:@"<html>" withString:@""];
-    webString = [webString stringByReplacingOccurrencesOfString:@"<body>" withString:@""];
-    webString = [webString stringByReplacingOccurrencesOfString:@"</body>" withString:@""];
-    webString = [webString stringByReplacingOccurrencesOfString:@"</html>" withString:@""];
-    webString = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"euc-kr\"?>%@", webString];
-        NSLog(@"%s, string = %@", __FUNCTION__, webString);
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[webString dataUsingEncoding:NSUTF8StringEncoding]];
+    [loadingProgressBar setProgress:0.5f animated:YES];
+    
+    // temp
+    NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
+    
+    if(isUser != nil && [isUser isEqualToString:@"Y"])
+    {
+        [self getUnreadMessageCountFromIPS];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }
+    
+    /*
+    NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
+    
+    if(isUser != nil && [isUser isEqualToString:@"Y"])
+    {
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_BANNER_INFO];
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(getBannerInfoResponse:)];
+        [req requestUrl:url bodyString:@""];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }*/
+}
+
+- (void)getBannerInfoResponse:(NSDictionary *)response
+{
+    NSLog(@"%s, %@", __FUNCTION__, response);
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        BannerInfo *bannerInfo = [[BannerInfo alloc] init];
+        bannerInfo.bannerSeq        = [response objectForKey:@"banner_seq"];
+        bannerInfo.createDate       = [response objectForKey:@"create_date"];
+        bannerInfo.editDate         = [response objectForKey:@"edit_date"];
+        bannerInfo.imagePath        = [response objectForKey:@"image_path"];
+        bannerInfo.linkInUrl        = [response objectForKey:@"link_in_url"];
+        bannerInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
+        bannerInfo.linkType         = [response objectForKey:@"link_type"];
+        bannerInfo.viewEndDate      = [response objectForKey:@"view_enddate"];
+        bannerInfo.viewStartDate    = [response objectForKey:@"view_startdate"];
+        bannerInfo.viewType         = [response objectForKey:@"view_type"];
+        
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
+    }
+    
+//    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    [self getUnreadMessageCountFromIPS];
 }
 
 - (void)didFailWithError:(NSError *)error
@@ -139,7 +245,6 @@
 - (void)setMainViewController
 {
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    
     UIViewController *vc = nil;
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
@@ -169,7 +274,8 @@
     else
     {
         // 가입시작
-        vc = [[RegistAccountViewController alloc] init];
+        vc = [[ServiceInfoViewController alloc] init];
+//        vc = [[RegistAccountViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
      
@@ -184,6 +290,23 @@
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 1100)
+    {
+        if(buttonIndex == BUTTON_INDEX_OK)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+        }
+        [self getBannerInfoRequest];
+    }
+    else if([alertView tag] == 1101)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+    }
 }
 
 @end
