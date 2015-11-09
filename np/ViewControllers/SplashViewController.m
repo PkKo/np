@@ -63,7 +63,7 @@
     slidingViewController.topViewController = vc;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;*/
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;//*/
 }
 
 - (void)getUnreadMessageCountFromIPS
