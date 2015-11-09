@@ -99,7 +99,7 @@
         
         startLocation   = (int)subRangeStart.location + (int)element.length;
         elementLength   = (int)subRangeEnd.location - startLocation;
-        article.regDate = [NSString stringWithFormat:@"%@", [dataString substringWithRange:NSMakeRange(startLocation, elementLength)]];
+        article.regDate = [[NSString stringWithFormat:@"%@", [dataString substringWithRange:NSMakeRange(startLocation, elementLength)]] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         
         //contents
         element         = @"<contents><![CDATA[";
@@ -140,7 +140,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"\n\n\n\n\n=====>%s - indexPath.row: %d", __func__, indexPath.row);
     
     static NSString *simpleTableIdentifier = @"MyArticleTableViewCell";
     
@@ -148,7 +147,6 @@
     ArticleObject * article;
     
     if (cell == nil) {
-        NSLog(@"********init cell");
         NSArray *nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArticleTableViewCell" owner:self options:nil];
         cell            = (ArticleTableViewCell *)[nibArr objectAtIndex:0];
         
@@ -156,13 +154,12 @@
     cell.delegate           = self;
     article                 = [articles objectAtIndex:[indexPath row]];
     cell.regDate.text       = article.regDate;
-    
-    NSLog(@"article.imgPath: %@", article.imgPath);
-    
+    cell.headline.text      = article.subject;
+    /*
     [cell.subject setSelectable:YES];
     cell.subject.text = article.subject;
     [cell.subject setSelectable:NO];
-    
+    */
     if (article.isDetailsShown) {
         
         if (article.imgPath) {
@@ -175,13 +172,9 @@
         [cell updateSubject:article.subject];
         [cell updateDetails:article.contents];
         article.cellSize        = cell.frame.size;
-        NSLog(@"article.cellSize: %@", NSStringFromCGSize(article.cellSize));
     }
     
-    cell.detailsView.hidden = !article.isDetailsShown;
-    
-    
-    NSLog(@"%d. cell.subject.text: %@", indexPath.row, cell.subject.text);
+    [cell hideDetailsView:!article.isDetailsShown];
     
     return cell;
 }
@@ -197,52 +190,37 @@
     return 77;
     
 }
-/*
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0) {
-    NSLog(@"%s", __func__);
-    
-    
-    return 80;
-}
-*/
+
 #pragma mark - Details
 - (void)showDetails:(BOOL)isShown ofDetailsView:(UIView *)detailsView {
     
-    NSLog(@"%s - shown: %d", __func__, isShown);
+    [self startIndicator];
+    [self performSelector:@selector(showDetails:) withObject:@[[NSNumber numberWithBool:isShown], detailsView] afterDelay:0.07];
+}
+
+- (void)showDetails:(NSArray *)detailsViewInfo {
+    
+    BOOL    isShown         = [(NSNumber *)[detailsViewInfo objectAtIndex:0] boolValue];
+    UIView * detailsView    = (UIView *)[detailsViewInfo objectAtIndex:1];
     
     for (ArticleObject * article in articles) {
         [article setIsDetailsShown:NO];
     }
     
     if (openCell) {
-        NSIndexPath     * openCellIndexPath = [self.articleTableView indexPathForCell:openCell];
-        NSLog(@"hide view >>>openCellIndexPath.row:%d", openCellIndexPath.row);
-        [openCell.detailsView setHidden:YES];
+        [openCell hideDetailsView:YES];
         openCell = nil;
     }
     
     if (isShown) {
+        
         if ([detailsView.superview.superview isKindOfClass:[ArticleTableViewCell class]]) {
             
-            ArticleTableViewCell * cell      = (ArticleTableViewCell*)detailsView.superview.superview;
-            NSIndexPath     * indexPath = [self.articleTableView indexPathForCell:cell];
-            NSLog(@"--->indexPath.row:%d", indexPath.row);
+            ArticleTableViewCell * cell     = (ArticleTableViewCell*)detailsView.superview.superview;
+            NSIndexPath     * indexPath     = [self.articleTableView indexPathForCell:cell];
             
             ArticleObject * selectedArticle = [articles objectAtIndex:indexPath.row];
             [selectedArticle setIsDetailsShown:YES];
-            
-            NSLog(@"article.imgPath: %@", selectedArticle.imgPath);
-             
-            if (selectedArticle.imgPath) {
-                [cell.photo setHidden:NO];
-                [cell.photo setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:selectedArticle.imgPath]]]];
-                
-            } else {
-                [cell.photo setHidden:YES];
-            }
-            
-            [cell updateDetails:selectedArticle.contents];
-            selectedArticle.cellSize        = cell.frame.size;
             
             openCell = cell;
             _prvSltedRow = indexPath.row;
@@ -250,6 +228,7 @@
     }
     
     [self.articleTableView reloadData];
+    [self stopIndicator];
 }
 
 @end

@@ -68,16 +68,7 @@
     isMoreList = YES;
     deleteIdList = [[NSMutableArray alloc] init];
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
-    StorageBoxController * controller = [[StorageBoxController alloc] init];
-    storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
-    {
-        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
-    }
-    else
-    {
-        [storageCountLabel setText:@"99+"];
-    }
+    [self refreshBadges];
     
     NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
     if([firstSectionArray count] >= 2)
@@ -99,16 +90,8 @@
 - (void)refreshData
 {
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
-    StorageBoxController * controller = [[StorageBoxController alloc] init];
-    storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
-    {
-        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
-    }
-    else
-    {
-        [storageCountLabel setText:@"99+"];
-    }
+    
+    [self refreshBadges];
     
     if(!listSortType)
     {
@@ -156,6 +139,22 @@
     
     isDeleteMode = NO;
     [self deleteViewHide:nil];
+}
+
+- (void)refreshBadges {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_REFRESH_BADGES object:nil];
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    storageCount = [[controller getAllTransactions] count];
+    if(storageCount < 100)
+    {
+        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
+    }
+    else
+    {
+        [storageCountLabel setText:@"99+"];
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -1127,6 +1126,8 @@
 
 - (void)moreButtonClick:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBadges) name:NOTIFICATION_REFRESH_BADGES object:nil];
+    
     IndexPathButton *currentButton = (IndexPathButton *)sender;
     NSIndexPath *indexPath = currentButton.indexPath;
     

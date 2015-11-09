@@ -28,7 +28,6 @@
     [self.transBtn setTitle:selectedTransType forState:UIControlStateNormal];
 }
 
-
 #pragma mark - Keyboard
 
 - (IBAction)validateTextEditing:(UITextField *)sender {
@@ -36,8 +35,6 @@
         [sender setText:[[sender text] substringToIndex:10]];
     }
 }
-
-
 
 #pragma mark - Date Search
 - (IBAction)choose1Week {
@@ -147,6 +144,8 @@
 }
 
 -(void)updateUI {
+    
+    [self choose1Month];
     
     [self.fakeAllAccounts.layer setBorderWidth:1];
     [self.fakeAllAccounts.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];

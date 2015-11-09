@@ -72,16 +72,7 @@
     }
     deleteIdList = [[NSMutableArray alloc] init];
     
-    StorageBoxController * controller = [[StorageBoxController alloc] init];
-    storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
-    {
-        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
-    }
-    else
-    {
-        [storageCountLabel setText:@"99+"];
-    }
+    [self refreshBadges];
     
     allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
     [allAccountList insertObject:@"전체계좌" atIndex:0];
@@ -109,16 +100,8 @@
 - (void)refreshData
 {
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
-    StorageBoxController * controller = [[StorageBoxController alloc] init];
-    storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
-    {
-        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
-    }
-    else
-    {
-        [storageCountLabel setText:@"99+"];
-    }
+    
+    [self refreshBadges];
     
     if([timeLineSection count] == 0)
     {
@@ -147,6 +130,22 @@
     [self stopLoading];
     isDeleteMode = NO;
     [self deleteViewHide:nil];
+}
+
+- (void)refreshBadges {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_REFRESH_BADGES object:nil];
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    storageCount = [[controller getAllTransactions] count];
+    if(storageCount < 100)
+    {
+        [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
+    }
+    else
+    {
+        [storageCountLabel setText:@"99+"];
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -812,13 +811,15 @@
 
 - (void)moreButtonClick:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBadges) name:NOTIFICATION_REFRESH_BADGES object:nil];
+    
     IndexPathButton *currentButton = (IndexPathButton *)sender;
     NSIndexPath *indexPath = currentButton.indexPath;
     NHInboxMessageData *inboxData = [[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     HomeTimeLineTableViewCell *cell = [bankingListTable cellForRowAtIndexPath:indexPath];
     
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:inboxData.serverMessageKey
-                                                                                       transactionDate:[NSDate dateWithTimeIntervalSince1970:inboxData.regDate]
+                                                                                       transactionDate:[NSDate dateWithTimeIntervalSince1970:inboxData.regDate/1000]
                                                                               transactionAccountNumber:inboxData.nhAccountNumber
                                                                                 transactionAccountType:@""
                                                                                     transactionDetails:inboxData.oppositeUser
@@ -826,7 +827,7 @@
                                                                                      transactionAmount:@(inboxData.amount)
                                                                                     transactionBalance:@(inboxData.balance)
                                                                                        transactionMemo:@""
-                                                                                  transactionActivePin:[NSNumber numberWithBool:[cell isSelected]]];
+                                                                                  transactionActivePin:[NSNumber numberWithBool:[cell.pinButton isSelected]]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
     [util showMemoComposerInViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController withTransationObject:transation];
 }
