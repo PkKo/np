@@ -100,7 +100,7 @@
     [self.view bringSubviewToFront:keyboardCloseButton];
     
     loadingIndicatorBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.75f]];
+    [loadingIndicatorBg setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.75f]];
     [loadingIndicatorBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [loadingIndicatorBg setAutoresizesSubviews:YES];
     CircleView *animationBg = [[CircleView alloc] initWithFrame:CGRectMake(

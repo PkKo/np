@@ -58,8 +58,6 @@
     
     [cell.accountNum setText:[[accountList objectAtIndex:indexPath.row] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
     
-    [cell.selectImg.layer setCornerRadius:50];
-    
     if(selectedIndex == indexPath.row)
     {
         [cell.accountNum setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
