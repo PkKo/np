@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="147"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="146.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="147"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sticker_01" id="ura-YE-OiO">
@@ -145,7 +145,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K4D-QB-JHb">
-                        <rect key="frame" x="0.0" y="145.5" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="146" width="320" height="1"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -156,6 +156,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="deleteBtn" destination="ba0-oo-9lW" id="udl-jc-O36"/>
+                <outlet property="editMemoBtn" destination="Meu-C7-kff" id="K3c-UE-nfm"/>
                 <outlet property="editTextField" destination="K2e-6J-m3V" id="ZTD-2A-QX4"/>
                 <outlet property="editView" destination="9Ga-pe-3aC" id="a39-2p-S8u"/>
                 <outlet property="fakeEditTextField" destination="xHn-z3-i91" id="sXy-na-o8z"/>

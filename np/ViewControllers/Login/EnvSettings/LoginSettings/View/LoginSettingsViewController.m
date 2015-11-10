@@ -191,6 +191,13 @@
     NSString * patternPw    = [util getPatternPassword];
     [self.patternLoginBtn setEnabled:patternPw ? YES : NO];
     
+    if (![util isLoggedIn]) {
+        [self.simpleLoginMgmtBtn setEnabled:self.simpleLoginBtn.isEnabled];
+        [self.patternLoginMgmtBtn setEnabled:self.patternLoginBtn.isEnabled];
+    } else {
+        [self.simpleLoginMgmtBtn setEnabled:YES];
+        [self.patternLoginMgmtBtn setEnabled:YES];
+    }
 }
 
 - (void)selectLoginBy:(LoginMethod)loginMethod {

@@ -14,17 +14,15 @@
 - (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw birthday:(NSString *)birthday ofViewController:(UIViewController *)viewController action:(SEL)action {
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
-    NSString * user_id      = @"150324104128890";//[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
-    NSString * crmMobile    = @"01540051434";//@"01011111111";//[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//
-    
-    //"mobile_number":"010 11111111","user_name":"조수헌","crmMobile":"01011111111",
+    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];
     
     NSLog(@"user_id: %@", user_id);
     NSLog(@"crmMobile: %@ - saved crmMobile: %@", crmMobile, [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE]);
     
-    NSString * account_number   = @"15702311194";
-    NSString * account_password = @"1111";
-    NSString * user_birthday    = @"830226";
+    NSString * account_number   = accountNo;
+    NSString * account_password = pw;
+    NSString * user_birthday    = birthday;
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];

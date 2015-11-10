@@ -41,7 +41,14 @@
     [self.pickerView selectRow:[self.items indexOfObject:value] inComponent:0 animated:YES];
 }
 
-- (IBAction)closePickerView {
+- (IBAction)closeDataPicker:(id)sender {
+    [self willMoveToParentViewController:nil];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+}
+
+
+- (IBAction)chooseData:(id)sender {
     
     NSInteger selectedIndex = [self.pickerView selectedRowInComponent:0];
     
@@ -49,10 +56,7 @@
         [self.parentTarget performSelector:self.parentAction
                                 withObject:[self.items objectAtIndex:selectedIndex] afterDelay:0];
     }
-    
-    [self willMoveToParentViewController:nil];
-    [self.view removeFromSuperview];
-    [self removeFromParentViewController];
+    [self closeDataPicker:sender];
 }
 
 #pragma mark - picker view

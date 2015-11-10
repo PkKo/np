@@ -42,7 +42,6 @@
 }
 
 - (IBAction)closeDatePicker:(id)sender {
-    NSLog(@"%s %d", __func__, __LINE__);
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

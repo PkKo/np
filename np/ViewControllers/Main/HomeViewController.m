@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "MainPageViewController.h"
 #import "LoginUtil.h"
+#import "ArchivedTransactionItemsViewController.h"
 
 @interface HomeViewController ()
 
@@ -229,15 +230,27 @@
         case INBOX:
         {
             // 보관함 구현
-            UIStoryboard        * archivedItemsStoryBoard       = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
-            UIViewController    * archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
+            // check if the archivedListView has been added.
+            NSArray * childViewControllers = [self childViewControllers];
+            BOOL hasArchivedView = NO;
+            for (UIViewController * childVC in childViewControllers) {
+                if ([childVC isKindOfClass:[ArchivedTransactionItemsViewController class]]) {
+                    hasArchivedView = YES;
+                    break;
+                }
+            }
+            if (!hasArchivedView) {
+                UIStoryboard        * archivedItemsStoryBoard       = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
+                UIViewController    * archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
+                
+                archivedItemsViewController.view.frame              = mMainContentView.bounds;
+                archivedItemsViewController.view.autoresizingMask   = mMainContentView.autoresizingMask;
+                
+                [self addChildViewController:archivedItemsViewController];
+                [mMainContentView addSubview:archivedItemsViewController.view];
+                [archivedItemsViewController didMoveToParentViewController:self];
+            }
             
-            archivedItemsViewController.view.frame  = mMainContentView.bounds;
-            archivedItemsViewController.view.autoresizingMask  = mMainContentView.autoresizingMask;
-            
-            [self addChildViewController:archivedItemsViewController];
-            [mMainContentView addSubview:archivedItemsViewController.view];
-            [archivedItemsViewController didMoveToParentViewController:self];
             
             break;
         }

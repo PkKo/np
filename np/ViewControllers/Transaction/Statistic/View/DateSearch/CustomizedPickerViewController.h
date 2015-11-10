@@ -12,7 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
-- (IBAction)closePickerView;
+- (IBAction)closeDataPicker:(nonnull id)sender;
+- (IBAction)chooseData:(nonnull id)sender;
+
 
 @property (nonatomic, strong) NSArray * _Nonnull items;
 - (void)addTarget:(nonnull id)target action:(nonnull SEL)action;

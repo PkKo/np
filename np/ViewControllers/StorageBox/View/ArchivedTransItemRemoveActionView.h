@@ -21,4 +21,5 @@
 
 - (void)updateHighlightBackgroundColor;
 - (void)toggleDeleteBgColor:(BOOL)isRed;
+- (BOOL)hasItemsToRemove;
 @end

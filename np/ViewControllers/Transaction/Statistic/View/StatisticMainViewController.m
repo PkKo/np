@@ -261,12 +261,14 @@
 
 #pragma mark - Get data
 - (void)getChartData {
-    
-    BOOL test = NO;
-    NSArray * accounts = test ? @[@"1111-22-333333"] : [self getAccountList];
+    [self startIndicator];
+    [self performSelector:@selector(doGetChartDataAfterDelay) withObject:nil afterDelay:0.06];
+}
+
+- (void)doGetChartDataAfterDelay {
     
     [IBInbox loadWithListener:self];
-    [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
+    [IBInbox reqGetStickerSummaryWithAccountNumberList:[self getAccountList] startDate:_startDate endDate:_endDate];
 }
 
 
@@ -274,14 +276,14 @@
 - (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
 {
     if (!summaryList || [summaryList count] == 0) {
-        
         [self showNoDataView:YES];
+        [self stopIndicator];
         return;
     }
     
     [self showNoDataView:NO];
     
-    int numberOfItems       = [summaryList count];
+    NSInteger numberOfItems = [summaryList count];
     NSMutableArray * items  = [NSMutableArray arrayWithCapacity:numberOfItems];
     int total               = [[summaryList valueForKeyPath:@"@sum.sum"] intValue];
     
@@ -296,18 +298,23 @@
             continue;
         }
         
-        int percentage;
+        float percentage;
         if (itemIdx == numberOfItems - 1) {
             percentage       = 100 - addUpPercentage;
+            NSLog(@"percentage: %f", percentage);
         } else {
-            percentage       = roundf([@(chartData.sum) floatValue] / total * 100);
+            percentage       = floorf(([@(chartData.sum) floatValue] / total * 100) * 100) / 100;
+            
+            
+            NSLog(@"percentage: %f", percentage);
+            
             addUpPercentage += percentage;
         }
         
         StickerInfo * stickerInfo = [CommonUtil getStickerInfo:(StickerType)chartData.stickerCode];
         ChartItemData * item = [[ChartItemData alloc] initWithColor:stickerInfo.stickerColorHexString
                                                                 name:stickerInfo.stickerName
-                                                             percent:[NSString stringWithFormat:@"%d", percentage]
+                                                             percent:[NSString stringWithFormat:@"%.2f", percentage]
                                                                value:[NSString stringWithFormat:@"%f", [@(chartData.sum) floatValue]]
                                                                 type:[CommonUtil getTransactionTypeByStickerType:(StickerType)chartData.stickerCode]];
         [items addObject:item];
@@ -316,11 +323,14 @@
     _dataSource = [items copy];
     
     [self drawChartWithDataSource:_dataSource];
+    
+    [self stopIndicator];
 }
 
 - (void)inboxLoadFailed:(int)responseCode
 {
     NSLog(@"%s, %d", __FUNCTION__, responseCode);
+    [self stopIndicator];
 }
 
 @end

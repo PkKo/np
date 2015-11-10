@@ -17,6 +17,7 @@
 #import "ArchivedTransItemRemoveActionView.h"
 #import "DBManager.h"
 #import "CustomizedPickerViewController.h"
+#import "MainPageViewController.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -27,12 +28,13 @@
 
 @implementation ArchivedTransactionItemsViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
-    StorageBoxController * controller = [[StorageBoxController alloc] init];
-    [self refreshData:[controller getAllTransactions] sortByAscending:NO];
+    [self performSelector:@selector(getAllTransactions) withObject:nil afterDelay:0.06];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -82,7 +84,21 @@
 
 - (void)removeSelectedItems {
     
-    BOOL hasSelectedItems = NO;
+    UIView * itemRemoveActionView = [[self.view subviews] objectAtIndex:self.view.subviews.count - 1];
+    if (itemRemoveActionView  && [itemRemoveActionView isKindOfClass:[ArchivedTransItemRemoveActionView class]]) {
+        
+        if (![(ArchivedTransItemRemoveActionView *)itemRemoveActionView hasItemsToRemove]) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 메시지를 선택해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    [self performSelector:@selector(doRemoveSelectedItems) withObject:nil afterDelay:0.06];
+}
+
+- (void)doRemoveSelectedItems {
     
     for (NSString * sectionTitle in _transactionTitles) {
         
@@ -91,22 +107,14 @@
         
         for (TransactionObject * transacObj in mutableSectionItems) {
             if ([[transacObj transactionMarkAsDeleted] boolValue]) {
-                hasSelectedItems = YES;
                 [[DBManager sharedInstance] deleteTransactionById:[transacObj transactionId]];
             }
         }
     }
     
-    if (!hasSelectedItems) {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 메시지를 선택해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert show];
-    } else {
-        
-        StorageBoxController * controller = [[StorageBoxController alloc] init];
-        [self refreshData:[controller getAllTransactions] sortByAscending:NO];
-        
-        [self.tableview reloadData];
-    }
+    [self getAllTransactions];
+    
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
 
 - (void)closeSelectToRemoveView {
@@ -126,7 +134,7 @@
         NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
         
         for (TransactionObject * transacObj in sectionItems) {
-            if ([[transacObj transactionActivePin] boolValue]) {
+            if (![[transacObj transactionActivePin] boolValue]) {
                 [transacObj setTransactionMarkAsDeleted:[NSNumber numberWithBool:isSelectAll]];
             }
         }
@@ -229,6 +237,19 @@
 - (void)searchTransFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate account:(NSString *)account
                   transType:(NSString *)transType memo:(NSString *)memo {
     
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
+    [self performSelector:@selector(searchTransByCriteria:) withObject:@[fromDate, toDate, account, transType, memo] afterDelay:0.06];
+}
+
+- (void)searchTransByCriteria:(NSArray *)criteriaArr {
+    
+    NSDate      * fromDate  = (NSDate *)  [criteriaArr objectAtIndex:0];
+    NSDate      * toDate    = (NSDate *)  [criteriaArr objectAtIndex:1];
+    NSString    * account   = (NSString *)[criteriaArr objectAtIndex:2];
+    NSString    * transType = (NSString *)[criteriaArr objectAtIndex:3];
+    NSString    * memo      = (NSString *)[criteriaArr objectAtIndex:4];
+    
     NSDateFormatter * dateFormatter = [StatisticMainUtil getDateFormatterDateStyle];
     
     NSString * startDate    = [dateFormatter stringFromDate:fromDate];
@@ -248,9 +269,20 @@
       sortByAscending:[[self.sortByDateBtn titleForState:UIControlStateNormal] isEqualToString:TIME_ACSENDING_ORDER] ? YES : NO];
     
     [self.tableview reloadData];
+    
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
 
 #pragma mark - data source
+- (void)getAllTransactions {
+    
+    StorageBoxController * controller = [[StorageBoxController alloc] init];
+    [self refreshData:[controller getAllTransactions] sortByAscending:NO];
+    [self.tableview reloadData];
+    
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+}
+
 - (void)refreshData:(NSArray *)dataArr sortByAscending:(BOOL)isAscending {
     
     StorageBoxController * controller = [[StorageBoxController alloc] init];
@@ -333,18 +365,20 @@
         // these following two variables are used for delete & edit.
         [cell setSection:indexPath.section];
         [cell setRow:indexPath.row];
+        [cell setPinnable:[[transacObj transactionActivePin] boolValue]];
         
-        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view] && [[transacObj transactionActivePin] boolValue]) {
+        if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
             
             [cell.deleteBtn setHidden:NO];
             [cell.transacTypeImageView setHidden:YES];
             cell.deleteBtn.selected = [transacObj.transactionMarkAsDeleted boolValue];
+            [cell.editMemoBtn setHidden:YES];
             
         } else {
             
             [cell.deleteBtn setHidden:YES];
             [cell.transacTypeImageView setHidden:NO];
-            
+            [cell.editMemoBtn setHidden:NO];
             [cell.transacTypeImageView setImage:[CommonUtil getStickerImage:(StickerType)[transacObj.transactionType intValue]]];
         }
         

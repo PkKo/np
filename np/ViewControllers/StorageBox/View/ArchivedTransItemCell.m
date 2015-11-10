@@ -12,8 +12,13 @@
 @implementation ArchivedTransItemCell
 
 - (IBAction)clickDeleteBtn {
-    [self.deleteBtn setSelected:!self.deleteBtn.selected];
-    [self.delegate markAsDeleted:self.deleteBtn.isSelected ofItemSection:self.section row:self.row];
+    if (self.pinnable) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고정핀 적용된 아이템은 삭제되지 않습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [self.deleteBtn setSelected:!self.deleteBtn.selected];
+        [self.delegate markAsDeleted:self.deleteBtn.isSelected ofItemSection:self.section row:self.row];
+    }
     
 }
 

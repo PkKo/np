@@ -21,6 +21,7 @@
 
 @property (nonatomic) NSInteger                     section;
 @property (nonatomic) NSInteger                     row;
+@property (nonatomic) BOOL                          pinnable;
 
 @property (weak, nonatomic) IBOutlet UIImageView    * transacTypeImageView;
 @property (weak, nonatomic) IBOutlet UIButton       * deleteBtn;
@@ -35,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel        * transacAccountNo;
 @property (weak, nonatomic) IBOutlet UILabel        * transacBalance;
 @property (weak, nonatomic) IBOutlet UILabel        * transacMemo;
+@property (weak, nonatomic) IBOutlet UIButton       * editMemoBtn;
 - (IBAction)editMemo;
 @property (weak, nonatomic) IBOutlet UIView         * editView;
 @property (weak, nonatomic) IBOutlet UITextField    * fakeEditTextField;

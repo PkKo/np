@@ -53,4 +53,8 @@
     self.removeBtn.selected = isRed;
 }
 
+- (BOOL)hasItemsToRemove {
+    return [self.removeBtn isSelected];
+}
+
 @end
