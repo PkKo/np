@@ -11,6 +11,7 @@
 #import "TimelineSectionData.h"
 #import "LoginUtil.h"
 #import "HomeViewController.h"
+#import "HomeEtcDetailViewController.h"
 
 @implementation HomeEtcTimeLineView
 
@@ -218,7 +219,6 @@
         cell = [HomeEtcTimeLineCell cell];
     }
     
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     
@@ -239,6 +239,15 @@
      int64_t balance;
      NSString * oppositeUser;
      int32_t stickerCode;*/
+    
+    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    else
+    {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+    }
     
     // 스티커 버튼
     [cell.stickerButton setIndexPath:indexPath];
@@ -282,7 +291,21 @@
     return cell;
 }
 
-#pragma mark UIScrollViewDelegate
+#pragma mark - UITableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
+    NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    
+    HomeEtcDetailViewController *vc = [[HomeEtcDetailViewController alloc] init];
+    [vc setInboxData:inboxData];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+}
+
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (isLoading) return;

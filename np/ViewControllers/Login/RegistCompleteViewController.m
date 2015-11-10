@@ -35,7 +35,7 @@
     
     [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
     
-    [self getBannerInfoRequest];
+//    [self getBannerInfoRequest];
 }
 
 - (void)didReceiveMemoryWarning

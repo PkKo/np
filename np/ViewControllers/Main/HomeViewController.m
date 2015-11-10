@@ -61,75 +61,51 @@
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
         
+        /*
+         필수 설정값
+         */
+        // 정렬 순서
+        //    reqData.ascending;
+        // 알림받는 계좌번호 리스트
+        //    reqData.accountNumberList;
+        // 입출금 구분
+        //    reqData.queryType;
+        AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+        reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+        reqData.ascending = YES;
+        reqData.size = TIMELINE_LOAD_COUNT;
+        
         switch (viewType)
         {
             case TIMELINE:
             {
-                //            [IBInbox requestInboxList];
-                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-                //            reqData.accountNumberList = @[@"1111-22-333333"];
-                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
                 reqData.queryType = @"A";
-//                reqData.queryType = @"1,2,3,4,5,6";
-                reqData.ascending = YES;
-                reqData.size = TIMELINE_LOAD_COUNT;
-                /*
-                 필수 설정값
-                 */
-                // 정렬 순서
-                //    reqData.ascending;
-                // 알림받는 계좌번호 리스트
-                //    reqData.accountNumberList;
-                // 입출금 구분
-                //    reqData.queryType;
-                [IBInbox reqQueryAccountInboxListWithSize:reqData];
                 break;
             }
             case BANKING:
             {
-                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                reqData.queryType = @"1,2";
-                reqData.ascending = YES;
-                reqData.size = TIMELINE_LOAD_COUNT;
-                /*
-                 필수 설정값
-                 */
-                // 정렬 순서
-                //    reqData.ascending;
-                // 알림받는 계좌번호 리스트
-                //    reqData.accountNumberList;
-                // 입출금 구분
-                //    reqData.queryType;
-                [IBInbox reqQueryAccountInboxListWithSize:reqData];
+                reqData.queryType = @"IO";
                 break;
             }
             case OTHER:
             {
-                AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
                 reqData.queryType = @"E";
-                reqData.ascending = YES;
-                reqData.size = TIMELINE_LOAD_COUNT;
-                /*
-                 필수 설정값
-                 */
-                // 정렬 순서
-                //    reqData.ascending;
-                // 알림받는 계좌번호 리스트
-                //    reqData.accountNumberList;
-                // 입출금 구분
-                //    reqData.queryType;
-                [IBInbox reqQueryAccountInboxListWithSize:reqData];
-                //                        [IBInbox reqGetStickerSummaryWithAccountNumberList:reqData.accountNumberList startDate:@"20150922" endDate:@"20151027"];
                 break;
             }
-                
             default:
             {
-                [self makeTimelineView];
+                reqData = nil;
                 break;
             }
+        }
+        
+        if(reqData != nil)
+        {
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+        }
+        else
+        {
+            [self makeTimelineView];
         }
     }
 }
@@ -583,14 +559,6 @@
             }
             else
             {
-                /*
-                 NSString *todayString = [CommonUtil getTodayDateString];
-                 NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
-                 TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-                 todaySectionData.date = todayString;
-                 todaySectionData.day = todayDayString;
-                 [sectionList addObject:todaySectionData];*/
-                
                 for(NHInboxMessageData *inboxData in messageList)
                 {
                     if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
@@ -615,36 +583,6 @@
                     [itemList addObject:inboxData];
                     
                     [timelineMessageList setObject:itemList forKey:dateString];
-                    /*
-                     if([dateString isEqualToString:todayString])
-                     {
-                     NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
-                     if(todayItemList == nil)
-                     {
-                     todayItemList = [[NSMutableArray alloc] init];
-                     }
-                     
-                     [todayItemList addObject:inboxData];
-                     
-                     [timelineMessageList setObject:todayItemList forKey:todayString];
-                     }
-                     else
-                     {
-                     NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                     if(itemList == nil)
-                     {
-                     itemList = [[NSMutableArray alloc] init];
-                     NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                     TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                     dateSectionData.date = dateString;
-                     dateSectionData.day = dateDayString;
-                     [sectionList addObject:dateSectionData];
-                     }
-                     
-                     [itemList addObject:inboxData];
-                     
-                     [timelineMessageList setObject:itemList forKey:dateString];
-                     }*/
                 }
             }
         }
@@ -792,8 +730,6 @@
         
         total += sum;
     }
-    
-
 }
 
 - (void)sendReadStatus
@@ -820,20 +756,6 @@
         
         // 각 뷰가 있으면 테이블 갱신
         [self makeTimelineView];
-        /*
-        if(mTimeLineView)
-        {
-            [mTimeLineView.mTimeLineTable reloadData];
-            
-        }
-        else if(bankingView)
-        {
-            [bankingView.bankingListTable reloadData];
-        }
-        else if (etcTimeLineView)
-        {
-            [etcTimeLineView.timelineTableView reloadData];
-        }*/
     }
     
     currentStickerIndexPath = nil;
@@ -882,19 +804,6 @@
         
         // 각 뷰가 있으면 테이블 갱신
         [self makeTimelineView];
-        /*
-        if(mTimeLineView)
-        {
-            [mTimeLineView.mTimeLineTable reloadData];
-        }
-        else if(bankingView)
-        {
-            [bankingView.bankingListTable reloadData];
-        }
-        else if (etcTimeLineView)
-        {
-            [etcTimeLineView.timelineTableView reloadData];
-        }*/
     }
 }
 

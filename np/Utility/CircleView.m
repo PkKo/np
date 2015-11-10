@@ -14,9 +14,16 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    /*
     self.alpha = 0.9f;
     // Drawing code
-    self.layer.cornerRadius = rect.size.height / 2;
+    self.layer.cornerRadius = rect.size.height / 2;*/
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:(rect.size.height / 2)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = rect;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
 }
 
 @end

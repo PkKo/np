@@ -178,16 +178,11 @@
         {
             [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
         }
-
-        if(totalCount > 9)
-        {
-            
-        }
     }
     else if(indexPath.row == 1)
     {
         // 입출금 목록 UnreadCount
-        NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
+        NSInteger noticeCount = [CommonUtil getUnreadCountForBanking];
         
         if(noticeCount > 99)
         {
@@ -215,7 +210,7 @@
     else if(indexPath.row == 2)
     {
         // 기타 목록 UnreadCount
-        NSInteger noticeCount = [CommonUtil getUnreadCountForBanking];
+        NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
         
         if(noticeCount > 99)
         {
