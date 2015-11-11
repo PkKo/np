@@ -10,6 +10,19 @@
 #import "StatisticMainUtil.h"
 #import "UIButton+BackgroundColor.h"
 
+typedef enum DateSearch {
+    DATE_SEARCH_BY_NONE = 0,
+    DATE_SEARCH_BY_1WEEK,
+    DATE_SEARCH_BY_1MONTH,
+    DATE_SEARCH_BY_3MONTH,
+    DATE_SEARCH_BY_6MONTH
+} DateSearch;
+
+@interface StorageBoxDateSearchView() {
+    DateSearch _prvSltedDateSearchPeriod;
+}
+@end
+
 @implementation StorageBoxDateSearchView
 
 - (IBAction)clickToSelectAccount {
@@ -29,7 +42,6 @@
 }
 
 #pragma mark - Keyboard
-
 - (IBAction)validateTextEditing:(UITextField *)sender {
     if ([[sender text] length] > 10) {
         [sender setText:[[sender text] substringToIndex:10]];
@@ -37,6 +49,41 @@
 }
 
 #pragma mark - Date Search
+- (void)handleToggleSelectedSearchDate:(DateSearch)dateSearch {
+    
+    if (dateSearch == _prvSltedDateSearchPeriod) {
+        return;
+    }
+    
+    if (_prvSltedDateSearchPeriod != DATE_SEARCH_BY_NONE) {
+        [self toggleSelectedSearchDate:_prvSltedDateSearchPeriod];
+    }
+    
+    [self toggleSelectedSearchDate:dateSearch];
+    
+    _prvSltedDateSearchPeriod = dateSearch;
+}
+
+- (void)toggleSelectedSearchDate:(DateSearch)dateSearch {
+    
+    switch (dateSearch) {
+        case DATE_SEARCH_BY_1WEEK:
+            self.dateSearch1WeekBtn.selected = !self.dateSearch1WeekBtn.isSelected;
+            break;
+        case DATE_SEARCH_BY_1MONTH:
+            self.dateSearch1MonthBtn.selected = !self.dateSearch1MonthBtn.isSelected;
+            break;
+        case DATE_SEARCH_BY_3MONTH:
+            self.dateSearch3MonthBtn.selected = !self.dateSearch3MonthBtn.isSelected;
+            break;
+        case DATE_SEARCH_BY_6MONTH:
+            self.dateSearch6MonthBtn.selected = !self.dateSearch6MonthBtn.isSelected;
+            break;
+        default:
+            break;
+    }
+}
+
 - (IBAction)choose1Week {
     
     NSDate * today              = [NSDate date];
@@ -44,6 +91,8 @@
     
     [self updateStartDate:dateOf1WeekAgo];
     [self updateEndDate:today];
+    
+    [self handleToggleSelectedSearchDate:DATE_SEARCH_BY_1WEEK];
 }
 
 - (IBAction)choose1Month {
@@ -53,6 +102,8 @@
     
     [self updateStartDate:dateOf1MonthAgo];
     [self updateEndDate:today];
+    
+    [self handleToggleSelectedSearchDate:DATE_SEARCH_BY_1MONTH];
 }
 
 - (IBAction)choose3Month {
@@ -61,6 +112,8 @@
     
     [self updateStartDate:dateOf3MonthAgo];
     [self updateEndDate:today];
+    
+    [self handleToggleSelectedSearchDate:DATE_SEARCH_BY_3MONTH];
 }
 
 - (IBAction)choose6Month {
@@ -69,6 +122,8 @@
     
     [self updateStartDate:dateOf6MonthAgo];
     [self updateEndDate:today];
+    
+    [self handleToggleSelectedSearchDate:DATE_SEARCH_BY_6MONTH];
 }
 
 - (IBAction)chooseStartDate {
@@ -144,7 +199,7 @@
 }
 
 -(void)updateUI {
-    
+    _prvSltedDateSearchPeriod = DATE_SEARCH_BY_NONE;
     [self choose1Month];
     
     [self.fakeAllAccounts.layer setBorderWidth:1];

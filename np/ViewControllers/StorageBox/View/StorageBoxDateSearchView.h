@@ -45,6 +45,10 @@
     
 - (IBAction)validateTextEditing:(UITextField *)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton    * dateSearch1WeekBtn;
+@property (weak, nonatomic) IBOutlet UIButton    * dateSearch1MonthBtn;
+@property (weak, nonatomic) IBOutlet UIButton    * dateSearch3MonthBtn;
+@property (weak, nonatomic) IBOutlet UIButton    * dateSearch6MonthBtn;
 - (IBAction)choose1Week;
 - (IBAction)choose1Month;
 - (IBAction)choose3Month;

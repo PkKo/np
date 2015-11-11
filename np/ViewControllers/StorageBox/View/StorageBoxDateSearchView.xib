@@ -16,13 +16,13 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="oEG-dm-hvz" userLabel="fake all account">
-                            <rect key="frame" x="18" y="27" width="164" height="31"/>
+                            <rect key="frame" x="18" y="27" width="174" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xzE-JL-jLp">
-                            <rect key="frame" x="32" y="28" width="148" height="28"/>
+                            <rect key="frame" x="32" y="28" width="158" height="28"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="전체계좌">
@@ -36,17 +36,17 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="GhJ-ju-8Xw">
-                            <rect key="frame" x="152" y="34" width="18" height="18"/>
+                            <rect key="frame" x="162" y="34" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="3cN-M3-oZd" userLabel="Fake trans type">
-                            <rect key="frame" x="189" y="27" width="111" height="31"/>
+                            <rect key="frame" x="199" y="27" width="101" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PvI-zg-Xkv">
-                            <rect key="frame" x="204" y="28" width="96" height="28"/>
+                            <rect key="frame" x="214" y="28" width="86" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="입출금">
@@ -86,6 +86,7 @@
                             <state key="normal" title="1주일" backgroundImage="button_04_dft.png">
                                 <color key="titleColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_04_on.png"/>
                             <state key="highlighted" backgroundImage="button_04_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -100,6 +101,7 @@
                             <state key="normal" title="1개월" backgroundImage="button_05_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_05_on.png"/>
                             <state key="highlighted" backgroundImage="button_05_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -114,6 +116,7 @@
                             <state key="normal" title="3개월" backgroundImage="button_05_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_05_on.png"/>
                             <state key="highlighted" backgroundImage="button_05_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -128,7 +131,8 @@
                             <state key="normal" title="6개월" backgroundImage="button_06_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <state key="highlighted" backgroundImage="button_06_on.png">
+                            <state key="selected" backgroundImage="button_06_on.png"/>
+                            <state key="highlighted">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -152,8 +156,12 @@
                             <rect key="frame" x="126" y="162" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_calendar_01"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xq0-jA-37G">
+                            <rect key="frame" x="18" y="156" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <connections>
-                                <action selector="chooseStartDate" destination="iN0-l3-epB" eventType="touchUpInside" id="qsL-XH-2qo"/>
+                                <action selector="chooseStartDate" destination="-2" eventType="touchUpInside" id="T6x-il-Tw3"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tXO-26-dIy">
@@ -182,8 +190,12 @@
                             <rect key="frame" x="274" y="162" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_calendar_01"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aGC-sQ-ov5">
+                            <rect key="frame" x="167" y="156" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <connections>
-                                <action selector="chooseEndDate" destination="iN0-l3-epB" eventType="touchUpInside" id="qLb-Yd-4nv"/>
+                                <action selector="chooseEndDate" destination="-2" eventType="touchUpInside" id="c8X-nm-dzS"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Prw-wQ-jmi">
@@ -223,6 +235,10 @@
             <connections>
                 <outlet property="accountBtn" destination="xzE-JL-jLp" id="GBF-ez-wex"/>
                 <outlet property="cancelBtn" destination="2gp-KI-Krv" id="nQU-dd-hFD"/>
+                <outlet property="dateSearch1MonthBtn" destination="Mmd-9x-YmY" id="wA2-mm-WZw"/>
+                <outlet property="dateSearch1WeekBtn" destination="CVs-Ft-RFM" id="RaL-YM-d8n"/>
+                <outlet property="dateSearch3MonthBtn" destination="anY-qp-tRL" id="ccY-sZ-ffu"/>
+                <outlet property="dateSearch6MonthBtn" destination="Ila-94-ui2" id="wzc-Nd-Tfe"/>
                 <outlet property="endDate" destination="1jq-tl-0Kh" id="xeL-XO-cjK"/>
                 <outlet property="fakeAllAccounts" destination="oEG-dm-hvz" id="kcA-I7-MpP"/>
                 <outlet property="fakeEndDate" destination="KrF-yq-BOR" id="geQ-xd-QEh"/>

@@ -46,8 +46,6 @@
     NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
     
     [self updateSelectedDates:dateAmonthAgo toDate:today];
-    [self updateUI];
-    
     [self getChartData];
 }
 
@@ -135,7 +133,7 @@
 #pragma mark - Select Account
 - (NSArray *)getAccountList {
     
-    if ([[self.selectAccountBtn titleForState:UIControlStateNormal] isEqualToString:TRANS_ALL_ACCOUNT]) {
+    if ([[self.selectAccountLabel text] isEqualToString:TRANS_ALL_ACCOUNT]) {
         
         StorageBoxController    * controller    = [[StorageBoxController alloc] init];
         NSArray                 * allAccounts   = [controller getAllAccounts];
@@ -144,13 +142,13 @@
         
     } else {
         
-        return @[[self.selectAccountBtn titleForState:UIControlStateNormal]];
+        return @[[self.selectAccountLabel text]];
     }
     
 }
 
 - (IBAction)selectAccount {
-    [self showDataPickerToSelectAccountWithSelectedValue:[self.selectAccountBtn titleForState:UIControlStateNormal]];
+    [self showDataPickerToSelectAccountWithSelectedValue:[self.selectAccountLabel text]];
 }
 
 - (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue {
@@ -164,14 +162,30 @@
 }
 
 - (void)updateAccount:(NSString *)account {
-    [self.selectAccountBtn setTitle:account forState:UIControlStateNormal];
+    
+    [self.selectAccountLabel setText:account];
+    
+    // resize account label
+    CGSize selectAccountLabelSize       = [StorageBoxUtil contentSizeOfLabel:self.selectAccountLabel];
+    CGRect selectAccountLabelRect       = self.selectAccountLabel.frame;
+    selectAccountLabelRect.size.width   = selectAccountLabelSize.width;
+    [self.selectAccountLabel setFrame:selectAccountLabelRect];
+    
+    // replace down arrow
+    CGRect selectAccountArrowRect   = self.selectAccountArrow.frame;
+    selectAccountArrowRect.origin.x = selectAccountLabelRect.origin.x + selectAccountLabelRect.size.width;
+    [self.selectAccountArrow setFrame:selectAccountArrowRect];
+    
+    // resize account button
+    CGRect selectAccountBtnRect     = self.selectAccountBtn.frame;
+    CGFloat startAccountButtonX     = selectAccountLabelRect.origin.x;
+    CGFloat endAccountButtonX       = selectAccountArrowRect.origin.x + selectAccountArrowRect.size.width;
+    selectAccountBtnRect.size.width = endAccountButtonX - startAccountButtonX;
+    [self.selectAccountBtn setFrame:selectAccountBtnRect];
+    
     [self getChartData];
 }
 
--(void)updateUI {
-    [self.fakeAllAccounts.layer setBorderWidth:1];
-    [self.fakeAllAccounts.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
-}
 
 - (void)showNoDataView:(BOOL)isShown {
     
@@ -216,6 +230,7 @@
     
     NSMutableArray * colors     = [[NSMutableArray alloc] init]; // array of UIColor
     NSMutableArray * percents   = [[NSMutableArray alloc] init];
+    
     for (ChartItemData *item in _dataSource ) {
         [colors addObject: [StatisticMainUtil colorFromHexString:item.itemColor]];
         [percents addObject:[NSNumber numberWithFloat:[item.itemPercent floatValue]]];
@@ -238,11 +253,15 @@
     
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
-    CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 23;
-    _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
+    if (_incomeDataSource && [_incomeDataSource count] > 0) {
+        CGFloat incomeDataViewY = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 23;
+        _incomeDataView         = [chartViewUtil addViewWithDataSource:_incomeDataSource toView:self.scrollView atY:incomeDataViewY];
+    }
     
-    CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
-    _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+    if (_expenseDataSource && [_expenseDataSource count] > 0) {
+        CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
+        _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+    }
 }
 
 - (void)replaceNoticeView {
@@ -250,8 +269,16 @@
     StatisticMainUtil * chartViewUtil = [[StatisticMainUtil alloc] init];
     
     CGRect noticeViewFrame      = self.noticeView.frame;
-    noticeViewFrame.origin.y    = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
+    CGFloat noticeViewY         = 0;
+    
+    if (_expenseDataSource && _expenseDataSource.count > 0) {
+        noticeViewY             = _expenseDataView.frame.origin.y + _expenseDataView.frame.size.height + 15; // spacing
+    } else if (_incomeDataSource && _incomeDataSource.count > 0) {
+        noticeViewY             = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 15; // spacing
+    }
+    noticeViewFrame.origin.y    = noticeViewY;
     [self.noticeView setFrame:noticeViewFrame];
+    
     /*
     CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
     [self.noticeView setCenter:noticeViewCenterPoint];
@@ -267,8 +294,22 @@
 
 - (void)doGetChartDataAfterDelay {
     
-    [IBInbox loadWithListener:self];
-    [IBInbox reqGetStickerSummaryWithAccountNumberList:[self getAccountList] startDate:_startDate endDate:_endDate];
+    NSLog(@"%s", __func__);
+    
+    NSArray * accounts = [self getAccountList];
+    
+    
+    if (!accounts || [accounts count] == 0) {
+        
+        [self showNoDataView:YES];
+        [self stopIndicator];
+        
+    } else {
+        
+        [IBInbox loadWithListener:self];
+        [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
+    }
+    
 }
 
 
@@ -301,36 +342,33 @@
         float percentage;
         if (itemIdx == numberOfItems - 1) {
             percentage       = 100 - addUpPercentage;
-            NSLog(@"percentage: %f", percentage);
         } else {
             percentage       = floorf(([@(chartData.sum) floatValue] / total * 100) * 100) / 100;
-            
-            
-            NSLog(@"percentage: %f", percentage);
-            
             addUpPercentage += percentage;
         }
         
         StickerInfo * stickerInfo = [CommonUtil getStickerInfo:(StickerType)chartData.stickerCode];
         ChartItemData * item = [[ChartItemData alloc] initWithColor:stickerInfo.stickerColorHexString
                                                                 name:stickerInfo.stickerName
-                                                             percent:[NSString stringWithFormat:@"%.2f", percentage]
+                                                            percent:[NSString stringWithFormat: (percentage == 100 ? @"%.0f" : @"%.2f"), percentage]
                                                                value:[NSString stringWithFormat:@"%f", [@(chartData.sum) floatValue]]
                                                                 type:[CommonUtil getTransactionTypeByStickerType:(StickerType)chartData.stickerCode]];
         [items addObject:item];
     }
     
     _dataSource = [items copy];
-    
+    _dataSource = [_dataSource sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"itemType"
+                                                                                           ascending:YES]]];
     [self drawChartWithDataSource:_dataSource];
-    
     [self stopIndicator];
 }
 
 - (void)inboxLoadFailed:(int)responseCode
 {
-    NSLog(@"%s, %d", __FUNCTION__, responseCode);
+    NSLog(@"%s,responseCode: %d", __FUNCTION__, responseCode);
     [self stopIndicator];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버 오류 발생되었습니다.\n다시 시도해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
