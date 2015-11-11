@@ -28,6 +28,8 @@
 
 @implementation ArchivedTransactionItemsViewController
 
+@synthesize scrollMoveTopButton;
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
@@ -373,6 +375,7 @@
             [cell.transacTypeImageView setHidden:YES];
             cell.deleteBtn.selected = [transacObj.transactionMarkAsDeleted boolValue];
             [cell.editMemoBtn setHidden:YES];
+            [cell.pinImageView setHidden:![[transacObj transactionActivePin] boolValue]];
             
         } else {
             
@@ -500,6 +503,51 @@
     }
     
     return YES;
+}
+
+#pragma mark - Go Top
+- (IBAction)scrollToTopOfTableView {
+    [self.tableview setContentOffset:CGPointZero animated:YES];
+}
+
+- (void)showScrollTopButton
+{
+    NSLog(@"%s", __func__);
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setHidden:NO];
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width - scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }completion:nil];
+}
+
+- (void)hideScrollTopButton {
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width,
+                                                 scrollMoveTopButton.frame.origin.y,
+                                                 scrollMoveTopButton.frame.size.width,
+                                                 scrollMoveTopButton.frame.size.height)];
+    }
+                     completion:^(BOOL finished){
+                         [scrollMoveTopButton setHidden:YES];
+                     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        UITableView * myTableView = (UITableView *)scrollView;
+        CGPoint myTableViewPosition =  myTableView.contentOffset;
+        
+        if (myTableViewPosition.y > 0 && self.scrollMoveTopButton.isHidden) {
+            [self showScrollTopButton];
+            
+        } else if (myTableViewPosition.y <= 0 && !self.scrollMoveTopButton.isHidden) {
+            [self hideScrollTopButton];
+        }
+    }
 }
 
 @end

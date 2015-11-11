@@ -52,17 +52,9 @@
 
 - (void)requestNongminNews {
     
-    CFStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_KR);//
-    /*
-    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"] encoding:encoding error:nil];
-    NSLog(@"%@", dataString);
-    */
-    NSURL *targetURL = [NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:encoding];
+    CFStringEncoding encoding = (CFStringEncoding)CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_KR);//
     
-    NSLog(@"dataString: %@", dataString);
+    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"] encoding:encoding error:nil];
     
     NSRange  range;
     NSString * element;
@@ -155,16 +147,23 @@
     article                 = [articles objectAtIndex:[indexPath row]];
     cell.regDate.text       = article.regDate;
     cell.headline.text      = article.subject;
-    /*
-    [cell.subject setSelectable:YES];
-    cell.subject.text = article.subject;
-    [cell.subject setSelectable:NO];
-    */
+    
     if (article.isDetailsShown) {
         
         if (article.imgPath) {
             [cell.photo setHidden:NO];
-            [cell.photo setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]]];
+            
+            //NSLog(@"\n\n------->article.imgPath: %@", article.imgPath);
+            UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]];
+            //NSLog(@"image   : %@", NSStringFromCGSize(image.size)) ;
+            
+            CGSize scaledPhotoSize  = [self scaleImage:image toSize:CGSizeMake(284, 166)];
+            CGRect photoFrame       = cell.photo.frame;
+            photoFrame.size         = scaledPhotoSize;
+            [cell.photo setFrame:photoFrame];
+            [cell.photo setImage:image];
+            
+            //[cell.photo setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]]];
         } else {
             [cell.photo setHidden:YES];
         }
@@ -177,6 +176,13 @@
     [cell hideDetailsView:!article.isDetailsShown];
     
     return cell;
+}
+
+- (CGSize)scaleImage:(UIImage *)image toSize: (CGSize)size {
+    
+    float newHeight = size.width / image.size.width * image.size.height;
+    //NSLog(@"size: %@", NSStringFromCGSize(CGSizeMake(size.width, newHeight)));
+    return CGSizeMake(size.width, newHeight);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -202,6 +208,7 @@
     
     BOOL    isShown         = [(NSNumber *)[detailsViewInfo objectAtIndex:0] boolValue];
     UIView * detailsView    = (UIView *)[detailsViewInfo objectAtIndex:1];
+    NSIndexPath * selectedIndexPath;
     
     for (ArticleObject * article in articles) {
         [article setIsDetailsShown:NO];
@@ -210,6 +217,7 @@
     if (openCell) {
         [openCell hideDetailsView:YES];
         openCell = nil;
+        [self stopIndicator];
     }
     
     if (isShown) {
@@ -222,13 +230,25 @@
             ArticleObject * selectedArticle = [articles objectAtIndex:indexPath.row];
             [selectedArticle setIsDetailsShown:YES];
             
-            openCell = cell;
-            _prvSltedRow = indexPath.row;
+            openCell            = cell;
+            _prvSltedRow        = (int)indexPath.row;
+            selectedIndexPath   = indexPath;
         }
     }
     
+    
+    
     [self.articleTableView reloadData];
-    [self stopIndicator];
+    
+    if (isShown && selectedIndexPath) {
+        
+        __weak FarmerNewsViewController *me = self;
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [me.articleTableView scrollToRowAtIndexPath:selectedIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        } completion:^(BOOL finished) {
+            [self stopIndicator];
+        }];
+    }
 }
 
 @end
