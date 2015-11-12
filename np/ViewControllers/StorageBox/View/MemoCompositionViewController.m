@@ -61,9 +61,6 @@
     
     [self.transactionObject setTransactionMemo:[self.memo text]];
     if (isNewMemo) {
-        
-        NSLog(@"self.transactionObject.transactionDate: %@", self.transactionObject.transactionDate);
-        
         [[DBManager sharedInstance] saveTransaction:self.transactionObject];
     } else {
         [[DBManager sharedInstance] updateTransaction:self.transactionObject];
@@ -76,7 +73,6 @@
 }
 
 - (void)showAlert {
-    NSLog(@"%s", __func__);
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
                                                      message:@"보관함에 저장되었습니다.\n보관함으로 이동하시겠습니까?"
                                                     delegate:self
@@ -150,7 +146,10 @@
     CGRect keyboardFrameRect    = [keyboardFrame CGRectValue];
     keyboardHeight              = keyboardFrameRect.size.height;
     
-    snsViewY = viewFrame.size.height - (snsViewFrame.size.height + keyboardHeight);
+    CGPoint separatorInSubPos   = self.separator.frame.origin;
+    CGPoint separatorInMainPos  = [self.snsWithoutCloseBtnView convertPoint:separatorInSubPos toView:self.snsView];
+    
+    snsViewY = viewFrame.size.height - (separatorInMainPos.y + keyboardHeight);
     snsViewY = snsViewY < 0 ? 0 : snsViewY;
     
     snsViewFrame.origin.y = snsViewY;

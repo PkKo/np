@@ -21,11 +21,22 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체계좌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oKd-Kz-DuQ">
+                                                <rect key="frame" x="18" y="0.0" width="53" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="5r1-XZ-Nn6">
+                                                <rect key="frame" x="71" y="11" width="18" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aF3-lX-cZE">
-                                                <rect key="frame" x="0.0" y="5" width="133" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="157" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="전체계좌">
+                                                <state key="normal">
                                                     <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <state key="highlighted">
@@ -35,12 +46,8 @@
                                                     <action selector="selectAccount" destination="lHy-Af-bbj" eventType="touchUpInside" id="oap-XN-tYY"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="5r1-XZ-Nn6">
-                                                <rect key="frame" x="133" y="10" width="18" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jJt-N1-f2m">
-                                                <rect key="frame" x="286" y="11" width="18" height="18"/>
+                                                <rect key="frame" x="263" y="0.0" width="54" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="icon_search_01">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,7 +106,7 @@
                                         <rect key="frame" x="0.0" y="40" width="320" height="473"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_noresult_01.png" id="OAL-aJ-mOT">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_noresult_02.png" id="OAL-aJ-mOT">
                                                 <rect key="frame" x="144" y="46" width="32" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -123,7 +130,9 @@
                         <outlet property="noDataView" destination="Khv-AZ-ON7" id="rbA-GL-R9E"/>
                         <outlet property="noticeView" destination="8aG-4V-WPC" id="ORa-Rd-5qh"/>
                         <outlet property="scrollView" destination="FQC-y1-FDJ" id="flB-hX-Ndl"/>
+                        <outlet property="selectAccountArrow" destination="5r1-XZ-Nn6" id="jdS-h3-hWh"/>
                         <outlet property="selectAccountBtn" destination="aF3-lX-cZE" id="qXn-Py-mrC"/>
+                        <outlet property="selectAccountLabel" destination="oKd-Kz-DuQ" id="VLT-RG-UgO"/>
                         <outlet property="selectedDatesLabel" destination="MaX-28-MtA" id="TS8-RM-oit"/>
                         <outlet property="topView" destination="TD5-0I-3vW" id="YTY-MT-kWY"/>
                     </connections>
@@ -135,7 +144,7 @@
     </scenes>
     <resources>
         <image name="icon_dropdown_01.png" width="18" height="18"/>
-        <image name="icon_noresult_01.png" width="32" height="32"/>
+        <image name="icon_noresult_02.png" width="32" height="32"/>
         <image name="icon_search_01" width="18" height="18"/>
     </resources>
 </document>

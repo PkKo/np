@@ -14,9 +14,11 @@
 
 @property (nonatomic, strong) TransactionObject     * transactionObject;
 @property (weak, nonatomic) IBOutlet UIView         * snsView;
+@property (weak, nonatomic) IBOutlet UIView         * snsWithoutCloseBtnView;
 @property (weak, nonatomic) IBOutlet UITextField    * memo;
 @property (weak, nonatomic) IBOutlet UITextField    * fakeMemo;
 @property (weak, nonatomic) IBOutlet UIButton       * cancelBtn;
+@property (weak, nonatomic) IBOutlet UILabel        * separator;
 
 - (IBAction)removeComposer;
 - (IBAction)saveToStorageBox;

@@ -9,19 +9,23 @@
             <connections>
                 <outlet property="accountCheckBtn" destination="D2i-3e-d4o" id="Pl7-Jd-An3"/>
                 <outlet property="accountLoginBtn" destination="LlQ-iK-fa0" id="suB-Eg-3EZ"/>
+                <outlet property="accountLoginView" destination="09M-ND-Ybx" id="fOz-Dz-5lC"/>
                 <outlet property="accountRadioBtn" destination="ncP-5R-dwU" id="Gvy-96-3MV"/>
                 <outlet property="certCheckBtn" destination="v0Q-Mx-M8E" id="G8Q-U8-hYy"/>
                 <outlet property="certListBtn" destination="Z51-Uq-HRd" id="F8I-Mk-nhR"/>
                 <outlet property="certLoginBtn" destination="We9-j9-oTZ" id="1g3-Gu-EXf"/>
+                <outlet property="certLoginView" destination="W9g-DE-ZyY" id="aFk-Ei-1V5"/>
                 <outlet property="certMgmtCenterBtn" destination="pJ7-DR-DJ6" id="yek-2h-6c8"/>
                 <outlet property="certRadioBtn" destination="a3O-80-F2m" id="B95-On-Ecq"/>
                 <outlet property="patternCheckBtn" destination="rxi-zg-iol" id="mJ3-Ax-zwA"/>
                 <outlet property="patternLoginBtn" destination="y9z-t5-bDh" id="Rwk-Ii-7yl"/>
                 <outlet property="patternLoginMgmtBtn" destination="cbu-BV-99C" id="1rh-ym-U97"/>
+                <outlet property="patternLoginView" destination="dGh-gm-ZHw" id="4Uv-It-A1k"/>
                 <outlet property="patternRadioBtn" destination="a4f-aj-zg3" id="LnK-WC-3GW"/>
                 <outlet property="simpleCheckBtn" destination="LKR-PL-pOV" id="N6m-AG-1iy"/>
                 <outlet property="simpleLoginBtn" destination="Rf9-ac-TOA" id="fEq-J0-63N"/>
                 <outlet property="simpleLoginMgmtBtn" destination="tUr-bR-IVx" id="5l9-2R-odM"/>
+                <outlet property="simpleLoginView" destination="nHF-ba-mUT" id="9i2-54-5sh"/>
                 <outlet property="simpleRadioBtn" destination="Pad-Hm-s4x" id="bdr-6k-hJR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -174,6 +178,38 @@
                                                         <action selector="gotoCertMgmtCenter" destination="-1" eventType="touchUpInside" id="EJd-ex-hya"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jmw-H4-Iz3" userLabel="simple_pw_mgmt_top_border">
+                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kOy-qe-dAu" userLabel="simple_pw_mgmt_top_2_border">
+                                                    <rect key="frame" x="0.0" y="47" width="284" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Sq-06-hDz" userLabel="simple_pw_mgmt_right_border">
+                                                    <rect key="frame" x="283" y="0.0" width="1" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6N4-g3-4Og" userLabel="simple_pw_mgmt_left_border">
+                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96470588239999999" green="0.96862745100000003" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
@@ -207,24 +243,8 @@
                                             <state key="normal" backgroundImage="icon_depth_04.png"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6dw-QZ-Z0i" userLabel="simple_pw_mgmt_right_border">
-                                            <rect key="frame" x="283" y="1" width="1" height="96"/>
+                                            <rect key="frame" x="283" y="48" width="1" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jmw-H4-Iz3" userLabel="simple_pw_mgmt_top_border">
-                                            <rect key="frame" x="0.0" y="0.0" width="284" height="1"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kOy-qe-dAu" userLabel="simple_pw_mgmt_top_2_border">
-                                            <rect key="frame" x="0.0" y="48" width="284" height="1"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,7 +259,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="atO-U6-pmT" userLabel="simple_pw_mgmt_left_border">
-                                            <rect key="frame" x="0.0" y="1" width="1" height="96"/>
+                                            <rect key="frame" x="0.0" y="48" width="1" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -431,7 +451,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <state key="normal" title="최소">
+                            <state key="normal" title="취소">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>

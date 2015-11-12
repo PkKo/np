@@ -8,21 +8,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StorageBoxDateSearchView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="294"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="286"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="zIH-yc-ofV">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="oEG-dm-hvz" userLabel="fake all account">
-                            <rect key="frame" x="18" y="27" width="164" height="31"/>
+                            <rect key="frame" x="18" y="19" width="174" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xzE-JL-jLp">
-                            <rect key="frame" x="32" y="28" width="148" height="28"/>
+                            <rect key="frame" x="32" y="20" width="158" height="28"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="전체계좌">
@@ -36,17 +36,17 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="GhJ-ju-8Xw">
-                            <rect key="frame" x="152" y="34" width="18" height="18"/>
+                            <rect key="frame" x="162" y="26" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="3cN-M3-oZd" userLabel="Fake trans type">
-                            <rect key="frame" x="189" y="27" width="111" height="31"/>
+                            <rect key="frame" x="199" y="19" width="101" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PvI-zg-Xkv">
-                            <rect key="frame" x="204" y="28" width="96" height="28"/>
+                            <rect key="frame" x="214" y="20" width="86" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="입출금">
@@ -60,17 +60,17 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dropdown_01.png" id="Bcd-Jh-8eD">
-                            <rect key="frame" x="274" y="34" width="18" height="18"/>
+                            <rect key="frame" x="274" y="26" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="ZHP-eo-2Ir" userLabel="Fake memo search">
-                            <rect key="frame" x="18" y="71" width="282" height="31"/>
+                            <rect key="frame" x="18" y="63" width="282" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모 검색" textAlignment="natural" minimumFontSize="17" id="cFp-hK-QD5">
-                            <rect key="frame" x="32" y="71" width="268" height="31"/>
+                            <rect key="frame" x="32" y="63" width="268" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -80,12 +80,13 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="CVs-Ft-RFM">
-                            <rect key="frame" x="17" y="115" width="71" height="27"/>
+                            <rect key="frame" x="17" y="107" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="1주일" backgroundImage="button_04_dft.png">
                                 <color key="titleColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_04_on.png"/>
                             <state key="highlighted" backgroundImage="button_04_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -94,12 +95,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mmd-9x-YmY">
-                            <rect key="frame" x="88" y="115" width="71" height="27"/>
+                            <rect key="frame" x="88" y="107" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="1개월" backgroundImage="button_05_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_05_on.png"/>
                             <state key="highlighted" backgroundImage="button_05_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -108,12 +110,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="anY-qp-tRL">
-                            <rect key="frame" x="159" y="115" width="71" height="27"/>
+                            <rect key="frame" x="159" y="107" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="3개월" backgroundImage="button_05_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="button_05_on.png"/>
                             <state key="highlighted" backgroundImage="button_05_on.png">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -122,13 +125,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ila-94-ui2">
-                            <rect key="frame" x="230" y="115" width="71" height="27"/>
+                            <rect key="frame" x="230" y="107" width="71" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="6개월" backgroundImage="button_06_dft.png">
                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <state key="highlighted" backgroundImage="button_06_on.png">
+                            <state key="selected" backgroundImage="button_06_on.png"/>
+                            <state key="highlighted">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -136,28 +140,32 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="YxC-eB-Zgd" userLabel="Fake StartDate">
-                            <rect key="frame" x="18" y="155" width="133" height="31"/>
+                            <rect key="frame" x="18" y="147" width="133" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="7Nl-8f-NFK">
-                            <rect key="frame" x="31" y="155" width="93" height="31"/>
+                            <rect key="frame" x="31" y="147" width="93" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="textColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h4i-0m-hDK">
-                            <rect key="frame" x="126" y="162" width="18" height="18"/>
+                            <rect key="frame" x="126" y="154" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_calendar_01"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xq0-jA-37G">
+                            <rect key="frame" x="18" y="148" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <connections>
-                                <action selector="chooseStartDate" destination="iN0-l3-epB" eventType="touchUpInside" id="qsL-XH-2qo"/>
+                                <action selector="chooseStartDate" destination="-2" eventType="touchUpInside" id="T6x-il-Tw3"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tXO-26-dIy">
-                            <rect key="frame" x="154" y="170" width="9" height="2"/>
+                            <rect key="frame" x="154" y="162" width="9" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -165,29 +173,33 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" id="KrF-yq-BOR" userLabel="Fake End Date">
-                            <rect key="frame" x="167" y="155" width="133" height="31"/>
+                            <rect key="frame" x="167" y="147" width="133" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="textColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="1jq-tl-0Kh">
-                            <rect key="frame" x="180" y="155" width="95" height="31"/>
+                            <rect key="frame" x="180" y="147" width="95" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="textColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R7B-u0-iEh">
-                            <rect key="frame" x="274" y="162" width="18" height="18"/>
+                            <rect key="frame" x="274" y="154" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_calendar_01"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aGC-sQ-ov5">
+                            <rect key="frame" x="167" y="148" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <connections>
-                                <action selector="chooseEndDate" destination="iN0-l3-epB" eventType="touchUpInside" id="qLb-Yd-4nv"/>
+                                <action selector="chooseEndDate" destination="-2" eventType="touchUpInside" id="c8X-nm-dzS"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Prw-wQ-jmi">
-                            <rect key="frame" x="18" y="201" width="282" height="31"/>
+                            <rect key="frame" x="18" y="193" width="282" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -202,7 +214,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2gp-KI-Krv">
-                    <rect key="frame" x="0.0" y="249" width="320" height="31"/>
+                    <rect key="frame" x="0.0" y="241" width="320" height="31"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -214,7 +226,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_01.png" id="Xt1-ag-nNx">
-                    <rect key="frame" x="0.0" y="280" width="320" height="14"/>
+                    <rect key="frame" x="0.0" y="272" width="320" height="14"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                 </imageView>
             </subviews>
@@ -223,6 +235,10 @@
             <connections>
                 <outlet property="accountBtn" destination="xzE-JL-jLp" id="GBF-ez-wex"/>
                 <outlet property="cancelBtn" destination="2gp-KI-Krv" id="nQU-dd-hFD"/>
+                <outlet property="dateSearch1MonthBtn" destination="Mmd-9x-YmY" id="wA2-mm-WZw"/>
+                <outlet property="dateSearch1WeekBtn" destination="CVs-Ft-RFM" id="RaL-YM-d8n"/>
+                <outlet property="dateSearch3MonthBtn" destination="anY-qp-tRL" id="ccY-sZ-ffu"/>
+                <outlet property="dateSearch6MonthBtn" destination="Ila-94-ui2" id="wzc-Nd-Tfe"/>
                 <outlet property="endDate" destination="1jq-tl-0Kh" id="xeL-XO-cjK"/>
                 <outlet property="fakeAllAccounts" destination="oEG-dm-hvz" id="kcA-I7-MpP"/>
                 <outlet property="fakeEndDate" destination="KrF-yq-BOR" id="geQ-xd-QEh"/>
@@ -233,7 +249,7 @@
                 <outlet property="startDate" destination="7Nl-8f-NFK" id="4Gw-J0-feg"/>
                 <outlet property="transBtn" destination="PvI-zg-Xkv" id="Rnl-80-MYa"/>
             </connections>
-            <point key="canvasLocation" x="189" y="499"/>
+            <point key="canvasLocation" x="189" y="503"/>
         </view>
     </objects>
     <resources>

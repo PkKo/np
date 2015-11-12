@@ -57,7 +57,6 @@
     LoginUtil * util = [[LoginUtil alloc] init];
     NSArray * allAccounts = [util getAllAccounts];
     
-    
     if (allAccounts && [allAccounts count] > 0) {
         NSMutableArray * accountsWithAll = [NSMutableArray arrayWithArray:allAccounts];
         [accountsWithAll insertObject:TRANS_ALL_ACCOUNT atIndex:0];
