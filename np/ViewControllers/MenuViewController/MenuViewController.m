@@ -178,6 +178,11 @@
         {
             [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
         }
+        
+        if(totalCount == 0)
+        {
+            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        }
     }
     else if(indexPath.row == 1)
     {
@@ -206,6 +211,11 @@
         {
             [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
         }
+        
+        if(noticeCount == 0)
+        {
+            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        }
     }
     else if(indexPath.row == 2)
     {
@@ -233,6 +243,11 @@
         else
         {
             [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
+        }
+        
+        if(noticeCount == 0)
+        {
+            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
         }
     }
     else

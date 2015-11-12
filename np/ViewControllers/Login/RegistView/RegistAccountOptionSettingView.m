@@ -8,6 +8,9 @@
 
 #import "RegistAccountOptionSettingView.h"
 
+#define DESCRIPTION_THREE_LINE_HEIGHT   48
+
+
 @implementation RegistAccountOptionSettingView
 
 @synthesize delegate;
@@ -74,6 +77,19 @@
 // 계좌삭제버튼
 @synthesize accountDeleteButton;
 
+// description views
+@synthesize descLabel1;
+@synthesize descDot1;
+@synthesize descView2;
+@synthesize descLabel2;
+@synthesize descDot2;
+@synthesize descView3;
+@synthesize descLabel3;
+@synthesize descDot3;
+@synthesize descView4;
+@synthesize descLabel4;
+@synthesize descDot4;
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -84,6 +100,28 @@
     
     [amountLimitBgView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
     [amountLimitBgView.layer setBorderWidth:1.0f];
+    
+    
+    [descDot1 setFrame:CGRectMake(descDot1.frame.origin.x,
+                                  descLabel1.frame.origin.y + 4,
+                                  descDot1.frame.size.width,
+                                  descDot1.frame.size.height)];
+    [descView2 setFrame:CGRectMake(descView2.frame.origin.x,
+                                   descLabel1.frame.origin.y + descLabel1.frame.size.height + 4,
+                                   descView2.frame.size.width,
+                                   descLabel2.frame.size.height)];
+    [descView3 setFrame:CGRectMake(descView3.frame.origin.x,
+                                   descView2.frame.origin.y + descView2.frame.size.height + 4,
+                                   descView3.frame.size.width,
+                                   descLabel3.frame.size.height)];
+    [descView4 setFrame:CGRectMake(descView4.frame.origin.x,
+                                   descView3.frame.origin.y + descView3.frame.size.height + 4,
+                                   descView4.frame.size.width,
+                                   descLabel4.frame.size.height)];
+    [accountDeleteButton setFrame:CGRectMake(accountDeleteButton.frame.origin.x,
+                                             descView4.frame.origin.y + descView4.frame.size.height + 15,
+                                             accountDeleteButton.frame.size.width,
+                                             accountDeleteButton.frame.size.height)];
 }
 
 - (void)initDataWithAccountNumber:(NSString *)accountNum
@@ -140,6 +178,11 @@
     notiPeriodTime1 = -1;
     notiPeriodTime2 = -1;
     notiPeriodTime3 = -1;
+    
+    [descLabel1 sizeToFit];
+    [descLabel2 sizeToFit];
+    [descLabel3 sizeToFit];
+    [descLabel4 sizeToFit];
 }
 
 - (void)makeAllOptionDataView
@@ -240,26 +283,26 @@
     {
         if(notiStartTime < 0)
         {
-            [notiTimeStart setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [notiTimeStart setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [notiTimeStart setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [notiTimeStart setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
         
         if(notiEndTime < 0)
         {
-            [notiTimeEnd setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [notiTimeEnd setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [notiTimeEnd setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [notiTimeEnd setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
     }
     else
     {
-        [notiTimeStart setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
-        [notiTimeEnd setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [notiTimeStart setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeEnd setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     }
     [notiTimeStart setText:[alarmTimeList objectAtIndex:notiStartTime + 1]];
     [notiTimeEnd setText:[alarmTimeList objectAtIndex:notiEndTime + 1]];
@@ -294,6 +337,7 @@
 - (void)notiAutoSelectViewSetting
 {
     [notiAutoText setText:[notiAutoList objectAtIndex:notiAutoFlag - 1]];
+    [notiAutoText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
 }
 
 /**
@@ -316,9 +360,9 @@
         [notiNoTimeText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
         [notiTimeOnText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-        [notiTimeOneText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
-        [notiTimeTwoText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
-        [notiTimeThreeText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [notiTimeOneText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeTwoText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeThreeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     }
     else if (notiPeriodType == 2)
     {
@@ -329,29 +373,29 @@
         
         if(notiPeriodTime1 < 0)
         {
-            [notiTimeOneText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [notiTimeOneText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [notiTimeOneText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [notiTimeOneText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
         
         if(notiPeriodTime2 < 0)
         {
-            [notiTimeTwoText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [notiTimeTwoText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [notiTimeTwoText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [notiTimeTwoText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
         
         if(notiPeriodTime3 < 0)
         {
-            [notiTimeThreeText setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [notiTimeThreeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [notiTimeThreeText setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [notiTimeThreeText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
     }
     
@@ -373,30 +417,60 @@
         }
         case NOTI_TIME_START:
         {
+            if(pickerSelectIndex > 0 && (pickerSelectIndex - 1) == notiEndTime)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             notiStartTime = pickerSelectIndex - 1;
             [self notiUnnotiTimeViewSetting];
             break;
         }
         case NOTI_TIME_END:
         {
+            if(pickerSelectIndex > 0 && (pickerSelectIndex - 1) == notiStartTime)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             notiEndTime = pickerSelectIndex - 1;
             [self notiUnnotiTimeViewSetting];
             break;
         }
         case NOTI_PERIOD_ONE:
         {
+            if((pickerSelectIndex > 0 && ((pickerSelectIndex - 1) == notiPeriodTime2 || (pickerSelectIndex - 1) == notiPeriodTime3)))
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             notiPeriodTime1 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
             break;
         }
         case NOTI_PERIOD_TWO:
         {
+            if((pickerSelectIndex > 0 && ((pickerSelectIndex - 1) == notiPeriodTime1 || (pickerSelectIndex - 1) == notiPeriodTime3)))
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             notiPeriodTime2 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
             break;
         }
         case NOTI_PERIOD_THREE:
         {
+            if((pickerSelectIndex > 0 && ((pickerSelectIndex - 1) == notiPeriodTime1 || (pickerSelectIndex - 1) == notiPeriodTime2)))
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             notiPeriodTime3 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
             break;

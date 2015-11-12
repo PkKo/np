@@ -443,6 +443,9 @@
 		A2DCFFB91BEB537000EEABD9 /* image_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DCFFB51BEB537000EEABD9 /* image_02@2x.png */; };
 		A2DD07231BF01F5700897AB8 /* HomeEtcDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD07211BF01F5700897AB8 /* HomeEtcDetailViewController.m */; };
 		A2DD07241BF01F5700897AB8 /* HomeEtcDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD07221BF01F5700897AB8 /* HomeEtcDetailViewController.xib */; };
+		A2DD37211BF2CD99002165CB /* LayerPopupInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD37201BF2CD99002165CB /* LayerPopupInfo.m */; };
+		A2DD37241BF2DD47002165CB /* SplashLayerPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD37231BF2DD47002165CB /* SplashLayerPopupView.m */; };
+		A2DD37261BF2DD54002165CB /* SplashLayerPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD37251BF2DD54002165CB /* SplashLayerPopupView.xib */; };
 		A2DD87431BC2155A0013470D /* RegisterTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */; };
 		A2DD87441BC2155A0013470D /* RegisterTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */; };
 		A2DD87481BC216AE0013470D /* RegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87461BC216AE0013470D /* RegisterAccountViewController.m */; };
@@ -1119,6 +1122,11 @@
 		A2DD07201BF01F5700897AB8 /* HomeEtcDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEtcDetailViewController.h; sourceTree = "<group>"; };
 		A2DD07211BF01F5700897AB8 /* HomeEtcDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEtcDetailViewController.m; sourceTree = "<group>"; };
 		A2DD07221BF01F5700897AB8 /* HomeEtcDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeEtcDetailViewController.xib; sourceTree = "<group>"; };
+		A2DD371F1BF2CD99002165CB /* LayerPopupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPopupInfo.h; sourceTree = "<group>"; };
+		A2DD37201BF2CD99002165CB /* LayerPopupInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPopupInfo.m; sourceTree = "<group>"; };
+		A2DD37221BF2DD47002165CB /* SplashLayerPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashLayerPopupView.h; sourceTree = "<group>"; };
+		A2DD37231BF2DD47002165CB /* SplashLayerPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashLayerPopupView.m; sourceTree = "<group>"; };
+		A2DD37251BF2DD54002165CB /* SplashLayerPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashLayerPopupView.xib; sourceTree = "<group>"; };
 		A2DD87401BC2155A0013470D /* RegisterTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTermsViewController.h; sourceTree = "<group>"; };
 		A2DD87411BC2155A0013470D /* RegisterTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTermsViewController.m; sourceTree = "<group>"; };
 		A2DD87421BC2155A0013470D /* RegisterTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterTermsViewController.xib; sourceTree = "<group>"; };
@@ -1916,6 +1924,8 @@
 			children = (
 				A2DCFFAA1BEB296000EEABD9 /* BannerInfo.h */,
 				A2DCFFAB1BEB296000EEABD9 /* BannerInfo.m */,
+				A2DD371F1BF2CD99002165CB /* LayerPopupInfo.h */,
+				A2DD37201BF2CD99002165CB /* LayerPopupInfo.m */,
 			);
 			path = CustomObject;
 			sourceTree = "<group>";
@@ -2542,6 +2552,9 @@
 				A2D9EAF61BEA129B00047BEC /* ServiceInfoViewController.h */,
 				A2D9EAF71BEA129B00047BEC /* ServiceInfoViewController.m */,
 				A2D9EAF81BEA129B00047BEC /* ServiceInfoViewController.xib */,
+				A2DD37221BF2DD47002165CB /* SplashLayerPopupView.h */,
+				A2DD37231BF2DD47002165CB /* SplashLayerPopupView.m */,
+				A2DD37251BF2DD54002165CB /* SplashLayerPopupView.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -3337,6 +3350,7 @@
 				A2D9EC4B1BEA18E200047BEC /* icon_settings_01_dft@2x.png in Resources */,
 				A2D9EC4C1BEA18E200047BEC /* icon_settings_01_on@2x.png in Resources */,
 				A2D9EC4D1BEA18E200047BEC /* icon_sharing_01@2x.png in Resources */,
+				A2DD37261BF2DD54002165CB /* SplashLayerPopupView.xib in Resources */,
 				A2D9EC4E1BEA18E200047BEC /* icon_sms_01_dft@2x.png in Resources */,
 				A2D9EC4F1BEA18E200047BEC /* icon_sms_01_sel@2x.png in Resources */,
 				A2D9EC501BEA18E200047BEC /* icon_stats_01@2x.png in Resources */,
@@ -3753,6 +3767,7 @@
 				A538C2F51BCE3FC5005E3211 /* SimplePwMgntChangeViewController.m in Sources */,
 				A2DBC3991BBE514600FFF357 /* IndexPathButton.m in Sources */,
 				A5EA7E321BBB7FA000626C74 /* ArchivedTransactionItemsViewController.m in Sources */,
+				A2DD37241BF2DD47002165CB /* SplashLayerPopupView.m in Sources */,
 				A2DEAE591B9FE6D800EDCCBA /* ECSlidingViewController.m in Sources */,
 				A2D95B9A1BA8F1DD00DC943D /* NFilterNum.m in Sources */,
 				A2DEADEE1B9FE68600EDCCBA /* AppDelegate.mm in Sources */,
@@ -3828,6 +3843,7 @@
 				A5F89D551BDE226B000A24CB /* NoticeViewController.m in Sources */,
 				A2DF41041BAF9902001389E7 /* RegistPhoneViewController.m in Sources */,
 				A55047181BDF7D28000D4524 /* LoginAccountController.m in Sources */,
+				A2DD37211BF2CD99002165CB /* LayerPopupInfo.m in Sources */,
 				A2DFDD901BB3742C00DC1A78 /* NotiSettingMenuViewController.m in Sources */,
 				A2DE58861BA7F98A008903E6 /* CertificateListViewController.m in Sources */,
 				A2DEAE5E1B9FE6D800EDCCBA /* MASConstraintMaker.m in Sources */,
@@ -4003,7 +4019,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccaeddb8-e9b6-4ce5-8620-69f0ec825db8";
+				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
 			};
 			name = Debug;
 		};
@@ -4035,7 +4051,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccaeddb8-e9b6-4ce5-8620-69f0ec825db8";
+				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
 			};
 			name = Release;
 		};

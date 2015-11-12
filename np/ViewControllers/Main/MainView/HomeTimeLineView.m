@@ -85,6 +85,17 @@
     }
     
     [self addPullToRefreshHeader];
+    
+    if([mTimeLineSection count] == 0)
+    {
+        [mTimeLineTable setHidden:YES];
+        [listEmptyView setHidden:NO];
+    }
+    else
+    {
+        [mTimeLineTable setHidden:NO];
+        [listEmptyView setHidden:YES];
+    }
 }
 
 - (void)refreshData
@@ -92,6 +103,17 @@
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     
     [self refreshBadges];
+    
+    if([mTimeLineSection count] == 0)
+    {
+        [mTimeLineTable setHidden:YES];
+        [listEmptyView setHidden:NO];
+    }
+    else
+    {
+        [mTimeLineTable setHidden:NO];
+        [listEmptyView setHidden:YES];
+    }
     
     if(!listSortType)
     {
@@ -110,18 +132,21 @@
         mTimeLineDic = reverseDic;
     }
     
-    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
-    if([firstSectionArray count] >= 2)
+    if(mTimeLineSection != nil && [mTimeLineSection count] > 0)
     {
-        bannerIndex = 1;
-    }
-    else if([firstSectionArray count] == 1)
-    {
-        bannerIndex = 0;
-    }
-    else
-    {
-        bannerIndex = 0;
+        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+        if([firstSectionArray count] >= 2)
+        {
+            bannerIndex = 1;
+        }
+        else if([firstSectionArray count] == 1)
+        {
+            bannerIndex = 0;
+        }
+        else
+        {
+            bannerIndex = -1;
+        }
     }
     
     if([mTimeLineSection count] == 0)
@@ -568,6 +593,8 @@
     {
         NSArray *array = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:section]).date];
         
+        return [array count];
+        /*
         if(section == 0 && [array count] == 0)
         {
             return 1;
@@ -575,7 +602,7 @@
         else
         {
             return [array count];
-        }
+        }*/
     }
 }
 
@@ -930,6 +957,7 @@
             [cell.titleLabel setText:inboxData.title];
             // 공지 내용
             [cell.contentLabel setText:inboxData.text];
+            [cell.contentLabel sizeToFit];
             
             if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
             {

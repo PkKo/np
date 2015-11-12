@@ -20,6 +20,7 @@
 #import "ServiceInfoViewController.h"
 #import "RegistCompleteViewController.h"
 #import "BannerInfo.h"
+#import "SplashLayerPopupView.h"
 
 @interface SplashViewController ()
 
@@ -34,6 +35,7 @@
 {
     [super viewDidLoad];
     // 앱 위변조 체크 삽입 예정
+    layerPopupInfo = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,7 +95,14 @@
         }
     }
     
-    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    if(layerPopupInfo != nil)
+    {
+        [self showLayerPopupView];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }
 }
 
 #pragma mark - 세션 생성 init 및 앱 버전 확인
@@ -104,8 +113,8 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[CommonUtil getDeviceUUID] forKey:REQUEST_APP_VERSION_UUID];
     [reqBody setObject:[CommonUtil getAppVersion] forKey:REQUEST_APP_VERSION_APPVER];
-    [reqBody setObject:@"N" forKey:@"forceUpdate"];
-    [reqBody setObject:@"N" forKey:@"lpType"];
+//    [reqBody setObject:@"N" forKey:@"forceUpdate"];
+//    [reqBody setObject:@"N" forKey:@"lpType"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_APP_VERSION];
     HttpRequest *req = [HttpRequest getInstance];
@@ -130,6 +139,25 @@
         if(terms2Ver != nil)
         {
             [[NSUserDefaults standardUserDefaults] setObject:terms2Ver forKey:@"terms2Ver"];
+        }
+        
+        if([response objectForKey:@"layer_seq"] != nil)
+        {
+            layerPopupInfo = [[LayerPopupInfo alloc] init];
+            layerPopupInfo.viewStartdate    = [response objectForKey:@"view_startdate"];
+            layerPopupInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
+            layerPopupInfo.viewEnddate      = [response objectForKey:@"view_enddate"];
+            layerPopupInfo.popupType        = [response objectForKey:@"popup_type"];
+            layerPopupInfo.viewTitle        = [response objectForKey:@"view_title"];
+            layerPopupInfo.linkInUrl        = [response objectForKey:@"link_in_url"];
+            layerPopupInfo.closedayType     = [response objectForKey:@"closeday_type"];
+            layerPopupInfo.createDate       = [response objectForKey:@"create_date"];
+            layerPopupInfo.viewType         = [response objectForKey:@"view_type"];
+            layerPopupInfo.imageUrl         = [response objectForKey:@"image_url"];
+            layerPopupInfo.textBody         = [response objectForKey:@"text_body"];
+            layerPopupInfo.layerSeq         = [response objectForKey:@"layer_seq"];
+            layerPopupInfo.editDate         = [response objectForKey:@"edit_date"];
+            layerPopupInfo.linkType         = [response objectForKey:@"link_type"];
         }
         
         NSString *updateYN = [response objectForKey:@"updateNotiYn"];
@@ -169,7 +197,7 @@
 - (void)getBannerInfoRequest
 {
     [loadingProgressBar setProgress:0.5f animated:YES];
-    
+    /*
     // temp
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
@@ -180,9 +208,8 @@
     else
     {
         [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
-    }
+    }*/
     
-    /*
     NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
     
     if(isUser != nil && [isUser isEqualToString:@"Y"])
@@ -194,8 +221,15 @@
     }
     else
     {
-        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
-    }*/
+        if(layerPopupInfo != nil)
+        {
+            [self showLayerPopupView];
+        }
+        else
+        {
+            [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+        }
+    }
 }
 
 - (void)getBannerInfoResponse:(NSDictionary *)response
@@ -207,7 +241,7 @@
         bannerInfo.bannerSeq        = [response objectForKey:@"banner_seq"];
         bannerInfo.createDate       = [response objectForKey:@"create_date"];
         bannerInfo.editDate         = [response objectForKey:@"edit_date"];
-        bannerInfo.imagePath        = [response objectForKey:@"image_path"];
+        bannerInfo.imagePath        = [response objectForKey:@"image_url"];
         bannerInfo.linkInUrl        = [response objectForKey:@"link_in_url"];
         bannerInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
         bannerInfo.linkType         = [response objectForKey:@"link_type"];
@@ -239,6 +273,27 @@
 - (void)sessionTestResponse:(NSDictionary *)response
 {
     NSLog(@"%@", response);
+    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+}
+
+- (void)showLayerPopupView
+{
+    SplashLayerPopupView *view = [SplashLayerPopupView view];
+    [view.titleLabel setText:layerPopupInfo.viewTitle];
+    [view.contentLabel setText:layerPopupInfo.textBody];
+    [view.contentLabel sizeToFit];
+    [view setDelegate:self];
+    [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:view];
+}
+
+- (void)closeLayerPopup:(id)sender
+{
+    if([sender tag] == 1)
+    {
+        // 해당 레이어 아이디를 가진 것은 일주일간 보이지 않음으로 한다.
+    }
+    
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 }
 

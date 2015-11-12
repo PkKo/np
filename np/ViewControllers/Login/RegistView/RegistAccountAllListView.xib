@@ -20,7 +20,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4pi-SI-okt">
-                                    <rect key="frame" x="0.0" y="15" width="320" height="39"/>
+                                    <rect key="frame" x="0.0" y="15" width="320" height="34"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <string key="text">NH스마트알림을 이용하실 계좌번호를
 선택해주세요.</string>

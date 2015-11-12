@@ -63,6 +63,7 @@
         // 기존 옵션 정보를 가져온다
         [countrySelectButton setEnabled:NO];
         [countryNameLabel setText:countryName];
+        [countryNameLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         [self registedCurrencyOptionRequest];
     }
     else
@@ -349,6 +350,14 @@
         countrySelectIndex = tempIndex;
         [countryNameLabel setText:[[countryAllList objectAtIndex:countrySelectIndex] objectForKey:@"UMSW023004_OUT_SUB.nation_name"]];
         countryCode = [[countryAllList objectAtIndex:countrySelectIndex] objectForKey:@"UMSW023004_OUT_SUB.nation_id"];
+        if(countrySelectIndex == 0)
+        {
+            [countryNameLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        }
+        else
+        {
+            [countryNameLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        }
     }
     else
     {

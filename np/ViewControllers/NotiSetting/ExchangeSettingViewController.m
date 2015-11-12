@@ -39,10 +39,6 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, countryListTable.frame.size.width, 0)];
     [countryListTable setTableFooterView:footerView];
     
-    // 1. 기존에 가입된 서비스가 있는지 확인해본다.
-    [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.view addSubview:serviceNotiAlertView];
-    
     // 2. 서버에서 환율알림 국가 목록을 조회해온다.
     [self currencyCountryListRequest];
     
@@ -115,7 +111,8 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"sub"]];
+        regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"freeList"]];
+        chargeList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"chargeList"]];
         [countryListTable reloadData];
     }
     else
@@ -133,6 +130,13 @@
     {
         [emptyView setHidden:YES];
         [listView setHidden:NO];
+    }
+    
+    if([chargeList count] > 0)
+    {
+        // 1. 기존에 가입된 서비스가 있는지 확인해본다.
+        [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [self.view addSubview:serviceNotiAlertView];
     }
 }
 

@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIImageView *initialImg;
+@property (strong, nonatomic) IBOutlet UIButton *preButton;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
 - (IBAction)registStart:(id)sender;
 - (IBAction)changePage:(id)sender;

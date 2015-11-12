@@ -243,10 +243,12 @@
     if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
     {
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.depthImage setHidden:YES];
     }
     else
     {
         [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
+        [cell.depthImage setHidden:NO];
     }
     
     // 스티커 버튼
@@ -274,10 +276,12 @@
     
     // 푸시 시간
     [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+    
     // 공지 타이틀
     [cell.titleLabel setText:inboxData.title];
     // 공지 내용
     [cell.contentLabel setText:inboxData.text];
+    [cell.contentLabel sizeToFit];
     
     if(indexPath.row == 0)
     {
@@ -298,6 +302,11 @@
     
     NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    
+    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    {
+        return;
+    }
     
     HomeEtcDetailViewController *vc = [[HomeEtcDetailViewController alloc] init];
     [vc setInboxData:inboxData];
@@ -367,7 +376,7 @@
 //        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, timelineTableView.contentSize.height, timelineTableView.frame.size.height);
 //        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + timelineTableView.frame.size.height, timelineTableView.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
         {
             [delegate refreshData:NO];
         }

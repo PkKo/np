@@ -10,6 +10,8 @@
 #import "HomeQuickPushTableViewCell.h"
 #import "HomeQuickNoticeTableViewCell.h"
 
+#define HOME_QUICKVIEW_CELL_HEIGHT  64
+
 @interface HomeQuickViewController ()
 
 @end
@@ -104,6 +106,11 @@
         [pushCountLabel setText:[NSString stringWithFormat:@"%d", (int)pushCount]];
     }
     
+    if(pushCount == 0)
+    {
+        [pushCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+    }
+    
     NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
     if(noticeCount > 99)
     {
@@ -128,6 +135,11 @@
         [noticeCountLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
     }
     
+    if(noticeCount == 0)
+    {
+        [noticeCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+    }
+    
     [self getRecentNoticeRequest];
 }
 
@@ -136,6 +148,11 @@
     [super viewWillAppear:animated];
     
     cellHeight = pushTableView.frame.size.height / 5;
+    if(cellHeight < HOME_QUICKVIEW_CELL_HEIGHT)
+    {
+        cellHeight = HOME_QUICKVIEW_CELL_HEIGHT;
+        [pushTableView setScrollEnabled:YES];
+    }
     
     bannerInfoView = [BannerInfoView view];
     [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height)];
@@ -169,7 +186,7 @@
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
     [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
-    [reqData setQueryType:@"3,4,5,6"];
+    [reqData setQueryType:@"E"];
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
 }
@@ -257,7 +274,7 @@
         
         NSNumberFormatter *numFomatter = [NSNumberFormatter new];
         [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
+        NSString *amount = [numFomatter stringFromNumber:[NSNumber numberWithInt:(int)inboxData.amount]];
         // 금액 String size
         CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
         
