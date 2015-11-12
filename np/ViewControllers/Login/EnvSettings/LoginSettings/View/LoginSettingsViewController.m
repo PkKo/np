@@ -15,13 +15,16 @@
 #import "CertificateMenuViewController.h"
 #import "EnvMgmtViewController.h"
 
-#define HIGHLIGHT_BG_COLOR [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
+#define HIGHLIGHT_BG_COLOR              [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
-#define OVAL_BUTTON_SELECTED_BG_COLOR [UIColor whiteColor]
+#define OVAL_BUTTON_SELECTED_BG_COLOR   [UIColor whiteColor]
 #define OVAL_BUTTON_SELECTED_TEXT_COLOR [UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1]
 
-#define OVAL_BUTTON_NORMAL_BG_COLOR [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]
-#define OVAL_BUTTON_NORMAL_TEXT_COLOR [UIColor whiteColor]
+#define OVAL_BUTTON_NORMAL_BG_COLOR     [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]
+#define OVAL_BUTTON_NORMAL_TEXT_COLOR   [UIColor whiteColor]
+
+#define BOX_BORDER_NORMAL_COLOR         [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]
+#define BOX_BORDER_SELECTED_COLOR       [UIColor whiteColor]
 
 @interface LoginSettingsViewController () {
     LoginMethod selectedLoginMethod;
@@ -97,7 +100,18 @@
 
 #pragma mark - Simple Login
 - (IBAction)selectSimpleLogin:(id)sender {
-    [self selectLoginBy:LOGIN_BY_SIMPLEPW];
+    
+    LoginUtil * util    = [[LoginUtil alloc] init];
+    NSString * simplePw = [util getSimplePassword];
+    
+    if (simplePw) {
+        
+        [self selectLoginBy:LOGIN_BY_SIMPLEPW];
+        
+    } else if ([util isLoggedIn]) {
+        
+        [self gotoSimpleLoginMgmt];
+    }
 }
 
 - (IBAction)gotoSimpleLoginMgmt {
@@ -106,7 +120,18 @@
 
 #pragma mark - Pattern Login
 - (IBAction)selectPatternLogin {
-    [self selectLoginBy:LOGIN_BY_PATTERN];
+    
+    LoginUtil * util        = [[LoginUtil alloc] init];
+    NSString * patternPw    = [util getPatternPassword];
+    
+    if (patternPw) {
+        
+        [self selectLoginBy:LOGIN_BY_PATTERN];
+        
+    } else if ([util isLoggedIn]) {
+        
+        [self gotoPatternLoginMgmt];
+    }
 }
 
 - (IBAction)gotoPatternLoginMgmt {
@@ -185,11 +210,18 @@
     CertInfo * savedCertToLogin = [util getCertToLogin];
     [self updateSelectedCert:savedCertToLogin];
     
-    NSString * simplePw     = [util getSimplePassword];
-    [self.simpleLoginBtn setEnabled:simplePw ? YES : NO];
-    
-    NSString * patternPw    = [util getPatternPassword];
-    [self.patternLoginBtn setEnabled:patternPw ? YES : NO];
+    if (![util isLoggedIn]) {
+        
+        NSString * simplePw     = [util getSimplePassword];
+        if (!simplePw) {
+            [self.simpleLoginBtn setEnabled:NO];
+        }
+        
+        NSString * patternPw    = [util getPatternPassword];
+        if (!patternPw) {
+            [self.patternLoginBtn setEnabled:NO];
+        }
+    }
     
     if (![util isLoggedIn]) {
         [self.simpleLoginMgmtBtn setEnabled:self.simpleLoginBtn.isEnabled];
@@ -218,30 +250,54 @@
             self.accountLoginBtn.selected   = !self.accountLoginBtn.isSelected;
             self.accountCheckBtn.hidden     = !self.accountLoginBtn.isSelected;
             self.accountRadioBtn.hidden     =  self.accountLoginBtn.isSelected;
+            
+            for (UIView * border in self.accountLoginView.subviews) {
+                if ([border isKindOfClass:[UILabel class]]) {
+                    [border setBackgroundColor:self.accountLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                }
+            }
             break;
             
         case LOGIN_BY_CERTIFICATE:
             self.certLoginBtn.selected              = !self.certLoginBtn.isSelected;
             self.certCheckBtn.hidden                = !self.certLoginBtn.isSelected;
             self.certRadioBtn.hidden                =  self.certLoginBtn.isSelected;
-            self.certMgmtCenterBtn.backgroundColor  = self.certLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
+            self.certMgmtCenterBtn.backgroundColor  =  self.certLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.certMgmtCenterBtn setTitleColor:self.certLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
+            
+            for (UIView * border in self.certLoginView.subviews) {
+                if ([border isKindOfClass:[UILabel class]]) {
+                    [border setBackgroundColor:self.certLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                }
+            }
             break;
             
         case LOGIN_BY_SIMPLEPW:
             self.simpleLoginBtn.selected            = !self.simpleLoginBtn.isSelected;
             self.simpleCheckBtn.hidden              = !self.simpleLoginBtn.isSelected;
             self.simpleRadioBtn.hidden              =  self.simpleLoginBtn.isSelected;
-            self.simpleLoginMgmtBtn.backgroundColor = self.simpleLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
+            self.simpleLoginMgmtBtn.backgroundColor =  self.simpleLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.simpleLoginMgmtBtn setTitleColor:self.simpleLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
+            
+            for (UIView * border in self.simpleLoginView.subviews) {
+                if ([border isKindOfClass:[UILabel class]]) {
+                    [border setBackgroundColor:self.simpleLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                }
+            }
             break;
             
         case LOGIN_BY_PATTERN:
             self.patternLoginBtn.selected               = !self.patternLoginBtn.isSelected;
             self.patternCheckBtn.hidden                 = !self.patternLoginBtn.isSelected;
             self.patternRadioBtn.hidden                 =  self.patternLoginBtn.isSelected;
-            self.patternLoginMgmtBtn.backgroundColor    = self.patternLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
+            self.patternLoginMgmtBtn.backgroundColor    =  self.patternLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.patternLoginMgmtBtn setTitleColor:self.patternLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
+            
+            for (UIView * border in self.patternLoginView.subviews) {
+                if ([border isKindOfClass:[UILabel class]]) {
+                    [border setBackgroundColor:self.patternLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                }
+            }
             break;
             
         default:

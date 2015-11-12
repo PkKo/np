@@ -11,11 +11,13 @@
 
 @interface LoginSettingsViewController : CommonViewController <UIAlertViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView   *accountLoginView;
 @property (weak, nonatomic) IBOutlet UIButton *accountRadioBtn;
 @property (weak, nonatomic) IBOutlet UIButton *accountCheckBtn;
 @property (weak, nonatomic) IBOutlet UIButton *accountLoginBtn;
 - (IBAction)selectAccountLogin;
 
+@property (weak, nonatomic) IBOutlet UIView   *certLoginView;
 @property (weak, nonatomic) IBOutlet UIButton *certRadioBtn;
 @property (weak, nonatomic) IBOutlet UIButton *certCheckBtn;
 @property (weak, nonatomic) IBOutlet UIButton *certLoginBtn;
@@ -25,6 +27,7 @@
 - (IBAction)showCertList;
 @property (weak, nonatomic) IBOutlet UIButton *certListBtn;
 
+@property (weak, nonatomic) IBOutlet UIView   *simpleLoginView;
 @property (weak, nonatomic) IBOutlet UIButton *simpleRadioBtn;
 @property (weak, nonatomic) IBOutlet UIButton *simpleCheckBtn;
 @property (weak, nonatomic) IBOutlet UIButton *simpleLoginBtn;
@@ -32,6 +35,7 @@
 - (IBAction)selectSimpleLogin:(id)sender;
 - (IBAction)gotoSimpleLoginMgmt;
 
+@property (weak, nonatomic) IBOutlet UIView   *patternLoginView;
 @property (weak, nonatomic) IBOutlet UIButton *patternRadioBtn;
 @property (weak, nonatomic) IBOutlet UIButton *patternCheckBtn;
 @property (weak, nonatomic) IBOutlet UIButton *patternLoginBtn;
