@@ -10,12 +10,19 @@
 #import "CommonViewController.h"
 
 @interface LoginCertListViewController : CommonViewController <UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UIView *certView;
-@property (weak, nonatomic) IBOutlet UILabel *certName;
-@property (weak, nonatomic) IBOutlet UILabel *certIssuer;
-@property (weak, nonatomic) IBOutlet UILabel *certType;
-@property (weak, nonatomic) IBOutlet UILabel *issueDate;
-@property (weak, nonatomic) IBOutlet UILabel *expiryDate;
+@property (weak, nonatomic) IBOutlet UIView         * certView;
+@property (weak, nonatomic) IBOutlet UILabel        * certName;
+@property (weak, nonatomic) IBOutlet UILabel        * certIssuer;
+@property (weak, nonatomic) IBOutlet UILabel        * certType;
+@property (weak, nonatomic) IBOutlet UILabel        * issueDate;
+@property (weak, nonatomic) IBOutlet UILabel        * expiryDate;
+
+@property (weak, nonatomic) IBOutlet UIView         * containerView;
+@property (weak, nonatomic) IBOutlet UIScrollView   * containerScrollView;
+
+@property (weak, nonatomic) IBOutlet UITextField    * fakeNoticeTextField;
+@property (weak, nonatomic) IBOutlet UILabel        * noteAsterisk;
+@property (weak, nonatomic) IBOutlet UILabel        * noteContent;
 
 - (IBAction)gotoCertCenter;
 - (IBAction)gotoLoginSettings;
@@ -23,5 +30,4 @@
 - (IBAction)gotoFAQ;
 - (IBAction)gotoTelInquiry;
 - (IBAction)clickOnCert:(UITapGestureRecognizer *)sender;
-@property (weak, nonatomic) IBOutlet UITextField *fakeNoticeTextField;
 @end

@@ -247,8 +247,48 @@
     }
 }
 
+- (void)resizeNoticeContent {
+    
+    CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
+    CGRect fakeNoticeTextFieldFrame = self.fakeNoticeTextField.frame;
+    CGFloat contentWidth            = screenWidth - self.fakeNoticeTextField.superview.frame.origin.x * 2  - (self.noteContent.frame.origin.x - fakeNoticeTextFieldFrame.origin.x) - 5;
+    
+    CGRect noteContentRect      = self.noteContent.frame;
+    noteContentRect.size.width  = contentWidth;
+    [self.noteContent setFrame:noteContentRect];
+    [self.noteContent sizeToFit];
+    noteContentRect             = self.noteContent.frame;
+    
+    CGRect noteAsteriskRect    = self.noteAsterisk.frame;
+    noteAsteriskRect.origin.y  = noteContentRect.origin.y + 3;
+    [self.noteAsterisk setFrame:noteAsteriskRect];
+    
+    fakeNoticeTextFieldFrame.size.height =  noteContentRect.origin.y - fakeNoticeTextFieldFrame.origin.y + noteContentRect.size.height + 5;
+    
+    [self.fakeNoticeTextField setFrame:fakeNoticeTextFieldFrame];
+}
+
+- (void)resizeContainerScrollView {
+    
+    CGFloat screenHeight                    = [[UIScreen mainScreen] bounds].size.height;
+    CGRect containerScrollViewFrame         = self.containerScrollView.frame;
+    containerScrollViewFrame.size.height    = screenHeight - self.containerScrollView.frame.origin.y;
+    
+    [self.containerScrollView setFrame:containerScrollViewFrame];
+    
+    CGRect containerViewRect = self.containerView.frame;
+    if (containerViewRect.size.height < containerScrollViewFrame.size.height) {
+        containerViewRect.size.height = containerScrollViewFrame.size.height - 20;
+        [self.containerView setFrame:containerViewRect];
+    }
+    
+    [self.containerScrollView setContentSize:self.containerView.frame.size];
+}
+
 - (void)updateUI {
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField color:TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE];
+    [self resizeContainerScrollView];
+    [self resizeNoticeContent];
 }
 
 #pragma mark - Footer

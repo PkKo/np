@@ -291,6 +291,10 @@
     [self.noteContent1 sizeToFit];
     noteContent1Rect            = self.noteContent1.frame;
     
+    CGRect noteAsterisk1Rect    = self.noteAsterisk1.frame;
+    noteAsterisk1Rect.origin.y  = noteContent1Rect.origin.y + 3;
+    [self.noteAsterisk1 setFrame:noteAsterisk1Rect];
+    
     CGRect noteContent2Rect     = self.noteContent2.frame;
     noteContent2Rect.size.width = contentWidth;
     noteContent2Rect.origin.y   = noteContent1Rect.origin.y + noteContent1Rect.size.height + 4;
@@ -298,12 +302,20 @@
     [self.noteContent2 sizeToFit];
     noteContent2Rect            = self.noteContent2.frame;
     
+    CGRect noteAsterisk2Rect    = self.noteAsterisk2.frame;
+    noteAsterisk2Rect.origin.y  = noteContent2Rect.origin.y + 3;
+    [self.noteAsterisk2 setFrame:noteAsterisk2Rect];
+    
     CGRect noteContent3Rect     = self.noteContent3.frame;
     noteContent3Rect.size.width = contentWidth;
     noteContent3Rect.origin.y   = noteContent2Rect.origin.y + noteContent2Rect.size.height + 4;
     [self.noteContent3 setFrame:noteContent3Rect];
     [self.noteContent3 sizeToFit];
     noteContent3Rect            = self.noteContent3.frame;
+    
+    CGRect noteAsterisk3Rect    = self.noteAsterisk3.frame;
+    noteAsterisk3Rect.origin.y  = noteContent3Rect.origin.y + 3;
+    [self.noteAsterisk3 setFrame:noteAsterisk3Rect];
     
     CGRect noticeViewFrame      = self.noticeView.frame;
     noticeViewFrame.size.height = noteContent3Rect.origin.y + noteContent3Rect.size.height + 20;
@@ -323,7 +335,7 @@
     
     if (!accounts || [accounts count] == 0) {
         
-        [self showNoDataView:YES];
+        //[self showNoDataView:YES];
         [self stopIndicator];
         
     } else {
