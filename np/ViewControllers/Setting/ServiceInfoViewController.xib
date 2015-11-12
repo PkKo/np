@@ -9,7 +9,9 @@
             <connections>
                 <outlet property="contentView" destination="dFX-5n-LFX" id="kBO-Sk-feQ"/>
                 <outlet property="initialImg" destination="Vc2-L5-cq2" id="5nM-bR-N94"/>
+                <outlet property="nextButton" destination="QWf-Nd-ds7" id="b10-XT-3DT"/>
                 <outlet property="pageControl" destination="6qK-gR-eQ7" id="pnX-k4-sYi"/>
+                <outlet property="preButton" destination="PKM-ek-z9D" id="0qE-Bc-dUx"/>
                 <outlet property="scrollView" destination="L9m-G5-jWs" id="3b2-rx-7ec"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -90,6 +92,6 @@
         <image name="close_02.png" width="16" height="16"/>
         <image name="icon_next_01.png" width="16" height="31"/>
         <image name="icon_next_02.png" width="16" height="31"/>
-        <image name="img_service_01.png" width="320" height="411"/>
+        <image name="img_service_01.png" width="320" height="410"/>
     </resources>
 </document>

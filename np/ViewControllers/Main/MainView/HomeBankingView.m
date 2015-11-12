@@ -893,7 +893,7 @@
     {
 //        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, bankingListTable.contentSize.height, bankingListTable.frame.size.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
         {
             [delegate refreshData:NO];
         }

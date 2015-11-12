@@ -16,6 +16,7 @@
 @synthesize timeLabel;
 @synthesize titleLabel;
 @synthesize contentLabel;
+@synthesize depthImage;
 
 - (void)awakeFromNib {
     // Initialization code

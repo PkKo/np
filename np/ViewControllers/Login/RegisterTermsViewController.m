@@ -47,6 +47,11 @@
     
     [scrollView setContentSize:contentView.frame.size];
     
+    [serviceTermWebView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
+    [serviceTermWebView.layer setBorderWidth:1.0f];
+    [personalDataTermWebView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
+    [personalDataTermWebView.layer setBorderWidth:1.0f];
+    
     [serviceTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_SHORT]]];
     [personalDataTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_SHORT]]];
 }

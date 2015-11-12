@@ -20,10 +20,13 @@
 @synthesize scrollView;
 @synthesize pageControl;
 @synthesize initialImg;
+@synthesize preButton;
+@synthesize nextButton;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [preButton setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,6 +63,18 @@
     CGFloat scrollViewY         = self.scrollView.frame.origin.y;
     
     [self.scrollView scrollRectToVisible:CGRectMake(scrollViewWith * self.pageControl.currentPage, scrollViewY, scrollViewWith, scrollViewHeight) animated:YES];
+    
+    [preButton setHidden:NO];
+    [nextButton setHidden:NO];
+    if(self.pageControl.currentPage == 0)
+    {
+        [preButton setHidden:YES];
+    }
+    
+    if(self.pageControl.currentPage == self.pageControl.numberOfPages - 1)
+    {
+        [nextButton setHidden:YES];
+    }
 }
 
 - (void)setIndicatorForCurrentPage {
@@ -101,6 +116,7 @@
     }
     
     [initialImg setHidden:YES];
+    [preButton setHidden:YES];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

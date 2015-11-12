@@ -46,6 +46,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [optionView.descLabel1 sizeToFit];
+    [optionView.descLabel2 sizeToFit];
+    [optionView.descLabel3 sizeToFit];
+    [optionView.descLabel4 sizeToFit];
+}
+
 #pragma mark - UIButtonAction
 /**
  @brief 확인버튼 클릭

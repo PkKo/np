@@ -257,6 +257,10 @@
         [optionView makeAllOptionDataView];
         [contentView addSubview:optionView];
         [nextButton setTag:2];
+        [optionView.descLabel1 sizeToFit];
+        [optionView.descLabel2 sizeToFit];
+        [optionView.descLabel3 sizeToFit];
+        [optionView.descLabel4 sizeToFit];
     }
     else
     {

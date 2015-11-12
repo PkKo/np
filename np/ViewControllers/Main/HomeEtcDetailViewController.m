@@ -86,6 +86,7 @@
     else
     {
         // 이미지 세팅
+        [self setImageView:nil];
     }
 }
 

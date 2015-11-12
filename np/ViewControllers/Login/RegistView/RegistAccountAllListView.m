@@ -56,7 +56,7 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    [cell.accountNum setText:[[accountList objectAtIndex:indexPath.row] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
+    [cell.accountNum setText:[NSString stringWithFormat:@"%@(%@)", [[accountList objectAtIndex:indexPath.row] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"], [[accountList objectAtIndex:indexPath.row] objectForKey:@"EAAPAL00R0_OUT_SUB.io_ea_wrsnm5"]]];
     
     if(selectedIndex == indexPath.row)
     {

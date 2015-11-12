@@ -117,6 +117,21 @@ typedef enum PickerViewType
 @property (strong, nonatomic) IBOutlet UIButton *accountDeleteButton;
 /////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////
+// description 부분
+@property (strong, nonatomic) IBOutlet UILabel *descLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *descDot1;
+@property (strong, nonatomic) IBOutlet UIView *descView2;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel2;
+@property (strong, nonatomic) IBOutlet UILabel *descDot2;
+@property (strong, nonatomic) IBOutlet UIView *descView3;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel3;
+@property (strong, nonatomic) IBOutlet UILabel *descDot3;
+@property (strong, nonatomic) IBOutlet UIView *descView4;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel4;
+@property (strong, nonatomic) IBOutlet UILabel *descDot4;
+/////////////////////////////////////////////////////////////////
+
 // 입출금 선택(1:입출 2:입금 3:출금)
 @property (assign, nonatomic) AlarmSettingType selectedType;
 // 통지금액(0:x, 1:천, 2:만, 3:십만, 4:백만, 5:천만, 6:일억, 7:십억)

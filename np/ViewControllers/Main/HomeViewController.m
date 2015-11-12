@@ -84,7 +84,7 @@
             }
             case BANKING:
             {
-                reqData.queryType = @"IO";
+                reqData.queryType = @"1,2";
                 break;
             }
             case OTHER:
@@ -262,7 +262,7 @@
         }
         case BANKING:
         {
-            reqData.queryType = @"IO";
+            reqData.queryType = @"1,2";
             break;
         }
         case OTHER:
@@ -511,6 +511,33 @@
                 [timelineMessageList removeAllObjects];
             }
             
+            for(NHInboxMessageData *inboxData in messageList)
+            {
+                if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                {
+                    inboxData.inboxType = @"4";
+                    inboxData.stickerCode = 4;
+                }
+                
+                NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                
+                NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                if(itemList == nil)
+                {
+                    itemList = [[NSMutableArray alloc] init];
+                    NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                    dateSectionData.date = dateString;
+                    dateSectionData.day = dateDayString;
+                    [sectionList addObject:dateSectionData];
+                }
+                
+                [itemList addObject:inboxData];
+                
+                [timelineMessageList setObject:itemList forKey:dateString];
+            }
+            
+            /*
             if(viewType == TIMELINE && !isSearch)
             {
                  NSString *todayString = [CommonUtil getTodayDateString];
@@ -584,7 +611,7 @@
                     
                     [timelineMessageList setObject:itemList forKey:dateString];
                 }
-            }
+            }*/
         }
         else
         {
@@ -623,6 +650,32 @@
                     isMoreList = NO;
                 }
                 
+                for(NHInboxMessageData *inboxData in messageList)
+                {
+                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    {
+                        inboxData.inboxType = @"4";
+                        inboxData.stickerCode = 4;
+                    }
+                    
+                    NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                    
+                    NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
+                    if(itemList == nil)
+                    {
+                        itemList = [[NSMutableArray alloc] init];
+                        NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
+                        TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
+                        dateSectionData.date = dateString;
+                        dateSectionData.day = dateDayString;
+                        [sectionList addObject:dateSectionData];
+                    }
+                    
+                    [itemList addObject:inboxData];
+                    
+                    [timelineMessageList setObject:itemList forKey:dateString];
+                }
+                /*
                 // 과거 목록
                 if(viewType == TIMELINE)
                 {
@@ -693,7 +746,7 @@
                         
                         [timelineMessageList setObject:itemList forKey:dateString];
                     }
-                }
+                }*/
             }
             
             isRefresh = NO;

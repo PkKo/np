@@ -7,10 +7,12 @@
 //
 
 #import "CommonViewController.h"
+#import "LayerPopupInfo.h"
 
 @interface SplashViewController : UIViewController<UIAlertViewDelegate, IBInboxProtocol>
 {
     int categoryIndex;
+    LayerPopupInfo *layerPopupInfo;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *loadingTextLabel;
