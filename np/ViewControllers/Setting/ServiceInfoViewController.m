@@ -96,7 +96,7 @@
     for (int pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
         
         UIImageView * page = [[UIImageView alloc] initWithFrame:CGRectMake(scrollViewWith * pageIndex, 0, scrollViewWith, scrollViewHeight)];
-        [page setImage:[UIImage imageNamed:[NSString stringWithFormat:@"img_service_0%d", (pageIndex + 1)]]];
+        [page setImage:[UIImage imageNamed:[NSString stringWithFormat:(IS_IPHONE_4_OR_LESS ? @"img_service_0%d_4s" : @"img_service_0%d"), (pageIndex + 1)]]];
         [self.scrollView addSubview:page];
     }
     

@@ -47,14 +47,12 @@
     
     [self updateSelectedDates:dateAmonthAgo toDate:today];
     [self getChartData];
+    [self resizeNoticeContent];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    NSLog(@"%s:%d", __func__, __LINE__);
 }
-
 
 #pragma mark - Date Search View
 
@@ -276,14 +274,40 @@
     } else if (_incomeDataSource && _incomeDataSource.count > 0) {
         noticeViewY             = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 15; // spacing
     }
+    
     noticeViewFrame.origin.y    = noticeViewY;
     [self.noticeView setFrame:noticeViewFrame];
     
-    /*
-    CGPoint noticeViewCenterPoint = CGPointMake(self.scrollView.center.x, self.noticeView.center.y);
-    [self.noticeView setCenter:noticeViewCenterPoint];
-    */
     [chartViewUtil setContentSizeOfScrollView:self.scrollView];
+}
+
+- (void)resizeNoticeContent {
+    
+    CGFloat contentWidth        = self.noticeView.frame.size.width - self.noteContent1.frame.origin.x;
+    
+    CGRect noteContent1Rect     = self.noteContent1.frame;
+    noteContent1Rect.size.width = contentWidth;
+    [self.noteContent1 setFrame:noteContent1Rect];
+    [self.noteContent1 sizeToFit];
+    noteContent1Rect            = self.noteContent1.frame;
+    
+    CGRect noteContent2Rect     = self.noteContent2.frame;
+    noteContent2Rect.size.width = contentWidth;
+    noteContent2Rect.origin.y   = noteContent1Rect.origin.y + noteContent1Rect.size.height + 4;
+    [self.noteContent2 setFrame:noteContent2Rect];
+    [self.noteContent2 sizeToFit];
+    noteContent2Rect            = self.noteContent2.frame;
+    
+    CGRect noteContent3Rect     = self.noteContent3.frame;
+    noteContent3Rect.size.width = contentWidth;
+    noteContent3Rect.origin.y   = noteContent2Rect.origin.y + noteContent2Rect.size.height + 4;
+    [self.noteContent3 setFrame:noteContent3Rect];
+    [self.noteContent3 sizeToFit];
+    noteContent3Rect            = self.noteContent3.frame;
+    
+    CGRect noticeViewFrame      = self.noticeView.frame;
+    noticeViewFrame.size.height = noteContent3Rect.origin.y + noteContent3Rect.size.height + 20;
+    [self.noticeView setFrame:noticeViewFrame];
 }
 
 #pragma mark - Get data
@@ -293,8 +317,6 @@
 }
 
 - (void)doGetChartDataAfterDelay {
-    
-    NSLog(@"%s", __func__);
     
     NSArray * accounts = [self getAccountList];
     
@@ -309,7 +331,6 @@
         [IBInbox loadWithListener:self];
         [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
     }
-    
 }
 
 
@@ -326,7 +347,7 @@
     
     NSInteger numberOfItems = [summaryList count];
     NSMutableArray * items  = [NSMutableArray arrayWithCapacity:numberOfItems];
-    int total               = [[summaryList valueForKeyPath:@"@sum.sum"] intValue];
+    float total               = [[summaryList valueForKeyPath:@"@sum.sum"] floatValue];
     
     float addUpPercentage     = 0;
     

@@ -75,25 +75,46 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="8aG-4V-WPC">
-                                        <rect key="frame" x="18" y="337" width="280" height="150"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="18" y="337" width="284" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 수입/지출 통계 조회기간은 최대 1개월까지만    가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yeP-St-JF8">
-                                                <rect key="frame" x="0.0" y="0.0" width="284" height="39"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jl3-YA-bex">
+                                                <rect key="frame" x="0.0" y="3" width="14" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수입/지출 통계 조회기간은 최대 1개월까지만 가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yeP-St-JF8">
+                                                <rect key="frame" x="10" y="0.0" width="274" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 최근 6개월 내 입출금 알림내역만 조회 가능하며     삭재된 내역은 통계에 포함되지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JNt-uW-k8S">
-                                                <rect key="frame" x="0.0" y="36" width="284" height="46"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NVZ-ud-BbX">
+                                                <rect key="frame" x="0.0" y="40" width="14" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 6개월 내 입출금 알림내역만 조회 가능하며 삭재된 내역은 통계에 포함되지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JNt-uW-k8S">
+                                                <rect key="frame" x="10" y="38" width="274" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 알림내역은 최대 6개월까지만 보관되므로     조회된 통계 화면을 따로 보관하시려는 경우    화면 캡쳐를 이용해주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X8h-mO-aGv">
-                                                <rect key="frame" x="0.0" y="75" width="284" height="65"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="blU-UY-GUT">
+                                                <rect key="frame" x="0.0" y="78" width="14" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림내역은 최대 6개월까지만 보관되므로 조회된 통계 화면을 따로 보관하시려는 경우 화면 캡쳐를 이용해주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X8h-mO-aGv">
+                                                <rect key="frame" x="10" y="76" width="274" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -128,6 +149,12 @@
                     </view>
                     <connections>
                         <outlet property="noDataView" destination="Khv-AZ-ON7" id="rbA-GL-R9E"/>
+                        <outlet property="noteAsterisk1" destination="Jl3-YA-bex" id="CPe-bR-MRU"/>
+                        <outlet property="noteAsterisk2" destination="NVZ-ud-BbX" id="NYX-zE-YYM"/>
+                        <outlet property="noteAsterisk3" destination="blU-UY-GUT" id="4Ap-VS-4uA"/>
+                        <outlet property="noteContent1" destination="yeP-St-JF8" id="dEO-k0-n7B"/>
+                        <outlet property="noteContent2" destination="JNt-uW-k8S" id="yvj-YD-wP5"/>
+                        <outlet property="noteContent3" destination="X8h-mO-aGv" id="ah8-w1-PjI"/>
                         <outlet property="noticeView" destination="8aG-4V-WPC" id="ORa-Rd-5qh"/>
                         <outlet property="scrollView" destination="FQC-y1-FDJ" id="flB-hX-Ndl"/>
                         <outlet property="selectAccountArrow" destination="5r1-XZ-Nn6" id="jdS-h3-hWh"/>

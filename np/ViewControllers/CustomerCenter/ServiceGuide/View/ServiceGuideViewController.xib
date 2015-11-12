@@ -9,7 +9,9 @@
             <connections>
                 <outlet property="containerScrollView" destination="tki-Qw-Ycq" id="6fs-s3-RHW"/>
                 <outlet property="containerView" destination="1gw-z1-JQc" id="HQw-Xs-Mop"/>
+                <outlet property="nxtBtn" destination="yaO-pP-LPp" id="73O-l8-eSR"/>
                 <outlet property="pageControl" destination="3bM-VY-cH7" id="9v7-ZU-Cfa"/>
+                <outlet property="prvBtn" destination="CPV-OI-TQF" id="uC3-06-Hta"/>
                 <outlet property="scrollView" destination="2oS-Vt-pqP" id="qYH-Yj-XFv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,22 +22,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tki-Qw-Ycq">
-                    <rect key="frame" x="0.0" y="75" width="320" height="493"/>
+                    <rect key="frame" x="0.0" y="55" width="320" height="513"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="1gw-z1-JQc">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="493"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="513"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="2oS-Vt-pqP">
                                     <rect key="frame" x="0.0" y="31" width="320" height="411"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="cni-ID-2h7"/>
                                     </connections>
                                 </scrollView>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" id="3bM-VY-cH7">
-                                    <rect key="frame" x="105" y="442" width="111" height="37"/>
+                                    <rect key="frame" x="105" y="452" width="111" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="pageIndicatorTintColor" red="0.8784313725490196" green="0.88235294117647056" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="currentPageIndicatorTintColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,7 +47,7 @@
                                 </pageControl>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CPV-OI-TQF">
                                     <rect key="frame" x="9" y="257" width="16" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_next_01.png"/>
                                     <connections>
                                         <action selector="goPreviousPage" destination="-1" eventType="touchUpInside" id="zvo-VG-dgL"/>
@@ -53,7 +55,7 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yaO-pP-LPp">
                                     <rect key="frame" x="295" y="257" width="16" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_next_02.png"/>
                                     <connections>
                                         <action selector="goNextPage" destination="-1" eventType="touchUpInside" id="c0J-Y8-vGr"/>

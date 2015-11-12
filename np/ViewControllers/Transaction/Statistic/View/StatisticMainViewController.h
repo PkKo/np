@@ -22,6 +22,13 @@
 @property (weak, nonatomic) IBOutlet UILabel        * selectedDatesLabel;
 @property (weak, nonatomic) IBOutlet UIView         * noticeView;
 
+@property (weak, nonatomic) IBOutlet UILabel *noteAsterisk1;
+@property (weak, nonatomic) IBOutlet UILabel *noteAsterisk2;
+@property (weak, nonatomic) IBOutlet UILabel *noteAsterisk3;
+@property (weak, nonatomic) IBOutlet UILabel *noteContent1;
+@property (weak, nonatomic) IBOutlet UILabel *noteContent2;
+@property (weak, nonatomic) IBOutlet UILabel *noteContent3;
+
 - (IBAction)clickSearchButton;
 - (IBAction)selectAccount;
 @end

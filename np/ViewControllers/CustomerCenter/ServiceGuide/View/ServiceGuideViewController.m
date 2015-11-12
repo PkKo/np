@@ -19,6 +19,8 @@
     
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"서비스안내"];
+    [self.prvBtn setHidden:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +30,23 @@
 
 #pragma mark - Page Control
 - (IBAction)changePage:(id)sender {
+    
+    
+    // enable/disable previous, next buttons
+    if (self.pageControl.currentPage == 0) {
+        
+        [self.prvBtn setHidden:YES];
+        [self.nxtBtn setHidden:NO];
+        
+    } else if (self.pageControl.currentPage == self.pageControl.numberOfPages - 1) {
+        
+        [self.prvBtn setHidden:NO];
+        [self.nxtBtn setHidden:YES];
+    } else {
+        
+        [self.prvBtn setHidden:NO];
+        [self.nxtBtn setHidden:NO];
+    }
     
     CGFloat scrollViewWith      = self.scrollView.frame.size.width;
     CGFloat scrollViewHeight    = self.scrollView.frame.size.height;
@@ -75,10 +94,10 @@
     for (int pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
         
         UIImageView * page = [[UIImageView alloc] initWithFrame:CGRectMake(scrollViewWith * pageIndex, 0, scrollViewWith, scrollViewHeight)];
-        [page setImage:[UIImage imageNamed:[NSString stringWithFormat:@"img_service_0%d", (pageIndex + 1)]]];
+        [page setImage:[UIImage imageNamed:[NSString stringWithFormat:(IS_IPHONE_4_OR_LESS ? @"img_service_0%d_4s" : @"img_service_0%d"), (pageIndex + 1)]]];
+        
         [self.scrollView addSubview:page];
     }
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

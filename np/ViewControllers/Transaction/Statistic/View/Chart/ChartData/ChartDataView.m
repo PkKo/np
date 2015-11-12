@@ -22,7 +22,7 @@
     CGFloat mainViewHeight  = 0.0;
     
     BOOL    isIncome    = NO;
-    CGFloat total       = 0;
+    float total       = 0;
     
     NSNumberFormatter * numberFormatter = [StatisticMainUtil getNumberFormatter];
     
@@ -41,12 +41,11 @@
         [[itemView itemValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[item.itemValue floatValue]]]]];
         
         total += [item.itemValue floatValue];
+        NSLog(@"item.itemName: %@ - [item.itemValue floatValue]: %f - total: %f", item.itemName, [item.itemValue floatValue], total);
         
         CGRect itemViewFrame        = itemView.frame;
         itemViewFrame.origin.y      = itemIdx * itemViewFrame.size.height + MARGIN_TOP;
         itemViewFrame.size.width    = [[UIScreen mainScreen] bounds].size.width - 36;
-        NSLog(@"self.frame.size.width: %f", itemViewFrame.size.width);
-        
         
         [itemView setFrame:itemViewFrame];
         
@@ -66,6 +65,9 @@
     ChartDataTotalView   * totalView  = (ChartDataTotalView *)[nibArr objectAtIndex:0];
     
     [[totalView totalName] setText:isIncome ? @"수입합계" : @"지출합계"];
+    
+    total = [[arr valueForKeyPath:@"@sum.itemValue"] floatValue];
+    
     [[totalView totalValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]]];
     
     CGRect totalViewFrame       = totalView.frame;
