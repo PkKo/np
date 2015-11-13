@@ -32,6 +32,7 @@
     CGRect dateSearchViewFrame = dateSearchView.frame;
     [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, scrollView.frame.size.width, dateSearchViewFrame.size.height)];
     
+    /*
     // move other subviews downward
     for (UIView * subview in [scrollView subviews]) {
         
@@ -45,18 +46,18 @@
         subviewFrame.origin.y += dateSearchViewFrame.size.height;
         [subview setFrame:subviewFrame];
     }
-    
+    */
     [scrollView addSubview:dateSearchView];
     [dateSearchView updateCurrentYearMonth];
     [dateSearchView updateUI];
     
-    [self setContentSizeOfScrollView:scrollView];
+    //[self setContentSizeOfScrollView:scrollView];
     
     return dateSearchView;
 }
 
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView {
-    
+    /*
     UIScrollView * scrollView   = (UIScrollView *)dateSearchView.superview;
     CGRect dateSearchViewFrame  = dateSearchView.frame;
     
@@ -72,10 +73,10 @@
         subviewFrame.origin.y -= dateSearchViewFrame.size.height;
         [subview setFrame:subviewFrame];
     }
-    
+    */
     [dateSearchView removeFromSuperview];
     
-    [self setContentSizeOfScrollView:scrollView];
+    //[self setContentSizeOfScrollView:scrollView];
 }
 
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate

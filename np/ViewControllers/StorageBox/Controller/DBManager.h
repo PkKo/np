@@ -18,9 +18,12 @@
 - (NSArray *)selectByTransactionsStartDate:(NSString *)startDate endDate:(NSString *)endDate
                                  accountNo:(NSString *)accountNo transType:(NSString *)transType memo:(NSString *)memo;
 
+- (void)removeDB;
 - (NSString *)findTransactionMemoById:(NSString *)transactionId;
 - (BOOL)saveTransaction:(TransactionObject *)transObj;
 - (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId;
+- (BOOL)updateTransactionPinnable:(BOOL)isPinnedUp byTransId:(NSString *)transId;
+- (BOOL)updateTransactionType:(NSString *)transType byTransId:(NSString *)transId;
 - (BOOL)updateTransaction:(TransactionObject *)transObj;
 - (BOOL)deleteAllTransactions;
 - (BOOL)deleteTransactionById:(NSString *)transId;

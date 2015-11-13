@@ -277,6 +277,7 @@
             if ([accountNumbers count] > 0) {
                 hasAccounts = YES;
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+                [self toggleBtnBgColor:NO textLength:0];
                 [[[LoginUtil alloc] init] showMainPage];
             }
         }

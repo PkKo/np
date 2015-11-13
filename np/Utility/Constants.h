@@ -245,9 +245,10 @@
 #define TIME_ACSENDING_ORDER    @"과거순"
 #define TIME_DECSENDING_ORDER   @"최신순"
 
-#define REQUEST_LOGIN_CERT                               @"servlet/EFPU1011R.cmd"
-#define REQUEST_LOGIN_ACCOUNT                            @"servlet/EFPU1012R.cmd"
-#define REQUEST_LOGIN_PINPAT                             @"servlet/EFPU1013R.cmd"
+#define REQUEST_LOGIN_CERT                          @"servlet/EFPU1011R.cmd"
+#define REQUEST_LOGIN_ACCOUNT                       @"servlet/EFPU1012R.cmd"
+#define REQUEST_LOGIN_PINPAT                        @"servlet/EFPU1013R.cmd"
+#define REQUEST_SERVICE_DEACTIVATION                @"servlet/EFPUD040001.cmd"
 
 #define NOTIFICATION_REFRESH_BADGES                 @"notificationRefreshBadges"
 
@@ -263,6 +264,7 @@
 #define PREF_KEY_CERT_TO_LOGIN                      @"certificateToLogin"
 #define PREF_KEY_CERT_LOGIN_SETT_FAILED_TIMES       @"certLoginSettingsKeyFailedTimes"
 
+#define PREF_KEY_LATEST_APP_VERSION                 @"latestAppVersion"
 #define PREF_KEY_LOGIN_STATUS                       @"loginStatus"
 #define PREF_KEY_LOGIN_METHOD                       @"loginMethodKey"
 typedef enum LoginMethod {

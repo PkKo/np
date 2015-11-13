@@ -23,8 +23,44 @@
 #import "DrawPatternLockViewController.h"
 #import "LoginSimpleVerificationViewController.h"
 #import "RegistAccountViewController.h"
+#import "ServiceDeactivationController.h"
+#import "DBManager.h"
 
 @implementation LoginUtil
+
+#pragma mark - Service Deactivation
+- (BOOL)isServiceDeactivated {
+    return [(AppDelegate *)[UIApplication sharedApplication].delegate isServiceDeactivated];
+}
+
+- (void)deactivateService:(BOOL)isDeactivated {
+    [(AppDelegate *)[UIApplication sharedApplication].delegate setIsServiceDeactivated:isDeactivated];
+}
+
+- (void)removeAllData {
+    // remove all objects
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+    
+    [[DBManager sharedInstance] removeDB];
+}
+
+#pragma mark - App Version {
+- (NSString *)getLatestAppVersion {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    NSString * latestVersion = [prefs stringForKey:PREF_KEY_LATEST_APP_VERSION];
+    if (latestVersion == nil) {
+        latestVersion = [CommonUtil getAppVersion];
+    }
+    
+    return latestVersion;
+}
+
+- (void)saveLatestAppVersion:(NSString *)latestVersion {
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:latestVersion forKey:PREF_KEY_LATEST_APP_VERSION];
+    [prefs synchronize];
+}
 
 #pragma mark - Login Settings
 - (BOOL)isLoggedIn {
@@ -35,6 +71,7 @@
 - (void)setLogInStatus:(BOOL)isLoggedIn {
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setBool:isLoggedIn forKey:PREF_KEY_LOGIN_STATUS];
+    [prefs synchronize];
 }
 
 - (void)gotoLoginSettings:(UINavigationController *)navController {
@@ -59,6 +96,11 @@
 }
 
 - (void)showMainPage {
+    
+    if ([self isServiceDeactivated]) {
+        [[ServiceDeactivationController sharedInstance] deactivateService];
+        return;
+    }
     
     [self setLogInStatus:YES];
     

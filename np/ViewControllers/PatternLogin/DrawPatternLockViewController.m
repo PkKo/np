@@ -320,6 +320,7 @@
     
     LoginUtil * util = [[LoginUtil alloc] init];
     [util savePatternPasswordFailedTimes:0];
+    [self clearDotConnections];
     [util showMainPage];
 }
 

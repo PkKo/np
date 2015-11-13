@@ -188,10 +188,18 @@
     [self.fakeNoticeTextField setFrame:fakeNoticeTextFieldFrame];
 }
 
+- (void)clearData {
+    self.accountTextField.text = @"";
+    self.passwordTextField.text = @"";
+    self.birthdayTextField.text = @"";
+}
+
 - (void)loginResult:(NSDictionary *)response {
     
     NSLog(@"response: %@", response);
     [self stopIndicator];
+    
+    [self clearData];
     
     LoginUtil * util        = [[LoginUtil alloc] init];
     

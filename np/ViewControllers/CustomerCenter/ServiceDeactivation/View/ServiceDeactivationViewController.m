@@ -26,4 +26,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)deactivateService {
+    
+    LoginUtil * util = [[LoginUtil alloc] init];
+    
+    [util deactivateService:YES];
+    [util setLogInStatus:NO];
+    [util showLoginPage:self.navigationController];
+}
 @end
