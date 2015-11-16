@@ -14,7 +14,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *mMenuTitleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *menuSeparateLine;
 
-@property (strong, nonatomic) IBOutlet CircleView *countBgView;
-@property (strong, nonatomic) IBOutlet UILabel *countLabel;
-
 @end

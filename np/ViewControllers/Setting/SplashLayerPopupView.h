@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *contentLabel;
 @property (strong, nonatomic) IBOutlet UIButton *closeDayOptionButton;
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
+@property (strong, nonatomic) IBOutlet UIImageView *contentImage;
 
 - (IBAction)closeLayerView:(id)sender;
 @end

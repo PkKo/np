@@ -30,6 +30,7 @@
 -(void)setDelegate:(id)mTarget selector:(SEL)mSelector;
 -(BOOL)requestUrl:(NSString *)url bodyObject:(NSDictionary *)bodyObject;
 -(BOOL)requestUrl:(NSString *)url bodyString:(NSString *)bodyString;
+-(BOOL)requestUrl:(NSString *)url bodyString:(NSString *)bodyString token:(NSString *)token;
 -(BOOL)requestUrlGET:(NSString *)url;
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)mResponse;
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;

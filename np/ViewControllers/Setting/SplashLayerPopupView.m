@@ -15,6 +15,7 @@
 @synthesize contentLabel;
 @synthesize closeDayOptionButton;
 @synthesize closeButton;
+@synthesize contentImage;
 
 - (IBAction)closeWithCloseDayOption:(id)sender
 {

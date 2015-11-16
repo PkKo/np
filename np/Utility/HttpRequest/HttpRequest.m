@@ -103,6 +103,36 @@
     return NO;
 }
 
+-(BOOL)requestUrl:(NSString *)url bodyString:(NSString *)bodyString token:(NSString *)token
+{
+    //NSLog(@"%s",__FUNCTION__);
+    //서버에 연결한다
+    requestUrl = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+    
+    //통신방식 정의
+    [requestUrl setHTTPMethod:@"POST"];
+    //dictionary 형태를 JSON data로 바꿔준다
+    postData = [bodyString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    //    if([[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] != nil)
+    //    {
+    //        [requestUrl setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"MCPU_SSID"] forHTTPHeaderField:@"CooKie"];
+    //    }
+    [requestUrl setValue:token forHTTPHeaderField:@"CODE_RESPONSE_TOKEN"];
+    //data를 헤더에 붙여준다
+    [requestUrl setHTTPBody:postData];
+    
+    //연결을 시도하는 connection 생성
+    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
+    
+    //연결이 되면 데이터를 받을 변수 초기화
+    if(connection) {
+        receivedData = [[NSMutableData alloc] init];
+        return YES;
+    }
+    
+    return NO;
+}
+
 -(BOOL)requestUrlGET:(NSString *)url
 {
     //NSLog(@"%s",__FUNCTION__);

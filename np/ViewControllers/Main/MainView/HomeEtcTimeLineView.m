@@ -90,7 +90,7 @@
     textLoading = @"Loading";
     
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT)];
-    refreshHeaderView.backgroundColor = [UIColor clearColor];
+    refreshHeaderView.backgroundColor = [UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f];
     [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
@@ -104,9 +104,13 @@
     [refreshLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
     refreshLabel.textAlignment = NSTextAlignmentCenter;
     [refreshLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, REFRESH_HEADER_HEIGHT - 1, timelineTableView.frame.size.width, 1)];
+    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     [refreshHeaderView addSubview:refreshLabel];
     [refreshHeaderView addSubview:refreshIndicator];
+    [refreshHeaderView addSubview:separateLine];
     [timelineTableView addSubview:refreshHeaderView];
 }
 
@@ -207,6 +211,11 @@
     
     return sectionHeaderView;
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return TIMELINE_ETC_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -438,14 +447,14 @@
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [searchView setHidden:NO];
-        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
+        [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
     }completion:nil];
 }
 
 - (IBAction)searchViewHide:(id)sender
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height, self.frame.size.width, searchView.frame.size.height)];
+        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height + TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
     }
                      completion:^(BOOL finished){
                          [searchView setHidden:YES];
@@ -569,6 +578,10 @@
 {
     isDeleteMode = YES;
     
+    if(searchView.frame.origin.y > 0)
+    {
+        [self searchViewHide:nil];
+    }
     [deleteAllView setHidden:NO];
     [deleteAllImg setHighlighted:NO];
     [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];

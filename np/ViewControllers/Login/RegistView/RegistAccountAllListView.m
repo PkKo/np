@@ -65,7 +65,7 @@
     }
     else
     {
-        [cell.accountNum setTextColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [cell.accountNum setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         [cell.selectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
     }
     

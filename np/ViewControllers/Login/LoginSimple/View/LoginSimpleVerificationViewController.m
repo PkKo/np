@@ -13,6 +13,7 @@
 #import "LoginSettingsViewController.h"
 #import "StorageBoxUtil.h"
 #import "CustomerCenterUtil.h"
+#import "BTWCodeguard.h"
 
 @interface LoginSimpleVerificationViewController () {
     NSString * _pw;
@@ -241,6 +242,11 @@
     NSLog(@"user_id: %@", user_id);
     NSLog(@"crmMobile: %@", crmMobile);
     
+    [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
+    [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
+    [[Codeguard sharedInstance] setChallengeRequestUrl:[NSString stringWithFormat:@"%@CodeGuard/check.jsp", SERVER_URL]];
+    NSString *token = [[Codeguard sharedInstance] requestAndGetToken];
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_PINPAT];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
@@ -252,7 +258,7 @@
     
     HttpRequest *req = [HttpRequest getInstance];
     [req setDelegate:self selector:@selector(loginResponse:)];
-    [req requestUrl:url bodyString:bodyString];
+    [req requestUrl:url bodyString:bodyString token:token];
     
 }
 

@@ -16,12 +16,15 @@
 #import "MainPageViewController.h"
 #import "CertManager.h"
 #import "CustomerCenterUtil.h"
+#import "BTWCodeguard.h"
 
 @interface LoginCertListViewController ()
 
 @end
 
 @implementation LoginCertListViewController
+
+@synthesize descLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +33,7 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     [self updateUI];
+    [descLabel sizeToFit];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -151,6 +155,11 @@
         NSLog(@"user_id: %@", user_id);
         NSLog(@"crmMobile: %@", crmMobile);
         
+        [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
+        [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
+        [[Codeguard sharedInstance] setChallengeRequestUrl:[NSString stringWithFormat:@"%@CodeGuard/check.jsp", SERVER_URL]];
+        NSString *token = [[Codeguard sharedInstance] requestAndGetToken];
+        
         [[CertManager sharedInstance] setTbs:strTbs];
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
@@ -168,7 +177,7 @@
         
         HttpRequest *req = [HttpRequest getInstance];
         [req setDelegate:self selector:@selector(certInfoResponse:)];
-        [req requestUrl:url bodyString:bodyString];
+        [req requestUrl:url bodyString:bodyString token:token];
         
         return YES;
     }

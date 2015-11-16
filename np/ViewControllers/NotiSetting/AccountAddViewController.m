@@ -76,6 +76,7 @@
         [CertTab setEnabled:NO];
         [accountInputView setHidden:YES];
         [certMenuView setHidden:NO];
+        [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
         
         [self makeCertMenuView];
     }

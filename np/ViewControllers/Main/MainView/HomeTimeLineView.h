@@ -68,12 +68,18 @@
 @property (strong, nonatomic) IBOutlet UIView *datePickerView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (assign, nonatomic) BOOL isSearchResult;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneWeekBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodThreeMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodSixMonthBtn;
+
 
 @property (assign, nonatomic) BOOL isMoreList;
 
 // 보관함에 저장된 갯수 표시
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 @property (assign, nonatomic) NSInteger bannerIndex;
+@property (strong, nonatomic) IBOutlet UIView *storageButtonView;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;

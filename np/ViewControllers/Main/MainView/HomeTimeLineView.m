@@ -41,6 +41,10 @@
 @synthesize datePicker;
 @synthesize isSearchResult;
 @synthesize isMoreList;
+@synthesize periodOneWeekBtn;
+@synthesize periodOneMonthBtn;
+@synthesize periodThreeMonthBtn;
+@synthesize periodSixMonthBtn;
 
 @synthesize storageCountLabel;
 
@@ -191,7 +195,6 @@
     [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
-
 - (void)addPullToRefreshHeader
 {
     textPull = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
@@ -199,7 +202,7 @@
     textLoading = @"Loading";
     
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
-    refreshHeaderView.backgroundColor = [UIColor clearColor];
+    refreshHeaderView.backgroundColor = [UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f];
     [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
@@ -213,9 +216,13 @@
     [refreshLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
     refreshLabel.textAlignment = NSTextAlignmentCenter;
     [refreshLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, REFRESH_HEADER_HEIGHT - 1, mTimeLineTable.frame.size.width, 1)];
+    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     [refreshHeaderView addSubview:refreshLabel];
     [refreshHeaderView addSubview:refreshIndicator];
+    [refreshHeaderView addSubview:separateLine];
     [mTimeLineTable addSubview:refreshHeaderView];
 }
 
@@ -269,6 +276,10 @@
 {
     isDeleteMode = YES;
     
+    if(searchView.frame.origin.y > 0)
+    {
+        [self searchViewHide:nil];
+    }
     [deleteAllView setHidden:NO];
     [deleteAllImg setHighlighted:NO];
     [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
@@ -390,14 +401,15 @@
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [searchView setHidden:NO];
-        [searchView setFrame:CGRectMake(0, 0, self.frame.size.width, searchView.frame.size.height)];
+        [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
+        [self searchPeriodSelect:periodOneWeekBtn];
     }completion:nil];
 }
 
 - (IBAction)searchViewHide:(id)sender
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height, self.frame.size.width, searchView.frame.size.height)];
+        [searchView setFrame:CGRectMake(0, -searchView.frame.size.height + TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
     }
                      completion:^(BOOL finished){
                          [searchView setHidden:YES];
@@ -410,9 +422,49 @@
     NSString *toDateString = [CommonUtil getFormattedTodayString:@"yyyy.MM.dd"];
     [searchEndDateLabel setText:toDateString];
     searchEndDate = [toDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    [searchEndDateLabel setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
     NSString *fromDateString = [CommonUtil getFormattedDateStringWithIndex:@"yyyy.MM.dd" indexDay:-[sender tag]];
     [searchStartDateLabel setText:fromDateString];
+    [searchStartDateLabel setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
     searchStartDate = [fromDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    switch ([sender tag])
+    {
+        case 7:
+        {
+            [periodOneWeekBtn setSelected:YES];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 30:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:YES];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 90:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:YES];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 180:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 // 검색 실행
@@ -455,12 +507,14 @@
     if(searchDateSelectType)
     {
         [searchEndDateLabel setText:selectedDateString];
+        [searchEndDateLabel setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
         searchEndDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
     }
     else
     {
         [searchStartDateLabel setText:selectedDateString];
         searchStartDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+        [searchStartDateLabel setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
     }
     
     [datePickerView setHidden:YES];
@@ -867,6 +921,8 @@
                 if(bannerInfoView == nil)
                 {
                     bannerInfoView = [BannerInfoView view];
+                    [bannerInfoView.nongminBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg forState:UIControlStateNormal];
+                    [bannerInfoView.noticeBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg forState:UIControlStateNormal];
                 }
                 else
                 {
@@ -880,11 +936,11 @@
                 [bannerView.bannerContentView addSubview:bannerInfoView];
                 [bannerInfoView bannerTimerStart];
             }
-            
+            /*
             if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
             {
                 [cell.upperLine setHidden:YES];
-            }
+            }*/
             
             CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
             if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
@@ -978,11 +1034,11 @@
                 [bannerView.bannerContentView addSubview:bannerInfoView];
                 [bannerInfoView bannerTimerStart];
             }
-            
+            /*
             if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
             {
                 [cell.upperLine setHidden:YES];
-            }
+            }*/
             
             return cell;
         }
