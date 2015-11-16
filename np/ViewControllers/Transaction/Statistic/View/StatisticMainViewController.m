@@ -59,14 +59,14 @@
 - (IBAction)clickSearchButton {
     
     StatisticMainUtil       * dateSearchUtil        = [[StatisticMainUtil alloc] init];
-    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
+    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.view];
     
     if (existedDateSearchView) {
         [dateSearchUtil hideDateSearchView:existedDateSearchView];
     } else {
         
         CGFloat belowSearchButtonY      = self.topView.frame.origin.y + self.topView.frame.size.height;
-        existedDateSearchView           = [dateSearchUtil showDateSearchViewInScrollView:self.scrollView atY:belowSearchButtonY];
+        existedDateSearchView           = [dateSearchUtil showDateSearchViewInScrollView:self.view atY:belowSearchButtonY];
         existedDateSearchView.delegate  = self;
     }
 }
@@ -87,13 +87,13 @@
 
 - (void)chooseStartDate:(id)sender {
     StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
-    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
+    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.view];
     [existedDateSearchView updateStartDate:(NSDate *)sender];
 }
 
 - (void)chooseEndDate:(id)sender {
     StatisticMainUtil * dateSearchUtil = [[StatisticMainUtil alloc] init];
-    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.scrollView];
+    StatisticDateSearchView * existedDateSearchView = [dateSearchUtil hasDateSearchViewInScrollView:self.view];
     [existedDateSearchView updateEndDate:(NSDate *)sender];
 }
 
@@ -231,7 +231,7 @@
     
     for (ChartItemData *item in _dataSource ) {
         [colors addObject: [StatisticMainUtil colorFromHexString:item.itemColor]];
-        [percents addObject:[NSNumber numberWithFloat:[item.itemPercent floatValue]]];
+        [percents addObject:[NSNumber numberWithDouble:[item.itemPercent doubleValue]]];
     }
     
     [_doughnutChart reloadChartWithColorArray:[colors copy] sliceArr:[percents copy]];
@@ -257,7 +257,15 @@
     }
     
     if (_expenseDataSource && [_expenseDataSource count] > 0) {
-        CGFloat expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
+        
+        CGFloat expenseDataViewY;
+        
+        if (_incomeDataSource && [_incomeDataSource count] > 0) {
+            expenseDataViewY    = _incomeDataView.frame.origin.y + _incomeDataView.frame.size.height + 13;
+        } else {
+            expenseDataViewY    = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 23;
+        }
+        
         _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
     }
 }
@@ -332,10 +340,9 @@
     
     NSArray * accounts = [self getAccountList];
     
-    
     if (!accounts || [accounts count] == 0) {
         
-        //[self showNoDataView:YES];
+        [self showNoDataView:YES];
         [self stopIndicator];
         
     } else {
@@ -359,9 +366,9 @@
     
     NSInteger numberOfItems = [summaryList count];
     NSMutableArray * items  = [NSMutableArray arrayWithCapacity:numberOfItems];
-    float total               = [[summaryList valueForKeyPath:@"@sum.sum"] floatValue];
+    double total               = [[summaryList valueForKeyPath:@"@sum.sum"] doubleValue];
     
-    float addUpPercentage     = 0;
+    double addUpPercentage     = 0;
     
     for (int itemIdx = 0; itemIdx < numberOfItems; itemIdx++) {
         
@@ -372,19 +379,19 @@
             continue;
         }
         
-        float percentage;
+        double percentage;
         if (itemIdx == numberOfItems - 1) {
             percentage       = 100 - addUpPercentage;
         } else {
-            percentage       = floorf(([@(chartData.sum) floatValue] / total * 100) * 100) / 100;
+            percentage       = floor(([@(chartData.sum) doubleValue] / total * 100) * 100) / 100;
             addUpPercentage += percentage;
         }
         
         StickerInfo * stickerInfo = [CommonUtil getStickerInfo:(StickerType)chartData.stickerCode];
         ChartItemData * item = [[ChartItemData alloc] initWithColor:stickerInfo.stickerColorHexString
                                                                 name:stickerInfo.stickerName
-                                                            percent:[NSString stringWithFormat: (percentage == 100 ? @"%.0f" : @"%.2f"), percentage]
-                                                               value:[NSString stringWithFormat:@"%f", [@(chartData.sum) floatValue]]
+                                                            percent:[NSString stringWithFormat: (percentage == 100 ? @"%.0lf" : @"%.2lf"), percentage]
+                                                               value:[NSString stringWithFormat:@"%lf", [@(chartData.sum) doubleValue]]
                                                                 type:[CommonUtil getTransactionTypeByStickerType:(StickerType)chartData.stickerCode]];
         [items addObject:item];
     }

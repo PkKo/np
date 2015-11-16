@@ -22,7 +22,7 @@
     CGFloat mainViewHeight  = 0.0;
     
     BOOL    isIncome    = NO;
-    float total       = 0;
+    double  total       = 0;
     
     NSNumberFormatter * numberFormatter = [StatisticMainUtil getNumberFormatter];
     
@@ -38,10 +38,7 @@
         
         [[itemView itemColor] setBackgroundColor:[StatisticMainUtil colorFromHexString:item.itemColor]];
         [[itemView itemName] setText:[NSString stringWithFormat:@"%@(%@%%)", item.itemName, item.itemPercent]];
-        [[itemView itemValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[item.itemValue floatValue]]]]];
-        
-        total += [item.itemValue floatValue];
-        NSLog(@"item.itemName: %@ - [item.itemValue floatValue]: %f - total: %f", item.itemName, [item.itemValue floatValue], total);
+        [[itemView itemValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithDouble:[item.itemValue doubleValue]]]]];
         
         CGRect itemViewFrame        = itemView.frame;
         itemViewFrame.origin.y      = itemIdx * itemViewFrame.size.height + MARGIN_TOP;
@@ -66,9 +63,9 @@
     
     [[totalView totalName] setText:isIncome ? @"수입합계" : @"지출합계"];
     
-    total = [[arr valueForKeyPath:@"@sum.itemValue"] floatValue];
+    total = [[arr valueForKeyPath:@"@sum.itemValue"] doubleValue];
     
-    [[totalView totalValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]]];
+    [[totalView totalValue] setText:[NSString stringWithFormat:@"%@원", [numberFormatter stringFromNumber:[NSNumber numberWithDouble:total]]]];
     
     CGRect totalViewFrame       = totalView.frame;
     totalViewFrame.origin.y     = mainViewHeight;
