@@ -580,6 +580,7 @@
 		A5D50B071BD4E55900D7A2DD /* CustomerCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B051BD4E55900D7A2DD /* CustomerCenterViewController.xib */; };
 		A5D50B0B1BD4EABC00D7A2DD /* TelInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */; };
 		A5D50B0C1BD4EABC00D7A2DD /* TelInquiryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */; };
+		A5D8119F1BF5A6EE0054ADB7 /* ServiceDeactivationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D8119E1BF5A6EE0054ADB7 /* ServiceDeactivationController.m */; settings = {ASSET_TAGS = (); }; };
 		A5DA1BB91BE0C077000E04E6 /* SelfIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA1BB81BE0C077000E04E6 /* SelfIdentifyViewController.xib */; };
 		A5DA32381BC61160008DE464 /* CustomizedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */; };
 		A5DA32391BC61160008DE464 /* CustomizedPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DA32371BC61160008DE464 /* CustomizedPickerViewController.xib */; };
@@ -1356,6 +1357,8 @@
 		A5D50B081BD4EABC00D7A2DD /* TelInquiryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelInquiryViewController.h; sourceTree = "<group>"; };
 		A5D50B091BD4EABC00D7A2DD /* TelInquiryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelInquiryViewController.m; sourceTree = "<group>"; };
 		A5D50B0A1BD4EABC00D7A2DD /* TelInquiryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TelInquiryViewController.xib; sourceTree = "<group>"; };
+		A5D8119D1BF5A6EE0054ADB7 /* ServiceDeactivationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceDeactivationController.h; path = Controller/ServiceDeactivationController.h; sourceTree = "<group>"; };
+		A5D8119E1BF5A6EE0054ADB7 /* ServiceDeactivationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceDeactivationController.m; path = Controller/ServiceDeactivationController.m; sourceTree = "<group>"; };
 		A5DA1BB81BE0C077000E04E6 /* SelfIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfIdentifyViewController.xib; sourceTree = "<group>"; };
 		A5DA32351BC61160008DE464 /* CustomizedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedPickerViewController.h; sourceTree = "<group>"; };
 		A5DA32361BC61160008DE464 /* CustomizedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedPickerViewController.m; sourceTree = "<group>"; };
@@ -2814,6 +2817,7 @@
 		A5D50AFA1BD4E53900D7A2DD /* ServiceDeactivation */ = {
 			isa = PBXGroup;
 			children = (
+				A5D8119C1BF5A6B50054ADB7 /* Controller */,
 				A5D50AFB1BD4E53900D7A2DD /* View */,
 			);
 			path = ServiceDeactivation;
@@ -2889,6 +2893,15 @@
 				A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A5D8119C1BF5A6B50054ADB7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5D8119D1BF5A6EE0054ADB7 /* ServiceDeactivationController.h */,
+				A5D8119E1BF5A6EE0054ADB7 /* ServiceDeactivationController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		A5DC2CAA1BE84EF400807999 /* Common */ = {
@@ -3729,6 +3742,7 @@
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
 				A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
+				A5D8119F1BF5A6EE0054ADB7 /* ServiceDeactivationController.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
 				17208CA71BEA702500968498 /* ArticleTableViewCell.m in Sources */,
@@ -4019,7 +4033,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
+				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
 			};
 			name = Debug;
 		};
@@ -4051,7 +4065,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
+				PROVISIONING_PROFILE = "d8dcf23f-caa1-48ca-8123-8b7b99e8da76";
 			};
 			name = Release;
 		};

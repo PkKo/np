@@ -11,6 +11,15 @@
 
 @interface LoginUtil : NSObject
 
+#pragma mark - Service Deactivation
+- (BOOL)isServiceDeactivated;
+- (void)deactivateService:(BOOL)isDeactivated;
+- (void)removeAllData;
+
+#pragma mark - App Version {
+- (NSString *)getLatestAppVersion;
+- (void)saveLatestAppVersion:(NSString *)latestVersion;
+
 #pragma mark - Login Settings
 - (BOOL)isLoggedIn;
 - (void)setLogInStatus:(BOOL)isLoggedIn;

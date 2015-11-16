@@ -31,6 +31,9 @@
                                     <state key="normal" title="서비스 해지하기">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="deactivateService" destination="-1" eventType="touchUpInside" id="wDA-q8-3LT"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tuS-pJ-1zr">
                                     <rect key="frame" x="0.0" y="31" width="280" height="88"/>

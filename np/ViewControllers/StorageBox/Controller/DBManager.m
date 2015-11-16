@@ -32,6 +32,22 @@
     return _sharedObject;
 }
 
+- (void)removeDB {
+    
+    NSString *docsDir;
+    NSArray *dirPaths;
+    
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
+    
+    // Build the path to the database file
+    _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"nhtransactions.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    [filemgr removeItemAtPath:_databasePath error:nil];
+}
+
 - (void)createDB {
     
     NSString *docsDir;
@@ -56,6 +72,8 @@
             
             if (sqlite3_exec(_nhTransactionDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
+            } else {
+                NSLog(@"created db.");
             }
             sqlite3_close(_nhTransactionDB);
         } else {
@@ -207,6 +225,35 @@
     return memo;
 }
 
+- (BOOL)updateTransactionType:(NSString *)transType byTransId:(NSString *)transId {
+    
+    sqlite3_stmt * statement;
+    
+    BOOL updated = NO;
+    
+    BOOL openDB = [self openDB];
+    
+    if (openDB == SQLITE_OK) {
+        NSLog(@"opened db");
+        
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_type = \"%@\" WHERE trans_id = \"%@\"", transType, transId];
+        
+        sqlite3_prepare(_nhTransactionDB, [updateSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"updated.");
+            updated = YES;
+        } else {
+            NSLog(@"failed to update");
+            updated = NO;
+        }
+    } else {
+        NSLog(@"failed to open db.");
+        updated = NO;
+    }
+    return updated;
+}
+
 - (BOOL)updateTransactionMemo:(NSString *)memo byTransId:(NSString *)transId {
     
     sqlite3_stmt * statement;
@@ -219,6 +266,35 @@
         NSLog(@"opened db");
         
         NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_memo = \"%@\" WHERE trans_id = \"%@\"", memo, transId];
+        
+        sqlite3_prepare(_nhTransactionDB, [updateSQL UTF8String], -1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"updated.");
+            updated = YES;
+        } else {
+            NSLog(@"failed to update");
+            updated = NO;
+        }
+    } else {
+        NSLog(@"failed to open db.");
+        updated = NO;
+    }
+    return updated;
+}
+
+- (BOOL)updateTransactionPinnable:(BOOL)isPinnedUp byTransId:(NSString *)transId {
+    
+    sqlite3_stmt * statement;
+    
+    BOOL updated = NO;
+    
+    BOOL openDB = [self openDB];
+    
+    if (openDB == SQLITE_OK) {
+        NSLog(@"opened db");
+        
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE transactions SET trans_pinnable = \"%@\" WHERE trans_id = \"%@\"", [[NSNumber numberWithBool:isPinnedUp] stringValue], transId];
         
         sqlite3_prepare(_nhTransactionDB, [updateSQL UTF8String], -1, &statement, NULL);
         

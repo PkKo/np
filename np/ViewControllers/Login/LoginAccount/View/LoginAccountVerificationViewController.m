@@ -137,12 +137,69 @@
 
 - (void)updateUI {
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField color:TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE];
+    [self resizeContainerScrollView];
+    [self resizeNoticeContent];
+}
+- (void)resizeContainerScrollView {
+    
+    CGFloat screenHeight                    = [[UIScreen mainScreen] bounds].size.height;
+    CGRect containerScrollViewFrame         = self.containerScrollView.frame;
+    containerScrollViewFrame.size.height    = screenHeight - self.containerScrollView.frame.origin.y;
+    
+    [self.containerScrollView setFrame:containerScrollViewFrame];
+    
+    CGRect containerViewRect = self.containerView.frame;
+    if (containerViewRect.size.height < containerScrollViewFrame.size.height) {
+        containerViewRect.size.height = containerScrollViewFrame.size.height - 20;
+        [self.containerView setFrame:containerViewRect];
+    }
+    
+    [self.containerScrollView setContentSize:self.containerView.frame.size];
+}
+
+- (void)resizeNoticeContent {
+    
+    CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
+    CGRect fakeNoticeTextFieldFrame = self.fakeNoticeTextField.frame;
+    CGFloat contentWidth            = screenWidth - self.fakeNoticeTextField.superview.frame.origin.x * 2  - (self.noteContent1.frame.origin.x - fakeNoticeTextFieldFrame.origin.x) - 5;
+    
+    CGRect noteContent1Rect     = self.noteContent1.frame;
+    noteContent1Rect.size.width = contentWidth;
+    [self.noteContent1 setFrame:noteContent1Rect];
+    [self.noteContent1 sizeToFit];
+    noteContent1Rect            = self.noteContent1.frame;
+    
+    CGRect noteAsterisk1Rect    = self.noteAsterisk1.frame;
+    noteAsterisk1Rect.origin.y  = noteContent1Rect.origin.y + 3;
+    [self.noteAsterisk1 setFrame:noteAsterisk1Rect];
+    
+    CGRect noteContent2Rect     = self.noteContent2.frame;
+    noteContent2Rect.size.width = contentWidth;
+    noteContent2Rect.origin.y   = noteContent1Rect.origin.y + noteContent1Rect.size.height + 4;
+    [self.noteContent2 setFrame:noteContent2Rect];
+    [self.noteContent2 sizeToFit];
+    noteContent2Rect            = self.noteContent2.frame;
+    
+    CGRect noteAsterisk2Rect    = self.noteAsterisk2.frame;
+    noteAsterisk2Rect.origin.y  = noteContent2Rect.origin.y + 3;
+    [self.noteAsterisk2 setFrame:noteAsterisk2Rect];
+    
+    fakeNoticeTextFieldFrame.size.height = noteContent2Rect.origin.y - fakeNoticeTextFieldFrame.origin.y + noteContent2Rect.size.height + 5;
+    [self.fakeNoticeTextField setFrame:fakeNoticeTextFieldFrame];
+}
+
+- (void)clearData {
+    self.accountTextField.text = @"";
+    self.passwordTextField.text = @"";
+    self.birthdayTextField.text = @"";
 }
 
 - (void)loginResult:(NSDictionary *)response {
     
     NSLog(@"response: %@", response);
     [self stopIndicator];
+    
+    [self clearData];
     
     LoginUtil * util        = [[LoginUtil alloc] init];
     

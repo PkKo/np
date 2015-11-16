@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VersionInfoViewController">
             <connections>
+                <outlet property="checkAppVersionBtn" destination="ebB-qx-kuL" id="p21-Ui-12q"/>
+                <outlet property="currentVersionNo" destination="jY6-VV-leM" id="lvd-Ne-FFJ"/>
+                <outlet property="latestVersionNo" destination="cVr-WX-qmG" id="91A-N0-j64"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,6 +39,9 @@
                                     <state key="normal" title="현재 최신 버전입니다">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="checkAppVersion:" destination="-1" eventType="touchUpInside" id="UCY-UQ-l7l"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재 버전 2.2.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jY6-VV-leM">
                                     <rect key="frame" x="0.0" y="119" width="280" height="18"/>
@@ -45,7 +51,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최신 버전 2.2.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cVr-WX-qmG">
-                                    <rect key="frame" x="0.0" y="138" width="280" height="18"/>
+                                    <rect key="frame" x="0.0" y="140" width="280" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>

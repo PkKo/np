@@ -10,5 +10,9 @@
 #import "CommonViewController.h"
 
 @interface VersionInfoViewController : CommonViewController
+@property (weak, nonatomic) IBOutlet UIButton *checkAppVersionBtn;
+- (IBAction)checkAppVersion:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *currentVersionNo;
+@property (weak, nonatomic) IBOutlet UILabel *latestVersionNo;
 
 @end

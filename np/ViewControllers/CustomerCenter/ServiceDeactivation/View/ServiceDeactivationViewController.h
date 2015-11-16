@@ -10,5 +10,6 @@
 #import "CommonViewController.h"
 
 @interface ServiceDeactivationViewController : CommonViewController
+- (IBAction)deactivateService;
 
 @end

@@ -372,21 +372,19 @@
         if ([selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
             
             [cell.deleteBtn setHidden:NO];
-            [cell.transacTypeImageView setHidden:YES];
+            [cell.transacTypeBtn setHidden:YES];
             cell.deleteBtn.selected = [transacObj.transactionMarkAsDeleted boolValue];
             [cell.editMemoBtn setHidden:YES];
-            [cell.pinImageView setHidden:![[transacObj transactionActivePin] boolValue]];
-            
+            [cell.pinupBtn setHidden:![[transacObj transactionActivePin] boolValue]];
         } else {
             
             [cell.deleteBtn setHidden:YES];
-            [cell.transacTypeImageView setHidden:NO];
+            [cell.transacTypeBtn setHidden:NO];
             [cell.editMemoBtn setHidden:NO];
-            [cell.transacTypeImageView setImage:[CommonUtil getStickerImage:(StickerType)[transacObj.transactionType intValue]]];
+            [cell updateTransTypeImageBtnByStickerCode:(StickerType)[transacObj.transactionType intValue]];
         }
         
-        [cell.pinImageView setImage:[UIImage imageNamed:[[transacObj transactionActivePin] boolValue] ? @"icon_pin_01_sel" : @"icon_pin_01_dft"]];
-        
+        [cell.pinupBtn setSelected:[[transacObj transactionActivePin] boolValue]];
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
         
@@ -407,7 +405,6 @@
         CGRect transacAmountUnitRect = cell.transacAmountUnit.frame;
         transacAmountUnitRect.origin.x = transacAmountRect.origin.x + transacAmountRect.size.width;
         [cell.transacAmountUnit setFrame:transacAmountUnitRect];
-        
         
         [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1] : [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1]];
         [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
@@ -430,6 +427,16 @@
     
     // highlight delete button
     [self highlightDeleteBtn];
+}
+
+- (void)markAsPinup:(BOOL)isPinnable ofItemSection:(NSInteger)section row:(NSInteger)row {
+    
+    NSString        * sectionTitle  = [_transactionTitles objectAtIndex:section];
+    NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+    
+    TransactionObject * transacObj  = [sectionItems objectAtIndex:row];
+    [transacObj setTransactionActivePin:[NSNumber numberWithBool:isPinnable]];
+    [[DBManager sharedInstance] updateTransactionPinnable:isPinnable byTransId:transacObj.transactionId];
 }
 
 - (void)highlightDeleteBtn {
@@ -460,8 +467,16 @@
     
     TransactionObject * transacObj = [sectionItems objectAtIndex:row];
     [transacObj setTransactionMemo:memo];
-    
     [[DBManager sharedInstance] updateTransactionMemo:memo byTransId:transacObj.transactionId];
+}
+
+- (void)updateSticker:(StickerType)sticker ofItemSection:(NSInteger)section row:(NSInteger)row {
+    NSString        * sectionTitle  = [_transactionTitles objectAtIndex:section];
+    NSMutableArray  * sectionItems  = [_transactions objectForKey:sectionTitle];
+    
+    TransactionObject * transacObj = [sectionItems objectAtIndex:row];
+    [transacObj setTransactionType:[@(sticker) stringValue]];
+    [[DBManager sharedInstance] updateTransactionType:transacObj.transactionType byTransId:transacObj.transactionId];
 }
 
 #pragma mark - Keyboard
@@ -512,7 +527,6 @@
 
 - (void)showScrollTopButton
 {
-    NSLog(@"%s", __func__);
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [scrollMoveTopButton setHidden:NO];
         [scrollMoveTopButton setFrame:CGRectMake(self.view.frame.size.width - scrollMoveTopButton.frame.size.width,
