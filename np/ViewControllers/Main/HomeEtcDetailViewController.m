@@ -53,9 +53,8 @@
     if(imageUrl == nil)
     {
         [contentImg setHidden:YES];
-        [contentView setFrame:CGRectMake(contentView.frame.origin.x,
-                                        contentImg.frame.origin.y,
-                                        contentView.frame.size.width,
+        [contentView setFrame:CGRectMake(contentView.frame.origin.x, 18,
+                                         contentView.frame.size.width,
                                          contentView.frame.size.height)];
     }
     else

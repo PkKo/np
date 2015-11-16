@@ -10,7 +10,9 @@
 #import "HomeQuickPushTableViewCell.h"
 #import "HomeQuickNoticeTableViewCell.h"
 
-#define HOME_QUICKVIEW_CELL_HEIGHT  64
+#define HOME_QUICKVIEW_TABLE_HEIGHT         306
+#define HOME_QUICKVIEW_CELL_HEIGHT          64
+#define HOME_QUICKVIEW_FIRST_CELL_HEIGHT    51
 
 @interface HomeQuickViewController ()
 
@@ -147,7 +149,13 @@
 {
     [super viewWillAppear:animated];
     
-    cellHeight = pushTableView.frame.size.height / 5;
+    firstCellHeight = HOME_QUICKVIEW_FIRST_CELL_HEIGHT * (pushTableView.frame.size.height / HOME_QUICKVIEW_TABLE_HEIGHT);
+    if(firstCellHeight < HOME_QUICKVIEW_FIRST_CELL_HEIGHT)
+    {
+        firstCellHeight = HOME_QUICKVIEW_FIRST_CELL_HEIGHT;
+    }
+    
+    cellHeight = HOME_QUICKVIEW_CELL_HEIGHT * (pushTableView.frame.size.height / HOME_QUICKVIEW_TABLE_HEIGHT);
     if(cellHeight < HOME_QUICKVIEW_CELL_HEIGHT)
     {
         cellHeight = HOME_QUICKVIEW_CELL_HEIGHT;
@@ -222,7 +230,14 @@
 #pragma mark - UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return cellHeight;
+    if(indexPath.row == 0)
+    {
+        return firstCellHeight;
+    }
+    else
+    {
+        return cellHeight;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -252,13 +267,18 @@
         {
             cell = [HomeQuickPushTableViewCell cell];
         }
+        if(indexPath.row == 0)
+        {
+            [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, firstCellHeight)];
+        }
+        else
+        {
+            [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, cellHeight)];
+        }
         
-        [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, cellHeight)];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         NHInboxMessageData *inboxData = [pushList objectAtIndex:indexPath.row];
-        
-        [cell.stickerImg setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode]];
         
         /*
         amountLabel;
@@ -269,8 +289,12 @@
 */
         // 푸시 시간
         [cell.dateLabel setText:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        [cell.dateLabel sizeToFit];
         
         [cell.accountLabel setText:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:inboxData.nhAccountNumber]]];
+        [cell.accountLabel sizeToFit];
+        [cell.dateLabel setFrame:CGRectMake(cell.accountLabel.frame.origin.x - cell.dateLabel.frame.size.width,
+                                            cell.dateLabel.frame.origin.y, cell.dateLabel.frame.size.width, cell.dateLabel.frame.size.height)];
         
         NSNumberFormatter *numFomatter = [NSNumberFormatter new];
         [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -288,6 +312,8 @@
                 // 입출금 타입
                 [cell.typeLabel setText:@"입금"];
                 [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
+                // 스티커 이미지
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_DEPOSIT_NORMAL]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
@@ -316,6 +342,8 @@
                 // 입출금 타입
                 [cell.typeLabel setText:@"출금"];
                 [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
+                // 스티커 이미지
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_WITHDRAW_NORMAL]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];

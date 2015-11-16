@@ -15,6 +15,7 @@
     NSMutableArray *noticeList;
     NSMutableDictionary *recentNotice;
     CGFloat cellHeight;
+    CGFloat firstCellHeight;
     BOOL isPushListRequest;
     BOOL isPushListLoadingEnd;
     BOOL isNoticeListLoadingEnd;

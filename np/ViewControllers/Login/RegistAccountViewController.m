@@ -61,9 +61,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)removeAllSubViews
@@ -688,6 +707,43 @@
     }
     
     self.currentTextField = nil;
+}
+
+- (void)onKeyboardShow:(NSNotification *)notifcation
+{
+    if(![accountSelectBtn isEnabled])
+    {
+        RegistAccountInputView *inputView = [[contentView subviews] objectAtIndex:0];
+        NSDictionary * keyboardInfo = [notifcation userInfo];
+        NSValue * keyboardFrame     = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrameRect    = [keyboardFrame CGRectValue];
+        CGRect textFieldRect        = self.currentTextField.frame;
+        CGRect inputRect            = contentView.superview.frame;
+        CGPoint point = CGPointMake(self.currentTextField.frame.origin.x, textFieldRect.origin.y + inputRect.origin.y + contentView.frame.origin.y);
+        
+        if(point.y >= keyboardFrameRect.origin.y)
+        {
+            NSLog(@"%s", __FUNCTION__);
+            scrollPoint = CGPointMake(0, point.y + textFieldRect.size.height - keyboardFrameRect.origin.y);
+            [inputView.scrollView setContentSize:CGSizeMake(inputView.scrollView.frame.size.width,
+                                                            inputView.scrollView.contentSize.height + scrollPoint.y)];
+//            [inputView.scrollView setContentOffset:scrollPoint animated:YES];
+            [inputView.scrollView scrollRectToVisible:CGRectMake(0, scrollPoint.y, inputView.scrollView.frame.size.width, inputView.scrollView.frame.size.height) animated:NO];
+            [inputView.scrollView setContentOffset:scrollPoint animated:NO];
+        }
+    }
+}
+
+- (void)onKeyboardHide:(NSNotification *)notifcation
+{
+    if(![accountSelectBtn isEnabled])
+    {
+        RegistAccountInputView *inputView = [[contentView subviews] objectAtIndex:0];
+        [inputView.scrollView setContentSize:CGSizeMake(inputView.scrollView.frame.size.width,
+                                                        inputView.scrollView.contentSize.height - scrollPoint.y)];
+        scrollPoint = CGPointZero;
+        [inputView.scrollView setContentOffset:scrollPoint animated:YES];
+    }
 }
 
 #pragma mark - Session Test Code

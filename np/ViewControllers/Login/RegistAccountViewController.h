@@ -19,6 +19,7 @@
     NSString *certNumTwoString;
     NSString *certNumThreeString;
     NSString *certNumFourString;
+    CGPoint scrollPoint;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;

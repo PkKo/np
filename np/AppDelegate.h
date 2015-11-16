@@ -18,6 +18,8 @@
 @property (strong, nonatomic) BannerInfo *bannerInfo;
 @property (assign, nonatomic) NSInteger unreadCountBanking;
 @property (assign, nonatomic) NSInteger unreadCountEtc;
+@property (strong, nonatomic) UIImage *nongminBannerImg;
+@property (strong, nonatomic) UIImage *noticeBannerImg;
 
 @end
 

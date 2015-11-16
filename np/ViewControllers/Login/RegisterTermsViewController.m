@@ -165,22 +165,33 @@
 #pragma mark - UIWebViewDelegate
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     return YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
+    [self zoomToFit:webView];
+}
+
+- (void)zoomToFit:(UIWebView *)webview
+{
+    if([webview respondsToSelector:@selector(scrollView)])
+    {
+        UIScrollView *scroll = [webview scrollView];
+        float zoom = webview.bounds.size.width/scroll.contentSize.width;
+        [scroll setZoomScale:zoom animated:YES];
+    }
 }
 @end

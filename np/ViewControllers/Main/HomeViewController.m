@@ -33,6 +33,7 @@
     
     sectionList = [[NSMutableArray alloc] init];
     timelineMessageList = [[NSMutableDictionary alloc] init];
+    unreadMessageList = [[NSMutableArray alloc] init];
     isSearch = NO;
     isMoreList = YES;
     
@@ -108,6 +109,9 @@
             [self makeTimelineView];
         }
     }
+    
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

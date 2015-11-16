@@ -60,6 +60,7 @@
 #define IS_IPHONE_6         (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P        (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+#define NONGMIN_BANNER_IMAGE_URL        @"image/nongmin_banner.png"
 
 #define STRING_DASH     @"-"
 #define STRING_MASKING  @"****"
@@ -79,7 +80,7 @@
 #define SECTION_HEADER_HEIGHT   31.0f
 #define SECTION_FOOTER_HEIGHT   93.0f
 #define TIMELINE_BANKING_HEIGHT 117.0f
-#define TIMELINE_ETC_HEIGHT     103.0f
+#define TIMELINE_ETC_HEIGHT     123.0f
 #define TIMELINE_BANNER_HEIGHT  93.0f
 #define AMOUNT_FONT_SIZE        20.0f
 #define IPHONE_FIVE_FRAME_HEIGHT    568

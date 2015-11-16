@@ -51,7 +51,7 @@
     
     CGRect dateSearchViewFrame      = dateSearchView.frame;
     dateSearchViewFrame.size.width  = parentView.frame.size.width;
-    dateSearchViewFrame.origin.y    = 0;//topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
+    dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
     [dateSearchView setFrame:dateSearchViewFrame];
     /*
     CGRect tableviewFrame           = tableview.frame;

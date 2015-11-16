@@ -110,6 +110,7 @@
     if(isBold)
     {
         size = [string sizeWithFont:[UIFont boldSystemFontOfSize:fontSize]];
+        size.width = size.width + 2;
     }
     else
     {

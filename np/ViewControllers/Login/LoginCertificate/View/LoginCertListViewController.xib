@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginCertListViewController">
@@ -11,6 +11,7 @@
                 <outlet property="certName" destination="lGL-vV-NKV" id="hZi-Mg-nQe"/>
                 <outlet property="certType" destination="kdJ-2m-KW0" id="CKA-9p-oBP"/>
                 <outlet property="certView" destination="dCv-yo-4WP" id="6eT-2K-Aaa"/>
+                <outlet property="descLabel" destination="xTa-ob-RZn" id="Grv-EX-6u3"/>
                 <outlet property="expiryDate" destination="vYl-g9-LZN" id="zRG-wr-xOK"/>
                 <outlet property="fakeNoticeTextField" destination="2sR-rC-GVV" id="QJ7-Hz-UvG"/>
                 <outlet property="issueDate" destination="mUr-bV-PdX" id="xHz-Ws-YRI"/>
@@ -198,9 +199,9 @@
                             <color key="textColor" red="0.55294117649999996" green="0.67843137249999996" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공인인증서 비밀번호 5회 오류 시 서비스가 제한되며 가까운 NH농협 영업점을 방문하셔서 공인인증서 비밀번호 재설정하셔야 합니다." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xTa-ob-RZn">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공인인증서 비밀번호 5회 오류 시 서비스가 제한되며 가까운 NH농협 영업점을 방문하셔서 공인인증서 비밀번호를 재설정하셔야 합니다." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xTa-ob-RZn">
                             <rect key="frame" x="16" y="58" width="221" height="72"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                             <color key="textColor" red="0.55294117647058827" green="0.67843137254901964" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>

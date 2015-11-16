@@ -15,9 +15,10 @@
                     <rect key="frame" x="0.0" y="10" width="267" height="75"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_01_dft.png" id="QYr-fh-dZI">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QYr-fh-dZI">
                             <rect key="frame" x="0.0" y="0.0" width="271" height="75"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uNu-bl-Xxi">
                             <rect key="frame" x="31" y="10" width="42" height="42"/>
@@ -100,7 +101,6 @@
         </view>
     </objects>
     <resources>
-        <image name="button_01_dft.png" width="53" height="53"/>
         <image name="icon_faq_01_dft.png" width="42" height="42"/>
         <image name="icon_faq_01_on.png" width="42" height="42"/>
         <image name="icon_news_01_dft.png" width="42" height="42"/>

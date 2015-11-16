@@ -14,9 +14,6 @@
 @synthesize menuTitleImg;
 @synthesize menuSeparateLine;
 
-@synthesize countBgView;
-@synthesize countLabel;
-
 - (void)awakeFromNib {
     // Initialization code
 }

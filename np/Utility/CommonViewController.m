@@ -79,6 +79,13 @@
     [mMenuCloseButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [mMenuCloseButton setHidden:YES];
     [self.view addSubview:mMenuCloseButton];
+    
+    UIImageView *closeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"close_01.png"]];
+    [closeImage setFrame:CGRectMake(mMenuCloseButton.frame.size.width - 24, 34, 16, 16)];
+    [closeImage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin];
+    NSLog(@"%s, %f, %f", __FUNCTION__, mMenuCloseButton.frame.size.width, closeImage.frame.origin.x);
+    [mMenuCloseButton addSubview:closeImage];
+    
     /*
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
     {

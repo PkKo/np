@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *certType;
 @property (weak, nonatomic) IBOutlet UILabel *issueDate;
 @property (weak, nonatomic) IBOutlet UILabel *expiryDate;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel;
 
 - (IBAction)gotoCertCenter;
 - (IBAction)gotoLoginSettings;

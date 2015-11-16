@@ -8,6 +8,7 @@
 
 #import "LoginAccountController.h"
 #import "CertManager.h"
+#import "BTWCodeguard.h"
 
 @implementation LoginAccountController
 
@@ -24,6 +25,11 @@
     NSString * account_password = pw;
     NSString * user_birthday    = birthday;
     
+    [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
+    [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
+    [[Codeguard sharedInstance] setChallengeRequestUrl:[NSString stringWithFormat:@"%@CodeGuard/check.jsp", SERVER_URL]];
+    NSString *token = [[Codeguard sharedInstance] requestAndGetToken];
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
@@ -37,7 +43,7 @@
     
     HttpRequest *req = [HttpRequest getInstance];
     [req setDelegate:viewController selector:action];
-    [req requestUrl:url bodyString:bodyString];
+    [req requestUrl:url bodyString:bodyString token:token];
     
 }
 

@@ -17,6 +17,8 @@
 @synthesize slidingViewController;
 @synthesize serverKey;
 @synthesize bannerInfo;
+@synthesize nongminBannerImg;
+@synthesize noticeBannerImg;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

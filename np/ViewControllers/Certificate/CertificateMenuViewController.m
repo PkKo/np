@@ -11,6 +11,7 @@
 #import "CertificateRoamingPhoneViewController.h"
 #import "CertificateListViewController.h"
 #import "CertMenuCell.h"
+#import "CertificateRoamingPassViewController.h"
 
 @interface CertificateMenuViewController ()
 

@@ -95,14 +95,12 @@
         }
     }
     
-    if(layerPopupInfo != nil)
-    {
-        [self showLayerPopupView];
-    }
-    else
-    {
-        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
-    }
+    // 퀵뷰
+    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    
+    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
 #pragma mark - 세션 생성 init 및 앱 버전 확인
@@ -191,8 +189,6 @@
     NSLog(@"%s, string = %@", __FUNCTION__, string);
 }
 
-#pragma mark - 위변조 체크
-
 #pragma mark - 배너정보 가져오기
 - (void)getBannerInfoRequest
 {
@@ -234,7 +230,7 @@
 
 - (void)getBannerInfoResponse:(NSDictionary *)response
 {
-    NSLog(@"%s, %@", __FUNCTION__, response);
+//    NSLog(@"%s, %@", __FUNCTION__, response);
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         BannerInfo *bannerInfo = [[BannerInfo alloc] init];
@@ -250,10 +246,11 @@
         bannerInfo.viewType         = [response objectForKey:@"view_type"];
         
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
+        [self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
     }
     
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
-    [self getUnreadMessageCountFromIPS];
+    [self showLayerPopupView];
 }
 
 - (void)didFailWithError:(NSError *)error
@@ -278,13 +275,28 @@
 
 - (void)showLayerPopupView
 {
-    SplashLayerPopupView *view = [SplashLayerPopupView view];
-    [view.titleLabel setText:layerPopupInfo.viewTitle];
-    [view.contentLabel setText:layerPopupInfo.textBody];
-    [view.contentLabel sizeToFit];
-    [view setDelegate:self];
-    [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.view addSubview:view];
+    if(layerPopupInfo != nil)
+    {
+        SplashLayerPopupView *view = [SplashLayerPopupView view];
+        if([layerPopupInfo.popupType isEqualToString:@"S"])
+        {
+            [view.contentLabel setText:layerPopupInfo.textBody];
+            [view.contentLabel sizeToFit];
+        }
+        else if([layerPopupInfo.popupType isEqualToString:@"I"])
+        {
+            [view.contentImage setHidden:NO];
+            [view.contentImage setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:layerPopupInfo.imageUrl]]]];
+        }
+        [view.closeDayOptionButton setTitle:[NSString stringWithFormat:@"%@일간 보지 않기", layerPopupInfo.closedayType] forState:UIControlStateNormal];
+        [view setDelegate:self];
+        [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [self.view addSubview:view];
+    }
+    else
+    {
+        [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
+    }
 }
 
 - (void)closeLayerPopup:(id)sender
@@ -309,15 +321,11 @@
         // 간편보기 확인
         if([[[LoginUtil alloc] init] isUsingSimpleView])
         {
-            // 퀵뷰
-            vc = [[HomeQuickViewController alloc] init];
-            slidingViewController.topViewController = vc;
-            
-            [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+            [self getUnreadMessageCountFromIPS];
         }
         else
         {
+            [loadingProgressBar setProgress:0.9f animated:NO];
             // Login
             [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
         }
@@ -328,10 +336,11 @@
     }
     else
     {
+        [loadingProgressBar setProgress:0.9f animated:NO];
         // 가입시작
         vc = [[ServiceInfoViewController alloc] init];
 //        vc = [[RegistAccountViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:NO];
     }
      
 //    RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
@@ -345,6 +354,12 @@
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+}
+
+- (void)getBannerImages
+{
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.imagePath]]];
 }
 
 #pragma mark - UIAlertViewDelegate

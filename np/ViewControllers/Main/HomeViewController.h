@@ -22,12 +22,16 @@ typedef enum HomeViewType
     INBOX
 } HomeViewType;
 
+#define TOP_MENU_BAR_HEIGHT     27
+
 @interface HomeViewController : UIViewController<IBInboxProtocol, StickerSettingDelegate>
 {
     // 푸시 날짜 데이터 리스트
     NSMutableArray *sectionList;
     // 날짜를 키로 한 푸시 데이터 딕셔너리 리스트
     NSMutableDictionary *timelineMessageList;
+    // 읽음 표시할 리스트
+    NSMutableArray *unreadMessageList;
     
     // 입금 스티커 뷰
     DepositStickerView *depositStickerView;

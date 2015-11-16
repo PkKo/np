@@ -22,6 +22,7 @@
 #import "CertificateMenuViewController.h"
 
 #define MENU_CELL_HEIGHT    37
+#define MENU_ICON_HEIGHT    27
 #define TABLE_VIEW_HEADER_HEIGHT    23
 
 @interface MenuViewController ()
@@ -58,13 +59,17 @@
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT)];
     [menuTableView setTableHeaderView:headerView];
+    /*
 	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, 0)];
     [menuTableView setTableFooterView:footerView];
     
     MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
     [bottomMenu setFrame:CGRectMake(0, 0, bottomMenuView.frame.size.width, bottomMenu.frame.size.height)];
-    [bottomMenuView addSubview:bottomMenu];
+    [bottomMenuView addSubview:bottomMenu];*/
+    MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
+    [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, bottomMenu.frame.size.height)];
+    [menuTableView setTableFooterView:bottomMenu];
     
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
@@ -139,121 +144,25 @@
         cell = [MenuTableCell cell];
     }
     
-    [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cellHeight)];
+    [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, cellHeight)];
     
     NSString *title = [[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:0];
     
     [cell.mMenuTitleLabel setText:title];
+    
+    CGFloat iconHeight = (cellHeight * MENU_ICON_HEIGHT) / MENU_CELL_HEIGHT;
     [cell.menuTitleImg setImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:1]]];
     [cell.menuTitleImg setHighlightedImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:2]]];
+    if(iconHeight > MENU_ICON_HEIGHT)
+    {
+        [cell.menuTitleImg setFrame:CGRectMake(cell.menuTitleImg.frame.origin.x,
+                                              cell.menuTitleImg.frame.origin.y,
+                                               iconHeight, iconHeight)];
+    }
     
     if (indexPath.row == 8)
     {
         [cell.menuSeparateLine setHidden:YES];
-    }
-    
-    if(indexPath.row == 0)
-    {
-        NSInteger totalCount = [CommonUtil getUnreadCountForBanking] + [CommonUtil getUnreadCountForEtc];
-        // 전체 목록 UnreadCount
-        if(totalCount > 99)
-        {
-            [cell.countLabel setText:@"99+"];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 10,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else if(totalCount > 9)
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 7,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)totalCount]];
-        }
-        
-        if(totalCount == 0)
-        {
-            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-        }
-    }
-    else if(indexPath.row == 1)
-    {
-        // 입출금 목록 UnreadCount
-        NSInteger noticeCount = [CommonUtil getUnreadCountForBanking];
-        
-        if(noticeCount > 99)
-        {
-            [cell.countLabel setText:@"99+"];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 10,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else if(noticeCount > 9)
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 7,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
-        }
-        
-        if(noticeCount == 0)
-        {
-            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-        }
-    }
-    else if(indexPath.row == 2)
-    {
-        // 기타 목록 UnreadCount
-        NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
-        
-        if(noticeCount > 99)
-        {
-            [cell.countLabel setText:@"99+"];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 10,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 10,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else if(noticeCount > 9)
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
-            [cell.countLabel setFrame:CGRectMake(cell.countLabel.frame.origin.x - 7,
-                                                 cell.countLabel.frame.origin.y,
-                                                 cell.countLabel.frame.size.width + 7,
-                                                 cell.countLabel.frame.size.height)];
-            [cell.countBgView setFrame:cell.countLabel.frame];
-        }
-        else
-        {
-            [cell.countLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
-        }
-        
-        if(noticeCount == 0)
-        {
-            [cell.countBgView setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
-        }
-    }
-    else
-    {
-        [cell.countLabel setHidden:YES];
-        [cell.countBgView setHidden:YES];
     }
     
     return cell;
@@ -270,7 +179,7 @@
     
 //    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
 //    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
-    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT) / [mMenuTitleArray count]);
+    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT - 85) / [mMenuTitleArray count]);
     if(cellHeight < MENU_CELL_HEIGHT)
     {
         cellHeight = MENU_CELL_HEIGHT;
@@ -279,6 +188,18 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MenuTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.mMenuTitleLabel setTextColor:[UIColor colorWithRed:0.0/255.0f green:101.0/255.0f blue:179.0/255.0f alpha:1.0f]];
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MenuTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.mMenuTitleLabel setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

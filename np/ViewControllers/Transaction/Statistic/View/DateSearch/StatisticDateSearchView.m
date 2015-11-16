@@ -199,6 +199,7 @@
 - (void)updateNewDate:(NSDate *)newDate forTextField:(UITextField *)dateTextField {
     NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterDateStyle];
     [dateTextField setText:[formatter stringFromDate:newDate]];
+    [dateTextField setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
 }
 
 - (IBAction)searchTransactions {
