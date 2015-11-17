@@ -336,16 +336,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    [self clearDotConnections];
-    
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
         {
-            _backFromSelfIdentifer = YES;
-            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
+            [self gotoPatternLoginMgmt];
             break;
         }
         default:
+            [self clearDotConnections];
             break;
     }
 }
@@ -357,7 +355,10 @@
 
 #pragma mark - Settings
 - (IBAction)gotoPatternLoginMgmt {
-    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
+    [self clearDotConnections];
+    _backFromSelfIdentifer = YES;
+    [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
+    
 }
 
 -(IBAction)gotoLoginSettings {
