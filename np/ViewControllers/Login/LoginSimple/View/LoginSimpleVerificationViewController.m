@@ -68,7 +68,9 @@
 }
 
 - (IBAction)gotoSimpleLoginSettings {
-    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
+    [self toggleBtnBgColor:NO textLength:0];
+    _backFromSelfIdentifer = YES;
+    [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_SIMPLEPW];
 }
 
 - (IBAction)doLogin {
@@ -135,9 +137,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
-            [self toggleBtnBgColor:NO textLength:0];
-            _backFromSelfIdentifer = YES;
-            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_SIMPLEPW];
+            [self gotoSimpleLoginSettings];
             break;
         default:
             break;
