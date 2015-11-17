@@ -47,7 +47,9 @@
 - (IBAction)clickSortByDate {
     
     StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
-    [util showDataPickerInParentViewController:self dataSource:@[TIME_DECSENDING_ORDER, TIME_ACSENDING_ORDER]
+    [util showDataPickerInParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
+                                        target:self
+                                    dataSource:@[TIME_DECSENDING_ORDER, TIME_ACSENDING_ORDER]
                                   selectAction:@selector(sortByOrder:)
                                      selectRow:[self.sortByDateBtn titleForState:UIControlStateNormal]];
 }
@@ -183,7 +185,9 @@
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     
     StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
-    [util showDataPickerInParentViewController:self dataSource:[controller getAllAccounts]
+    [util showDataPickerInParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
+                                        target:self
+                                    dataSource:[controller getAllAccounts]
                                   selectAction:@selector(updateAccount:)
                                      selectRow:sltedValue];
 }
@@ -197,7 +201,9 @@
 - (void)showDataPickerToSelectTransTypeWithSelectedValue:(NSString *)sltedValue {
     
     StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
-    [util showDataPickerInParentViewController:self dataSource:@[TRANS_TYPE_GENERAL, TRANS_TYPE_INCOME, TRANS_TYPE_EXPENSE]
+    [util showDataPickerInParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
+                                        target:self
+                                    dataSource:@[TRANS_TYPE_GENERAL, TRANS_TYPE_INCOME, TRANS_TYPE_EXPENSE]
                                   selectAction:@selector(updateTransType:)
                                      selectRow:sltedValue];
 }
@@ -212,14 +218,18 @@
 - (void)showDatePickerForStartDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
-    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil inParentViewController:self
+    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil
+                       inParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
+                                       target:self
                                    doneAction:@selector(chooseStartDate:)];
 }
 
 - (void)showDatePickerForEndDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
-    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil inParentViewController:self
+    [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil
+                       inParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
+                                       target:self
                                    doneAction:@selector(chooseEndDate:)];
 }
 

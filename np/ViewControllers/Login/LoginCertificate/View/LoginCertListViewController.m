@@ -24,8 +24,6 @@
 
 @implementation LoginCertListViewController
 
-@synthesize descLabel;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -33,7 +31,6 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     [self updateUI];
-    [descLabel sizeToFit];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

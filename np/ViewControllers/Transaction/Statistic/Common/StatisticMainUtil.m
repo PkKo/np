@@ -82,7 +82,17 @@
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
                                            inParentViewController:(UIViewController *)parentVC
                                                        doneAction:(SEL)doneAction {
+    [self showDatePickerWithMinDate:minDate maxDate:maxDate
+             inParentViewController:parentVC
+                             target:nil
+                         doneAction:doneAction];
     
+}
+
+- (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
+           inParentViewController:(UIViewController *)parentVC
+                           target:(UIViewController *)target
+                       doneAction:(SEL)doneAction {
     CustomizedDatePickerViewController * datePickerViewController = [[CustomizedDatePickerViewController alloc] initWithNibName:@"CustomizedDatePickerViewController" bundle:nil];
     
     datePickerViewController.view.frame             = parentVC.view.bounds;
@@ -96,10 +106,19 @@
         [datePickerViewController setMinMaxDateToSelectWithMinDate:minDate maxDate:maxDate];
     }
     
-    [datePickerViewController addTargetForDoneButton:parentVC action:doneAction];
+    [datePickerViewController addTargetForDoneButton:(target ? target : parentVC) action:doneAction];
 }
 
 - (void)showDataPickerInParentViewController:(UIViewController *)parentVC
+                                  dataSource:(NSArray *)items
+                                selectAction:(SEL)selectAction selectRow:(NSString *)value {
+    
+    [self showDataPickerInParentViewController:parentVC target:nil
+                                    dataSource:items selectAction:selectAction selectRow:value];
+}
+
+- (void)showDataPickerInParentViewController:(UIViewController *)parentVC
+                                      target:(UIViewController *)targetVC
                                   dataSource:(NSArray *)items
                                 selectAction:(SEL)selectAction selectRow:(NSString *)value {
     
@@ -114,7 +133,7 @@
     [parentVC.view addSubview:pickerViewController.view];
     [pickerViewController didMoveToParentViewController:parentVC];
     
-    [pickerViewController addTarget:parentVC action:selectAction];
+    [pickerViewController addTarget:(targetVC ? targetVC : parentVC) action:selectAction];
     [pickerViewController selectRowByValue:value];
 }
 
