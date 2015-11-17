@@ -42,7 +42,12 @@
 @synthesize searchTypeInboxLabel;
 @synthesize isSearchResult;
 @synthesize isMoreList;
+@synthesize periodOneWeekBtn;
+@synthesize periodOneMonthBtn;
+@synthesize periodThreeMonthBtn;
+@synthesize periodSixMonthBtn;
 
+@synthesize storageCountBg;
 @synthesize storageCountLabel;
 
 - (id)init
@@ -138,12 +143,22 @@
     
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
+    
+    if(storageCount == 0)
     {
+        [storageCountBg setHidden:YES];
+        [storageCountLabel setHidden:YES];
+    }
+    else if(storageCount < 100)
+    {
+        [storageCountBg setHidden:NO];
+        [storageCountLabel setHidden:NO];
         [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
     }
     else
     {
+        [storageCountBg setHidden:NO];
+        [storageCountLabel setHidden:NO];
         [storageCountLabel setText:@"99+"];
     }
 }
@@ -280,6 +295,7 @@
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [searchView setHidden:NO];
         [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
+        [self searchPeriodSelect:periodOneWeekBtn];
     }completion:nil];
 }
 
@@ -302,6 +318,44 @@
     NSString *fromDateString = [CommonUtil getFormattedDateStringWithIndex:@"yyyy.MM.dd" indexDay:-[sender tag]];
     [searchStartDateLabel setText:fromDateString];
     searchStartDate = [fromDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    switch ([sender tag])
+    {
+        case 7:
+        {
+            [periodOneWeekBtn setSelected:YES];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 30:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:YES];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 90:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:YES];
+            [periodSixMonthBtn setSelected:NO];
+            break;
+        }
+        case 180:
+        {
+            [periodOneWeekBtn setSelected:NO];
+            [periodOneMonthBtn setSelected:NO];
+            [periodThreeMonthBtn setSelected:NO];
+            [periodSixMonthBtn setSelected:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 // 검색 실행

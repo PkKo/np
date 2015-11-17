@@ -21,6 +21,7 @@
 #import "RegistCompleteViewController.h"
 #import "BannerInfo.h"
 #import "SplashLayerPopupView.h"
+#import "CertificateMenuViewController.h"
 
 @interface SplashViewController ()
 
@@ -60,8 +61,10 @@
 //    [self ipsTest];
     /*
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    MainPageViewController *vc = [[MainPageViewController alloc] init];
-    [vc setStartPageIndex:0];
+//    MainPageViewController *vc = [[MainPageViewController alloc] init];
+//    [vc setStartPageIndex:0];
+    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
+
     slidingViewController.topViewController = vc;
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];

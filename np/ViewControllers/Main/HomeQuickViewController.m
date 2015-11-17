@@ -110,7 +110,9 @@
     
     if(pushCount == 0)
     {
-        [pushCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+//        [pushCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [pushCountBg setHidden:YES];
+        [pushCountLabel setHidden:YES];
     }
     
     NSInteger noticeCount = [CommonUtil getUnreadCountForEtc];
@@ -139,7 +141,9 @@
     
     if(noticeCount == 0)
     {
-        [noticeCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+//        [noticeCountBg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [noticeCountBg setHidden:YES];
+        [noticeCountLabel setHidden:YES];
     }
     
     [self getRecentNoticeRequest];

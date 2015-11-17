@@ -514,6 +514,10 @@
                 <outlet property="deleteButton" destination="ERD-ZM-SPu" id="9oe-Ce-9ES"/>
                 <outlet property="deleteButtonView" destination="8jL-zc-yVw" id="fah-dh-cbg"/>
                 <outlet property="listEmptyView" destination="zMY-eF-1Wh" id="6Vo-AD-Usq"/>
+                <outlet property="periodOneMonthBtn" destination="Kgg-Dk-HfH" id="upA-J5-KvM"/>
+                <outlet property="periodOneWeekBtn" destination="0mV-wP-paO" id="5eI-TQ-HQn"/>
+                <outlet property="periodSixMonthBtn" destination="3aR-GB-oH1" id="ijp-cD-Igd"/>
+                <outlet property="periodThreeMonthBtn" destination="2lO-un-LtW" id="kLp-0p-2pa"/>
                 <outlet property="searchEndDateLabel" destination="DK2-GS-zZe" id="mkK-yt-TiV"/>
                 <outlet property="searchStartDateLabel" destination="a63-KL-5xi" id="EBr-4R-rST"/>
                 <outlet property="searchTypeAccountLabel" destination="Fft-fM-xTL" id="4FY-lK-RPs"/>
@@ -523,6 +527,7 @@
                 <outlet property="searchView" destination="ANT-zQ-KF2" id="v04-TV-jm5"/>
                 <outlet property="sortLabel" destination="HrA-9p-VoR" id="Sx8-JR-vz7"/>
                 <outlet property="statisticButton" destination="u2f-9m-3ji" id="Ihf-Ek-E7m"/>
+                <outlet property="storageCountBg" destination="M9g-HD-0nA" id="W13-zf-kq8"/>
                 <outlet property="storageCountLabel" destination="VZM-jo-6ta" id="Nwi-Dr-vOD"/>
             </connections>
             <point key="canvasLocation" x="313" y="374"/>

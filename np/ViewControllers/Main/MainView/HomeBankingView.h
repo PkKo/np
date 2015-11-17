@@ -72,7 +72,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *searchTypeInboxLabel;
 @property (assign, nonatomic) BOOL isSearchResult;
 @property (assign, nonatomic) BOOL isMoreList;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneWeekBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodThreeMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodSixMonthBtn;
 
+@property (strong, nonatomic) IBOutlet CircleView *storageCountBg;
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
