@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ServiceDeactivationController : NSObject
+@interface ServiceDeactivationController : NSObject <UIAlertViewDelegate>
 
 + (instancetype)sharedInstance;
 - (void)deactivateService;

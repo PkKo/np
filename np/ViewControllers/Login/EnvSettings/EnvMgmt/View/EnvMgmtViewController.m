@@ -57,9 +57,27 @@
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
+-(IBAction)resetData {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"NH스마트알림 모든 데이터 (전체, 입출금, 보관함 등)가 초기화 됩니다. 초기화 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alert show];
+}
+
 -(void)refreshUI {
     LoginUtil * util = [[LoginUtil alloc] init];
     [self.usingSimpleViewBtn setSelected:[util isUsingSimpleView]];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            // remove data here
+            
+            // show main view
+            [[[LoginUtil alloc] init] showMainPage];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

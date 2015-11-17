@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface EnvMgmtViewController : CommonViewController
+@interface EnvMgmtViewController : CommonViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *usingSimpleViewBtn;
 -(IBAction)toggleUsingSimpleView:(UIButton *)simpleViewSwitch;
@@ -17,5 +17,5 @@
 -(IBAction)gotoSimpleLoginMgmt;
 -(IBAction)gotoPatternLoginMgmt;
 -(IBAction)gotoNoticeBgColorSettings;
-    
+-(IBAction)resetData;
 @end
