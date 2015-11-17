@@ -10,6 +10,8 @@
 #import "ExchangeCountryAddViewController.h"
 #import "CertMenuCell.h"
 
+#define CELL_HEIGHT     48
+
 @interface ExchangeSettingViewController ()
 
 @end
@@ -38,6 +40,11 @@
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, countryListTable.frame.size.width, 0)];
     [countryListTable setTableFooterView:footerView];
+    [countryListTable.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
+    [countryListTable.layer setBorderWidth:1.0f];
+    
+    [payAlarmListTable.layer setBorderWidth:1.0f];
+    [payAlarmListTable.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
     
     // 2. 서버에서 환율알림 국가 목록을 조회해온다.
     [self currencyCountryListRequest];
@@ -56,8 +63,8 @@
 {
     [super viewWillAppear:animated];
     
-    countryCellHeight = countryListTable.frame.size.height / 3;
-    payAlarmCellHeight = payAlarmListTable.frame.size.height / 2;
+    countryCellHeight = CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+    payAlarmCellHeight = CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
 }
 
 #pragma mark - 환율 알림 전체 국가 목록 요청
@@ -147,11 +154,22 @@
         
         if([chargeList count] == 0)
         {
+            CGFloat totalCellHeight = countryCellHeight * [regCountryList count];
+            CGFloat tableViewHeight = payAlarmView.frame.origin.y + payAlarmView.frame.size.height - 28 - countryListTable.frame.origin.y;
+            if(totalCellHeight < tableViewHeight)
+            {
+                tableViewHeight = totalCellHeight;
+                [countryListTable setScrollEnabled:NO];
+            }
+            else
+            {
+                [countryListTable setScrollEnabled:YES];
+            }
+            
             [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
-                                                 countryListTable.frame.origin.y,
-                                                 countryListTable.frame.size.width,
-                                                  listView.frame.size.height - 28)];
-            countryCellHeight = countryListTable.frame.size.height / 6.5;
+                                                  countryListTable.frame.origin.y,
+                                                  countryListTable.frame.size.width,
+                                                  tableViewHeight)];
             [payAlarmView setHidden:YES];
             [countryListTable reloadData];
         }

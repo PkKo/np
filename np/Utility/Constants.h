@@ -121,6 +121,7 @@
 #pragma mark 앱버전 체크
 // 앱 버전 체크
 #define REQUEST_APP_VERSION         @"servlet/EFPU0000R.cmd"
+#define REQUEST_APP_SESSION_REFRESH @"servlet/EFPU0001R.cmd"
 #define REQUEST_APP_VERSION_UUID    @"uuid"
 #define REQUEST_APP_VERSION_APPVER  @"appVer"
 
@@ -157,6 +158,9 @@
 #define REQUEST_PHONE_AUTH          @"servlet/EFPUW031001.cmd"
 #define REQUEST_PHONE_AUTH_NUMBER   @"receiver"
 #define RESPONSE_PHONE_AUTH_CODE    @"randomCode"
+
+#pragma mark 가입된 계좌 목록 조회
+#define REQUEST_REGIST_ACCOUNT_LIST         @"servlet/EFPUD060101.cmd"
 
 #pragma mark 계좌 알림 옵션 조회
 #define REQUEST_NOTI_OPTION_SEARCH          @"servlet/EFPUW022001.cmd"

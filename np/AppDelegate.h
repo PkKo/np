@@ -23,5 +23,7 @@
 @property (strong, nonatomic) UIImage *nongminBannerImg;
 @property (strong, nonatomic) UIImage *noticeBannerImg;
 
+- (void)timeoutError:(NSDictionary *)response;
+- (void)restartApplication;
 @end
 

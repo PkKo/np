@@ -93,7 +93,7 @@
                                         <action selector="addCurrencyCountry:" destination="-1" eventType="touchUpInside" id="guK-3q-RSr"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" id="H4F-QN-yhI" customClass="StrokeView">
+                                <view hidden="YES" contentMode="scaleToFill" id="H4F-QN-yhI" customClass="StrokeView">
                                     <rect key="frame" x="17" y="129" width="286" height="148"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -101,7 +101,7 @@
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
                                     <rect key="frame" x="18" y="130" width="284" height="146"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="Kwy-Qa-LbC"/>
                                         <outlet property="delegate" destination="-1" id="pak-Gs-6lm"/>
@@ -120,7 +120,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" id="mPp-Iq-kqZ" customClass="StrokeView">
+                                        <view hidden="YES" contentMode="scaleToFill" id="mPp-Iq-kqZ" customClass="StrokeView">
                                             <rect key="frame" x="0.0" y="65" width="284" height="119"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

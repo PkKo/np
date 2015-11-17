@@ -11,6 +11,7 @@
 @interface CertificateMenuViewController : CommonViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *mCertMenuArray;
+    CGFloat cellHeight;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mCertMenuTableView;

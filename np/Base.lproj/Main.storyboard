@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fNc-3Y-x12">
             <objects>
-                <navigationController navigationBarHidden="YES" id="7uY-oa-ykT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RootNavigationController" navigationBarHidden="YES" id="7uY-oa-ykT" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pvf-Up-CWs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -25,7 +25,7 @@
         <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SplashViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootSplashViewController" id="BYZ-38-t0r" customClass="SplashViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

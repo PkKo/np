@@ -409,26 +409,28 @@
         NSArray * accounts      = (NSArray *)(list[@"sub"]);
         int numberOfAccounts    = (int)[accounts count];
         BOOL hasAccounts        = NO;
+        NSMutableArray * accountNumbers = [NSMutableArray array];
         
-        if (numberOfAccounts > 0) {
-            
-            NSMutableArray * accountNumbers = [NSMutableArray array];
+        if (numberOfAccounts > 0)
+        {
             for (NSDictionary * account in accounts) {
                 [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
             }
-            
+            /*
             if ([accountNumbers count] > 0) {
                 hasAccounts = YES;
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
                 [self showMainView];
                 
-            }
+            }*/
         }
-        
+        /*
         if (!hasAccounts) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
             [alertView show];
-        }
+        }*/
+        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+        [self showMainView];
         
     } else {
         

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SplashViewController.h"
 
 @interface AppDelegate ()
 
@@ -115,5 +116,29 @@
     // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달
     ////////////////////////////////////////////////////////////////////////////////////////////////
     [IBPush apnsHandleRemoteNotification:userInfo];
+}
+
+- (void)timeoutError:(NSDictionary *)response
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alertView setTag:123456];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%s", __FUNCTION__);
+    
+    if([alertView tag] == 123456)
+    {
+        [self restartApplication];
+    }
+}
+
+- (void)restartApplication
+{
+    UIStoryboard        * mainStoryBoard       = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *naviCon = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RootNavigationController"];
+    self.window.rootViewController = naviCon;
 }
 @end

@@ -195,10 +195,10 @@
         
         int numberOfAccounts    = (int)[accounts count];
         BOOL hasAccounts        = NO;
+        NSMutableArray * accountNumbers = [NSMutableArray array];
         
         if (numberOfAccounts > 0) {
             
-            NSMutableArray * accountNumbers = [NSMutableArray array];
             for (NSDictionary * accountDic in accounts) {
                 
                 NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
@@ -207,17 +207,21 @@
                 }
             }
             
+            /*
             if ([accountNumbers count] > 0) {
                 hasAccounts = YES;
                 [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
                 [[[LoginUtil alloc] init] showMainPage];
-            }
+            }*/
         }
         
+        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+        [[[LoginUtil alloc] init] showMainPage];
+        /*
         if (!hasAccounts) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
             [alertView show];
-        }
+        }*/
         
     } else {
         

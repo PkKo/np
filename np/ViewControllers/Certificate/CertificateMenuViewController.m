@@ -13,6 +13,8 @@
 #import "CertMenuCell.h"
 #import "CertificateRoamingPassViewController.h"
 
+#define CELL_HEIGHT     48
+
 @interface CertificateMenuViewController ()
 
 @end
@@ -31,7 +33,9 @@
     mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC > 스마트폰 인증서 가져오기", @"스마트폰 > 스마트폰 인증서 가져오기", @"인증서 관리", nil];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertMenuTableView.frame.size.width, 0)];
+    [mCertMenuTableView setTableHeaderView:footerView];
     [mCertMenuTableView setTableFooterView:footerView];
+    [mCertMenuTableView setContentInset:UIEdgeInsetsZero];
     
     [mCertMenuTableView.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
     [mCertMenuTableView.layer setBorderWidth:1.0f];
@@ -40,6 +44,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    cellHeight = CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+    
+    CGFloat totalCellHeight = cellHeight * [mCertMenuArray count];
+    [mCertMenuTableView setFrame:CGRectMake(mCertMenuTableView.frame.origin.x,
+                                            mCertMenuTableView.frame.origin.y,
+                                            mCertMenuTableView.frame.size.width,
+                                            totalCellHeight)];
+    [mCertMenuTableView scrollRectToVisible:CGRectMake(0, mCertMenuTableView.frame.size.height, mCertMenuTableView.frame.size.width, 0) animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +62,16 @@
 }
 
 #pragma mark - UITableViewDataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return cellHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *reuseId = [NSString stringWithFormat:@"%@", [CertMenuCell class]];
@@ -58,10 +81,8 @@
     {
         cell = [CertMenuCell cell];
     }
-    /*
-    [cell.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
-    [cell.layer setBorderWidth:1.0f];*/
     
+    [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, cellHeight)];
     [cell.titleLabel setText:[mCertMenuArray objectAtIndex:indexPath.row]];
     
     return cell;

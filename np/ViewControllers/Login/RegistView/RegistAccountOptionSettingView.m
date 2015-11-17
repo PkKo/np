@@ -128,7 +128,7 @@
 {
     [scrollView setContentSize:contentView.frame.size];
     
-    [accountNumberLabel setText:accountNum];
+    [accountNumberLabel setText:[CommonUtil getAccountNumberAddDash:accountNum]];
     if(delegate != nil)
     {
         [accountNicknameInput setDelegate:delegate];

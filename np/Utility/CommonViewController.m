@@ -26,6 +26,7 @@
 {
     [super viewDidLoad];
     [self makeNaviAndMenuView];
+    sessionRefreshRequest = [[HttpRequest alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -38,6 +39,8 @@
     }
     
     [self.view bringSubviewToFront:loadingIndicatorBg];
+    
+    [self sessionRefreshRequest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -174,17 +177,22 @@
 {
     [self stopIndicator];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-    [alertView setTag:123456];
-    [alertView show];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate) timeoutError:response];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)sessionRefreshRequest
 {
-    if([alertView tag] == 123456)
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_APP_SESSION_REFRESH];
+    [sessionRefreshRequest setDelegate:self selector:@selector(sessionRefreshResponse:)];
+    [sessionRefreshRequest requestUrl:url bodyString:@""];
+}
+
+- (void)sessionRefreshResponse:(NSDictionary *)response
+{
+//    NSLog(@"%s", __FUNCTION__);
+    if(![[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] && ![[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        SplashViewController *vc = [[SplashViewController alloc] init];
-        [self.navigationController setViewControllers:@[vc] animated:YES];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) timeoutError:response];
     }
 }
 
