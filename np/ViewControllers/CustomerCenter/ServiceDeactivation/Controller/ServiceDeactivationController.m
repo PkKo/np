@@ -48,7 +48,11 @@
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO]) {
         LoginUtil * util = [[LoginUtil alloc] init];
         [util removeAllData];
-        exit(0);
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
+                                                         message:@"모든 데이터 초기화 처리 후\n서비스 해지 처리가 완료되었습니다."
+                                                        delegate:self cancelButtonTitle:@"확인"
+                                               otherButtonTitles:nil];
+        [alert show];
         
     } else {
         
@@ -56,6 +60,10 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    exit(0);
 }
 
 @end

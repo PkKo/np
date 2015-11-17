@@ -304,11 +304,13 @@
 
 - (void)resizeNoticeContent {
     
-    CGFloat contentWidth        = self.noticeView.frame.size.width - self.noteContent1.frame.origin.x;
+    CGFloat screenWidth         = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat contentWidth        = screenWidth - (self.noticeView.frame.origin.x * 2 + self.noteContent1.frame.origin.x);
     
     CGRect noteContent1Rect     = self.noteContent1.frame;
     noteContent1Rect.size.width = contentWidth;
     [self.noteContent1 setFrame:noteContent1Rect];
+    
     [self.noteContent1 sizeToFit];
     noteContent1Rect            = self.noteContent1.frame;
     
