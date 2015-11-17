@@ -136,11 +136,24 @@
         StorageBoxController    * controller    = [[StorageBoxController alloc] init];
         NSArray                 * allAccounts   = [controller getAllAccounts];
         
-        return [allAccounts subarrayWithRange:NSMakeRange(1, [allAccounts count] - 1)]; // remove 전체계좌 item
+        if ([allAccounts count] == 1) {
+            return nil;
+        }
+        
+        return [[[LoginUtil alloc] init] getAllAccounts];
         
     } else {
         
-        return @[[self.selectAccountLabel text]];
+        NSString        * accountNo             = [self.selectAccountLabel text];
+        NSMutableString * accountNoWithoutDash  = [NSMutableString stringWithString:accountNo];
+        
+        [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
+                                                 options:NSCaseInsensitiveSearch
+                                                   range:NSMakeRange(0, accountNoWithoutDash.length)];
+        
+        NSLog(@"accountNo: %@ - accountNoWithoutDash: %@", accountNo, accountNoWithoutDash);
+        
+        return @[accountNoWithoutDash];
     }
     
 }

@@ -23,6 +23,15 @@
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
            inParentViewController:(UIViewController *)parentVC
                        doneAction:(SEL)doneAction;
+- (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
+           inParentViewController:(UIViewController *)parentVC
+                           target:(UIViewController *)target
+                       doneAction:(SEL)doneAction;
+
+- (void)showDataPickerInParentViewController:(UIViewController *)parentVC
+                                      target:(UIViewController *)targetVC
+                                  dataSource:(NSArray *)items
+                                selectAction:(SEL)selectAction selectRow:(NSString *)value;
 
 - (void)showDataPickerInParentViewController:(UIViewController *)parentVC
                                   dataSource:(NSArray *)items

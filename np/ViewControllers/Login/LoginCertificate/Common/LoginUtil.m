@@ -414,6 +414,8 @@
         [vc setTopBarText:topBar];
         [vc setTitleText:title];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];
+        [vc setBackgroundDimmedColor];
+        [vc hidePrvNxtBtnsOfToolbar];
     }
     else
     {

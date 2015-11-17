@@ -55,7 +55,7 @@
 - (IBAction)clickOnCert:(UITapGestureRecognizer *)sender {
     
     LoginUtil * util = [[LoginUtil alloc] init];
-    [util showSecureKeypadInParent:self topBar:@"공인인증서 로그인" title:@"비밀번호 입력"
+    [util showSecureKeypadInParent:self topBar:@"공인인증서" title:@"비밀번호 입력"
                         textLength:20
                         doneAction:@selector(confirmPassword:) cancelAction:nil];
 }

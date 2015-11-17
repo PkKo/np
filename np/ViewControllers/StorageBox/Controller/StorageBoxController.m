@@ -58,8 +58,14 @@
     NSArray * allAccounts = [util getAllAccounts];
     
     if (allAccounts && [allAccounts count] > 0) {
-        NSMutableArray * accountsWithAll = [NSMutableArray arrayWithArray:allAccounts];
+        
+        NSMutableArray * accountsWithAll = [NSMutableArray arrayWithCapacity:[allAccounts count]];
         [accountsWithAll insertObject:TRANS_ALL_ACCOUNT atIndex:0];
+        
+        for (NSString * account in allAccounts) {
+            [accountsWithAll addObject:[CommonUtil getAccountNumberAddDash:account]];
+        }
+        
         return [accountsWithAll copy];
     }
     

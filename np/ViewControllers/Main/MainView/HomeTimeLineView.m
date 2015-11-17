@@ -1225,7 +1225,7 @@
     
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:inboxData.serverMessageKey
                                                                                        transactionDate:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]
-                                                                              transactionAccountNumber:inboxData.nhAccountNumber
+                                                                              transactionAccountNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]
                                                                                 transactionAccountType:@""
                                                                                     transactionDetails:inboxData.oppositeUser
                                                                                        transactionType:[NSString stringWithFormat:@"%d", inboxData.stickerCode]
