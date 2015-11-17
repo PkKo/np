@@ -119,6 +119,12 @@
     [animationBg setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
     [animationBg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
     [loadingIndicatorBg addSubview:animationBg];
+    loadingIndicatorImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.png"]];
+    [loadingIndicatorImg setFrame:CGRectMake((animationBg.frame.size.width - 24) / 2,
+                                            (animationBg.frame.size.height - 24) / 2,
+                                             24, 24)];
+    [loadingIndicatorImg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+    [animationBg addSubview:loadingIndicatorImg];
     [loadingIndicatorBg setHidden:YES];
     
     [self.view addSubview:loadingIndicatorBg];
@@ -165,11 +171,13 @@
 - (void)startIndicator
 {
     [self.view bringSubviewToFront:loadingIndicatorBg];
+    [CommonUtil runSpinAnimationWithDuration:loadingIndicatorImg duration:10.0f];
     [loadingIndicatorBg setHidden:NO];
 }
 
 - (void)stopIndicator
 {
+    [CommonUtil stopSpinAnimation:loadingIndicatorImg];
     [loadingIndicatorBg setHidden:YES];
 }
 

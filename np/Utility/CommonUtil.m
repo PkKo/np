@@ -204,8 +204,8 @@
 + (void)runSpinAnimationWithDuration:(UIView *)view duration:(CGFloat)duration
 {
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.fromValue = [NSNumber numberWithFloat:M_PI * 2.0 * duration];
-    rotationAnimation.toValue = [NSNumber numberWithFloat:0.0f];
+    rotationAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI * 2.0 * duration];
     rotationAnimation.duration = duration;
     rotationAnimation.repeatCount = INFINITY;
     
