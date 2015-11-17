@@ -21,9 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    NSLog(@"%s", __func__);
     [self startIndicator];
     
     _prvSltedRow = -1;
@@ -36,7 +33,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    NSLog(@"%s", __func__);
     [self requestNongminNews];
     [self.articleTableView reloadData];
     [self stopIndicator];
@@ -54,7 +50,7 @@
     
     CFStringEncoding encoding = (CFStringEncoding)CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_KR);//
     
-    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/ar_xml_nh.htm"] encoding:encoding error:nil];
+    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/app_push/ar_xml_all.xml"] encoding:encoding error:nil];
     
     NSRange  range;
     NSString * element;
@@ -153,9 +149,7 @@
         if (article.imgPath) {
             [cell.photo setHidden:NO];
             
-            //NSLog(@"\n\n------->article.imgPath: %@", article.imgPath);
             UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]];
-            //NSLog(@"image   : %@", NSStringFromCGSize(image.size)) ;
             
             CGSize scaledPhotoSize  = [self scaleImage:image toSize:CGSizeMake(284, 166)];
             CGRect photoFrame       = cell.photo.frame;
@@ -163,7 +157,6 @@
             [cell.photo setFrame:photoFrame];
             [cell.photo setImage:image];
             
-            //[cell.photo setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]]];
         } else {
             [cell.photo setHidden:YES];
         }

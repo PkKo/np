@@ -254,6 +254,7 @@
 #define REQUEST_LOGIN_ACCOUNT                       @"servlet/EFPU1012R.cmd"
 #define REQUEST_LOGIN_PINPAT                        @"servlet/EFPU1013R.cmd"
 #define REQUEST_SERVICE_DEACTIVATION                @"servlet/EFPUD040001.cmd"
+#define REQUEST_RESET_DATA                          @"servlet/EFPU1099E.cmd"
 
 #define NOTIFICATION_REFRESH_BADGES                 @"notificationRefreshBadges"
 

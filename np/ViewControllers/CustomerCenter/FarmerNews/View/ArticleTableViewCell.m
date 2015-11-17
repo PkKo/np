@@ -33,6 +33,9 @@
     [self.subject setHidden:isHidden];
     [self.detailsView setHidden:isHidden];
     [self.rowSeparator setHidden:!isHidden];
+    
+    [self.imgOpen setHidden:!isHidden];
+    [self.imgClose setHidden:isHidden];
 }
 
 - (void)updateSubject:(NSString *)subject {

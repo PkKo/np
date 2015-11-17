@@ -33,6 +33,7 @@
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
     [requestBody setObject:user_id forKey:@"user_id"];
+    [requestBody setObject:PUSH_APP_ID forKey:@"app_id"];
     
     NSString *bodyString = [CommonUtil getBodyString:requestBody];
     

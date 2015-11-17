@@ -13,6 +13,7 @@
 #import "LoginCertListViewController.h"
 #import "LoginAccountVerificationViewController.h"
 #import "LoginSimpleVerificationViewController.h"
+#import "DBManager.h"
 
 @interface EnvMgmtViewController ()
 
@@ -57,26 +58,61 @@
     [self.navigationController pushViewController:eVC animated:YES];
 }
 
--(IBAction)resetData {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"NH스마트알림 모든 데이터 (전체, 입출금, 보관함 등)가 초기화 됩니다.\n초기화 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
-    [alert show];
-}
-
 -(void)refreshUI {
     LoginUtil * util = [[LoginUtil alloc] init];
     [self.usingSimpleViewBtn setSelected:[util isUsingSimpleView]];
 }
 
+#pragma mark - Reset data 
+
+-(IBAction)resetData {
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"NH스마트알림 모든 데이터 (전체, 입출금, 보관함 등)가 초기화 됩니다.\n초기화 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alert show];
+}
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 1:
             // remove data here
+            [self startIndicator];
+            [self performSelector:@selector(resetService) withObject:nil afterDelay:0.06];
             
-            // show main view
-            [[[LoginUtil alloc] init] showMainPage];
             break;
         default:
             break;
+    }
+}
+
+- (void)resetService {
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_RESET_DATA];
+    NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+    
+    [requestBody setObject:PUSH_APP_ID forKey:@"app_id"];
+    
+    NSString *bodyString = [CommonUtil getBodyString:requestBody];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(receiveResponse:)];
+    [req requestUrl:url bodyString:bodyString];
+}
+
+- (void)receiveResponse:(NSDictionary *)response {
+    
+    NSLog(@"RESPONSE: %@", response);
+    [self stopIndicator];
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO]) {
+        
+        [[DBManager sharedInstance] deleteAllTransactions];
+        [[[LoginUtil alloc] init] showMainPage];
+        
+    } else {
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 

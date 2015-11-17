@@ -40,8 +40,12 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="c5N-l0-7Wf">
-                                <rect key="frame" x="286" y="39" width="16" height="16"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_more_04_close_01.png" id="c5N-l0-7Wf">
+                                <rect key="frame" x="290" y="39" width="16" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_more_04.png" id="2Mt-qH-9S9">
+                                <rect key="frame" x="290" y="38" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bzT-qX-dVQ">
@@ -110,12 +114,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닫기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gwq-sD-ccz">
-                                        <rect key="frame" x="279" y="13" width="27" height="16"/>
+                                        <rect key="frame" x="263" y="11" width="27" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_more_04_close_02.png" id="mcK-qk-0ad">
+                                        <rect key="frame" x="290" y="11" width="16" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -134,6 +142,8 @@
                 <outlet property="footerView" destination="gSw-hr-Blc" id="0PF-wb-LpU"/>
                 <outlet property="headline" destination="D1z-6f-g2H" id="3yZ-6Q-IhV"/>
                 <outlet property="headlineView" destination="Gtg-Ej-NRa" id="CEy-9F-eP6"/>
+                <outlet property="imgClose" destination="c5N-l0-7Wf" id="Sps-V8-mYx"/>
+                <outlet property="imgOpen" destination="2Mt-qH-9S9" id="DDt-8Q-TdK"/>
                 <outlet property="photo" destination="7TH-5L-XIQ" id="QwK-hb-o45"/>
                 <outlet property="regDate" destination="Tkh-lK-NqX" id="FMa-Wj-ihZ"/>
                 <outlet property="rowSeparator" destination="bzT-qX-dVQ" id="uGu-u6-te4"/>
@@ -152,4 +162,9 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="icon_more_04.png" width="16" height="16"/>
+        <image name="icon_more_04_close_01.png" width="16" height="16"/>
+        <image name="icon_more_04_close_02.png" width="16" height="16"/>
+    </resources>
 </document>
