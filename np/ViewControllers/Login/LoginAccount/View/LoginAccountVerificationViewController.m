@@ -67,6 +67,8 @@
         title           = @"생년월일 입력";
     }
     
+    [textField setText:@""];
+    
     LoginUtil * util = [[LoginUtil alloc] init];
     
     [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:title

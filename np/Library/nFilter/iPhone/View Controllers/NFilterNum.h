@@ -86,6 +86,8 @@
     IBOutlet UIButton *btnToolbarConfirm;                   // 툴바 확인 버튼
     IBOutlet UIButton *btnToolbarPrev;                      // 툴바 이전 버튼
     IBOutlet UIButton *btnToolbarNext;                      // 툴바 다음 버튼
+    IBOutlet UIImageView *imgToolbarPrev;                   // 툴바 이전 버튼 이지미
+    IBOutlet UIImageView *imgToolbarNext;                   // 툴바 다음 버튼 이지미
     
     IBOutlet UIButton *btnBackGroundClose;                  // 하프 모드 시에 백그라운드 클릭시 엔필터 닫힘
     
@@ -170,6 +172,8 @@
 - (void)closeNFilter;                                       // nFilter 닫기
 
 // 이하 고객지원 옵션
+- (void)setBackgroundDimmedColor;
+- (void)hidePrvNxtBtnsOfToolbar;
 - (void)setSupportBackgroundEvent:(BOOL)pYesOrNo;           // 백그라운드 이벤트 설정
 - (void)setDeepSecMode:(BOOL)pYesOrNo;                      // 강한 보한 모드 설정
 - (void)setSupportRotation:(BOOL)pYesOrNo;                  // 회전 설정

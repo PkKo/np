@@ -16,6 +16,7 @@
 #import "PublicKeyDownloader.h"
 #import <AudioToolbox/AudioServices.h>
 #include <CommonCrypto/CommonDigest.h>
+#import "StorageBoxUtil.h"
 
 @implementation NFilterNum {
 @private
@@ -857,6 +858,20 @@ static NFilterNum* instance = nil;
 }
 
 #pragma mark - 백그라운드 이벤트 허용 설정
+- (void)setBackgroundDimmedColor {
+    [btnBackGroundClose setHidden:NO];
+    [btnBackGroundClose setBackgroundColor:[StorageBoxUtil getDimmedBackgroundColor]];
+}
+
+- (void)hidePrvNxtBtnsOfToolbar {
+    
+    BOOL isHidden = YES;
+    
+    [btnToolbarNext setHidden:isHidden];
+    [btnToolbarPrev setHidden:isHidden];
+    [imgToolbarNext setHidden:isHidden];
+    [imgToolbarPrev setHidden:isHidden];
+}
 
 - (void)setSupportBackgroundEvent:(BOOL)pYesOrNo {
     isSuportBackgroundEvent = pYesOrNo;

@@ -15,7 +15,7 @@
 
 #pragma mark - UI Customization
 + (UIColor *)getDimmedBackgroundColor {
-    return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+    return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
 }
 
 - (void)updateTextFieldBorder:(UITextField *)textField {
