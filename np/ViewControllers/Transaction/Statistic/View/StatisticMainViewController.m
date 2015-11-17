@@ -140,11 +140,20 @@
             return nil;
         }
         
-        return [allAccounts subarrayWithRange:NSMakeRange(1, [allAccounts count] - 1)]; // remove 전체계좌 item
+        return [[[LoginUtil alloc] init] getAllAccounts];
         
     } else {
         
-        return @[[self.selectAccountLabel text]];
+        NSString        * accountNo             = [self.selectAccountLabel text];
+        NSMutableString * accountNoWithoutDash  = [NSMutableString stringWithString:accountNo];
+        
+        [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
+                                                 options:NSCaseInsensitiveSearch
+                                                   range:NSMakeRange(0, accountNoWithoutDash.length)];
+        
+        NSLog(@"accountNo: %@ - accountNoWithoutDash: %@", accountNo, accountNoWithoutDash);
+        
+        return @[accountNoWithoutDash];
     }
     
 }
@@ -350,16 +359,7 @@
         [self stopIndicator];
         
     } else {
-        /*
-        NSMutableArray * accountWithoutDashArr = [NSMutableArray arrayWithCapacity:[accounts count]];
-        for (NSString * accountNo in accounts) {
-            [accountWithoutDashArr addObject:[CommonUtil getAccountNumberWithoutDash:accountNo]];
-        }
         
-        for (NSString * accountWithoutDash in accountWithoutDashArr) {
-            NSLog(@"accountWithoutDash: %@", accountWithoutDash);
-        }
-        */
         [IBInbox loadWithListener:self];
         [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
     }

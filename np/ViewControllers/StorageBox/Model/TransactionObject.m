@@ -51,11 +51,7 @@
 }
 
 - (NSString *)getMaskingTransactionAccountNumber {
-    NSString * maskingTransactionAccountNumber1 = [self.transactionAccountNumber substringToIndex:self.transactionAccountNumber.length - 6];
-    NSString * maskingTransactionAccountNumber2 = [self.transactionAccountNumber substringFromIndex:self.transactionAccountNumber.length - 2];
-    maskingTransactionAccountNumber1 = [NSString stringWithFormat:@"%@****%@", maskingTransactionAccountNumber1, maskingTransactionAccountNumber2];
-    
-    return maskingTransactionAccountNumber1;
+    return [CommonUtil getMaskingNumber:self.transactionAccountNumber];
 }
 
 - (NSString *)formattedTransactionDate {
