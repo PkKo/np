@@ -291,7 +291,7 @@
         [cell.dateLabel setText:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
         [cell.dateLabel sizeToFit];
         
-        [cell.accountLabel setText:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:inboxData.nhAccountNumber]]];
+        [cell.accountLabel setText:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]]];
         [cell.accountLabel sizeToFit];
         [cell.dateLabel setFrame:CGRectMake(cell.accountLabel.frame.origin.x - cell.dateLabel.frame.size.width,
                                             cell.dateLabel.frame.origin.y, cell.dateLabel.frame.size.width, cell.dateLabel.frame.size.height)];

@@ -7,6 +7,7 @@
 //
 
 #import "BannerInfoView.h"
+#import "CustomerCenterUtil.h"
 
 #define SCROLL_TIMER_MAX        3
 #define SCROLL_TIMER_INTERVAL   1
@@ -47,6 +48,17 @@
     [scrollView addSubview:rightView];*/
 }
 
+- (IBAction)nongminBannerClick:(id)sender
+{
+    [[CustomerCenterUtil sharedInstance] gotoFarmerNews];
+}
+
+- (IBAction)noticeBannerClick:(id)sender
+{
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+
+#pragma mark - 배너 타이머
 - (void)bannerTimerStart
 {
     if(scrollTimer != nil)

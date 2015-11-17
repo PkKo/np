@@ -503,6 +503,11 @@
     
     if(success)
     {
+        if([unreadMessageList count] > 0)
+        {
+            [unreadMessageList removeAllObjects];
+        }
+        
         if(!isRefresh)
         {
             if([sectionList count] > 0)
@@ -539,6 +544,11 @@
                 [itemList addObject:inboxData];
                 
                 [timelineMessageList setObject:itemList forKey:dateString];
+                
+                if(inboxData.readDate == 0)
+                {
+                    [unreadMessageList addObject:inboxData.serverMessageKey];
+                }
             }
             
             /*
@@ -645,6 +655,11 @@
                     
                     [itemList insertObject:inboxData atIndex:0];
                     [timelineMessageList setObject:itemList forKey:dateString];
+                    
+                    if(inboxData.readDate == 0)
+                    {
+                        [unreadMessageList addObject:inboxData.serverMessageKey];
+                    }
                 }
             }
             else
@@ -678,6 +693,11 @@
                     [itemList addObject:inboxData];
                     
                     [timelineMessageList setObject:itemList forKey:dateString];
+                    
+                    if(inboxData.readDate == 0)
+                    {
+                        [unreadMessageList addObject:inboxData.serverMessageKey];
+                    }
                 }
                 /*
                 // 과거 목록
@@ -758,7 +778,10 @@
         
         [self performSelector:@selector(makeTimelineView) withObject:nil];
         
-//        [self sendReadStatus];
+        if([unreadMessageList count] > 0)
+        {
+            [self sendReadStatus];
+        }
     }
 }
 
@@ -791,14 +814,16 @@
 
 - (void)sendReadStatus
 {
-    NHInboxMessageData *data = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject];
-    
-    [IBInbox requestReadMessageWithMsgKey:@[data.serverMessageKey] readMethod:1];
+    [IBInbox requestReadMessageWithMsgKey:unreadMessageList readMethod:1];
 }
 
 - (void)readMessage:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys
 {
     NSLog(@"%s, %d, keys = %@", __FUNCTION__, success, sMsgKeys);
+    if(success)
+    {
+        [unreadMessageList removeAllObjects];
+    }
 }
 
 - (void)addedSticker:(BOOL)success

@@ -71,6 +71,8 @@
     [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(19, 9)];
     [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(28, 8)];
     [descriptionThreeLabel setAttributedText:texthree];
+    
+    [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 - (void)didReceiveMemoryWarning

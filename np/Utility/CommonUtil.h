@@ -36,6 +36,7 @@ typedef enum StickerType
 + (NSString *)getAppVersion;
 + (NSString *)getOSVersion;
 + (NSString *)getMaskingNumber:(NSString *)number;
++ (NSString *)getAccountNumberAddDash:(NSString *)number;
 + (NSString *)getDeviceUUID;
 + (NSString *)getBodyString:(NSDictionary *)bodyObject;
 + (CGSize)getStringFrameSize:(NSString *)string fontSize:(CGFloat)fontSize bold:(BOOL)isBold;

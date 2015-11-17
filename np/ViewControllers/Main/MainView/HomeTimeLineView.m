@@ -886,11 +886,11 @@
             
             if(accountNickName != nil && [accountNickName length] > 0)
             {
-                [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, inboxData.nhAccountNumber]];
+                [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, [CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]];
             }
             else
             {
-                [cell.accountLabel setText:inboxData.nhAccountNumber];
+                [cell.accountLabel setText:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]];
             }
             
             // 잔액

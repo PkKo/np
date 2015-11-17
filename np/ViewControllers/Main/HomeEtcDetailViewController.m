@@ -28,6 +28,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.mNaviView.mTitleLabel setText:@"상세보기"];
+    
+    if(inboxData != nil)
+    {
+        [self startIndicator];
+        [IBInbox loadWithListener:self];
+        [IBInbox requestInboxSingMessage:inboxData.serverMessageKey];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,13 +46,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if(inboxData != nil)
-    {
-        [self startIndicator];
-        [IBInbox loadWithListener:self];
-        [IBInbox requestInboxSingMessage:inboxData.serverMessageKey];
-    }
 }
 
 - (void)setImageView:(NSString *)imageUrl
@@ -53,7 +53,7 @@
     if(imageUrl == nil)
     {
         [contentImg setHidden:YES];
-        [contentView setFrame:CGRectMake(contentView.frame.origin.x, 18,
+        [contentView setFrame:CGRectMake(contentView.frame.origin.x, contentImg.frame.origin.y,
                                          contentView.frame.size.width,
                                          contentView.frame.size.height)];
     }
@@ -66,6 +66,10 @@
     [contentTitle setText:inboxData.title];
     [contentText setText:inboxData.text];
     [contentText sizeToFit];
+    
+    CGSize contentSize = CGSizeMake(contentView.frame.size.width, contentView.frame.origin.y + contentText.frame.origin.y + contentText.frame.size.height);
+    [scrollView setContentSize:contentSize];
+    [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 #pragma mark - IBInboxProtocol Delegate

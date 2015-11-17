@@ -32,6 +32,9 @@
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertMenuTableView.frame.size.width, 0)];
     [mCertMenuTableView setTableFooterView:footerView];
+    
+    [mCertMenuTableView.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
+    [mCertMenuTableView.layer setBorderWidth:1.0f];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,9 +58,9 @@
     {
         cell = [CertMenuCell cell];
     }
-    
+    /*
     [cell.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
-    [cell.layer setBorderWidth:1.0f];
+    [cell.layer setBorderWidth:1.0f];*/
     
     [cell.titleLabel setText:[mCertMenuArray objectAtIndex:indexPath.row]];
     

@@ -24,8 +24,6 @@
 
 @implementation LoginCertListViewController
 
-@synthesize descLabel;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -33,7 +31,6 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     [self updateUI];
-    [descLabel sizeToFit];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -206,7 +203,7 @@
                 
                 NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
                 if (account && ![account isEqualToString:@""]) {
-                    [accountNumbers addObject:account];
+                    [accountNumbers addObject:[account stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
                 }
             }
             

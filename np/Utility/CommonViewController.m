@@ -81,9 +81,9 @@
     [self.view addSubview:mMenuCloseButton];
     
     UIImageView *closeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"close_01.png"]];
-    [closeImage setFrame:CGRectMake(mMenuCloseButton.frame.size.width - 24, 34, 16, 16)];
+    [closeImage setFrame:CGRectMake(mMenuCloseButton.frame.size.width - 16, 34, 16, 16)];
     [closeImage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin];
-    NSLog(@"%s, %f, %f", __FUNCTION__, mMenuCloseButton.frame.size.width, closeImage.frame.origin.x);
+//    NSLog(@"%s, %f, %f", __FUNCTION__, mMenuCloseButton.frame.size.width, closeImage.frame.origin.x);
     [mMenuCloseButton addSubview:closeImage];
     
     /*

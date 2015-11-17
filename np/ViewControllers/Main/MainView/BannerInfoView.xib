@@ -19,11 +19,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="nongminBannerClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lmk-xQ-FNi"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o4m-OY-IGt">
                             <rect key="frame" x="320" y="0.0" width="320" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="noticeBannerClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2JN-ML-4HN"/>
+                            </connections>
                         </button>
                     </subviews>
                     <connections>

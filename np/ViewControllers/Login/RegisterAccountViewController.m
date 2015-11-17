@@ -76,7 +76,7 @@
 {
     inputAccountView = [RegistAccountInputAccountView view];
     [inputAccountView setDelegate:self];
-    [[inputAccountView certifiedAccountNumberLabel] setText:certifiedAccountNumber];
+    [[inputAccountView certifiedAccountNumberLabel] setText:[CommonUtil getAccountNumberAddDash:certifiedAccountNumber]];
     [[inputAccountView addNewAccountInput] setDelegate:self];
     [[inputAccountView addNewAccountPassInput] setDelegate:self];
     [[inputAccountView addNewAccountBirthInput] setDelegate:self];
@@ -130,7 +130,7 @@
             // 계좌 인증 루틴 실행 - UMS 서버와 통신
             if(![inputAccountView.certifiedAccountView isHidden])
             {
-                certifiedAccountNumber = inputAccountView.certifiedAccountNumberLabel.text;
+                certifiedAccountNumber = [inputAccountView.certifiedAccountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""];
                 [self accountOptionSearchReqeust];
             }
             else if(![inputAccountView.addNewAccountView isHidden])
@@ -156,7 +156,7 @@
 {
     [self startIndicator];
     
-    certifiedAccountNumber = inputAccountView.addNewAccountInput.text;
+    certifiedAccountNumber = [inputAccountView.addNewAccountInput.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
@@ -313,7 +313,7 @@
      */
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     
-    [reqBody setObject:optionView.accountNumberLabel.text forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
+    [reqBody setObject:[optionView.accountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""] forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
     if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
     {
         [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
@@ -347,7 +347,8 @@
         if(umsId != nil)
         {
             [[NSUserDefaults standardUserDefaults] setObject:umsId forKey:RESPONSE_CERT_UMS_USER_ID];
-            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
+//            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
+            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE]];
         }
         
         [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:IS_USER];
@@ -385,7 +386,7 @@
             NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
             for (NSDictionary * account in accounts)
             {
-                [accountNumbers addObject:(NSString *)account[@"UMSA360101_OUT_SUB.account_number"]];
+                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
             }
             if ([accountNumbers count] > 0)
             {

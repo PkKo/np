@@ -47,10 +47,16 @@
         else if([numberArray count] > 0)
         {
             /**
-             3-2-6형태의 계좌 : 111-22-****33
-             4-2-6형태의 계좌 : 1111-22-****33
-             6-2-6형태의 계좌 : 111111-22-****33
-             6-3-6형태의 계좌 : 111111-222-****33
+             11자리
+             3-2-6형태의 계좌    : 111-22-****33
+             12자리
+             4-2-6형태의 계좌    : 1111-22-****33
+             13자리
+             3-4-4-2형태의 계좌  : 111-****-3333-44
+             14자리
+             6-2-6형태의 계좌    : 111111-22-****33
+             15자리
+             6-3-6형태의 계좌    : 111111-222-****33
              */
             NSString *lastNumber = [numberArray objectAtIndex:[numberArray count] - 1];
             lastNumber = [lastNumber stringByReplacingCharactersInRange:NSMakeRange(0, [STRING_MASKING length]) withString:STRING_MASKING];
@@ -60,6 +66,81 @@
     }
     
     return maskingNumber;
+}
+
++ (NSString *)getAccountNumberAddDash:(NSString *)number
+{
+    NSString *dashNumber = @"";
+    
+    if(![number containsString:STRING_DASH])
+    {
+        switch ([number length])
+        {
+            case 11:
+            {
+                // 11자리
+                // 3-2-6형태의 계좌    : 111-22-333333
+                dashNumber = [NSString stringWithFormat:@"%@-%@-%@",
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 3)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(3, 2)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(5, 6)]]];
+                break;
+            }
+            case 12:
+            {
+                // 12자리
+                // 4-2-6형태의 계좌    : 1111-22-333333
+                dashNumber = [NSString stringWithFormat:@"%@-%@-%@",
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 4)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(4, 2)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(6, 6)]]];
+                break;
+            }
+            case 13:
+            {
+                // 13자리
+                // 3-4-4-2형태의 계좌  : 111-2222-3333-44
+                dashNumber = [NSString stringWithFormat:@"%@-%@-%@-%@",
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 3)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(3, 4)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(7, 4)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(11, 2)]]];
+                break;
+            }
+            case 14:
+            {
+                // 14자리
+                // 6-2-6형태의 계좌    : 111111-22-333333
+                dashNumber = [NSString stringWithFormat:@"%@-%@-%@",
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 6)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(6, 2)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(8, 6)]]];
+                break;
+            }
+            case 15:
+            {
+                // 15자리
+                // 6-3-6형태의 계좌    : 111111-222-333333
+                dashNumber = [NSString stringWithFormat:@"%@-%@-%@",
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 6)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(6, 3)]],
+                              [number substringWithRange:[number rangeOfComposedCharacterSequencesForRange:NSMakeRange(9, 6)]]];
+                break;
+            }
+                
+            default:
+            {
+                dashNumber = number;
+                break;
+            }
+        }
+    }
+    else
+    {
+        dashNumber = number;
+    }
+    
+    return dashNumber;
 }
 
 + (NSString *)getDeviceUUID

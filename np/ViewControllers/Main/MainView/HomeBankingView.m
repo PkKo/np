@@ -426,6 +426,7 @@
 - (IBAction)searchDatePickerHide:(id)sender
 {
     [datePickerView setHidden:YES];
+    [self inboxTypePickerHide:nil];
 }
 
 - (IBAction)showInboxTypePickerShow:(id)sender
@@ -485,7 +486,7 @@
 {
     if(inboxTypePickerMode == 0)
     {
-        return [allAccountList objectAtIndex:row];
+        return [CommonUtil getAccountNumberAddDash:[allAccountList objectAtIndex:row]];
     }
     else if(inboxTypePickerMode == 1)
     {
@@ -688,11 +689,11 @@
     
     if(accountNickName != nil && [accountNickName length] > 0)
     {
-        [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, inboxData.nhAccountNumber]];
+        [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, [CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]];
     }
     else
     {
-        [cell.accountLabel setText:inboxData.nhAccountNumber];
+        [cell.accountLabel setText:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]];
     }
     
     // 잔액

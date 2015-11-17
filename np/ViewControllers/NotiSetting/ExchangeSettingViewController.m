@@ -56,8 +56,8 @@
 {
     [super viewWillAppear:animated];
     
-    countryCellHeight = countryListTable.frame.size.height / 2;
-    payAlarmCellHeight = payAlarmListTable.frame.size.height / 3;
+    countryCellHeight = countryListTable.frame.size.height / 3;
+    payAlarmCellHeight = payAlarmListTable.frame.size.height / 2;
 }
 
 #pragma mark - 환율 알림 전체 국가 목록 요청
@@ -113,7 +113,15 @@
     {
         regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"freeList"]];
         chargeList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"chargeList"]];
-        [countryListTable reloadData];
+        
+        if([chargeList count] > 0)
+        {
+            // 1. 기존에 가입된 서비스가 있는지 확인해본다.
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고객님이 이용 중인 UMS 유료 환율 서비스를 해지하고, NH스마트알림으로 환율정보를 받으시겠습니까?" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            //        [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            //        [self.view addSubview:serviceNotiAlertView];
+        }
     }
     else
     {
@@ -121,7 +129,7 @@
         [alertView show];
     }
     
-    if([regCountryList count] == 0)
+    if([regCountryList count] == 0 && [chargeList count] == 0)
     {
         [emptyView setHidden:NO];
         [listView setHidden:YES];
@@ -130,13 +138,23 @@
     {
         [emptyView setHidden:YES];
         [listView setHidden:NO];
-    }
-    
-    if([chargeList count] > 0)
-    {
-        // 1. 기존에 가입된 서비스가 있는지 확인해본다.
-        [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        [self.view addSubview:serviceNotiAlertView];
+        
+        if([regCountryList count] == 0)
+        {
+            [countryListTable setHidden:YES];
+            [payAlarmListTable reloadData];
+        }
+        
+        if([chargeList count] == 0)
+        {
+            [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
+                                                 countryListTable.frame.origin.y,
+                                                 countryListTable.frame.size.width,
+                                                  listView.frame.size.height - 28)];
+            countryCellHeight = countryListTable.frame.size.height / 6.5;
+            [payAlarmView setHidden:YES];
+            [countryListTable reloadData];
+        }
     }
 }
 
@@ -211,7 +229,7 @@
     }
     else if(tableView == payAlarmListTable)
     {
-        
+        [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, payAlarmCellHeight)];
     }
     
     return cell;
@@ -222,14 +240,27 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    // 통화 옵션 뷰로 이동
-    ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
-    [vc setIsNewCoutry:NO];
-    [vc setCountryAllList:countryList];
-    [vc setCountryCode:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
-    [vc setCountryName:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
-    
-    [self.navigationController pushViewController:eVC animated:YES];
+    if(tableView == countryListTable)
+    {
+        // 통화 옵션 뷰로 이동
+        ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
+        [vc setIsNewCoutry:NO];
+        [vc setCountryAllList:countryList];
+        [vc setCountryCode:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
+        [vc setCountryName:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        [self.navigationController pushViewController:eVC animated:YES];
+    }
+    else if (tableView == payAlarmListTable)
+    {
+        // 통화 옵션 뷰로 이동
+        ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
+        [vc setIsNewCoutry:NO];
+        [vc setCountryAllList:countryList];
+        [vc setCountryCode:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
+        [vc setCountryName:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        [self.navigationController pushViewController:eVC animated:YES];
+    }
 }
 @end
