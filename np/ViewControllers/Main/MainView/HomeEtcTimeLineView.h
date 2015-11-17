@@ -46,6 +46,10 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (assign, nonatomic) BOOL isSearchResult;
 @property (assign, nonatomic) BOOL isMoreList;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneWeekBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodOneMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodThreeMonthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *periodSixMonthBtn;
 
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;

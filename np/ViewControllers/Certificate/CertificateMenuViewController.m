@@ -32,10 +32,10 @@
     
     mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC > 스마트폰 인증서 가져오기", @"스마트폰 > 스마트폰 인증서 가져오기", @"인증서 관리", nil];
     
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertMenuTableView.frame.size.width, 0)];
+    [mCertMenuTableView setTableHeaderView:headerView];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertMenuTableView.frame.size.width, 0)];
-    [mCertMenuTableView setTableHeaderView:footerView];
     [mCertMenuTableView setTableFooterView:footerView];
-    [mCertMenuTableView setContentInset:UIEdgeInsetsZero];
     
     [mCertMenuTableView.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
     [mCertMenuTableView.layer setBorderWidth:1.0f];
@@ -52,7 +52,12 @@
                                             mCertMenuTableView.frame.origin.y,
                                             mCertMenuTableView.frame.size.width,
                                             totalCellHeight)];
-    [mCertMenuTableView scrollRectToVisible:CGRectMake(0, mCertMenuTableView.frame.size.height, mCertMenuTableView.frame.size.width, 0) animated:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [mCertMenuTableView setContentInset:UIEdgeInsetsZero];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,11 +70,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return cellHeight;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

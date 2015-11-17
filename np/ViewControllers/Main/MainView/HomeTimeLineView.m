@@ -46,6 +46,7 @@
 @synthesize periodThreeMonthBtn;
 @synthesize periodSixMonthBtn;
 
+@synthesize storageCountBg;
 @synthesize storageCountLabel;
 
 @synthesize bannerIndex;
@@ -179,12 +180,21 @@
     
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     storageCount = [[controller getAllTransactions] count];
-    if(storageCount < 100)
+    if(storageCount == 0)
     {
+        [storageCountBg setHidden:YES];
+        [storageCountLabel setHidden:YES];
+    }
+    else if(storageCount < 100)
+    {
+        [storageCountBg setHidden:NO];
+        [storageCountLabel setHidden:NO];
         [storageCountLabel setText:[NSString stringWithFormat:@"%ld", (long)storageCount]];
     }
     else
     {
+        [storageCountBg setHidden:NO];
+        [storageCountLabel setHidden:NO];
         [storageCountLabel setText:@"99+"];
     }
 }

@@ -422,6 +422,7 @@
                 <outlet property="searchView" destination="08R-bT-Ppw" id="pxN-6Z-o7n"/>
                 <outlet property="sortLabel" destination="t0E-z1-PV6" id="S9f-3n-obB"/>
                 <outlet property="storageButtonView" destination="lD0-ib-vRu" id="eTM-CV-MZY"/>
+                <outlet property="storageCountBg" destination="1e5-IE-l0J" id="qC4-Ic-cqm"/>
                 <outlet property="storageCountLabel" destination="e3N-2K-lHO" id="hAB-pK-4M3"/>
                 <outlet property="topMenuView" destination="v2T-S8-1WV" id="mXj-NY-d8s"/>
             </connections>

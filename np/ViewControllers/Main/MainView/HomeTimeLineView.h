@@ -77,6 +77,7 @@
 @property (assign, nonatomic) BOOL isMoreList;
 
 // 보관함에 저장된 갯수 표시
+@property (strong, nonatomic) IBOutlet CircleView *storageCountBg;
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
 @property (assign, nonatomic) NSInteger bannerIndex;
 @property (strong, nonatomic) IBOutlet UIView *storageButtonView;
