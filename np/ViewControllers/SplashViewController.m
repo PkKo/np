@@ -37,6 +37,8 @@
     [super viewDidLoad];
     // 앱 위변조 체크 삽입 예정
     layerPopupInfo = nil;
+    
+    [self.bgImage setImage:[UIImage imageNamed:IS_IPHONE_4_OR_LESS ? @"bg_01_4s" : @"bg_01"]];
 }
 
 - (void)didReceiveMemoryWarning

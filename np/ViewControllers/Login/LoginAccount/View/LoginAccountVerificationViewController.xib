@@ -26,11 +26,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ZPj-2F-vLf">
-                    <rect key="frame" x="0.0" y="55" width="320" height="513"/>
+                    <rect key="frame" x="0.0" y="55" width="320" height="493"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="T1S-JO-dI0">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="513"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="493"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_01.png" id="axE-Am-Xf8">
@@ -166,7 +166,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="cdj-DC-qIj">
-                                    <rect key="frame" x="0.0" y="451" width="320" height="62"/>
+                                    <rect key="frame" x="0.0" y="431" width="320" height="62"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_03.png" id="8Uh-z2-Pbk">

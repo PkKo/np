@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="7uY-oa-ykT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="7uY-oa-ykT">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -51,6 +51,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="NtB-fJ-Puu"/>
                     <connections>
+                        <outlet property="bgImage" destination="4Wb-in-D98" id="t07-aI-dja"/>
                         <outlet property="loadingProgressBar" destination="JDe-7h-fBT" id="OQf-X1-Ugu"/>
                         <outlet property="loadingTextLabel" destination="8zn-3D-8gF" id="Mb9-Be-mSr"/>
                     </connections>
