@@ -16,8 +16,8 @@
 
 @interface StatisticMainUtil : NSObject
 
-- (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIScrollView *)scrollView;
-- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY;
+- (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIView *)view;
+- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIView *)view atY:(CGFloat)dateSearchViewY;
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView;
 
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate

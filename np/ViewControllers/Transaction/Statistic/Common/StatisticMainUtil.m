@@ -12,9 +12,9 @@
 @implementation StatisticMainUtil
 
 #pragma mark - Date Search
-- (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIScrollView *)scrollView {
+- (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIView *)view {
     
-    NSArray *subviewArray = [scrollView subviews];
+    NSArray *subviewArray = [view subviews];
     
     for (UIView *subview in subviewArray) {
         if ([subview isKindOfClass:[StatisticDateSearchView class]]) {
@@ -24,13 +24,13 @@
     return nil;
 }
 
-- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIScrollView *)scrollView atY:(CGFloat)dateSearchViewY {
+- (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIView *)view atY:(CGFloat)dateSearchViewY {
     
     NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"StatisticDateSearchView" owner:self options:nil];
     StatisticDateSearchView * dateSearchView = (StatisticDateSearchView *)[subviewArray objectAtIndex:0];
     
     CGRect dateSearchViewFrame = dateSearchView.frame;
-    [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, scrollView.frame.size.width, dateSearchViewFrame.size.height)];
+    [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, view.frame.size.width, dateSearchViewFrame.size.height)];
     
     /*
     // move other subviews downward
@@ -47,7 +47,7 @@
         [subview setFrame:subviewFrame];
     }
     */
-    [scrollView addSubview:dateSearchView];
+    [view addSubview:dateSearchView];
     [dateSearchView updateCurrentYearMonth];
     [dateSearchView updateUI];
     
