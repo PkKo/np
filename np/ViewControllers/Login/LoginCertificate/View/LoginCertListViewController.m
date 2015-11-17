@@ -203,7 +203,7 @@
                 
                 NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
                 if (account && ![account isEqualToString:@""]) {
-                    [accountNumbers addObject:account];
+                    [accountNumbers addObject:[account stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
                 }
             }
             

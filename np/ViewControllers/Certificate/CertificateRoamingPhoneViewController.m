@@ -55,6 +55,9 @@
     [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(16, 8)];
     [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(24, 8)];
     [descriptionThreeLabel setAttributedText:textThree];
+    
+    [scrollView setContentInset:UIEdgeInsetsZero];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, bottomView.frame.origin.y + bottomView.frame.size.height)];
 }
 
 - (void)didReceiveMemoryWarning

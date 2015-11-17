@@ -35,7 +35,7 @@
     
     [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
     
-//    [self getBannerInfoRequest];
+    [self getBannerInfoRequest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +72,14 @@
         
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
     }
+    
+    [self getBannerImages];
+}
+
+- (void)getBannerImages
+{
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.imagePath]]];
 }
 
 /**

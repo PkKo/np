@@ -26,6 +26,8 @@
     [self.mNaviView.mTitleLabel setHidden:NO];
     [self.mNaviView.imgTitleView setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"알림설정"];
+    
+    [allNotiButton setEnabled:[[IBNgmService sharedInstance] pushEnabled]];
 }
 
 - (void)didReceiveMemoryWarning

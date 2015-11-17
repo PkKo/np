@@ -30,7 +30,7 @@
     
     optionView = [RegistAccountOptionSettingView view];
     [optionView setDelegate:self];
-    [optionView initDataWithAccountNumber:accountNumber];
+    [optionView initDataWithAccountNumber:[CommonUtil getAccountNumberAddDash:accountNumber]];
     [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [[optionView accountDeleteButton] setHidden:isNewAccount];
     [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];

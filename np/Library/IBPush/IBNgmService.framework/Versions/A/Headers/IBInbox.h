@@ -71,7 +71,7 @@
 
 + (void)loadWithListener:(id)listener;
 
-+ (void)requestInboxSingMessage:(NSString *)msgKey;
++ (void)requestInboxSingMessage:(NSString *)sMsgKey;
 
 + (void)requestInboxList;
 + (void)requestInboxListWithReqData:(InboxRequestData *)reqData;

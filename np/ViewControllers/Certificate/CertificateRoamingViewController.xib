@@ -27,11 +27,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="HR5-uF-lxm">
-                    <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="493"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="eyb-QE-ZEs">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="478"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="453"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="jih-lf-i6Q" customClass="StrokeView">
@@ -149,7 +149,7 @@ http://banking.nonghyup.com에 접속합니다.</string>
                             </subviews>
                         </scrollView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Mr-cL-gQ0">
-                            <rect key="frame" x="0.0" y="478" width="320" height="40"/>
+                            <rect key="frame" x="0.0" y="453" width="320" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.24313725490196078" green="0.60784313725490191" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>

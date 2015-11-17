@@ -28,4 +28,6 @@
 
 - (void)bannerTimerStart;
 - (void)bannerTimerStop;
+- (IBAction)nongminBannerClick:(id)sender;
+- (IBAction)noticeBannerClick:(id)sender;
 @end

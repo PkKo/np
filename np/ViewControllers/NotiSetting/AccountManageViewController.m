@@ -97,7 +97,7 @@
     }
     
     NSString *accountNumber = [accountList objectAtIndex:indexPath.row];
-    [cell.titleLabel setText:accountNumber];
+    [cell.titleLabel setText:[CommonUtil getAccountNumberAddDash:accountNumber]];
     
     return cell;
 }

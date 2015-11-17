@@ -82,6 +82,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 
 @property (nonatomic) NSString * serverMessageKey;
 @property (nonatomic) int64_t regDate;
+@property (nonatomic) int64_t readDate;
 @property (nonatomic) NSString * inboxType;
 @property (nonatomic) NSString * title;
 @property (nonatomic) NSString * text;
