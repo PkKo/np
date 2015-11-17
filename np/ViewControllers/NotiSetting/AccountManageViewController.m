@@ -44,35 +44,77 @@
 {
     [super viewWillAppear:animated];
     
-    // 로그인 할 때 받아온 계좌번호 리스트를 가져온다
-    accountList = [[[LoginUtil alloc] init] getAllAccounts];
+    [self getRegistAccountRequest];
+}
+
+#pragma mark - 가입계좌 조회
+- (void)getRegistAccountRequest
+{
+    [self startIndicator];
     
-    if([accountList count] == 0)
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_REGIST_ACCOUNT_LIST];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(getRegistAccountResoponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)getRegistAccountResoponse:(NSDictionary *)response
+{
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        [emptyView setHidden:NO];
-        [contentView setHidden:YES];
+        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
+        NSArray * accounts      = (NSArray *)(list[@"sub"]);
+        int numberOfAccounts    = (int)[accounts count];
+        NSMutableArray * accountNumbers = [NSMutableArray array];
+        if (numberOfAccounts > 0)
+        {
+            for (NSDictionary * account in accounts) {
+                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
+            }
+        }
+        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+        
+        // 로그인 할 때 받아온 계좌번호 리스트를 가져온다
+        accountList = [[[LoginUtil alloc] init] getAllAccounts];
+        
+        if([accountList count] == 0)
+        {
+            [emptyView setHidden:NO];
+            [contentView setHidden:YES];
+        }
+        else
+        {
+            [emptyView setHidden:YES];
+            [contentView setHidden:NO];
+        }
+        
+        cellHeight = CERT_MENU_CELL_HEIGHT * (self.view.frame.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+        
+        if(cellHeight * [accountList count] > accountListTable.frame.size.height)
+        {
+            [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
+                                                   tableBgStrokeView.frame.size.width, accountListTable.frame.size.height + 2)];
+        }
+        else
+        {
+            [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
+                                                   tableBgStrokeView.frame.size.width, cellHeight * [accountList count])];
+            [accountListTable setScrollEnabled:NO];
+        }
+        
+        [accountListTable reloadData];
     }
     else
     {
-        [emptyView setHidden:YES];
-        [contentView setHidden:NO];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
     }
-    
-    cellHeight = CERT_MENU_CELL_HEIGHT * (self.view.frame.size.height / IPHONE_FIVE_FRAME_HEIGHT);
-    
-    if(cellHeight * [accountList count] > accountListTable.frame.size.height)
-    {
-        [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
-                                               tableBgStrokeView.frame.size.width, accountListTable.frame.size.height + 2)];
-    }
-    else
-    {
-        [tableBgStrokeView setFrame:CGRectMake(tableBgStrokeView.frame.origin.x, tableBgStrokeView.frame.origin.y,
-                                               tableBgStrokeView.frame.size.width, cellHeight * [accountList count])];
-        [accountListTable setScrollEnabled:NO];
-    }
-    
-    [accountListTable reloadData];
 }
 
 #pragma mark - UITableViewDataSource

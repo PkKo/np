@@ -31,12 +31,13 @@
 {
     [super viewDidLoad];
     
-    sectionList = [[NSMutableArray alloc] init];
-    timelineMessageList = [[NSMutableDictionary alloc] init];
-    unreadMessageList = [[NSMutableArray alloc] init];
+    sectionList = [NSMutableArray array];
+    timelineMessageList = [NSMutableDictionary dictionary];
+    unreadMessageList = [NSMutableArray array];
     isSearch = NO;
     isMoreList = YES;
     
+    /*
     if(viewType == TIMELINE)
     {
         if([sectionList count] == 0)
@@ -48,7 +49,7 @@
             todaySectionData.day = todayDayString;
             [sectionList addObject:todaySectionData];
         }
-    }
+    }*/
     [self makeTimelineView];
 }
 

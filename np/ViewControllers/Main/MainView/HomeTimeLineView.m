@@ -74,14 +74,17 @@
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
     [self refreshBadges];
     
-    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
-    if([firstSectionArray count] >= 2)
+    if([mTimeLineSection count] > 0)
     {
-        bannerIndex = 1;
-    }
-    else if([firstSectionArray count] == 1)
-    {
-        bannerIndex = 0;
+        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+        if([firstSectionArray count] >= 2)
+        {
+            bannerIndex = 1;
+        }
+        else if([firstSectionArray count] == 1)
+        {
+            bannerIndex = 0;
+        }
     }
     else
     {
@@ -802,7 +805,8 @@
                 {
                     [cell.upperLine setHidden:YES];
                 }
-                else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+                
+                if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
                 {
                     [cell.underLine setHidden:YES];
                 }
@@ -998,7 +1002,8 @@
                 {
                     [cell.upperLine setHidden:YES];
                 }
-                else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
+                
+                if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
                 {
                     [cell.underLine setHidden:YES];
                 }

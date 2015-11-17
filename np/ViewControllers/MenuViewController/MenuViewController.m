@@ -108,9 +108,7 @@
         // 로그 아웃 시킨다
         [[[LoginUtil alloc] init] setLogInStatus:NO];
         // Login
-        SplashViewController *vc = [[SplashViewController alloc] init];
-        [self.navigationController setViewControllers:@[vc] animated:NO];
-//        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) restartApplication];
     }
     else
     {

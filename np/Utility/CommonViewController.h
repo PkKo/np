@@ -13,6 +13,7 @@
 {
     UIView *loadingIndicatorBg;
     UIImageView *loadingIndicatorImg;
+    HttpRequest *sessionRefreshRequest;
 }
 
 @property (strong, nonatomic) NavigationView *mNaviView;
