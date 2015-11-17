@@ -226,8 +226,14 @@
         }
         
         if (!hasAccounts) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            [alertView show];
+            
+            [util saveAllAccounts:nil];
+            [util showMainPage];
+            NSLog(@"계좌목록 없습니다.");
+            /*
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌목록 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+             [alertView show];
+             */
         }
         
     } else {

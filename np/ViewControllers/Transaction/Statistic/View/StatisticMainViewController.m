@@ -136,6 +136,10 @@
         StorageBoxController    * controller    = [[StorageBoxController alloc] init];
         NSArray                 * allAccounts   = [controller getAllAccounts];
         
+        if ([allAccounts count] == 1) {
+            return nil;
+        }
+        
         return [allAccounts subarrayWithRange:NSMakeRange(1, [allAccounts count] - 1)]; // remove 전체계좌 item
         
     } else {
@@ -346,7 +350,16 @@
         [self stopIndicator];
         
     } else {
+        /*
+        NSMutableArray * accountWithoutDashArr = [NSMutableArray arrayWithCapacity:[accounts count]];
+        for (NSString * accountNo in accounts) {
+            [accountWithoutDashArr addObject:[CommonUtil getAccountNumberWithoutDash:accountNo]];
+        }
         
+        for (NSString * accountWithoutDash in accountWithoutDashArr) {
+            NSLog(@"accountWithoutDash: %@", accountWithoutDash);
+        }
+        */
         [IBInbox loadWithListener:self];
         [IBInbox reqGetStickerSummaryWithAccountNumberList:accounts startDate:_startDate endDate:_endDate];
     }
