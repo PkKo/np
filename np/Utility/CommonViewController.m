@@ -110,7 +110,7 @@
     [loadingIndicatorBg addSubview:animationBg];
     loadingIndicatorImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.png"]];
     [loadingIndicatorImg setFrame:CGRectMake((animationBg.frame.size.width - 24) / 2,
-                                            (animationBg.frame.size.height - 24) / 2,
+                                             (animationBg.frame.size.height - 24) / 2,
                                              24, 24)];
     [loadingIndicatorImg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
     [animationBg addSubview:loadingIndicatorImg];

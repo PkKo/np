@@ -208,7 +208,7 @@
     rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI * 2.0 * duration];
     rotationAnimation.duration = duration;
     rotationAnimation.repeatCount = INFINITY;
-    rotationAnimation.speed = 2.0f;
+    rotationAnimation.speed = 1.25f;
     
     [view.layer addAnimation:rotationAnimation forKey:@"SpinAnimation"];
     

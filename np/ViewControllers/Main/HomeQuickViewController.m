@@ -9,6 +9,7 @@
 #import "HomeQuickViewController.h"
 #import "HomeQuickPushTableViewCell.h"
 #import "HomeQuickNoticeTableViewCell.h"
+#import "CustomerCenterUtil.h"
 
 #define HOME_QUICKVIEW_TABLE_HEIGHT         306
 #define HOME_QUICKVIEW_CELL_HEIGHT          64
@@ -30,6 +31,9 @@
 // 신규 공지사항 갯수 표시
 @synthesize noticeCountLabel;
 @synthesize noticeCountBg;
+
+@synthesize scrollView;
+@synthesize contentView;
 // 알림 내역 add subView 한다
 @synthesize listContentView;
 // 알림 내역이 없는 경우 보여줄 알림
@@ -146,12 +150,22 @@
         [noticeCountLabel setHidden:YES];
     }
     
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, contentView.frame.size.height)];
+    
     [self getRecentNoticeRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    bannerInfoView = [BannerInfoView view];
+    [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerInfoView.frame.size.height)];
+    [bannerView addSubview:bannerInfoView];
+    [bannerView bringSubviewToFront:bannerInfoView];
+    [bannerInfoView bannerTimerStart];
+    [bannerView setUserInteractionEnabled:YES];
+    [scrollView bringSubviewToFront:bannerView];
     
     firstCellHeight = HOME_QUICKVIEW_FIRST_CELL_HEIGHT * (pushTableView.frame.size.height / HOME_QUICKVIEW_TABLE_HEIGHT);
     if(firstCellHeight < HOME_QUICKVIEW_FIRST_CELL_HEIGHT)
@@ -163,13 +177,24 @@
     if(cellHeight < HOME_QUICKVIEW_CELL_HEIGHT)
     {
         cellHeight = HOME_QUICKVIEW_CELL_HEIGHT;
-        [pushTableView setScrollEnabled:YES];
+        CGSize tableOriginSize = pushTableView.frame.size;
+        CGFloat tableViewHeight = (cellHeight * 4) + firstCellHeight;
+        CGFloat heightDiff = tableViewHeight - tableOriginSize.height;
+        [contentView setFrame:CGRectMake(contentView.frame.origin.x,
+                                         contentView.frame.origin.y,
+                                         contentView.frame.size.width,
+                                         contentView.frame.size.height + heightDiff)];
+        
+        [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, contentView.frame.size.height + 15)];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    bannerInfoView = [BannerInfoView view];
-    [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height)];
-    [bannerView addSubview:bannerInfoView];
-    [bannerInfoView bannerTimerStart];
+    [scrollView setContentInset:UIEdgeInsetsZero];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, contentView.frame.size.height)];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -292,13 +317,24 @@
         amountDescLabel;
 */
         // 푸시 시간
-        [cell.dateLabel setText:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        /*
+        [cell.dateLabel setText:];
         [cell.dateLabel sizeToFit];
         
-        [cell.accountLabel setText:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]]];
+        [cell.accountLabel setText:];
         [cell.accountLabel sizeToFit];
         [cell.dateLabel setFrame:CGRectMake(cell.accountLabel.frame.origin.x - cell.dateLabel.frame.size.width,
-                                            cell.dateLabel.frame.origin.y, cell.dateLabel.frame.size.width, cell.dateLabel.frame.size.height)];
+                                            cell.dateLabel.frame.origin.y, cell.dateLabel.frame.size.width, cell.dateLabel.frame.size.height)];*/
+        
+        UIFont *dateFont = [UIFont boldSystemFontOfSize:13.0f];
+        NSMutableAttributedString *dateString = [[NSMutableAttributedString alloc] initWithString:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        [dateString addAttribute:NSFontAttributeName value:dateFont range:NSMakeRange(0, [dateString length])];
+        UIFont *accountFont = [UIFont systemFontOfSize:13.0f];
+        NSMutableAttributedString *accountString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]]];
+        [accountString addAttribute:NSFontAttributeName value:accountFont range:NSMakeRange(0, [accountString length])];
+        NSMutableAttributedString *totalString = [[NSMutableAttributedString alloc] initWithAttributedString:dateString];
+        [totalString appendAttributedString:accountString];
+        [cell.accountLabel setAttributedText:totalString];
         
         NSNumberFormatter *numFomatter = [NSNumberFormatter new];
         [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -511,5 +547,10 @@
             [self requestNoticeList];
         }
     }
+}
+
+- (IBAction)noticeClick:(id)sender
+{
+    [[CustomerCenterUtil sharedInstance] gotoNotice];
 }
 @end

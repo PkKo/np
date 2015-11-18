@@ -29,6 +29,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *noticeMenuButton;
 @property (strong, nonatomic) IBOutlet UILabel *noticeCountLabel;
 @property (strong, nonatomic) IBOutlet CircleView *noticeCountBg;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UIView *listContentView;
 @property (strong, nonatomic) IBOutlet UIView *emptyListView;
 @property (strong, nonatomic) IBOutlet UITableView *pushTableView;
@@ -40,4 +43,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *tabOneBg;
 @property (strong, nonatomic) IBOutlet UIImageView *tabTwoBg;
 - (IBAction)selectTabButton:(id)sender;
+- (IBAction)noticeClick:(id)sender;
+
 @end

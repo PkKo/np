@@ -310,7 +310,8 @@
     {
         [cell.upperLine setHidden:YES];
     }
-    else if ([(NSArray *)[timelineDic objectForKey:section] count] - 1 == indexPath.row)
+    
+    if ([(NSArray *)[timelineDic objectForKey:section] count] - 1 == indexPath.row)
     {
         [cell.underLine setHidden:YES];
     }

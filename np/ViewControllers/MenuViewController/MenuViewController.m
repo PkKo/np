@@ -22,7 +22,7 @@
 
 #define MENU_CELL_HEIGHT    37
 #define MENU_ICON_HEIGHT    27
-#define TABLE_VIEW_HEADER_HEIGHT    23
+#define TABLE_VIEW_HEADER_HEIGHT    15
 #define TABLE_VIEW_FOOTER_HEIGHT    80
 
 @interface MenuViewController ()
@@ -70,6 +70,7 @@
     bottomMenu = [MenuTableEtcView view];
     [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_FOOTER_HEIGHT)];
     [menuTableView setTableFooterView:bottomMenu];
+    [menuTableView bringSubviewToFront:bottomMenu];
     
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
@@ -129,6 +130,7 @@
     {
         [menuTableView setScrollEnabled:YES];
         [menuTableView setContentSize:CGSizeMake(menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT + (cellHeight * [mMenuTitleArray count]) + TABLE_VIEW_FOOTER_HEIGHT)];
+        [menuTableView bringSubviewToFront:menuTableView.tableFooterView];
     }
 }
 

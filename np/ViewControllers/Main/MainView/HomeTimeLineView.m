@@ -16,6 +16,7 @@
 #import "HomeEtcTimeLineCell.h"
 #import "TimelineBannerView.h"
 #import "LoginUtil.h"
+#import "StatisticMainUtil.h"
 
 @implementation HomeTimeLineView
 
@@ -241,7 +242,31 @@
 #pragma mark - 리스트 정렬 변경
 - (IBAction)listSortChange:(id)sender
 {
-    listSortType = !listSortType;
+    CustomizedPickerViewController * pickerViewController = [[CustomizedPickerViewController alloc] initWithNibName:@"CustomizedPickerViewController" bundle:nil];
+    
+    [pickerViewController setItems:@[TIME_DECSENDING_ORDER, TIME_ACSENDING_ORDER]];
+    
+    pickerViewController.view.frame             = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.bounds;
+    pickerViewController.view.autoresizingMask  = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.autoresizingMask;
+    
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController addChildViewController:pickerViewController];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:pickerViewController.view];
+    [pickerViewController didMoveToParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController];
+    
+    [pickerViewController addTarget:self action:@selector(sortByOrder:)];
+    [pickerViewController selectRowByValue:[sortLabel text]];
+}
+
+-(void)sortByOrder:(NSString *)order
+{
+    if([order isEqualToString:TIME_ACSENDING_ORDER])
+    {
+        listSortType = NO;
+    }
+    else
+    {
+        listSortType = YES;
+    }
     
     if([mTimeLineSection count] > 0)
     {
