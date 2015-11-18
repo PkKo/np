@@ -20,6 +20,7 @@
     NSInteger tempIndex;
     
     CGRect orgBottomRect;
+    UIView *pickeBgView;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;

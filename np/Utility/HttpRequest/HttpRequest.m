@@ -206,7 +206,7 @@
     //Dictionary 형태로 변환
     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:receivedData options:kNilOptions error:&error];
     
-    if([[responseDic objectForKey:RESULT] isEqualToString:@"SBIP90007"])
+    if([[responseDic objectForKey:RESULT] isEqualToString:@"SBIP90007"] || [[responseDic objectForKey:RESULT] isEqualToString:@"WFDB90401"])
     {
         if([self target] != nil && [[self target] respondsToSelector:@selector(timeoutError:)])
         {

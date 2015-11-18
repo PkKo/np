@@ -47,6 +47,7 @@ typedef enum PickerViewType
     NSArray *alarmPeriodList;
     int pickerSelectIndex;
     PickerViewType currentPickerView;
+    UIView *pickerBgView;
 }
 
 @property (assign, nonatomic) id delegate;

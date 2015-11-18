@@ -8,6 +8,7 @@
 
 #import "AccountOptionSettingViewController.h"
 #import "AccountManageViewController.h"
+#import "ServiceDeactivationController.h"
 
 @interface AccountOptionSettingViewController ()
 
@@ -120,6 +121,8 @@
             optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
             optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
         }
+        
+        totalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
         
         [optionView makeAllOptionDataView];
     }
@@ -316,12 +319,32 @@
     }
 }
 
+#pragma mark - 이용해지
+- (void)serviceDeactivateRequest
+{
+    [[ServiceDeactivationController sharedInstance] deactivateService];
+}
+
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if([alertView tag] == 90001 && buttonIndex == BUTTON_INDEX_OK)
     {
-        [self accountDeleteRequest];
+        if(totalNotiCount < 2)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"확인" message:@"해당 계좌를 삭제하면 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+            [alertView setTag:90002];
+            [alertView show];
+        }
+        else
+        {
+            [self accountDeleteRequest];
+        }
+    }
+    else if([alertView tag] == 90002 && buttonIndex == BUTTON_INDEX_OK)
+    {
+        // 이용해지 전문을 태운다.
+        [self serviceDeactivateRequest];
     }
 }
 

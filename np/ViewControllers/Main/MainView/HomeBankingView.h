@@ -41,6 +41,8 @@
     NSInteger inboxAccountsIndex;
     NSInteger inboxTypeIndex;
     NSInteger inboxTypePickerMode;
+    
+    UIView *pickerBgView;
 }
 
 @property (strong, nonatomic) id delegate;

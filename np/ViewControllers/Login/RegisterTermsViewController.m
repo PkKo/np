@@ -90,8 +90,8 @@
 - (IBAction)showServiceTerm:(id)sender
 {
     [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_TOTAL]]];
     [self.view addSubview:serviceTermsView];
+    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_TOTAL]]];
 }
 
 // 서비스 이용약관 체크
@@ -115,8 +115,8 @@
 - (IBAction)showPersonalTerm:(id)sender
 {
     [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_TOTAL]]];
     [self.view addSubview:serviceTermsView];
+    [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_TOTAL]]];
 }
 
 // 개인정보 이용동의 체크
@@ -211,11 +211,6 @@
 
 - (void)zoomToFit:(UIWebView *)webview
 {
-    if([webview respondsToSelector:@selector(scrollView)])
-    {
-        UIScrollView *scroll = [webview scrollView];
-        float zoom = webview.bounds.size.width/scroll.contentSize.width;
-        [scroll setZoomScale:zoom animated:YES];
-    }
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.querySelector('meta[name=viewport]').setAttribute('content','width=%d;',false);", (int)webview.frame.size.width]];
 }
 @end

@@ -98,7 +98,14 @@
  */
 - (IBAction)carrierNumClick:(id)sender
 {
+    if(pickeBgView == nil)
+    {
+        pickeBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [pickeBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [self.view addSubview:pickeBgView];
     [carrierPickerBgView setHidden:NO];
+    [self.view bringSubviewToFront:carrierPickerBgView];
     [carrierPickerView selectRow:carrierIndex inComponent:0 animated:YES];
 }
 
@@ -192,6 +199,7 @@
 
 - (IBAction)pickerViewHide:(id)sender
 {
+    [pickeBgView removeFromSuperview];
     [carrierPickerBgView setHidden:YES];
 }
 

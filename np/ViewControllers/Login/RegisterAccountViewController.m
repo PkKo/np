@@ -349,6 +349,10 @@
             [[NSUserDefaults standardUserDefaults] setObject:umsId forKey:RESPONSE_CERT_UMS_USER_ID];
 //            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
             [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE]];
+            
+            NSMutableDictionary *additionalInfo = [[NSMutableDictionary alloc] init];
+            [additionalInfo setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] forKey:@"TAG1"];
+            [IBNgmService setAdditionalInfo:additionalInfo];
         }
         
         [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:IS_USER];

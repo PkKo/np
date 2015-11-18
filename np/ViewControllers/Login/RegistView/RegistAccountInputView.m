@@ -95,12 +95,21 @@
 
 - (IBAction)carrierPickerViewHide:(id)sender
 {
+    [pickerBgView removeFromSuperview];
     [carrierPickerBgView setHidden:YES];
 }
 
 - (IBAction)carrierPickerViewShow:(id)sender
 {
+    if(pickerBgView == nil)
+    {
+        CGSize frame = ((UIViewController *)delegate).view.bounds.size;
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.width, frame.height - carrierPickerBgView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [((UIViewController *)delegate).view addSubview:pickerBgView];
     [carrierPickerBgView setHidden:NO];
+    [self bringSubviewToFront:carrierPickerBgView];
     [carrierPickerView selectRow:carrierIndex inComponent:0 animated:YES];
 }
 
