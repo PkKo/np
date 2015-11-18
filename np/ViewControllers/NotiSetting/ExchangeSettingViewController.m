@@ -120,7 +120,7 @@
     {
         regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"freeList"]];
         chargeList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"chargeList"]];
-        
+        /*
         if([chargeList count] > 0)
         {
             // 1. 기존에 가입된 서비스가 있는지 확인해본다.
@@ -128,7 +128,7 @@
             [alertView show];
             //        [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
             //        [self.view addSubview:serviceNotiAlertView];
-        }
+        }*/
     }
     else
     {
@@ -180,6 +180,7 @@
 {
     ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
     [vc setIsNewCoutry:YES];
+    [vc setIsChargeCountry:NO];
     [vc setCountryAllList:countryList];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
@@ -263,6 +264,7 @@
         // 통화 옵션 뷰로 이동
         ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
         [vc setIsNewCoutry:NO];
+        [vc setIsChargeCountry:NO];
         [vc setCountryAllList:countryList];
         [vc setCountryCode:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
         [vc setCountryName:[[regCountryList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
@@ -271,9 +273,10 @@
     }
     else if (tableView == payAlarmListTable)
     {
-        // 통화 옵션 뷰로 이동
+        // 유료 국가 무료로 전환 요청
         ExchangeCountryAddViewController *vc = [[ExchangeCountryAddViewController alloc] init];
         [vc setIsNewCoutry:NO];
+        [vc setIsChargeCountry:YES];
         [vc setCountryAllList:countryList];
         [vc setCountryCode:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
         [vc setCountryName:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];

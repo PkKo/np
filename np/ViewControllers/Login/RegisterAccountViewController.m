@@ -440,6 +440,25 @@
     {
         self.currentTextField = nil;
     }
+    
+    if(!isCertMode && inputAccountView.addNewAccountInput.text.length > 0 && inputAccountView.addNewAccountPassInput.text.length > 0 && inputAccountView.addNewAccountBirthInput.text.length > 0)
+    {
+        [nextButton setEnabled:YES];
+        [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(![string isEqualToString:@""])
+    {
+        if(range.location == [textField tag])
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (void)showNFilterKeypad

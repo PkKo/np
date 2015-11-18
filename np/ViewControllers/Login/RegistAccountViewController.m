@@ -617,7 +617,16 @@
         }
             
         default:
+        {
+            if(![string isEqualToString:@""])
+            {
+                if(range.location == [textField tag])
+                {
+                    return NO;
+                }
+            }
             break;
+        }
     }
     
     return YES;

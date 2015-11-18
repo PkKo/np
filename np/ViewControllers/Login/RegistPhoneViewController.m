@@ -137,11 +137,6 @@
  */
 - (IBAction)nextViewClick:(id)sender
 {
-#if 0
-    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-#else
-    
     [self authNumberTimerStop];
     
     // 휴대폰 번호 입력 체크
@@ -186,7 +181,6 @@
     
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-#endif
 }
 
 #pragma mark - PickerView Action

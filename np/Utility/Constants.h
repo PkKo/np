@@ -221,6 +221,8 @@
 #define REQUEST_EXCHANGE_CURRENCY_ADD_COUNTRY           @"servlet/EFPUW023005A.cmd"
 // 대상 국가 옵션 변경
 #define REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION         @"servlet/EFPUW023006E.cmd"
+// 유료 알림 무료 전환
+#define REQUEST_EXCHANGE_CHARGE_COUNTRY                 @"servler/EFPUW023006U.cmd"
 // 환율 알림 취소
 #define REQEUST_EXCHANGE_CURRENCY_COUNTRY_DELETE        @"servlet/EFPUW023003S.cmd"
 

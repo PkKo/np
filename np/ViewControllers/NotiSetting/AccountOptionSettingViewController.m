@@ -322,7 +322,7 @@
 #pragma mark - 이용해지
 - (void)serviceDeactivateRequest
 {
-    [[ServiceDeactivationController sharedInstance] deactivateService];
+    [[ServiceDeactivationController sharedInstance] deactivateService:@"Y"];
 }
 
 #pragma mark - UIAlertViewDelegate

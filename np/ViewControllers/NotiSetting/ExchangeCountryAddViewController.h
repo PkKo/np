@@ -23,12 +23,16 @@
     NSMutableArray *pickerList;
     
     BOOL isCountrySelectMode;
+    NSInteger totlalNotiCount;
+    
+    UIView *pickerBgView;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
 @property (assign, nonatomic) BOOL isNewCoutry;
+@property (assign, nonatomic) BOOL isChargeCountry;
 @property (strong, nonatomic) NSString *countryCode;
 @property (strong, nonatomic) NSString *countryName;
 @property (strong, nonatomic) NSArray *countryAllList;
