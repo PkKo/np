@@ -11,8 +11,8 @@
 @protocol StorageBoxDateSearchViewDelegate <NSObject>
 
 - (void)searchTransFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate account:(NSString *)account transType:(NSString *)transType memo:(NSString *)memo;
-- (void)showDatePickerForStartDate;
-- (void)showDatePickerForEndDate;
+- (void)showDatePickerForStartDate:(NSDate *)startDate;
+- (void)showDatePickerForEndDate:(NSDate *)endDate;
 
 - (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue;
 - (void)showDataPickerToSelectTransTypeWithSelectedValue:(NSString *)sltedValue;

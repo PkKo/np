@@ -16,14 +16,19 @@
 
 @interface StatisticMainUtil : NSObject
 
++ (instancetype)sharedInstance;
+
+- (void)showStatisticView:(UINavigationController * )nav;
 - (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIView *)view;
 - (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIView *)view atY:(CGFloat)dateSearchViewY;
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView;
 
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
+                      initialDate:(NSDate *)initialDate
            inParentViewController:(UIViewController *)parentVC
                        doneAction:(SEL)doneAction;
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
+                      initialDate:(NSDate *)initialDate
            inParentViewController:(UIViewController *)parentVC
                            target:(UIViewController *)target
                        doneAction:(SEL)doneAction;

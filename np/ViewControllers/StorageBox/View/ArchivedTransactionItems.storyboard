@@ -105,10 +105,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view hidden="YES" alpha="0.10000000000000001" contentMode="scaleToFill" id="z4h-B4-SZY">
+                            <view hidden="YES" alpha="0.20000000000000001" contentMode="scaleToFill" id="z4h-B4-SZY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="4Mu-dU-1hQ" appends="YES" id="rML-Am-FFf"/>

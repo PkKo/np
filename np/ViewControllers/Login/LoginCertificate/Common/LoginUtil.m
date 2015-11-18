@@ -98,7 +98,7 @@
 - (void)showMainPage {
     
     if ([self isServiceDeactivated]) {
-        [[ServiceDeactivationController sharedInstance] deactivateService];
+        [[ServiceDeactivationController sharedInstance] deactivateService:IS_REGISTERED_YES];
         return;
     }
     

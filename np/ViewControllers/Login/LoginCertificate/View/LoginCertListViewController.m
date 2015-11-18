@@ -17,6 +17,7 @@
 #import "CertManager.h"
 #import "CustomerCenterUtil.h"
 #import "BTWCodeguard.h"
+#import "ServiceDeactivationController.h"
 
 @interface LoginCertListViewController ()
 
@@ -189,6 +190,13 @@
     [self stopIndicator];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        NSString * isRegistered = (NSString *)response[@"reg_yn"];
+        
+        if ([isRegistered isEqualToString:IS_REGISTERED_NO]) {
+            [[ServiceDeactivationController sharedInstance] showForceToDeactivateAlert];
+            return;
+        }
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);

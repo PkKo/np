@@ -30,6 +30,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)displayPreviousSelectedDate:(NSDate *)initialDate {
+    [self.datePicker setDate:initialDate];
+}
+
 - (void)setMinMaxDateToSelectWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
     
     [self.datePicker setMinimumDate:minDate];
