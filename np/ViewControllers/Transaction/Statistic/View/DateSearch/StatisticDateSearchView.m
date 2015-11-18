@@ -277,8 +277,6 @@
     [self.fakeStartDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeEndDate.layer setBorderWidth:1];
     [self.fakeEndDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
-    
-    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 @end

@@ -15,6 +15,7 @@
     LayerPopupInfo *layerPopupInfo;
 }
 
+@property (weak, nonatomic) IBOutlet UIImageView *bgImage;
 @property (strong, nonatomic) IBOutlet UILabel *loadingTextLabel;
 @property (strong, nonatomic) IBOutlet UIProgressView *loadingProgressBar;
 @end
