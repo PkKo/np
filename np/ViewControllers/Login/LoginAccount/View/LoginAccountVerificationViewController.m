@@ -14,6 +14,7 @@
 #import "LoginAccountController.h"
 #import "LoginAccountVerificationViewController.h"
 #import "CustomerCenterUtil.h"
+#import "ServiceDeactivationController.h"
 
 @interface LoginAccountVerificationViewController ()
 
@@ -206,6 +207,13 @@
     LoginUtil * util        = [[LoginUtil alloc] init];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        NSString * isRegistered = (NSString *)response[@"reg_yn"];
+        
+        if ([isRegistered isEqualToString:IS_REGISTERED_NO]) {
+            [[ServiceDeactivationController sharedInstance] showForceToDeactivateAlert];
+            return;
+        }
         
         NSDictionary * list     = (NSDictionary *)(response[@"list"]);
         NSArray * accounts      = (NSArray *)(list[@"sub"]);

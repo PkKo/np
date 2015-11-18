@@ -22,18 +22,19 @@
     return _sharedObject;
 }
 
-- (void)deactivateService {
+- (void)deactivateService:(NSString *)isRegistered {
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
     
-    NSLog(@"user_id: %@", user_id);
+    NSLog(@"user_id: %@ - app_id: %@ - reg_yn: %@", user_id, PUSH_APP_ID, isRegistered);
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_SERVICE_DEACTIVATION];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
     [requestBody setObject:user_id forKey:@"user_id"];
     [requestBody setObject:PUSH_APP_ID forKey:@"app_id"];
+    [requestBody setObject:isRegistered forKey:@"reg_yn"];
     
     NSString *bodyString = [CommonUtil getBodyString:requestBody];
     
@@ -53,6 +54,7 @@
                                                          message:@"모든 데이터 초기화 처리 후\n서비스 해지 처리가 완료되었습니다."
                                                         delegate:self cancelButtonTitle:@"확인"
                                                otherButtonTitles:nil];
+        alert.tag = SERVICE_DEACTIVATION_DONE;
         [alert show];
         
     } else {
@@ -63,8 +65,32 @@
     }
 }
 
+#pragma mark - Alert
+- (void)showForceToDeactivateAlert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
+                                                     message:@"모든 데이터 초기화 처리 후\n서비스 해지할 예정입니다."
+                                                    delegate:self cancelButtonTitle:@"확인"
+                                           otherButtonTitles:nil];
+    alert.tag = SERVICE_DEACTIVATION_WILL_DO;
+    [alert show];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    exit(0);
+    
+    switch (alertView.tag) {
+            
+        case SERVICE_DEACTIVATION_DONE:
+            exit(0);
+            break;
+            
+        case SERVICE_DEACTIVATION_WILL_DO:
+            [self deactivateService:IS_REGISTERED_NO];
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 @end
