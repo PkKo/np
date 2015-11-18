@@ -22,6 +22,7 @@
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
     NSArray         * _transactionTitles;
+    UITextField     * _editingTextField;
 }
 
 @end
@@ -492,8 +493,13 @@
 #pragma mark - Keyboard
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
+    NSLog(@"%s", __func__);
+    
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
-        
+        /*
+        _editingTextField = textField;
+        [self.keyboardBgView setHidden:NO];
+        */
         ArchivedTransItemCell * cell = (ArchivedTransItemCell*)textField.superview.superview.superview;
         
         CGPoint pointInTable    = [cell convertPoint:cell.editView.frame.origin toView:self.tableview];
@@ -508,7 +514,11 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
+    NSLog(@"%s", __func__);
+    
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
+        
+        //[self.keyboardBgView setHidden:YES];
         
         UITableViewCell * cell      = (UITableViewCell*)textField.superview.superview.superview;
         NSIndexPath     * indexPath = [self.tableview indexPathForCell:cell];
@@ -518,11 +528,25 @@
     return YES;
 }
 
+
+- (IBAction)tapToHideKeyboard:(UITapGestureRecognizer *)sender {
+    
+    NSLog(@"%s", __func__);
+    /*
+    [_editingTextField resignFirstResponder];
+    [self.keyboardBgView setHidden:YES];
+     */
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    
+    NSLog(@"%s", __func__);
     
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
-        
+        /*
+        [textField resignFirstResponder];
+        [self.keyboardBgView setHidden:YES];
+        */
         ArchivedTransItemCell * cell      = (ArchivedTransItemCell *)textField.superview.superview.superview;
         [cell saveNewMemo];
     }

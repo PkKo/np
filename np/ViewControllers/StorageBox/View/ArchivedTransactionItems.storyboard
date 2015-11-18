@@ -93,11 +93,11 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_noresult_02.png" id="rp3-Qz-Uhe">
                                         <rect key="frame" x="144" y="31" width="32" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관함에 저장된 내역이 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SNw-0s-lfC">
                                         <rect key="frame" x="0.0" y="71" width="320" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.69019607843137254" green="0.69411764705882351" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -105,10 +105,20 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view hidden="YES" alpha="0.10000000000000001" contentMode="scaleToFill" id="z4h-B4-SZY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="4Mu-dU-1hQ" appends="YES" id="rML-Am-FFf"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="keyboardBgView" destination="z4h-B4-SZY" id="UlC-nb-Had"/>
                         <outlet property="noDataImageView" destination="rp3-Qz-Uhe" id="vAz-I0-wpn"/>
                         <outlet property="noDataNotice" destination="SNw-0s-lfC" id="lm7-2p-Odx"/>
                         <outlet property="noDataView" destination="wn3-KU-oNC" id="shH-Zf-Cdq"/>
@@ -119,6 +129,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEa-fX-IK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4Mu-dU-1hQ">
+                    <connections>
+                        <action selector="tapToHideKeyboard:" destination="YzV-4h-Hki" id="B7E-N3-2Bg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="224" y="222"/>
         </scene>
