@@ -51,6 +51,8 @@
 
 @synthesize bannerIndex;
 
+@synthesize emptyListImageView;
+
 - (id)init
 {
     self = [super init];
@@ -116,6 +118,14 @@
     {
         [mTimeLineTable setHidden:YES];
         [listEmptyView setHidden:NO];
+        if(isSearchResult)
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_noresult_01.png"]];
+        }
+        else
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_notice_06.png"]];
+        }
     }
     else
     {
@@ -157,17 +167,6 @@
         }
     }
     
-    if([mTimeLineSection count] == 0)
-    {
-        [listEmptyView setHidden:NO];
-        [mTimeLineTable setHidden:YES];
-        
-    }
-    else
-    {
-        [listEmptyView setHidden:YES];
-        [mTimeLineTable setHidden:NO];
-    }
     [self stopLoading];
     
     isDeleteMode = NO;
@@ -244,32 +243,37 @@
 {
     listSortType = !listSortType;
     
-    // section을 먼저 sorting한다.
-    mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
-    // sorting된 section을 가지고 dictionary를 구성한다.
-    NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
-    for(TimelineSectionData *data in mTimeLineSection)
+    if([mTimeLineSection count] > 0)
     {
-        if([mTimeLineDic objectForKey:data.date] != nil)
+        // section을 먼저 sorting한다.
+        mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
+        // sorting된 section을 가지고 dictionary를 구성한다.
+        NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
+        for(TimelineSectionData *data in mTimeLineSection)
         {
-            NSArray *reverseArray = [[[mTimeLineDic objectForKey:data.date] reverseObjectEnumerator] allObjects];
-            [reverseDic setObject:reverseArray forKey:data.date];
+            if([mTimeLineDic objectForKey:data.date] != nil)
+            {
+                NSArray *reverseArray = [[[mTimeLineDic objectForKey:data.date] reverseObjectEnumerator] allObjects];
+                [reverseDic setObject:reverseArray forKey:data.date];
+            }
         }
-    }
-    mTimeLineDic = reverseDic;
-    
-    NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
-    if([firstSectionArray count] >= 2)
-    {
-        bannerIndex = 1;
-    }
-    else if([firstSectionArray count] == 1)
-    {
-        bannerIndex = 0;
-    }
-    else
-    {
-        bannerIndex = 0;
+        mTimeLineDic = reverseDic;
+        
+        NSArray *firstSectionArray = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:0]).date];
+        if([firstSectionArray count] >= 2)
+        {
+            bannerIndex = 1;
+        }
+        else if([firstSectionArray count] == 1)
+        {
+            bannerIndex = 0;
+        }
+        else
+        {
+            bannerIndex = 0;
+        }
+        
+        [mTimeLineTable reloadData];
     }
     
     if(listSortType)
@@ -280,8 +284,6 @@
     {
         [sortLabel setText:@"과거순"];
     }
-    
-    [mTimeLineTable reloadData];
 }
 
 #pragma mark - 삭제 Action
@@ -483,21 +485,6 @@
 // 검색 실행
 - (IBAction)searchStart:(id)sender
 {
-    /*
-    if(searchStartDate == nil || [searchStartDate length] == 0)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    if(searchEndDate == nil || [searchEndDate length] == 0)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 종료일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }*/
-    
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = listSortType;

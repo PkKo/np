@@ -251,12 +251,11 @@
             self.accountCheckBtn.hidden     = !self.accountLoginBtn.isSelected;
             self.accountRadioBtn.hidden     =  self.accountLoginBtn.isSelected;
             
-            /*
             for (UIView * border in self.accountLoginView.subviews) {
                 if ([border isKindOfClass:[UILabel class]]) {
-                    [border setBackgroundColor:self.accountLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                    [border setBackgroundColor:self.accountLoginBtn.isSelected ? HIGHLIGHT_BG_COLOR : BOX_BORDER_NORMAL_COLOR];
                 }
-            }*/
+            }
             break;
             
         case LOGIN_BY_CERTIFICATE:
@@ -265,12 +264,12 @@
             self.certRadioBtn.hidden                =  self.certLoginBtn.isSelected;
             self.certMgmtCenterBtn.backgroundColor  =  self.certLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.certMgmtCenterBtn setTitleColor:self.certLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
-            /*
+            
             for (UIView * border in self.certLoginView.subviews) {
                 if ([border isKindOfClass:[UILabel class]]) {
-                    [border setBackgroundColor:self.certLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                    [border setBackgroundColor:self.certLoginBtn.isSelected ? HIGHLIGHT_BG_COLOR : BOX_BORDER_NORMAL_COLOR];
                 }
-            }*/
+            }
             break;
             
         case LOGIN_BY_SIMPLEPW:
@@ -279,12 +278,12 @@
             self.simpleRadioBtn.hidden              =  self.simpleLoginBtn.isSelected;
             self.simpleLoginMgmtBtn.backgroundColor =  self.simpleLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.simpleLoginMgmtBtn setTitleColor:self.simpleLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
-            /*
+            
             for (UIView * border in self.simpleLoginView.subviews) {
                 if ([border isKindOfClass:[UILabel class]]) {
-                    [border setBackgroundColor:self.simpleLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                    [border setBackgroundColor:self.simpleLoginBtn.isSelected ? HIGHLIGHT_BG_COLOR : BOX_BORDER_NORMAL_COLOR];
                 }
-            }*/
+            }
             break;
             
         case LOGIN_BY_PATTERN:
@@ -293,12 +292,12 @@
             self.patternRadioBtn.hidden                 =  self.patternLoginBtn.isSelected;
             self.patternLoginMgmtBtn.backgroundColor    =  self.patternLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_BG_COLOR : OVAL_BUTTON_NORMAL_BG_COLOR;
             [self.patternLoginMgmtBtn setTitleColor:self.patternLoginBtn.isSelected ? OVAL_BUTTON_SELECTED_TEXT_COLOR : OVAL_BUTTON_NORMAL_TEXT_COLOR forState:UIControlStateNormal];
-            /*
+            
             for (UIView * border in self.patternLoginView.subviews) {
                 if ([border isKindOfClass:[UILabel class]]) {
-                    [border setBackgroundColor:self.patternLoginBtn.isSelected ? BOX_BORDER_SELECTED_COLOR : BOX_BORDER_NORMAL_COLOR];
+                    [border setBackgroundColor:self.patternLoginBtn.isSelected ? HIGHLIGHT_BG_COLOR : BOX_BORDER_NORMAL_COLOR];
                 }
-            }*/
+            }
             break;
             
         default:

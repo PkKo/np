@@ -274,11 +274,17 @@
     [self.containerScrollView setFrame:containerScrollViewFrame];
     
     CGRect containerViewRect = self.containerView.frame;
-    if (containerViewRect.size.height < containerScrollViewFrame.size.height) {
+    if (containerViewRect.size.height <= containerScrollViewFrame.size.height) {
         containerViewRect.size.height = containerScrollViewFrame.size.height - 20;
         [self.containerView setFrame:containerViewRect];
+        [self.containerScrollView setScrollEnabled:NO];
+    }
+    else
+    {
+        [self.containerScrollView setScrollEnabled:YES];
     }
     
+    [self.containerScrollView setContentInset:UIEdgeInsetsZero];
     [self.containerScrollView setContentSize:self.containerView.frame.size];
 }
 

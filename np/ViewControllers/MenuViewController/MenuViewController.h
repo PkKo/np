@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuTableEtcView.h"
 
 @interface MenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *mMenuTitleArray;
+    MenuTableEtcView *bottomMenu;
     float cellHeight;
 }
 

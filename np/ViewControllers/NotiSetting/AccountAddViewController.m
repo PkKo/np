@@ -67,6 +67,7 @@
         [CertTab setEnabled:YES];
         [accountInputView setHidden:NO];
         [certMenuView setHidden:YES];
+        [nextButton setHidden:NO];
         [nextButton setEnabled:YES];
         [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
     }
@@ -76,6 +77,7 @@
         [CertTab setEnabled:NO];
         [accountInputView setHidden:YES];
         [certMenuView setHidden:NO];
+        [nextButton setHidden:YES];
         [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
         
         [self makeCertMenuView];
@@ -103,8 +105,10 @@
     {
         isCertRegist = NO;
         [self moveToCertListView];
+        [nextButton setHidden:YES];
+        /*
         [nextButton setEnabled:NO];
-        [nextButton setBackgroundColor:BUTTON_BGCOLOR_DISABLE];
+        [nextButton setBackgroundColor:BUTTON_BGCOLOR_DISABLE];*/
     }
     else
     {
@@ -316,6 +320,7 @@
             [allListView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
             [allListView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
             [certMenuContentView addSubview:allListView];
+            [nextButton setHidden:NO];
             [nextButton setEnabled:YES];
             [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
         }
@@ -433,6 +438,7 @@
     }
     else
     {
+        [self.keyboardCloseButton setHidden:NO];
         [self.keyboardCloseButton setEnabled:YES];
     }
 }
@@ -441,6 +447,7 @@
 {
     [textField resignFirstResponder];
     [self.keyboardCloseButton setEnabled:NO];
+    [self.keyboardCloseButton setHidden:YES];
     
     if(![self.currentTextField isSecureTextEntry])
     {

@@ -82,6 +82,9 @@
 @property (assign, nonatomic) NSInteger bannerIndex;
 @property (strong, nonatomic) IBOutlet UIView *storageButtonView;
 
+// no list imageView
+@property (strong, nonatomic) IBOutlet UIImageView *emptyListImageView;
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;
 

@@ -17,6 +17,7 @@
 }
 
 @property (strong, nonatomic) NavigationView *mNaviView;
+@property (strong, nonatomic) UIView *menuCloseView;
 @property (strong, nonatomic) UIButton *mMenuCloseButton;
 @property (strong, nonatomic) UIButton *keyboardCloseButton;
 @property (strong, nonatomic) UITextField *currentTextField;

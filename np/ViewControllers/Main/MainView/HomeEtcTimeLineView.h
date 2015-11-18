@@ -51,6 +51,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *periodThreeMonthBtn;
 @property (strong, nonatomic) IBOutlet UIButton *periodSixMonthBtn;
 
+@property (strong, nonatomic) IBOutlet UIImageView *emptyListImageView;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;

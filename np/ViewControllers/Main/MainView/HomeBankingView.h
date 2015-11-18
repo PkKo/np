@@ -79,6 +79,7 @@
 
 @property (strong, nonatomic) IBOutlet CircleView *storageCountBg;
 @property (strong, nonatomic) IBOutlet UILabel *storageCountLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *emptyListImageView;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;

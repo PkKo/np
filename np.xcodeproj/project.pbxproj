@@ -524,6 +524,7 @@
 		A2DFDD961BB398FD00DC1A78 /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DFDD941BB398FD00DC1A78 /* MainPageViewController.xib */; };
 		A2E03C641BFB0D0E00188C52 /* loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2E03C631BFB0D0E00188C52 /* loading@2x.png */; };
 		A2E03C661BFB109B00188C52 /* img_nhbank_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2E03C651BFB109B00188C52 /* img_nhbank_01@2x.png */; };
+		A2E03C6B1BFB639500188C52 /* StrokeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E03C6A1BFB639500188C52 /* StrokeInputView.m */; };
 		A2E0FE0E1BD7110900D528BA /* AccountAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E0FE0C1BD7110900D528BA /* AccountAddViewController.m */; };
 		A2E0FE0F1BD7110900D528BA /* AccountAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E0FE0D1BD7110900D528BA /* AccountAddViewController.xib */; };
 		A2E0FE131BD764A700D528BA /* ExchangeCountryAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E0FE111BD764A700D528BA /* ExchangeCountryAddViewController.m */; };
@@ -1272,6 +1273,8 @@
 		A2DFDD941BB398FD00DC1A78 /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
 		A2E03C631BFB0D0E00188C52 /* loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading@2x.png"; sourceTree = "<group>"; };
 		A2E03C651BFB109B00188C52 /* img_nhbank_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_nhbank_01@2x.png"; sourceTree = "<group>"; };
+		A2E03C691BFB639500188C52 /* StrokeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrokeInputView.h; sourceTree = "<group>"; };
+		A2E03C6A1BFB639500188C52 /* StrokeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrokeInputView.m; sourceTree = "<group>"; };
 		A2E0FE0B1BD7110900D528BA /* AccountAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAddViewController.h; sourceTree = "<group>"; };
 		A2E0FE0C1BD7110900D528BA /* AccountAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountAddViewController.m; sourceTree = "<group>"; };
 		A2E0FE0D1BD7110900D528BA /* AccountAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountAddViewController.xib; sourceTree = "<group>"; };
@@ -2294,6 +2297,8 @@
 				A2E0FE161BD7676900D528BA /* DropboxStrokeView.m */,
 				A2D994B71BD8824700A6A325 /* TimelineSectionData.h */,
 				A2D994B81BD8824700A6A325 /* TimelineSectionData.m */,
+				A2E03C691BFB639500188C52 /* StrokeInputView.h */,
+				A2E03C6A1BFB639500188C52 /* StrokeInputView.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -3773,6 +3778,7 @@
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
 				A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */,
 				A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */,
+				A2E03C6B1BFB639500188C52 /* StrokeInputView.m in Sources */,
 				A5F251A11BD5D03D000867A9 /* DrawPatternMgmtViewController.m in Sources */,
 				177044901BB9152C009638B0 /* ChartDataTotalView.m in Sources */,
 				A2DEAE631B9FE6D800EDCCBA /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

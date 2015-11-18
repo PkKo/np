@@ -39,6 +39,8 @@
 @synthesize periodThreeMonthBtn;
 @synthesize periodSixMonthBtn;
 
+@synthesize emptyListImageView;
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
     timelineSection = section;
@@ -75,6 +77,14 @@
     {
         [timelineTableView setHidden:YES];
         [listEmptyView setHidden:NO];
+        if(isSearchResult)
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_noresult_01.png"]];
+        }
+        else
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_notice_06.png"]];
+        }
     }
     else
     {

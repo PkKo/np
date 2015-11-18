@@ -13,7 +13,6 @@
 #import "CertificateMenuViewController.h"
 #import "StatisticMainViewController.h"
 #import "SNSViewController.h"
-#import "MenuTableEtcView.h"
 #import "NotiSettingMenuViewController.h"
 #import "EnvMgmtViewController.h"
 #import "CustomerCenterViewController.h"
@@ -24,6 +23,7 @@
 #define MENU_CELL_HEIGHT    37
 #define MENU_ICON_HEIGHT    27
 #define TABLE_VIEW_HEADER_HEIGHT    23
+#define TABLE_VIEW_FOOTER_HEIGHT    80
 
 @interface MenuViewController ()
 
@@ -67,8 +67,8 @@
     MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
     [bottomMenu setFrame:CGRectMake(0, 0, bottomMenuView.frame.size.width, bottomMenu.frame.size.height)];
     [bottomMenuView addSubview:bottomMenu];*/
-    MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
-    [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, bottomMenu.frame.size.height)];
+    bottomMenu = [MenuTableEtcView view];
+    [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_FOOTER_HEIGHT)];
     [menuTableView setTableFooterView:bottomMenu];
     
     if([[[LoginUtil alloc] init] isLoggedIn])
@@ -128,6 +128,7 @@
     else
     {
         [menuTableView setScrollEnabled:YES];
+        [menuTableView setContentSize:CGSizeMake(menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT + (cellHeight * [mMenuTitleArray count]) + TABLE_VIEW_FOOTER_HEIGHT)];
     }
 }
 
@@ -177,7 +178,7 @@
     
 //    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
 //    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
-    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT - 85) / [mMenuTitleArray count]);
+    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT - TABLE_VIEW_FOOTER_HEIGHT) / [mMenuTitleArray count]);
     if(cellHeight < MENU_CELL_HEIGHT)
     {
         cellHeight = MENU_CELL_HEIGHT;

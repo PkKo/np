@@ -50,6 +50,8 @@
 @synthesize storageCountBg;
 @synthesize storageCountLabel;
 
+@synthesize emptyListImageView;
+
 - (id)init
 {
     self = [super init];
@@ -112,6 +114,14 @@
     {
         [bankingListTable setHidden:YES];
         [listEmptyView setHidden:NO];
+        if(isSearchResult)
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_noresult_01.png"]];
+        }
+        else
+        {
+            [emptyListImageView setImage:[UIImage imageNamed:@"icon_notice_06.png"]];
+        }
     }
     else
     {
@@ -176,16 +186,21 @@
 {
     listSortType = !listSortType;
     
-    // section을 먼저 sorting한다.
-    timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
-    // sorting된 section을 가지고 dictionary를 구성한다.
-    NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
-    for(TimelineSectionData *sectionData in timeLineSection)
+    if([timeLineSection count])
     {
-        NSArray *reverseArray = [[[timeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
-        [reverseDic setObject:reverseArray forKey:sectionData.date];
+        // section을 먼저 sorting한다.
+        timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
+        // sorting된 section을 가지고 dictionary를 구성한다.
+        NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
+        for(TimelineSectionData *sectionData in timeLineSection)
+        {
+            NSArray *reverseArray = [[[timeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
+            [reverseDic setObject:reverseArray forKey:sectionData.date];
+        }
+        timeLineDic = reverseDic;
+        
+        [bankingListTable reloadData];
     }
-    timeLineDic = reverseDic;
     
     if(listSortType)
     {
@@ -195,8 +210,6 @@
     {
         [sortLabel setText:@"과거순"];
     }
-    
-    [bankingListTable reloadData];
 }
 
 - (IBAction)storageMoveClick:(id)sender

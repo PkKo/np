@@ -56,7 +56,7 @@
     NSMutableAttributedString *textOne = [[NSMutableAttributedString alloc] initWithString:descriptionOneLabel.text];
     [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(0, 13)];
     [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:48.0/255.0f green:158.0/255.0f blue:251.0/255.0f alpha:1.0f] range:NSMakeRange(13, 28)];
-    [textOne addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(13, 28)];
+//    [textOne addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(13, 28)];
     [textOne addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(41, 8)];
     [descriptionOneLabel setAttributedText:textOne];
     
@@ -72,13 +72,20 @@
     [texthree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(28, 8)];
     [descriptionThreeLabel setAttributedText:texthree];
     
-    [scrollView setContentInset:UIEdgeInsetsZero];
+//    [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+//    [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 #pragma mark - Method

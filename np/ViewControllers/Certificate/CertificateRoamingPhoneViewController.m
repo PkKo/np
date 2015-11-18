@@ -56,7 +56,7 @@
     [textThree addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:144.0/255.0f green:145.0/255.0f blue:150.0/255.0f alpha:1.0f] range:NSMakeRange(24, 8)];
     [descriptionThreeLabel setAttributedText:textThree];
     
-    [scrollView setContentInset:UIEdgeInsetsZero];
+//    [scrollView setContentInset:UIEdgeInsetsZero];
     [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, bottomView.frame.origin.y + bottomView.frame.size.height)];
 }
 
@@ -71,11 +71,13 @@
 {
     self.currentTextField = textField;
     [self.keyboardCloseButton setEnabled:YES];
+    [self.keyboardCloseButton setHidden:NO];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    [self.keyboardCloseButton setHidden:YES];
     [self.keyboardCloseButton setEnabled:NO];
     self.currentTextField = nil;
 }

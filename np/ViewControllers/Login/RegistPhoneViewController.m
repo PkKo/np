@@ -201,6 +201,8 @@
  */
 - (void)authNumberRequest
 {
+    [self startIndicator];
+    
     [phoneAuthNumInput setHidden:NO];
     [bottomDescView setFrame:CGRectMake(orgBottomRect.origin.x, orgBottomRect.origin.y, bottomDescView.frame.size.width, bottomDescView.frame.size.height)];
     
@@ -218,6 +220,8 @@
  */
 - (void)authNumberResponse:(NSDictionary *)response
 {
+    [self stopIndicator];
+    
     // Connection Success
     if([[response objectForKey:RESULT] isEqualToString:@"0"])
     {
@@ -277,6 +281,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.currentTextField = textField;
+    [self.keyboardCloseButton setHidden:NO];
     [self.keyboardCloseButton setEnabled:YES];
 }
 
@@ -284,6 +289,7 @@
 {
     self.currentTextField = nil;
     [self.keyboardCloseButton setEnabled:NO];
+    [self.keyboardCloseButton setHidden:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

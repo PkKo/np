@@ -213,6 +213,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
         }
         
+        /*
         if(isNewAccount)
         {
             NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
@@ -222,7 +223,7 @@
                 [allAccountList addObject:addedAccountNumber];
                 [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
             }
-        }
+        }*/
         
         // 뒤로가기
         NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
@@ -273,13 +274,26 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
+//        NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
         NSString *deletedAccountNumber = [[[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0] objectForKey:@"UMSD030001_OUT_SUB.account_number"];
+        if(deletedAccountNumber != nil && [deletedAccountNumber length] > 0)
+        {
+            deletedAccountNumber = [deletedAccountNumber stringByReplacingOccurrencesOfString:STRING_DASH withString:@""];
+            
+            NSMutableDictionary *nickNameDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY]];
+            if([nickNameDic objectForKey:deletedAccountNumber] != nil)
+            {
+                [nickNameDic removeObjectForKey:deletedAccountNumber];
+                [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
+            }
+        }
+        
+        /*
         if([allAccountList containsObject:deletedAccountNumber])
         {
             [allAccountList removeObject:deletedAccountNumber];
             [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
-        }
+        }*/
         
         // 뒤로가기
         NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
@@ -315,6 +329,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.currentTextField = textField;
+    [self.keyboardCloseButton setHidden:NO];
     [self.keyboardCloseButton setEnabled:YES];
 }
 
@@ -322,6 +337,7 @@
 {
     [textField resignFirstResponder];
     [self.keyboardCloseButton setEnabled:NO];
+    [self.keyboardCloseButton setHidden:YES];
     self.currentTextField = nil;
 }
 @end

@@ -249,7 +249,7 @@
                                 <action selector="pickerViewHide:" destination="-1" eventType="touchUpInside" id="XlZ-qR-OxZ"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_03.png" id="KCs-pP-ONy">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow_02.png" id="KCs-pP-ONy">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -270,6 +270,7 @@
         <image name="icon_top_03_on.png" width="25" height="25"/>
         <image name="icon_top_04_off.png" width="25" height="25"/>
         <image name="icon_top_04_on.png" width="25" height="25"/>
+        <image name="shadow_02.png" width="16" height="16"/>
         <image name="shadow_03.png" width="12" height="12"/>
     </resources>
 </document>

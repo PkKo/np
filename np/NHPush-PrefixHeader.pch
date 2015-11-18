@@ -21,6 +21,7 @@
 #import "CommonTextField.h"
 #import "CircleView.h"
 #import "StrokeView.h"
+#import "StrokeInputView.h"
 #import "DropboxStrokeView.h"
 #import <IBNgmService/IBNgmService.h>
 #import "LoginUtil.h"

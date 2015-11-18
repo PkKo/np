@@ -59,6 +59,14 @@
     
     [IBInbox loadWithListener:self];
     
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     if([[[LoginUtil alloc] init] getAllAccounts] != nil && [[[[LoginUtil alloc] init] getAllAccounts] count] > 0)
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
@@ -110,9 +118,6 @@
             [self makeTimelineView];
         }
     }
-    
-    LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

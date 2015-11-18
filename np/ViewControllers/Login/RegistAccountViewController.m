@@ -559,6 +559,7 @@
     }
     else
     {
+        [self.keyboardCloseButton setHidden:NO];
         [self.keyboardCloseButton setEnabled:YES];
     }
 }
@@ -566,6 +567,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    [self.keyboardCloseButton setHidden:YES];
     [self.keyboardCloseButton setEnabled:NO];
     
     if(![self.currentTextField isSecureTextEntry])

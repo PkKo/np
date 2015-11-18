@@ -45,6 +45,7 @@
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
     
+    contentViewHeight = contentView.frame.size.height;
     [scrollView setContentSize:contentView.frame.size];
     
     [serviceTermWebView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
@@ -60,6 +61,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self startIndicator];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if(contentView.frame.size.height < contentViewHeight)
+    {
+        [contentView setFrame:CGRectMake(contentView.frame.origin.x,
+                                         contentView.frame.origin.y,
+                                         contentView.frame.size.width,
+                                         contentViewHeight)];
+        [scrollView setContentSize:contentView.frame.size];
+    }
+    
+    [self stopIndicator];
 }
 
 // 서비스 이용약관을 전체화면으로 보여준다.

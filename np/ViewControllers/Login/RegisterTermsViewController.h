@@ -9,6 +9,9 @@
 #import "CommonViewController.h"
 
 @interface RegisterTermsViewController : CommonViewController<UIWebViewDelegate>
+{
+    CGFloat contentViewHeight;
+}
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 

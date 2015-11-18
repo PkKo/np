@@ -42,7 +42,7 @@
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="iac-2l-FhN">
+                <view hidden="YES" contentMode="scaleToFill" id="iac-2l-FhN">
                     <rect key="frame" x="40" y="483" width="280" height="85"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
