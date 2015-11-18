@@ -177,15 +177,24 @@
 - (IBAction)chooseStartDate {
     
     NSDateFormatter *dateFormatter = [StatisticMainUtil getDateFormatterDateHourStyle];
-    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
-    [self.delegate showDatePickerForStartDateWithMinDate:[dateFormatter dateFromString:minDateStr] maxDate:[NSDate date]];
+    
+    NSString    * minDateStr    = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
+    NSDate      * minDate       = [dateFormatter dateFromString:minDateStr];
+    
+    NSDate * initialDate        = [[StatisticMainUtil getDateFormatterDateStyle] dateFromString:self.startDate.text];
+    
+    [self.delegate showDatePickerForStartDateWithMinDate:minDate maxDate:[NSDate date] initialDate:initialDate];
 }
 
 - (IBAction)chooseEndDate {
     
-    NSDateFormatter *dateFormatter = [StatisticMainUtil getDateFormatterDateHourStyle];
-    NSString * minDateStr = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
-    [self.delegate showDatePickerForEndDateWithMinDate:[dateFormatter dateFromString:minDateStr] maxDate:[NSDate date]];
+    NSDateFormatter * dateFormatter = [StatisticMainUtil getDateFormatterDateHourStyle];
+    NSString        * minDateStr    = [NSString stringWithFormat:@"%d/%d/%d 00:00:00", (int)_lastLatestMaxMonthYear, (int)_lastLatestMaxMonthMonth, (int)_lastLatestMaxMonthDay];
+    
+    NSDate * minDate            = [dateFormatter dateFromString:minDateStr];
+    NSDate * initialDate        = [[StatisticMainUtil getDateFormatterDateStyle] dateFromString:self.endDate.text];
+    
+    [self.delegate showDatePickerForEndDateWithMinDate:minDate maxDate:[NSDate date] initialDate:initialDate];
 }
 
 - (void)updateStartDate:(NSDate *)startDate {

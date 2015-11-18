@@ -24,31 +24,21 @@
 - (ArchivedTransItemRemoveAllSelectView *)hasSelectAllViewInParentView:(UIView *)parentView;
 
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
-             moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                    moveTableviewDown:(UIView *)tableview
-                   moveNoDataViewDown:(UIView *)noDataView
                                target:(id)target
                       selectAllAction:(SEL)selectAllAction
             removeSelectedItemsAction:(SEL)removeSelectedItemsAction
         closeSelectToRemoveViewAction:(SEL)closeSelectToRemoveViewAction;
 
-- (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
-                      moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                             moveTableviewBack:(UIView *)tableview
-                            moveNoDataViewBack:(UIView *)noDataView;
+- (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView;
 
 #pragma mark - Date Search
 - (StorageBoxDateSearchView *)hasStorageDateSearchViewInParentView:(UIView *)parentView;
 
 - (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
                                       moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                                             moveTableviewDown:(UIView *)tableview
-                                            moveNoDataViewDown:(UIView *)noDataView;
+                                         outsideOfKeyboardView:(UIView *)outsideOfKeyboardView;
 
-- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
-                         moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                                moveTableviewBack:(UIView *)tableview
-                               moveNoDataViewBack:(UIView *)noDataView;
+- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView;
 
 #pragma mark - UI Customization
 + (UIColor *)getDimmedBackgroundColor;

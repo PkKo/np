@@ -10,6 +10,7 @@
 #import "MainPageViewController.h"
 #import "LoginUtil.h"
 #import "ArchivedTransactionItemsViewController.h"
+#import "StatisticMainUtil.h"
 
 @interface HomeViewController ()
 
@@ -317,10 +318,7 @@
  */
 - (void)moveStatisticViewController:(id)sender
 {
-    UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
-    UIViewController *vc = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
-    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
-    [self.navigationController pushViewController:eVC animated:YES];
+    [[StatisticMainUtil sharedInstance] showStatisticView:self.navigationController];
 }
 
 - (void)stickerButtonClick:(id)sender

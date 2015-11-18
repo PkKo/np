@@ -17,7 +17,7 @@
 - (IBAction)toggleSearchView;
 @property (weak, nonatomic) IBOutlet UILabel        * topViewSeperator;
 @property (weak, nonatomic) IBOutlet UITableView    * tableview;
-@property (weak, nonatomic) IBOutlet UIView *keyboardBgView;
+@property (weak, nonatomic) IBOutlet UIView         * keyboardBgView;
 - (IBAction)tapToHideKeyboard:(UITapGestureRecognizer *)sender;
 
 #pragma mark - goto Top button

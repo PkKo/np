@@ -23,6 +23,8 @@
     NSDictionary    * _transactions;
     NSArray         * _transactionTitles;
     UITextField     * _editingTextField;
+    NSArray         * _prvSearchedCriteria;
+    BOOL              _isSearch;
 }
 
 @end
@@ -35,6 +37,8 @@
     [super viewDidAppear:animated];
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
+    _prvSearchedCriteria    = nil;
+    _isSearch               = NO;
     [self performSelector:@selector(getAllTransactions) withObject:nil afterDelay:0.06];
 }
 
@@ -73,9 +77,6 @@
     if (![selectToRemoveUtil hasSelectAllViewInParentView:self.view]) {
         
         [selectToRemoveUtil addSelectToRemoveViewToParent:self.view
-                                 moveTopViewSeperatorDown:self.topViewSeperator
-                                        moveTableviewDown:self.tableview
-                                       moveNoDataViewDown:self.noDataView
                                                    target:self
                                           selectAllAction:@selector(selectAllItems:)
                                 removeSelectedItemsAction:@selector(removeSelectedItems)
@@ -117,17 +118,18 @@
         }
     }
     
-    [self getAllTransactions];
+    if (_prvSearchedCriteria) {
+        [self searchTransByCriteria:_prvSearchedCriteria];
+    } else {
+        [self getAllTransactions];
+    }
     
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
 
 - (void)closeSelectToRemoveView {
     StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
-    [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view
-                                      moveTopViewSeperatorBack:self.topViewSeperator
-                                             moveTableviewBack:self.tableview
-                                            moveNoDataViewBack:self.noDataView];
+    [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view];
     [self selectAllItems:[NSNumber numberWithBool:NO]];
 }
 
@@ -164,16 +166,12 @@
         
         StorageBoxDateSearchView * dateSearch = [dateSearchUtil addStorageDateSearchViewToParent:self.view
                                                                         moveTopViewSeperatorDown:self.topViewSeperator
-                                                                               moveTableviewDown:self.tableview
-                                                                              moveNoDataViewDown:self.noDataView];
+                                                                           outsideOfKeyboardView:self.keyboardBgView];
         dateSearch.delegate                 = self;
         dateSearch.memoTextField.delegate   = self;
         
     } else {
-        [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view
-                                         moveTopViewSeperatorBack:self.topViewSeperator
-                                                moveTableviewBack:self.tableview
-                                               moveNoDataViewBack:self.noDataView];
+        [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view];
     }
 }
 
@@ -216,19 +214,21 @@
 }
 
 #pragma mark - date picker
-- (void)showDatePickerForStartDate {
+- (void)showDatePickerForStartDate:(NSDate *)initialDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
     [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil
+                                  initialDate:initialDate
                        inParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
                                        target:self
                                    doneAction:@selector(chooseStartDate:)];
 }
 
-- (void)showDatePickerForEndDate {
+- (void)showDatePickerForEndDate:(NSDate *)initialDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
     [datePickerUtil showDatePickerWithMinDate:nil maxDate:nil
+                                  initialDate:initialDate
                        inParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController
                                        target:self
                                    doneAction:@selector(chooseEndDate:)];
@@ -251,11 +251,14 @@
                   transType:(NSString *)transType memo:(NSString *)memo {
     
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    _isSearch = YES;
     
     [self performSelector:@selector(searchTransByCriteria:) withObject:@[fromDate, toDate, account, transType, memo] afterDelay:0.06];
 }
 
 - (void)searchTransByCriteria:(NSArray *)criteriaArr {
+    
+    _prvSearchedCriteria    = criteriaArr;
     
     NSDate      * fromDate  = (NSDate *)  [criteriaArr objectAtIndex:0];
     NSDate      * toDate    = (NSDate *)  [criteriaArr objectAtIndex:1];
@@ -271,7 +274,7 @@
     endDate                 = [NSString stringWithFormat:@"%@ 23:59:59", endDate];
     
     NSString * checkedAccountNo = [account isEqualToString:TRANS_ALL_ACCOUNT] ? nil : account;
-    NSString * checkedTransType = [transType isEqualToString:TRANS_TYPE_GENERAL] ? nil : transType;
+    NSString * checkedTransType = [transType isEqualToString:TRANS_TYPE_GENERAL] ? nil : ([transType isEqualToString:INCOME_TYPE_STRING] ? @"1" : @"2");
     NSString * checkedMemo = [memo isEqualToString:@""] ? nil : memo;
     
     NSArray * searchedItems = [[DBManager sharedInstance] selectByTransactionsStartDate:startDate endDate:endDate
@@ -305,6 +308,11 @@
     [self.tableview setHidden:([[_transactions allKeys] count] == 0)];
     [self.noDataView setHidden:!self.tableview.hidden];
     
+    if (![self.noDataView isHidden]) {
+        [self.noDataImageView setImage:[UIImage imageNamed:_isSearch ? @"icon_noresult_01" : @"icon_noresult_02"]];
+        [self.noDataNotice setText: _isSearch ? @"해당기간 내 검색 결과가 없습니다." : @"보관함에 저장된 내역이 없습니다."];
+    }
+    _isSearch = NO;
 }
 
 - (void)sortDataByAscending:(BOOL)ascending {
@@ -493,13 +501,11 @@
 #pragma mark - Keyboard
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-    NSLog(@"%s", __func__);
+    _editingTextField = textField;
+    [self.keyboardBgView setHidden:NO];
     
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
-        /*
-        _editingTextField = textField;
-        [self.keyboardBgView setHidden:NO];
-        */
+        
         ArchivedTransItemCell * cell = (ArchivedTransItemCell*)textField.superview.superview.superview;
         
         CGPoint pointInTable    = [cell convertPoint:cell.editView.frame.origin toView:self.tableview];
@@ -514,11 +520,9 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
-    NSLog(@"%s", __func__);
+    [self.keyboardBgView setHidden:YES];
     
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
-        
-        //[self.keyboardBgView setHidden:YES];
         
         UITableViewCell * cell      = (UITableViewCell*)textField.superview.superview.superview;
         NSIndexPath     * indexPath = [self.tableview indexPathForCell:cell];
@@ -531,22 +535,17 @@
 
 - (IBAction)tapToHideKeyboard:(UITapGestureRecognizer *)sender {
     
-    NSLog(@"%s", __func__);
-    /*
     [_editingTextField resignFirstResponder];
     [self.keyboardBgView setHidden:YES];
-     */
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    NSLog(@"%s", __func__);
+    [textField resignFirstResponder];
+    [self.keyboardBgView setHidden:YES];
     
     if ([textField.superview.superview.superview isKindOfClass:[UITableViewCell class]]) {
-        /*
-        [textField resignFirstResponder];
-        [self.keyboardBgView setHidden:YES];
-        */
+        
         ArchivedTransItemCell * cell      = (ArchivedTransItemCell *)textField.superview.superview.superview;
         [cell saveNewMemo];
     }

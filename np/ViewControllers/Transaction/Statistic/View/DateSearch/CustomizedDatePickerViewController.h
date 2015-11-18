@@ -14,6 +14,7 @@
 - (IBAction)closeDatePicker:(id)sender;
 - (IBAction)chooseDate:(id)sender;
 
+- (void)displayPreviousSelectedDate:(NSDate *)initialDate;
 - (void)setMinMaxDateToSelectWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
 - (void)addTargetForDoneButton:(id)target action:(SEL)action;
 @end

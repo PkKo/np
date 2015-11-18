@@ -11,6 +11,27 @@
 
 @implementation StatisticMainUtil
 
++ (instancetype)sharedInstance {
+    
+    static dispatch_once_t onceToken = 0;
+    __strong static id _sharedObject = nil;
+    
+    dispatch_once(&onceToken, ^{
+        _sharedObject = [[self alloc] init];
+    });
+    
+    return _sharedObject;
+}
+
+
+#pragma mark - Chart
+- (void)showStatisticView:(UINavigationController * )nav {
+    UIStoryboard * statisticStoryBoard = [UIStoryboard storyboardWithName:@"StatisticMainStoryboard" bundle:nil];
+    UIViewController *vc = [statisticStoryBoard instantiateViewControllerWithIdentifier:@"statisticMain"];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    [nav pushViewController:eVC animated:YES];
+}
+
 #pragma mark - Date Search
 - (StatisticDateSearchView *)hasDateSearchViewInScrollView:(UIView *)view {
     
@@ -80,19 +101,23 @@
 }
 
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
-                                           inParentViewController:(UIViewController *)parentVC
-                                                       doneAction:(SEL)doneAction {
+                       initialDate:(NSDate *)initialDate
+           inParentViewController:(UIViewController *)parentVC
+                       doneAction:(SEL)doneAction {
+    
     [self showDatePickerWithMinDate:minDate maxDate:maxDate
+                        initialDate:initialDate
              inParentViewController:parentVC
                              target:nil
                          doneAction:doneAction];
-    
 }
 
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
+                       initialDate:(NSDate *)initialDate
            inParentViewController:(UIViewController *)parentVC
                            target:(UIViewController *)target
                        doneAction:(SEL)doneAction {
+    
     CustomizedDatePickerViewController * datePickerViewController = [[CustomizedDatePickerViewController alloc] initWithNibName:@"CustomizedDatePickerViewController" bundle:nil];
     
     datePickerViewController.view.frame             = parentVC.view.bounds;
@@ -104,6 +129,10 @@
     
     if (maxDate && minDate) {
         [datePickerViewController setMinMaxDateToSelectWithMinDate:minDate maxDate:maxDate];
+    }
+    
+    if (initialDate) {
+        [datePickerViewController displayPreviousSelectedDate:initialDate];
     }
     
     [datePickerViewController addTargetForDoneButton:(target ? target : parentVC) action:doneAction];

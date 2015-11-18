@@ -118,7 +118,7 @@
     }
     
     if (transType) {
-        selectSQL = [NSString stringWithFormat:@"%@ AND (trans_type = \"%@\")", selectSQL, transType];
+        selectSQL = [NSString stringWithFormat:@"%@ AND (trans_type LIKE \"%@%%\")", selectSQL, transType];
     }
     
     if (memo) {

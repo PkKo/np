@@ -30,8 +30,7 @@
 #pragma mark - Date Search
 - (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
                                       moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                                             moveTableviewDown:(UIView *)tableview
-                                            moveNoDataViewDown:(UIView *)noDataView{
+                                         outsideOfKeyboardView:(UIView *)outsideOfKeyboardView {
     
     StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
     if (dateSearchView) {
@@ -39,10 +38,7 @@
     }
     
     if ([self hasSelectAllViewInParentView:parentView]) {
-        [self removeSelectToRemoveViewFromParentView:parentView
-                            moveTopViewSeperatorBack:topViewSeperator
-                                   moveTableviewBack:tableview
-                                  moveNoDataViewBack:noDataView];
+        [self removeSelectToRemoveViewFromParentView:parentView];
     }
     
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView"
@@ -53,35 +49,17 @@
     dateSearchViewFrame.size.width  = parentView.frame.size.width;
     dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
     [dateSearchView setFrame:dateSearchViewFrame];
-    /*
-    CGRect tableviewFrame           = tableview.frame;
-    tableviewFrame.origin.y         = tableviewFrame.origin.y + dateSearchViewFrame.size.height - 14; //14: shadow's height.
-    tableviewFrame.size.height      =  parentView.frame.size.height - tableviewFrame.origin.y;
-    [tableview setFrame:tableviewFrame];
-    [noDataView setFrame:tableviewFrame];
-    */
-    [parentView addSubview:dateSearchView];
+    [parentView insertSubview:dateSearchView belowSubview:outsideOfKeyboardView];
     [dateSearchView updateUI];
     
     return dateSearchView;
 }
 
-- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView
-                         moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                                moveTableviewBack:(UIView *)tableview
-                               moveNoDataViewBack:(UIView *)noDataView {
+- (void)removeStorageDateSearchViewFromParentView:(UIView *)parentView {
     
     StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
     
     if (dateSearchView) {
-        /*
-        CGRect topViewSeperatorFrame    = topViewSeperator.frame;
-        CGRect tableviewFrame           = tableview.frame;
-        tableviewFrame.origin.y         = topViewSeperatorFrame.origin.y + topViewSeperatorFrame.size.height;
-        tableviewFrame.size.height      = parentView.frame.size.height - tableviewFrame.origin.y;
-        [tableview setFrame:tableviewFrame];
-        [noDataView setFrame:tableviewFrame];
-        */
         [dateSearchView removeFromSuperview];
     }
 }
@@ -100,9 +78,6 @@
 
 #pragma mark - Select items to remove
 - (void)addSelectToRemoveViewToParent:(UIView *)parentView
-             moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                    moveTableviewDown:(UIView *)tableview
-                   moveNoDataViewDown:(UIView *)noDataView
                                target:(id)target
                       selectAllAction:(SEL)selectAllAction
             removeSelectedItemsAction:(SEL)removeSelectedItemsAction
@@ -113,10 +88,7 @@
     }
     
     if ([self hasStorageDateSearchViewInParentView:parentView]) {
-        [self removeStorageDateSearchViewFromParentView:parentView
-                               moveTopViewSeperatorBack:topViewSeperator
-                                      moveTableviewBack:tableview
-                                     moveNoDataViewBack:noDataView];
+        [self removeStorageDateSearchViewFromParentView:parentView];
     }
     
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"ArchivedTransItemRemoveAllSelectView"
@@ -129,17 +101,6 @@
     selectToRemoveViewFrame.origin.y    = 0;//topViewSeperator.frame.origin.y;
     selectToRemoveViewFrame.size.width  = parentView.frame.size.width;
     [selectAllView setFrame:selectToRemoveViewFrame];
-    /*
-    CGRect topViewSeperatorFrame    = topViewSeperator.frame;
-    topViewSeperatorFrame.origin.y += selectToRemoveViewFrame.size.height;
-    [topViewSeperator setFrame:topViewSeperatorFrame];
-    
-    CGRect tableviewFrame           = tableview.frame;
-    tableviewFrame.origin.y        += selectToRemoveViewFrame.size.height;
-    tableviewFrame.size.height     -= selectToRemoveViewFrame.size.height;
-    [tableview setFrame:tableviewFrame];
-    [noDataView setFrame:tableviewFrame];
-    */
     [parentView addSubview:selectAllView];
     
     // -------
@@ -155,39 +116,15 @@
     removeCancelViewFrame.origin.y      = parentView.frame.size.height - removeCancelViewFrame.size.height;
     removeCancelViewFrame.size.width    = parentView.frame.size.width;
     [removeCancelView setFrame:removeCancelViewFrame];
-    /*
-    tableviewFrame.size.height         -= removeCancelViewFrame.size.height + 18;
-    [tableview setFrame:tableviewFrame];
-    */
     [parentView addSubview:removeCancelView];
 }
 
-- (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView
-                      moveTopViewSeperatorBack:(UILabel *)topViewSeperator
-                             moveTableviewBack:(UIView *)tableview
-                            moveNoDataViewBack:(UIView *)noDataView {
+- (void)removeSelectToRemoveViewFromParentView:(UIView *)parentView {
     
     ArchivedTransItemRemoveAllSelectView    * selectAllView     = [self hasSelectAllViewInParentView:parentView];
     ArchivedTransItemRemoveActionView       * removeCancelView  = [self hasRemoveCancelViewInParentView:parentView];
     
     if (selectAllView && removeCancelView) {
-        /*
-        CGRect selectToRemoveViewFrame  = selectAllView.frame;
-        CGRect topViewSeperatorFrame    = topViewSeperator.frame;
-        topViewSeperatorFrame.origin.y -= selectToRemoveViewFrame.size.height;
-        [topViewSeperator setFrame:topViewSeperatorFrame];
-        
-        CGRect tableviewFrame           = tableview.frame;
-        tableviewFrame.origin.y        -= selectToRemoveViewFrame.size.height;
-        tableviewFrame.size.height     += selectToRemoveViewFrame.size.height;
-        [tableview setFrame:tableviewFrame];
-        [noDataView setFrame:tableviewFrame];
-        */
-        /*
-        CGRect removeCancelViewFrame    = removeCancelView.frame;
-        tableviewFrame.size.height     += removeCancelViewFrame.size.height;
-        [tableview setFrame:tableviewFrame];
-        */
         [selectAllView removeFromSuperview];
         [removeCancelView removeFromSuperview];
     }

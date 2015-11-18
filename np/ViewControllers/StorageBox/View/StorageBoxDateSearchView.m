@@ -127,11 +127,13 @@ typedef enum DateSearch {
 }
 
 - (IBAction)chooseStartDate {
-    [self.delegate showDatePickerForStartDate];
+    NSDate * startDate = [[StatisticMainUtil getDateFormatterDateStyle] dateFromString:self.startDate.text];
+    [self.delegate showDatePickerForStartDate:startDate];
 }
 
 - (IBAction)chooseEndDate {
-    [self.delegate showDatePickerForEndDate];
+    NSDate * endDate = [[StatisticMainUtil getDateFormatterDateStyle] dateFromString:self.endDate.text];
+    [self.delegate showDatePickerForEndDate:endDate];
 }
 
 - (void)updateStartDate:(NSDate *)startDate {
@@ -212,8 +214,6 @@ typedef enum DateSearch {
     [self.fakeStartDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
     [self.fakeEndDate.layer setBorderWidth:1];
     [self.fakeEndDate.layer setBorderColor:TEXT_FIELD_BORDER_COLOR];
-    
-    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 @end

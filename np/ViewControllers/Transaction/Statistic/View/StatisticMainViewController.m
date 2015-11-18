@@ -71,17 +71,21 @@
     }
 }
 
-- (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
+- (void)showDatePickerForStartDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate initialDate:(NSDate *)initialDate{
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
-    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate inParentViewController:self
+    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate
+                                  initialDate:initialDate
+                       inParentViewController:self
                                    doneAction:@selector(chooseStartDate:)];
 }
 
-- (void)showDatePickerForEndDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate {
+- (void)showDatePickerForEndDateWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate initialDate:(NSDate *)initialDate {
     
     StatisticMainUtil *datePickerUtil = [[StatisticMainUtil alloc] init];
-    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate inParentViewController:self
+    [datePickerUtil showDatePickerWithMinDate:minDate maxDate:maxDate
+                                  initialDate:initialDate
+                       inParentViewController:self
                                    doneAction:@selector(chooseEndDate:)];
 }
 
