@@ -30,8 +30,6 @@
     self.eventStore = [[EKEventStore alloc] init];
     
     [self composeSNSContent];
-    
-    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
 }
 
 /*
