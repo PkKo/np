@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "StickerInfo.h"
+#import "Reachability.h"
 
 typedef enum StickerType
 {
@@ -61,4 +62,5 @@ typedef enum StickerType
 + (NSInteger)getUnreadCountForBanking;
 + (void)setUnreadCountForEtc:(NSInteger)count;
 + (NSInteger)getUnreadCountForEtc;
++ (NetworkStatus)getNetworkStatus;
 @end

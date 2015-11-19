@@ -11,7 +11,7 @@
 #import "RegistAccountInputAccountView.h"
 #import "RegistAccountOptionSettingView.h"
 
-@interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate>
+@interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate, UIAlertViewDelegate>
 {
     BOOL isCertMode;
     RegistAccountAllListView *allListView;

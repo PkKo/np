@@ -409,6 +409,7 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert setTag:90003];
         [alert show];
     }
 }
@@ -504,5 +505,14 @@
     }
     
     self.currentTextField = nil;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 90003)
+    {
+        [self accountChangeClick:nil];
+    }
 }
 @end

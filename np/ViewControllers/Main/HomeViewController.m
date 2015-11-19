@@ -51,7 +51,6 @@
             [sectionList addObject:todaySectionData];
         }
     }*/
-    [self makeTimelineView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,6 +61,7 @@
     
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+//    [self makeTimelineView];
 }
 
 - (void)viewDidAppear:(BOOL)animated

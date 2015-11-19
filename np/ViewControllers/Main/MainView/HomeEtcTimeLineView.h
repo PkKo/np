@@ -19,6 +19,9 @@
     NSString *textRelease;
     NSString *textLoading;
     
+    UIView *refreshFooterView;
+    UILabel *refreshFooterLabel;
+    
     NSMutableArray *deleteIdList;
     BOOL isDeleteMode;
     
@@ -55,6 +58,8 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *emptyListImageView;
 
+@property (strong, nonatomic) IBOutlet UILabel *serviceSelectLabel;
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;
 
@@ -66,9 +71,12 @@
 - (IBAction)searchDateSelect:(id)sender;
 - (IBAction)searchDatePickerShow:(id)sender;
 - (IBAction)searchDatePickerHide:(id)sender;
-
+// 삭제 관련 Action
 - (IBAction)deleteMode:(id)sender;
 - (IBAction)deleteSelectAll:(id)sender;
 - (IBAction)deleteSelectedList:(id)sender;
 - (IBAction)deleteViewHide:(id)sender;
+// 서비스별 선택 Action
+- (IBAction)serviceSelectShow:(id)sender;
+
 @end

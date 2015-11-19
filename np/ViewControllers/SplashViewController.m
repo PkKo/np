@@ -56,7 +56,16 @@
 {
     [super viewDidAppear:animated];
     
-    [self appVersionCheckRequest];
+    if([CommonUtil getNetworkStatus] == NotReachable)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"네트워크에 연결되지 않았습니다.\n네트워크 상태를 확인해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView setTag:90004];
+        [alertView show];
+    }
+    else
+    {
+        [self appVersionCheckRequest];
+    }
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
 //    [self htmlRequestTest];
@@ -374,13 +383,18 @@
     {
         if(buttonIndex == BUTTON_INDEX_OK)
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"com.nonghyup.nhsmartbanking://"]];
         }
         [self getBannerInfoRequest];
     }
     else if([alertView tag] == 1101)
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+    }
+    else if ([alertView tag] == 90004)
+    {
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) restartApplication];
     }
 }
 

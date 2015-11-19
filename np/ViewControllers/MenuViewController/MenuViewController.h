@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MenuTableEtcView.h"
 
-@interface MenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface MenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     NSArray *mMenuTitleArray;
     MenuTableEtcView *bottomMenu;

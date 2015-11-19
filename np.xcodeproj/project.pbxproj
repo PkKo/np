@@ -456,6 +456,7 @@
 		A2DD874E1BC219790013470D /* RegistCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD874C1BC219790013470D /* RegistCompleteViewController.xib */; };
 		A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */; };
 		A2DD87531BC23BB50013470D /* RegistAccountInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */; };
+		A2DE0A511BFDA01B00839355 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE0A501BFDA01B00839355 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A2DE50BE1BD0852300A40BF3 /* CertMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE50BC1BD0852300A40BF3 /* CertMenuCell.m */; };
 		A2DE50BF1BD0852300A40BF3 /* CertMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE50BD1BD0852300A40BF3 /* CertMenuCell.xib */; };
 		A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE587F1BA7E780008903E6 /* CertificateRoamingPassViewController.m */; };
@@ -1147,6 +1148,8 @@
 		A2DD874F1BC23B9B0013470D /* RegistAccountInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistAccountInputView.h; sourceTree = "<group>"; };
 		A2DD87501BC23B9B0013470D /* RegistAccountInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistAccountInputView.m; sourceTree = "<group>"; };
 		A2DD87521BC23BB50013470D /* RegistAccountInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistAccountInputView.xib; sourceTree = "<group>"; };
+		A2DE0A4F1BFDA01B00839355 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A2DE0A501BFDA01B00839355 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A2DE50BB1BD0852300A40BF3 /* CertMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertMenuCell.h; sourceTree = "<group>"; };
 		A2DE50BC1BD0852300A40BF3 /* CertMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertMenuCell.m; sourceTree = "<group>"; };
 		A2DE50BD1BD0852300A40BF3 /* CertMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertMenuCell.xib; sourceTree = "<group>"; };
@@ -1944,6 +1947,15 @@
 			path = CustomObject;
 			sourceTree = "<group>";
 		};
+		A2DE0A4E1BFDA01B00839355 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				A2DE0A4F1BFDA01B00839355 /* Reachability.h */,
+				A2DE0A501BFDA01B00839355 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		A2DEADDC1B9FE68600EDCCBA = {
 			isa = PBXGroup;
 			children = (
@@ -2283,6 +2295,7 @@
 				A2DFD7141BB0F19100838E09 /* KeyChainItemWrapper */,
 				A2CAD8BA1BDF8084008C1244 /* NDDatAdditions */,
 				A2DCFFA91BEB294A00EEABD9 /* CustomObject */,
+				A2DE0A4E1BFDA01B00839355 /* Reachability */,
 				A2DEAE1F1B9FE6D800EDCCBA /* CommonUtil.h */,
 				A2DEAE201B9FE6D800EDCCBA /* CommonUtil.m */,
 				A2DEAE211B9FE6D800EDCCBA /* CommonViewController.h */,
@@ -3763,6 +3776,7 @@
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
 				A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
+				A2DE0A511BFDA01B00839355 /* Reachability.m in Sources */,
 				A5D8119F1BF5A6EE0054ADB7 /* ServiceDeactivationController.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
