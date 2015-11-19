@@ -244,7 +244,7 @@ typedef enum SetupStatus {
     
     if (failedTimes >= 5) {
         
-        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+        alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
         tag             = ALERT_GOTO_SELF_IDENTIFY;
         
     } else {
@@ -262,7 +262,7 @@ typedef enum SetupStatus {
                 [util savePatternPasswordFailedTimes:failedTimes];
                 if (failedTimes >= 5) {
                     
-                    alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                    alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
                     tag             = ALERT_GOTO_SELF_IDENTIFY;
                     
                 } else {
@@ -276,7 +276,11 @@ typedef enum SetupStatus {
             
         } else if (_setupStatus == SETUP_PW) {
             
-            _pw = password;
+            if ([_pw isEqualToString:savedPassword]) {
+                alertMessage = @"현재 패턴과 동일한 패턴 입니다.";
+            } else {
+                _pw = password;
+            }
             
         } else if (_setupStatus == SETUP_PW_CONFIRM) {
             
@@ -466,8 +470,7 @@ typedef enum SetupStatus {
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
         {
-            [self clearDotConnections];
-            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
+            [self clickToShowSelfIdentifier];
             break;
         }
             break;

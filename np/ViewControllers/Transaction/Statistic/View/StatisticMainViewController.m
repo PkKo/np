@@ -40,7 +40,7 @@
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:NO];
-    [self.mNaviView.mTitleLabel setText:@"입금/지출 통계"];
+    [self.mNaviView.mTitleLabel setText:@"수입/지출 통계"];
     
     NSDate * today          = [NSDate date];
     NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];

@@ -105,7 +105,7 @@
 }
 
 - (IBAction)clickDone {
-    [[[LoginUtil alloc] init] saveNoticeBackgroundColour:[_selectedBgColorView backgroundColor]];
+    [[[LoginUtil alloc] init] saveNoticeBackgroundColour:[_selectedBgColorView tintColor]];
     [self clickCancel];
 }
 

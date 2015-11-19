@@ -36,7 +36,25 @@
 }
 */
 
-- (IBAction)makeACall {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:15882100"]];
+-
+(IBAction)makeACall {
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"고객센터로 연결하세겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:15882100"]];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+
 @end

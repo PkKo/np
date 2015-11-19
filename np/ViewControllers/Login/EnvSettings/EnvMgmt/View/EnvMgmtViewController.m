@@ -45,11 +45,11 @@
 }
 
 -(IBAction)gotoSimpleLoginMgmt {
-    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
+    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController animated:YES];
 }
 
 -(IBAction)gotoPatternLoginMgmt {
-    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
+    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController animated:YES];
 }
 
 -(IBAction)gotoNoticeBgColorSettings {

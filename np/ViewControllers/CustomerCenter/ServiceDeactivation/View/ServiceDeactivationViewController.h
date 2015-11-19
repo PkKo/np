@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface ServiceDeactivationViewController : CommonViewController
+@interface ServiceDeactivationViewController : CommonViewController<UIAlertViewDelegate>
 - (IBAction)deactivateService;
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
-@interface TelInquiryViewController : CommonViewController
+@interface TelInquiryViewController : CommonViewController <UIAlertViewDelegate>
 - (IBAction)makeACall;
 
 @end

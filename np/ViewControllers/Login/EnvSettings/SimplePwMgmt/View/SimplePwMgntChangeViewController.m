@@ -39,6 +39,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     [textField resignFirstResponder];
+    [textField setText:@""];
     
     NSString * title = textField.placeholder;;
     SEL action;
