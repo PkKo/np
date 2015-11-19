@@ -41,14 +41,14 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     if (_backFromSelfIdentifer) {
         LoginUtil * util = [[LoginUtil alloc] init];
         NSString * patternPw = [util getSimplePassword];
         if (!patternPw) {
-            [util gotoSimpleLoginMgmt:self.navigationController];
+            [util gotoSimpleLoginMgmt:self.navigationController animated:YES];
         }
     }
 }

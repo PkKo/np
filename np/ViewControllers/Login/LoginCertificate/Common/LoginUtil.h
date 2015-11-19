@@ -43,7 +43,7 @@
 - (void)saveAllAccounts:(NSArray *)allAccounts;
 
 #pragma mark - Simple Login
-- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController;
+- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;
 - (NSString *)getSimplePassword;
 - (void)saveSimplePassword:(NSString *)simplePassword;
 - (void)removeSimplePassword;
@@ -51,7 +51,7 @@
 - (void)saveSimplePasswordFailedTimes:(NSInteger)failedTimes;
 
 #pragma mark - Pattern Login
-- (void)gotoPatternLoginMgmt:(UINavigationController *)navController;
+- (void)gotoPatternLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;
 - (UIViewController *)getPatternLoginMgmt;
 - (NSString *)getPatternPassword;
 - (void)savePatternPassword:(NSString *)pw;

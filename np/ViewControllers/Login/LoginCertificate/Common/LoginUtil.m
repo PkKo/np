@@ -149,13 +149,45 @@
 }
 
 - (void)showSelfIdentifer:(LoginMethod)loginMethod {
+    
+    UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
+    
+    BOOL shouldAnimateSelfIdentifier = YES;
+    
+    // pin/pattern login view -> 본인인증
+    // shows pat/pattern management page right after the self identification process is done.
+    if (![self isLoggedIn]) {
+        
+        if (loginMethod == LOGIN_BY_SIMPLEPW || loginMethod == LOGIN_BY_PATTERN) {
+            shouldAnimateSelfIdentifier = NO;
+            
+            NSArray             * viewControllers   = [navController viewControllers];
+            UIViewController    * pinOrPatLoginView = nil;
+            int             numberOfViewControllers = (int)[viewControllers count];
+            
+            if (numberOfViewControllers >= 1) {
+                
+                pinOrPatLoginView = [viewControllers objectAtIndex:(numberOfViewControllers - 1)];
+                
+                if (pinOrPatLoginView && [[(ECSlidingViewController *)pinOrPatLoginView topViewController] isKindOfClass:[DrawPatternLockViewController class]]) {
+                    
+                    [self gotoPatternLoginMgmt:navController animated:shouldAnimateSelfIdentifier];
+                    
+                } else if (pinOrPatLoginView && [[(ECSlidingViewController *)pinOrPatLoginView topViewController] isKindOfClass:[LoginSimpleVerificationViewController class]]) {
+                    
+                    [self gotoSimpleLoginMgmt:navController animated:shouldAnimateSelfIdentifier];
+                }
+            }
+        }
+    }
+    
+    // 본인 인증
     RegistAccountViewController *vc = [[RegistAccountViewController alloc] initWithNibName:@"SelfIdentifyViewController" bundle:nil];
     [vc setIsSelfIdentified:YES];
     [vc setLoginMethod:loginMethod];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
-    UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
-    [navController pushViewController:eVC animated:YES];
+    [navController pushViewController:eVC animated:shouldAnimateSelfIdentifier];
 }
 
 #pragma mark - Certificate Login
@@ -225,9 +257,9 @@
 }
 
 #pragma mark - Simple Login
-- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController {
+- (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated {
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[[SimplePwMgntChangeViewController alloc] initWithNibName:@"SimplePwMgntChangeViewController" bundle:nil]];
-    [navController pushViewController:eVC animated:YES];
+    [navController pushViewController:eVC animated:animated];
 }
 
 - (NSString *)getSimplePassword {
@@ -273,9 +305,9 @@
 }
 
 #pragma mark - Pattern Login
-- (void)gotoPatternLoginMgmt:(UINavigationController *)navController {
+- (void)gotoPatternLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated {
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
-    [navController pushViewController:eVC animated:YES];
+    [navController pushViewController:eVC animated:animated];
 }
 
 - (UIViewController *)getPatternLoginMgmt {

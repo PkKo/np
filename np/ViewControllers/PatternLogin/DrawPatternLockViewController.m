@@ -82,14 +82,14 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     if (_backFromSelfIdentifer) {
         LoginUtil * util = [[LoginUtil alloc] init];
         NSString * patternPw = [util getPatternPassword];
         if (!patternPw) {
-            [util gotoPatternLoginMgmt:self.navigationController];
+            [util gotoPatternLoginMgmt:self.navigationController animated:YES];
         }
     }
 }
@@ -286,7 +286,7 @@
     
     if (failedTimes >= 5) {
         
-        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+        alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
         tag             = ALERT_GOTO_SELF_IDENTIFY;
         
     } else {
@@ -300,7 +300,7 @@
             [util savePatternPasswordFailedTimes:failedTimes];
             if (failedTimes >= 5) {
                 
-                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
                 tag             = ALERT_GOTO_SELF_IDENTIFY;
                 
             } else {

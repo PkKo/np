@@ -79,7 +79,7 @@
                                 </connections>
                             </tableView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8eU-p3-dbY">
-                                <rect key="frame" x="320" y="532" width="52" height="36"/>
+                                <rect key="frame" x="320" y="502" width="52" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="button_top.png"/>

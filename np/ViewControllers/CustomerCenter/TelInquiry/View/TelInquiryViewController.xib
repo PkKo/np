@@ -59,7 +59,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hSC-NE-BWs">
                                     <rect key="frame" x="0.0" y="182" width="280" height="52"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <string key="text">NH스마트알림 서비스 이용 중 불편사향과 
+                                    <string key="text">NH스마트알림 서비스 이용 중 불편사항과 
 문의사항은 NH농협 고객센터를
 이용해 주시기 바랍니다.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

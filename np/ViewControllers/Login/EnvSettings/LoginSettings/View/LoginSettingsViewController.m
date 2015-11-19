@@ -26,6 +26,10 @@
 #define BOX_BORDER_NORMAL_COLOR         [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1]
 #define BOX_BORDER_SELECTED_COLOR       [UIColor whiteColor]
 
+#define ALERT_CERT_CENTER               100
+#define ALERT_SETTINGS_DONE_CONFIRM     101
+#define ALERT_SETTINGS_DONE_NO_CHANGE   102
+
 @interface LoginSettingsViewController () {
     LoginMethod selectedLoginMethod;
 }
@@ -78,17 +82,8 @@
         [[[StorageBoxUtil alloc] init] showCertListInViewController:self dataSource:certificates updateSltedCert:@selector(updateSelectedCert:)];
     } else {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"등록된 공인인증서가 없습니다.\n공인인증센터로 이동하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        alert.tag = ALERT_CERT_CENTER;
         [alert show];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 1:
-            [[[LoginUtil alloc] init] gotoCertCentre:self.navigationController];
-            break;
-        default:
-            break;
     }
 }
 
@@ -115,7 +110,7 @@
 }
 
 - (IBAction)gotoSimpleLoginMgmt {
-    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController];
+    [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController animated:YES];
 }
 
 #pragma mark - Pattern Login
@@ -135,7 +130,7 @@
 }
 
 - (IBAction)gotoPatternLoginMgmt {
-    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController];
+    [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController animated:YES];
 }
 
 #pragma mark - cancel/done
@@ -156,29 +151,20 @@
     } else {
         
         LoginMethod loggedInMethod = [util getLoginMethod];
+        
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"로그인 설정이 완료 되었습니다." delegate:self
+                                               cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        
         if (loggedInMethod == selectedLoginMethod) {
             
-            [self removeLoginSettings];
+            alert.tag = ALERT_SETTINGS_DONE_NO_CHANGE;
             
         } else {
             [util saveLoginMethod:selectedLoginMethod];
-            
-            
-            NSArray * viewControllers = [self.navigationController viewControllers];
-            UIViewController * loginSettingsParent = nil;
-            int numberOfViewControllers = (int)[viewControllers count];
-            
-            if (numberOfViewControllers >= 2) {
-                
-                loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
-                
-                if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[EnvMgmtViewController class]]) {
-                    [self removeLoginSettings];
-                } else {
-                    [util showLoginPage:self.navigationController];
-                }
-            }
+            alert.tag = ALERT_SETTINGS_DONE_CONFIRM;
         }
+        [alert show];
     }
 }
 
@@ -304,5 +290,47 @@
             break;
     }
 }
+
+#pragma mark - Alert
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (alertView.tag) {
+        case ALERT_CERT_CENTER:
+        {
+            if (buttonIndex == 1) {
+                [[[LoginUtil alloc] init] gotoCertCentre:self.navigationController];
+            }
+            break;
+        }
+            
+        case ALERT_SETTINGS_DONE_CONFIRM:
+        {
+            NSArray * viewControllers = [self.navigationController viewControllers];
+            UIViewController * loginSettingsParent = nil;
+            int numberOfViewControllers = (int)[viewControllers count];
+            
+            if (numberOfViewControllers >= 2) {
+                
+                loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
+                
+                if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[EnvMgmtViewController class]]) {
+                    [self removeLoginSettings];
+                } else {
+                    [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+                }
+            }
+            break;
+        }
+            
+        case ALERT_SETTINGS_DONE_NO_CHANGE:
+        {
+            [self removeLoginSettings];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 
 @end

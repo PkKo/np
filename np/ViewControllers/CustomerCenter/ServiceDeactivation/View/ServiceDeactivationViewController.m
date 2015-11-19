@@ -28,10 +28,18 @@
 
 - (IBAction)deactivateService {
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    
-    [util deactivateService:YES];
-    [util setLogInStatus:NO];
-    [util showLoginPage:self.navigationController];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"서비스를 해지 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        LoginUtil * util = [[LoginUtil alloc] init];
+        
+        [util deactivateService:YES];
+        [util setLogInStatus:NO];
+        [util showLoginPage:self.navigationController];
+    }
+}
+
 @end
