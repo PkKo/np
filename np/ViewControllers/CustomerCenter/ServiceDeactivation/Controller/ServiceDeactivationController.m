@@ -7,6 +7,13 @@
 //
 
 #import "ServiceDeactivationController.h"
+#import "MainPageViewController.h"
+
+@interface ServiceDeactivationController() {
+    NSString * _isRegistered;
+}
+
+@end
 
 @implementation ServiceDeactivationController
 
@@ -24,10 +31,12 @@
 
 - (void)deactivateService:(NSString *)isRegistered {
     
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
+    _isRegistered = isRegistered;
+    
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
-    
-    NSLog(@"user_id: %@ - app_id: %@ - reg_yn: %@", user_id, PUSH_APP_ID, isRegistered);
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_SERVICE_DEACTIVATION];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
@@ -46,16 +55,26 @@
 - (void)receiveResponse:(NSDictionary *)response {
     
     NSLog(@"RESPONSE: %@", response);
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO]) {
         LoginUtil * util = [[LoginUtil alloc] init];
         [util removeAllData];
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
-                                                         message:@"모든 데이터 초기화 처리 후\n서비스 해지 처리가 완료되었습니다."
-                                                        delegate:self cancelButtonTitle:@"확인"
-                                               otherButtonTitles:nil];
-        alert.tag = SERVICE_DEACTIVATION_DONE;
-        [alert show];
+        
+        
+        if ([_isRegistered isEqualToString:IS_REGISTERED_NO]) { // 비정상 해지
+            
+            [(AppDelegate *)[UIApplication sharedApplication].delegate restartApplication];
+            
+        } else if ([_isRegistered isEqualToString:IS_REGISTERED_YES]) { // 정상 해지
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
+                                                             message:@"모든 데이터 초기화 처리 후\n서비스 해지 처리가 완료되었습니다."
+                                                            delegate:self cancelButtonTitle:@"확인"
+                                                   otherButtonTitles:nil];
+            alert.tag = SERVICE_DEACTIVATION_DONE_EXIT;
+            [alert show];
+        }
         
     } else {
         
@@ -68,9 +87,10 @@
 #pragma mark - Alert
 - (void)showForceToDeactivateAlert {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
-                                                     message:@"모든 데이터 초기화 처리 후\n서비스 해지할 예정입니다."
-                                                    delegate:self cancelButtonTitle:@"확인"
-                                           otherButtonTitles:nil];
+                                                     message:@"NH스마트알림 앱 서비스를\n해지 하셨습니다.\n\n서비스를 재가입하시겠습니까?"
+                                                    delegate:self
+                                           cancelButtonTitle:@"취소"
+                                           otherButtonTitles:@"확인", nil];
     alert.tag = SERVICE_DEACTIVATION_WILL_DO;
     [alert show];
 }
@@ -79,18 +99,23 @@
     
     switch (alertView.tag) {
             
-        case SERVICE_DEACTIVATION_DONE:
+        case SERVICE_DEACTIVATION_DONE_EXIT:
             exit(0);
             break;
             
         case SERVICE_DEACTIVATION_WILL_DO:
-            [self deactivateService:IS_REGISTERED_NO];
-            break;
+        {
+            if (buttonIndex == 0) {
+                exit(0);
+            } else if (buttonIndex == 1) {
+                [self deactivateService:IS_REGISTERED_NO];
+            }
             
+            break;
+        }
         default:
             break;
     }
-    
 }
 
 @end
