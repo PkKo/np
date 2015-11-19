@@ -7,6 +7,7 @@
 //
 
 #import "ExchangeCountryAddViewController.h"
+#import "ServiceDeactivationController.h"
 
 @interface ExchangeCountryAddViewController ()
 
@@ -18,6 +19,7 @@
 @synthesize contentView;
 
 @synthesize isNewCoutry;
+@synthesize isChargeCountry;
 @synthesize countryCode;
 @synthesize countryName;
 @synthesize countryAllList;
@@ -49,7 +51,7 @@
 
     [scrollView setContentSize:contentView.frame.size];
     
-    [countryDeleteButton setHidden:isNewCoutry];
+    [countryDeleteButton setHidden:isNewCoutry||isChargeCountry];
     
     pickerList = [[NSMutableArray alloc] init];
     countrySelectIndex = 0;
@@ -58,7 +60,7 @@
     periodTwoIndex = 0;
     periodThreeIndex = 0;
     
-    if(!isNewCoutry)
+    if(!isNewCoutry || isChargeCountry)
     {
         // 기존 옵션 정보를 가져온다
         [countrySelectButton setEnabled:NO];
@@ -158,6 +160,7 @@
         periodOneIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time1"] integerValue] + 1;
         periodTwoIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time2"] integerValue] + 1;
         periodThreeIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time3"] integerValue] + 1;
+        totlalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
         
         [self makeOptionSettingView];
     }
@@ -239,6 +242,37 @@
     }
 }
 
+#pragma mark - 유료 국가 무료 전환
+- (void)currencyChargeCountryRequest
+{
+    [self startIndicator];
+    
+    NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
+    [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CHARGE_COUNTRY];
+    
+    HttpRequest *req = [HttpRequest getInstance];
+    [req setDelegate:self selector:@selector(currencyChargeCountryResponse:)];
+    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+}
+
+- (void)currencyChargeCountryResponse:(NSDictionary *)response
+{
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:self];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
 #pragma mark - 환율 국가 삭제
 - (void)currencyCountryDeleteRequest
 {
@@ -271,6 +305,12 @@
     }
 }
 
+#pragma mark - 이용해지
+- (void)serviceDeactivateRequest
+{
+    [[ServiceDeactivationController sharedInstance] deactivateService:@"Y"];
+}
+
 #pragma mark - UIButtonAction
 - (IBAction)confirmButtonClick:(id)sender
 {
@@ -287,6 +327,12 @@
             [self currencyOptionMakeRequest];
         }
     }
+    else if (isChargeCountry)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"안내" message:@"고객님이 이용중인 UMS 유료 환율 서비스를\nPUSH 환율 알림 서비스로 변경하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        [alertView setTag:80002];
+        [alertView show];
+    }
     else
     {
         [self currencyOptionSaveRequest];
@@ -300,6 +346,12 @@
 
 - (IBAction)currencyCountrySelect:(id)sender
 {
+    if(pickerBgView == nil)
+    {
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - pickerView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [self.view addSubview:pickerBgView];
     isCountrySelectMode = YES;
     [pickerView setHidden:NO];
     pickerList = (NSMutableArray *)countryAllList;
@@ -315,6 +367,12 @@
 
 - (IBAction)periodOptionSelect:(id)sender
 {
+    if(pickerBgView == nil)
+    {
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - pickerView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [self.view addSubview:pickerBgView];
     isCountrySelectMode = NO;
     [pickerView setHidden:NO];
     pickerList = (NSMutableArray *)alarmPeriodList;
@@ -380,6 +438,7 @@
 
 - (IBAction)pickerViewHide:(id)sender
 {
+    [pickerBgView removeFromSuperview];
     [pickerView setHidden:YES];
 }
 
@@ -425,9 +484,29 @@
         {
             case 80001:
             {
-                // 계좌 삭제
-                [self currencyCountryDeleteRequest];
+                if(totlalNotiCount < 2)
+                {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"확인" message:@"해당 알림을 삭제하면 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+                    [alertView setTag:80003];
+                    [alertView show];
+                }
+                else
+                {
+                    // 계좌 삭제
+                    [self currencyCountryDeleteRequest];
+                }
                 break;
+            }
+            case 80002:
+            {
+                // 유료 알림 무료 전환
+                [self currencyChargeCountryRequest];
+                break;
+            }
+            case 80003:
+            {
+                // 알림 삭제 시 마지막 알림인 경우 해지여부 확인
+                [self serviceDeactivateRequest];
             }
                 
             default:

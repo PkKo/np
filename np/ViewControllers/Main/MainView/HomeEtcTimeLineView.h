@@ -25,6 +25,8 @@
     NSString *searchStartDate;
     NSString *searchEndDate;
     BOOL searchDateSelectType;
+    
+    UIView *pickerBgView;
 }
 
 @property (assign, nonatomic) id delegate;

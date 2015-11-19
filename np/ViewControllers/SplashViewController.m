@@ -63,9 +63,9 @@
 //    [self ipsTest];
     /*
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    MainPageViewController *vc = [[MainPageViewController alloc] init];
-    [vc setStartPageIndex:0];
-//    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
+//    MainPageViewController *vc = [[MainPageViewController alloc] init];
+//    [vc setStartPageIndex:0];
+    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
 
     slidingViewController.topViewController = vc;
     

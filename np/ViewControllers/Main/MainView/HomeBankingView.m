@@ -473,6 +473,14 @@
 // DatePickerView 보여줌
 - (IBAction)searchDatePickerShow:(id)sender
 {
+    if(pickerBgView == nil)
+    {
+        CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.bounds;
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - datePickerView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:pickerBgView];
+    
     searchDateSelectType = (BOOL)[sender tag];
     
     [datePickerView setHidden:NO];
@@ -517,6 +525,7 @@
 // DatePickerView 숨김
 - (IBAction)searchDatePickerHide:(id)sender
 {
+    [pickerBgView removeFromSuperview];
     [datePickerView setHidden:YES];
     [self inboxTypePickerHide:nil];
 }

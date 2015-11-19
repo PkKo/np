@@ -608,6 +608,14 @@
 - (void)showAmountSelectPickerView
 {
     [amountSelectView setFrame:CGRectMake(0, ((UIViewController *)delegate).view.frame.size.height - amountSelectView.frame.size.height, ((UIViewController *)delegate).view.frame.size.width, amountSelectView.frame.size.height)];
+    
+    if(pickerBgView == nil)
+    {
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ((UIViewController *)delegate).view.frame.size.width, ((UIViewController *)delegate).view.frame.size.height - amountSelectView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    
+    [((UIViewController *)delegate).view addSubview:pickerBgView];
     [((UIViewController *)delegate).view addSubview:amountSelectView];
     [amountSeletPickerView reloadAllComponents];
     
@@ -665,6 +673,7 @@
 
 - (void)hideAmountSelectPickerView
 {
+    [pickerBgView removeFromSuperview];
     [amountSelectView removeFromSuperview];
 }
 

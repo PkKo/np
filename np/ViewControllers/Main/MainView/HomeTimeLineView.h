@@ -39,6 +39,8 @@
     BOOL searchDateSelectType;
     
     BannerInfoView *bannerInfoView;
+    
+    UIView *pickerBgView;
 }
 
 @property (strong, nonatomic) id delegate;

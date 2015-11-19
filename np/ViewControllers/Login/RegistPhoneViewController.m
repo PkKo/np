@@ -98,7 +98,14 @@
  */
 - (IBAction)carrierNumClick:(id)sender
 {
+    if(pickeBgView == nil)
+    {
+        pickeBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [pickeBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [self.view addSubview:pickeBgView];
     [carrierPickerBgView setHidden:NO];
+    [self.view bringSubviewToFront:carrierPickerBgView];
     [carrierPickerView selectRow:carrierIndex inComponent:0 animated:YES];
 }
 
@@ -130,11 +137,6 @@
  */
 - (IBAction)nextViewClick:(id)sender
 {
-#if 0
-    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-#else
-    
     [self authNumberTimerStop];
     
     // 휴대폰 번호 입력 체크
@@ -179,7 +181,6 @@
     
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-#endif
 }
 
 #pragma mark - PickerView Action
@@ -192,6 +193,7 @@
 
 - (IBAction)pickerViewHide:(id)sender
 {
+    [pickeBgView removeFromSuperview];
     [carrierPickerBgView setHidden:YES];
 }
 

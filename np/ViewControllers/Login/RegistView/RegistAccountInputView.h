@@ -13,6 +13,7 @@
     NSInteger tempIndex;
     NSInteger carrierIndex;
     NSArray *carrierListArray;
+    UIView *pickerBgView;
 }
 
 @property (assign, nonatomic) id delegate;

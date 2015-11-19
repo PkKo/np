@@ -182,6 +182,7 @@
     UIView *view = vc.view;
     [view setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [vc.mainView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+    [vc.scrollView setContentInset:UIEdgeInsetsZero];
     [vc.nextButton removeTarget:vc action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [vc.nextButton addTarget:self action:@selector(checkCertUploaded) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:vc.mainView];
@@ -193,6 +194,7 @@
     UIView *view = vc.view;
     [view setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [vc.mainView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+    [vc.scrollView setContentInset:UIEdgeInsetsZero];
     [vc.certNumOne setDelegate:self];
     [vc.certNumTwo setDelegate:self];
     [vc.certNumThree setDelegate:self];
@@ -615,7 +617,16 @@
         }
             
         default:
+        {
+            if(![string isEqualToString:@""])
+            {
+                if(range.location == [textField tag])
+                {
+                    return NO;
+                }
+            }
             break;
+        }
     }
     
     return YES;
