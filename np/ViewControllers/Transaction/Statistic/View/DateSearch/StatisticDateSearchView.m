@@ -277,7 +277,6 @@
 
 - (IBAction)closeSearchView {
     [self.delegate closeDatePicker];
-    [self removeFromSuperview];
 }
 
 -(void)updateUI {

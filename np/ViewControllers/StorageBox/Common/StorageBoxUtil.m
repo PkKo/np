@@ -30,7 +30,7 @@
 #pragma mark - Date Search
 - (StorageBoxDateSearchView *)addStorageDateSearchViewToParent:(UIView *)parentView
                                       moveTopViewSeperatorDown:(UILabel *)topViewSeperator
-                                         outsideOfKeyboardView:(UIView *)outsideOfKeyboardView {
+                                         outsideOfKeyboardView:(UIView *)toolbarView {
     
     StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
     if (dateSearchView) {
@@ -44,13 +44,20 @@
     NSArray * nibArr = [[NSBundle mainBundle] loadNibNamed:@"StorageBoxDateSearchView"
                                                      owner:self options:nil];
     dateSearchView = (StorageBoxDateSearchView *)[nibArr objectAtIndex:0];
-    
+    [dateSearchView setHidden:YES];
     CGRect dateSearchViewFrame      = dateSearchView.frame;
+    CGFloat dateSearchViewY         = topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
+    
     dateSearchViewFrame.size.width  = parentView.frame.size.width;
-    dateSearchViewFrame.origin.y    = topViewSeperator.frame.origin.y + topViewSeperator.frame.size.height;
+    dateSearchViewFrame.origin.y    = dateSearchViewY - dateSearchViewFrame.size.height;
     [dateSearchView setFrame:dateSearchViewFrame];
-    [parentView insertSubview:dateSearchView belowSubview:outsideOfKeyboardView];
+    [parentView insertSubview:dateSearchView belowSubview:toolbarView];
     [dateSearchView updateUI];
+    
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [dateSearchView setHidden:NO];
+        [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, dateSearchViewFrame.size.width, dateSearchViewFrame.size.height)];
+    }completion:nil];
     
     return dateSearchView;
 }
@@ -60,7 +67,12 @@
     StorageBoxDateSearchView * dateSearchView = [self hasStorageDateSearchViewInParentView:parentView];
     
     if (dateSearchView) {
-        [dateSearchView removeFromSuperview];
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [dateSearchView setFrame:CGRectMake(0, dateSearchView.frame.origin.y - dateSearchView.frame.size.height, dateSearchView.frame.size.width, dateSearchView.frame.size.height)];
+        }
+                         completion:^(BOOL finished){
+                             [dateSearchView removeFromSuperview];
+                         }];
     }
 }
 

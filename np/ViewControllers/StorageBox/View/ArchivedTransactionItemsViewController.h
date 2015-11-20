@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView         * keyboardBgView;
 - (IBAction)tapToHideKeyboard:(UITapGestureRecognizer *)sender;
 
+@property (weak, nonatomic) IBOutlet UIView         * toolbarView;
 #pragma mark - goto Top button
 @property (strong, nonatomic) IBOutlet UIButton     * scrollMoveTopButton;
 - (IBAction)scrollToTopOfTableView;
