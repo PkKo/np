@@ -275,7 +275,7 @@
                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <webView contentMode="scaleToFill" scalesPageToFit="YES" id="Gh4-Df-wCs">
+                        <webView contentMode="scaleToFill" id="Gh4-Df-wCs">
                             <rect key="frame" x="0.0" y="67" width="284" height="333"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

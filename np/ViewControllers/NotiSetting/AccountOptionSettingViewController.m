@@ -36,6 +36,14 @@
     [[optionView accountDeleteButton] setHidden:isNewAccount];
     [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];
     [[optionView accountChangeButton] addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
+    if(!isNewAccount)
+    {
+        NSString *accountNickname = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:accountNumber];
+        if(accountNickname != nil)
+        {
+            [[optionView accountNicknameInput] setText:accountNickname];
+        }
+    }
     [contentView addSubview:optionView];
     
     [self accountOptionSearchReqeust];
@@ -129,6 +137,7 @@
     else
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView setTag:90003];
         [alertView show];
     }
 }
@@ -228,23 +237,14 @@
             }
         }*/
         
-        // 뒤로가기
-        NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
-        while(viewIndex >= 0)
-        {
-            ECSlidingViewController *eVC = [[self.navigationController viewControllers] objectAtIndex:viewIndex];
-            if([eVC.topViewController isKindOfClass:[AccountManageViewController class]])
-            {
-                [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
-                break;
-            }
-            
-            viewIndex--;
-        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입출금 알림 설정이 완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView setTag:90000];
+        [alertView show];
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert setTag:90003];
         [alert show];
     }
 }
@@ -277,7 +277,6 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-//        NSMutableArray *allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
         NSString *deletedAccountNumber = [[[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0] objectForKey:@"UMSD030001_OUT_SUB.account_number"];
         if(deletedAccountNumber != nil && [deletedAccountNumber length] > 0)
         {
@@ -291,13 +290,29 @@
             }
         }
         
-        /*
-        if([allAccountList containsObject:deletedAccountNumber])
-        {
-            [allAccountList removeObject:deletedAccountNumber];
-            [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
-        }*/
-        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"알림 계좌가 삭제되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView setTag:90000];
+        [alertView show];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert setTag:90003];
+        [alert show];
+    }
+}
+
+#pragma mark - 이용해지
+- (void)serviceDeactivateRequest
+{
+    [[ServiceDeactivationController sharedInstance] deactivateService:@"Y"];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 90000)
+    {
         // 뒤로가기
         NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
         while(viewIndex >= 0)
@@ -312,23 +327,7 @@
             viewIndex--;
         }
     }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-#pragma mark - 이용해지
-- (void)serviceDeactivateRequest
-{
-    [[ServiceDeactivationController sharedInstance] deactivateService:@"Y"];
-}
-
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if([alertView tag] == 90001 && buttonIndex == BUTTON_INDEX_OK)
+    else if([alertView tag] == 90001 && buttonIndex == BUTTON_INDEX_OK)
     {
         if(totalNotiCount < 2)
         {
@@ -345,6 +344,10 @@
     {
         // 이용해지 전문을 태운다.
         [self serviceDeactivateRequest];
+    }
+    else if([alertView tag] == 90003)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

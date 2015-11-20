@@ -156,7 +156,7 @@
                             <rect key="frame" x="54" y="0.0" width="102" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="입출금 알림">
+                            <state key="normal" title="입출금">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
@@ -183,7 +183,7 @@
                             <rect key="frame" x="164" y="0.0" width="102" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="알림 메시지">
+                            <state key="normal" title="기타">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">

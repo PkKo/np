@@ -12,6 +12,12 @@
 #import "LoginUtil.h"
 #import "HomeViewController.h"
 #import "HomeEtcDetailViewController.h"
+#import "CustomizedPickerViewController.h"
+
+#define SERVICE_TYPE_ALL            @"서비스별"
+#define SERVICE_TYPE_ECOMMERCE      @"e금융인증번호"
+#define SERVICE_TYPE_EXCHANGE       @"환율"
+#define SERVICE_TYPE_ETC            @"기타"
 
 @implementation HomeEtcTimeLineView
 
@@ -41,6 +47,8 @@
 
 @synthesize emptyListImageView;
 
+@synthesize serviceSelectLabel;
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
     timelineSection = section;
@@ -61,6 +69,7 @@
     }
     
     [self addPullToRefreshHeader];
+    [self addPullToRefreshFooter];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -69,6 +78,8 @@
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [timelineTableView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshFooterView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)refreshData
@@ -93,18 +104,24 @@
     }
     
     [self stopLoading];
+    [self stopFooterLoading];
+    
+    [refreshFooterView setHidden:!isMoreList];
+    
     isDeleteMode = NO;
     [self deleteViewHide:nil];
 }
 
+#pragma mark - Pull to Refresh view
 - (void)addPullToRefreshHeader
 {
     textPull = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
     textRelease = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
     textLoading = @"Loading";
     
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT)];
-    refreshHeaderView.backgroundColor = [UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f];
+    refreshHeaderView.backgroundColor = [loginUtil getNoticeBackgroundColour];
     [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
@@ -167,12 +184,80 @@
 
 - (void)refresh
 {
-    // This is just a demo. Override this method with your custom reload action.
-    // Don't forget to call stopLoading at the end.
-//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
     if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
     {
         [delegate refreshData:YES];
+    }
+}
+
+- (void)addPullToRefreshFooter
+{
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, timelineTableView.frame.size.height - REFRESH_HEADER_HEIGHT, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT/2)];
+    refreshFooterView.backgroundColor = [loginUtil getNoticeBackgroundColour];
+    [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, refreshFooterView.frame.size.height)];
+    refreshFooterLabel.backgroundColor = [UIColor clearColor];
+    refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
+    [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, 1)];
+    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    [refreshFooterView addSubview:refreshFooterLabel];
+    [refreshFooterView addSubview:separateLine];
+    [timelineTableView addSubview:refreshFooterView];
+}
+
+- (void)startFooterLoading
+{
+    if(!isMoreList)
+    {
+        return;
+    }
+    
+    isLoading = YES;
+    // Show the header
+    [UIView animateWithDuration:0.5 animations:^{
+        [timelineTableView setContentInset:UIEdgeInsetsMake(0, 0, REFRESH_HEADER_HEIGHT / 2, 0)];
+        refreshFooterLabel.text = textLoading;
+    }];
+    
+    // Refresh action!
+    [self refreshFooter];
+}
+
+- (void)stopFooterLoading
+{
+    isLoading = NO;
+    
+    // Hide the footer
+    [UIView animateWithDuration:0.5 animations:^{
+        timelineTableView.contentInset = UIEdgeInsetsZero;
+    }
+                     completion:^(BOOL finished) {
+                         [self performSelector:@selector(stopFooterLoadingComplete)];
+                     }];
+}
+
+- (void)stopFooterLoadingComplete
+{
+    // Reset the header
+    if(!isMoreList)
+    {
+        [refreshFooterView setHidden:YES];
+    }
+    refreshFooterLabel.text = textPull;
+}
+
+- (void)refreshFooter
+{
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
+    {
+        [delegate refreshData:NO];
     }
 }
 
@@ -229,7 +314,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return TIMELINE_ETC_HEIGHT;
+    NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
+    NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    
+    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    {
+        return TIMELINE_ETC_HEIGHT;
+    }
+    else
+    {
+        return TIMELINE_ETC_NOTICE_HEIGHT;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -247,6 +342,7 @@
     
     NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    
 //    NSArray *payload = inboxMessageData.payloadList;
     
     /* 데이터 구성
@@ -265,13 +361,25 @@
     
     if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
     {
+        [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell.depthImage setHidden:YES];
+        // 타이틀
+        [cell.titleLabel setText:@"환율알림"];
+        // 내용
+        [cell.contentLabel setText:inboxData.text];
+        [cell.contentLabel sizeToFit];
+
     }
     else
     {
+        [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
         [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
         [cell.depthImage setHidden:NO];
+        // 타이틀
+        [cell.titleLabel setText:@"공지사항"];
+        // 내용
+        [cell.contentLabel setText:inboxData.text];
     }
     
     // 스티커 버튼
@@ -299,12 +407,6 @@
     
     // 푸시 시간
     [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
-    
-    // 공지 타이틀
-    [cell.titleLabel setText:inboxData.title];
-    // 공지 내용
-    [cell.contentLabel setText:inboxData.text];
-    [cell.contentLabel sizeToFit];
     
     if(indexPath.row == 0)
     {
@@ -375,7 +477,12 @@
             [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
-    else if(isDragging && scrollView.contentOffset.y > 0)
+    else if (isDragging && scrollView.contentOffset.y + timelineTableView.frame.size.height >= timelineTableView.contentSize.height)
+    {
+        refreshFooterLabel.text = textPull;
+    }
+    
+    if(isDragging && scrollView.contentOffset.y > 0)
     {
         if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
         {
@@ -395,15 +502,10 @@
         // Released above the header
         [self startLoading];
     }
-    else if(scrollView.contentOffset.y + timelineTableView.frame.size.height >= timelineTableView.contentSize.height)
+    else if(scrollView.contentOffset.y + timelineTableView.frame.size.height - timelineTableView.contentSize.height >= REFRESH_HEADER_HEIGHT)
     {
-//        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, timelineTableView.contentSize.height, timelineTableView.frame.size.height);
-//        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + timelineTableView.frame.size.height, timelineTableView.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
-        {
-            [delegate refreshData:NO];
-        }
+        [self startFooterLoading];
     }
 }
 
@@ -460,11 +562,18 @@
 #pragma mark - 검색 Action
 - (IBAction)searchViewShow:(id)sender
 {
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [searchView setHidden:NO];
-        [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-        [self searchPeriodSelect:periodOneWeekBtn];
-    }completion:nil];
+    if([searchView isHidden])
+    {
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [searchView setHidden:NO];
+            [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
+            [self searchPeriodSelect:periodOneWeekBtn];
+        }completion:nil];
+    }
+    else
+    {
+        [self searchViewHide:nil];
+    }
 }
 
 - (IBAction)searchViewHide:(id)sender
@@ -751,4 +860,50 @@
     [timelineTableView reloadData];
 }
 
+#pragma mark - 서비스별 선택 Action
+- (IBAction)serviceSelectShow:(id)sender
+{
+    CustomizedPickerViewController * pickerViewController = [[CustomizedPickerViewController alloc] initWithNibName:@"CustomizedPickerViewController" bundle:nil];
+    
+    [pickerViewController setItems:@[SERVICE_TYPE_ALL, SERVICE_TYPE_ECOMMERCE, SERVICE_TYPE_EXCHANGE, SERVICE_TYPE_ETC]];
+    
+    pickerViewController.view.frame             = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.bounds;
+    pickerViewController.view.autoresizingMask  = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.autoresizingMask;
+    
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController addChildViewController:pickerViewController];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:pickerViewController.view];
+    [pickerViewController didMoveToParentViewController:((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController];
+    
+    [pickerViewController addTarget:self action:@selector(selectServiceCode:)];
+    [pickerViewController selectRowByValue:[serviceSelectLabel text]];
+}
+
+- (void)selectServiceCode:(NSString *)selection
+{
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+    reqData.ascending = YES;
+    
+    if([selection isEqualToString:SERVICE_TYPE_ALL])
+    {
+        reqData.queryType = @"E";
+    }
+    else if([selection isEqualToString:SERVICE_TYPE_ECOMMERCE])
+    {
+        reqData.queryType = @"5";
+    }
+    else if([selection isEqualToString:SERVICE_TYPE_EXCHANGE])
+    {
+        reqData.queryType = @"3";
+    }
+    else if([selection isEqualToString:SERVICE_TYPE_ETC])
+    {
+        reqData.queryType = @"4";
+    }
+    
+    if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
+    {
+        [delegate performSelector:@selector(searchInboxDataWithQuery:) withObject:reqData];
+    }
+}
 @end

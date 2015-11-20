@@ -96,6 +96,7 @@
     }
     
     [self addPullToRefreshHeader];
+    [self addPullToRefreshFooter];
     
     if([mTimeLineSection count] == 0)
     {
@@ -169,6 +170,9 @@
     }
     
     [self stopLoading];
+    [self stopFooterLoading];
+    
+    [refreshFooterView setHidden:!isMoreList];
     
     isDeleteMode = NO;
     [self deleteViewHide:nil];
@@ -206,6 +210,8 @@
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshFooterView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)addPullToRefreshHeader
@@ -214,8 +220,9 @@
     textRelease = @"화면을 당기면 알림 내역이 업데이트 됩니다.";
     textLoading = @"Loading";
     
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
-    refreshHeaderView.backgroundColor = [UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f];
+    refreshHeaderView.backgroundColor = [loginUtil getNoticeBackgroundColour];
     [refreshHeaderView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     refreshIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
@@ -237,6 +244,28 @@
     [refreshHeaderView addSubview:refreshIndicator];
     [refreshHeaderView addSubview:separateLine];
     [mTimeLineTable addSubview:refreshHeaderView];
+}
+
+- (void)addPullToRefreshFooter
+{
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, mTimeLineTable.frame.size.height, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+    refreshFooterView.backgroundColor = [loginUtil getNoticeBackgroundColour];
+    [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, refreshFooterView.frame.size.height)];
+    refreshFooterLabel.backgroundColor = [UIColor clearColor];
+    refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
+    [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, 1)];
+    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    [refreshFooterView addSubview:refreshFooterLabel];
+    [refreshFooterView addSubview:separateLine];
+    [mTimeLineTable addSubview:refreshFooterView];
 }
 
 #pragma mark - 리스트 정렬 변경
@@ -439,11 +468,18 @@
 #pragma mark - 검색 Action
 - (IBAction)searchViewShow:(id)sender
 {
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [searchView setHidden:NO];
-        [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-        [self searchPeriodSelect:periodOneWeekBtn];
-    }completion:nil];
+    if([searchView isHidden])
+    {
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [searchView setHidden:NO];
+            [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
+            [self searchPeriodSelect:periodOneWeekBtn];
+        }completion:nil];
+    }
+    else
+    {
+        [self searchViewHide:nil];
+    }
 }
 
 - (IBAction)searchViewHide:(id)sender
@@ -656,13 +692,59 @@
 
 - (void)refresh
 {
-    // This is just a demo. Override this method with your custom reload action.
-    // Don't forget to call stopLoading at the end.
     if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
     {
         [delegate refreshData:YES];
     }
-//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+}
+
+- (void)startFooterLoading
+{
+    if(!isMoreList)
+    {
+        return;
+    }
+  
+    isLoading = YES;
+    // Show the header
+    [UIView animateWithDuration:0.5 animations:^{
+        [mTimeLineTable setContentInset:UIEdgeInsetsMake(0, 0, REFRESH_HEADER_HEIGHT / 2, 0)];
+        refreshFooterLabel.text = textLoading;
+    }];
+    
+    // Refresh action!
+    [self refreshFooter];
+}
+
+- (void)stopFooterLoading
+{
+    isLoading = NO;
+    
+    // Hide the footer
+    [UIView animateWithDuration:0.5 animations:^{
+        mTimeLineTable.contentInset = UIEdgeInsetsZero;
+    }
+                     completion:^(BOOL finished) {
+                         [self performSelector:@selector(stopFooterLoadingComplete)];
+                     }];
+}
+
+- (void)stopFooterLoadingComplete
+{
+    // Reset the header
+    if(!isMoreList)
+    {
+        [refreshFooterView setHidden:YES];
+    }
+    refreshFooterLabel.text = textPull;
+}
+
+- (void)refreshFooter
+{
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
+    {
+        [delegate refreshData:NO];
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -820,7 +902,16 @@
                     [cell.stickerButton setSelected:YES];
                 }
                 
-                [cell.pinButton setHidden:YES];
+                if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
+                {
+                    [cell.pinButton setHidden:NO];
+                    [cell.stickerButton setEnabled:NO];
+                }
+                else
+                {
+                    [cell.pinButton setHidden:YES];
+                }
+                
                 [cell.moreButton setHidden:YES];
                 [cell.upperLine setHidden:YES];
                 [cell.underLine setHidden:YES];
@@ -1095,10 +1186,17 @@
     if (isLoading)
     {
         // Update the content inset, good for section headers
+        /*
+        else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
+        {
+            mTimeLineTable.contentInset = UIEdgeInsetsMake(0, 0, (scrollView.contentOffset.y + mTimeLineTable.frame.size.height) - mTimeLineTable.contentSize.height, 0);
+        }*/
         if (scrollView.contentOffset.y > 0)
             mTimeLineTable.contentInset = UIEdgeInsetsZero;
-        else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
-            mTimeLineTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        else if (scrollView.contentOffset.y < 0 && scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
+        {
+            mTimeLineTable.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        }
     }
     else if (isDragging && scrollView.contentOffset.y <= 0)
     {
@@ -1118,7 +1216,12 @@
             [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
-    else if(isDragging && scrollView.contentOffset.y > 0)
+    else if (isDragging && scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
+    {
+        refreshFooterLabel.text = textPull;
+    }
+    
+    if(isDragging && scrollView.contentOffset.y > 0)
     {
         if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
         {
@@ -1139,15 +1242,10 @@
         // Released above the header
         [self startLoading];
     }
-    else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height >= mTimeLineTable.contentSize.height)
+    else if(scrollView.contentOffset.y + mTimeLineTable.frame.size.height - mTimeLineTable.contentSize.height >= REFRESH_HEADER_HEIGHT)
     {
-//        NSLog(@"scrollView.contentOffset.y = %f, tableViewContentSize = %f, tableViewHeight = %f", scrollView.contentOffset.y, mTimeLineTable.contentSize.height, mTimeLineTable.frame.size.height);
-//        NSLog(@"offset + height = %f, tableViewContentSize = %f", scrollView.contentOffset.y + mTimeLineTable.frame.size.height, mTimeLineTable.contentSize.height);
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
-        if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
-        {
-            [delegate refreshData:NO];
-        }
+        [self startFooterLoading];
     }
 }
 

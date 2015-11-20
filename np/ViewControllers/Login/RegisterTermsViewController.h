@@ -11,6 +11,8 @@
 @interface RegisterTermsViewController : CommonViewController<UIWebViewDelegate>
 {
     CGFloat contentViewHeight;
+    BOOL serviceTermClick;
+    BOOL personalTermClick;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;

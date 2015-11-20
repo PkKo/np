@@ -252,6 +252,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qN2-hN-84q">
                             <rect key="frame" x="18" y="0.0" width="68" height="22"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="serviceSelectShow:" destination="iN0-l3-epB" eventType="touchUpInside" id="yiK-Af-Y7S"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="20b-kp-Qib">
                             <rect key="frame" x="275" y="0.0" width="36" height="18"/>
@@ -325,7 +328,7 @@
                             <rect key="frame" x="160" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="확인"/>
                             <connections>
                                 <action selector="searchDateSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="ALL-0a-7L2"/>
@@ -335,7 +338,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="취소"/>
                             <connections>
                                 <action selector="searchDatePickerHide:" destination="iN0-l3-epB" eventType="touchUpInside" id="coT-5m-DdV"/>
@@ -372,9 +375,14 @@
                 <outlet property="deleteButtonView" destination="r4K-hr-VVF" id="QfK-tC-aBF"/>
                 <outlet property="emptyListImageView" destination="ZWX-Rm-IA6" id="1tf-po-LfR"/>
                 <outlet property="listEmptyView" destination="BTt-8i-CLp" id="dPe-BN-Hbs"/>
+                <outlet property="periodOneMonthBtn" destination="37W-SV-bXf" id="P3e-sV-fYX"/>
+                <outlet property="periodOneWeekBtn" destination="k6W-qu-HMc" id="ZEw-Wo-kB2"/>
+                <outlet property="periodSixMonthBtn" destination="btJ-8T-Cro" id="yb3-b9-PR6"/>
+                <outlet property="periodThreeMonthBtn" destination="boP-vh-ET8" id="ZEO-L0-tbB"/>
                 <outlet property="searchEndDateLabel" destination="wUf-oi-V6z" id="krX-Uv-y2V"/>
                 <outlet property="searchStartDateLabel" destination="oMF-BM-9lW" id="Ctk-ss-aRA"/>
                 <outlet property="searchView" destination="mNF-8u-5ux" id="m5y-G9-1mI"/>
+                <outlet property="serviceSelectLabel" destination="mGf-vu-IMf" id="9o9-sj-gUy"/>
                 <outlet property="timelineTableView" destination="yJF-RD-WKf" id="LsF-Rg-AWa"/>
             </connections>
             <point key="canvasLocation" x="313" y="374"/>

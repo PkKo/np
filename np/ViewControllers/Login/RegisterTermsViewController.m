@@ -55,6 +55,9 @@
     
     [serviceTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_SHORT]]];
     [personalDataTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_SHORT]]];
+    
+    serviceTermClick = NO;
+    personalTermClick = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +95,7 @@
     [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:serviceTermsView];
     [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_TOTAL]]];
+    serviceTermClick = YES;
 }
 
 // 서비스 이용약관 체크
@@ -117,6 +121,7 @@
     [serviceTermsView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:serviceTermsView];
     [totalTermsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_TOTAL]]];
+    personalTermClick = YES;
 }
 
 // 개인정보 이용동의 체크
@@ -157,16 +162,28 @@
     // 약관동의 여부 체크
     if(![serviceTermAgreeImg isHighlighted])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 이용약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
     }
     
+    if(!serviceTermClick)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 이용약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
+    
     if(![personalDataTermAgreeImg isHighlighted])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
+    }
+    
+    if(!personalTermClick)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
     
     if(![pushAgreeImg isHighlighted])

@@ -22,6 +22,9 @@
     NSString *textRelease;
     NSString *textLoading;
     
+    UIView *refreshFooterView;
+    UILabel *refreshFooterLabel;
+    
     BOOL listSortType;
     
     NSMutableArray *deleteIdList;

@@ -106,10 +106,9 @@
 {
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
-        // 로그 아웃 시킨다
-        [[[LoginUtil alloc] init] setLogInStatus:NO];
-        // Login
-        [((AppDelegate *)[UIApplication sharedApplication].delegate) restartApplication];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"로그아웃 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        [alertView setTag:30000];
+        [alertView show];
     }
     else
     {
@@ -294,6 +293,17 @@
         // Login
         [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
     }
-    
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 30000 && buttonIndex == BUTTON_INDEX_OK)
+    {
+        // 로그 아웃 시킨다
+        [[[LoginUtil alloc] init] setLogInStatus:NO];
+        // Login
+        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+    }
 }
 @end

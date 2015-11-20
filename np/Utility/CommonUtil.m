@@ -736,4 +736,11 @@
 {
     return ((AppDelegate *)[UIApplication sharedApplication].delegate).unreadCountEtc;
 }
+
++ (NetworkStatus)getNetworkStatus
+{
+    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    
+    return status;
+}
 @end
