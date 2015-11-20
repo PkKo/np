@@ -849,7 +849,7 @@
     {
         return TIMELINE_BANNER_HEIGHT;
     }
-    else if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+    else if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
     {
         return [self getTimelineCellHeight:(StickerType)inboxData.stickerCode] + TIMELINE_BANNER_HEIGHT;
     }
@@ -1076,7 +1076,7 @@
                 [cell.pinButton setSelected:YES];
             }
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 if(bannerInfoView == nil)
@@ -1208,7 +1208,7 @@
             [cell.contentLabel setText:inboxData.text];
             [cell.contentLabel sizeToFit];*/
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 if(bannerInfoView == nil)
