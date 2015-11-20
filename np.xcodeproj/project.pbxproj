@@ -23,6 +23,8 @@
 		A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D62D2D1BC3617B001E16B0 /* HomeBankingView.m */; };
 		A2D62D301BC36188001E16B0 /* HomeBankingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D62D2F1BC36188001E16B0 /* HomeBankingView.xib */; };
+		A2D653931BFEEEA300A00935 /* ServiceFunctionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D653921BFEEEA300A00935 /* ServiceFunctionInfoView.m */; };
+		A2D653951BFEEEB800A00935 /* ServiceFunctionInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D653941BFEEEB800A00935 /* ServiceFunctionInfoView.xib */; };
 		A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D791681BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m */; };
 		A2D7916B1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D791691BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.xib */; };
 		A2D7916F1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D7916D1BBD171300E817E7 /* HomeQuickNoticeTableViewCell.m */; };
@@ -669,6 +671,9 @@
 		A2D62D2C1BC3617B001E16B0 /* HomeBankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBankingView.h; sourceTree = "<group>"; };
 		A2D62D2D1BC3617B001E16B0 /* HomeBankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBankingView.m; sourceTree = "<group>"; };
 		A2D62D2F1BC36188001E16B0 /* HomeBankingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeBankingView.xib; sourceTree = "<group>"; };
+		A2D653911BFEEEA300A00935 /* ServiceFunctionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceFunctionInfoView.h; sourceTree = "<group>"; };
+		A2D653921BFEEEA300A00935 /* ServiceFunctionInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFunctionInfoView.m; sourceTree = "<group>"; };
+		A2D653941BFEEEB800A00935 /* ServiceFunctionInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceFunctionInfoView.xib; sourceTree = "<group>"; };
 		A2D791671BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQuickPushTableViewCell.h; sourceTree = "<group>"; };
 		A2D791681BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQuickPushTableViewCell.m; sourceTree = "<group>"; };
 		A2D791691BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQuickPushTableViewCell.xib; sourceTree = "<group>"; };
@@ -1922,6 +1927,9 @@
 				A2DCFFAD1BEB2D5700EEABD9 /* BannerInfoView.h */,
 				A2DCFFAE1BEB2D5700EEABD9 /* BannerInfoView.m */,
 				A2DCFFB01BEB2D6500EEABD9 /* BannerInfoView.xib */,
+				A2D653911BFEEEA300A00935 /* ServiceFunctionInfoView.h */,
+				A2D653921BFEEEA300A00935 /* ServiceFunctionInfoView.m */,
+				A2D653941BFEEEB800A00935 /* ServiceFunctionInfoView.xib */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -3380,6 +3388,7 @@
 				A2D9EC3E1BEA18E200047BEC /* icon_notice_04_dft@2x.png in Resources */,
 				A2D9EC3F1BEA18E200047BEC /* icon_notice_04_on@2x.png in Resources */,
 				A2D9EC401BEA18E200047BEC /* icon_notice_05@2x.png in Resources */,
+				A2D653951BFEEEB800A00935 /* ServiceFunctionInfoView.xib in Resources */,
 				A2D9EC411BEA18E200047BEC /* icon_notice_06@2x.png in Resources */,
 				A2D9EC421BEA18E200047BEC /* icon_notice_setting_01_dft@2x.png in Resources */,
 				A2D9EC431BEA18E200047BEC /* icon_notice_setting_01_on@2x.png in Resources */,
@@ -3764,6 +3773,7 @@
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
 				A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
+				A2D653931BFEEEA300A00935 /* ServiceFunctionInfoView.m in Sources */,
 				A2D994B91BD8824700A6A325 /* TimelineSectionData.m in Sources */,
 				A54B94E21BAA841C00D5D99B /* SNSViewController.m in Sources */,
 				A2DE64751BD62628009EC403 /* AccountOptionSettingViewController.m in Sources */,

@@ -44,5 +44,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *tabTwoBg;
 - (IBAction)selectTabButton:(id)sender;
 - (IBAction)noticeClick:(id)sender;
+- (IBAction)moveMainView:(id)sender;
 
 @end

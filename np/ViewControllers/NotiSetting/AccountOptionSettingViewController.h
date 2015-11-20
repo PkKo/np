@@ -21,4 +21,5 @@
 @property (assign, nonatomic) BOOL isNewAccount;
 
 - (IBAction)optionSettingConfirm:(id)sender;
+- (IBAction)optionSettingCancel:(id)sender;
 @end

@@ -34,19 +34,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="FWR-QC-WjD">
-                    <rect key="frame" x="0.0" y="128" width="320" height="440"/>
+                    <rect key="frame" x="0.0" y="127" width="320" height="441"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="z7p-8t-gEY">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="441"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="UTP-lk-EXK">
-                                    <rect key="frame" x="27" y="0.0" width="267" height="315"/>
+                                    <rect key="frame" x="27" y="0.0" width="267" height="316"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="gur-lg-Bq5">
-                                            <rect key="frame" x="0.0" y="0.0" width="267" height="306"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="267" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_notice_05.png" id="RyM-eT-neI">
@@ -60,11 +60,18 @@
                                                     <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Brr-jV-xnf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="267" height="307"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <connections>
+                                                        <action selector="moveMainView:" destination="-1" eventType="touchUpInside" id="Mhe-94-7G7"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hb5-iQ-6Sj">
-                                            <rect key="frame" x="0.0" y="0.0" width="267" height="306"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="267" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -73,7 +80,7 @@
                                             </connections>
                                         </tableView>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CAg-tS-uqN">
-                                            <rect key="frame" x="0.0" y="0.0" width="267" height="306"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="267" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -82,14 +89,14 @@
                                             </connections>
                                         </tableView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botton_pattern.png" id="Vrc-0i-gg3">
-                                            <rect key="frame" x="0.0" y="306" width="267" height="9"/>
+                                            <rect key="frame" x="0.0" y="307" width="267" height="9"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="sYc-q1-ckd">
-                                    <rect key="frame" x="27" y="315" width="267" height="49"/>
+                                    <rect key="frame" x="27" y="316" width="267" height="49"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WHU-Xf-DFA">
@@ -127,7 +134,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="uBy-b4-OSa">
-                                    <rect key="frame" x="27" y="364" width="267" height="65"/>
+                                    <rect key="frame" x="27" y="365" width="267" height="65"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>

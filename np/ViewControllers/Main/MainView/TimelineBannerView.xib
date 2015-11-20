@@ -11,6 +11,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tjK-wN-82T">
+                    <rect key="frame" x="30" y="0.0" width="1" height="93"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="JD5-nv-uSe">
                     <rect key="frame" x="18" y="0.0" width="284" height="69"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -25,6 +30,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bannerContentView" destination="JD5-nv-uSe" id="4lf-69-Zez"/>
+                <outlet property="underLine" destination="tjK-wN-82T" id="JBJ-CJ-u4S"/>
             </connections>
             <point key="canvasLocation" x="313" y="374"/>
         </view>

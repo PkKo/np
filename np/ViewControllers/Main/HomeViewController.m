@@ -11,6 +11,7 @@
 #import "LoginUtil.h"
 #import "ArchivedTransactionItemsViewController.h"
 #import "StatisticMainUtil.h"
+#import "ServiceFunctionInfoView.h"
 
 @interface HomeViewController ()
 
@@ -37,20 +38,6 @@
     unreadMessageList = [NSMutableArray array];
     isSearch = NO;
     isMoreList = YES;
-    
-    /*
-    if(viewType == TIMELINE)
-    {
-        if([sectionList count] == 0)
-        {
-            NSString *todayString = [CommonUtil getTodayDateString];
-            NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
-            TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-            todaySectionData.date = todayString;
-            todaySectionData.day = todayDayString;
-            [sectionList addObject:todaySectionData];
-        }
-    }*/
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,6 +49,22 @@
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 //    [self makeTimelineView];
+    
+    // 기능안내 페이지
+    if (viewType == INBOX)
+    {
+        if([[NSUserDefaults standardUserDefaults] objectForKey:FIRST_LOGIN_FLAG_FOR_STORAGE] == nil)
+        {
+            ServiceFunctionInfoView *guideView = [ServiceFunctionInfoView view];
+            [guideView setFrame:CGRectMake(0, 0,
+                                           ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.width,
+                                           ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+            [[guideView infoViewButton] setTag:INBOX];
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:guideView];
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view bringSubviewToFront:guideView];
+            [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:FIRST_LOGIN_FLAG_FOR_STORAGE];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -374,7 +377,7 @@
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
     selectedStickerCode = (StickerType)index.integerValue;
-    NSLog(@"%s, %d", __FUNCTION__, (int)selectedStickerCode);
+//    NSLog(@"%s, %d", __FUNCTION__, (int)selectedStickerCode);
     
     if(currentStickerIndexPath != nil)
     {
@@ -791,18 +794,21 @@
 
 - (void)inboxLoadFailed:(int)responseCode
 {
-    NSLog(@"%s, %d", __FUNCTION__, responseCode);
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"데이터 가져오기에 실패했습니다.\n잠시 후 다시 시도해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alertView show];
+    [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
 - (void)loadedInboxCategoryList:(NSArray *)categoryList
 {
-    NSLog(@"%s, %@", __FUNCTION__, categoryList);
+//    NSLog(@"%s, %@", __FUNCTION__, categoryList);
 }
 
 - (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
 {
-    NSLog(@"%s, %@", __FUNCTION__, summaryList);
+//    NSLog(@"%s, %@", __FUNCTION__, summaryList);
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
     
     float total = 0;
@@ -823,7 +829,7 @@
 
 - (void)readMessage:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys
 {
-    NSLog(@"%s, %d, keys = %@", __FUNCTION__, success, sMsgKeys);
+//    NSLog(@"%s, %d, keys = %@", __FUNCTION__, success, sMsgKeys);
     if(success)
     {
         [unreadMessageList removeAllObjects];

@@ -17,6 +17,7 @@
 #import "TimelineBannerView.h"
 #import "LoginUtil.h"
 #import "StatisticMainUtil.h"
+#import "ServiceFunctionInfoView.h"
 
 @implementation HomeTimeLineView
 
@@ -76,6 +77,14 @@
     isMoreList = YES;
     deleteIdList = [[NSMutableArray alloc] init];
     pinnedIdList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:TIMELINE_PIN_MESSAGE_ID]];
+    
+    if(datePicker == nil)
+    {
+        datePicker = [[UIDatePicker alloc] init];
+    }
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    
     [self refreshBadges];
     
     if([mTimeLineSection count] > 0)
@@ -95,9 +104,6 @@
         bannerIndex = 0;
     }
     
-    [self addPullToRefreshHeader];
-    [self addPullToRefreshFooter];
-    
     if([mTimeLineSection count] == 0)
     {
         [mTimeLineTable setHidden:YES];
@@ -107,6 +113,28 @@
     {
         [mTimeLineTable setHidden:NO];
         [listEmptyView setHidden:YES];
+        [mTimeLineTable reloadData];
+    }
+    
+    [self addPullToRefreshHeader];
+    [self addPullToRefreshFooter];
+    
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    
+    // 기능안내 페이지
+    if([[NSUserDefaults standardUserDefaults] objectForKey:FIRST_LOGIN_FLAG_FOR_TIMELINE] == nil)
+    {
+        ServiceFunctionInfoView *guideView = [ServiceFunctionInfoView view];
+        [guideView setFrame:CGRectMake(0, 0,
+                                       ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.width,
+                                       ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+        [[guideView infoViewButton] setTag:TIMELINE];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:guideView];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view bringSubviewToFront:guideView];
+        [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:FIRST_LOGIN_FLAG_FOR_TIMELINE];
     }
 }
 
@@ -133,6 +161,7 @@
     {
         [mTimeLineTable setHidden:NO];
         [listEmptyView setHidden:YES];
+        [mTimeLineTable reloadData];
     }
     
     if(!listSortType)
@@ -172,10 +201,15 @@
     [self stopLoading];
     [self stopFooterLoading];
     
-    [refreshFooterView setHidden:!isMoreList];
-    
     isDeleteMode = NO;
     [self deleteViewHide:nil];
+    
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [self addPullToRefreshFooter];
+    [refreshFooterView setHidden:!isMoreList];
 }
 
 - (void)refreshBadges {
@@ -201,17 +235,6 @@
         [storageCountLabel setHidden:NO];
         [storageCountLabel setText:@"99+"];
     }
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    NSLog(@"%s", __FUNCTION__);
-    // Drawing code
-    LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [mTimeLineTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [refreshFooterView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)addPullToRefreshHeader
@@ -249,23 +272,36 @@
 - (void)addPullToRefreshFooter
 {
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, mTimeLineTable.frame.size.height, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+    CGFloat originY = mTimeLineTable.frame.size.height;
+    if(mTimeLineTable.contentSize.height > mTimeLineTable.frame.size.height)
+    {
+        originY = mTimeLineTable.contentSize.height;
+    }
+    
+    if(refreshFooterView == nil)
+    {
+        refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+        [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+        
+        refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, refreshFooterView.frame.size.height)];
+        refreshFooterLabel.backgroundColor = [UIColor clearColor];
+        refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
+        [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, 1)];
+        [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        
+        [refreshFooterView addSubview:refreshFooterLabel];
+        [refreshFooterView addSubview:separateLine];
+        [mTimeLineTable addSubview:refreshFooterView];
+    }
+    else
+    {
+        [refreshFooterView setFrame:CGRectMake(0, originY, mTimeLineTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+    }
     refreshFooterView.backgroundColor = [loginUtil getNoticeBackgroundColour];
-    [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, refreshFooterView.frame.size.height)];
-    refreshFooterLabel.backgroundColor = [UIColor clearColor];
-    refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
-    refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
-    [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mTimeLineTable.frame.size.width, 1)];
-    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
-    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    [refreshFooterView addSubview:refreshFooterLabel];
-    [refreshFooterView addSubview:separateLine];
-    [mTimeLineTable addSubview:refreshFooterView];
 }
 
 #pragma mark - 리스트 정렬 변경
@@ -473,7 +509,7 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [searchView setHidden:NO];
             [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-            [self searchPeriodSelect:periodOneWeekBtn];
+            [self searchPeriodSelect:periodOneMonthBtn];
         }completion:nil];
     }
     else
@@ -578,7 +614,7 @@
         [searchStartDateLabel setTextColor:[UIColor colorWithRed:96/255.0f green:97/255.0f blue:102/255.0f alpha:1.0f]];
     }
     
-    [datePickerView setHidden:YES];
+    [self searchDatePickerHide:nil];
 }
 
 // DatePickerView 보여줌
@@ -596,11 +632,6 @@
     
     [datePickerView setHidden:NO];
     
-    if(datePicker == nil)
-    {
-        datePicker = [[UIDatePicker alloc] init];
-    }
-    
     if(searchDateSelectType)
     {
         // 종료일
@@ -613,7 +644,7 @@
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyyMMdd"];
             NSDate *currentDate = [formatter dateFromString:searchEndDate];
-            [datePicker setDate:currentDate];
+            [datePicker setDate:currentDate animated:NO];
         }
     }
     else
@@ -818,7 +849,7 @@
     {
         return TIMELINE_BANNER_HEIGHT;
     }
-    else if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+    else if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
     {
         return [self getTimelineCellHeight:(StickerType)inboxData.stickerCode] + TIMELINE_BANNER_HEIGHT;
     }
@@ -955,6 +986,8 @@
                 case STICKER_DEPOSIT_SALARY:
                 case STICKER_DEPOSIT_POCKET:
                 case STICKER_DEPOSIT_ETC:
+                case STICKER_DEPOSIT_MODIFY:
+                case STICKER_DEPOSIT_CANCEL:
                 {
                     // 입출금 타입
                     [cell.typeLabel setText:@"입금"];
@@ -984,6 +1017,8 @@
                 case STICKER_WITHDRAW_CREDIT:
                 case STICKER_WITHDRAW_SAVING:
                 case STICKER_WITHDRAW_ETC:
+                case STICKER_WITHDRAW_MODIFY:
+                case STICKER_WITHDRAW_CANCEL:
                 {
                     // 입출금 타입
                     [cell.typeLabel setText:@"출금"];
@@ -1041,7 +1076,7 @@
                 [cell.pinButton setSelected:YES];
             }
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 if(bannerInfoView == nil)
@@ -1061,6 +1096,15 @@
                 [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                 [bannerView.bannerContentView addSubview:bannerInfoView];
                 [bannerInfoView bannerTimerStart];
+                
+                if([(NSArray *)[mTimeLineDic objectForKey:section] count] > bannerIndex + 1)
+                {
+                    [bannerView.underLine setHidden:NO];
+                }
+                else
+                {
+                    [bannerView.underLine setHidden:YES];
+                }
             }
             /*
             if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
@@ -1136,18 +1180,42 @@
             
             // 푸시 시간
             [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+            
+            if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+            {
+                [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
+                [cell.depthImage setHidden:YES];
+                // 타이틀
+                [cell.titleLabel setText:@"환율알림"];
+                // 내용
+                [cell.contentLabel setText:inboxData.text];
+                [cell.contentLabel sizeToFit];
+                
+            }
+            else
+            {
+                [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
+                [cell.depthImage setHidden:YES];
+                // 타이틀
+                [cell.titleLabel setText:@"공지사항"];
+                // 내용
+                [cell.contentLabel setText:inboxData.text];
+            }
+            /*
             // 공지 타이틀
             [cell.titleLabel setText:inboxData.title];
             // 공지 내용
             [cell.contentLabel setText:inboxData.text];
-            [cell.contentLabel sizeToFit];
+            [cell.contentLabel sizeToFit];*/
             
-            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult)
+            if(indexPath.section == 0 && indexPath.row == bannerIndex && !isSearchResult && !isDeleteMode)
             {
                 TimelineBannerView *bannerView = [TimelineBannerView view];
                 if(bannerInfoView == nil)
                 {
                     bannerInfoView = [BannerInfoView view];
+                    [bannerInfoView.nongminBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg forState:UIControlStateNormal];
+                    [bannerInfoView.noticeBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg forState:UIControlStateNormal];
                 }
                 else
                 {
@@ -1160,6 +1228,15 @@
                 [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                 [bannerView.bannerContentView addSubview:bannerInfoView];
                 [bannerInfoView bannerTimerStart];
+                
+                if([(NSArray *)[mTimeLineDic objectForKey:section] count] > bannerIndex + 1)
+                {
+                    [bannerView.underLine setHidden:NO];
+                }
+                else
+                {
+                    [bannerView.underLine setHidden:YES];
+                }
             }
             /*
             if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
@@ -1385,11 +1462,19 @@
         case STICKER_WITHDRAW_CREDIT:
         case STICKER_WITHDRAW_SAVING:
         case STICKER_WITHDRAW_ETC:
+        case STICKER_DEPOSIT_MODIFY:
+        case STICKER_DEPOSIT_CANCEL:
+        case STICKER_WITHDRAW_MODIFY:
+        case STICKER_WITHDRAW_CANCEL:
         {
             return TIMELINE_BANKING_HEIGHT;
             break;
         }
-            
+        case STICKER_NOTICE_NORMAL:
+        {
+            return TIMELINE_ETC_NOTICE_HEIGHT;
+            break;
+        }
         default:
             return TIMELINE_ETC_HEIGHT;
             break;
@@ -1414,6 +1499,10 @@
         case STICKER_WITHDRAW_CREDIT:
         case STICKER_WITHDRAW_SAVING:
         case STICKER_WITHDRAW_ETC:
+        case STICKER_DEPOSIT_MODIFY:
+        case STICKER_DEPOSIT_CANCEL:
+        case STICKER_WITHDRAW_MODIFY:
+        case STICKER_WITHDRAW_CANCEL:
         {
             return YES;
             break;

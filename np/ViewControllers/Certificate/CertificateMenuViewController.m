@@ -114,7 +114,16 @@
             
         case 2: // 인증서 관리
         {
-            vc = [[CertificateListViewController alloc] init];
+            if([[[LoginUtil alloc] init] isLoggedIn])
+            {
+                vc = [[CertificateListViewController alloc] init];
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"로그인 상태가 아닙니다.\n로그인 후 이용해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             break;
         }
             

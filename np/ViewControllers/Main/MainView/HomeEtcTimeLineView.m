@@ -57,6 +57,13 @@
     isSearchResult = NO;
     isMoreList = YES;
     
+    if(datePicker == nil)
+    {
+        datePicker = [[UIDatePicker alloc] init];
+    }
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    
     if([timelineSection count] == 0)
     {
         [timelineTableView setHidden:YES];
@@ -66,20 +73,15 @@
     {
         [timelineTableView setHidden:NO];
         [listEmptyView setHidden:YES];
+        [timelineTableView reloadData];
     }
     
     [self addPullToRefreshHeader];
     [self addPullToRefreshFooter];
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [timelineTableView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [refreshFooterView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)refreshData
@@ -101,15 +103,22 @@
     {
         [timelineTableView setHidden:NO];
         [listEmptyView setHidden:YES];
+        [timelineTableView reloadData];
     }
     
     [self stopLoading];
     [self stopFooterLoading];
+    [self addPullToRefreshFooter];
     
     [refreshFooterView setHidden:!isMoreList];
     
     isDeleteMode = NO;
     [self deleteViewHide:nil];
+    
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [timelineTableView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 #pragma mark - Pull to Refresh view
@@ -193,23 +202,37 @@
 - (void)addPullToRefreshFooter
 {
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, timelineTableView.frame.size.height - REFRESH_HEADER_HEIGHT, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT/2)];
+    
+    CGFloat originY = timelineTableView.frame.size.height;
+    if(timelineTableView.contentSize.height > timelineTableView.frame.size.height)
+    {
+        originY = timelineTableView.contentSize.height;
+    }
+    
+    if(refreshFooterView == nil)
+    {
+        refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT/2)];
+        [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        
+        refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, refreshFooterView.frame.size.height)];
+        refreshFooterLabel.backgroundColor = [UIColor clearColor];
+        refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
+        [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, 1)];
+        [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        
+        [refreshFooterView addSubview:refreshFooterLabel];
+        [refreshFooterView addSubview:separateLine];
+        [timelineTableView addSubview:refreshFooterView];
+    }
+    else
+    {
+        [refreshFooterView setFrame:CGRectMake(0, originY, timelineTableView.frame.size.width, REFRESH_HEADER_HEIGHT/2)];
+    }
     refreshFooterView.backgroundColor = [loginUtil getNoticeBackgroundColour];
-    [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, refreshFooterView.frame.size.height)];
-    refreshFooterLabel.backgroundColor = [UIColor clearColor];
-    refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
-    refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
-    [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, timelineTableView.frame.size.width, 1)];
-    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
-    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    [refreshFooterView addSubview:refreshFooterLabel];
-    [refreshFooterView addSubview:separateLine];
-    [timelineTableView addSubview:refreshFooterView];
 }
 
 - (void)startFooterLoading
@@ -567,7 +590,7 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [searchView setHidden:NO];
             [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-            [self searchPeriodSelect:periodOneWeekBtn];
+            [self searchPeriodSelect:periodOneMonthBtn];
         }completion:nil];
     }
     else
@@ -683,7 +706,7 @@
         searchStartDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
     }
     
-    [datePickerView setHidden:YES];
+    [self searchDatePickerHide:nil];
 }
 
 // DatePickerView 보여줌

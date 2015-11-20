@@ -76,7 +76,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="R16-lh-n7h"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ny7-Ph-mme">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ny7-Ph-mme">
                             <rect key="frame" x="209" y="115" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_deposit_03_dft.png"/>

@@ -73,7 +73,7 @@
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
     }
     
-    [self getBannerImages];
+    [self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
 }
 
 - (void)getBannerImages

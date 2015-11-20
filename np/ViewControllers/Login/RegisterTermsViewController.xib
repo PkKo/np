@@ -183,7 +183,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="showPersonalTerm:" destination="-1" eventType="touchUpInside" id="IDk-Ja-VYo"/>
-                                                <action selector="showServiceTerm:" destination="-1" eventType="touchUpInside" id="kgJ-xM-Hre"/>
                                             </connections>
                                         </button>
                                     </subviews>

@@ -166,6 +166,8 @@
     [bannerInfoView bannerTimerStart];
     [bannerView setUserInteractionEnabled:YES];
     [scrollView bringSubviewToFront:bannerView];
+    [bannerInfoView.nongminBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg forState:UIControlStateNormal];
+    [bannerInfoView.noticeBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg forState:UIControlStateNormal];
     
     firstCellHeight = HOME_QUICKVIEW_FIRST_CELL_HEIGHT * (pushTableView.frame.size.height / HOME_QUICKVIEW_TABLE_HEIGHT);
     if(firstCellHeight < HOME_QUICKVIEW_FIRST_CELL_HEIGHT)
@@ -552,5 +554,11 @@
 - (IBAction)noticeClick:(id)sender
 {
     [[CustomerCenterUtil sharedInstance] gotoNotice];
+}
+
+- (IBAction)moveMainView:(id)sender
+{
+    // Login
+    [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 }
 @end

@@ -11,4 +11,5 @@
 @interface TimelineBannerView : UIView
 
 @property (strong, nonatomic) IBOutlet UIView *bannerContentView;
+@property (strong, nonatomic) IBOutlet UIImageView *underLine;
 @end

@@ -739,7 +739,7 @@
             NSLog(@"%s", __FUNCTION__);
             scrollPoint = CGPointMake(0, point.y + textFieldRect.size.height - keyboardFrameRect.origin.y);
             [inputView.scrollView setContentSize:CGSizeMake(inputView.scrollView.frame.size.width,
-                                                            inputView.scrollView.contentSize.height + scrollPoint.y)];
+                                                            inputView.scrollView.contentSize.height + scrollPoint.y * 2)];
 //            [inputView.scrollView setContentOffset:scrollPoint animated:YES];
             [inputView.scrollView scrollRectToVisible:CGRectMake(0, scrollPoint.y, inputView.scrollView.frame.size.width, inputView.scrollView.frame.size.height) animated:NO];
             [inputView.scrollView setContentOffset:scrollPoint animated:NO];
@@ -753,7 +753,7 @@
     {
         RegistAccountInputView *inputView = [[contentView subviews] objectAtIndex:0];
         [inputView.scrollView setContentSize:CGSizeMake(inputView.scrollView.frame.size.width,
-                                                        inputView.scrollView.contentSize.height - scrollPoint.y)];
+                                                        inputView.scrollView.contentSize.height - scrollPoint.y * 2)];
         scrollPoint = CGPointZero;
         [inputView.scrollView setContentOffset:scrollPoint animated:YES];
     }

@@ -159,6 +159,13 @@
 
 - (IBAction)nextButtonClick:(id)sender
 {
+    if(!serviceTermClick)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 이용약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+
     // 약관동의 여부 체크
     if(![serviceTermAgreeImg isHighlighted])
     {
@@ -167,10 +174,11 @@
         return;
     }
     
-    if(!serviceTermClick)
+    if(!personalTermClick)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 이용약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
+        return;
     }
     
     if(![personalDataTermAgreeImg isHighlighted])
@@ -178,12 +186,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
-    }
-    
-    if(!personalTermClick)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
     }
     
     if(![pushAgreeImg isHighlighted])
@@ -200,6 +202,7 @@
 
 - (IBAction)closeServiceTermsView:(id)sender
 {
+    [totalTermsWebView loadHTMLString:@"" baseURL:nil];
     [serviceTermsView removeFromSuperview];
 }
 
@@ -211,7 +214,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-//    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s, %@", __FUNCTION__, request.URL.path);
     return YES;
 }
 
