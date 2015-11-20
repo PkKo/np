@@ -196,7 +196,6 @@ typedef enum DateSearch {
 
 - (IBAction)closeSearchView {
     [self.delegate closeSearchView];
-    [self removeFromSuperview];
 }
 
 -(void)updateUI {

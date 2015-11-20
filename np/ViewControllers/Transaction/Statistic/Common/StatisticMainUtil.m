@@ -44,62 +44,70 @@
     }
     return nil;
 }
-
+/*
+- (IBAction)searchViewShow:(id)sender
+{
+    if([searchView isHidden])
+    {
+        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [searchView setHidden:NO];
+            [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
+            [self searchPeriodSelect:periodOneMonthBtn];
+        }completion:nil];
+    }
+    else
+    {
+        [self searchViewHide:nil];
+    }
+}
+*/
 - (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIView *)view atY:(CGFloat)dateSearchViewY {
     
     NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"StatisticDateSearchView" owner:self options:nil];
     StatisticDateSearchView * dateSearchView = (StatisticDateSearchView *)[subviewArray objectAtIndex:0];
     
-    CGRect dateSearchViewFrame = dateSearchView.frame;
-    [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, view.frame.size.width, dateSearchViewFrame.size.height)];
     
-    /*
-    // move other subviews downward
-    for (UIView * subview in [scrollView subviews]) {
-        
-        CGRect subviewFrame = subview.frame;
-        BOOL doNothingWithSubviewsAboveDateSearchView = subviewFrame.origin.y < dateSearchViewY;
-        
-        if (doNothingWithSubviewsAboveDateSearchView) {
-            continue;
-        }
-        
-        subviewFrame.origin.y += dateSearchViewFrame.size.height;
-        [subview setFrame:subviewFrame];
-    }
-    */
-    [view addSubview:dateSearchView];
+    
+    
+    CGRect dateSearchViewFrame = dateSearchView.frame;
+    [dateSearchView setFrame:CGRectMake(0, dateSearchViewY - dateSearchViewFrame.size.height + 20, view.frame.size.width, dateSearchViewFrame.size.height)];
+    [dateSearchView setHidden:YES];
+    
+    NSLog(@"dateSearchViewY - dateSearchViewFrame.size.height + 20: %f", (dateSearchViewY - dateSearchViewFrame.size.height + 20));
+    
+    
+    NSArray * subviews = [view subviews];
+    NSLog(@"[subviews objectAtIndex:0]: %@", [subviews objectAtIndex:1]);
+    UIView * topView = [subviews objectAtIndex:1];
+    
+    
+    //[view addSubview:dateSearchView];
+    [view insertSubview:dateSearchView belowSubview:topView];
+    
+    
     [dateSearchView updateCurrentYearMonth];
     [dateSearchView updateUI];
     
-    //[self setContentSizeOfScrollView:scrollView];
+    
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [dateSearchView setHidden:NO];
+        [dateSearchView setFrame:CGRectMake(0, dateSearchViewY, view.frame.size.width, dateSearchViewFrame.size.height)];
+    }completion:nil];
     
     return dateSearchView;
 }
 
 - (void)hideDateSearchView:(StatisticDateSearchView *)dateSearchView {
-    /*
-    UIScrollView * scrollView   = (UIScrollView *)dateSearchView.superview;
-    CGRect dateSearchViewFrame  = dateSearchView.frame;
     
-    for (UIView * subview in [scrollView subviews]) {
-        
-        CGRect subviewFrame = subview.frame;
-        BOOL doNothingWithSubviewsAboveDateSearchView = subviewFrame.origin.y <= dateSearchViewFrame.origin.y;
-        
-        if (doNothingWithSubviewsAboveDateSearchView) {
-            continue;
-        }
-        
-        subviewFrame.origin.y -= dateSearchViewFrame.size.height;
-        [subview setFrame:subviewFrame];
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [dateSearchView setFrame:CGRectMake(0, dateSearchView.frame.origin.y - dateSearchView.frame.size.height + 20, dateSearchView.frame.size.width, dateSearchView.frame.size.height)];
     }
-    */
-    [dateSearchView removeFromSuperview];
-    
-    //[self setContentSizeOfScrollView:scrollView];
+                     completion:^(BOOL finished){
+                         [dateSearchView removeFromSuperview];
+                     }];
 }
 
+#pragma mark - Date Picker
 - (void)showDatePickerWithMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate
                        initialDate:(NSDate *)initialDate
            inParentViewController:(UIViewController *)parentVC

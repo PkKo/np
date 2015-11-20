@@ -166,7 +166,7 @@
         
         StorageBoxDateSearchView * dateSearch = [dateSearchUtil addStorageDateSearchViewToParent:self.view
                                                                         moveTopViewSeperatorDown:self.topViewSeperator
-                                                                           outsideOfKeyboardView:self.keyboardBgView];
+                                                                           outsideOfKeyboardView:self.toolbarView];
         dateSearch.delegate                 = self;
         dateSearch.memoTextField.delegate   = self;
         
