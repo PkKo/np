@@ -13,7 +13,6 @@
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import "StoryLinkHelper.h"
 #import "StorageBoxUtil.h"
-#import "UIButton+BackgroundColor.h"
 
 @interface SNSViewController () <MFMessageComposeViewControllerDelegate, EKEventEditViewDelegate>
 
@@ -109,7 +108,7 @@
     ScrapInfo *scrapInfo    = [[ScrapInfo alloc] init];
     scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
-    scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
+    scrapInfo.imageURLs     = @[[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]];
     scrapInfo.type = ScrapTypeVideo;
     
     NSString * text = [NSString stringWithFormat:@"[%@]2015/09/17 12:30 111-22-***33 당풍니 입금 100,000원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
@@ -129,7 +128,7 @@
     ScrapInfo *scrapInfo    = [[ScrapInfo alloc] init];
     scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
-    scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];
+    scrapInfo.imageURLs     = @[[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]];
     scrapInfo.type          = ScrapTypeVideo;
     
     NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
@@ -153,7 +152,7 @@
     [controller setInitialText:[NSString stringWithFormat:@"[%@]\n%@",
                                 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
     [controller addImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:
-                                                 [NSURL URLWithString:@"http://www.daumkakao.com/images/operating/temp_mov.jpg"]]]];
+                                                 [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]]];
     
     [self presentViewController:controller animated:YES completion:nil];
 }

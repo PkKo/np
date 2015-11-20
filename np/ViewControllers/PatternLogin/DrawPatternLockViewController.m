@@ -404,6 +404,7 @@
     NSLog(@"response: %@", response);
     
     [self stopIndicator];
+    [self clearDotConnections];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         

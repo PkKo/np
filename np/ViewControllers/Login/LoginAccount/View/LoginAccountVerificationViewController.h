@@ -21,9 +21,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView         * containerView;
 @property (weak, nonatomic) IBOutlet UIScrollView   * containerScrollView;
+@property (weak, nonatomic) IBOutlet UIView                     * keyboardDimmedBg;
+- (IBAction)tapOutsideOfKBToHideKeyboard:(UITapGestureRecognizer *)sender;
 
 - (IBAction)clickToLogin;
 - (IBAction)gotoLoginSettings;
+
+- (IBAction)validateAccountTextEditing:(UITextField *)sender;
+- (IBAction)validateBirthdayTextEditing:(UITextField *)sender;
 
 #pragma mark - Footer
 - (IBAction)gotoNotice;

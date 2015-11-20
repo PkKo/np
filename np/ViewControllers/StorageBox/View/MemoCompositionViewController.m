@@ -9,7 +9,6 @@
 #import "MemoCompositionViewController.h"
 #import "StorageBoxUtil.h"
 #import "DBManager.h"
-#import "UIButton+BackgroundColor.h"
 #import "MainPageViewController.h"
 #import "HomeViewController.h"
 
@@ -112,7 +111,6 @@
 - (void)updateMemo {
     
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeMemo];
-    [self.cancelBtn setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.9] forState:UIControlStateHighlighted];
     
     NSString * memoStr = [[DBManager sharedInstance] findTransactionMemoById:self.transactionObject.transactionId];
     if (memoStr == nil) {
