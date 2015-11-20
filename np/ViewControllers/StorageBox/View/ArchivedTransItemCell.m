@@ -44,6 +44,8 @@
 
 - (IBAction)editMemo {
     [self.editView setHidden:NO];
+    [self.textingIcon setHidden:YES];
+    [self.transacMemo setHidden:YES];
     [self.editTextField setText:self.transacMemo.text];
     [self.editTextField becomeFirstResponder];
     
@@ -53,6 +55,8 @@
     [self.editTextField resignFirstResponder];
     
     [self.editView setHidden:YES];
+    [self.textingIcon setHidden:NO];
+    [self.transacMemo setHidden:NO];
     [self.transacMemo setText:self.editTextField.text];
     
     [self.delegate updateMemo:self.transacMemo.text ofItemSection:self.section row:self.row];
