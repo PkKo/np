@@ -98,6 +98,10 @@
 #define TIMELINE_PIN_MESSAGE_ID @"pinnedServerMessageId"
 // 계좌별칭
 #define ACCOUNT_NICKNAME_DICTIONARY     @"accountNicknameDictionary"
+// 레이어 팝업 seq
+#define LAYER_POPUP_SEQ_ENDDATE         @"layerPopupEndDate"
+#define FIRST_LOGIN_FLAG_FOR_TIMELINE   @"firstTimeline"
+#define FIRST_LOGIN_FLAG_FOR_STORAGE    @"firstStorage"
 
 #pragma mark 입출금 내역 스트링
 #define INCOME_TYPE_STRING             @"입금"

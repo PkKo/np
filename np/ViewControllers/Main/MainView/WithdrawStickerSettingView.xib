@@ -80,6 +80,7 @@
                             <rect key="frame" x="209" y="115" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_03_dft.png"/>
+                            <state key="highlighted" image="icon_withdraw_03_sel.png"/>
                             <connections>
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="aRV-Mk-AUi"/>
                             </connections>
@@ -129,7 +130,7 @@
                                 <action selector="stickerSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="Y91-Fi-EYK"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="208" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8f2-6n-k5L">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8f2-6n-k5L">
                             <rect key="frame" x="209" y="276" width="73" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_withdraw_09_dft.png"/>
@@ -158,6 +159,7 @@
         <image name="icon_withdraw_02_dft.png" width="73" height="64"/>
         <image name="icon_withdraw_02_sel.png" width="73" height="64"/>
         <image name="icon_withdraw_03_dft.png" width="73" height="64"/>
+        <image name="icon_withdraw_03_sel.png" width="73" height="64"/>
         <image name="icon_withdraw_04_dft.png" width="73" height="64"/>
         <image name="icon_withdraw_04_sel.png" width="73" height="64"/>
         <image name="icon_withdraw_05_dft.png" width="73" height="64"/>

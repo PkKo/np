@@ -122,6 +122,10 @@
                                              descView4.frame.origin.y + descView4.frame.size.height + 15,
                                              accountDeleteButton.frame.size.width,
                                              accountDeleteButton.frame.size.height)];
+    
+    [contentView setFrame:CGRectMake(0, 0, scrollView.frame.size.width, accountDeleteButton.frame.origin.y + accountDeleteButton.frame.size.height + 15)];
+    [scrollView setContentSize:contentView.frame.size];
+    [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 - (void)initDataWithAccountNumber:(NSString *)accountNum
@@ -615,10 +619,6 @@
         [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
     }
     
-    [((UIViewController *)delegate).view addSubview:pickerBgView];
-    [((UIViewController *)delegate).view addSubview:amountSelectView];
-    [amountSeletPickerView reloadAllComponents];
-    
     switch (currentPickerView)
     {
         case AMOUNT:
@@ -668,6 +668,9 @@
             break;
     }
     
+    [((UIViewController *)delegate).view addSubview:pickerBgView];
+    [((UIViewController *)delegate).view addSubview:amountSelectView];
+    [amountSeletPickerView reloadAllComponents];
     [amountSeletPickerView selectRow:pickerSelectIndex inComponent:0 animated:YES];
 }
 

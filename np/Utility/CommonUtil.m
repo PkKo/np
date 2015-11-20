@@ -248,6 +248,8 @@
             break;
         }
         case STICKER_DEPOSIT_ETC:
+        case STICKER_DEPOSIT_MODIFY:
+        case STICKER_DEPOSIT_CANCEL:
         {
             stickerImageName = @"icon_sticker_01.png";
             break;
@@ -298,6 +300,8 @@
             break;
         }
         case STICKER_WITHDRAW_ETC:
+        case STICKER_WITHDRAW_MODIFY:
+        case STICKER_WITHDRAW_CANCEL:
         {
             stickerImageName = @"icon_sticker_02.png";
             break;
@@ -350,6 +354,8 @@
             break;
         }
         case STICKER_DEPOSIT_ETC:
+        case STICKER_DEPOSIT_MODIFY:
+        case STICKER_DEPOSIT_CANCEL:
         {
             stickerImageName    = @"icon_deposit_03_dft.png";
             stickerName         = @"기타";
@@ -420,6 +426,8 @@
             break;
         }
         case STICKER_WITHDRAW_ETC:
+        case STICKER_WITHDRAW_MODIFY:
+        case STICKER_WITHDRAW_CANCEL:
         {
             stickerImageName    = @"icon_withdraw_09_dft.png";
             stickerName         = @"기타";
@@ -742,5 +750,16 @@
     NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     
     return status;
+}
+
++ (NSComparisonResult)compareDateString:(NSString *)fromDateString toDate:(NSString *)toDateString
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy.MM.dd"];
+    
+    NSDate *fromDate = [dateFormat dateFromString:fromDateString];
+    NSDate *toDate = [dateFormat dateFromString:toDateString];
+    
+    return [fromDate compare:toDate];
 }
 @end

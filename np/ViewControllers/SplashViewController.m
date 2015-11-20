@@ -55,7 +55,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+//    [self appVersionCheckRequest];
+//    return;
+    //*
     if([CommonUtil getNetworkStatus] == NotReachable)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"네트워크에 연결되지 않았습니다.\n네트워크 상태를 확인해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -65,7 +67,7 @@
     else
     {
         [self appVersionCheckRequest];
-    }
+    }//*/
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
 //    [self htmlRequestTest];
@@ -74,7 +76,8 @@
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
 //    MainPageViewController *vc = [[MainPageViewController alloc] init];
 //    [vc setStartPageIndex:0];
-    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
+//    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
+    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
 
     slidingViewController.topViewController = vc;
     
@@ -170,6 +173,16 @@
             layerPopupInfo.layerSeq         = [response objectForKey:@"layer_seq"];
             layerPopupInfo.editDate         = [response objectForKey:@"edit_date"];
             layerPopupInfo.linkType         = [response objectForKey:@"link_type"];
+            
+            NSMutableDictionary *layerData = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:LAYER_POPUP_SEQ_ENDDATE]];
+            if(layerData != nil)
+            {
+                NSString *viewHideDate = [layerData objectForKey:layerPopupInfo.layerSeq];
+                if(viewHideDate != nil && [CommonUtil compareDateString:viewHideDate toDate:[CommonUtil getTodayDateString]] > NSOrderedSame)
+                {
+                    layerPopupInfo = nil;
+                }
+            }
         }
         
         NSString *updateYN = [response objectForKey:@"updateNotiYn"];
@@ -318,6 +331,17 @@
     if([sender tag] == 1)
     {
         // 해당 레이어 아이디를 가진 것은 일주일간 보이지 않음으로 한다.
+        NSMutableDictionary *layerData = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:LAYER_POPUP_SEQ_ENDDATE]];
+        if(layerData != nil)
+        {
+            [layerData removeAllObjects];
+        }
+        else
+        {
+            layerData = [[NSMutableDictionary alloc] init];
+        }
+        [layerData setObject:[CommonUtil getFormattedDateStringWithIndex:@"yyyy.MM.dd" indexDay:[layerPopupInfo.closedayType integerValue]] forKey:layerPopupInfo.layerSeq];
+        [[NSUserDefaults standardUserDefaults] setObject:layerData forKey:LAYER_POPUP_SEQ_ENDDATE];
     }
     
     [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
@@ -372,7 +396,8 @@
 
 - (void)getBannerImages
 {
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]];
+    UIImage *nongminBannerImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg = nongminBannerImage;
     ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.imagePath]]];
 }
 

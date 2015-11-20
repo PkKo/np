@@ -35,6 +35,7 @@
     [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [[optionView accountDeleteButton] setHidden:isNewAccount];
     [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];
+    [[optionView accountDeleteButton] setEnabled:!isNewAccount];
     [[optionView accountChangeButton] addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
     if(!isNewAccount)
     {
@@ -73,6 +74,11 @@
 {
     // 옵션 값 확인해서 세팅한다.
     [self accountOptionSetReqeust];
+}
+
+- (IBAction)optionSettingCancel:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 계좌옵션 조회

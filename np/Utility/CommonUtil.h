@@ -28,8 +28,12 @@ typedef enum StickerType
     STICKER_WITHDRAW_SAVING,
     STICKER_WITHDRAW_ETC,
     
-    STICKER_EXCHANGE_RATE       = 3,
-    STICKER_NOTICE_NORMAL       = 4
+    STICKER_DEPOSIT_MODIFY      = 3,
+    STICKER_DEPOSIT_CANCEL,
+    STICKER_WITHDRAW_MODIFY,
+    STICKER_WITHDRAW_CANCEL,
+    STICKER_EXCHANGE_RATE,
+    STICKER_NOTICE_NORMAL
 } StickerType;
 
 @interface CommonUtil : NSObject
@@ -63,4 +67,5 @@ typedef enum StickerType
 + (void)setUnreadCountForEtc:(NSInteger)count;
 + (NSInteger)getUnreadCountForEtc;
 + (NetworkStatus)getNetworkStatus;
++ (NSComparisonResult)compareDateString:(NSString *)fromDateString toDate:(NSString *)toDateString;
 @end

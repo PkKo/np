@@ -80,6 +80,13 @@
     }
     deleteIdList = [[NSMutableArray alloc] init];
     
+    if(datePicker == nil)
+    {
+        datePicker = [[UIDatePicker alloc] init];
+    }
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    
     [self refreshBadges];
     
     allAccountList = [NSMutableArray arrayWithArray:[[[LoginUtil alloc] init] getAllAccounts]];
@@ -100,10 +107,14 @@
     {
         [bankingListTable setHidden:NO];
         [listEmptyView setHidden:YES];
+        [bankingListTable reloadData];
     }
     
     [self addPullToRefreshHeader];
     [self addPullToRefreshFooter];
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [bankingListTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 - (void)refreshData
@@ -129,6 +140,7 @@
     {
         [bankingListTable setHidden:NO];
         [listEmptyView setHidden:YES];
+        [bankingListTable reloadData];
     }
     
     if(!listSortType)
@@ -146,6 +158,11 @@
     }
     [self stopLoading];
     [self stopFooterLoading];
+    
+    LoginUtil *loginUtil = [[LoginUtil alloc] init];
+    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [bankingListTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     
     [refreshFooterView setHidden:!isMoreList];
     
@@ -177,16 +194,6 @@
         [storageCountLabel setHidden:NO];
         [storageCountLabel setText:@"99+"];
     }
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-    LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [bankingListTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    [refreshFooterView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 }
 
 #pragma mark - UIButton Action
@@ -338,23 +345,36 @@
 - (void)addPullToRefreshFooter
 {
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, bankingListTable.frame.size.height, bankingListTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+    CGFloat originY = bankingListTable.frame.size.height;
+    if(bankingListTable.contentSize.height > bankingListTable.frame.size.height)
+    {
+        originY = bankingListTable.contentSize.height;
+    }
+    
+    if(refreshFooterView == nil)
+    {
+        refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, bankingListTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+        [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        
+        refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bankingListTable.frame.size.width, refreshFooterView.frame.size.height)];
+        refreshFooterLabel.backgroundColor = [UIColor clearColor];
+        refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+        refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
+        [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bankingListTable.frame.size.width, 1)];
+        [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        
+        [refreshFooterView addSubview:refreshFooterLabel];
+        [refreshFooterView addSubview:separateLine];
+        [bankingListTable addSubview:refreshFooterView];
+    }
+    else
+    {
+        [refreshFooterView setFrame:CGRectMake(0, originY, bankingListTable.frame.size.width, REFRESH_HEADER_HEIGHT / 2)];
+    }
     refreshFooterView.backgroundColor = [loginUtil getNoticeBackgroundColour];
-    [refreshFooterView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    refreshFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bankingListTable.frame.size.width, refreshFooterView.frame.size.height)];
-    refreshFooterLabel.backgroundColor = [UIColor clearColor];
-    refreshFooterLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [refreshFooterLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
-    refreshFooterLabel.textAlignment = NSTextAlignmentCenter;
-    [refreshFooterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    UIView *separateLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bankingListTable.frame.size.width, 1)];
-    [separateLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
-    [separateLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    
-    [refreshFooterView addSubview:refreshFooterLabel];
-    [refreshFooterView addSubview:separateLine];
-    [bankingListTable addSubview:refreshFooterView];
 }
 
 - (void)startFooterLoading
@@ -414,7 +434,7 @@
         [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [searchView setHidden:NO];
             [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-            [self searchPeriodSelect:periodOneWeekBtn];
+            [self searchPeriodSelect:periodOneMonthBtn];
         }completion:nil];
     }
     else
@@ -553,7 +573,7 @@
         searchStartDate = [selectedDateString stringByReplacingOccurrencesOfString:@"." withString:@""];
     }
     
-    [datePickerView setHidden:YES];
+    [self searchDatePickerHide:nil];
 }
 
 // DatePickerView 보여줌

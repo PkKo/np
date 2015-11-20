@@ -40,6 +40,11 @@
     }
     
     [self.view bringSubviewToFront:loadingIndicatorBg];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     [self sessionRefreshRequest];
 }

@@ -290,8 +290,33 @@
     }
     else
     {
-        // Login
-        [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+        switch (indexPath.row)
+        {
+            case 7: // 공인인증센터
+            {
+                pushViewController = [[CertificateMenuViewController alloc] initWithNibName:@"CertificateMenuViewController" bundle:nil];
+                [self closeMenu:nil];
+                ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
+                [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
+                [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+                break;
+            }
+            case 8: // NH APPZONE
+            {
+                pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
+                [self closeMenu:nil];
+                ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
+                [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
+                [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
+                break;
+            }
+            default:
+            {
+                // Login
+                [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+                break;
+            }
+        }
     }
 }
 
