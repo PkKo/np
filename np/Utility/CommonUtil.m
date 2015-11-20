@@ -312,12 +312,16 @@
             break;
         }
         case STICKER_NOTICE_NORMAL:
+        case STICKER_ETC:
         {
             stickerImageName = @"icon_sticker_04.png";
             break;
         }
         default:
+        {
+            stickerImageName = @"icon_sticker_04.png";
             break;
+        }
     }
     
     UIImage *stickerImage = [UIImage imageNamed:stickerImageName];

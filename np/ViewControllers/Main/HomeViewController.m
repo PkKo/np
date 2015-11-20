@@ -281,7 +281,7 @@
         }
         case OTHER:
         {
-            reqData.queryType = @"E";
+            reqData.queryType = @"3,4,5,6,A,B,Z";
             break;
         }
         default:
@@ -529,10 +529,20 @@
             
             for(NHInboxMessageData *inboxData in messageList)
             {
-                if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
                 {
-                    inboxData.inboxType = @"4";
-                    inboxData.stickerCode = 4;
+                    if([inboxData.inboxType isEqualToString:@"A"])
+                    {
+                        inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                    }
+                    else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                    {
+                        inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                    }
+                    else
+                    {
+                        inboxData.stickerCode = STICKER_ETC;
+                    }
                 }
                 
                 NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
@@ -641,10 +651,20 @@
                 // 신규 목록
                 for(NHInboxMessageData *inboxData in messageList)
                 {
-                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
                     {
-                        inboxData.inboxType = @"4";
-                        inboxData.stickerCode = 4;
+                        if([inboxData.inboxType isEqualToString:@"A"])
+                        {
+                            inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                        }
+                        else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                        {
+                            inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                        }
+                        else
+                        {
+                            inboxData.stickerCode = STICKER_ETC;
+                        }
                     }
                     
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
@@ -678,10 +698,20 @@
                 
                 for(NHInboxMessageData *inboxData in messageList)
                 {
-                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
+                    if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
                     {
-                        inboxData.inboxType = @"4";
-                        inboxData.stickerCode = 4;
+                        if([inboxData.inboxType isEqualToString:@"A"])
+                        {
+                            inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                        }
+                        else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                        {
+                            inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                        }
+                        else
+                        {
+                            inboxData.stickerCode = STICKER_ETC;
+                        }
                     }
                     
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];

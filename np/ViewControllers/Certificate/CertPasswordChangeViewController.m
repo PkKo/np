@@ -29,10 +29,10 @@
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
     [self.mNaviView.mMenuButton setHidden:YES];
     
-    if(certInfo != nil)
-    {
-        [[CertManager sharedInstance] setCertInfo:certInfo];
-    }
+//    if(certInfo != nil)
+//    {
+//        [[CertManager sharedInstance] setCertInfo:certInfo];
+//    }
 }
 
 - (void)didReceiveMemoryWarning

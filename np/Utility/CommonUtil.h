@@ -32,10 +32,13 @@ typedef enum StickerType
     STICKER_DEPOSIT_CANCEL,
     STICKER_WITHDRAW_MODIFY,
     STICKER_WITHDRAW_CANCEL,
-    STICKER_EXCHANGE_RATE,
-    STICKER_NOTICE_NORMAL
+    STICKER_EXCHANGE_RATE       = 300,
+    STICKER_NOTICE_NORMAL,
+    STICKER_ETC
 } StickerType;
 
+// 환율 300
+// 기타 301
 @interface CommonUtil : NSObject
 
 + (NSString *)getAppVersion;
