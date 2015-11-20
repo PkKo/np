@@ -638,6 +638,14 @@
 
 - (IBAction)showInboxTypePickerShow:(id)sender
 {
+    if(pickerBgView == nil)
+    {
+        CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.bounds;
+        pickerBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - searchTypePickerView.frame.size.height)];
+        [pickerBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    }
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:pickerBgView];
+    
     inboxTypePickerMode = [sender tag];
     [searchTypePickerView setHidden:NO];
     [searchTypePicker reloadAllComponents];
@@ -667,6 +675,7 @@
 
 - (IBAction)inboxTypePickerHide:(id)sender
 {
+    [pickerBgView removeFromSuperview];
     [searchTypePickerView setHidden:YES];
 }
 

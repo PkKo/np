@@ -28,11 +28,6 @@
 
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
     [self.mNaviView.mMenuButton setHidden:YES];
-    
-//    if(certInfo != nil)
-//    {
-//        [[CertManager sharedInstance] setCertInfo:certInfo];
-//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,20 +54,25 @@
         return;
     }
     
-    int rc = 0;
-    
-    rc = [[CertManager sharedInstance] changePassword:newPassword currentPassword:currentPassword];
-    
-    if (rc != 0)
+    if(certInfo != nil)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert show];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 변경되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alert setTag:999];
-        [alert show];
+        [[CertManager sharedInstance] setCertInfo:certInfo];
+        
+        int rc = 0;
+        
+        rc = [[CertManager sharedInstance] changePassword:newPassword currentPassword:currentPassword];
+        
+        if (rc != 0)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 변경되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alert setTag:999];
+            [alert show];
+        }
     }
 }
 

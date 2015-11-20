@@ -120,11 +120,11 @@
                     </connections>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" id="Zg2-w5-Rxk">
-                    <rect key="frame" x="0.0" y="353" width="320" height="215"/>
+                    <rect key="frame" x="0.0" y="319" width="320" height="249"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
                         <pickerView contentMode="scaleToFill" id="6l7-K9-rhF">
-                            <rect key="frame" x="0.0" y="52" width="320" height="163"/>
+                            <rect key="frame" x="0.0" y="48" width="320" height="201"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

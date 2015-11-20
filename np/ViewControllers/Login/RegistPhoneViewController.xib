@@ -217,11 +217,11 @@
                     </connections>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" id="j41-u7-eTg">
-                    <rect key="frame" x="0.0" y="353" width="320" height="215"/>
+                    <rect key="frame" x="0.0" y="319" width="320" height="249"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
                         <pickerView contentMode="scaleToFill" id="OIN-HU-EjW">
-                            <rect key="frame" x="0.0" y="52" width="320" height="163"/>
+                            <rect key="frame" x="0.0" y="48" width="320" height="201"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -233,7 +233,7 @@
                             <rect key="frame" x="160" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                             <color key="backgroundColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="확인"/>
                             <connections>
                                 <action selector="pickerSelectConfirm:" destination="-1" eventType="touchUpInside" id="gcd-xf-r9s"/>
@@ -243,7 +243,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.81568627449999997" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="취소"/>
                             <connections>
                                 <action selector="pickerViewHide:" destination="-1" eventType="touchUpInside" id="XlZ-qR-OxZ"/>
