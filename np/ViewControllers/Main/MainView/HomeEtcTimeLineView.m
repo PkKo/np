@@ -382,7 +382,7 @@
      NSString * oppositeUser;
      int32_t stickerCode;*/
     
-    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    if([inboxData.inboxType isEqualToString:@"A"])
     {
         [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -394,15 +394,38 @@
         [cell.contentLabel sizeToFit];
 
     }
-    else
+    else if([inboxData.inboxType isEqualToString:@"B"])
     {
         [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
-        [cell.depthImage setHidden:NO];
+        [cell.depthImage setHidden:YES];
+        // 타이틀
+        [cell.titleLabel setText:@"e금융인증번호"];
+        // 내용
+        [cell.contentLabel setText:inboxData.text];
+        [cell.contentLabel setNumberOfLines:1];
+        [cell.contentLabel sizeToFit];
+    }
+    else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
+    {
+        [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
+        [cell.depthImage setHidden:YES];
         // 타이틀
         [cell.titleLabel setText:@"공지사항"];
         // 내용
         [cell.contentLabel setText:inboxData.text];
+        [cell.contentLabel setNumberOfLines:1];
+        [cell.contentLabel sizeToFit];
+    }
+    else
+    {
+        [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.depthImage setHidden:YES];
+        // 타이틀
+        [cell.titleLabel setText:inboxData.title];
+        // 내용
+        [cell.contentLabel setText:inboxData.text];
+        [cell.contentLabel sizeToFit];
     }
     
     // 스티커 버튼
@@ -909,19 +932,19 @@
     
     if([selection isEqualToString:SERVICE_TYPE_ALL])
     {
-        reqData.queryType = @"E";
+        reqData.queryType = @"3,4,5,6,A,B,Z";
     }
     else if([selection isEqualToString:SERVICE_TYPE_ECOMMERCE])
     {
-        reqData.queryType = @"5";
+        reqData.queryType = @"B";
     }
     else if([selection isEqualToString:SERVICE_TYPE_EXCHANGE])
     {
-        reqData.queryType = @"3";
+        reqData.queryType = @"A";
     }
     else if([selection isEqualToString:SERVICE_TYPE_ETC])
     {
-        reqData.queryType = @"4";
+        reqData.queryType = @"3,4,5,6,Z";
     }
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])

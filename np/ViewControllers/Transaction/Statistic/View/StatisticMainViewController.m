@@ -391,7 +391,10 @@
         
         StickerSummaryData * chartData = (StickerSummaryData *)[summaryList objectAtIndex:itemIdx];
         
-        if(chartData.stickerCode == STICKER_EXCHANGE_RATE || chartData.stickerCode == STICKER_NOTICE_NORMAL)
+        if(chartData.stickerCode == STICKER_EXCHANGE_RATE ||
+           chartData.stickerCode == STICKER_NOTICE_NORMAL ||
+           chartData.stickerCode == STICKER_ETC ||
+           (chartData.stickerCode >= STICKER_DEPOSIT_MODIFY && chartData.stickerCode < STICKER_DEPOSIT_SALARY))
         {
             continue;
         }

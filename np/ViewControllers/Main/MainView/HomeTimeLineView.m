@@ -1181,7 +1181,7 @@
             // 푸시 시간
             [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
             
-            if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+            if([inboxData.inboxType isEqualToString:@"A"])
             {
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
                 [cell.depthImage setHidden:YES];
@@ -1192,7 +1192,18 @@
                 [cell.contentLabel sizeToFit];
                 
             }
-            else
+            else if([inboxData.inboxType isEqualToString:@"B"])
+            {
+                [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
+                [cell.depthImage setHidden:YES];
+                // 타이틀
+                [cell.titleLabel setText:@"e금융인증번호"];
+                // 내용
+                [cell.contentLabel setText:inboxData.text];
+                [cell.contentLabel setNumberOfLines:1];
+                [cell.contentLabel sizeToFit];
+            }
+            else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
             {
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
                 [cell.depthImage setHidden:YES];
@@ -1200,6 +1211,18 @@
                 [cell.titleLabel setText:@"공지사항"];
                 // 내용
                 [cell.contentLabel setText:inboxData.text];
+                [cell.contentLabel setNumberOfLines:1];
+                [cell.contentLabel sizeToFit];
+            }
+            else
+            {
+                [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_HEIGHT)];
+                [cell.depthImage setHidden:YES];
+                // 타이틀
+                [cell.titleLabel setText:inboxData.title];
+                // 내용
+                [cell.contentLabel setText:inboxData.text];
+                [cell.contentLabel sizeToFit];
             }
             /*
             // 공지 타이틀
@@ -1237,12 +1260,9 @@
                 {
                     [bannerView.underLine setHidden:YES];
                 }
+                
+                [cell.contentLabel sizeToFit];
             }
-            /*
-            if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
-            {
-                [cell.upperLine setHidden:YES];
-            }*/
             
             return cell;
         }
@@ -1468,6 +1488,12 @@
         case STICKER_WITHDRAW_CANCEL:
         {
             return TIMELINE_BANKING_HEIGHT;
+            break;
+        }
+        case STICKER_EXCHANGE_RATE:
+        case STICKER_ETC:
+        {
+            return TIMELINE_ETC_HEIGHT;
             break;
         }
         case STICKER_NOTICE_NORMAL:
