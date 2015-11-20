@@ -32,7 +32,7 @@
     
     if (!self.deleteBtn.isHidden) {
         
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"삭제 상태에서 공정핀 해제할 수 없습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"삭제 상태에서 고정핀 해제할 수 없습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
         
     } else {

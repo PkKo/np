@@ -16,7 +16,9 @@
 #import "CustomerCenterUtil.h"
 #import "ServiceDeactivationController.h"
 
-@interface LoginAccountVerificationViewController ()
+@interface LoginAccountVerificationViewController () {
+    UITextField * _edittingTextField;
+}
 
 @end
 
@@ -27,6 +29,8 @@
     
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
+    
+    _edittingTextField = nil;
     [self updateUI];
 }
 
@@ -41,52 +45,44 @@
 }
 
 #pragma mark - Keyboard
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    [textField resignFirstResponder];
-    
-    int textLength;
-    SEL confirmAction;
-    NSString * title;
-    
-    if (textField == self.accountTextField) {
-        
-        textLength      = 15;
-        confirmAction   = @selector(confirmAccountNo:);
-        title           = @"계좌번호 입력";
-        
-    } else if (textField == self.passwordTextField) {
-        
-        textLength      = 4;
-        confirmAction   = @selector(confirmPassword:);
-        title           = @"계좌비밀번호 입력";
-        
-    } else if (textField == self.birthdayTextField) {
-        
-        textLength      = 6;
-        confirmAction   = @selector(confirmBirthday:);
-        title           = @"생년월일 입력";
+- (IBAction)validateAccountTextEditing:(UITextField *)sender {
+    [self checkMaxTextInputLength:15 ofTextField:sender];
+}
+
+- (IBAction)validateBirthdayTextEditing:(UITextField *)sender {
+    [self checkMaxTextInputLength:6 ofTextField:sender];
+}
+
+- (void)checkMaxTextInputLength:(int)maxLength ofTextField:(UITextField *)sender {
+    if ([[sender text] length] > maxLength) {
+        [sender setText:[[sender text] substringToIndex:maxLength]];
     }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     [textField setText:@""];
     
-    LoginUtil * util = [[LoginUtil alloc] init];
+    if (textField == self.passwordTextField) {
+        
+        [textField resignFirstResponder];
+        
+        SEL confirmAction   = @selector(confirmPassword:);
+        
+        LoginUtil * util = [[LoginUtil alloc] init];
+        [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:@"계좌비밀번호 입력"
+                            textLength:4
+                            doneAction:confirmAction methodOnPress:confirmAction];
+        return;
+    }
     
-    [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:title
-                        textLength:textLength
-                        doneAction:confirmAction methodOnPress:confirmAction];
+    _edittingTextField = textField;
+    [self.keyboardDimmedBg setHidden:NO];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     textField.text = @"";
     return NO;
-}
-
-- (void)confirmAccountNo:(NSString *)accountNo {
-    
-    EccEncryptor * ec = [EccEncryptor sharedInstance];
-    NSString * plainText = [ec makeDecNoPadWithSeedkey:accountNo];
-    self.accountTextField.text = plainText;
 }
 
 - (void)confirmPassword:(NSString *)pw {
@@ -96,13 +92,13 @@
     self.passwordTextField.text = plainText;
 }
 
-- (void)confirmBirthday:(NSString *)birthday {
-    
-    EccEncryptor *ec = [EccEncryptor sharedInstance];
-    NSString *plainText = [ec makeDecNoPadWithSeedkey:birthday];
-    self.birthdayTextField.text = plainText;
+- (IBAction)tapOutsideOfKBToHideKeyboard:(UITapGestureRecognizer *)sender {
+    if (_edittingTextField) {
+        [_edittingTextField resignFirstResponder];
+        [self.keyboardDimmedBg setHidden:YES];
+        _edittingTextField = nil;
+    }
 }
-
 
 - (IBAction)clickToLogin {
     

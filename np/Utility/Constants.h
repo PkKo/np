@@ -61,6 +61,7 @@
 #define IS_IPHONE_6P        (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
 #define NONGMIN_BANNER_IMAGE_URL        @"content/images/front/common/nongmin_banner.jpg"
+#define SNS_SHARE_IMAGE_URL             @"content/images/front/common/logo_ios144px.png"
 
 #define STRING_DASH     @"-"
 #define STRING_MASKING  @"****"
