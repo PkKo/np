@@ -42,7 +42,7 @@
         
         if (![view isKindOfClass:[UILabel class]]) {
             
-            NSString * viewBgColorStr   = [StatisticMainUtil hexStringFromColor:[view backgroundColor]];
+            NSString * viewBgColorStr   = [StatisticMainUtil hexStringFromColor:[view tintColor]];
             NSString * savedBgColorStr  = [StatisticMainUtil hexStringFromColor:savedBgColor];
             
             if ([viewBgColorStr isEqualToString:savedBgColorStr]) {

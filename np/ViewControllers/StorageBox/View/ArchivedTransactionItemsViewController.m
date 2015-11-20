@@ -252,6 +252,7 @@
     
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     _isSearch = YES;
+    [[[StorageBoxUtil alloc] init] removeStorageDateSearchViewFromParentView:self.view];
     
     [self performSelector:@selector(searchTransByCriteria:) withObject:@[fromDate, toDate, account, transType, memo] afterDelay:0.06];
 }

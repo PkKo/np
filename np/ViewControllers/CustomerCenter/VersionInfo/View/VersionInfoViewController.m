@@ -40,6 +40,7 @@
     
     NSString * updateVersionBtnTitle    = @"현재 최신 버전입니다.";
     BOOL       shouldUpdate             = NO;
+    UIColor  * bgColour                 = [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1];
     
     _currentVersion                     = [CommonUtil getAppVersion];
     _latestVersion                      = [[[LoginUtil alloc] init] getLatestAppVersion];
@@ -51,10 +52,12 @@
     if (compareResult == NSOrderedAscending) {
         updateVersionBtnTitle   = @"최신 버전으로 업데이트 하시겠습니까?";
         shouldUpdate            = YES;
+        bgColour                = [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:251.0f/255.0f alpha:1];
     }
     
     [self.checkAppVersionBtn setTitle:updateVersionBtnTitle forState:UIControlStateNormal];
     [self.checkAppVersionBtn setEnabled:shouldUpdate];
+    [self.checkAppVersionBtn setBackgroundColor:bgColour];
 }
 
 - (IBAction)checkAppVersion:(id)sender {

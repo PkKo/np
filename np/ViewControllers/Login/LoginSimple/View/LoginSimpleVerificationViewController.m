@@ -136,6 +136,9 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    [self toggleBtnBgColor:NO textLength:0];
+    
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
             [self gotoSimpleLoginSettings];

@@ -42,7 +42,7 @@
     if (self.isSelfIdentified) {
         
         [self.mNaviView.mBackButton setHidden:YES];
-        [self.mNaviView.mTitleLabel setText:@"본인설정"];
+        [self.mNaviView.mTitleLabel setText:@"본인인증"];
         
     } else {
         [self.mNaviView.mBackButton setHidden:YES];
