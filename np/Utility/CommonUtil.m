@@ -331,7 +331,7 @@
         case STICKER_DEPOSIT_NORMAL:
         {
             stickerImageName    = @"icon_sticker_01.png";
-            stickerName         = @"입금기타";
+            stickerName         = @"기타";
             stickerColorHexStr  = @"#3E9BE9";
             break;
         }
@@ -359,7 +359,7 @@
         case STICKER_WITHDRAW_NORMAL:
         {
             stickerImageName    = @"icon_sticker_02.png";
-            stickerName         = @"지출기타";
+            stickerName         = @"기타";
             stickerColorHexStr  = @"#F4607C";
             break;
         }

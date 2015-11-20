@@ -74,7 +74,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="2015/09/17 12:30 111-22-***33 당풍니 입금 100,000원" textAlignment="center" selectable="NO" id="goe-23-NDR">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="2015/09/17 12:30 111-22-***33 당풍니 입금 100,000원" textAlignment="center" selectable="NO" id="goe-23-NDR">
                             <rect key="frame" x="51" y="111" width="181" height="69"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

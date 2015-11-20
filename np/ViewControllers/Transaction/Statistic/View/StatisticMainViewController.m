@@ -120,6 +120,7 @@
 
 #pragma mark - refresh
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
+    [self clickSearchButton];
     [self updateSelectedDates:fromDate toDate:toDate];
     [self getChartData];
 }
@@ -154,9 +155,6 @@
         [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
                                                  options:NSCaseInsensitiveSearch
                                                    range:NSMakeRange(0, accountNoWithoutDash.length)];
-        
-        NSLog(@"accountNo: %@ - accountNoWithoutDash: %@", accountNo, accountNoWithoutDash);
-        
         return @[accountNoWithoutDash];
     }
     

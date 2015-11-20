@@ -47,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIView         * editView;
 @property (weak, nonatomic) IBOutlet UITextField    * fakeEditTextField;
 @property (weak, nonatomic) IBOutlet UITextField    * editTextField;
+@property (weak, nonatomic) IBOutlet UIImageView    * textingIcon;
 
 - (IBAction)togglePinup;
 - (IBAction)saveNewMemo;
