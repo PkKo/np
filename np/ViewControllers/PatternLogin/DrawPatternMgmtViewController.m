@@ -276,7 +276,7 @@ typedef enum SetupStatus {
             
         } else if (_setupStatus == SETUP_PW) {
             
-            if ([_pw isEqualToString:savedPassword]) {
+            if ([password isEqualToString:savedPassword]) {
                 alertMessage = @"현재 패턴과 동일한 패턴 입니다.";
             } else {
                 _pw = password;
