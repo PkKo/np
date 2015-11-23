@@ -700,7 +700,7 @@
     }*/
     
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+//    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
@@ -927,7 +927,7 @@
 - (void)selectServiceCode:(NSString *)selection
 {
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+//    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = YES;
     
     if([selection isEqualToString:SERVICE_TYPE_ALL])
@@ -944,7 +944,7 @@
     }
     else if([selection isEqualToString:SERVICE_TYPE_ETC])
     {
-        reqData.queryType = @"Z";
+        reqData.queryType = @"3,4,5,6,Z";
     }
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])

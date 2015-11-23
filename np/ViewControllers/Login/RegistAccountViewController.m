@@ -74,6 +74,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if(self.isSelfIdentified)
+    {
+        [contentView setContentInset:UIEdgeInsetsZero];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -339,30 +344,40 @@
         NSString *strTbs = @"abc"; //서명할 원문
         [[CertManager sharedInstance] setTbs:strTbs];
         // 전자서명 API 호출
-//        NSString *sig = [[[CertManager sharedInstance] getSignature] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        NSString *sig = [[CertManager sharedInstance] getSignature];
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_CERT];
-        
-        NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
-        [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
-        [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
-        [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
-//        [requestBody setObject:@"Y" forKey:@"dummyYn"];
-        /*
-        NSString *tbs = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_TBS_DATA", strTbs];
-        NSString *sigStr = [NSString stringWithFormat:@"%@=%@", @"SSLSIGN_SIGNATURE", sig];
-        NSString *loginType = [NSString stringWithFormat:@"%@=%@", @"REQ_LOGINTYPE", @"1"];
-        NSString *bodyString = [NSString stringWithFormat:@"%@&%@&%@", tbs, sigStr, loginType];
-         */
-        
-        NSString *bodyString = [CommonUtil getBodyString:requestBody];
-        
-        HttpRequest *req = [HttpRequest getInstance];
-        [req setDelegate:self selector:@selector(certInfoResponse:)];
-//        [req requestUrl:url bodyObject:requestBody];
-        [req requestUrl:url bodyString:bodyString];
+        if (self.isSelfIdentified)
+        {
+            NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT];
+            
+            NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+            [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
+            [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
+            [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
+            [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
+            [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+            
+            NSString *bodyString = [CommonUtil getBodyString:requestBody];
+            
+            HttpRequest *req = [HttpRequest getInstance];
+            [req setDelegate:self selector:@selector(certInfoResponse:)];
+            [req requestUrl:url bodyString:bodyString];
+        }
+        else
+        {
+            NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_CERT];
+            
+            NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
+            [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
+            [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
+            [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
+            
+            NSString *bodyString = [CommonUtil getBodyString:requestBody];
+            
+            HttpRequest *req = [HttpRequest getInstance];
+            [req setDelegate:self selector:@selector(certInfoResponse:)];
+            [req requestUrl:url bodyString:bodyString];
+        }
     }
     else
     {
@@ -375,29 +390,8 @@
 {
     [self stopIndicator];
     
-//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-//    NSLog(@"%@", cookies);
-    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        // 공인인증서로 인증한걸로 저장한다.
-        [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
-        if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
-        {
-            NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
-            [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
-        }
-        NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
-//        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
-//        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
-        NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
-        NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
-        [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
-        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
-        // 인증 성공한 이후 휴대폰 인증으로 이동
-        
         if (self.isSelfIdentified) {
             LoginUtil * util = [[LoginUtil alloc] init];
             if (self.loginMethod == LOGIN_BY_PATTERN) {
@@ -406,7 +400,27 @@
                 [util removeSimplePassword];
             }
             [self.navigationController popViewControllerAnimated:YES];
-        } else {
+        }
+        else
+        {
+            // 공인인증서로 인증한걸로 저장한다.
+            [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
+            if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
+            {
+                NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
+                [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
+            }
+            NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
+            //        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
+            //        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
+            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+            NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
+            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
+            
+            // 인증 성공한 이후 휴대폰 인증으로 이동
             RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -419,65 +433,40 @@
     }
 }
 
-- (void)certMakeSessionRequest
-{
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    NSHTTPCookie *reqCookie = nil;
-    for(NSHTTPCookie *cookie in cookies)
-    {
-        if([cookie.name isEqualToString:@"MCPU_SSID"])
-        {
-            reqCookie = cookie;
-            break;
-        }
-    }
-    
-    if(reqCookie != nil)
-    {
-        HttpRequest *httpReq = [HttpRequest getInstance];
-        
-        [httpReq setDelegate:self selector:@selector(certMakeSessionResponse:)];
-        
-//        NSString *reqBody = [NSString stringWithFormat:@"%@=%@", reqCookie.name, reqCookie.value];
-        NSString *strTbs = @"abc";
-        NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
-        
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, @"PMCNA100R.cmd"];
-        
-        NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
-        [requestBody setObject:strTbs forKey:@"SSLSIGN_TBS_DATA"];
-        [requestBody setObject:sig forKey:@"SSLSIGN_SIGNATURE"];
-        [requestBody setObject:@"1" forKey:@"REQ_LOGINTYPE"];
-        [requestBody setObject:reqCookie.value forKey:reqCookie.name];
-        [httpReq requestUrl:url bodyObject:requestBody];
-    }
-}
-
-- (void)certMakeSessionResponse:(NSDictionary *)response
-{
-    NSLog(@"%s, response = %@", __FUNCTION__, response);
-}
-
 #pragma mark - 계좌인증 확인
 - (void)checkRegistAccountRequest:(NSDictionary *)accountInfo
 {
     [self startIndicator];
     
-    tempAccountNum = [accountInfo objectForKey:REQUEST_ACCOUNT_NUMBER];
+    inputAccountInfo = [NSMutableDictionary dictionaryWithDictionary:accountInfo];
+    tempAccountNum = [inputAccountInfo objectForKey:REQUEST_ACCOUNT_NUMBER];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_NUMBER] forKey:REQUEST_ACCOUNT_NUMBER];
-    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_PASSWORD] forKey:REQUEST_ACCOUNT_PASSWORD];
-    [reqBody setObject:[accountInfo objectForKey:REQUEST_ACCOUNT_BIRTHDAY] forKey:REQUEST_ACCOUNT_BIRTHDAY];
+    [reqBody setObject:[inputAccountInfo objectForKey:REQUEST_ACCOUNT_NUMBER] forKey:REQUEST_ACCOUNT_NUMBER];
+    [reqBody setObject:[inputAccountInfo objectForKey:REQUEST_ACCOUNT_PASSWORD] forKey:REQUEST_ACCOUNT_PASSWORD];
+    [reqBody setObject:[inputAccountInfo objectForKey:REQUEST_ACCOUNT_BIRTHDAY] forKey:REQUEST_ACCOUNT_BIRTHDAY];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
-    
-    // Request Start
-    HttpRequest *req = [HttpRequest getInstance];
-    [req setDelegate:self selector:@selector(checkRegistAccountResponse:)];
-    [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
-    
-//    [self performSelector:@selector(checkRegistAccountResponse:) withObject:nil afterDelay:1];
+    if(self.isSelfIdentified)
+    {
+        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
+        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
+        
+        // Request Start
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(checkRegistAccountResponse:)];
+        [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+    }
+    else
+    {
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
+        
+        // Request Start
+        HttpRequest *req = [HttpRequest getInstance];
+        [req setDelegate:self selector:@selector(checkRegistAccountResponse:)];
+        [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
+    }
 }
 
 - (void)checkRegistAccountResponse:(NSDictionary *)response
@@ -493,17 +482,19 @@
 #else
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        // 계좌번호로 인증한걸로 저장한다.
-        [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
         NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
         NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
         NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
-        [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
-        [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
-        [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
-        [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
         
-        if (self.isSelfIdentified) {
+        if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        
+        if (self.isSelfIdentified)
+        {
             LoginUtil * util = [[LoginUtil alloc] init];
             if (self.loginMethod == LOGIN_BY_PATTERN) {
                 [util removePatternPassword];
@@ -511,7 +502,17 @@
                 [util removeSimplePassword];
             }
             [self.navigationController popViewControllerAnimated:YES];
-        } else {
+        }
+        else
+        {
+            // 계좌번호로 인증한걸로 저장한다.
+            [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
+            [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
+            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
+            
             // 인증 성공한 이후 휴대폰 인증으로 이동
             RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];

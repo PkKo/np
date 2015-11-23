@@ -147,6 +147,13 @@
         return;
     }
     
+    if([[phoneNumberInput text] length] < 7)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 정확히 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     // 인증번호 입력 체크
     if([[phoneAuthNumInput text] length] == 0)
     {
@@ -238,7 +245,7 @@
     [self stopIndicator];
     
     // Connection Success
-    if([[response objectForKey:RESULT] isEqualToString:@"0"])
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
         // 인증번호 입력 대기 및 카운터 스타트
         [self authNumberTimerStart];

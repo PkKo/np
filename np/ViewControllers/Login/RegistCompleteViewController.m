@@ -56,13 +56,14 @@
 - (void)getBannerInfoResponse:(NSDictionary *)response
 {
     NSLog(@"%s, %@", __FUNCTION__, response);
+    BannerInfo *bannerInfo = [[BannerInfo alloc] init];
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         BannerInfo *bannerInfo = [[BannerInfo alloc] init];
         bannerInfo.bannerSeq        = [response objectForKey:@"banner_seq"];
         bannerInfo.createDate       = [response objectForKey:@"create_date"];
         bannerInfo.editDate         = [response objectForKey:@"edit_date"];
-        bannerInfo.imagePath        = [response objectForKey:@"image_path"];
+        bannerInfo.imagePath        = [response objectForKey:@"image_url"];
         bannerInfo.linkInUrl        = [response objectForKey:@"link_in_url"];
         bannerInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
         bannerInfo.linkType         = [response objectForKey:@"link_type"];
@@ -80,6 +81,7 @@
 {
     ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]]]];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.imagePath]]];
+    NSLog(@"%s, nongmin = %@, notice = %@", __FUNCTION__, ((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg, ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg);
 }
 
 /**

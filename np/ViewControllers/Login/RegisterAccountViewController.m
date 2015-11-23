@@ -102,6 +102,7 @@
     }
     else
     {
+        certifiedAccountNumber = [inputAccountView.certifiedAccountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""];
         [nextButton setEnabled:YES];
         [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
     }
@@ -162,8 +163,9 @@
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
     [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:inputAccountView.addNewAccountBirthInput.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
     
     // Request Start
     HttpRequest *req = [HttpRequest getInstance];

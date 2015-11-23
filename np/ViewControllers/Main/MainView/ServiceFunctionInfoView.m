@@ -11,6 +11,7 @@
 @implementation ServiceFunctionInfoView
 
 @synthesize infoViewButton;
+@synthesize delegate;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -57,6 +58,10 @@
         }
         case 3:
         {
+            if(delegate != nil && [delegate respondsToSelector:@selector(removedServiceFunctionInfoView)])
+            {
+                [delegate performSelector:@selector(removedServiceFunctionInfoView) withObject:nil];
+            }
             [self removeFromSuperview];
             break;
         }
