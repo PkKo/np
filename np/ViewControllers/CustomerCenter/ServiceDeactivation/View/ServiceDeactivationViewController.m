@@ -28,7 +28,7 @@
 
 - (IBAction)deactivateService {
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"서비스를 해지 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"서비스를 해지 하시겠습니까?\n서비스해지는 로그인 후 완료됩니다." delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
     [alert show];
 }
 
