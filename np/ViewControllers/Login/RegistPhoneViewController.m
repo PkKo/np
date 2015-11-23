@@ -181,6 +181,19 @@
     
     RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    authNumber = nil;
+    carrierIndex = 0;
+    tempIndex = 0;
+    [carrierSelectButton setTitle:[carrierListArray objectAtIndex:carrierIndex] forState:UIControlStateNormal];
+    [phoneNumberInput setText:@""];
+    [phoneAuthNumInput setText:@""];
+    [reqAuthNumButton setTitle:@"인증번호 요청" forState:UIControlStateNormal];
+    [phoneAuthNumInput setHidden:YES];
+    [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
+                                        phoneAuthNumInput.frame.origin.y,
+                                        bottomDescView.frame.size.width,
+                                        bottomDescView.frame.size.height)];
 }
 
 #pragma mark - PickerView Action

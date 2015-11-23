@@ -225,7 +225,7 @@
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
     [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
-    [reqData setQueryType:@"E"];
+    [reqData setQueryType:@"ETC"];
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
 }
