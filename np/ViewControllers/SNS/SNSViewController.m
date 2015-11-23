@@ -103,9 +103,7 @@
     ScrapInfo *scrapInfo    = [[ScrapInfo alloc] init];
     scrapInfo.title         = [NSString stringWithFormat:@"[%@]", [bundle objectForInfoDictionaryKey:@"CFBundleName"]];
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
-    
-    //scrapInfo.imageURLs     = @[@"http://3.bp.blogspot.com/-7aE01RmX-pU/UgrX69_HjNI/AAAAAAAANVw/jpmfWMMRts8/s1600/nonghyup.png"];
-    scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];//@[[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]];
+    //scrapInfo.imageURLs     = @[@"http://www.daumkakao.com/images/operating/temp_mov.jpg"];//@[[NSString stringWithFormat:@"%@%@", SERVER_URL, NONGMIN_BANNER_IMAGE_URL]];
     scrapInfo.type          = ScrapTypeVideo;
     
     NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
