@@ -19,10 +19,11 @@
 
 @implementation DBManager
 
+
+static dispatch_once_t onceToken    = 0;
+static id _sharedObject             = nil;
+
 + (instancetype)sharedInstance {
-    
-    static dispatch_once_t onceToken = 0;
-    __strong static id _sharedObject = nil;
     
     dispatch_once(&onceToken, ^{
         _sharedObject = [[self alloc] init];
@@ -32,20 +33,19 @@
     return _sharedObject;
 }
 
++(void)resetSharedInstance {
+    onceToken       = 0; // resets the once_token so dispatch_once will run again
+    _sharedObject   = nil;
+}
+
 - (void)removeDB {
     
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
-    
-    // Build the path to the database file
-    _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"nhtransactions.db"]];
-    
     NSFileManager *filemgr = [NSFileManager defaultManager];
-    [filemgr removeItemAtPath:_databasePath error:nil];
+    if ([filemgr fileExistsAtPath:_databasePath] == YES) {
+        NSError * error;
+        [filemgr removeItemAtPath:_databasePath error:&error];
+    }
+    [DBManager resetSharedInstance];
 }
 
 - (void)createDB {
@@ -61,7 +61,7 @@
     _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"nhtransactions.db"]];
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
-    if ([filemgr fileExistsAtPath: _databasePath ] == NO) {
+    if ([filemgr fileExistsAtPath:_databasePath] == NO) {
         
         BOOL openDB = [self openDB];
         if (openDB == SQLITE_OK) {
