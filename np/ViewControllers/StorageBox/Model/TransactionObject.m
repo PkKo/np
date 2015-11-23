@@ -68,7 +68,7 @@
 }
 
 - (NSString *)formattedTransactionBalance {
-    return [NSString stringWithFormat:@"%@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionBalance floatValue]]]];
+    return [NSString stringWithFormat:@"잔액 %@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionBalance floatValue]]]];
 }
 
 - (NSString *)getTransactionHourMinute {

@@ -44,23 +44,7 @@
     }
     return nil;
 }
-/*
-- (IBAction)searchViewShow:(id)sender
-{
-    if([searchView isHidden])
-    {
-        [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [searchView setHidden:NO];
-            [searchView setFrame:CGRectMake(0, TOP_MENU_BAR_HEIGHT, self.frame.size.width, searchView.frame.size.height)];
-            [self searchPeriodSelect:periodOneMonthBtn];
-        }completion:nil];
-    }
-    else
-    {
-        [self searchViewHide:nil];
-    }
-}
-*/
+
 - (StatisticDateSearchView *)showDateSearchViewInScrollView:(UIView *)view atY:(CGFloat)dateSearchViewY {
     
     NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"StatisticDateSearchView" owner:self options:nil];
@@ -378,6 +362,15 @@
 }
 
 #pragma mark - General
+- (NSString *)getAccountNumberWithoutDash:(NSString *)accountNoWithDash {
+    NSMutableString * accountNoWithoutDash  = [NSMutableString stringWithString:accountNoWithDash];
+    
+    [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
+                                             options:NSCaseInsensitiveSearch
+                                               range:NSMakeRange(0, accountNoWithoutDash.length)];
+    return [accountNoWithoutDash copy];
+}
+
 + (NSNumberFormatter *)getNumberFormatter {
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
