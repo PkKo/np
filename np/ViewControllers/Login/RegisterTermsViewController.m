@@ -188,16 +188,23 @@
         return;
     }
     
-    if(![pushAgreeImg isHighlighted])
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"금융정보/기타 알림메시지 수신에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
+//    if(![pushAgreeImg isHighlighted])
+//    {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"금융정보/기타 알림메시지 수신에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+//        [alertView show];
+//        return;
+//    }
     
     // 계좌번호 등록 뷰 컨트롤러로 이동
     RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    serviceTermClick = NO;
+    personalTermClick = NO;
+    [self checkPersonalTermAgree:nil];
+    [self checkServiceTermAgree:nil];
+    [pushAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
+    [pushAgreeImg setHighlighted:NO];
 }
 
 - (IBAction)closeServiceTermsView:(id)sender
