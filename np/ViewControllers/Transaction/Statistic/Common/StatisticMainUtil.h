@@ -60,6 +60,8 @@
 + (NSDateFormatter *)getDateFormatterDateServerStyle;
 + (NSDateFormatter *)getDateFormatterWithStyle:(NSString *)style;
 
+#pragma mark - General
+- (NSString *)getAccountNumberWithoutDash:(NSString *)accountNoWithDash;
 + (NSNumberFormatter *)getNumberFormatter;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 + (NSString *)hexStringFromColor:(UIColor *)color;

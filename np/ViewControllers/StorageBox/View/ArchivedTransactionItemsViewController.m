@@ -408,8 +408,10 @@
         [cell.transacTime setText:[transacObj getTransactionHourMinute]];
         [cell.transacName setText:[transacObj transactionDetails]];
         
-        if ([transacObj transactionAccountType] && ![[transacObj transactionAccountType] isEqualToString:@""]) {
-            [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", [transacObj transactionAccountType], [transacObj transactionAccountNumber]]];
+        NSString *accountNickName = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:[transacObj transactionAccountNumber]]];
+        
+        if(accountNickName != nil && [accountNickName length] > 0) {
+            [cell.transacAccountNo setText:[NSString stringWithFormat:@"%@ %@", accountNickName, [transacObj transactionAccountNumber]]];
         } else {
             [cell.transacAccountNo setText:[transacObj transactionAccountNumber]];
         }

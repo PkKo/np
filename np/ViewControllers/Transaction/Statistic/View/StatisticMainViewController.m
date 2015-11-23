@@ -149,15 +149,9 @@
         
     } else {
         
-        NSString        * accountNo             = [self.selectAccountLabel text];
-        NSMutableString * accountNoWithoutDash  = [NSMutableString stringWithString:accountNo];
-        
-        [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
-                                                 options:NSCaseInsensitiveSearch
-                                                   range:NSMakeRange(0, accountNoWithoutDash.length)];
-        return @[accountNoWithoutDash];
+        NSString * accountNo = [self.selectAccountLabel text];
+        return @[[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:accountNo]];
     }
-    
 }
 
 - (IBAction)selectAccount {

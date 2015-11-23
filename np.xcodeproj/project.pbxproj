@@ -580,6 +580,10 @@
 		A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
+		A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */; settings = {ASSET_TAGS = (); }; };
+		A5B50D5C1C02AC9100E6AD04 /* icon_noresult_02.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D581C02AC9100E6AD04 /* icon_noresult_02.png */; settings = {ASSET_TAGS = (); }; };
+		A5B50D5D1C02AC9100E6AD04 /* icon_noresult_03.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D591C02AC9100E6AD04 /* icon_noresult_03.png */; settings = {ASSET_TAGS = (); }; };
+		A5B50D5E1C02AC9100E6AD04 /* icon_noresult_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D5A1C02AC9100E6AD04 /* icon_noresult_03@2x.png */; settings = {ASSET_TAGS = (); }; };
 		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; };
 		A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */; };
 		A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */; };
@@ -1364,6 +1368,10 @@
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_noresult_01.png; sourceTree = "<group>"; };
+		A5B50D581C02AC9100E6AD04 /* icon_noresult_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_noresult_02.png; sourceTree = "<group>"; };
+		A5B50D591C02AC9100E6AD04 /* icon_noresult_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_noresult_03.png; sourceTree = "<group>"; };
+		A5B50D5A1C02AC9100E6AD04 /* icon_noresult_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_noresult_03@2x.png"; sourceTree = "<group>"; };
 		A5D50AE71BD48F0500D7A2DD /* EnvMgmtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvMgmtViewController.h; sourceTree = "<group>"; };
 		A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvMgmtViewController.m; sourceTree = "<group>"; };
 		A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvMgmtViewController.xib; sourceTree = "<group>"; };
@@ -2049,6 +2057,10 @@
 		A2DEAE111B9FE6BB00EDCCBA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */,
+				A5B50D581C02AC9100E6AD04 /* icon_noresult_02.png */,
+				A5B50D591C02AC9100E6AD04 /* icon_noresult_03.png */,
+				A5B50D5A1C02AC9100E6AD04 /* icon_noresult_03@2x.png */,
 				A2DA147C1BFC11EA00830FF6 /* 120px.png */,
 				A2DA147D1BFC11EA00830FF6 /* 180px.png */,
 				A2DADD281BDF008300457E9A /* back_01@2x.png */,
@@ -3338,6 +3350,7 @@
 				A2D9EC0E1BEA18E100047BEC /* icon_customer_01_dft@2x.png in Resources */,
 				A2D9EC0F1BEA18E100047BEC /* icon_customer_01_on@2x.png in Resources */,
 				A2D9EC101BEA18E100047BEC /* icon_data_01@2x.png in Resources */,
+				A5B50D5C1C02AC9100E6AD04 /* icon_noresult_02.png in Resources */,
 				A2D9EC111BEA18E100047BEC /* icon_delete_01@2x.png in Resources */,
 				A2D9EC121BEA18E100047BEC /* icon_deposit_01_dft@2x.png in Resources */,
 				A2DCFFB11BEB2D6500EEABD9 /* BannerInfoView.xib in Resources */,
@@ -3507,6 +3520,7 @@
 				A2D95B911BA8F1DD00DC943D /* nf_ios_num_btn@3x.png in Resources */,
 				A2D95B641BA8F1DD00DC943D /* nf_ios_spacebar.png in Resources */,
 				A2DF410E1BAFBD00001389E7 /* CarrierList.plist in Resources */,
+				A5B50D5D1C02AC9100E6AD04 /* icon_noresult_03.png in Resources */,
 				A2D9EBEA1BEA162900047BEC /* img_service_05_4s@2x.png in Resources */,
 				17745DE51BB96355003609C7 /* CustomizedDatePickerViewController.xib in Resources */,
 				A2DD874E1BC219790013470D /* RegistCompleteViewController.xib in Resources */,
@@ -3630,6 +3644,7 @@
 				A2D95B4E1BA8F1DD00DC943D /* iPadKeySetting.plist in Resources */,
 				A5E11DFD1BC3BA9E0009B5AC /* StorageBoxDateSearchView.xib in Resources */,
 				A2D95B341BA8F1DD00DC943D /* NFPadBtnNext@2x.png in Resources */,
+				A5B50D5E1C02AC9100E6AD04 /* icon_noresult_03@2x.png in Resources */,
 				A538C2EA1BCE2AC5005E3211 /* CertViewCell.xib in Resources */,
 				A2D95B8D1BA8F1DD00DC943D /* nf_ios_icon_shift@3x.png in Resources */,
 				A2D95B751BA8F1DD00DC943D /* nf_ios_icon_shift@2x.png in Resources */,
@@ -3699,6 +3714,7 @@
 				A2D95B9D1BA8F1DD00DC943D /* NFilterSerialNum.xib in Resources */,
 				A2D95B701BA8F1DD00DC943D /* nf_ios_btn_pressed@2x.png in Resources */,
 				A2DE64711BD617B7009EC403 /* ExchangeSettingViewController.xib in Resources */,
+				A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */,
 				A2D95B6A1BA8F1DD00DC943D /* nf_ios_btn@2x.png in Resources */,
 				A2D95B571BA8F1DD00DC943D /* nf_ios_btn_confirm.png in Resources */,
 				A2DFD7131BB0EAD600838E09 /* MenuTableEtcView.xib in Resources */,
