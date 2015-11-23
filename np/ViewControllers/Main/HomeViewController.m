@@ -93,7 +93,7 @@
         {
             case TIMELINE:
             {
-                reqData.queryType = @"A";
+                reqData.queryType = @"ALL";
                 break;
             }
             case BANKING:
@@ -103,7 +103,7 @@
             }
             case OTHER:
             {
-                reqData.queryType = @"E";
+                reqData.queryType = @"ETC";
                 break;
             }
             default:
@@ -271,7 +271,7 @@
     {
         case TIMELINE:
         {
-            reqData.queryType = @"A";
+            reqData.queryType = @"ALL";
             break;
         }
         case BANKING:
@@ -281,7 +281,7 @@
         }
         case OTHER:
         {
-            reqData.queryType = @"3,4,5,6,A,B,Z";
+            reqData.queryType = @"ETC";
             break;
         }
         default:

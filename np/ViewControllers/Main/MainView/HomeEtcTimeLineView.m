@@ -340,13 +340,13 @@
     NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
     
-    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    if([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
     {
-        return TIMELINE_ETC_HEIGHT;
+        return TIMELINE_ETC_NOTICE_HEIGHT;
     }
     else
     {
-        return TIMELINE_ETC_NOTICE_HEIGHT;
+        return TIMELINE_ETC_HEIGHT;
     }
 }
 
@@ -475,7 +475,7 @@
     NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
     NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
     
-    if(inboxData.stickerCode == STICKER_EXCHANGE_RATE)
+    if([inboxData.inboxType isEqualToString:@"A"])
     {
         return;
     }
@@ -704,7 +704,7 @@
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"3,4,5,6";
+    reqData.queryType = @"ETC";
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {
@@ -932,7 +932,7 @@
     
     if([selection isEqualToString:SERVICE_TYPE_ALL])
     {
-        reqData.queryType = @"3,4,5,6,A,B,Z";
+        reqData.queryType = @"ETC";
     }
     else if([selection isEqualToString:SERVICE_TYPE_ECOMMERCE])
     {
@@ -944,7 +944,7 @@
     }
     else if([selection isEqualToString:SERVICE_TYPE_ETC])
     {
-        reqData.queryType = @"3,4,5,6,Z";
+        reqData.queryType = @"Z";
     }
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])

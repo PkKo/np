@@ -92,7 +92,7 @@
     if(pushCount > 99)
     {
         [pushCountLabel setText:@"99+"];
-        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x - 10,
+        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x,
                                             pushCountLabel.frame.origin.y,
                                             pushCountLabel.frame.size.width + 10,
                                             pushCountLabel.frame.size.height)];
@@ -101,7 +101,7 @@
     else if (pushCount > 9)
     {
         [pushCountLabel setText:[NSString stringWithFormat:@"%d", (int)pushCount]];
-        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x - 7,
+        [pushCountLabel setFrame:CGRectMake(pushCountLabel.frame.origin.x,
                                             pushCountLabel.frame.origin.y,
                                             pushCountLabel.frame.size.width + 7,
                                             pushCountLabel.frame.size.height)];
@@ -123,7 +123,7 @@
     if(noticeCount > 99)
     {
         [noticeCountLabel setText:@"99+"];
-        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x - 10,
+        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x,
                                               noticeCountLabel.frame.origin.y,
                                               noticeCountLabel.frame.size.width + 10,
                                               noticeCountLabel.frame.size.height)];
@@ -132,7 +132,7 @@
     else if(noticeCount > 9)
     {
         [noticeCountLabel setText:[NSString stringWithFormat:@"%d", (int)noticeCount]];
-        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x - 7,
+        [noticeCountLabel setFrame:CGRectMake(noticeCountLabel.frame.origin.x,
                                               noticeCountLabel.frame.origin.y,
                                               noticeCountLabel.frame.size.width + 7,
                                               noticeCountLabel.frame.size.height)];

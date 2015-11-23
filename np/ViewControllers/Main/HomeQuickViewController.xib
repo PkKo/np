@@ -174,12 +174,12 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="uyQ-hf-bwx" customClass="CircleView">
-                            <rect key="frame" x="138" y="0.0" width="18" height="18"/>
+                            <rect key="frame" x="128" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.23529411759999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ua1-ql-2um">
-                            <rect key="frame" x="138" y="0.0" width="18" height="18"/>
+                            <rect key="frame" x="128" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -201,12 +201,12 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="TWE-c7-GFm" customClass="CircleView">
-                            <rect key="frame" x="251" y="0.0" width="18" height="18"/>
+                            <rect key="frame" x="235" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.23529411759999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dt5-2P-R7y">
-                            <rect key="frame" x="251" y="0.0" width="18" height="18"/>
+                            <rect key="frame" x="235" y="0.0" width="18" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>

@@ -587,7 +587,7 @@
     reqData.ascending = listSortType;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"1,2,3,4,5,6";
+    reqData.queryType = @"ALL";
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {
