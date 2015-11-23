@@ -281,7 +281,7 @@
         }
         case OTHER:
         {
-            reqData.queryType = @"3,4,5,6,A,B,Z";
+            reqData.queryType = @"E";
             break;
         }
         default:
