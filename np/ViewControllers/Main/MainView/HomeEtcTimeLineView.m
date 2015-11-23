@@ -704,7 +704,7 @@
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"E";
+    reqData.queryType = @"ETC";
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {
@@ -932,7 +932,7 @@
     
     if([selection isEqualToString:SERVICE_TYPE_ALL])
     {
-        reqData.queryType = @"E";
+        reqData.queryType = @"ETC";
     }
     else if([selection isEqualToString:SERVICE_TYPE_ECOMMERCE])
     {
