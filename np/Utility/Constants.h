@@ -159,6 +159,8 @@
 #define REQUEST_ACCOUNT_PASSWORD    @"account_password"
 // 생년월일
 #define REQUEST_ACCOUNT_BIRTHDAY    @"user_birthday"
+// 계좌번호 검증
+#define REQUEST_ACCOUNT_CHECK       @"servlet/EFPU1022R.cmd"
 
 #pragma mark 휴대폰 인증번호 발송
 #define REQUEST_PHONE_AUTH          @"servlet/EFPUW031001.cmd"

@@ -136,7 +136,7 @@
         </view>
     </objects>
     <resources>
-        <image name="menu_tab_bg.png" width="2" height="18"/>
-        <image name="menu_tab_bg_02.png" width="33" height="18"/>
+        <image name="menu_tab_bg.png" width="8" height="18"/>
+        <image name="menu_tab_bg_02.png" width="66" height="18"/>
     </resources>
 </document>

@@ -88,6 +88,14 @@
     }
     else
     {
+        for (ContentsPayload *payload in contents.payloadList)
+        {
+            if([payload.key isEqualToString:@"lu"])
+            {
+                linkUrl = payload.value;
+                [contentLinkButton setHidden:NO];
+            }
+        }
         // 이미지 세팅
         [self setImageView:nil];
     }
@@ -125,6 +133,17 @@
     else
     {
         [self stopIndicator];
+    }
+}
+
+/**
+ @brief 외부 링크로 이동
+ */
+- (IBAction)linkActionClick:(id)sender
+{
+    if(linkUrl != nil && [linkUrl length] > 0)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkUrl]];
     }
 }
 @end

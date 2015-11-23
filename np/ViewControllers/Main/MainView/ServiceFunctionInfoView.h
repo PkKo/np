@@ -11,5 +11,7 @@
 @interface ServiceFunctionInfoView : UIView
 
 @property (strong, nonatomic) IBOutlet UIButton *infoViewButton;
+@property (assign, nonatomic) id delegate;
+
 - (IBAction)infoButtonClick:(id)sender;
 @end

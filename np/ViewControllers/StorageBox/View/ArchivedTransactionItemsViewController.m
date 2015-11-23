@@ -18,6 +18,7 @@
 #import "DBManager.h"
 #import "CustomizedPickerViewController.h"
 #import "MainPageViewController.h"
+#import "ServiceFunctionInfoView.h"
 
 @interface ArchivedTransactionItemsViewController () <ArchivedTransItemCellDelegate> {
     NSDictionary    * _transactions;
@@ -35,17 +36,42 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
-    _prvSearchedCriteria    = nil;
-    _isSearch               = NO;
-    [self performSelector:@selector(getAllTransactions) withObject:nil afterDelay:0.06];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:FIRST_LOGIN_FLAG_FOR_STORAGE] == nil)
+    {
+        ServiceFunctionInfoView *guideView = [ServiceFunctionInfoView view];
+        [guideView setDelegate:self];
+        [guideView setFrame:CGRectMake(0, 0,
+                                       ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.width,
+                                       ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
+        [[guideView infoViewButton] setTag:3];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:guideView];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view bringSubviewToFront:guideView];
+        [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:FIRST_LOGIN_FLAG_FOR_STORAGE];
+    }
+    else
+    {
+        [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+        
+        _prvSearchedCriteria    = nil;
+        _isSearch               = NO;
+        [self performSelector:@selector(getAllTransactions) withObject:nil afterDelay:0.06];
+    }
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)removedServiceFunctionInfoView
+{
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+    
+    _prvSearchedCriteria    = nil;
+    _isSearch               = NO;
+    [self performSelector:@selector(getAllTransactions) withObject:nil afterDelay:0.06];
 }
 
 #pragma mark - top controller

@@ -20,6 +20,7 @@
     NSString *certNumThreeString;
     NSString *certNumFourString;
     CGPoint scrollPoint;
+    NSMutableDictionary *inputAccountInfo;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;

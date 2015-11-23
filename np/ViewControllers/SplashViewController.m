@@ -74,10 +74,10 @@
 //    [self ipsTest];
     /*
     ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-//    MainPageViewController *vc = [[MainPageViewController alloc] init];
-//    [vc setStartPageIndex:0];
+    MainPageViewController *vc = [[MainPageViewController alloc] init];
+    [vc setStartPageIndex:0];
 //    CertificateMenuViewController *vc = [[CertificateMenuViewController alloc] init];
-    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
+//    RegistAccountViewController *vc = [[RegistAccountViewController alloc] init];
 
     slidingViewController.topViewController = vc;
     
@@ -316,6 +316,11 @@
             [view.contentImage setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:layerPopupInfo.imageUrl]]]];
         }
         [view.closeDayOptionButton setTitle:[NSString stringWithFormat:@"%@일간 보지 않기", layerPopupInfo.closedayType] forState:UIControlStateNormal];
+        if(layerPopupInfo.linkOutUrl != nil && [layerPopupInfo.linkOutUrl length] > 0)
+        {
+            view.linkOutUrl = layerPopupInfo.linkOutUrl;
+            [view.linkUrlButton setEnabled:YES];
+        }
         [view setDelegate:self];
         [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [self.view addSubview:view];

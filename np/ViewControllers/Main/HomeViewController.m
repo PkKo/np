@@ -49,22 +49,6 @@
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 //    [self makeTimelineView];
-    
-    // 기능안내 페이지
-    if (viewType == INBOX)
-    {
-        if([[NSUserDefaults standardUserDefaults] objectForKey:FIRST_LOGIN_FLAG_FOR_STORAGE] == nil)
-        {
-            ServiceFunctionInfoView *guideView = [ServiceFunctionInfoView view];
-            [guideView setFrame:CGRectMake(0, 0,
-                                           ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.width,
-                                           ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height)];
-            [[guideView infoViewButton] setTag:INBOX];
-            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view addSubview:guideView];
-            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view bringSubviewToFront:guideView];
-            [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:FIRST_LOGIN_FLAG_FOR_STORAGE];
-        }
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -529,20 +513,17 @@
             
             for(NHInboxMessageData *inboxData in messageList)
             {
-                if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                if([inboxData.inboxType isEqualToString:@"A"])
                 {
-                    if([inboxData.inboxType isEqualToString:@"A"])
-                    {
-                        inboxData.stickerCode = STICKER_EXCHANGE_RATE;
-                    }
-                    else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
-                    {
-                        inboxData.stickerCode = STICKER_NOTICE_NORMAL;
-                    }
-                    else
-                    {
-                        inboxData.stickerCode = STICKER_ETC;
-                    }
+                    inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                }
+                else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                {
+                    inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                }
+                else if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                {
+                    inboxData.stickerCode = STICKER_ETC;
                 }
                 
                 NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
@@ -651,20 +632,17 @@
                 // 신규 목록
                 for(NHInboxMessageData *inboxData in messageList)
                 {
-                    if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                    if([inboxData.inboxType isEqualToString:@"A"])
                     {
-                        if([inboxData.inboxType isEqualToString:@"A"])
-                        {
-                            inboxData.stickerCode = STICKER_EXCHANGE_RATE;
-                        }
-                        else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
-                        {
-                            inboxData.stickerCode = STICKER_NOTICE_NORMAL;
-                        }
-                        else
-                        {
-                            inboxData.stickerCode = STICKER_ETC;
-                        }
+                        inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                    }
+                    else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                    {
+                        inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                    }
+                    else if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                    {
+                        inboxData.stickerCode = STICKER_ETC;
                     }
                     
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
@@ -698,20 +676,17 @@
                 
                 for(NHInboxMessageData *inboxData in messageList)
                 {
-                    if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                    if([inboxData.inboxType isEqualToString:@"A"])
                     {
-                        if([inboxData.inboxType isEqualToString:@"A"])
-                        {
-                            inboxData.stickerCode = STICKER_EXCHANGE_RATE;
-                        }
-                        else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
-                        {
-                            inboxData.stickerCode = STICKER_NOTICE_NORMAL;
-                        }
-                        else
-                        {
-                            inboxData.stickerCode = STICKER_ETC;
-                        }
+                        inboxData.stickerCode = STICKER_EXCHANGE_RATE;
+                    }
+                    else if ([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"])
+                    {
+                        inboxData.stickerCode = STICKER_NOTICE_NORMAL;
+                    }
+                    else if(inboxData.stickerCode < 0 || (inboxData.stickerCode > 6 && inboxData.stickerCode < 100))
+                    {
+                        inboxData.stickerCode = STICKER_ETC;
                     }
                     
                     NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];

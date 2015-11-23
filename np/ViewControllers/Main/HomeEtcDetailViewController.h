@@ -11,6 +11,7 @@
 @interface HomeEtcDetailViewController : CommonViewController<IBInboxProtocol>
 {
     NSString *contentKey;
+    NSString *linkUrl;
 }
 
 @property (strong, nonatomic) NHInboxMessageData *inboxData;
@@ -21,4 +22,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *contentTitle;
 @property (strong, nonatomic) IBOutlet UILabel *contentText;
 @property (strong, nonatomic) IBOutlet UIButton *contentLinkButton;
+
+- (IBAction)linkActionClick:(id)sender;
 @end

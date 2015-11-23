@@ -16,6 +16,8 @@
 @synthesize closeDayOptionButton;
 @synthesize closeButton;
 @synthesize contentImage;
+@synthesize linkOutUrl;
+@synthesize linkUrlButton;
 
 - (IBAction)closeWithCloseDayOption:(id)sender
 {
@@ -28,6 +30,14 @@
     if(delegate != nil && [delegate respondsToSelector:@selector(closeLayerPopup:)])
     {
         [delegate performSelector:@selector(closeLayerPopup:) withObject:(UIButton *)sender];
+    }
+}
+
+- (IBAction)linkUrlOpen:(id)sender
+{
+    if(linkOutUrl != nil && [linkOutUrl length] > 0)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkOutUrl]];
     }
 }
 @end

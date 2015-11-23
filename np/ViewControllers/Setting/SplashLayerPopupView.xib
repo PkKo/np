@@ -68,6 +68,13 @@
                                 <action selector="closeLayerView:" destination="iN0-l3-epB" eventType="touchUpInside" id="26N-vB-pEr"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P8H-eo-Uus">
+                            <rect key="frame" x="0.0" y="0.0" width="284" height="315"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <connections>
+                                <action selector="linkUrlOpen:" destination="iN0-l3-epB" eventType="touchUpInside" id="HzM-nL-BeO"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -78,6 +85,7 @@
                 <outlet property="closeDayOptionButton" destination="3T4-SG-cg8" id="e6Y-Fu-i6B"/>
                 <outlet property="contentImage" destination="Lhe-2V-69a" id="AWi-8l-yAQ"/>
                 <outlet property="contentLabel" destination="6VM-r6-qCS" id="JGi-Kf-yjc"/>
+                <outlet property="linkUrlButton" destination="P8H-eo-Uus" id="h5Z-OU-BBm"/>
                 <outlet property="titleLabel" destination="8yj-5y-am5" id="zai-Xq-tKw"/>
             </connections>
             <point key="canvasLocation" x="282" y="355"/>
