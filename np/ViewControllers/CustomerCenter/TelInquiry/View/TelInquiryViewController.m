@@ -39,7 +39,7 @@
 -
 (IBAction)makeACall {
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"고객센터로 연결하세겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"고객센터로 연결하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
     [alert show];
 }
 
