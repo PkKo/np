@@ -90,9 +90,9 @@
         [optionTwoImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
         [optionTwoText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         
-        [periodTimeOneLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
-        [periodTimeTwoLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
-        [periodTimeThreeLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+        [periodTimeOneLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [periodTimeTwoLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [periodTimeThreeLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     }
     else if(periodFlag == 2)
     {
@@ -103,29 +103,29 @@
         
         if(periodOneIndex == 0)
         {
-            [periodTimeOneLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [periodTimeOneLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [periodTimeOneLabel setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [periodTimeOneLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
         
         if(periodTwoIndex == 0)
         {
-            [periodTimeTwoLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [periodTimeTwoLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [periodTimeTwoLabel setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [periodTimeTwoLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
         
         if(periodThreeIndex == 0)
         {
-            [periodTimeThreeLabel setTextColor:[UIColor colorWithRed:176.0/255.0f green:177.0/255.0f blue:182.0/255.0f alpha:1.0f]];
+            [periodTimeThreeLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         }
         else
         {
-            [periodTimeThreeLabel setTextColor:[UIColor colorWithRed:96.0/255.0f green:97.0/255.0f blue:102.0/255.0f alpha:1.0f]];
+            [periodTimeThreeLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         }
     }
     
@@ -422,14 +422,32 @@
         periodFlag = 2;
         if([pickerSelectView tag] == 1)
         {
+            if(tempIndex == periodTwoIndex || tempIndex == periodThreeIndex)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             periodOneIndex = tempIndex;
         }
         else if([pickerSelectView tag] == 2)
         {
+            if(tempIndex == periodOneIndex || tempIndex == periodThreeIndex)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             periodTwoIndex = tempIndex;
         }
         else if([pickerSelectView tag] == 3)
         {
+            if(tempIndex == periodTwoIndex || tempIndex == periodOneIndex)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
             periodThreeIndex = tempIndex;
         }
         [self makeOptionSettingView];

@@ -270,6 +270,7 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
     [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+    [reqBody setObject:PUSH_APP_ID forKey:@"app_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_ACCOUNT_DELETE];
     HttpRequest *req = [HttpRequest getInstance];

@@ -446,6 +446,41 @@
     [reqBody setObject:[inputAccountInfo objectForKey:REQUEST_ACCOUNT_PASSWORD] forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:[inputAccountInfo objectForKey:REQUEST_ACCOUNT_BIRTHDAY] forKey:REQUEST_ACCOUNT_BIRTHDAY];
     
+    if([tempAccountNum length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([[inputAccountInfo objectForKey:REQUEST_ACCOUNT_PASSWORD] length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([[inputAccountInfo objectForKey:REQUEST_ACCOUNT_BIRTHDAY] length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"생년월일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 4)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 10)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 정확히 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     if(self.isSelfIdentified)
     {
         [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
