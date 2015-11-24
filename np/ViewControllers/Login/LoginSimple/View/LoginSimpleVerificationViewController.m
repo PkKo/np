@@ -236,15 +236,10 @@
 #pragma mark - Server Connection
 - (void)validateLoginSimple {
     
-    NSLog(@"%s", __func__);
-    
     NSString * loginType        = @"PIN";
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
     NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
-    
-    NSLog(@"user_id: %@", user_id);
-    NSLog(@"crmMobile: %@", crmMobile);
     
     [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
     [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
@@ -264,55 +259,6 @@
     [req setDelegate:self selector:@selector(loginResponse:)];
     [req requestUrl:url bodyString:bodyString token:token];
     
-}
-
-- (void)loginResponse:(NSDictionary *)response {
-    
-    [self stopIndicator];
-    
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
-        
-        NSString * isRegistered = (NSString *)response[@"reg_yn"];
-        
-        if ([isRegistered isEqualToString:IS_REGISTERED_NO]) {
-            [[ServiceDeactivationController sharedInstance] showForceToDeactivateAlert];
-            return;
-        }
-        
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = (int)[accounts count];
-        NSMutableArray * accountNumbers = [NSMutableArray array];
-        
-        if (numberOfAccounts > 0)
-        {
-            for (NSDictionary * account in accounts) {
-                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
-            }
-        }
-        
-        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
-        [self toggleBtnBgColor:NO textLength:0];
-        [[[LoginUtil alloc] init] showMainPage];
-        
-    } else {
-        
-        NSString *message = [response objectForKey:RESULT_MESSAGE];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-#pragma mark - Footer
-- (IBAction)gotoNotice {
-    [[CustomerCenterUtil sharedInstance] gotoNotice];
-}
-- (IBAction)gotoFAQ {
-    [[CustomerCenterUtil sharedInstance] gotoFAQ];
-}
-
-- (IBAction)gotoTelEnquiry {
-    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
 }
 
 @end

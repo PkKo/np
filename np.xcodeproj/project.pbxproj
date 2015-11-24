@@ -567,6 +567,8 @@
 		A55047121BDF6904000D4524 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A55047111BDF6904000D4524 /* FooterView.m */; };
 		A55047141BDF6916000D4524 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55047131BDF6916000D4524 /* FooterView.xib */; };
 		A55047181BDF7D28000D4524 /* LoginAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55047171BDF7D28000D4524 /* LoginAccountController.m */; };
+		A550C3971C04052D00FBB8FB /* NewTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A550C3951C04052D00FBB8FB /* NewTermsOfUseViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A550C3981C04052D00FBB8FB /* NewTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A550C3961C04052D00FBB8FB /* NewTermsOfUseViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB471BD713FD00B9364A /* VersionInfoViewController.m */; };
 		A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */; };
 		A557DB4E1BD7181900B9364A /* ServiceDeactivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */; };
@@ -578,6 +580,7 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; };
 		A56171621BEA22550001F0BB /* FarmerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56171601BEA22550001F0BB /* FarmerNewsViewController.m */; };
 		A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */; };
+		A57E29121C042E29008120CD /* LoginBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A57E29111C042E29008120CD /* LoginBase.m */; settings = {ASSET_TAGS = (); }; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
 		A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */; settings = {ASSET_TAGS = (); }; };
@@ -1348,6 +1351,9 @@
 		A55047131BDF6916000D4524 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		A55047161BDF7D28000D4524 /* LoginAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginAccountController.h; path = Controller/LoginAccountController.h; sourceTree = "<group>"; };
 		A55047171BDF7D28000D4524 /* LoginAccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginAccountController.m; path = Controller/LoginAccountController.m; sourceTree = "<group>"; };
+		A550C3941C04052D00FBB8FB /* NewTermsOfUseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewTermsOfUseViewController.h; path = View/NewTermsOfUseViewController.h; sourceTree = "<group>"; };
+		A550C3951C04052D00FBB8FB /* NewTermsOfUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewTermsOfUseViewController.m; path = View/NewTermsOfUseViewController.m; sourceTree = "<group>"; };
+		A550C3961C04052D00FBB8FB /* NewTermsOfUseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTermsOfUseViewController.xib; path = View/NewTermsOfUseViewController.xib; sourceTree = "<group>"; };
 		A557DB461BD713FD00B9364A /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
 		A557DB471BD713FD00B9364A /* VersionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionInfoViewController.m; sourceTree = "<group>"; };
 		A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionInfoViewController.xib; sourceTree = "<group>"; };
@@ -1365,6 +1371,8 @@
 		A561715F1BEA22550001F0BB /* FarmerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FarmerNewsViewController.h; sourceTree = "<group>"; };
 		A56171601BEA22550001F0BB /* FarmerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FarmerNewsViewController.m; sourceTree = "<group>"; };
 		A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FarmerNewsViewController.xib; sourceTree = "<group>"; };
+		A57E29101C042E29008120CD /* LoginBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginBase.h; path = LoginBase/LoginBase.h; sourceTree = "<group>"; };
+		A57E29111C042E29008120CD /* LoginBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginBase.m; path = LoginBase/LoginBase.m; sourceTree = "<group>"; };
 		A5989BBB1BC25D0600873B76 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = StorageBox/Controller/DBManager.h; sourceTree = "<group>"; };
 		A5989BBC1BC25D0600873B76 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = StorageBox/Controller/DBManager.m; sourceTree = "<group>"; };
 		A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -2498,6 +2506,7 @@
 		A2DF41001BAF8577001389E7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A57E290F1C042DEB008120CD /* LoginBase */,
 				A538C2D91BCDE728005E3211 /* EnvSettings */,
 				A5E0176A1BCCD134007BD4EA /* LoginAccount */,
 				A5E0176F1BCCD134007BD4EA /* LoginCertificate */,
@@ -2774,6 +2783,15 @@
 				17208CA61BEA702500968498 /* ArticleTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A57E290F1C042DEB008120CD /* LoginBase */ = {
+			isa = PBXGroup;
+			children = (
+				A57E29101C042E29008120CD /* LoginBase.h */,
+				A57E29111C042E29008120CD /* LoginBase.m */,
+			);
+			name = LoginBase;
 			sourceTree = "<group>";
 		};
 		A5D50AE51BD48EC100D7A2DD /* EnvMgmt */ = {
@@ -3226,6 +3244,9 @@
 		A5F89D5D1BDE2B8D000A24CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A550C3941C04052D00FBB8FB /* NewTermsOfUseViewController.h */,
+				A550C3951C04052D00FBB8FB /* NewTermsOfUseViewController.m */,
+				A550C3961C04052D00FBB8FB /* NewTermsOfUseViewController.xib */,
 				A5F89D5E1BDE2BA5000A24CB /* TermsOfUseViewController.h */,
 				A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */,
 				A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */,
@@ -3419,6 +3440,7 @@
 				A2D9EC4E1BEA18E200047BEC /* icon_sms_01_dft@2x.png in Resources */,
 				A2D9EC4F1BEA18E200047BEC /* icon_sms_01_sel@2x.png in Resources */,
 				A2D9EC501BEA18E200047BEC /* icon_stats_01@2x.png in Resources */,
+				A550C3981C04052D00FBB8FB /* NewTermsOfUseViewController.xib in Resources */,
 				A2D9EC511BEA18E200047BEC /* icon_sticker_01_sel_01@2x.png in Resources */,
 				A2D9EC521BEA18E200047BEC /* icon_sticker_01_sel_02@2x.png in Resources */,
 				A2D9EC531BEA18E200047BEC /* icon_sticker_01@2x.png in Resources */,
@@ -3801,6 +3823,7 @@
 				A2DFDD951BB398FD00DC1A78 /* MainPageViewController.m in Sources */,
 				A2D95B011BA8F1DD00DC943D /* NSStreamKNAdditions.m in Sources */,
 				A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */,
+				A550C3971C04052D00FBB8FB /* NewTermsOfUseViewController.m in Sources */,
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE0A511BFDA01B00839355 /* Reachability.m in Sources */,
 				A5D8119F1BF5A6EE0054ADB7 /* ServiceDeactivationController.m in Sources */,
@@ -3934,6 +3957,7 @@
 				A2DCFFAF1BEB2D5700EEABD9 /* BannerInfoView.m in Sources */,
 				A2D62D2E1BC3617B001E16B0 /* HomeBankingView.m in Sources */,
 				A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */,
+				A57E29121C042E29008120CD /* LoginBase.m in Sources */,
 				172356E71BAE621C001564A1 /* StoryLinkHelper.m in Sources */,
 				A2DEAE5A1B9FE6D800EDCCBA /* UIViewController+ECSlidingViewController.m in Sources */,
 				A5E017801BCCD134007BD4EA /* LoginCertListViewController.m in Sources */,

@@ -147,11 +147,8 @@
         NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
         
         NSString * strTbs       = @"abc"; //서명할 원문
-        NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
-        NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
-        
-        NSLog(@"user_id: %@", user_id);
-        NSLog(@"crmMobile: %@", crmMobile);
+        NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+        NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];
         
         [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
         [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
@@ -174,56 +171,13 @@
         NSString *bodyString = [CommonUtil getBodyString:requestBody];
         
         HttpRequest *req = [HttpRequest getInstance];
-        [req setDelegate:self selector:@selector(certInfoResponse:)];
+        [req setDelegate:self selector:@selector(loginResponse:)];
         [req requestUrl:url bodyString:bodyString token:token];
         
         return YES;
     }
     
     return NO;
-}
-
-- (void)certInfoResponse:(NSDictionary *)response {
-    
-    NSLog(@"response: %@", response);
-    
-    [self stopIndicator];
-    
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
-        
-        NSString * isRegistered = (NSString *)response[@"reg_yn"];
-        
-        if ([isRegistered isEqualToString:IS_REGISTERED_NO]) {
-            [[ServiceDeactivationController sharedInstance] showForceToDeactivateAlert];
-            return;
-        }
-        
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        
-        int numberOfAccounts    = (int)[accounts count];
-        NSMutableArray * accountNumbers = [NSMutableArray array];
-        
-        if (numberOfAccounts > 0) {
-            
-            for (NSDictionary * accountDic in accounts) {
-                
-                NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
-                if (account && ![account isEqualToString:@""]) {
-                    [accountNumbers addObject:[account stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
-                }
-            }
-        }
-        
-        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
-        [[[LoginUtil alloc] init] showMainPage];
-        
-    } else {
-        
-        NSString *message = [response objectForKey:RESULT_MESSAGE];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-    }
 }
 
 #pragma mark - Refrest View
@@ -300,20 +254,6 @@
     [[[StorageBoxUtil alloc] init] updateTextFieldBorder:self.fakeNoticeTextField color:TEXT_FIELD_BORDER_COLOR_FOR_LOGIN_NOTICE];
     [self resizeContainerScrollView];
     [self resizeNoticeContent];
-}
-
-#pragma mark - Footer
-
-- (IBAction)gotoNB {
-    [[CustomerCenterUtil sharedInstance] gotoNotice];
-}
-
-- (IBAction)gotoTelInquiry {
-    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
-}
-
-- (IBAction)gotoFAQ {
-    [[CustomerCenterUtil sharedInstance] gotoFAQ];
 }
 
 @end

@@ -365,7 +365,7 @@
 - (NSString *)getAccountNumberWithoutDash:(NSString *)accountNoWithDash {
     NSMutableString * accountNoWithoutDash  = [NSMutableString stringWithString:accountNoWithDash];
     
-    [accountNoWithoutDash replaceOccurrencesOfString:@"-" withString:@""
+    [accountNoWithoutDash replaceOccurrencesOfString:STRING_DASH withString:@""
                                              options:NSCaseInsensitiveSearch
                                                range:NSMakeRange(0, accountNoWithoutDash.length)];
     return [accountNoWithoutDash copy];

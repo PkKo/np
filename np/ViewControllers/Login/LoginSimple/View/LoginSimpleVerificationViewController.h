@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonViewController.h"
+#import "LoginBase.h"
 
-@interface LoginSimpleVerificationViewController : CommonViewController
+@interface LoginSimpleVerificationViewController : LoginBase
+
 @property (weak, nonatomic) IBOutlet UIView *loginBtns;
 @property (weak, nonatomic) IBOutlet UITextField *fakeNoticeTextField;
 
@@ -25,8 +26,4 @@
 - (IBAction)gotoSimpleLoginSettings;
 - (IBAction)doLogin;
 
-#pragma mark - Footer
-- (IBAction)gotoNotice;
-- (IBAction)gotoFAQ;
-- (IBAction)gotoTelEnquiry;
 @end
