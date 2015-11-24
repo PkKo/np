@@ -87,10 +87,14 @@
 
 - (void)resetService {
     
+    NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
+    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_RESET_DATA];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
     [requestBody setObject:PUSH_APP_ID forKey:@"app_id"];
+    [requestBody setObject:user_id forKey:@"user_id"];
     
     NSString *bodyString = [CommonUtil getBodyString:requestBody];
     

@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView   * scrollView;
 @property (weak, nonatomic) IBOutlet UIView         * topView;
-@property (weak, nonatomic) IBOutlet UIView         * noDataView;
+
 @property (weak, nonatomic) IBOutlet UIButton       * selectAccountBtn;
 @property (weak, nonatomic) IBOutlet UILabel        * selectAccountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView    * selectAccountArrow;
@@ -29,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *noteContent2;
 @property (weak, nonatomic) IBOutlet UILabel *noteContent3;
 
+@property (weak, nonatomic) IBOutlet UIView         * noDataView;
+@property (weak, nonatomic) IBOutlet UIImageView    * noDataImageView;
+@property (weak, nonatomic) IBOutlet UILabel        * noDataNotice;
 - (IBAction)clickSearchButton;
 - (IBAction)selectAccount;
 @end

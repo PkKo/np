@@ -430,6 +430,18 @@
                       textLength:(NSInteger)length
                       doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress {
     
+    [self showSecureNumpadInParent:viewController
+                            topBar:topBar title:title textLength:length
+                        doneAction:doneAction methodOnPress:methodOnPress
+                        isFullMode:NO
+               isAutoCloseKeyboard:YES];
+}
+
+- (void)showSecureNumpadInParent:(UIViewController *)viewController
+                          topBar:(NSString *)topBar title:(NSString *)title
+                      textLength:(NSInteger)length
+                      doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress isFullMode:(BOOL)isFullMode isAutoCloseKeyboard:(BOOL)isAutoCloseKeyboard {
+    
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
@@ -439,8 +451,8 @@
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
-        [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil isAutoCloseKeyboard:YES];
-        [vc setFullMode:NO];
+        [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil isAutoCloseKeyboard:isAutoCloseKeyboard];
+        [vc setFullMode:isFullMode];
         [vc setToolBar:NO];
         [vc setSupportRetinaHD:YES];
         [vc setTopBarText:topBar];

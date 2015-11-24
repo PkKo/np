@@ -153,6 +153,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="noDataImageView" destination="OAL-aJ-mOT" id="rsi-MC-6Y5"/>
+                        <outlet property="noDataNotice" destination="93s-Kp-h2f" id="q5N-ct-3xg"/>
                         <outlet property="noDataView" destination="Khv-AZ-ON7" id="rbA-GL-R9E"/>
                         <outlet property="noteAsterisk1" destination="Jl3-YA-bex" id="CPe-bR-MRU"/>
                         <outlet property="noteAsterisk2" destination="NVZ-ud-BbX" id="NYX-zE-YYM"/>
