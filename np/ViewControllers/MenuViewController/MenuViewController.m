@@ -283,6 +283,18 @@
         else if(pushViewController)
         {
             [self closeMenu:nil];
+            
+            if(![((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController isKindOfClass:[MainPageViewController class]])
+            {
+                ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
+                MainPageViewController *vc = [[MainPageViewController alloc] init];
+                [vc setStartPageIndex:0];
+                slidingViewController.topViewController = vc;
+                
+                [self.navigationController setViewControllers:@[slidingViewController] animated:NO];
+                ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+            }
+            
             ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:pushViewController];
             [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController popToRootViewControllerAnimated:NO];
             [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];

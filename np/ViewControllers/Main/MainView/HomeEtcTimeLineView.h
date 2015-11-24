@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeEtcTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate>
+@interface HomeEtcTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     UIView *refreshHeaderView;
     UILabel *refreshLabel;
