@@ -9,6 +9,7 @@
 #import "RegistPhoneViewController.h"
 #import "RegistTabView.h"
 #import "RegisterTermsViewController.h"
+#import "RegistPhoneErrorViewController.h"
 
 #define AUTH_NUMBER_TIMER_INTERVAL  1.0
 #define AUTH_NUMBER_TIMER_MAX       180
@@ -85,11 +86,25 @@
 {
     [super viewWillAppear:animated];
     
-    orgBottomRect = bottomDescView.frame;
-    [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
-                                        phoneAuthNumInput.frame.origin.y,
-                                        bottomDescView.frame.size.width,
-                                        bottomDescView.frame.size.height)];
+    if(orgBottomRect.size.width == 0)
+    {
+        orgBottomRect = bottomDescView.frame;
+        [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
+                                            phoneAuthNumInput.frame.origin.y,
+                                            bottomDescView.frame.size.width,
+                                            bottomDescView.frame.size.height)];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCurrentTime:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveCurrentTime:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 #pragma mark - UIButtonAction
@@ -121,10 +136,18 @@
         return;
     }
     
+    if([[phoneNumberInput text] length] < 7)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 정확히 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     // 휴대폰 번호 유효성 체크(CRM 확인)
     if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가 NH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+        [alertView setTag:60001];
         [alertView show];
         return;
     }
@@ -154,6 +177,15 @@
         return;
     }
     
+    // 휴대폰 번호 유효성 체크(CRM 확인)
+    if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가 NH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+        [alertView setTag:60001];
+        [alertView show];
+        return;
+    }
+    
     // 인증번호 입력 체크
     if([[phoneAuthNumInput text] length] == 0)
     {
@@ -162,10 +194,10 @@
         return;
     }
     
-    // 휴대폰 번호 유효성 체크(CRM 확인)
-    if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
+    // 인증번호 인증유효시간 체크
+    if(authNumCounter >= AUTH_NUMBER_TIMER_MAX)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증번호 입력 시간을 초과했습니다.\n인증번호 재요청 후 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
     }
@@ -174,14 +206,6 @@
     if(![authNumber isEqualToString:phoneAuthNumInput.text])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 인증번호가 일치하지 않습니다.\n다시 확인해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    // 인증번호 인증유효시간 체크
-    if(authNumCounter == AUTH_NUMBER_TIMER_MAX)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증번호 입력 시간을 초과했습니다.\n인증번호 재요청 후 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
     }
@@ -201,6 +225,8 @@
                                         phoneAuthNumInput.frame.origin.y,
                                         bottomDescView.frame.size.width,
                                         bottomDescView.frame.size.height)];
+    
+    [scrollView scrollsToTop];
 }
 
 #pragma mark - PickerView Action
@@ -363,7 +389,7 @@
 {
     authNumCounter++;
     
-    if(authNumCounter == AUTH_NUMBER_TIMER_MAX)
+    if(authNumCounter >= AUTH_NUMBER_TIMER_MAX)
     {
         [self authNumberTimerStop];
     }
@@ -372,4 +398,50 @@
     [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %ld초)", AUTH_NUMBER_TIMER_MAX - authNumCounter] forState:UIControlStateNormal];
 }
 
+#pragma mark - UIApplication Notification
+- (void)saveCurrentTime:(NSNotification *)noti
+{
+    if(authNumTimer != nil)
+    {
+        backgroundEnteredTime = [NSDate date];
+    }
+}
+
+- (void)loadCurrentTime:(NSNotification *)noti
+{
+    if(authNumTimer != nil && backgroundEnteredTime != nil)
+    {
+        NSDate *currentDate = [NSDate date];
+        NSTimeInterval timeDiff = [currentDate timeIntervalSinceDate:backgroundEnteredTime];
+        authNumCounter += timeDiff;
+        
+        if(authNumCounter >= AUTH_NUMBER_TIMER_MAX)
+        {
+            [self authNumberTimerStop];
+        }
+        
+        // 타이머 숫자 표시
+        [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %ld초)", AUTH_NUMBER_TIMER_MAX - authNumCounter] forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch ([alertView tag])
+    {
+        case 60001: // 휴대폰 오류 자세히 보기 뷰 생성
+        {
+            if(buttonIndex == BUTTON_INDEX_OK)
+            {
+                RegistPhoneErrorViewController *vc = [[RegistPhoneErrorViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
 @end

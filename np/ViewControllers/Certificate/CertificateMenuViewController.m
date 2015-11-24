@@ -82,6 +82,8 @@
         cell = [CertMenuCell cell];
     }
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     [cell setFrame:CGRectMake(0, 0, tableView.frame.size.width, cellHeight)];
     [cell.titleLabel setText:[mCertMenuArray objectAtIndex:indexPath.row]];
     

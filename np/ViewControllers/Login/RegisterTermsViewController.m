@@ -221,7 +221,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"%s, %@", __FUNCTION__, request.URL.path);
+//    NSLog(@"%s, %@", __FUNCTION__, request.URL.path);
     return YES;
 }
 

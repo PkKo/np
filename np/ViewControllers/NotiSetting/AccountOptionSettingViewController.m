@@ -102,6 +102,30 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        accountType = [[response objectForKey:@"account_type"] integerValue];
+        
+        if(accountType < 1 || accountType > 4)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입출금 알림 신청이 불가능한 계좌입니다.\n입출식,외환,수익증권,신탁 계좌만 신청이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            
+            // 뒤로가기
+            NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
+            while(viewIndex >= 0)
+            {
+                ECSlidingViewController *eVC = [[self.navigationController viewControllers] objectAtIndex:viewIndex];
+                if([eVC.topViewController isKindOfClass:[AccountManageViewController class]])
+                {
+                    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
+                    break;
+                }
+                
+                viewIndex--;
+            }
+            
+            return;
+        }
+        
         if([(NSArray *)[[response objectForKey:@"list"] objectForKey:@"sub"] count] > 0)
         {
             NSDictionary *optionData = [[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0];
@@ -138,6 +162,8 @@
         
         totalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
         
+        // 계좌 타입
+        [optionView setAccountType:accountType];
         [optionView makeAllOptionDataView];
     }
     else
@@ -354,7 +380,20 @@
     }
     else if([alertView tag] == 90003)
     {
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
+        // 뒤로가기
+        NSInteger viewIndex = [[self.navigationController viewControllers] count] - 1;
+        while(viewIndex >= 0)
+        {
+            ECSlidingViewController *eVC = [[self.navigationController viewControllers] objectAtIndex:viewIndex];
+            if([eVC.topViewController isKindOfClass:[AccountManageViewController class]])
+            {
+                [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:viewIndex] animated:YES];
+                break;
+            }
+            
+            viewIndex--;
+        }
     }
 }
 

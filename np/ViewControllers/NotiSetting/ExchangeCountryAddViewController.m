@@ -424,7 +424,7 @@
         {
             if(tempIndex == periodTwoIndex || tempIndex == periodThreeIndex)
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
                 [alertView show];
                 return;
             }
@@ -434,7 +434,7 @@
         {
             if(tempIndex == periodOneIndex || tempIndex == periodThreeIndex)
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
                 [alertView show];
                 return;
             }
@@ -444,7 +444,7 @@
         {
             if(tempIndex == periodTwoIndex || tempIndex == periodOneIndex)
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
                 [alertView show];
                 return;
             }

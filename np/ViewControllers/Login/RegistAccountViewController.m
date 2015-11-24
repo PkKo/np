@@ -23,6 +23,7 @@
 #import "RegistPhoneViewController.h"
 #import "RegistAccountInputView.h"
 #import "LoginUtil.h"
+#import "RegistPhoneErrorViewController.h"
 
 @interface RegistAccountViewController ()
 
@@ -523,7 +524,8 @@
         
         if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"해당 휴대폰 번호는 NH농협에 미등록되어 있는 번호입니다.\n번호가 변경된 경우는 인근 영업점에 고객정보를 변경 후 이용하시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가 NH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+            [alertView setTag:60001];
             [alertView show];
             return;
         }
@@ -577,6 +579,15 @@
         {
             self.currentTextField = nil;
             [self moveToCertListView];
+            break;
+        }
+        case 60001: // 휴대폰 오류 자세히 보기 뷰 생성
+        {
+            if(buttonIndex == BUTTON_INDEX_OK)
+            {
+                RegistPhoneErrorViewController *vc = [[RegistPhoneErrorViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             break;
         }
             

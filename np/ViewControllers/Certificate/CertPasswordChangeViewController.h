@@ -23,6 +23,7 @@ typedef enum PASSWORD_TYPE
     NSString *currentPassword;
     NSString *newPassword;
     NSString *newCheckPassword;
+    NSInteger wrongPasswordCount;
 }
 
 @property (strong, nonatomic) CertInfo *certInfo;

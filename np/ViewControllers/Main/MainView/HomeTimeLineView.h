@@ -57,6 +57,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *sortLabel;
 @property (strong, nonatomic) IBOutlet UIView *topMenuView;
 @property (strong, nonatomic) IBOutlet UIView *listEmptyView;
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 
 // 삭제시 전체선택 뷰
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;

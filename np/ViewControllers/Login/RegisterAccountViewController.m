@@ -216,9 +216,19 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        NSInteger accountType = [[response objectForKey:@"account_type"] integerValue];
+        
+        if(accountType < 1 || accountType > 4)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입출금 알림 신청이 불가능한 계좌입니다.\n입출식,외환,수익증권,신탁 계좌만 신청이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        
         optionView = [RegistAccountOptionSettingView view];
         [optionView setDelegate:self];
         [optionView initDataWithAccountNumber:certifiedAccountNumber];
+        [optionView setAccountType:accountType];
         [optionView.accountChangeButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
         [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
         

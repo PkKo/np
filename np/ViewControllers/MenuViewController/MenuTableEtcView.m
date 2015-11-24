@@ -11,6 +11,15 @@
 
 @implementation MenuTableEtcView
 
+@synthesize nongminButton;
+@synthesize nongminLabel;
+@synthesize telButton;
+@synthesize telLabel;
+@synthesize faqButton;
+@synthesize faqLabel;
+@synthesize noticeButton;
+@synthesize noticeLabel;
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -10,6 +10,7 @@
 #import "NFilterChar.h"
 #import "nFilterCharForPad.h"
 #import "EccEncryptor.h"
+#import "BTWSSLCrypto.h"
 
 @interface CertPasswordChangeViewController ()
 
@@ -28,6 +29,8 @@
 
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
     [self.mNaviView.mMenuButton setHidden:YES];
+    
+    wrongPasswordCount = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +49,27 @@
         return;
     }
     
+    if([newPassword length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"변경할 비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([newCheckPassword length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"변경할 비밀번호 확인 비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(![newPassword isEqualToString:newCheckPassword])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.\n다시 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     // 기존 비밀번호와 변경할 비밀번호가 동일한 경우
     if([currentPassword isEqualToString:newPassword])
     {
@@ -53,26 +77,61 @@
         [alertView show];
         return;
     }
-    
+        
     if(certInfo != nil)
     {
         [[CertManager sharedInstance] setCertInfo:certInfo];
         
-        int rc = 0;
+        int passCheck = [[CertManager sharedInstance] checkPassword:currentPassword];
         
-        rc = [[CertManager sharedInstance] changePassword:newPassword currentPassword:currentPassword];
-        
-        if (rc != 0)
+        if(passCheck == 0)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            [alert show];
+            int rc = 0;
+            
+            rc = [[CertManager sharedInstance] changePassword:newPassword currentPassword:currentPassword];
+            
+            if (rc != 0)
+            {
+                wrongPasswordCount++;
+                
+                NSString *alertMessage = @"";
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:alertMessage delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                if (wrongPasswordCount >= 5) {
+                    alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+                    [alert setTag:999];
+                    
+                } else {
+                    
+                    alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)wrongPasswordCount];
+                }
+                [alert setMessage:alertMessage];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"공인인증서 비밀번호가 변경되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alert setTag:999];
+                [alert show];
+            }
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 변경되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            [alert setTag:999];
+            wrongPasswordCount++;
+            
+            NSString *alertMessage = @"";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:alertMessage delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            if (wrongPasswordCount >= 5) {
+                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+                [alert setTag:999];
+                
+            } else {
+                
+                alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)wrongPasswordCount];
+            }
+            [alert setMessage:alertMessage];
             [alert show];
         }
+        
     }
 }
 
