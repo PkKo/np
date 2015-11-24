@@ -121,11 +121,12 @@
     } else {
         
         [self startIndicator];
-        [self clearData];
         [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text
                                                            password:self.passwordTextField.text
                                                            birthday:self.birthdayTextField.text
                                                    ofViewController:self action:@selector(loginResponse:)];
+        
+        [self clearData];
     }
     
     if (alertMessage) {

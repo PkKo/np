@@ -106,7 +106,7 @@
     
     if ([pw length] != PW_LENGTH) {
         
-        alertMessage = @"숫자 6자리를 입력해 주세요.";
+        alertMessage = @"간편 비밀번호를 입력해주세요.";
         
     } else if (![pw isEqualToString:savedPassword]) {
         
@@ -114,12 +114,12 @@
         [util saveSimplePasswordFailedTimes:failedTimes];
         if (failedTimes >= 5) {
             
-            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+            alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여 로그인이 불가능합니다. 본인인증 후 간편 비밀번호를 재설정해주세요.";
             tag             = ALERT_GOTO_SELF_IDENTIFY;
             
         } else {
             
-            alertMessage = [NSString stringWithFormat:@"비밀번호가 일치하지 않습니다.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
+            alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d회 오류입니다.", (int)failedTimes];
         }
     }
     
@@ -238,8 +238,8 @@
     
     NSString * loginType        = @"PIN";
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
-    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID]; //@"150324104128890";
-    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;//@"01540051434";
+    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;
     
     [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
     [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
