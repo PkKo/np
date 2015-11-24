@@ -88,6 +88,7 @@
             }
             case OTHER:
             {
+                reqData.accountNumberList = [NSArray array];
                 reqData.queryType = @"ETC";
                 break;
             }
@@ -267,6 +268,7 @@
         }
         case OTHER:
         {
+            reqData.accountNumberList = [NSArray array];
             reqData.queryType = @"ETC";
             break;
         }

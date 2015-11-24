@@ -192,6 +192,11 @@
 - (void)sessionRefreshResponse:(NSDictionary *)response
 {
 //    NSLog(@"%s", __FUNCTION__);
+    if(response == nil)
+    {
+        return;
+    }
+    
     if(![[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] && ![[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         [((AppDelegate *)[UIApplication sharedApplication].delegate) timeoutError:response];

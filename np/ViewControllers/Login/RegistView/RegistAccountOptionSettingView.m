@@ -183,7 +183,7 @@
     notiStartTime = -1;
     notiEndTime = -1;
     balanceFlag = 1;
-    notiAutoFlag = 1;
+    notiAutoFlag = 3;
     notiPeriodType = 1;
     notiPeriodTime1 = -1;
     notiPeriodTime2 = -1;
@@ -708,7 +708,7 @@
         case NOTI_LIMIT_AUTO:
         {
             // 펀드계좌인 경우 자동이체 옵션 선택할 수 없음
-            if(accountType == FUND)
+            if(accountType == FUND || accountType == TRUST)
             {
                 return;
             }

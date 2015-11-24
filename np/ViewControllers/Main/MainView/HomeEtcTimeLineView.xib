@@ -383,7 +383,9 @@
                 <outlet property="searchEndDateLabel" destination="wUf-oi-V6z" id="krX-Uv-y2V"/>
                 <outlet property="searchStartDateLabel" destination="oMF-BM-9lW" id="Ctk-ss-aRA"/>
                 <outlet property="searchView" destination="mNF-8u-5ux" id="m5y-G9-1mI"/>
+                <outlet property="serviceSelectButton" destination="qN2-hN-84q" id="Uvq-Vk-kth"/>
                 <outlet property="serviceSelectLabel" destination="mGf-vu-IMf" id="9o9-sj-gUy"/>
+                <outlet property="serviceSelectionImage" destination="aIj-zR-d4q" id="G2k-HD-ZbS"/>
                 <outlet property="timelineTableView" destination="yJF-RD-WKf" id="LsF-Rg-AWa"/>
             </connections>
             <point key="canvasLocation" x="313" y="374"/>

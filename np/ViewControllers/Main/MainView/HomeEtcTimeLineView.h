@@ -30,6 +30,7 @@
     BOOL searchDateSelectType;
     
     UIView *pickerBgView;
+    CGRect serviceSelectLabelFrame;
 }
 
 @property (assign, nonatomic) id delegate;
@@ -60,6 +61,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *emptyListImageView;
 
 @property (strong, nonatomic) IBOutlet UILabel *serviceSelectLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *serviceSelectionImage;
+@property (strong, nonatomic) IBOutlet UIButton *serviceSelectButton;
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data;
 - (void)refreshData;

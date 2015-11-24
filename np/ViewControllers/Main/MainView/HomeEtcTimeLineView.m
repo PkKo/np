@@ -50,6 +50,11 @@
 
 @synthesize serviceSelectLabel;
 
+- (void)drawRect:(CGRect)rect
+{
+    serviceSelectLabelFrame = serviceSelectLabel.frame;
+}
+
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
     timelineSection = section;
@@ -400,24 +405,30 @@
     else if([inboxData.inboxType isEqualToString:@"B"])
     {
         [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
-        [cell.depthImage setHidden:YES];
+        [cell.depthImage setHidden:NO];
         // 타이틀
         [cell.titleLabel setText:@"e금융인증번호"];
         // 내용
         [cell.contentLabel setText:inboxData.text];
         [cell.contentLabel setNumberOfLines:1];
+        CGSize cellSize = cell.contentLabel.frame.size;
         [cell.contentLabel sizeToFit];
+        [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
+                                  cellSize.width, cell.contentLabel.frame.size.height)];
     }
     else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
     {
         [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
-        [cell.depthImage setHidden:YES];
+        [cell.depthImage setHidden:NO];
         // 타이틀
         [cell.titleLabel setText:@"공지사항"];
         // 내용
         [cell.contentLabel setText:inboxData.text];
         [cell.contentLabel setNumberOfLines:1];
+        CGSize cellSize = cell.contentLabel.frame.size;
         [cell.contentLabel sizeToFit];
+        [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
+                                  cellSize.width, cell.contentLabel.frame.size.height)];
     }
     else
     {
@@ -704,6 +715,7 @@
     
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
 //    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+    reqData.accountNumberList = [NSArray array];
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
@@ -934,25 +946,44 @@
 - (void)selectServiceCode:(NSString *)selection
 {
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-//    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+    reqData.accountNumberList = [NSArray array];
     reqData.ascending = YES;
+    
+    [serviceSelectLabel setText:selection];
     
     if([selection isEqualToString:SERVICE_TYPE_ALL])
     {
         reqData.queryType = @"ETC";
+        [serviceSelectLabel setFrame:serviceSelectLabelFrame];
     }
     else if([selection isEqualToString:SERVICE_TYPE_ECOMMERCE])
     {
         reqData.queryType = @"B";
+        [serviceSelectLabel sizeToFit];
+        [serviceSelectLabel setFrame:CGRectMake(serviceSelectLabel.frame.origin.x,
+                                                serviceSelectLabel.frame.origin.y,
+                                                serviceSelectLabel.frame.size.width,
+                                                serviceSelectLabelFrame.size.height)];
     }
     else if([selection isEqualToString:SERVICE_TYPE_EXCHANGE])
     {
         reqData.queryType = @"A";
+        [serviceSelectLabel setFrame:serviceSelectLabelFrame];
     }
     else if([selection isEqualToString:SERVICE_TYPE_ETC])
     {
         reqData.queryType = @"3,4,5,6,Z";
+        [serviceSelectLabel setFrame:serviceSelectLabelFrame];
     }
+    
+    [_serviceSelectionImage setFrame:CGRectMake(serviceSelectLabel.frame.origin.x + serviceSelectLabel.frame.size.width,
+                                                serviceSelectLabel.frame.origin.y,
+                                                _serviceSelectionImage.frame.size.width,
+                                                _serviceSelectionImage.frame.size.height)];
+    [_serviceSelectButton setFrame:CGRectMake(serviceSelectLabel.frame.origin.x,
+                                             serviceSelectLabel.frame.origin.y,
+                                             serviceSelectLabel.frame.size.width + _serviceSelectionImage.frame.size.width,
+                                              _serviceSelectButton.frame.size.height)];
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {

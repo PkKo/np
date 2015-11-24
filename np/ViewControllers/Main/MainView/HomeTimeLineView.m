@@ -18,6 +18,7 @@
 #import "LoginUtil.h"
 #import "StatisticMainUtil.h"
 #import "ServiceFunctionInfoView.h"
+#import "HomeEtcDetailViewController.h"
 
 @implementation HomeTimeLineView
 
@@ -676,10 +677,13 @@
     MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
     [newTopViewController setStartPageIndex:INBOX];
     
+    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) tabSelect:INBOX];
+    
+    /*
     CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];*/
 }
 
 #pragma mark - 새로고침
@@ -1193,25 +1197,33 @@
             }
             else if([inboxData.inboxType isEqualToString:@"B"])
             {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
-                [cell.depthImage setHidden:YES];
+                [cell.depthImage setHidden:NO];
                 // 타이틀
                 [cell.titleLabel setText:@"e금융인증번호"];
                 // 내용
                 [cell.contentLabel setText:inboxData.text];
                 [cell.contentLabel setNumberOfLines:1];
+                CGSize cellSize = cell.contentLabel.frame.size;
                 [cell.contentLabel sizeToFit];
+                [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
+                                                       cellSize.width, cell.contentLabel.frame.size.height)];
             }
             else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
             {
+                [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
-                [cell.depthImage setHidden:YES];
+                [cell.depthImage setHidden:NO];
                 // 타이틀
                 [cell.titleLabel setText:@"공지사항"];
                 // 내용
                 [cell.contentLabel setText:inboxData.text];
                 [cell.contentLabel setNumberOfLines:1];
+                CGSize cellSize = cell.contentLabel.frame.size;
                 [cell.contentLabel sizeToFit];
+                [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
+                                                       cellSize.width, cell.contentLabel.frame.size.height)];
             }
             else
             {
@@ -1265,6 +1277,23 @@
             
             return cell;
         }
+    }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSString *section = ((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date;
+    NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
+    
+    if([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
+    {
+        HomeEtcDetailViewController *vc = [[HomeEtcDetailViewController alloc] init];
+        [vc setInboxData:inboxData];
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
     }
 }
 

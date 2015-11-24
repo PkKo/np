@@ -25,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *inboxButton;
 @property (strong, nonatomic) IBOutlet UIImageView *inboxSelectImg;
 
+- (void)tabSelect:(NSInteger)index;
 - (IBAction)tabButtonClick:(id)sender;
 @end
