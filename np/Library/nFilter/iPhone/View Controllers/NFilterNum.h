@@ -106,6 +106,7 @@
     NSTimer *tmrCursor;             // 커서타이머
     UIButton *btnRadnomNum;         // 랜덤버튼
     NSArray *arrGapByEcc;
+    BOOL isAutoCloseKeyboard;       // close keyboard automatically when the number of input text reaches the length limit
     
 	BOOL isStopCursor;              // 커서멈춤
     BOOL isSuportLandscape;         // 가로모드 지원
@@ -185,6 +186,7 @@
 - (void)setTopBarText:(NSString *)bBarTitle;                // 탑바 텍스트 설정
 - (void)setToolBar:(BOOL)pYesOrNo;                          // 툴바 설정
 - (void)setLengthWithTagName:(NSString *)pTagName length:(NSInteger)pLength webView:(UIWebView *)pWebView;            // 태그이름,길이 설정
+- (void)setLengthWithTagName:(NSString *)pTagName length:(NSInteger)pLength webView:(UIWebView *)pWebView isAutoCloseKeyboard:(BOOL)autoCloseKeyobard;
 - (void)setNonPlainText:(BOOL)pYesOrNo;                     // 평문없앰 설정
 - (void)setNoSound:(BOOL)pYesOrNo;                          // 사운드 없앰
 - (void)setSupportIdentityNum:(BOOL)pYesOrNo;

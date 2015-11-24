@@ -54,16 +54,17 @@
 }
 
 - (void)checkMaxTextInputLength:(int)maxLength ofTextField:(UITextField *)sender {
-    if ([[sender text] length] > maxLength) {
+    if ([[sender text] length] >= maxLength) {
         [sender setText:[[sender text] substringToIndex:maxLength]];
+        [self tapOutsideOfKBToHideKeyboard:nil];
     }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    [textField setText:@""];
-    
     if (textField == self.passwordTextField) {
+        
+        [textField setText:@""];
         
         [textField resignFirstResponder];
         
