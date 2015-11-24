@@ -408,6 +408,7 @@
                 <outlet property="deleteAllView" destination="T5P-jZ-t4J" id="dhV-ao-gf8"/>
                 <outlet property="deleteButton" destination="hyG-5m-x8E" id="vFc-21-eeg"/>
                 <outlet property="deleteButtonView" destination="HWm-oE-fFu" id="vId-oV-Ufz"/>
+                <outlet property="emptyLabel" destination="mXM-MW-Sel" id="Bz6-nC-Uhl"/>
                 <outlet property="emptyListImageView" destination="5ct-ij-VfW" id="mtA-ZT-JtV"/>
                 <outlet property="listEmptyView" destination="KT6-XI-Ugw" id="adt-as-TVS"/>
                 <outlet property="mTimeLineTable" destination="ax2-sT-eHl" id="mP3-Eo-pct"/>

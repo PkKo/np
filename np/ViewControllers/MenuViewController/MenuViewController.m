@@ -68,6 +68,10 @@
     [bottomMenu setFrame:CGRectMake(0, 0, bottomMenuView.frame.size.width, bottomMenu.frame.size.height)];
     [bottomMenuView addSubview:bottomMenu];*/
     bottomMenu = [MenuTableEtcView view];
+    [[bottomMenu nongminButton] setDelegateLabel:[bottomMenu nongminLabel]];
+    [[bottomMenu telButton] setDelegateLabel:[bottomMenu telLabel]];
+    [[bottomMenu faqButton] setDelegateLabel:[bottomMenu faqLabel]];
+    [[bottomMenu noticeButton] setDelegateLabel:[bottomMenu noticeLabel]];
     [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_FOOTER_HEIGHT)];
     [menuTableView setTableFooterView:bottomMenu];
     [menuTableView bringSubviewToFront:bottomMenu];
@@ -302,6 +306,8 @@
     }
     else
     {
+        [self closeMenu:nil];
+        
         switch (indexPath.row)
         {
             case 7: // 공인인증센터

@@ -23,6 +23,7 @@
 @synthesize timeLineDic;
 @synthesize bankingListTable;
 @synthesize listEmptyView;
+@synthesize emptyLabel;
 @synthesize statisticButton;
 @synthesize sortLabel;
 
@@ -130,10 +131,12 @@
         if(isSearchResult)
         {
             [emptyListImageView setImage:[UIImage imageNamed:@"icon_noresult_01.png"]];
+            [emptyLabel setText:@"해당 기간 내 검색 결과가 없습니다."];
         }
         else
         {
             [emptyListImageView setImage:[UIImage imageNamed:@"icon_notice_06.png"]];
+            [emptyLabel setText:@"알림 내역이 없습니다."];
         }
     }
     else

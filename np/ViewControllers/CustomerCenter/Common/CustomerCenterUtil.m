@@ -55,6 +55,7 @@
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
     UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
+    [navController popToRootViewControllerAnimated:NO];
     [navController pushViewController:eVC animated:YES];
 }
 

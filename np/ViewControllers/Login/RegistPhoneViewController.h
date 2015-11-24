@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface RegistPhoneViewController : CommonViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 {
     NSArray *carrierListArray;
     NSInteger carrierIndex;
@@ -21,6 +21,8 @@
     
     CGRect orgBottomRect;
     UIView *pickeBgView;
+    
+    NSDate *backgroundEnteredTime;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;

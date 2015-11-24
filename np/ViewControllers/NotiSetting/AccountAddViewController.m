@@ -315,6 +315,19 @@
         if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
         {
             allAccountList = [NSMutableArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
+            NSMutableArray *tempAllAccountList = [NSMutableArray arrayWithArray:allAccountList];
+            NSArray *joinedAccounts = [[[LoginUtil alloc] init] getAllAccounts];
+            for(NSDictionary *account in allAccountList)
+            {
+                for (NSString *accountNumber in joinedAccounts)
+                {
+                    if([[account objectForKey:@"EAAPAL00R0_OUT_SUB.acno"] isEqualToString:accountNumber])
+                    {
+                        [tempAllAccountList removeObject:account];
+                    }
+                }
+            }
+            allAccountList = tempAllAccountList;
             allListView = [RegistAccountAllListView view];
             [allListView initAccountList:allAccountList customerName:[response objectForKey:@"user_name"]];
             [allListView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
@@ -336,6 +349,14 @@
 #pragma mark - 계좌인증 확인
 - (void)checkRegistAccountRequest
 {
+    NSArray *allAccounts = [[[LoginUtil alloc] init] getAllAccounts];
+    if([allAccounts containsObject:accountInputField.text])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"이미 등록된 계좌입니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
@@ -391,12 +412,21 @@
         {
             // 공인인증서로 추가
             // 계좌번호가 있으면 옵션 설정 뷰 컨트롤러로 이동한다.
-            AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
-            [vc setAccountNumber:[[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
-            [vc setIsNewAccount:YES];
-            ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
-            
-            [self.navigationController pushViewController:eVC animated:YES];
+            if([allAccountList count] > 0)
+            {
+                AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
+                [vc setAccountNumber:[[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
+                [vc setIsNewAccount:YES];
+                ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+                
+                [self.navigationController pushViewController:eVC animated:YES];
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"추가할 계좌가 존재하지 않습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+                return;
+            }
         }
     }
     else if(![accountCertTab isEnabled])

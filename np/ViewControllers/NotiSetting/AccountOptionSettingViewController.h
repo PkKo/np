@@ -14,6 +14,7 @@
     RegistAccountOptionSettingView *optionView;
     NSString *receiptsPaymentId;
     NSInteger totalNotiCount;
+    NSInteger accountType;
 }
 
 @property (strong, nonatomic) NSString *accountNumber;

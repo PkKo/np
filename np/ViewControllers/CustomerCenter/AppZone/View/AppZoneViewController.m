@@ -39,6 +39,12 @@
     [self stopIndicator];
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSLog(@"%s, %@", __FUNCTION__, request.URL.path);
+    return YES;
+}
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
     [self stopIndicator];
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:error.description delegate:self

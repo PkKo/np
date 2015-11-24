@@ -513,6 +513,7 @@
                 <outlet property="deleteAllView" destination="wet-vp-G3b" id="hFA-4V-eBP"/>
                 <outlet property="deleteButton" destination="ERD-ZM-SPu" id="9oe-Ce-9ES"/>
                 <outlet property="deleteButtonView" destination="8jL-zc-yVw" id="fah-dh-cbg"/>
+                <outlet property="emptyLabel" destination="whU-fr-vmR" id="lfD-cf-4Aw"/>
                 <outlet property="emptyListImageView" destination="Qim-oJ-K5r" id="hao-kk-t44"/>
                 <outlet property="listEmptyView" destination="zMY-eF-1Wh" id="6Vo-AD-Usq"/>
                 <outlet property="periodOneMonthBtn" destination="Kgg-Dk-HfH" id="upA-J5-KvM"/>

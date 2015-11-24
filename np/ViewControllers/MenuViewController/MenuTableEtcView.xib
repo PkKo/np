@@ -20,7 +20,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uNu-bl-Xxi">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uNu-bl-Xxi" customClass="DelegateButton">
                             <rect key="frame" x="31" y="10" width="42" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -37,7 +37,7 @@
                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Xk-3o-g0F">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Xk-3o-g0F" customClass="DelegateButton">
                             <rect key="frame" x="85" y="10" width="42" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -54,7 +54,7 @@
                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ynb-RC-TdS">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ynb-RC-TdS" customClass="DelegateButton">
                             <rect key="frame" x="139" y="10" width="42" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="icon_faq_01_dft.png"/>
@@ -70,7 +70,7 @@
                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y1C-LO-UFt">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y1C-LO-UFt" customClass="DelegateButton">
                             <rect key="frame" x="193" y="10" width="42" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -97,6 +97,16 @@
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="faqButton" destination="Ynb-RC-TdS" id="Kfh-da-Gba"/>
+                <outlet property="faqLabel" destination="lvZ-ue-8me" id="5Nr-Jb-EVL"/>
+                <outlet property="nongminButton" destination="uNu-bl-Xxi" id="H3M-92-FeA"/>
+                <outlet property="nongminLabel" destination="qLw-Fd-i6V" id="54t-zB-KKE"/>
+                <outlet property="noticeButton" destination="Y1C-LO-UFt" id="LYh-RB-HJn"/>
+                <outlet property="noticeLabel" destination="xWx-WG-ZLb" id="tWV-ej-xTO"/>
+                <outlet property="telButton" destination="5Xk-3o-g0F" id="FvO-2g-JkK"/>
+                <outlet property="telLabel" destination="BtI-wZ-u1T" id="eb9-2a-c9C"/>
+            </connections>
             <point key="canvasLocation" x="274.5" y="356.5"/>
         </view>
     </objects>

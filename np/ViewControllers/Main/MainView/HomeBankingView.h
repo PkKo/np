@@ -55,6 +55,7 @@
 @property (strong, nonatomic) NSMutableDictionary   *timeLineDic;
 @property (strong, nonatomic) IBOutlet UITableView *bankingListTable;
 @property (strong, nonatomic) IBOutlet UIView *listEmptyView;
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *statisticButton;
 @property (strong, nonatomic) IBOutlet UILabel *sortLabel;

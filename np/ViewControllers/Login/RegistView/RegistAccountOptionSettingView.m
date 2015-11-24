@@ -16,6 +16,7 @@
 @synthesize delegate;
 @synthesize scrollView;
 @synthesize contentView;
+@synthesize accountType;
 
 @synthesize accountNumberLabel;
 @synthesize accountChangeButton;
@@ -35,8 +36,10 @@
 @synthesize amountSelectView;
 @synthesize amountSeletPickerView;
 
-@synthesize notiTimeStart;
-@synthesize notiTimeEnd;
+@synthesize notiAbortOnImg;
+@synthesize notiAbortLabel;
+@synthesize notiTimeStartLabel;
+@synthesize notiTimeEndLabel;
 
 @synthesize balanceOnImg;
 @synthesize balanceOnText;
@@ -155,6 +158,9 @@
     [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     
     // 알림 시간 제한 선택
+    notiAbortFlag = NO;
+    [notiAbortOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+    [notiAbortLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
     alarmTimeList = [NSArray arrayWithObjects:@"선택", @"00:00", @"01:00", @"02:00", @"03:00", @"04:00", @"05:00", @"06:00", @"07:00", @"08:00", @"09:00", @"10:00", @"11:00", @"12:00", @"13:00", @"14:00", @"15:00", @"16:00", @"17:00", @"18:00", @"19:00", @"20:00", @"21:00", @"22:00", @"23:00", nil];
     
     // 잔액 표시
@@ -280,6 +286,7 @@
     }
     else
     {
+        notiAbortFlag = YES;
         notiTimeFlag = YES;
     }
     
@@ -287,29 +294,44 @@
     {
         if(notiStartTime < 0)
         {
-            [notiTimeStart setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+            [notiTimeStartLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+            [notiTimeStartLabel setText:[alarmTimeList objectAtIndex:notiStartTime + 1]];
         }
         else
         {
-            [notiTimeStart setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+            [notiTimeStartLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+            [notiTimeStartLabel setText:[[alarmTimeList objectAtIndex:notiStartTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""]];
         }
         
         if(notiEndTime < 0)
         {
-            [notiTimeEnd setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+            [notiTimeEndLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+            [notiTimeEndLabel setText:[alarmTimeList objectAtIndex:notiEndTime + 1]];
         }
         else
         {
-            [notiTimeEnd setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+            [notiTimeEndLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+            [notiTimeEndLabel setText:[[alarmTimeList objectAtIndex:notiEndTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""]];
         }
     }
     else
     {
-        [notiTimeStart setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
-        [notiTimeEnd setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeStartLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeStartLabel setText:[alarmTimeList objectAtIndex:notiStartTime + 1]];
+        [notiTimeEndLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeEndLabel setText:[alarmTimeList objectAtIndex:notiEndTime + 1]];
     }
-    [notiTimeStart setText:[alarmTimeList objectAtIndex:notiStartTime + 1]];
-    [notiTimeEnd setText:[alarmTimeList objectAtIndex:notiEndTime + 1]];
+    
+    if(notiAbortFlag)
+    {
+        [notiAbortOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiAbortLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    }
+    else
+    {
+        [notiAbortOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [notiAbortLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+    }
 }
 
 /**
@@ -421,26 +443,26 @@
         }
         case NOTI_TIME_START:
         {
-            if(pickerSelectIndex > 0 && (pickerSelectIndex - 1) == notiEndTime)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
             notiStartTime = pickerSelectIndex - 1;
             [self notiUnnotiTimeViewSetting];
+            if(notiStartTime > -1 && (notiStartTime >= notiEndTime) && notiEndTime > -1)
+            {
+                NSString *message = [NSString stringWithFormat:@"선택하신 알림 시간제한은 %@시 00분 부터 \n익일 %@시 59분까지입니다.", [[alarmTimeList objectAtIndex:notiStartTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""], [[alarmTimeList objectAtIndex:notiEndTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""]];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+            }
             break;
         }
         case NOTI_TIME_END:
         {
-            if(pickerSelectIndex > 0 && (pickerSelectIndex - 1) == notiStartTime)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"같은 시간으로 알림설정 할 수 없습니다.\n다시 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
             notiEndTime = pickerSelectIndex - 1;
             [self notiUnnotiTimeViewSetting];
+            if(notiStartTime > -1 && (notiStartTime >= notiEndTime) && notiEndTime > -1)
+            {
+                NSString *message = [NSString stringWithFormat:@"선택하신 알림 시간제한은 %@시 00분 부터 \n익일 %@시 59분까지입니다.", [[alarmTimeList objectAtIndex:notiStartTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""], [[alarmTimeList objectAtIndex:notiEndTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""]];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+                [alertView show];
+            }
             break;
         }
         case NOTI_PERIOD_ONE:
@@ -623,6 +645,11 @@
     {
         case AMOUNT:
         {
+            // 외환계좌인 경우 통지금액 옵션 선택할 수 없음
+            if(accountType == EXCHANGE)
+            {
+                return;
+            }
             if(selectedAmount > 0)
             {
                 pickerSelectIndex = selectedAmount - 1;
@@ -635,31 +662,56 @@
         }
         case NOTI_TIME_START:
         {
+            if(!notiAbortFlag)
+            {
+                return;
+            }
             pickerSelectIndex = notiStartTime + 1;
             break;
         }
         case NOTI_TIME_END:
         {
+            if(!notiAbortFlag)
+            {
+                return;
+            }
             pickerSelectIndex = notiEndTime + 1;
             break;
         }
         case NOTI_PERIOD_ONE:
         {
+            if(notiStartTime > -1 || notiEndTime > -1)
+            {
+                return;
+            }
             pickerSelectIndex = notiPeriodTime1 + 1;
             break;
         }
         case NOTI_PERIOD_TWO:
         {
+            if(notiStartTime > -1 || notiEndTime > -1)
+            {
+                return;
+            }
             pickerSelectIndex = notiPeriodTime2 + 1;
             break;
         }
         case NOTI_PERIOD_THREE:
         {
+            if(notiStartTime > -1 || notiEndTime > -1)
+            {
+                return;
+            }
             pickerSelectIndex = notiPeriodTime3 + 1;
             break;
         }
         case NOTI_LIMIT_AUTO:
         {
+            // 펀드계좌인 경우 자동이체 옵션 선택할 수 없음
+            if(accountType == FUND)
+            {
+                return;
+            }
             pickerSelectIndex = notiAutoFlag - 1;
             break;
         }
@@ -716,6 +768,23 @@
     {
         currentPickerView = (PickerViewType)[sender tag];
         [self showAmountSelectPickerView];
+    }
+}
+
+- (IBAction)selectNotiAbort:(id)sender
+{
+    notiAbortFlag = !notiAbortFlag;
+    
+    if(notiAbortFlag)
+    {
+        [notiAbortOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiAbortLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    }
+    else
+    {
+        notiStartTime = -1;
+        notiEndTime = -1;
+        [self notiUnnotiTimeViewSetting];
     }
 }
 @end

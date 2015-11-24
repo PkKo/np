@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum AccountType
+{
+    // 입출금(요구불)
+    NORMAL = 1,
+    // 외화(요구불)
+    EXCHANGE,
+    // 수익증권
+    FUND,
+    // 신탁
+    TRUST
+}AccountType;
+
 typedef enum AlarmSetting
 {
     BOTH = 1,
@@ -48,6 +60,7 @@ typedef enum PickerViewType
     int pickerSelectIndex;
     PickerViewType currentPickerView;
     UIView *pickerBgView;
+    BOOL notiAbortFlag;
 }
 
 @property (assign, nonatomic) id delegate;
@@ -58,7 +71,8 @@ typedef enum PickerViewType
 @property (strong, nonatomic) IBOutlet UILabel *accountNumberLabel;
 // 계좌변경
 @property (strong, nonatomic) IBOutlet UIButton *accountChangeButton;
-
+//
+@property (assign, nonatomic) NSInteger accountType;
 // 계좌 별칭
 @property (strong, nonatomic) IBOutlet CommonTextField *accountNicknameInput;
 
@@ -85,8 +99,10 @@ typedef enum PickerViewType
 
 /////////////////////////////////////////////////////////////////
 // 알림 시간 제한
-@property (strong, nonatomic) IBOutlet UILabel *notiTimeStart;
-@property (strong, nonatomic) IBOutlet UILabel *notiTimeEnd;
+@property (strong, nonatomic) IBOutlet CircleView *notiAbortOnImg;
+@property (strong, nonatomic) IBOutlet UILabel *notiAbortLabel;
+@property (strong, nonatomic) IBOutlet UILabel *notiTimeStartLabel;
+@property (strong, nonatomic) IBOutlet UILabel *notiTimeEndLabel;
 
 /////////////////////////////////////////////////////////////////
 
@@ -172,5 +188,8 @@ typedef enum PickerViewType
 - (IBAction)selectNotiAutoSetting:(id)sender;
 // 알림주기 선택
 - (IBAction)selectNotiTime:(id)sender;
+// 알림 시간 제한 선택
+- (IBAction)selectNotiAbort:(id)sender;
+
 
 @end

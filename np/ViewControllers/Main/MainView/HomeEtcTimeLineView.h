@@ -35,6 +35,7 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) IBOutlet UITableView *timelineTableView;
 @property (strong, nonatomic) IBOutlet UIView *listEmptyView;
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (strong, nonatomic) NSMutableArray *timelineSection;
 @property (strong, nonatomic) NSMutableDictionary *timelineDic;
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;

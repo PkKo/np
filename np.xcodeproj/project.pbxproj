@@ -468,6 +468,10 @@
 		A2DE58891BA805A3008903E6 /* libBTW-SSLSign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DE58881BA805A3008903E6 /* libBTW-SSLSign.a */; };
 		A2DE588F1BA80F93008903E6 /* libBTWCryptoLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DE588E1BA80F93008903E6 /* libBTWCryptoLib.a */; };
 		A2DE58901BA81296008903E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DEADF21B9FE68600EDCCBA /* Main.storyboard */; };
+		A2DE5A821C044A380061BAE3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2DE5A811C044A380061BAE3 /* AudioToolbox.framework */; };
+		A2DE5A851C0462E80061BAE3 /* DelegateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE5A841C0462E80061BAE3 /* DelegateButton.m */; };
+		A2DE5A891C0476A90061BAE3 /* RegistPhoneErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE5A871C0476A90061BAE3 /* RegistPhoneErrorViewController.m */; };
+		A2DE5A8A1C0476A90061BAE3 /* RegistPhoneErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE5A881C0476A90061BAE3 /* RegistPhoneErrorViewController.xib */; };
 		A2DE64601BD5BF47009EC403 /* HomeEtcTimeLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE645F1BD5BF47009EC403 /* HomeEtcTimeLineView.m */; };
 		A2DE64621BD5BF54009EC403 /* HomeEtcTimeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2DE64611BD5BF54009EC403 /* HomeEtcTimeLineView.xib */; };
 		A2DE64661BD5C44C009EC403 /* HomeEtcTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DE64641BD5C44C009EC403 /* HomeEtcTimeLineCell.m */; };
@@ -580,10 +584,10 @@
 		A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
-		A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */; settings = {ASSET_TAGS = (); }; };
-		A5B50D5C1C02AC9100E6AD04 /* icon_noresult_02.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D581C02AC9100E6AD04 /* icon_noresult_02.png */; settings = {ASSET_TAGS = (); }; };
-		A5B50D5D1C02AC9100E6AD04 /* icon_noresult_03.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D591C02AC9100E6AD04 /* icon_noresult_03.png */; settings = {ASSET_TAGS = (); }; };
-		A5B50D5E1C02AC9100E6AD04 /* icon_noresult_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D5A1C02AC9100E6AD04 /* icon_noresult_03@2x.png */; settings = {ASSET_TAGS = (); }; };
+		A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */; };
+		A5B50D5C1C02AC9100E6AD04 /* icon_noresult_02.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D581C02AC9100E6AD04 /* icon_noresult_02.png */; };
+		A5B50D5D1C02AC9100E6AD04 /* icon_noresult_03.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D591C02AC9100E6AD04 /* icon_noresult_03.png */; };
+		A5B50D5E1C02AC9100E6AD04 /* icon_noresult_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D5A1C02AC9100E6AD04 /* icon_noresult_03@2x.png */; };
 		A5D50AEA1BD48F0500D7A2DD /* EnvMgmtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AE81BD48F0500D7A2DD /* EnvMgmtViewController.m */; };
 		A5D50AEB1BD48F0500D7A2DD /* EnvMgmtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D50AE91BD48F0500D7A2DD /* EnvMgmtViewController.xib */; };
 		A5D50AF11BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D50AEF1BD4B38F00D7A2DD /* NoticeBackgroundSettingsViewController.m */; };
@@ -1170,6 +1174,12 @@
 		A2DE58851BA7F98A008903E6 /* CertificateListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateListViewController.xib; sourceTree = "<group>"; };
 		A2DE58881BA805A3008903E6 /* libBTW-SSLSign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBTW-SSLSign.a"; sourceTree = "<group>"; };
 		A2DE588E1BA80F93008903E6 /* libBTWCryptoLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBTWCryptoLib.a; sourceTree = "<group>"; };
+		A2DE5A811C044A380061BAE3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A2DE5A831C0462E80061BAE3 /* DelegateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateButton.h; sourceTree = "<group>"; };
+		A2DE5A841C0462E80061BAE3 /* DelegateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateButton.m; sourceTree = "<group>"; };
+		A2DE5A861C0476A90061BAE3 /* RegistPhoneErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistPhoneErrorViewController.h; sourceTree = "<group>"; };
+		A2DE5A871C0476A90061BAE3 /* RegistPhoneErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistPhoneErrorViewController.m; sourceTree = "<group>"; };
+		A2DE5A881C0476A90061BAE3 /* RegistPhoneErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistPhoneErrorViewController.xib; sourceTree = "<group>"; };
 		A2DE645E1BD5BF47009EC403 /* HomeEtcTimeLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEtcTimeLineView.h; sourceTree = "<group>"; };
 		A2DE645F1BD5BF47009EC403 /* HomeEtcTimeLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEtcTimeLineView.m; sourceTree = "<group>"; };
 		A2DE64611BD5BF54009EC403 /* HomeEtcTimeLineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeEtcTimeLineView.xib; sourceTree = "<group>"; };
@@ -1457,6 +1467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2DE5A821C044A380061BAE3 /* AudioToolbox.framework in Frameworks */,
 				A2DCFFA81BEAE26000EEABD9 /* CoreTelephony.framework in Frameworks */,
 				A2DA4F3D1BCCF20F009FB32F /* SystemConfiguration.framework in Frameworks */,
 				A2DA4F351BCCDC0D009FB32F /* QuartzCore.framework in Frameworks */,
@@ -2038,6 +2049,7 @@
 		A2DEAE0E1B9FE69000EDCCBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2DE5A811C044A380061BAE3 /* AudioToolbox.framework */,
 				A2DCFFA71BEAE26000EEABD9 /* CoreTelephony.framework */,
 				A2DA4F3C1BCCF20F009FB32F /* SystemConfiguration.framework */,
 				A2DA4F341BCCDC0D009FB32F /* QuartzCore.framework */,
@@ -2338,6 +2350,8 @@
 				A2D994B81BD8824700A6A325 /* TimelineSectionData.m */,
 				A2E03C691BFB639500188C52 /* StrokeInputView.h */,
 				A2E03C6A1BFB639500188C52 /* StrokeInputView.m */,
+				A2DE5A831C0462E80061BAE3 /* DelegateButton.h */,
+				A2DE5A841C0462E80061BAE3 /* DelegateButton.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2520,6 +2534,9 @@
 				A2DD874A1BC219790013470D /* RegistCompleteViewController.h */,
 				A2DD874B1BC219790013470D /* RegistCompleteViewController.m */,
 				A2DD874C1BC219790013470D /* RegistCompleteViewController.xib */,
+				A2DE5A861C0476A90061BAE3 /* RegistPhoneErrorViewController.h */,
+				A2DE5A871C0476A90061BAE3 /* RegistPhoneErrorViewController.m */,
+				A2DE5A881C0476A90061BAE3 /* RegistPhoneErrorViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -3505,6 +3522,7 @@
 				A2D9ECA11BEA18E200047BEC /* pattern_03_sel@2x.png in Resources */,
 				A2D9ECA21BEA18E200047BEC /* shadow_01@2x.png in Resources */,
 				A2D9ECA31BEA18E200047BEC /* shadow_02@2x.png in Resources */,
+				A2DE5A8A1C0476A90061BAE3 /* RegistPhoneErrorViewController.xib in Resources */,
 				A2D9ECA41BEA18E200047BEC /* shadow_03@2x.png in Resources */,
 				A2D9ECA51BEA18E200047BEC /* toggle_01_off@2x.png in Resources */,
 				A2D9ECA61BEA18E200047BEC /* toggle_01_on@2x.png in Resources */,
@@ -3804,6 +3822,7 @@
 				A2D95B001BA8F1DD00DC943D /* NSDataKNAdditions.m in Sources */,
 				A2DE0A511BFDA01B00839355 /* Reachability.m in Sources */,
 				A5D8119F1BF5A6EE0054ADB7 /* ServiceDeactivationController.m in Sources */,
+				A2DE5A851C0462E80061BAE3 /* DelegateButton.m in Sources */,
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
 				17208CA71BEA702500968498 /* ArticleTableViewCell.m in Sources */,
@@ -3856,6 +3875,7 @@
 				A2D90D6C1BB2745000315425 /* CertTableCell.m in Sources */,
 				A538C2E91BCE2AC5005E3211 /* CertViewCell.m in Sources */,
 				A2D791741BBD202800E817E7 /* HomeTimeLineTableViewCell.m in Sources */,
+				A2DE5A891C0476A90061BAE3 /* RegistPhoneErrorViewController.m in Sources */,
 				A5EA7E361BBBA09C00626C74 /* ArchivedTransItemCell.m in Sources */,
 				A2E0FE171BD7676900D528BA /* DropboxStrokeView.m in Sources */,
 				A2DEAE601B9FE6D800EDCCBA /* MASViewAttribute.m in Sources */,
