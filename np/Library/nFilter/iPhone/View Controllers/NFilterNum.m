@@ -119,6 +119,13 @@ static NFilterNum* instance = nil;
         return;
     
     [self returnWithCallBackMethod:_pMethodOnPress];
+    
+    // close keyboard
+    if (isAutoCloseKeyboard) {
+        if ( txtInSecurity.text.length == lengthLimit) {
+            [self pressBackGround:nil];
+        }
+    }
 }
 
 - (NSString *)findIndexWithKeyValue:(NSString*)pKeyValue{
@@ -853,9 +860,15 @@ static NFilterNum* instance = nil;
 #pragma mark - 길이와 태그 이름 웹뷰 지정
 
 - (void)setLengthWithTagName:(NSString *)pTagName length:(NSInteger)pLength webView:(UIWebView *)pWebView {
-	lengthLimit = pLength;
-	self.tagName = pTagName;
+    [self setLengthWithTagName:pTagName length:pLength webView:pWebView isAutoCloseKeyboard:NO];
 }
+
+- (void)setLengthWithTagName:(NSString *)pTagName length:(NSInteger)pLength webView:(UIWebView *)pWebView isAutoCloseKeyboard:(BOOL)autoCloseKeyobard {
+    lengthLimit         = pLength;
+    self.tagName        = pTagName;
+    isAutoCloseKeyboard = autoCloseKeyobard;
+}
+
 
 #pragma mark - 백그라운드 이벤트 허용 설정
 - (void)setBackgroundDimmedColor {

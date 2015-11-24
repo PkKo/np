@@ -439,15 +439,14 @@
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
-        [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
+        [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil isAutoCloseKeyboard:YES];
         [vc setFullMode:NO];
-        [vc setToolBar:YES];
+        [vc setToolBar:NO];
         [vc setSupportRetinaHD:YES];
         [vc setTopBarText:topBar];
         [vc setTitleText:title];
         [vc setRotateToInterfaceOrientation:viewController.interfaceOrientation parentView:viewController.view];
         [vc setBackgroundDimmedColor];
-        [vc hidePrvNxtBtnsOfToolbar];
     }
     else
     {
