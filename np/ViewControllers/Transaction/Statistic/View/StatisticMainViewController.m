@@ -30,6 +30,7 @@
     
     NSString * _startDate;
     NSString * _endDate;
+    BOOL _isSearch;
 }
 
 @end
@@ -122,6 +123,7 @@
 - (void)refreshChartFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate {
     [self clickSearchButton];
     [self updateSelectedDates:fromDate toDate:toDate];
+    _isSearch = YES;
     [self getChartData];
 }
 
@@ -197,6 +199,16 @@
 - (void)showNoDataView:(BOOL)isShown {
     
     [self.noDataView setHidden:!isShown];
+    
+    if (![self.noDataView isHidden]) {
+        
+        [self.noDataImageView setImage:[UIImage imageNamed:_isSearch ? @"icon_noresult_01" : @"icon_noresult_03"]];
+        [self.noDataNotice setText: _isSearch ? @"해당기간 내 검색 결과가 없습니다." : @"통계 내역이 없습니다."];
+        
+        _isSearch = NO;
+    }
+    
+    
     [self.selectedDatesLabel setHidden:isShown];
     [self.noticeView setHidden:isShown];
     
