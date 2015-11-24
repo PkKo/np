@@ -56,7 +56,11 @@
 
 - (IBAction)saveToStorageBox {
     
-    [self.memo resignFirstResponder];
+    BOOL hasKeyboard = [self.memo isFirstResponder];
+    
+    if (hasKeyboard) {
+        [self.memo resignFirstResponder];
+    }
     
     [self.transactionObject setTransactionMemo:[self.memo text]];
     if (isNewMemo) {
@@ -67,7 +71,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REFRESH_BADGES object:nil];
     
-    [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.6];
+    [self performSelector:@selector(showAlert) withObject:nil afterDelay: hasKeyboard ? 0.6 : 0.0];
     
 }
 

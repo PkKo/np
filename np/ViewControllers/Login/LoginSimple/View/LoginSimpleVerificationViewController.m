@@ -106,7 +106,7 @@
     
     if ([pw length] != PW_LENGTH) {
         
-        alertMessage = @"간편 비밀번호를 입력해주세요.";
+        alertMessage = @"숫자 6자리를 입력해 주세요.";
         
     } else if (![pw isEqualToString:savedPassword]) {
         

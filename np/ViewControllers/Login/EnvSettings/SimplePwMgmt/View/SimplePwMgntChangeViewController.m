@@ -111,11 +111,11 @@
             [util saveSimplePasswordFailedTimes:failedTimes];
             if (failedTimes >= 5) {
                 
-                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
+                alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여 로그인이 불가능합니다. 본인인증 후 간편 비밀번호를 재설정해주세요.";
                 tag             = ALERT_GOTO_SELF_IDENTIFY;
             } else {
                 
-                alertMessage = [NSString stringWithFormat:@"비밀번호가 일치하지 않습니다.\n비밀번호 %d 회 오류입니다.", (int)failedTimes];
+                alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d회 오류입니다.", (int)failedTimes];
             }
         } else if (![self.myNewPw.text isEqualToString:self.myNewPwConfirm.text]) {
             

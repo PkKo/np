@@ -126,7 +126,7 @@
                                                            birthday:self.birthdayTextField.text
                                                    ofViewController:self action:@selector(loginResponse:)];
         
-        [self clearData];
+        //[self clearData];
     }
     
     if (alertMessage) {

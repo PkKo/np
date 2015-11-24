@@ -126,8 +126,8 @@
         }
     }
     
-    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
-    [self performSelector:@selector(doRemoveSelectedItems) withObject:nil afterDelay:0.06];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"선택한 메시지를 삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    [alert show];
 }
 
 - (void)doRemoveSelectedItems {
@@ -149,6 +149,9 @@
     } else {
         [self getAllTransactions];
     }
+    
+    // highlight delete button
+    [self highlightDeleteBtn];
     
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
@@ -177,6 +180,13 @@
     [self highlightDeleteBtn];
     
     [self.tableview reloadData];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+        [self performSelector:@selector(doRemoveSelectedItems) withObject:nil afterDelay:0.06];
+    }
 }
 
 #pragma mark - search view
