@@ -1196,7 +1196,7 @@
         
         [deleteAllImg setHighlighted:NO];
         [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
-        [deleteButton setEnabled:NO];
+//        [deleteButton setEnabled:NO];
         [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     }
     else
@@ -1222,19 +1222,19 @@
             
             [deleteAllImg setHighlighted:YES];
             [deleteAllLabel setTextColor:[UIColor colorWithRed:48.0f/255.0f green:49.0f/255.0f blue:54.0f/255.0f alpha:1.0f]];
-            [deleteButton setEnabled:YES];
+//            [deleteButton setEnabled:YES];
             [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
         }
     }
     
     if([deleteIdList count] > 0)
     {
-        [deleteButton setEnabled:YES];
+//        [deleteButton setEnabled:YES];
         [deleteButton setBackgroundColor:[UIColor colorWithRed:213.0/255.0f green:42.0/255.0f blue:58.0/255.0f alpha:1.0f]];
     }
     else
     {
-        [deleteButton setEnabled:NO];
+//        [deleteButton setEnabled:NO];
         [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     }
     
@@ -1246,18 +1246,14 @@
     // deleteIdList로 삭제를 진행한다.
     if([deleteIdList count] > 0)
     {
-        for(NSString *serverMessageKey in deleteIdList)
-        {
-            if([pinnedIdList containsObject:serverMessageKey])
-            {
-                [deleteIdList removeObject:serverMessageKey];
-            }
-        }
-        
-        if(delegate != nil && [delegate respondsToSelector:@selector(deletePushItems:)])
-        {
-            [delegate performSelector:@selector(deletePushItems:) withObject:deleteIdList];
-        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"선택한 메시지를 삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        [alertView setTag:70001];
+        [alertView show];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"확인" message:@"삭제할 메시지를 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
@@ -1273,7 +1269,7 @@
     [deleteAllLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
     [deleteAllView setHidden:YES];
     
-    [deleteButton setEnabled:NO];
+//    [deleteButton setEnabled:NO];
     [deleteButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1284,5 +1280,25 @@
                      }];
     
     [bankingListTable reloadData];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 70001 && buttonIndex == BUTTON_INDEX_OK)
+    {
+        for(NSString *serverMessageKey in deleteIdList)
+        {
+            if([pinnedIdList containsObject:serverMessageKey])
+            {
+                [deleteIdList removeObject:serverMessageKey];
+            }
+        }
+        
+        if(delegate != nil && [delegate respondsToSelector:@selector(deletePushItems:)])
+        {
+            [delegate performSelector:@selector(deletePushItems:) withObject:deleteIdList];
+        }
+    }
 }
 @end

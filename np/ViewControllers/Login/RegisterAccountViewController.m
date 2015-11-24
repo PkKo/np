@@ -406,7 +406,10 @@
 
         // 등록완료 뷰 컨트롤러로 이동
         RegistCompleteViewController *vc = [[RegistCompleteViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+//        [self.navigationController pushViewController:eVC animated:YES];
+        [self.navigationController setViewControllers:@[eVC] animated:YES];
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = eVC;
     }
     else
     {

@@ -441,7 +441,7 @@
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil];
         [vc setFullMode:NO];
-        [vc setToolBar:YES];
+        [vc setToolBar:NO];
         [vc setSupportRetinaHD:YES];
         [vc setTopBarText:topBar];
         [vc setTitleText:title];

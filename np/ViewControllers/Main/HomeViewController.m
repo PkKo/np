@@ -69,7 +69,6 @@
         // 입출금 구분
         //    reqData.queryType;
         AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-        reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
         reqData.ascending = YES;
         reqData.size = TIMELINE_LOAD_COUNT;
         
@@ -77,11 +76,13 @@
         {
             case TIMELINE:
             {
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
                 reqData.queryType = @"ALL";
                 break;
             }
             case BANKING:
             {
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
                 reqData.queryType = @"1,2";
                 break;
             }
@@ -247,7 +248,6 @@
     isRefresh = YES;
     isNewData = newData;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = !newData;
     reqData.size = TIMELINE_LOAD_COUNT;
     
@@ -255,11 +255,13 @@
     {
         case TIMELINE:
         {
+            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
             reqData.queryType = @"ALL";
             break;
         }
         case BANKING:
         {
+            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
             reqData.queryType = @"1,2";
             break;
         }
@@ -365,11 +367,22 @@
     
     if(currentStickerIndexPath != nil)
     {
+        NHInboxMessageData *inboxData = [[NHInboxMessageData alloc] init];
         // 스티커 정보 세팅
-        NHInboxMessageData *inboxData = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+        if(viewType == TIMELINE)
+        {
+            inboxData = [[mTimeLineView.mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+        }
+        else if(viewType == BANKING)
+        {
+            inboxData = [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+        }
         
-        // 인박스에 스티커 정보를 저장한다.
-        [IBInbox reqAddStickerInfoWithMsgKey:inboxData.serverMessageKey stickerCode:(int)selectedStickerCode];
+        if(inboxData != nil)
+        {
+            // 인박스에 스티커 정보를 저장한다.
+            [IBInbox reqAddStickerInfoWithMsgKey:inboxData.serverMessageKey stickerCode:(int)selectedStickerCode];
+        }
     }
 }
 
@@ -548,82 +561,6 @@
                     [unreadMessageList addObject:inboxData.serverMessageKey];
                 }
             }
-            
-            /*
-            if(viewType == TIMELINE && !isSearch)
-            {
-                 NSString *todayString = [CommonUtil getTodayDateString];
-                 NSString *todayDayString = [CommonUtil getDayString:[NSDate date]];
-                 TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
-                 todaySectionData.date = todayString;
-                 todaySectionData.day = todayDayString;
-                 [sectionList addObject:todaySectionData];
-                
-                for(NHInboxMessageData *inboxData in messageList)
-                {
-                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
-                    {
-                        inboxData.inboxType = @"4";
-                        inboxData.stickerCode = 4;
-                    }
-                    NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                    
-                    if([dateString isEqualToString:todayString])
-                    {
-                        NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
-                        if(todayItemList == nil)
-                        {
-                            todayItemList = [[NSMutableArray alloc] init];
-                        }
-                     
-                        [todayItemList addObject:inboxData];
-                        [timelineMessageList setObject:todayItemList forKey:todayString];
-                    }
-                    else
-                    {
-                        NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                        if(itemList == nil)
-                        {
-                            itemList = [[NSMutableArray alloc] init];
-                            NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                            TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                            dateSectionData.date = dateString;
-                            dateSectionData.day = dateDayString;
-                            [sectionList addObject:dateSectionData];
-                        }
-                        [itemList addObject:inboxData];
-                        [timelineMessageList setObject:itemList forKey:dateString];
-                    }
-                }
-            }
-            else
-            {
-                for(NHInboxMessageData *inboxData in messageList)
-                {
-                    if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
-                    {
-                        inboxData.inboxType = @"4";
-                        inboxData.stickerCode = 4;
-                    }
-                    
-                    NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                    
-                    NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                    if(itemList == nil)
-                    {
-                        itemList = [[NSMutableArray alloc] init];
-                        NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                        TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                        dateSectionData.date = dateString;
-                        dateSectionData.day = dateDayString;
-                        [sectionList addObject:dateSectionData];
-                    }
-                    
-                    [itemList addObject:inboxData];
-                    
-                    [timelineMessageList setObject:itemList forKey:dateString];
-                }
-            }*/
         }
         else
         {
@@ -711,78 +648,6 @@
                         [unreadMessageList addObject:inboxData.serverMessageKey];
                     }
                 }
-                /*
-                // 과거 목록
-                if(viewType == TIMELINE)
-                {
-                    NSString *todayString = [CommonUtil getTodayDateString];
-                    
-                    for(NHInboxMessageData *inboxData in messageList)
-                    {
-                        if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
-                        {
-                            inboxData.inboxType = @"4";
-                            inboxData.stickerCode = 4;
-                        }
-                        
-                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                        
-                        if([dateString isEqualToString:todayString])
-                        {
-                            NSMutableArray *todayItemList = [timelineMessageList objectForKey:todayString];
-                            if(todayItemList == nil)
-                            {
-                                todayItemList = [[NSMutableArray alloc] init];
-                            }
-                            
-                            [todayItemList addObject:inboxData];
-                            [timelineMessageList setObject:todayItemList forKey:todayString];
-                        }
-                        else
-                        {
-                            NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                            if(itemList == nil)
-                            {
-                                itemList = [[NSMutableArray alloc] init];
-                                NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                                TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                                dateSectionData.date = dateString;
-                                dateSectionData.day = dateDayString;
-                                [sectionList addObject:dateSectionData];
-                            }
-                            [itemList addObject:inboxData];
-                            [timelineMessageList setObject:itemList forKey:dateString];
-                        }
-                    }
-                }
-                else
-                {
-                    for(NHInboxMessageData *inboxData in messageList)
-                    {
-                        if(inboxData.inboxType == nil || [inboxData.inboxType length] == 0)
-                        {
-                            inboxData.inboxType = @"4";
-                            inboxData.stickerCode = 4;
-                        }
-                        
-                        NSString *dateString = [CommonUtil getDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                        
-                        NSMutableArray *itemList = [timelineMessageList objectForKey:dateString];
-                        if(itemList == nil)
-                        {
-                            itemList = [[NSMutableArray alloc] init];
-                            NSString *dateDayString = [CommonUtil getDayString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]];
-                            TimelineSectionData *dateSectionData = [[TimelineSectionData alloc] init];
-                            dateSectionData.date = dateString;
-                            dateSectionData.day = dateDayString;
-                            [sectionList addObject:dateSectionData];
-                        }
-                        
-                        [itemList addObject:inboxData];
-                        
-                        [timelineMessageList setObject:itemList forKey:dateString];
-                    }
-                }*/
             }
             
             isRefresh = NO;
@@ -806,27 +671,6 @@
     [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
-- (void)loadedInboxCategoryList:(NSArray *)categoryList
-{
-//    NSLog(@"%s, %@", __FUNCTION__, categoryList);
-}
-
-- (void)stickerSummaryList:(BOOL)success summaryList:(NSArray *)summaryList
-{
-//    NSLog(@"%s, %@", __FUNCTION__, summaryList);
-    [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
-    
-    float total = 0;
-    for(StickerSummaryData *data in summaryList)
-    {
-        StickerType type = data.stickerCode;
-        int sum = (int)data.sum;
-        int count = (int)data.count;
-        
-        total += sum;
-    }
-}
-
 - (void)sendReadStatus
 {
     [IBInbox requestReadMessageWithMsgKey:unreadMessageList readMethod:1];
@@ -847,9 +691,20 @@
     
     if(success)
     {
-        NHInboxMessageData *inboxData = [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
-        inboxData.stickerCode = selectedStickerCode;
-        [[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
+        NHInboxMessageData *inboxData = [[NHInboxMessageData alloc] init];
+        // 스티커 정보 세팅
+        if(viewType == TIMELINE)
+        {
+            inboxData = [[mTimeLineView.mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+            inboxData.stickerCode = selectedStickerCode;
+            [[mTimeLineView.mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
+        }
+        else if(viewType == BANKING)
+        {
+            inboxData = [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+            inboxData.stickerCode = selectedStickerCode;
+            [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
+        }
         
         // 각 뷰가 있으면 테이블 갱신
         [self makeTimelineView];

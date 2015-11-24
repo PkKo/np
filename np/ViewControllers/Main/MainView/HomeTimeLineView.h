@@ -11,7 +11,7 @@
 #import "DepositStickerView.h"
 #import "BannerInfoView.h"
 
-@interface HomeTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate>
+@interface HomeTimeLineView : UIView<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     UIView *refreshHeaderView;
     UILabel *refreshLabel;

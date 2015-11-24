@@ -251,9 +251,9 @@
         [self authNumberTimerStart];
         [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %d초)", AUTH_NUMBER_TIMER_MAX] forState:UIControlStateNormal];
         
-        // 임시 코드
+        // 인증 코드 저장
         authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
-        [phoneAuthNumInput setText:authNumber];
+//        [phoneAuthNumInput setText:authNumber];
     }
     else
     {
