@@ -18,12 +18,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="kEl-mi-Ow2">
-                    <rect key="frame" x="0.0" y="75" width="320" height="435"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="453"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="373-QL-yYc">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="453"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6xL-Qt-cMM">
                                     <rect key="frame" x="18" y="25" width="20" height="18"/>

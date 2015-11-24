@@ -86,11 +86,14 @@
 {
     [super viewWillAppear:animated];
     
-    orgBottomRect = bottomDescView.frame;
-    [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
-                                        phoneAuthNumInput.frame.origin.y,
-                                        bottomDescView.frame.size.width,
-                                        bottomDescView.frame.size.height)];
+    if(orgBottomRect.size.width == 0)
+    {
+        orgBottomRect = bottomDescView.frame;
+        [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
+                                            phoneAuthNumInput.frame.origin.y,
+                                            bottomDescView.frame.size.width,
+                                            bottomDescView.frame.size.height)];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCurrentTime:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveCurrentTime:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -222,6 +225,8 @@
                                         phoneAuthNumInput.frame.origin.y,
                                         bottomDescView.frame.size.width,
                                         bottomDescView.frame.size.height)];
+    
+    [scrollView scrollsToTop];
 }
 
 #pragma mark - PickerView Action

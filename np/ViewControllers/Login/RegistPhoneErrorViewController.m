@@ -14,9 +14,14 @@
 
 @implementation RegistPhoneErrorViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.mBackButton setHidden:YES];
+    [self.mNaviView.mMenuButton setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
