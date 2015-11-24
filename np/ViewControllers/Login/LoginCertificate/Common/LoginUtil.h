@@ -77,4 +77,11 @@
                           topBar:(NSString *)topBar title:(NSString *)title
                       textLength:(NSInteger)length
                       doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress;
+
+- (void)showSecureNumpadInParent:(UIViewController *)viewController
+                          topBar:(NSString *)topBar title:(NSString *)title
+                      textLength:(NSInteger)length
+                      doneAction:(SEL)doneAction methodOnPress:(SEL)methodOnPress
+                      isFullMode:(BOOL)isFullMode
+             isAutoCloseKeyboard:(BOOL)isAutoCloseKeyboard;
 @end

@@ -73,7 +73,8 @@
         LoginUtil * util = [[LoginUtil alloc] init];
         [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:@"계좌비밀번호 입력"
                             textLength:4
-                            doneAction:confirmAction methodOnPress:confirmAction];
+                            doneAction:confirmAction methodOnPress:confirmAction
+                            isFullMode:YES isAutoCloseKeyboard:NO];
         return;
     }
     
