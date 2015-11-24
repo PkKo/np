@@ -30,6 +30,17 @@
         return;
     }
     
+    [self.pinupBtn setSelected:!self.pinupBtn.isSelected];
+    self.pinnable = self.pinupBtn.isSelected;
+    [self.delegate markAsPinup:self.pinupBtn.isSelected ofItemSection:self.section row:self.row];
+    
+    if (!self.deleteBtn.isHidden) {
+        if (!self.pinnable) {
+            [self.pinupBtn setHidden:YES];
+        }
+    }
+    
+    /*
     if (!self.deleteBtn.isHidden) {
         
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"삭제 상태에서 고정핀 해제할 수 없습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -40,6 +51,7 @@
         [self.pinupBtn setSelected:!self.pinupBtn.isSelected];
         [self.delegate markAsPinup:self.pinupBtn.isSelected ofItemSection:self.section row:self.row];
     }
+    */
 }
 
 - (IBAction)editMemo {

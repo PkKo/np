@@ -239,7 +239,7 @@
                                                 <color key="titleColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="gotoNB" destination="-1" eventType="touchUpInside" id="10W-t2-pjc"/>
+                                                <action selector="gotoNotice" destination="-1" eventType="touchUpInside" id="AdV-Dd-igN"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1zH-Cg-5xt">
@@ -257,7 +257,7 @@
                                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="gotoFAQ" destination="-1" eventType="touchUpInside" id="2d4-DK-NsC"/>
+                                                <action selector="gotoFAQ" destination="-1" eventType="touchUpInside" id="0Ql-l8-Pqv"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Gr-hW-iPs">
@@ -275,7 +275,7 @@
                                                 <color key="titleColor" red="0.37647058820000001" green="0.3803921569" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="gotoTelInquiry" destination="-1" eventType="touchUpInside" id="WZr-4C-5hA"/>
+                                                <action selector="gotoTelEnquiry" destination="-1" eventType="touchUpInside" id="aDo-Wb-47X"/>
                                             </connections>
                                         </button>
                                     </subviews>

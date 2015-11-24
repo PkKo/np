@@ -81,7 +81,7 @@
     if (certificates && [certificates count] > 0) {
         [[[StorageBoxUtil alloc] init] showCertListInViewController:self dataSource:certificates updateSltedCert:@selector(updateSelectedCert:)];
     } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"등록된 공인인증서가 없습니다.\n공인인증센터로 이동하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"현재 저장된 인증서가 없습니다. 인증서 가져오기를 진행해주세요." delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
         alert.tag = ALERT_CERT_CENTER;
         [alert show];
     }

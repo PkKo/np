@@ -260,6 +260,7 @@
 #define TIME_ACSENDING_ORDER    @"과거순"
 #define TIME_DECSENDING_ORDER   @"최신순"
 
+#define REQUEST_LATEST_TERMS_OF_USE                 @"servlet/EFPU1017U.cmd"
 #define REQUEST_LOGIN_CERT                          @"servlet/EFPU1011R.cmd"
 #define REQUEST_LOGIN_ACCOUNT                       @"servlet/EFPU1012R.cmd"
 #define REQUEST_LOGIN_PINPAT                        @"servlet/EFPU1013R.cmd"

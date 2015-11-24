@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonViewController.h"
+#import "LoginBase.h"
 
-@interface LoginAccountVerificationViewController : CommonViewController<UITextFieldDelegate>
+@interface LoginAccountVerificationViewController : LoginBase <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField    * accountTextField;
 @property (weak, nonatomic) IBOutlet UITextField    * passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField    * birthdayTextField;
@@ -29,10 +29,5 @@
 
 - (IBAction)validateAccountTextEditing:(UITextField *)sender;
 - (IBAction)validateBirthdayTextEditing:(UITextField *)sender;
-
-#pragma mark - Footer
-- (IBAction)gotoNotice;
-- (IBAction)gotoFAQ;
-- (IBAction)gotoTelEnquiry;
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonViewController.h"
+#import "LoginBase.h"
 #import "DrawPatternLockView.h"
 
-@interface DrawPatternLockViewController : CommonViewController <UIAlertViewDelegate> {
+@interface DrawPatternLockViewController : LoginBase <UIAlertViewDelegate> {
     NSMutableArray* _paths;
 }
 
@@ -22,7 +22,4 @@
 - (IBAction)gotoPatternLoginMgmt;
 - (IBAction)gotoLoginSettings;
 
-- (IBAction)gotoNotice;
-- (IBAction)gotoFAQ;
-- (IBAction)gotoTelEnquiry;
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonViewController.h"
+#import "LoginBase.h"
 
-@interface LoginCertListViewController : CommonViewController <UIAlertViewDelegate>
+@interface LoginCertListViewController : LoginBase <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView         * certView;
 @property (weak, nonatomic) IBOutlet UILabel        * certName;
 @property (weak, nonatomic) IBOutlet UILabel        * certIssuer;
@@ -26,8 +26,5 @@
 
 - (IBAction)gotoCertCenter;
 - (IBAction)gotoLoginSettings;
-- (IBAction)gotoNB;
-- (IBAction)gotoFAQ;
-- (IBAction)gotoTelInquiry;
 - (IBAction)clickOnCert:(UITapGestureRecognizer *)sender;
 @end

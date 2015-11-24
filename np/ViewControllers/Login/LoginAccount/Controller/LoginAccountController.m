@@ -18,9 +18,6 @@
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
     NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];
     
-    NSLog(@"user_id: %@", user_id);
-    NSLog(@"crmMobile: %@ - saved crmMobile: %@", crmMobile, [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE]);
-    
     NSString * account_number   = accountNo;
     NSString * account_password = pw;
     NSString * user_birthday    = birthday;

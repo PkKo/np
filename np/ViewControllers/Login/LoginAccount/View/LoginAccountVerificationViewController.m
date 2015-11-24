@@ -124,7 +124,9 @@
         [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text
                                                            password:self.passwordTextField.text
                                                            birthday:self.birthdayTextField.text
-                                                   ofViewController:self action:@selector(loginResult:)];
+                                                   ofViewController:self action:@selector(loginResponse:)];
+        
+        //[self clearData];
     }
     
     if (alertMessage) {
@@ -193,58 +195,4 @@
     self.passwordTextField.text = @"";
     self.birthdayTextField.text = @"";
 }
-
-- (void)loginResult:(NSDictionary *)response {
-    
-    NSLog(@"response: %@", response);
-    [self stopIndicator];
-    
-    [self clearData];
-    
-    LoginUtil * util        = [[LoginUtil alloc] init];
-    
-    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
-        
-        NSString * isRegistered = (NSString *)response[@"reg_yn"];
-        
-        if ([isRegistered isEqualToString:IS_REGISTERED_NO]) {
-            [[ServiceDeactivationController sharedInstance] showForceToDeactivateAlert];
-            return;
-        }
-        
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        
-        int numberOfAccounts    = (int)[accounts count];
-        NSMutableArray * accountNumbers = [NSMutableArray array];
-        
-        if (numberOfAccounts > 0)
-        {
-            for (NSDictionary * account in accounts) {
-                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
-            }
-        }
-        [util saveAllAccounts:[accountNumbers copy]];
-        [util showMainPage];
-        
-    } else {
-        
-        NSString    * message   = [response objectForKey:RESULT_MESSAGE];
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-#pragma mark - Footer
-- (IBAction)gotoNotice {
-    [[CustomerCenterUtil sharedInstance] gotoNotice];
-}
-- (IBAction)gotoFAQ {
-    [[CustomerCenterUtil sharedInstance] gotoFAQ];
-}
-
-- (IBAction)gotoTelEnquiry {
-    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
-}
-
 @end
