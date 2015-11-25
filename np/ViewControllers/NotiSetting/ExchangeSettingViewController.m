@@ -149,7 +149,6 @@
         if([regCountryList count] == 0)
         {
             [countryListTable setHidden:YES];
-            [payAlarmListTable reloadData];
         }
         
         if([chargeList count] == 0)
@@ -171,8 +170,10 @@
                                                   countryListTable.frame.size.width,
                                                   tableViewHeight)];
             [payAlarmView setHidden:YES];
-            [countryListTable reloadData];
         }
+        
+        [countryListTable reloadData];
+        [payAlarmListTable reloadData];
     }
 }
 
