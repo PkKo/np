@@ -56,12 +56,7 @@
     _displayedMonth = _currentMonth;
     
     [self refreshSelectedYearMonth];
-    
-    NSDate * today          = [NSDate date];
-    NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
-    
-    [self updateStartDate:dateAmonthAgo];
-    [self updateEndDate:today];
+    [self refreshChartDataOfMonth:_displayedMonth year:_displayedYear];
 }
 
 - (void)refreshSelectedYearMonth {
@@ -97,12 +92,8 @@
     fromDate = [dateFormatter dateFromString:fromDateStr];
     toDate  = [dateFormatter dateFromString:toDateStr];
     
-    //NSLog(@"delegate.refreshChartFromDate fromDate: %@ - toDate: %@", [dateFormatter stringFromDate:fromDate] , [dateFormatter stringFromDate:toDate]);
-    
     [self updateStartDate:fromDate];
     [self updateEndDate:toDate];
-    
-    //[self.delegate refreshChartFromDate:fromDate toDate:toDate];
 }
 
 - (IBAction)choosePrvMonth {

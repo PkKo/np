@@ -437,8 +437,6 @@
 #pragma mark - 계좌인증 확인
 - (void)checkRegistAccountRequest:(NSDictionary *)accountInfo
 {
-    [self startIndicator];
-    
     inputAccountInfo = [NSMutableDictionary dictionaryWithDictionary:accountInfo];
     tempAccountNum = [inputAccountInfo objectForKey:REQUEST_ACCOUNT_NUMBER];
     
@@ -481,6 +479,8 @@
         [alertView show];
         return;
     }
+    
+    [self startIndicator];
     
     if(self.isSelfIdentified)
     {

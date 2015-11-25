@@ -208,7 +208,6 @@
         _isSearch = NO;
     }
     
-    
     [self.selectedDatesLabel setHidden:isShown];
     [self.noticeView setHidden:isShown];
     
@@ -287,7 +286,7 @@
             expenseDataViewY    = _doughnutChart.frame.origin.y + _doughnutChart.frame.size.height + 23;
         }
         
-        _expenseDataView            = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
+        _expenseDataView        = [chartViewUtil addViewWithDataSource:_expenseDataSource toView:self.scrollView atY:expenseDataViewY];
     }
 }
 
