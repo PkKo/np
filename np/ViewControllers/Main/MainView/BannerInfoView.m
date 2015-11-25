@@ -55,7 +55,25 @@
 
 - (IBAction)noticeBannerClick:(id)sender
 {
-    [[CustomerCenterUtil sharedInstance] gotoNotice];
+    if([((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkType isEqualToString:@"I"])
+    {
+        if([((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkInUrl isEqualToString:@"N"])
+        {
+            [[CustomerCenterUtil sharedInstance] gotoNotice];
+        }
+        else if([((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkInUrl isEqualToString:@"F"])
+        {
+            [[CustomerCenterUtil sharedInstance] gotoFarmerNews];
+        }
+    }
+    else if([((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkType isEqualToString:@"O"])
+    {
+        if(((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkOutUrl != nil ||
+           [((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkOutUrl length] > 0)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo.linkOutUrl]];
+        }
+    }
 }
 
 #pragma mark - 배너 타이머
