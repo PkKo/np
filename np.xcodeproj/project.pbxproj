@@ -571,8 +571,8 @@
 		A55047121BDF6904000D4524 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A55047111BDF6904000D4524 /* FooterView.m */; };
 		A55047141BDF6916000D4524 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55047131BDF6916000D4524 /* FooterView.xib */; };
 		A55047181BDF7D28000D4524 /* LoginAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55047171BDF7D28000D4524 /* LoginAccountController.m */; };
-		A550C3971C04052D00FBB8FB /* NewTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A550C3951C04052D00FBB8FB /* NewTermsOfUseViewController.m */; settings = {ASSET_TAGS = (); }; };
-		A550C3981C04052D00FBB8FB /* NewTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A550C3961C04052D00FBB8FB /* NewTermsOfUseViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		A550C3971C04052D00FBB8FB /* NewTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A550C3951C04052D00FBB8FB /* NewTermsOfUseViewController.m */; };
+		A550C3981C04052D00FBB8FB /* NewTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A550C3961C04052D00FBB8FB /* NewTermsOfUseViewController.xib */; };
 		A557DB491BD713FD00B9364A /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB471BD713FD00B9364A /* VersionInfoViewController.m */; };
 		A557DB4A1BD713FD00B9364A /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A557DB481BD713FD00B9364A /* VersionInfoViewController.xib */; };
 		A557DB4E1BD7181900B9364A /* ServiceDeactivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A557DB4C1BD7181900B9364A /* ServiceDeactivationViewController.m */; };
@@ -584,7 +584,7 @@
 		A55BDF151BB11E6E00646C79 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A55BDEEA1BB0EB8100646C79 /* DrawPatternLockViewController.m */; };
 		A56171621BEA22550001F0BB /* FarmerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56171601BEA22550001F0BB /* FarmerNewsViewController.m */; };
 		A56171631BEA22550001F0BB /* FarmerNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A56171611BEA22550001F0BB /* FarmerNewsViewController.xib */; };
-		A57E29121C042E29008120CD /* LoginBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A57E29111C042E29008120CD /* LoginBase.m */; settings = {ASSET_TAGS = (); }; };
+		A57E29121C042E29008120CD /* LoginBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A57E29111C042E29008120CD /* LoginBase.m */; };
 		A5989BBD1BC25D0600873B76 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5989BBC1BC25D0600873B76 /* DBManager.m */; };
 		A5989BBF1BC25E7400873B76 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5989BBE1BC25E7400873B76 /* libsqlite3.0.tbd */; };
 		A5B50D5B1C02AC9100E6AD04 /* icon_noresult_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5B50D571C02AC9100E6AD04 /* icon_noresult_01.png */; };
