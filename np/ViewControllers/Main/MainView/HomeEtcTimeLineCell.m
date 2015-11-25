@@ -17,6 +17,7 @@
 @synthesize titleLabel;
 @synthesize contentLabel;
 @synthesize depthImage;
+@synthesize separateLine;
 
 - (void)awakeFromNib {
     // Initialization code

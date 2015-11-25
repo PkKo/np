@@ -21,6 +21,7 @@
 @synthesize accountLabel;
 @synthesize remainAmountLabel;
 @synthesize amountDescLabel;
+@synthesize separateLine;
 
 @synthesize pinButton;
 @synthesize moreButton;

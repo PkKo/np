@@ -412,4 +412,20 @@
     [self.keyboardCloseButton setHidden:YES];
     self.currentTextField = nil;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(self.currentTextField == optionView.accountNicknameInput)
+    {
+        if(![string isEqualToString:@""])
+        {
+            if(range.location == [textField tag])
+            {
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
 @end

@@ -1108,6 +1108,8 @@
                 {
                     [bannerView.underLine setHidden:YES];
                 }
+                
+                [cell.separateLine setHidden:YES];
             }
             /*
             if(indexPath.section == 0 && indexPath.row == bannerIndex + 1 && !isSearchResult)
@@ -1197,7 +1199,6 @@
             }
             else if([inboxData.inboxType isEqualToString:@"B"])
             {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
                 [cell.depthImage setHidden:NO];
                 // 타이틀
@@ -1212,7 +1213,6 @@
             }
             else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
             {
-                [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
                 [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
                 [cell.depthImage setHidden:NO];
                 // 타이틀
@@ -1273,6 +1273,8 @@
                 }
                 
                 [cell.contentLabel sizeToFit];
+                
+                [cell.separateLine setHidden:YES];
             }
             
             return cell;

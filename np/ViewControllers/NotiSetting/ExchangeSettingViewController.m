@@ -36,7 +36,7 @@
     [self.mNaviView.mTitleLabel setText:@"환율 알림 설정"];
 
     regCountryList = [[NSMutableArray alloc] init];
-    payAlarmList = [[NSMutableArray alloc] init];
+    chargeList = [[NSMutableArray alloc] init];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, countryListTable.frame.size.width, 0)];
     [countryListTable setTableFooterView:footerView];
@@ -222,7 +222,7 @@
     }
     else if (tableView == payAlarmListTable)
     {
-        return [payAlarmList count];
+        return [chargeList count];
     }
     
     return 0;
@@ -249,6 +249,10 @@
     else if(tableView == payAlarmListTable)
     {
         [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, payAlarmCellHeight)];
+        
+        NSString *countryName = [[chargeList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"];
+        
+        [cell.titleLabel setText:countryName];
     }
     
     return cell;
@@ -278,8 +282,8 @@
         [vc setIsNewCoutry:NO];
         [vc setIsChargeCountry:YES];
         [vc setCountryAllList:countryList];
-        [vc setCountryCode:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
-        [vc setCountryName:[[payAlarmList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
+        [vc setCountryCode:[[chargeList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_id"]];
+        [vc setCountryName:[[chargeList objectAtIndex:indexPath.row] objectForKey:@"UMSW023001_OUT_SUB.nation_name"]];
         ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
         [self.navigationController pushViewController:eVC animated:YES];
     }

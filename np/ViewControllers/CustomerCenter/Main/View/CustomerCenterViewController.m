@@ -34,16 +34,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)gotoNotice {
-    [[CustomerCenterUtil sharedInstance] gotoNotice];
+- (IBAction)gotoNotice
+{
+//    [[CustomerCenterUtil sharedInstance] gotoNotice];
+    NoticeViewController * notice = [[NoticeViewController alloc] initWithNibName:@"NoticeViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:notice];
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 - (IBAction)gotoFAQ {
-    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+//    [[CustomerCenterUtil sharedInstance] gotoFAQ];
+    FaqViewController * faq = [[FaqViewController alloc] initWithNibName:@"FaqViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:faq];
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 - (IBAction)gotoTelEnquiry {
-    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+//    [[CustomerCenterUtil sharedInstance] gotoTelEnquiry];
+    TelInquiryViewController * telInquiry = [[TelInquiryViewController alloc] initWithNibName:@"TelInquiryViewController" bundle:nil];
+    ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:telInquiry];
+    [self.navigationController pushViewController:eVC animated:YES];
 }
 
 /*===================*/

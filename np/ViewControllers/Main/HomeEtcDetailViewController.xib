@@ -8,11 +8,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeEtcDetailViewController">
             <connections>
                 <outlet property="contentDate" destination="al4-a2-6IX" id="MYz-Sl-lE3"/>
-                <outlet property="contentImg" destination="jfe-RF-mVd" id="5lp-pK-Aab"/>
                 <outlet property="contentLinkButton" destination="sUa-hY-pT6" id="8Rl-O1-IYz"/>
                 <outlet property="contentText" destination="i0N-FG-xlv" id="Xwf-0s-WjA"/>
                 <outlet property="contentTitle" destination="4Uh-ng-Saz" id="bbi-3u-dBx"/>
                 <outlet property="contentView" destination="fSL-aZ-RwE" id="pod-C6-UNl"/>
+                <outlet property="imgPageControl" destination="lBl-ck-bQK" id="VbP-lu-Kov"/>
+                <outlet property="imgScrollView" destination="d2d-Uw-2R4" id="WRT-MR-YMC"/>
                 <outlet property="scrollView" destination="yEG-j8-9Wi" id="KI9-xg-acf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,11 +31,22 @@
                             <rect key="frame" x="0.0" y="18" width="320" height="399"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jfe-RF-mVd">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="d2d-Uw-2R4">
                                     <rect key="frame" x="18" y="0.0" width="284" height="165"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </imageView>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="tU5-LV-5ay"/>
+                                    </connections>
+                                </scrollView>
+                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="lBl-ck-bQK">
+                                    <rect key="frame" x="104" y="130" width="111" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="pageIndicatorTintColor" red="0.87843137250000003" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="currentPageIndicatorTintColor" red="0.24313725489999999" green="0.60784313729999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="changePage:" destination="-1" eventType="valueChanged" id="2YC-0t-1oh"/>
+                                    </connections>
+                                </pageControl>
                                 <view contentMode="scaleToFill" id="fSL-aZ-RwE">
                                     <rect key="frame" x="18" y="180" width="284" height="219"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
