@@ -192,9 +192,12 @@
     selectAccountBtnRect.size.width = endAccountButtonX - startAccountButtonX;
     [self.selectAccountBtn setFrame:selectAccountBtnRect];
     
+    
+    NSDate * today          = [NSDate date];
+    NSDate * dateAmonthAgo  = [StatisticMainUtil getExactDateOfMonthsAgo:1 beforeThisDate:today];
+    [self updateSelectedDates:dateAmonthAgo toDate:today];
     [self getChartData];
 }
-
 
 - (void)showNoDataView:(BOOL)isShown {
     

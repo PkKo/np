@@ -134,7 +134,21 @@
 }
 
 #pragma mark - cancel/done
+// overwrite back button's action
+- (void)moveBack {
+    NSLog(@"%s", __func__);
+    [self removeLoginSettings];
+}
+
 - (IBAction)removeLoginSettings {
+    
+    LoginMethod loggedInMethod = [[[LoginUtil alloc] init] getLoginMethod];
+    if (selectedLoginMethod == LOGIN_BY_NONE && loggedInMethod == LOGIN_BY_NONE) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"로그인 방식을 설정해주세요." delegate:self
+                                               cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -150,12 +164,16 @@
         
     } else {
         
-        LoginMethod loggedInMethod = [util getLoginMethod];
-        
+        if (selectedLoginMethod == LOGIN_BY_NONE) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"로그인 방식을 설정해주세요." delegate:self
+                                                   cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
         
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"로그인 설정이 완료 되었습니다." delegate:self
                                                cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        
+        LoginMethod loggedInMethod = [util getLoginMethod];
         if (loggedInMethod == selectedLoginMethod) {
             
             alert.tag = ALERT_SETTINGS_DONE_NO_CHANGE;
@@ -196,25 +214,34 @@
     CertInfo * savedCertToLogin = [util getCertToLogin];
     [self updateSelectedCert:savedCertToLogin];
     
+    NSString * simplePw     = [util getSimplePassword];
+    NSString * patternPw    = [util getPatternPassword];
+    
     if (![util isLoggedIn]) {
         
-        NSString * simplePw     = [util getSimplePassword];
         if (!simplePw) {
             [self.simpleLoginBtn setEnabled:NO];
         }
         
-        NSString * patternPw    = [util getPatternPassword];
         if (!patternPw) {
             [self.patternLoginBtn setEnabled:NO];
         }
-    }
-    
-    if (![util isLoggedIn]) {
+        
         [self.simpleLoginMgmtBtn setEnabled:self.simpleLoginBtn.isEnabled];
         [self.patternLoginMgmtBtn setEnabled:self.patternLoginBtn.isEnabled];
+        
     } else {
         [self.simpleLoginMgmtBtn setEnabled:YES];
         [self.patternLoginMgmtBtn setEnabled:YES];
+    }
+    
+    if ( (selectedLoginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (selectedLoginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
+        [self selectLoginBy:LOGIN_BY_NONE];
+    }
+    
+    LoginMethod loginMethod = [util getLoginMethod];
+    if ( (loginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (loginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
+        [util saveLoginMethod:LOGIN_BY_NONE];
     }
 }
 
