@@ -13,7 +13,6 @@
     NSArray *countryList;
     NSMutableArray *regCountryList;
     NSMutableArray *chargeList;
-    NSMutableArray *payAlarmList;
     CGFloat countryCellHeight;
     CGFloat payAlarmCellHeight;
 }

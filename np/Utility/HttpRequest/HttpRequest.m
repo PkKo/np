@@ -218,6 +218,10 @@
         //델리게이트가 있으면 실행한다
         if([self target] && [[self target] respondsToSelector:[self selector]])
         {
+            if(responseDic == nil)
+            {
+                responseDic = [NSDictionary dictionaryWithObject:@"서버에러가 발생했습니다.\n잠시 후 다시 시도해주세요." forKey:RESULT_MESSAGE];
+            }
             [[self target] performSelector:[self selector] withObject:responseDic];
         }
 

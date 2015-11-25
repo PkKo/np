@@ -23,6 +23,7 @@
 /* 농협 개발서버 주소*/
 #define IPNS_ACCOUNT_HOST   @"218.239.251.112"
 #define IPNS_INBOX_HOST     @"218.239.251.113"
+#define IPNS_INBOX_IMAGE    [NSString stringWithFormat:@"http://%@:7104/FT_IMG/", IPNS_ACCOUNT_HOST]
 #else
 // 운영서버
 #define SERVER_URL          @""

@@ -261,6 +261,8 @@
 
 - (void)currencyChargeCountryResponse:(NSDictionary *)response
 {
+    [self stopIndicator];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         [self.navigationController popViewControllerAnimated:YES];

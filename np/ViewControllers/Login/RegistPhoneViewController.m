@@ -55,6 +55,11 @@
     carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];
     
     crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
+    {
+        [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];
+        [phoneNumberInput setEnabled:NO];
+    }
     authNumCounter = 0;
     
     NSMutableAttributedString *textOne = [[NSMutableAttributedString alloc] initWithString:descLabelOne.text];

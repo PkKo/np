@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *accountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *remainAmountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *amountDescLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *separateLine;
 
 @property (strong, nonatomic) IBOutlet IndexPathButton *pinButton;
 @property (strong, nonatomic) IBOutlet IndexPathButton *moreButton;

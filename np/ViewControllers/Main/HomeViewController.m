@@ -13,6 +13,11 @@
 #import "StatisticMainUtil.h"
 #import "ServiceFunctionInfoView.h"
 
+#define SERVICE_TYPE_ALL            @"서비스별"
+#define SERVICE_TYPE_ECOMMERCE      @"e금융인증번호"
+#define SERVICE_TYPE_EXCHANGE       @"환율"
+#define SERVICE_TYPE_ETC            @"기타"
+
 @interface HomeViewController ()
 
 @end
@@ -89,7 +94,29 @@
             case OTHER:
             {
                 reqData.accountNumberList = [NSArray array];
-                reqData.queryType = @"ETC";
+                if(etcTimeLineView != nil)
+                {
+                    if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+                    {
+                        reqData.queryType = @"ETC";
+                    }
+                    else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+                    {
+                        reqData.queryType = @"B";
+                    }
+                    else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
+                    {
+                        reqData.queryType = @"A";
+                    }
+                    else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
+                    {
+                        reqData.queryType = @"3,4,5,6,Z";
+                    }
+                }
+                else
+                {
+                    reqData.queryType = @"ETC";
+                }
                 break;
             }
             default:
@@ -269,7 +296,22 @@
         case OTHER:
         {
             reqData.accountNumberList = [NSArray array];
-            reqData.queryType = @"ETC";
+            if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+            {
+                reqData.queryType = @"ETC";
+            }
+            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+            {
+                reqData.queryType = @"B";
+            }
+            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
+            {
+                reqData.queryType = @"A";
+            }
+            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
+            {
+                reqData.queryType = @"3,4,5,6,Z";
+            }
             break;
         }
         default:
