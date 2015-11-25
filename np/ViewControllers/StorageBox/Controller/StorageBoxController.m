@@ -54,8 +54,21 @@
 
 - (NSArray *)getAllAccounts {
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    NSArray * allAccounts = [util getAllAccounts];
+    LoginUtil   * util          = [[LoginUtil alloc] init];
+    NSArray     * allAccounts   = [util getAllAccounts];
+    
+    return [self getAllAccounts:allAccounts];
+}
+
+- (NSArray *)getAllTransAccounts {
+    
+    LoginUtil   * util        = [[LoginUtil alloc] init];
+    NSArray     * allAccounts = [util getAllTransAccounts];
+    
+    return [self getAllAccounts:allAccounts];
+}
+
+- (NSArray *)getAllAccounts:(NSArray *)allAccounts {
     
     if (allAccounts && [allAccounts count] > 0) {
         

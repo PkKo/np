@@ -279,6 +279,8 @@
 #define PREF_KEY_ACCOUNT_LOGIN_SETT_FAILED_TIMES    @"accountLoginSettingsKeyFailedTimes"
 
 #define PREF_KEY_ALL_ACCOUNT                        @"AllAccounts"
+#define PREF_KEY_ALL_TRANS_ACCOUNT                  @"AllTransAccounts"
+
 #define PREF_KEY_CERT_TO_LOGIN                      @"certificateToLogin"
 #define PREF_KEY_CERT_LOGIN_SETT_FAILED_TIMES       @"certLoginSettingsKeyFailedTimes"
 

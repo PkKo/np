@@ -68,17 +68,8 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = (int)[accounts count];
-        NSMutableArray * accountNumbers = [NSMutableArray array];
-        if (numberOfAccounts > 0)
-        {
-            for (NSDictionary * account in accounts) {
-                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
-            }
-        }
-        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+        LoginUtil * util        = [[LoginUtil alloc] init];
+        [util saveAllAccountsAndAllTransAccounts:response];
         
         // 로그인 할 때 받아온 계좌번호 리스트를 가져온다
         accountList = [[[LoginUtil alloc] init] getAllAccounts];
