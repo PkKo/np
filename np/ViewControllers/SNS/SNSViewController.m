@@ -61,7 +61,7 @@
         [KOAppCall openKakaoTalkAppLink:[self kakaotalkMessage]];
         
     } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.kakaotalk.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/kakaotalk-messenger/id362057947?l=en&mt=8"]];
     }
 }
 
@@ -90,7 +90,7 @@
     
     if (![StoryLinkHelper canOpenStoryLink]) {
         NSLog(@"Cannot open kakao story.");
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://story.kakao.com/s/login"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/kakaostory/id486244601?l=en&mt=8"]];
         return;
     }
     
