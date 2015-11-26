@@ -463,6 +463,11 @@
 }
 
 #pragma mark - UIPickerViewDataSource
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 36.0f;
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;

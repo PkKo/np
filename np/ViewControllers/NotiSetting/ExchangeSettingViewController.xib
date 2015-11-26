@@ -93,11 +93,6 @@
                                         <action selector="addCurrencyCountry:" destination="-1" eventType="touchUpInside" id="guK-3q-RSr"/>
                                     </connections>
                                 </button>
-                                <view hidden="YES" contentMode="scaleToFill" id="H4F-QN-yhI" customClass="StrokeView">
-                                    <rect key="frame" x="17" y="129" width="286" height="148"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
                                     <rect key="frame" x="18" y="130" width="284" height="146"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -108,25 +103,20 @@
                                     </connections>
                                 </tableView>
                                 <view contentMode="scaleToFill" id="rbU-J2-N3Z">
-                                    <rect key="frame" x="18" y="294" width="284" height="184"/>
+                                    <rect key="frame" x="0.0" y="294" width="320" height="184"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="lfW-ew-ViG">
-                                            <rect key="frame" x="0.0" y="15" width="284" height="36"/>
+                                            <rect key="frame" x="0.0" y="15" width="320" height="36"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <string key="text">고객님이 이용중인 유료 환율 정보를
 무료 PUSH 알림으로 변경 신청하세요.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view hidden="YES" contentMode="scaleToFill" id="mPp-Iq-kqZ" customClass="StrokeView">
-                                            <rect key="frame" x="0.0" y="65" width="284" height="119"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="pbK-Ue-2aW">
-                                            <rect key="frame" x="1" y="66" width="282" height="117"/>
+                                            <rect key="frame" x="18" y="66" width="284" height="117"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>

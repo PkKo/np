@@ -978,14 +978,30 @@
             
             NSNumberFormatter *numFomatter = [NSNumberFormatter new];
             [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
-            NSString *amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
-            NSString *balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
+            NSString *amount = @"";
+            NSString *balance = @"";
+            if(inboxData.amount >= 0)
+            {
+                amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
+            }
+            
+            if(inboxData.balance >= 0)
+            {
+                balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
+            }
+            
             // 금액 String size
             CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
             
             if(inboxData.payType != nil && [inboxData.payType length] > 0)
             {
+                CGRect descFrame = cell.amountDescLabel.frame;
                 [cell.amountDescLabel setText:inboxData.payType];
+                [cell.amountDescLabel sizeToFit];
+                [cell.amountDescLabel setFrame:CGRectMake(descFrame.origin.x,
+                                                         descFrame.origin.y,
+                                                         cell.amountDescLabel.frame.size.width,
+                                                          descFrame.size.height)];
             }
             
             switch (inboxData.stickerCode)
