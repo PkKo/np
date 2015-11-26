@@ -245,7 +245,39 @@
     [prefs synchronize];
 }
 
-#pragma mark - Account Login
+#pragma mark - Accounts
+- (void)saveAllAccountsAndAllTransAccounts:(NSDictionary *)response {
+    
+    NSDictionary * list     = (NSDictionary *)(response[@"list"]);
+    NSArray * accounts      = (NSArray *)(list[@"sub"]);
+    
+    int numberOfAccounts    = (int)[accounts count];
+    
+    NSMutableArray * accountNumbers         = [NSMutableArray array];
+    NSMutableArray * transAccountNumbers    = [NSMutableArray array];
+    
+    if (numberOfAccounts > 0) {
+        
+        for (NSDictionary * accountDic in accounts) {
+            
+            NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
+            if (account && ![account isEqualToString:@""]) {
+                [accountNumbers addObject:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account]];
+                
+                // 입출금 계좌
+                NSString * accountType = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_type"]);
+                
+                if ([accountType isEqualToString:@"1"]) { // 1:입출금 계좌
+                    [transAccountNumbers addObject:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account]];
+                }
+            }
+        }
+    }
+    
+    [self saveAllTransAccounts:[transAccountNumbers copy]];
+    [self saveAllAccounts:[accountNumbers copy]];
+}
+
 - (NSArray *)getAllAccounts {
     
     return [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_ACCOUNT];
@@ -255,6 +287,17 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_ACCOUNT];
 }
+
+- (NSArray *)getAllTransAccounts {
+    
+    return [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_TRANS_ACCOUNT];
+}
+
+- (void)saveAllTransAccounts:(NSArray *)allAccounts {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_TRANS_ACCOUNT];
+}
+
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated {

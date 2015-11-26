@@ -38,9 +38,13 @@
 - (NSInteger)getCertPasswordFailedTimes;
 - (void)saveCertPasswordFailedTimes:(NSInteger)failedTimes;
 
-#pragma mark - Account Login
+#pragma mark - Accounts
+- (void)saveAllAccountsAndAllTransAccounts:(NSDictionary *)response;
 - (NSArray *)getAllAccounts;
 - (void)saveAllAccounts:(NSArray *)allAccounts;
+- (NSArray *)getAllTransAccounts;
+- (void)saveAllTransAccounts:(NSArray *)allAccounts;
+
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;

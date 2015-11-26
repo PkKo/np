@@ -141,13 +141,13 @@
     if ([[self.selectAccountLabel text] isEqualToString:TRANS_ALL_ACCOUNT]) {
         
         StorageBoxController    * controller    = [[StorageBoxController alloc] init];
-        NSArray                 * allAccounts   = [controller getAllAccounts];
+        NSArray                 * allAccounts   = [controller getAllTransAccounts];
         
         if ([allAccounts count] == 1) {
             return nil;
         }
         
-        return [[[LoginUtil alloc] init] getAllAccounts];
+        return [[[LoginUtil alloc] init] getAllTransAccounts];
         
     } else {
         
@@ -165,7 +165,7 @@
     StorageBoxController * controller = [[StorageBoxController alloc] init];
     
     StatisticMainUtil * util = [[StatisticMainUtil alloc] init];
-    [util showDataPickerInParentViewController:self dataSource:[controller getAllAccounts]
+    [util showDataPickerInParentViewController:self dataSource:[controller getAllTransAccounts]
                                   selectAction:@selector(updateAccount:)
                                      selectRow:sltedValue];
 }

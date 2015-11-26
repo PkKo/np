@@ -30,8 +30,6 @@
 
 - (void)loginResponse:(NSDictionary *)response {
     
-    NSLog(@"response: %@", response);
-    
     [self stopIndicator];
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
@@ -43,30 +41,14 @@
             return;
         }
         
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        
-        int numberOfAccounts    = (int)[accounts count];
-        NSMutableArray * accountNumbers = [NSMutableArray array];
-        
-        if (numberOfAccounts > 0) {
-            
-            for (NSDictionary * accountDic in accounts) {
-                
-                NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
-                if (account && ![account isEqualToString:@""]) {
-                    [accountNumbers addObject:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account]];
-                }
-            }
-        }
-        
-        [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
+        LoginUtil * util        = [[LoginUtil alloc] init];
+        [util saveAllAccountsAndAllTransAccounts:response];
         
         NSString * isLatestTermsOfUse = (NSString *)response[@"provision_check"];
         
         if ([isLatestTermsOfUse isEqualToString:IS_LATEST_TERMS_OF_USE_YES]) {
             
-            [[[LoginUtil alloc] init] showMainPage];
+            [util showMainPage];
             
         } else {
             NewTermsOfUseViewController *termsOfUseView = [[NewTermsOfUseViewController alloc] initWithNibName:@"NewTermsOfUseViewController" bundle:nil];

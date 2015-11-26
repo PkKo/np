@@ -414,24 +414,8 @@
         }
         
         // 가입계좌 가져오기
-        NSDictionary * list     = (NSDictionary *)(response[@"list"]);
-        NSArray * accounts      = (NSArray *)(list[@"sub"]);
-        int numberOfAccounts    = (int)[accounts count];
-        
-        if (numberOfAccounts > 0)
-        {
-            NSMutableArray * accountNumbers = [NSMutableArray arrayWithCapacity:numberOfAccounts];
-            for (NSDictionary * account in accounts)
-            {
-                [accountNumbers addObject:[(NSString *)account[@"UMSA360101_OUT_SUB.account_number"] stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
-            }
-            if ([accountNumbers count] > 0)
-            {
-                
-                [[[LoginUtil alloc] init] saveAllAccounts:[accountNumbers copy]];
-                
-            }
-        }
+        LoginUtil * util        = [[LoginUtil alloc] init];
+        [util saveAllAccountsAndAllTransAccounts:response];
         
         [[[LoginUtil alloc] init] setLogInStatus:YES];
 
