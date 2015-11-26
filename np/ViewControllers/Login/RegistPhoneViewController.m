@@ -296,7 +296,7 @@
 #pragma mark - UIPickerViewDataSource
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
-    return 40.0f;
+    return 36.0f;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -358,7 +358,7 @@
         }
         else if ([textField isEqual:phoneAuthNumInput])
         {
-            if(textField.text.length == 6)
+            if(textField.text.length == 4)
             {
                 return NO;
             }

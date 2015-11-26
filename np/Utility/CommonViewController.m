@@ -46,7 +46,10 @@
 {
     [super viewDidAppear:animated];
     
-    [self sessionRefreshRequest];
+    if([[[LoginUtil alloc] init] isLoggedIn])
+    {
+        [self sessionRefreshRequest];
+    }
 }
 
 - (void)didReceiveMemoryWarning

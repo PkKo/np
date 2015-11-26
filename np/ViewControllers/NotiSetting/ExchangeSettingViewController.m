@@ -120,15 +120,6 @@
     {
         regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"freeList"]];
         chargeList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"chargeList"]];
-        /*
-        if([chargeList count] > 0)
-        {
-            // 1. 기존에 가입된 서비스가 있는지 확인해본다.
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고객님이 이용 중인 UMS 유료 환율 서비스를 해지하고, NH스마트알림으로 환율정보를 받으시겠습니까?" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            [alertView show];
-            //        [serviceNotiAlertView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-            //        [self.view addSubview:serviceNotiAlertView];
-        }*/
     }
     else
     {
@@ -170,6 +161,33 @@
                                                   countryListTable.frame.size.width,
                                                   tableViewHeight)];
             [payAlarmView setHidden:YES];
+        }
+        else
+        {
+            // 유료알림 국가 목록
+            if([chargeList count] < 3)
+            {
+                CGFloat totalCellHeight = payAlarmCellHeight * [chargeList count];
+                [payAlarmListTable setScrollEnabled:NO];
+                [payAlarmListTable setFrame:CGRectMake(payAlarmListTable.frame.origin.x,
+                                                       payAlarmListTable.frame.origin.y,
+                                                       payAlarmListTable.frame.size.width,
+                                                       totalCellHeight)];
+            }
+        }
+        
+        if([regCountryList count] > 0 && [chargeList count] > 0)
+        {
+            // 푸시알림국가목록
+            if([regCountryList count] < 4)
+            {
+                CGFloat totalCellHeight = countryCellHeight * [regCountryList count];
+                [countryListTable setScrollEnabled:NO];
+                [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
+                                                      countryListTable.frame.origin.y,
+                                                      countryListTable.frame.size.width,
+                                                      totalCellHeight)];
+            }
         }
         
         [countryListTable reloadData];
