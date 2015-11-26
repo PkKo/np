@@ -94,7 +94,7 @@
                                     </connections>
                                 </button>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" id="EG9-tW-GRn">
-                                    <rect key="frame" x="18" y="130" width="284" height="146"/>
+                                    <rect key="frame" x="18" y="130" width="284" height="130"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -103,7 +103,7 @@
                                     </connections>
                                 </tableView>
                                 <view contentMode="scaleToFill" id="rbU-J2-N3Z">
-                                    <rect key="frame" x="0.0" y="294" width="320" height="184"/>
+                                    <rect key="frame" x="0.0" y="278" width="320" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" id="lfW-ew-ViG">

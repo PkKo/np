@@ -12,7 +12,7 @@
 #define DEV_MODE        1
 
 // server url 정보
-#ifdef DEV_MODE
+#if DEV_MODE
 // 개발서버
 #define SERVER_URL          @"https://218.239.251.103:39190/"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
@@ -23,15 +23,16 @@
 /* 농협 개발서버 주소*/
 #define IPNS_ACCOUNT_HOST   @"218.239.251.112"
 #define IPNS_INBOX_HOST     @"218.239.251.113"
-#define IPNS_INBOX_IMAGE    [NSString stringWithFormat:@"http://%@:7104/FT_IMG/", IPNS_ACCOUNT_HOST]
 #else
 // 운영서버
-#define SERVER_URL          @""
-#define PUSH_APP_ID         @""
-#define PUSH_APP_SECRET     @""
-#define IPNS_ACCOUNT_HOST   @""
+#define SERVER_URL          @"https://218.239.251.103:39190/"
+#define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
+#define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
+#define IPNS_ACCOUNT_HOST   @"61.42.212.61"
 #define IPNS_INBOX_HOST     @""
 #endif
+
+#define IPNS_INBOX_IMAGE    [NSString stringWithFormat:@"http://%@:7104/FT_IMG/", IPNS_ACCOUNT_HOST]
 
 // 공인인증서 NH은행 실제 주소
 #define NH_BANK_AUTH_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getauth.jsp"

@@ -65,6 +65,16 @@
     
     countryCellHeight = CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
     payAlarmCellHeight = CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
+    
+    if(CGRectEqualToRect(regCountryOriginFrame, CGRectNull) || CGRectEqualToRect(regCountryOriginFrame, CGRectZero))
+    {
+        regCountryOriginFrame = countryListTable.frame;
+    }
+    
+    if(CGRectEqualToRect(payCountryOriginFrame, CGRectNull) || CGRectEqualToRect(payCountryOriginFrame, CGRectZero))
+    {
+        payCountryOriginFrame = payAlarmListTable.frame;
+    }
 }
 
 #pragma mark - 환율 알림 전체 국가 목록 요청
@@ -174,6 +184,14 @@
                                                        payAlarmListTable.frame.size.width,
                                                        totalCellHeight)];
             }
+            else
+            {
+                [payAlarmListTable setScrollEnabled:YES];
+                [payAlarmListTable setFrame:CGRectMake(payAlarmListTable.frame.origin.x,
+                                                       payAlarmListTable.frame.origin.y,
+                                                       payAlarmListTable.frame.size.width,
+                                                       payCountryOriginFrame.size.height)];
+            }
         }
         
         if([regCountryList count] > 0 && [chargeList count] > 0)
@@ -187,6 +205,14 @@
                                                       countryListTable.frame.origin.y,
                                                       countryListTable.frame.size.width,
                                                       totalCellHeight)];
+            }
+            else
+            {
+                [countryListTable setScrollEnabled:YES];
+                [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
+                                                      countryListTable.frame.origin.y,
+                                                      countryListTable.frame.size.width,
+                                                      regCountryOriginFrame.size.height)];
             }
         }
         

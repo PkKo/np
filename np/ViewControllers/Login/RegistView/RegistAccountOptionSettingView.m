@@ -264,6 +264,7 @@
         [amountNoLimitText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
         [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [amountSelectText setText:[amountList objectAtIndex:selectedAmount]];
     }
     else
     {
