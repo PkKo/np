@@ -993,6 +993,7 @@
             // 금액 String size
             CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
             
+            // 화폐단위(없을경우 디폴트 : 원)
             if(inboxData.payType != nil && [inboxData.payType length] > 0)
             {
                 CGRect descFrame = cell.amountDescLabel.frame;
