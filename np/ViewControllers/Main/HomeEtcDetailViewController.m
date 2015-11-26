@@ -7,6 +7,7 @@
 //
 
 #import "HomeEtcDetailViewController.h"
+#import "LoadingImageView.h"
 
 @interface HomeEtcDetailViewController ()
 
@@ -74,7 +75,7 @@
         
         for (int pageIndex = 0; pageIndex < numberOfPages; pageIndex++)
         {
-            UIImageView * page = [[UIImageView alloc] initWithFrame:CGRectMake(scrollViewWith * pageIndex, 0, scrollViewWith, scrollViewHeight)];
+            LoadingImageView * page = [[LoadingImageView alloc] initWithFrame:CGRectMake(scrollViewWith * pageIndex, 0, scrollViewWith, scrollViewHeight)];
             [self getImageInBackground:page url:[imgUrl objectAtIndex:pageIndex]];
             /*
             UIWebView *webPage = [[UIWebView alloc] initWithFrame:CGRectMake(scrollViewWith * pageIndex, 0, scrollViewWith, scrollViewHeight)];
@@ -95,12 +96,17 @@
     [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
-- (void)getImageInBackground:(UIImageView *)imageView url:(NSString *)url
+- (void)getImageInBackground:(LoadingImageView *)imageView url:(NSString *)url
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void){
+        [imageView startLoadingAnimation];
         UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
         dispatch_sync(dispatch_get_main_queue(), ^(void){
-            [imageView setImage:downloadedImage];
+            if(downloadedImage)
+            {
+                [imageView stopLoadingAnimation];
+                [imageView setImage:downloadedImage];
+            }
         });
     });
 }

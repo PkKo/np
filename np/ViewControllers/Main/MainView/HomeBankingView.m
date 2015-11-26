@@ -687,6 +687,11 @@
     [searchTypePickerView setHidden:YES];
 }
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 36;
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
 {
     return 1;
@@ -859,6 +864,11 @@
     NSString *balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
     // 금액 String size
     CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
+    
+    if(inboxData.payType != nil && [inboxData.payType length] > 0)
+    {
+        [cell.amountDescLabel setText:inboxData.payType];
+    }
     
     switch (inboxData.stickerCode)
     {

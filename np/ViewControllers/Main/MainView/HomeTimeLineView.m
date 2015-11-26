@@ -983,6 +983,11 @@
             // 금액 String size
             CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
             
+            if(inboxData.payType != nil && [inboxData.payType length] > 0)
+            {
+                [cell.amountDescLabel setText:inboxData.payType];
+            }
+            
             switch (inboxData.stickerCode)
             {
                 case STICKER_DEPOSIT_NORMAL:

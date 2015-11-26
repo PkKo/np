@@ -155,6 +155,27 @@
 #pragma mark - 계좌인증 확인
 - (void)checkRegistAccountRequest
 {
+    if([inputAccountView.addNewAccountInput.text length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([inputAccountView.addNewAccountPassInput.text length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌 비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if([inputAccountView.addNewAccountBirthInput.text length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"생년월일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     [self startIndicator];
     
     certifiedAccountNumber = [inputAccountView.addNewAccountInput.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""];
