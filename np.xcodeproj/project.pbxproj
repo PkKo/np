@@ -545,6 +545,7 @@
 		A2E235421BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235401BAA4AF500BAEBEA /* CertPasswordChangeViewController.xib */; };
 		A2E235461BAAACAF00BAEBEA /* HomeQuickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */; };
 		A2E235471BAAACAF00BAEBEA /* HomeQuickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */; };
+		A2EB98321C068B1B00C3B9AD /* LoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2EB98311C068B1B00C3B9AD /* LoadingImageView.m */; };
 		A538C2DF1BCDE748005E3211 /* LoginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2DD1BCDE748005E3211 /* LoginSettingsViewController.m */; };
 		A538C2E01BCDE748005E3211 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A538C2DE1BCDE748005E3211 /* LoginSettingsViewController.xib */; };
 		A538C2E41BCE2702005E3211 /* CertListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A538C2E21BCE2702005E3211 /* CertListViewController.m */; };
@@ -1321,6 +1322,8 @@
 		A2E235431BAAACAF00BAEBEA /* HomeQuickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQuickViewController.h; sourceTree = "<group>"; };
 		A2E235441BAAACAF00BAEBEA /* HomeQuickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQuickViewController.m; sourceTree = "<group>"; };
 		A2E235451BAAACAF00BAEBEA /* HomeQuickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQuickViewController.xib; sourceTree = "<group>"; };
+		A2EB98301C068B1B00C3B9AD /* LoadingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingImageView.h; sourceTree = "<group>"; };
+		A2EB98311C068B1B00C3B9AD /* LoadingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingImageView.m; sourceTree = "<group>"; };
 		A538C2DC1BCDE748005E3211 /* LoginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSettingsViewController.h; sourceTree = "<group>"; };
 		A538C2DD1BCDE748005E3211 /* LoginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSettingsViewController.m; sourceTree = "<group>"; };
 		A538C2DE1BCDE748005E3211 /* LoginSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSettingsViewController.xib; sourceTree = "<group>"; };
@@ -2360,6 +2363,8 @@
 				A2E03C6A1BFB639500188C52 /* StrokeInputView.m */,
 				A2DE5A831C0462E80061BAE3 /* DelegateButton.h */,
 				A2DE5A841C0462E80061BAE3 /* DelegateButton.m */,
+				A2EB98301C068B1B00C3B9AD /* LoadingImageView.h */,
+				A2EB98311C068B1B00C3B9AD /* LoadingImageView.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -3866,6 +3871,7 @@
 				A2DFD7171BB0F1A100838E09 /* KeychainItemWrapper.m in Sources */,
 				A2DEAE791B9FE6E600EDCCBA /* HomeViewController.m in Sources */,
 				A2DEAE5B1B9FE6D800EDCCBA /* HttpRequest.m in Sources */,
+				A2EB98321C068B1B00C3B9AD /* LoadingImageView.m in Sources */,
 				A2E2353C1BAA452000BAEBEA /* CertInfoViewController.m in Sources */,
 				A5E017871BCCD19F007BD4EA /* LoginUtil.m in Sources */,
 				A2E03C6B1BFB639500188C52 /* StrokeInputView.m in Sources */,

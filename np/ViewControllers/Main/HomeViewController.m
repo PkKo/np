@@ -38,6 +38,8 @@
 {
     [super viewDidLoad];
     
+    [self.mNaviView removeFromSuperview];
+    
     sectionList = [NSMutableArray array];
     timelineMessageList = [NSMutableDictionary dictionary];
     unreadMessageList = [NSMutableArray array];

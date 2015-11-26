@@ -24,7 +24,7 @@ typedef enum HomeViewType
 
 #define TOP_MENU_BAR_HEIGHT     27
 
-@interface HomeViewController : UIViewController<IBInboxProtocol, StickerSettingDelegate>
+@interface HomeViewController : CommonViewController<IBInboxProtocol, StickerSettingDelegate>
 {
     // 푸시 날짜 데이터 리스트
     NSMutableArray *sectionList;

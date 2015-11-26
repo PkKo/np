@@ -93,6 +93,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 @property (nonatomic) NSString * oppositeUser;
 @property (nonatomic) int32_t stickerCode;
 @property (nonatomic) NSString * accountGb;
+@property (nonatomic) NSString * payType;
 
 @end
 
