@@ -161,17 +161,34 @@ static id _sharedObject             = nil;
                 NSString * transType        = [NSString stringWithUTF8String:
                                                                         (const char *)sqlite3_column_text(statement, 4)];
                 
-                NSNumber * transAmount      = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
-                                                                        (const char *)sqlite3_column_text(statement, 5)] floatValue]];
+                NSNumber * transAmount      = [NSNumber numberWithDouble:[[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 5)] doubleValue]];
                 
-                NSNumber * transBalance     = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
-                                                                        (const char *)sqlite3_column_text(statement, 6)] floatValue]];
+                NSString * transBalanceWithCurrencyUnit = [NSString stringWithUTF8String:
+                                                            (const char *)sqlite3_column_text(statement, 6)];
+                NSString * transBalanceStr;
+                NSString * currencyUnit;
+                
+                NSLog(@"transBalanceWithCurrencyUnit:%@", transBalanceWithCurrencyUnit);
+                NSRange whiteSpaceRange = [transBalanceWithCurrencyUnit rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+                if (whiteSpaceRange.location != NSNotFound) {
+                    
+                    transBalanceStr = [transBalanceWithCurrencyUnit substringToIndex:whiteSpaceRange.location];
+                    NSLog(@"transBalanceStr: %@", transBalanceStr);
+                    
+                    currencyUnit = [transBalanceWithCurrencyUnit substringFromIndex:whiteSpaceRange.location + 1];
+                    NSLog(@"currencyUnit: %@", currencyUnit);
+                }
+                
+                                                           
+                
+                NSNumber * transBalance     = 0;//[NSNumber numberWithDouble: doubleValue]];
                 
                 NSString * transMemo        = [NSString stringWithUTF8String:
                                                                         (const char *)sqlite3_column_text(statement, 7)];
                 
-                NSNumber * transPinnable    = [NSNumber numberWithFloat:[[NSString stringWithUTF8String:
-                                                                        (const char *)sqlite3_column_text(statement, 8)] floatValue]];
+                NSNumber * transPinnable    = [NSNumber numberWithDouble:[[NSString stringWithUTF8String:
+                                                                        (const char *)sqlite3_column_text(statement, 8)] doubleValue]];
                 NSString * transAccountType = [NSString stringWithUTF8String:
                                                                         (const char *)sqlite3_column_text(statement, 9)];
                 
@@ -404,7 +421,7 @@ static id _sharedObject             = nil;
         NSString * insertSQL = [NSString stringWithFormat:@"INSERT INTO transactions (TRANS_ID,TRANS_DATE, TRANS_ACCOUNT, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_BALANCE, TRANS_MEMO, TRANS_PINNABLE, TRANS_ACCOUNT_TYPE) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", transObj.transactionId, transObj.formattedTransactionDateForDB,
                                 transObj.transactionAccountNumber, transObj.transactionDetails,
                                 transObj.transactionType, [transObj.transactionAmount stringValue],
-                                [transObj.transactionBalance stringValue], transObj.transactionMemo, [transObj.transactionActivePin stringValue], transObj.transactionAccountType];
+                                [NSString stringWithFormat:@"%@ %@", [transObj.transactionBalance stringValue], transObj.currencyUnit], transObj.transactionMemo, [transObj.transactionActivePin stringValue], transObj.transactionAccountType];
         
         const char * insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare(_nhTransactionDB, insert_stmt, -1, &statement, NULL);

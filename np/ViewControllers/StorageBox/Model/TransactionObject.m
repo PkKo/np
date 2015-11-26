@@ -31,6 +31,7 @@
                                        transactionType:(NSString *)transactionType
                                      transactionAmount:(NSNumber *)transactionAmount
                                     transactionBalance:(NSNumber *)transactionBalance
+                                          currencyUnit:(NSString *)currencyUnit
                                        transactionMemo:(NSString *)transactionMemo
                                   transactionActivePin:(NSNumber *)transactionActivePin {
     self = [super init];
@@ -64,11 +65,11 @@
 
 
 - (NSString *)formattedTransactionAmount {
-    return [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionAmount floatValue]]];
+    return [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithDouble:[self.transactionAmount doubleValue]]];
 }
 
 - (NSString *)formattedTransactionBalance {
-    return [NSString stringWithFormat:@"잔액 %@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithFloat:[self.transactionBalance floatValue]]]];
+    return [NSString stringWithFormat:@"잔액 %@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithDouble:[self.transactionBalance doubleValue]]]];
 }
 
 - (NSString *)getTransactionHourMinute {

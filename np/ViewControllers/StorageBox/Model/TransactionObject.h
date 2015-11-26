@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSNumber * transactionAmount;
 @property (nonatomic, copy) NSNumber * transactionBalance;
 @property (nonatomic, copy) NSString * transactionMemo;
+@property (nonatomic, copy) NSString * currencyUnit;
 @property (nonatomic, copy) NSNumber * transactionActivePin;
 @property (nonatomic, copy) NSNumber * transactionMarkAsDeleted;
 
@@ -36,6 +37,7 @@
                                        transactionType:(NSString *)transactionType
                                      transactionAmount:(NSNumber *)transactionAmount
                                     transactionBalance:(NSNumber *)transactionBalance
+                                          currencyUnit:(NSString *)currencyUnit
                                        transactionMemo:(NSString *)transactionMemo
                                   transactionActivePin:(NSNumber *)transactionActivePin;
 

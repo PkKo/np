@@ -1075,6 +1075,7 @@
                                                                                            transactionType:[NSString stringWithFormat:@"%d", inboxData.stickerCode]
                                                                                      transactionAmount:@(inboxData.amount)
                                                                                     transactionBalance:@(inboxData.balance)
+                                                                                          currencyUnit:[inboxData.payType isEqualToString:@""] ? @"원" : inboxData.payType
                                                                                        transactionMemo:@""
                                                                                   transactionActivePin:[NSNumber numberWithBool:[cell.pinButton isSelected]]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];
