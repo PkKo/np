@@ -10,6 +10,7 @@
 #import "RegistTabView.h"
 #import "RegisterTermsViewController.h"
 #import "RegistPhoneErrorViewController.h"
+#import "RegisterAccountViewController.h"
 
 #define AUTH_NUMBER_TIMER_INTERVAL  1.0
 #define AUTH_NUMBER_TIMER_MAX       180
@@ -34,6 +35,8 @@
 @synthesize descLabelTwo;
 @synthesize descLabelThree;
 @synthesize bottomDescView;
+
+@synthesize isRegisteredUser;
 
 - (void)viewDidLoad
 {
@@ -215,8 +218,16 @@
         return;
     }
     
-    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if(isRegisteredUser)
+    {
+        RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     authNumber = nil;
     carrierIndex = 0;

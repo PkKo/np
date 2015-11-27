@@ -15,6 +15,8 @@
     NSMutableArray *chargeList;
     CGFloat countryCellHeight;
     CGFloat payAlarmCellHeight;
+    CGRect regCountryOriginFrame;
+    CGRect payCountryOriginFrame;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *emptyView;

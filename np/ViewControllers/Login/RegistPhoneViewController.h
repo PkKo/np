@@ -39,6 +39,8 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *carrierPickerView;
 @property (strong, nonatomic) IBOutlet UIView *carrierPickerBgView;
 
+@property (assign, nonatomic) BOOL isRegisteredUser;
+
 @property (strong, nonatomic) IBOutlet UILabel *descLabelOne;
 @property (strong, nonatomic) IBOutlet UILabel *descLabelTwo;
 @property (strong, nonatomic) IBOutlet UILabel *descLabelThree;

@@ -421,8 +421,11 @@
             [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
             
+            NSInteger userCount = [[response objectForKey:@"user_count"] integerValue];
+            
             // 인증 성공한 이후 휴대폰 인증으로 이동
             RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+            [vc setIsRegisteredUser:userCount];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -550,8 +553,11 @@
             [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
             
+            NSInteger userCount = [[response objectForKey:@"user_count"] integerValue];
+            
             // 인증 성공한 이후 휴대폰 인증으로 이동
             RegistPhoneViewController *vc = [[RegistPhoneViewController alloc] init];
+            [vc setIsRegisteredUser:userCount];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

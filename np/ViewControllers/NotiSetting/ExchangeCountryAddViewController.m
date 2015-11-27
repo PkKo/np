@@ -51,7 +51,7 @@
 
     [scrollView setContentSize:contentView.frame.size];
     
-    [countryDeleteButton setHidden:isNewCoutry||isChargeCountry];
+    [countryDeleteButton setHidden:isNewCoutry];
     
     pickerList = [[NSMutableArray alloc] init];
     countrySelectIndex = 0;
