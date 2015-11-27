@@ -46,17 +46,8 @@
                         <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZMF-S0-Qcf">
-                        <rect key="frame" x="272" y="30" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="icon_pin_01_dft.png"/>
-                        <state key="selected" image="icon_pin_01_sel.png"/>
-                        <connections>
-                            <action selector="togglePinup" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HYy-K5-q9L"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" id="fsv-af-xyE">
-                        <rect key="frame" x="104" y="38" width="176" height="25"/>
+                        <rect key="frame" x="104" y="38" width="193" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ucJ-B6-LYj">
@@ -66,7 +57,7 @@
                                 <color key="textColor" red="0.14117647058823529" green="0.51764705882352935" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90,000,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HaD-Cn-Ito">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90,000,000" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="16" id="HaD-Cn-Ito">
                                 <rect key="frame" x="34" y="0.0" width="123" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -83,6 +74,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZMF-S0-Qcf">
+                        <rect key="frame" x="272" y="30" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="icon_pin_01_dft.png"/>
+                        <state key="selected" image="icon_pin_01_sel.png"/>
+                        <connections>
+                            <action selector="togglePinup" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HYy-K5-q9L"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="급여통장 111-2458-11**-**" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="Z9n-QJ-Qjh">
                         <rect key="frame" x="104" y="67" width="198" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>

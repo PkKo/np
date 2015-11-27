@@ -1501,6 +1501,7 @@
     NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     HomeTimeLineTableViewCell *cell = [mTimeLineTable cellForRowAtIndexPath:indexPath];
     
+    NSString * currencyUnit = (!inboxData.payType || [inboxData.payType isEqualToString:@""]) ? @"원" : inboxData.payType;
     TransactionObject * transation = [[TransactionObject alloc] initTransactionObjectWithTransactionId:inboxData.serverMessageKey
                                                                                        transactionDate:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]
                                                                               transactionAccountNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]
@@ -1509,7 +1510,7 @@
                                                                                        transactionType:[NSString stringWithFormat:@"%d", inboxData.stickerCode]
                                                                                      transactionAmount:@(inboxData.amount)
                                                                                     transactionBalance:@(inboxData.balance)
-                                                                                          currencyUnit:[inboxData.payType isEqualToString:@""] ? @"원" : inboxData.payType
+                                                                                          currencyUnit:currencyUnit
                                                                                        transactionMemo:@""
                                                                                   transactionActivePin:[NSNumber numberWithBool:[cell.pinButton isSelected]]];
     StorageBoxUtil * util = [[StorageBoxUtil alloc] init];

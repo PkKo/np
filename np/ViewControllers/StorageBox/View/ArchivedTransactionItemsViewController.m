@@ -454,19 +454,27 @@
         
         [cell.transacAmountType setText:[transacObj transactionTypeDesc]];
         [cell.transacAmount setText:[transacObj formattedTransactionAmount]];
+        [cell.transacAmountUnit setText:transacObj.currencyUnit];
         
-        CGSize transacAmountSize = [StorageBoxUtil contentSizeOfLabel:cell.transacAmount];
-        CGRect transacAmountRect = cell.transacAmount.frame;
-        transacAmountRect.size.width = transacAmountSize.width;
+        CGRect transacAmountUnitRect    = cell.transacAmountUnit.frame;
+        CGSize transacAmountUnitSize    = [StorageBoxUtil contentSizeOfLabel:cell.transacAmountUnit];
+        
+        CGSize transacAmountSize        = [StorageBoxUtil contentSizeOfLabel:cell.transacAmount];
+        CGRect transacAmountRect        = cell.transacAmount.frame;
+        
+        CGFloat maxTransacAmountWidth   = cell.transacAmountView.frame.size.width - (cell.transacAmountType.frame.size.width + cell.transacAmountUnit.frame.size.width);
+        NSLog(@"maxTransacAmountWidth: %f", maxTransacAmountWidth);
+        
+        transacAmountRect.size.width    = transacAmountSize.width;//transacAmountSize.width > maxTransacAmountWidth ? maxTransacAmountWidth : transacAmountSize.width; //transacAmountSize.width
         [cell.transacAmount setFrame:transacAmountRect];
         
-        CGRect transacAmountUnitRect = cell.transacAmountUnit.frame;
-        transacAmountUnitRect.origin.x = transacAmountRect.origin.x + transacAmountRect.size.width;
+        
+        transacAmountUnitRect.origin.x  = transacAmountRect.origin.x + transacAmountRect.size.width;
         [cell.transacAmountUnit setFrame:transacAmountUnitRect];
         
         [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1] : [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1]];
-        [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
         [cell.transacAmountType setTextColor:cell.transacAmount.textColor];
+        [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
         
         [cell.transacBalance setText:[transacObj formattedTransactionBalance]];
         [cell.transacMemo setText:[transacObj transactionMemo]];

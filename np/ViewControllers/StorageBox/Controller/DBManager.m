@@ -166,23 +166,16 @@ static id _sharedObject             = nil;
                 
                 NSString * transBalanceWithCurrencyUnit = [NSString stringWithUTF8String:
                                                             (const char *)sqlite3_column_text(statement, 6)];
-                NSString * transBalanceStr;
-                NSString * currencyUnit;
+                NSString * transBalanceStr  = @"0";
+                NSString * currencyUnit     = @"원";
                 
-                NSLog(@"transBalanceWithCurrencyUnit:%@", transBalanceWithCurrencyUnit);
                 NSRange whiteSpaceRange = [transBalanceWithCurrencyUnit rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
                 if (whiteSpaceRange.location != NSNotFound) {
-                    
                     transBalanceStr = [transBalanceWithCurrencyUnit substringToIndex:whiteSpaceRange.location];
-                    NSLog(@"transBalanceStr: %@", transBalanceStr);
-                    
                     currencyUnit = [transBalanceWithCurrencyUnit substringFromIndex:whiteSpaceRange.location + 1];
-                    NSLog(@"currencyUnit: %@", currencyUnit);
                 }
                 
-                                                           
-                
-                NSNumber * transBalance     = 0;//[NSNumber numberWithDouble: doubleValue]];
+                NSNumber * transBalance     = [NSNumber numberWithDouble:[transBalanceStr doubleValue]];
                 
                 NSString * transMemo        = [NSString stringWithUTF8String:
                                                                         (const char *)sqlite3_column_text(statement, 7)];
@@ -200,6 +193,7 @@ static id _sharedObject             = nil;
                 [tranObj setTransactionType         :transType];
                 [tranObj setTransactionAmount       :transAmount];
                 [tranObj setTransactionBalance      :transBalance];
+                [tranObj setCurrencyUnit            :currencyUnit];
                 [tranObj setTransactionMemo         :transMemo];
                 [tranObj setTransactionActivePin    :transPinnable];
                 [tranObj setTransactionAccountType  :transAccountType];

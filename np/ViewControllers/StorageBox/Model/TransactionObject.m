@@ -44,6 +44,7 @@
         self.transactionType            = transactionType;
         self.transactionAmount          = transactionAmount;
         self.transactionBalance         = transactionBalance;
+        self.currencyUnit               = currencyUnit;
         self.transactionMemo            = transactionMemo;
         self.transactionActivePin       = transactionActivePin;
         self.transactionMarkAsDeleted   = TRANS_MARK_AS_DELETED_NO;
@@ -69,7 +70,7 @@
 }
 
 - (NSString *)formattedTransactionBalance {
-    return [NSString stringWithFormat:@"잔액 %@원", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithDouble:[self.transactionBalance doubleValue]]]];
+    return [NSString stringWithFormat:@"잔액 %@%@", [[StatisticMainUtil getNumberFormatter] stringFromNumber:[NSNumber numberWithDouble:[self.transactionBalance doubleValue]]], self.currencyUnit];
 }
 
 - (NSString *)getTransactionHourMinute {
