@@ -57,7 +57,7 @@
                                 <color key="textColor" red="0.14117647058823529" green="0.51764705882352935" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90,000,000" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="16" id="HaD-Cn-Ito">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90,000,000" textAlignment="natural" lineBreakMode="tailTruncation" minimumFontSize="14" id="HaD-Cn-Ito">
                                 <rect key="frame" x="34" y="0.0" width="123" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>

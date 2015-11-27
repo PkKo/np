@@ -458,14 +458,14 @@
         
         CGRect transacAmountUnitRect    = cell.transacAmountUnit.frame;
         CGSize transacAmountUnitSize    = [StorageBoxUtil contentSizeOfLabel:cell.transacAmountUnit];
+        transacAmountUnitRect.size.width= transacAmountUnitSize.width;
         
         CGSize transacAmountSize        = [StorageBoxUtil contentSizeOfLabel:cell.transacAmount];
         CGRect transacAmountRect        = cell.transacAmount.frame;
         
-        CGFloat maxTransacAmountWidth   = cell.transacAmountView.frame.size.width - (cell.transacAmountType.frame.size.width + cell.transacAmountUnit.frame.size.width);
-        NSLog(@"maxTransacAmountWidth: %f", maxTransacAmountWidth);
+        CGFloat maxTransacAmountWidth   = cell.transacAmountView.frame.size.width - (cell.transacAmountType.frame.size.width +transacAmountUnitRect.size.width);
         
-        transacAmountRect.size.width    = transacAmountSize.width;//transacAmountSize.width > maxTransacAmountWidth ? maxTransacAmountWidth : transacAmountSize.width; //transacAmountSize.width
+        transacAmountRect.size.width    = transacAmountSize.width > maxTransacAmountWidth ? maxTransacAmountWidth : transacAmountSize.width;
         [cell.transacAmount setFrame:transacAmountRect];
         
         
