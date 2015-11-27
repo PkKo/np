@@ -261,6 +261,12 @@
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CHARGE_COUNTRY];
     
     HttpRequest *req = [HttpRequest getInstance];
