@@ -93,6 +93,11 @@
         [periodTimeOneLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         [periodTimeTwoLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
         [periodTimeThreeLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        
+        // reset 3 periodTime
+        periodOneIndex      =  0;
+        periodTwoIndex      =  0;
+        periodThreeIndex    =  0;
     }
     else if(periodFlag == 2)
     {
