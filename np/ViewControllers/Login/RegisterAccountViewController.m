@@ -51,6 +51,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardShow:)
                                                  name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -547,14 +549,18 @@
     }
     
     CGFloat keyboardHeight;
-    
     NSDictionary * keyboardInfo = [notifcation userInfo];
     NSValue * keyboardFrame     = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardFrameRect    = [keyboardFrame CGRectValue];
     keyboardHeight              = keyboardFrameRect.size.height;
     
     CGPoint addNewAccountBirthInputPos = [inputAccountView convertPoint:inputAccountView.addNewAccountBirthInput.frame.origin toView:self.scrollView];
-    [self.scrollView setContentOffset:addNewAccountBirthInputPos];
+    [self.scrollView setContentOffset:CGPointMake(0, addNewAccountBirthInputPos.y)];
+}
+
+- (void)onKeyboardHide:(NSNotification *)notifcation
+{
+    [self.scrollView setContentOffset:CGPointZero];
 }
 
 @end
