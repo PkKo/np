@@ -15,7 +15,7 @@
 
 - (IBAction)clickDeleteBtn {
     if (self.pinnable) {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고정핀 적용된 아이템은 삭제되지 않습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고정핀이 적용된 메시지는 삭제되지 않습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
     } else {
         [self.deleteBtn setSelected:!self.deleteBtn.selected];

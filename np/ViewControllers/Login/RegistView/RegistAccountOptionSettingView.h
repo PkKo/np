@@ -75,6 +75,7 @@ typedef enum PickerViewType
 @property (assign, nonatomic) NSInteger accountType;
 // 계좌 별칭
 @property (strong, nonatomic) IBOutlet CommonTextField *accountNicknameInput;
+- (IBAction)validateNicknameTextEditing:(UITextField *)textField;
 
 /////////////////////////////////////////////////////////////////
 // 입출금 선택

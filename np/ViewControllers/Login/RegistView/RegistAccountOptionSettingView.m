@@ -793,4 +793,13 @@
         [self notiUnnotiTimeViewSetting];
     }
 }
+
+#pragma mark - TextField
+- (IBAction)validateNicknameTextEditing:(UITextField *)textField {
+    int maxLength = 5;
+    if ([[textField text] length] >= maxLength) {
+        [textField setText:[[textField text] substringToIndex:maxLength]];
+    }
+}
+
 @end

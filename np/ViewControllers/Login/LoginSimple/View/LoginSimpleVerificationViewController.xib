@@ -124,12 +124,12 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aPc-QQ-V1K">
-                                            <rect key="frame" x="0.0" y="145" width="154" height="22"/>
+                                            <rect key="frame" x="0.0" y="145" width="131" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <inset key="titleEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="137" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="간편비밀번호 초기화하기" image="icon_depth_03.png">
+                                            <inset key="imageEdgeInsets" minX="113" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="간편비밀번호 초기화" image="icon_depth_03.png">
                                                 <color key="titleColor" red="0.70196078429999997" green="0.81960784310000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>

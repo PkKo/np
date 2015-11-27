@@ -48,6 +48,9 @@
         certifiedAccountNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST];
         [self makeInputAccountView];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -535,4 +538,23 @@
         [self accountChangeClick:nil];
     }
 }
+
+#pragma mark - Keyboard
+- (void)onKeyboardShow:(NSNotification *)notifcation {
+    
+    if (![[inputAccountView addNewAccountBirthInput] isFirstResponder]) {
+        return;
+    }
+    
+    CGFloat keyboardHeight;
+    
+    NSDictionary * keyboardInfo = [notifcation userInfo];
+    NSValue * keyboardFrame     = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameRect    = [keyboardFrame CGRectValue];
+    keyboardHeight              = keyboardFrameRect.size.height;
+    
+    CGPoint addNewAccountBirthInputPos = [inputAccountView convertPoint:inputAccountView.addNewAccountBirthInput.frame.origin toView:self.scrollView];
+    [self.scrollView setContentOffset:addNewAccountBirthInputPos];
+}
+
 @end

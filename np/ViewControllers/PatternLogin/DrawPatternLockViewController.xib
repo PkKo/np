@@ -40,12 +40,12 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3br-af-EqK">
-                            <rect key="frame" x="0.0" y="0.0" width="105" height="22"/>
+                            <rect key="frame" x="0.0" y="0.0" width="84" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="87" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="패턴 초기화하기" image="icon_depth_03.png">
+                            <inset key="imageEdgeInsets" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="패턴 초기화" image="icon_depth_03.png">
                                 <color key="titleColor" red="0.70196078429999997" green="0.81960784310000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

@@ -120,7 +120,13 @@
     if (itemRemoveActionView  && [itemRemoveActionView isKindOfClass:[ArchivedTransItemRemoveActionView class]]) {
         
         if (![(ArchivedTransItemRemoveActionView *)itemRemoveActionView hasItemsToRemove]) {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 메시지를 선택해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            
+            NSString * msg = @"삭제할 메시지를 선택해주세요.";
+            if (!self.noDataView.isHidden) {
+                msg = @"삭제할 내역이 없습니다.";
+            }
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
             [alert show];
             return;
         }

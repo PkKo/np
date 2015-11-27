@@ -13,6 +13,7 @@
 #import "HomeViewController.h"
 #import "HomeEtcDetailViewController.h"
 #import "CustomizedPickerViewController.h"
+#import "StatisticMainUtil.h"
 
 #define SERVICE_TYPE_ALL            @"서비스별"
 #define SERVICE_TYPE_ECOMMERCE      @"e금융인증번호"
@@ -696,8 +697,44 @@
 }
 
 // 검색 실행
+- (BOOL)validateSelectedDates {
+    
+    BOOL isInvalidSelectedDates = NO;
+    
+    if ([searchStartDate isEqualToString:@""] || [searchEndDate isEqualToString:@""]) {
+        isInvalidSelectedDates = YES;
+    }
+    
+    NSDateFormatter * formatter = [StatisticMainUtil getDateFormatterDateServerStyle];
+    
+    NSDate * fromDate   = [formatter dateFromString:searchStartDate];
+    NSDate * toDate     = [formatter dateFromString:searchEndDate];
+    
+    if ([fromDate compare:toDate] == NSOrderedDescending) {
+        isInvalidSelectedDates = YES;
+    }
+    return isInvalidSelectedDates;
+}
+
+- (void)invalidSelectedDatesAlert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림"
+                                                     message:@"검색 기간이 잘못 설정되었습니다. 기간을 다시 설정한 후 검색하시기바랍니다."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"확인"
+                                           otherButtonTitles:nil];
+    [alert show];
+}
+
+// 검색 실행
 - (IBAction)searchStart:(id)sender
 {
+    
+    BOOL isInvalidSelectedDates = [self validateSelectedDates];
+    
+    if (isInvalidSelectedDates) {
+        [self invalidSelectedDatesAlert];
+        return;
+    }
     /*
     if(searchStartDate == nil || [searchStartDate length] == 0)
     {

@@ -63,6 +63,7 @@
         [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];
         [phoneNumberInput setEnabled:NO];
     }
+    
     authNumCounter = 0;
     
     NSMutableAttributedString *textOne = [[NSMutableAttributedString alloc] initWithString:descLabelOne.text];
@@ -101,6 +102,13 @@
                                             phoneAuthNumInput.frame.origin.y,
                                             bottomDescView.frame.size.width,
                                             bottomDescView.frame.size.height)];
+    }
+    
+    crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
+    {
+        [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];
+        [phoneNumberInput setEnabled:NO];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCurrentTime:) name:UIApplicationDidBecomeActiveNotification object:nil];

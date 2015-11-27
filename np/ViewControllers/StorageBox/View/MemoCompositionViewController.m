@@ -92,14 +92,6 @@
             [newTopViewController setStartPageIndex:INBOX];
             
             [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) tabSelect:INBOX];
-            /*
-            MainPageViewController *newTopViewController = [[MainPageViewController alloc] init];
-            [newTopViewController setStartPageIndex:INBOX];
-            
-            CGRect frame = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame;
-            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController = newTopViewController;
-            ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame = frame;
-            [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController resetTopViewAnimated:NO];*/
             break;
         }
         default:
