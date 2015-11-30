@@ -104,12 +104,25 @@
     }
 }
 
+- (BOOL)hasLoadingPage {
+    return (![loadingIndicatorBg isHidden]);
+}
+
 #pragma mark - Touches
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    if ([self hasLoadingPage]) {
+        return;
+    }
+    
     _paths = [[NSMutableArray alloc] init];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    if ([self hasLoadingPage]) {
+        return;
+    }
     
     CGPoint pt = [[touches anyObject] locationInView:_patternView];
     UIView *touched = [_patternView hitTest:pt withEvent:event];
@@ -145,6 +158,11 @@
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    if ([self hasLoadingPage]) {
+        return;
+    }
+    
     [self validatePW:[self getKey]];
 }
 
