@@ -61,13 +61,26 @@
 
 - (void )updateDetails:(NSString *)details {
     
+    //NSLog(@"original details: %@", details);
+    
     [self.contents setSelectable:YES];
     
+    
+    details = [details stringByReplacingOccurrencesOfString:@"\r\n" withString:@"<br>"];
+    details = [details stringByReplacingOccurrencesOfString:@"[b]" withString:@"<b>"];
+    details = [details stringByReplacingOccurrencesOfString:@"[/b]" withString:@"</b>"];
+    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[details dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    self.contents.attributedText = attributedString;
+    
     [self.contents setFont:[UIFont systemFontOfSize:14]];
     [self.contents setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:109.0f/255.0f alpha:1]];
     [self.contents setTextAlignment:NSTextAlignmentJustified];
+    
+    
+    //[attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, details.length)];
+    
+    
+    self.contents.attributedText = attributedString;
     
     [self.contents setSelectable:NO];
     
