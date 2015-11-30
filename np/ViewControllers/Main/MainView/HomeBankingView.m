@@ -1378,6 +1378,11 @@
 #pragma mark - delete mode
 - (IBAction)deleteMode:(id)sender
 {
+    if (!listEmptyView.isHidden) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:@"삭제할 내역이 없습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     isDeleteMode = YES;
     
     if(searchView.frame.origin.y > 0)
