@@ -69,7 +69,7 @@
 {
     [super viewDidDisappear:animated];
     
-    [IBInbox loadWithListener:nil];
+//    [IBInbox loadWithListener:nil];
     
     if(viewType == TIMELINE)
     {

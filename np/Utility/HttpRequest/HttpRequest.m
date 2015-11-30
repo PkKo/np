@@ -238,7 +238,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    if([challenge.protectionSpace.host isEqualToString:@"218.239.251.103"])
+    if([challenge.protectionSpace.host isEqualToString:@"smartdev.nonghyup.com"])
+    {
+        [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+    }
+    
+    if([challenge.protectionSpace.host isEqualToString:@"umspush.nonghyup.com"])
     {
         [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
     }

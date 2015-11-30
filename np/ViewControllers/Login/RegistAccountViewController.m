@@ -202,6 +202,7 @@
     [vc.nextButton addTarget:self action:@selector(checkCertUploaded) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:vc.mainView];
     [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mBackButton removeTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
     [self.mNaviView.mBackButton addTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -220,6 +221,7 @@
     [vc.nextButton addTarget:self action:@selector(checkCertUploadedFromPhone) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:vc.mainView];
     [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mBackButton removeTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
     [self.mNaviView.mBackButton addTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -301,7 +303,7 @@
 {
     int rc = 0;
     rc = [[CertManager sharedInstance] p12ImportWithUrl:NH_BANK_CERT_URL password:self.currentTextField.text];
-    
+
     if (rc == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -327,6 +329,13 @@
 - (void)moveToCertListView
 {
     isCertRoaming = NO;
+    
+    if([[contentView subviews] count] > 0)
+    {
+        [self removeAllSubViews];
+    }
+    [self.mNaviView.mBackButton setHidden:YES];
+    
     RegistCertListView *certListView = [RegistCertListView view];
     [certListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [certListView initCertList];

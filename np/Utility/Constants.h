@@ -14,7 +14,8 @@
 // server url 정보
 #if DEV_MODE
 // 개발서버
-#define SERVER_URL          @"https://218.239.251.103:39190/"
+//#define SERVER_URL          @"https://218.239.251.103:39190/"
+#define SERVER_URL          @"https://smartdev.nonghyup.com:39190/"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 // cloud server
@@ -25,10 +26,11 @@
 #define IPNS_INBOX_HOST     @"218.239.251.113"
 #else
 // 운영서버
-#define SERVER_URL          @"https://218.239.251.103:39190/"
+#define SERVER_URL          @"https://umspush.nonghyup.com/"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
-#define IPNS_ACCOUNT_HOST   @"61.42.212.61"
+//#define IPNS_ACCOUNT_HOST   @"61.42.212.61"
+#define IPNS_ACCOUNT_HOST   @"umspuships.nonghyup.com"
 #define IPNS_INBOX_HOST     @""
 #endif
 
