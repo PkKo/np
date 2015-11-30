@@ -69,6 +69,8 @@
 {
     [super viewDidDisappear:animated];
     
+    [IBInbox loadWithListener:nil];
+    
     if(viewType == TIMELINE)
     {
         [mTimeLineView bannerTimerStop];

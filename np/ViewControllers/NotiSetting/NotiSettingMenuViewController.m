@@ -27,7 +27,17 @@
     [self.mNaviView.imgTitleView setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@"알림설정"];
     
-    [allNotiButton setSelected:[[IBNgmService sharedInstance] pushEnabled]];
+    [IBNgmService setNgmServiceReceiver:self];
+    
+    [allNotiButton setSelected:[IBNgmService getApnsAllow]];
+    if([allNotiButton isSelected])
+    {
+        [allNotiButton setImage:[UIImage imageNamed:@"toggle_01_on.png"] forState:UIControlStateHighlighted];
+    }
+    else
+    {
+        [allNotiButton setImage:[UIImage imageNamed:@"toggle_01_off.png"] forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +91,21 @@
 {
     if(success)
     {
-        [allNotiButton setSelected:[IBNgmService getApnsAllow]];
+        NSLog(@"%s, %d", __FUNCTION__, [IBNgmService getApnsAllow]);
+        [self performSelectorOnMainThread:@selector(updateApnsState) withObject:nil waitUntilDone:NO];
+    }
+}
+
+- (void)updateApnsState
+{
+    [allNotiButton setSelected:[IBNgmService getApnsAllow]];
+    if([IBNgmService getApnsAllow])
+    {
+        [allNotiButton setImage:[UIImage imageNamed:@"toggle_01_on.png"] forState:UIControlStateHighlighted];
+    }
+    else
+    {
+        [allNotiButton setImage:[UIImage imageNamed:@"toggle_01_off.png"] forState:UIControlStateHighlighted];
     }
 }
 @end

@@ -92,6 +92,8 @@
 @synthesize descView4;
 @synthesize descLabel4;
 @synthesize descDot4;
+@synthesize descView5;
+@synthesize descLabel5;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -121,8 +123,13 @@
                                    descView3.frame.origin.y + descView3.frame.size.height + 4,
                                    descView4.frame.size.width,
                                    descLabel4.frame.size.height)];
+    [descView5 setFrame:CGRectMake(descView5.frame.origin.x,
+                                   descView4.frame.origin.y + descView4.frame.size.height + 4,
+                                   descView5.frame.size.width,
+                                   descLabel5.frame.size.height)];
+    
     [accountDeleteButton setFrame:CGRectMake(accountDeleteButton.frame.origin.x,
-                                             descView4.frame.origin.y + descView4.frame.size.height + 15,
+                                             descView5.frame.origin.y + descView5.frame.size.height + 15,
                                              accountDeleteButton.frame.size.width,
                                              accountDeleteButton.frame.size.height)];
     
@@ -452,6 +459,15 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
                 [alertView show];
             }
+            
+            if(notiStartTime >= 0)
+            {
+                notiPeriodSelectFlag = NO;
+                notiPeriodTime1 = -1;
+                notiPeriodTime2 = -1;
+                notiPeriodTime3 = -1;
+                [self notiPeriodSelectViewSetting];
+            }
             break;
         }
         case NOTI_TIME_END:
@@ -463,6 +479,15 @@
                 NSString *message = [NSString stringWithFormat:@"선택하신 알림 시간제한은 %@시 00분 부터 \n익일 %@시 59분까지입니다.", [[alarmTimeList objectAtIndex:notiStartTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""], [[alarmTimeList objectAtIndex:notiEndTime + 1] stringByReplacingCharactersInRange:NSMakeRange(2, 3) withString:@""]];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
                 [alertView show];
+            }
+            
+            if(notiEndTime >= 0)
+            {
+                notiPeriodSelectFlag = NO;
+                notiPeriodTime1 = -1;
+                notiPeriodTime2 = -1;
+                notiPeriodTime3 = -1;
+                [self notiPeriodSelectViewSetting];
             }
             break;
         }
@@ -476,6 +501,14 @@
             }
             notiPeriodTime1 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
+            
+            if(notiPeriodTime1 >= 0)
+            {
+                notiAbortFlag = NO;
+                notiStartTime = -1;
+                notiEndTime = -1;
+                [self notiUnnotiTimeViewSetting];
+            }
             break;
         }
         case NOTI_PERIOD_TWO:
@@ -488,6 +521,14 @@
             }
             notiPeriodTime2 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
+            
+            if(notiPeriodTime2 >= 0)
+            {
+                notiAbortFlag = NO;
+                notiStartTime = -1;
+                notiEndTime = -1;
+                [self notiUnnotiTimeViewSetting];
+            }
             break;
         }
         case NOTI_PERIOD_THREE:
@@ -500,6 +541,14 @@
             }
             notiPeriodTime3 = pickerSelectIndex - 1;
             [self notiPeriodSelectViewSetting];
+            
+            if(notiPeriodTime3 >= 0)
+            {
+                notiAbortFlag = NO;
+                notiStartTime = -1;
+                notiEndTime = -1;
+                [self notiUnnotiTimeViewSetting];
+            }
             break;
         }
         case NOTI_LIMIT_AUTO:
@@ -686,28 +735,43 @@
         }
         case NOTI_PERIOD_ONE:
         {
-            if(notiStartTime > -1 || notiEndTime > -1)
+            if(!notiPeriodSelectFlag)
             {
                 return;
             }
+            
+//            if(notiStartTime > -1 || notiEndTime > -1)
+//            {
+//                return;
+//            }
             pickerSelectIndex = notiPeriodTime1 + 1;
             break;
         }
         case NOTI_PERIOD_TWO:
         {
-            if(notiStartTime > -1 || notiEndTime > -1)
+            if(!notiPeriodSelectFlag)
             {
                 return;
             }
+            
+//            if(notiStartTime > -1 || notiEndTime > -1)
+//            {
+//                return;
+//            }
             pickerSelectIndex = notiPeriodTime2 + 1;
             break;
         }
         case NOTI_PERIOD_THREE:
         {
-            if(notiStartTime > -1 || notiEndTime > -1)
+            if(!notiPeriodSelectFlag)
             {
                 return;
             }
+            
+//            if(notiStartTime > -1 || notiEndTime > -1)
+//            {
+//                return;
+//            }
             pickerSelectIndex = notiPeriodTime3 + 1;
             break;
         }
@@ -779,6 +843,16 @@
 
 - (IBAction)selectNotiAbort:(id)sender
 {
+    /*
+    if(notiPeriodTime1 >= 0 || notiPeriodTime2 >= 0 || notiPeriodTime3 >= 0)
+    {
+        notiAbortFlag = NO;
+    }
+    else
+    {
+        notiAbortFlag = !notiAbortFlag;
+    }*/
+    
     notiAbortFlag = !notiAbortFlag;
     
     if(notiAbortFlag)
@@ -791,6 +865,27 @@
         notiStartTime = -1;
         notiEndTime = -1;
         [self notiUnnotiTimeViewSetting];
+    }
+}
+
+- (IBAction)selectNotiPeriodFlag:(id)sender
+{
+    notiPeriodSelectFlag = !notiPeriodSelectFlag;
+    
+    if(notiPeriodSelectFlag)
+    {
+        [notiNoTimeImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [notiNoTimeText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [notiTimeOnImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [notiTimeOnText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    }
+    else
+    {
+        notiPeriodTime1 = -1;
+        notiPeriodTime2 = -1;
+        notiPeriodTime3 = -1;
+        
+        [self notiPeriodSelectViewSetting];
     }
 }
 

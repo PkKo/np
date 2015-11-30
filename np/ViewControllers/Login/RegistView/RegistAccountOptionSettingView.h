@@ -61,6 +61,7 @@ typedef enum PickerViewType
     PickerViewType currentPickerView;
     UIView *pickerBgView;
     BOOL notiAbortFlag;
+    BOOL notiPeriodSelectFlag;
 }
 
 @property (assign, nonatomic) id delegate;
@@ -148,6 +149,8 @@ typedef enum PickerViewType
 @property (strong, nonatomic) IBOutlet UIView *descView4;
 @property (strong, nonatomic) IBOutlet UILabel *descLabel4;
 @property (strong, nonatomic) IBOutlet UILabel *descDot4;
+@property (strong, nonatomic) IBOutlet UIView *descView5;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel5;
 /////////////////////////////////////////////////////////////////
 
 // 입출금 선택(1:입출 2:입금 3:출금)
@@ -191,6 +194,7 @@ typedef enum PickerViewType
 - (IBAction)selectNotiTime:(id)sender;
 // 알림 시간 제한 선택
 - (IBAction)selectNotiAbort:(id)sender;
+- (IBAction)selectNotiPeriodFlag:(id)sender;
 
 
 @end
