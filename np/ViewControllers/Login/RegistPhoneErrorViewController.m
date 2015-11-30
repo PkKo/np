@@ -22,6 +22,9 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mMenuButton setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
+    
+    [_scrollView setContentInset:UIEdgeInsetsZero];
+    [_scrollView setContentSize:_contentView.frame.size];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,12 +35,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    [_scrollView setContentInset:UIEdgeInsetsZero];
     if(_contentView.frame.size.height > _scrollView.frame.size.height)
     {
         [_scrollView setContentSize:_contentView.frame.size];
+        [_scrollView setScrollEnabled:YES];
     }
+    [_scrollView setContentInset:UIEdgeInsetsZero];
 }
 
 /*

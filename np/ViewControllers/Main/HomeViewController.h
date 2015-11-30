@@ -60,7 +60,8 @@ typedef enum HomeViewType
 // 스크롤 위로 버튼
 @property (strong, nonatomic) IBOutlet UIButton *scrollMoveTopButton;
 
-- (void)refreshData:(BOOL)newData;
+- (void)refreshData:(BOOL)newData requestData:(AccountInboxRequestData *)requestData;
+- (void)searchInboxDataWithQuery:(AccountInboxRequestData *)reqData;
 - (IBAction)scrollToTop:(id)sender;
 - (void)showScrollTopButton;
 - (void)hideScrollTopButton;

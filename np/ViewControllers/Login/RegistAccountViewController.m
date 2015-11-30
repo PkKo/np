@@ -103,6 +103,12 @@
 {
     UIView *lastView = [[contentView subviews] lastObject];
     [lastView removeFromSuperview];
+    
+    if([[contentView subviews] count] == 1)
+    {
+        [self.mNaviView.mBackButton setHidden:YES];
+        [self.mNaviView.mBackButton removeTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)showRegistCertView
@@ -111,6 +117,7 @@
     {
         [self removeAllSubViews];
     }
+    [self.mNaviView.mBackButton setHidden:YES];
     /*
      * 공인인증서로 가입하려는 경우
      */
@@ -143,6 +150,8 @@
     {
         [self removeAllSubViews];
     }
+    
+    [self.mNaviView.mBackButton setHidden:YES];
     /*
      * 계좌번호로 가입하려는 경우
      */
@@ -192,6 +201,8 @@
     [vc.nextButton removeTarget:vc action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [vc.nextButton addTarget:self action:@selector(checkCertUploaded) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:vc.mainView];
+    [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mBackButton addTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)moveToGetCertFromPhoneView
@@ -208,6 +219,8 @@
     [vc.nextButton removeTarget:vc action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [vc.nextButton addTarget:self action:@selector(checkCertUploadedFromPhone) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:vc.mainView];
+    [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mBackButton addTarget:self action:@selector(certPopView) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)checkCertUploaded
@@ -721,8 +734,8 @@
     {
         if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
-            //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+//            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
+            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
             //서버 공개키 설정
             [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
             

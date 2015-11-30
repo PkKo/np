@@ -58,7 +58,7 @@ extern NSString * const IBNgmServiceInfoAdditionalInfo;
     NSData      * verifyCode;
 }
 
-@property (nonatomic)			BOOL		pushEnabled;
+@property (nonatomic, readonly)	BOOL		pushEnabled;
 
 @property (nonatomic, readonly)	NSString	* appId;
 @property (nonatomic, readonly)	NSString	* appSecret;
@@ -88,6 +88,9 @@ extern NSString * const IBNgmServiceInfoAdditionalInfo;
 + (BOOL)registerUserWithAccountId:(NSString *)accountId verifyCode:(NSData *)verifyCode phoneNumber:(NSString *)phoneNumber;
 + (BOOL)registerUserWithAccountId:(NSString *)accountId verifyCode:(NSData *)verifyCode countryCode:(int)countryCode phoneNumber:(NSString *)phoneNumber;
 
++ (void)setNgmServiceReceiver:(id)listener;
+
++ (BOOL)getApnsAllow;
 + (void)setApnsAllow:(BOOL)allow;
 + (void)setAdditionalInfo:(NSDictionary *)additionalInfo;
 

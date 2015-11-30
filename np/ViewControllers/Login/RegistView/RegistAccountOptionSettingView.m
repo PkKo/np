@@ -183,7 +183,7 @@
     notiStartTime = -1;
     notiEndTime = -1;
     balanceFlag = 1;
-    notiAutoFlag = 3;
+    notiAutoFlag = 1;
     notiPeriodType = 1;
     notiPeriodTime1 = -1;
     notiPeriodTime2 = -1;

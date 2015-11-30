@@ -102,9 +102,9 @@
         [imageView startLoadingAnimation];
         UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
         dispatch_sync(dispatch_get_main_queue(), ^(void){
+            [imageView stopLoadingAnimation];
             if(downloadedImage)
             {
-                [imageView stopLoadingAnimation];
                 [imageView setImage:downloadedImage];
             }
         });
@@ -158,16 +158,23 @@
     {
         for (ContentsPayload *payload in message.payloadList)
         {
-            if([payload.key isEqualToString:@"mck"])
+            if([payload.key isEqualToString:@"ck"])
             {
                 contentKey = payload.value;
             }
-            else if([payload.key isEqualToString:@"lu"])
+            
+            if(contentKey == nil && [payload.key isEqualToString:@"mck"])
+            {
+                contentKey = payload.value;
+            }
+            
+            if([payload.key isEqualToString:@"lu"])
             {
                 linkUrl = payload.value;
                 [contentLinkButton setHidden:NO];
             }
-            else if([payload.key isEqualToString:@"vi"] && [payload.value length] > 0)
+            
+            if([payload.key isEqualToString:@"vi"] && [payload.value length] > 0)
             {
                 [imgUrl addObject:[NSString stringWithFormat:@"%@%@", IPNS_INBOX_IMAGE, payload.value]];
             }
