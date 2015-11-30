@@ -112,6 +112,19 @@ typedef enum EN_APNS_REQUEST_TYPE
 @end
 
 #pragma mark -
+#pragma mark IBNgmServiceProtocol
+
+@protocol IBNgmServiceProtocol <NSObject>
+@required
+
+- (void)apnsAllows:(BOOL)success;
+
+@optional
+
+@end
+
+
+#pragma mark -
 #pragma mark IBApnsHelperProtocol
 
 @protocol IBApnsHelperProtocol <NSObject>

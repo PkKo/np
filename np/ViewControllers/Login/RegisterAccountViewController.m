@@ -251,6 +251,9 @@
             return;
         }
         
+        [self.mNaviView.mBackButton removeTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
+        [self.mNaviView.mBackButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
+        
         optionView = [RegistAccountOptionSettingView view];
         [optionView setDelegate:self];
         [optionView initDataWithAccountNumber:certifiedAccountNumber];
@@ -320,13 +323,14 @@
     {
         [nextButton setTag:1];
     }
+    
+    [self.mNaviView.mBackButton removeTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.mNaviView.mBackButton addTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - 계좌옵션 설정
 - (void)accountOptionSetReqeust
 {
-    [self startIndicator];
-    
     /*
      // 입출금 선택(1:입출 2:입금 3:출금)
      @synthesize selectedType;
@@ -367,6 +371,24 @@
     [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
     [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime2] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
     [reqBody setObject:[NSNumber numberWithInt:optionView.notiPeriodTime3] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    
+    if(optionView.notiStartTime < 0 && optionView.notiEndTime >= 0)
+    {
+        //종료시간만 있음
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"알림 시작 시간을 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    if(optionView.notiStartTime >= 0 && optionView.notiEndTime < 0)
+    {
+        // 시작 시간만 있음
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"알림 끝 시간을 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    [self startIndicator];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION];
     
@@ -492,8 +514,8 @@
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
-        //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+//        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
+        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
         [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         

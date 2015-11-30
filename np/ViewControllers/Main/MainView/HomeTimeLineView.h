@@ -16,6 +16,10 @@
     UIView *refreshHeaderView;
     UILabel *refreshLabel;
     UIImageView *refreshIndicator;
+    
+    UILabel *refreshEmptyLabel;
+    UIImageView *refreshEmptyIndicator;
+    
     BOOL isDragging;
     BOOL isLoading;
     NSString *textPull;
@@ -58,6 +62,7 @@
 @property (strong, nonatomic) IBOutlet UIView *topMenuView;
 @property (strong, nonatomic) IBOutlet UIView *listEmptyView;
 @property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
+@property (strong, nonatomic) IBOutlet UITableView *emptyScrollView;
 
 // 삭제시 전체선택 뷰
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;

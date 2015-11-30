@@ -548,7 +548,7 @@
             NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
             //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:@""];
+            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -563,7 +563,7 @@
         {
             nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:@""];
+            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -575,10 +575,10 @@
     {
         if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
-            //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+//            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
+            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:@""];
+            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -593,7 +593,7 @@
         {
             nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:@""];
+            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];

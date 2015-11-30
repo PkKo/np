@@ -24,17 +24,32 @@
                     <rect key="frame" x="0.0" y="27" width="320" height="541"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_notice_06.png" id="Qim-oJ-K5r">
-                            <rect key="frame" x="144" y="31" width="32" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 내역이 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="whU-fr-vmR">
-                            <rect key="frame" x="0.0" y="75" width="320" height="16"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.69019607839999997" green="0.69411764710000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="z52-i6-bWz">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="541"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_notice_06.png" id="Qim-oJ-K5r">
+                                    <rect key="frame" x="144" y="31" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 내역이 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="whU-fr-vmR">
+                                    <rect key="frame" x="0.0" y="75" width="320" height="16"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.69019607839999997" green="0.69411764710000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </scrollView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="uh5-PW-r3r">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="541"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="iN0-l3-epB" id="yxm-iX-D2A"/>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="gwy-eX-N3H"/>
+                            </connections>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94509803920000002" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
@@ -515,6 +530,7 @@
                 <outlet property="deleteButtonView" destination="8jL-zc-yVw" id="fah-dh-cbg"/>
                 <outlet property="emptyLabel" destination="whU-fr-vmR" id="lfD-cf-4Aw"/>
                 <outlet property="emptyListImageView" destination="Qim-oJ-K5r" id="hao-kk-t44"/>
+                <outlet property="emptyScrollView" destination="uh5-PW-r3r" id="vLa-29-EXe"/>
                 <outlet property="listEmptyView" destination="zMY-eF-1Wh" id="6Vo-AD-Usq"/>
                 <outlet property="periodOneMonthBtn" destination="Kgg-Dk-HfH" id="upA-J5-KvM"/>
                 <outlet property="periodOneWeekBtn" destination="0mV-wP-paO" id="5eI-TQ-HQn"/>

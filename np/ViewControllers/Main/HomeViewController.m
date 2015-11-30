@@ -62,6 +62,21 @@
 {
     [super viewDidAppear:animated];
     
+    [self queryInitData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if(viewType == TIMELINE)
+    {
+        [mTimeLineView bannerTimerStop];
+    }
+}
+
+- (void)queryInitData
+{
     if([[[LoginUtil alloc] init] getAllAccounts] != nil && [[[[LoginUtil alloc] init] getAllAccounts] count] > 0)
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
@@ -137,15 +152,40 @@
             [self makeTimelineView];
         }
     }
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    if(viewType == TIMELINE)
+    else
     {
-        [mTimeLineView bannerTimerStop];
+        if(viewType == OTHER)
+        {
+            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+            reqData.ascending = YES;
+            reqData.size = TIMELINE_LOAD_COUNT;
+            reqData.accountNumberList = [NSArray array];
+            if(etcTimeLineView != nil)
+            {
+                if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+                {
+                    reqData.queryType = @"ETC";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+                {
+                    reqData.queryType = @"B";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
+                {
+                    reqData.queryType = @"A";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
+                {
+                    reqData.queryType = @"3,4,5,6,Z";
+                }
+            }
+            else
+            {
+                reqData.queryType = @"ETC";
+            }
+            
+            [IBInbox reqQueryAccountInboxListWithSize:reqData];
+        }
     }
 }
 
@@ -271,7 +311,7 @@
 /**
  @brief 데이터 갱신
  */
-- (void)refreshData:(BOOL)newData
+- (void)refreshData:(BOOL)newData requestData:(AccountInboxRequestData *)requestData
 {
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
     
@@ -287,32 +327,56 @@
         {
             reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
             reqData.queryType = @"ALL";
+            if(requestData != nil)
+            {
+                reqData.startDate = requestData.startDate;
+                reqData.endDate = requestData.endDate;
+            }
             break;
         }
         case BANKING:
         {
-            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-            reqData.queryType = @"1,2";
+            if(requestData != nil)
+            {
+                reqData.accountNumberList = requestData.accountNumberList;
+                reqData.queryType = requestData.queryType;
+                reqData.startDate = requestData.startDate;
+                reqData.endDate = requestData.endDate;
+            }
+            else
+            {
+                reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+                reqData.queryType = @"1,2";
+            }
             break;
         }
         case OTHER:
         {
             reqData.accountNumberList = [NSArray array];
-            if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+            if(requestData != nil)
             {
-                reqData.queryType = @"ETC";
+                reqData.startDate = requestData.startDate;
+                reqData.endDate = requestData.endDate;
+                reqData.queryType = requestData.queryType;
             }
-            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+            else
             {
-                reqData.queryType = @"B";
-            }
-            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
-            {
-                reqData.queryType = @"A";
-            }
-            else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
-            {
-                reqData.queryType = @"3,4,5,6,Z";
+                if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+                {
+                    reqData.queryType = @"ETC";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+                {
+                    reqData.queryType = @"B";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
+                {
+                    reqData.queryType = @"A";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
+                {
+                    reqData.queryType = @"3,4,5,6,Z";
+                }
             }
             break;
         }
@@ -766,20 +830,32 @@
     
     if(success)
     {
+        [self queryInitData];
+        /*
         for(NSString *msgKey in sMsgKeys)
         {
-            NSMutableArray *deletedSectionList = sectionList;
+            NSMutableArray *deletedSectionList = [NSMutableArray arrayWithArray:sectionList];
             for(TimelineSectionData *sectionData in deletedSectionList)
             {
-                NSMutableArray *deletedList = [[NSMutableArray alloc] init];
-                for(NHInboxMessageData *inboxData in [timelineMessageList objectForKey:sectionData.date])
+                NSMutableArray *deletedList = [NSMutableArray arrayWithArray:[timelineMessageList objectForKey:sectionData.date]];
+                for(NHInboxMessageData *inboxData in deletedList)
                 {
-                    if(![inboxData.serverMessageKey isEqualToString:msgKey])
+                    if(inboxData != nil && [inboxData.serverMessageKey isEqualToString:msgKey])
                     {
-                        [deletedList addObject:inboxData];
+                        [deletedList removeObject:inboxData];
                     }
                 }
                 
+                if([deletedList count] == 0)
+                {
+                    [timelineMessageList removeObjectForKey:sectionData.date];
+                    [sectionList removeObject:sectionData];
+                }
+                else
+                {
+                    [timelineMessageList setObject:deletedList forKey:sectionData.date];
+                }
+         
                 NSString *todayString = [CommonUtil getTodayDateString];
                 if(viewType == TIMELINE && [deletedList count] == 0 && [sectionData.date isEqualToString:todayString])
                 {
@@ -801,7 +877,7 @@
         }
         
         // 각 뷰가 있으면 테이블 갱신
-        [self makeTimelineView];
+        [self makeTimelineView];*/
     }
 }
 

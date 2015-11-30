@@ -25,6 +25,7 @@
 @synthesize bankingListTable;
 @synthesize listEmptyView;
 @synthesize emptyLabel;
+@synthesize emptyScrollView;
 @synthesize statisticButton;
 @synthesize sortLabel;
 
@@ -301,6 +302,31 @@
     [refreshHeaderView addSubview:refreshIndicator];
     [refreshHeaderView addSubview:separateLine];
     [bankingListTable addSubview:refreshHeaderView];
+    
+    UIView *refreshEmptyScrollHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, bankingListTable.frame.size.width, REFRESH_HEADER_HEIGHT)];
+    [refreshEmptyScrollHeaderView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0f/255.0f blue:246.0/255.0f alpha:1.0f]];
+    
+    refreshEmptyIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_refresh_01.png"]];
+    [refreshEmptyIndicator setFrame:CGRectMake(floorf(floorf(refreshHeaderView.frame.size.width - 20) / 2), 11, 30, 30)];
+    [refreshEmptyIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
+    
+    refreshEmptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, refreshIndicator.frame.origin.y + refreshIndicator.frame.size.height, bankingListTable.frame.size.width, 16)];
+    refreshEmptyLabel.backgroundColor = [UIColor clearColor];
+    refreshEmptyLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    [refreshEmptyLabel setTextColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f]];
+    refreshEmptyLabel.textAlignment = NSTextAlignmentCenter;
+    [refreshEmptyLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    UIView *separateEmptyLine = [[UIView alloc] initWithFrame:CGRectMake(0, REFRESH_HEADER_HEIGHT - 1, bankingListTable.frame.size.width, 1)];
+    [separateEmptyLine setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+    [separateEmptyLine setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    [refreshEmptyScrollHeaderView addSubview:refreshEmptyLabel];
+    [refreshEmptyScrollHeaderView addSubview:refreshEmptyIndicator];
+    [refreshEmptyScrollHeaderView addSubview:separateEmptyLine];
+    [emptyScrollView addSubview:refreshEmptyScrollHeaderView];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, emptyScrollView.frame.size.width, 0)];
+    [emptyScrollView setTableFooterView:footerView];
+    [emptyScrollView reloadData];
 }
 
 - (void)startLoading
@@ -311,8 +337,11 @@
     // Show the header
     [UIView animateWithDuration:0.3 animations:^{
         bankingListTable.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        emptyScrollView.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
         refreshLabel.text = textLoading;
+        refreshEmptyLabel.text = textLoading;
         [CommonUtil runSpinAnimationWithDuration:refreshIndicator duration:10.0f];
+        [CommonUtil runSpinAnimationWithDuration:refreshEmptyIndicator duration:10.0f];
     }];
     
     // Refresh action!
@@ -327,6 +356,7 @@
     // Hide the header
     [UIView animateWithDuration:0.3 animations:^{
         bankingListTable.contentInset = UIEdgeInsetsZero;
+        emptyScrollView.contentInset = UIEdgeInsetsZero;
     }
                      completion:^(BOOL finished) {
                          [self performSelector:@selector(stopLoadingComplete)];
@@ -337,17 +367,25 @@
 {
     // Reset the header
     refreshLabel.text = textPull;
+    refreshEmptyLabel.text = textPull;
     [CommonUtil stopSpinAnimation:refreshIndicator];
+    [CommonUtil stopSpinAnimation:refreshEmptyIndicator];
 }
 
 - (void)refresh
 {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-//    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
-    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)])
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
     {
-        [delegate refreshData:YES];
+        isSearchResult = NO;
+        inboxAccountsIndex = 0;
+        inboxTypeIndex = 0;
+        searchStartDate = nil;
+        searchEndDate = nil;
+        [searchTypeAccountLabel setText:[allAccountList objectAtIndex:inboxAccountsIndex]];
+        [searchTypeInboxLabel setText:[inboxTypeList objectAtIndex:inboxTypeIndex]];
+        [delegate refreshData:YES requestData:nil];
     }
 }
 
@@ -429,9 +467,45 @@
 
 - (void)refreshFooter
 {
-    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:)] && isMoreList)
+    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)] && isMoreList)
     {
-        [delegate refreshData:NO];
+        if(isSearchResult)
+        {
+            AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+            if(inboxAccountsIndex == 0)
+            {
+                // 전체계좌 검색
+                NSMutableArray *accountList = [NSMutableArray arrayWithArray:allAccountList];
+                [accountList removeObjectAtIndex:0];
+                reqData.accountNumberList = accountList;
+            }
+            else
+            {
+                reqData.accountNumberList = @[[allAccountList objectAtIndex:inboxAccountsIndex]];
+            }
+            
+            reqData.ascending = listSortType;
+            reqData.startDate = searchStartDate;
+            reqData.endDate = searchEndDate;
+            
+            if(inboxTypeIndex == 0)
+            {
+                reqData.queryType = @"1,2";
+            }
+            else if(inboxTypeIndex == 1)
+            {
+                reqData.queryType = @"1";
+            }
+            else if(inboxTypeIndex == 2)
+            {
+                reqData.queryType = @"2";
+            }
+            [delegate refreshData:NO requestData:reqData];
+        }
+        else
+        {
+            [delegate refreshData:NO requestData:nil];
+        }
     }
 }
 
@@ -776,267 +850,308 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [timeLineSection count];
+    if(emptyScrollView == tableView)
+    {
+        return 1;
+    }
+    else
+    {
+        return [timeLineSection count];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if([timeLineSection count] == 0)
+    if(emptyScrollView == tableView)
     {
-        return 0;
+        return 1;
     }
     else
     {
-        
-        NSArray *array = [timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:section]).date];
-        return [array count];
+        if([timeLineSection count] == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            
+            NSArray *array = [timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:section]).date];
+            return [array count];
+        }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return SECTION_HEADER_HEIGHT;
+    if(tableView == emptyScrollView)
+    {
+        return 0;
+    }
+    else
+    {
+        return SECTION_HEADER_HEIGHT;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEADER_HEIGHT)];
-    
-    [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
-    
-    TimelineSectionData *sectionData = [timeLineSection objectAtIndex:section];
-    NSString *date = sectionData.date;
-    NSString *day = sectionData.day;
-    
-    CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12.0 bold:YES];
-    UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, dateSize.width, SECTION_HEADER_HEIGHT)];
-    [dateLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dateLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
-    [dateLabel setText:date];
-    [sectionHeaderView addSubview:dateLabel];
-    
-    CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:12 bold:NO];
-    UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(dateLabel.frame.origin.x + dateSize.width, 0, daySize.width, SECTION_HEADER_HEIGHT)];
-    [dayLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
-    [dayLabel setFont:[UIFont systemFontOfSize:12.0f]];
-    [dayLabel setText:day];
-    [sectionHeaderView addSubview:dayLabel];
-    
-    return sectionHeaderView;
-    
+    if(tableView == emptyScrollView)
+    {
+        return nil;
+    }
+    else
+    {
+        UIView *sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEADER_HEIGHT)];
+        
+        [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
+        
+        TimelineSectionData *sectionData = [timeLineSection objectAtIndex:section];
+        NSString *date = sectionData.date;
+        NSString *day = sectionData.day;
+        
+        CGSize dateSize = [CommonUtil getStringFrameSize:date fontSize:12.0 bold:YES];
+        UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, dateSize.width, SECTION_HEADER_HEIGHT)];
+        [dateLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
+        [dateLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [dateLabel setText:date];
+        [sectionHeaderView addSubview:dateLabel];
+        
+        CGSize daySize = [CommonUtil getStringFrameSize:date fontSize:12 bold:NO];
+        UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(dateLabel.frame.origin.x + dateSize.width, 0, daySize.width, SECTION_HEADER_HEIGHT)];
+        [dayLabel setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:102.0f/255.0f alpha:1.0f]];
+        [dayLabel setFont:[UIFont systemFontOfSize:12.0f]];
+        [dayLabel setText:day];
+        [sectionHeaderView addSubview:dayLabel];
+        
+        return sectionHeaderView;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuseId = [NSString stringWithFormat:@"%@", [HomeTimeLineTableViewCell class]];
-    HomeTimeLineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-    
-    if(cell == nil)
+    if(tableView == emptyScrollView)
     {
-        cell = [HomeTimeLineTableViewCell cell];
-    }
-    
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LoginUtil *loginUtil = [[LoginUtil alloc] init];
-    [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    
-    NSString *section = ((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date;
-    NHInboxMessageData *inboxData = [[timeLineDic objectForKey:section] objectAtIndex:indexPath.row];
-    
-    // 스티커 버튼
-    [cell.stickerButton setIndexPath:indexPath];
-    if(isDeleteMode)
-    {
-        // 삭제 버튼으로 바꿔줌
-        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_dft.png"] forState:UIControlStateNormal];
-        [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_sel.png"] forState:UIControlStateSelected];
-        if(deleteIdList != nil && [deleteIdList containsObject:inboxData.serverMessageKey])
-        {
-            [cell.stickerButton setSelected:YES];
-        }
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, emptyScrollView.frame.size.width, 100.0f)];
         
-        if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
-        {
-            [cell.pinButton setHidden:NO];
-            //[cell.stickerButton setEnabled:NO];
-        }
-        else
-        {
-            [cell.pinButton setHidden:YES];
-        }
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell addSubview:emptyListImageView];
+        [cell addSubview:emptyLabel];
+        [cell setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0f/255.0f blue:246.0/255.0f alpha:1.0f]];
         
-        [cell.moreButton setHidden:YES];
-        [cell.upperLine setHidden:YES];
-        [cell.underLine setHidden:YES];
+        return cell;
     }
     else
     {
-        [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
-        [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+        NSString *reuseId = [NSString stringWithFormat:@"%@", [HomeTimeLineTableViewCell class]];
+        HomeTimeLineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
         
-        [cell.pinButton setHidden:NO];
-        [cell.moreButton setHidden:NO];
+        if(cell == nil)
+        {
+            cell = [HomeTimeLineTableViewCell cell];
+        }
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        LoginUtil *loginUtil = [[LoginUtil alloc] init];
+        [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
+        
+        NSString *section = ((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date;
+        NHInboxMessageData *inboxData = [[timeLineDic objectForKey:section] objectAtIndex:indexPath.row];
+        
+        // 스티커 버튼
+        [cell.stickerButton setIndexPath:indexPath];
+        if(isDeleteMode)
+        {
+            // 삭제 버튼으로 바꿔줌
+            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_dft.png"] forState:UIControlStateNormal];
+            [cell.stickerButton setImage:[UIImage imageNamed:@"icon_sticker_05_sel.png"] forState:UIControlStateSelected];
+            if(deleteIdList != nil && [deleteIdList containsObject:inboxData.serverMessageKey])
+            {
+                [cell.stickerButton setSelected:YES];
+            }
+            
+            if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
+            {
+                [cell.pinButton setHidden:NO];
+                //[cell.stickerButton setEnabled:NO];
+            }
+            else
+            {
+                [cell.pinButton setHidden:YES];
+            }
+            
+            [cell.moreButton setHidden:YES];
+            [cell.upperLine setHidden:YES];
+            [cell.underLine setHidden:YES];
+        }
+        else
+        {
+            [cell.stickerButton setImage:[CommonUtil getStickerImage:(StickerType)inboxData.stickerCode] forState:UIControlStateNormal];
+            [cell.stickerButton setImage:nil forState:UIControlStateSelected];
+            
+            [cell.pinButton setHidden:NO];
+            [cell.moreButton setHidden:NO];
+            if(indexPath.row == 0)
+            {
+                [cell.upperLine setHidden:YES];
+            }
+            
+            if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+            {
+                [cell.underLine setHidden:YES];
+            }
+        }
+        [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
+        [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // 푸시 시간
+        [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        // 거래명
+        [cell.nameLabel setText:inboxData.oppositeUser];
+        
+        NSNumberFormatter *numFomatter = [NSNumberFormatter new];
+        [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSString *amount = @"";
+        NSString *balance = @"";
+        if(inboxData.amount >= 0)
+        {
+            amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
+        }
+        
+        if(inboxData.balance >= 0)
+        {
+            balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
+        }
+        // 금액 String size
+        CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
+        
+        if(inboxData.payType != nil && [inboxData.payType length] > 0)
+        {
+            CGRect descFrame = cell.amountDescLabel.frame;
+            [cell.amountDescLabel setText:inboxData.payType];
+            [cell.amountDescLabel sizeToFit];
+            [cell.amountDescLabel setFrame:CGRectMake(descFrame.origin.x,
+                                                      descFrame.origin.y,
+                                                      cell.amountDescLabel.frame.size.width,
+                                                      descFrame.size.height)];
+        }
+        
+        switch (inboxData.stickerCode)
+        {
+            case STICKER_DEPOSIT_NORMAL:
+            case STICKER_DEPOSIT_SALARY:
+            case STICKER_DEPOSIT_POCKET:
+            case STICKER_DEPOSIT_ETC:
+            {
+                // 입출금 타입
+                [cell.typeLabel setText:@"입금"];
+                [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
+                // 금액
+                [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                                      cell.amountLabel.frame.origin.y,
+                                                      amountSize.width, cell.amountLabel.frame.size.height)];
+                [cell.amountLabel setText:amount];
+                [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
+                
+                [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                          cell.amountDescLabel.frame.origin.y,
+                                                          cell.amountDescLabel.frame.size.width,
+                                                          cell.amountDescLabel.frame.size.height)];
+                [cell.amountDescLabel setTextColor:INCOME_STRING_COLOR];
+                break;
+            }
+                
+            case STICKER_WITHDRAW_NORMAL:
+            case STICKER_WITHDRAW_FOOD:
+            case STICKER_WITHDRAW_TELEPHONE:
+            case STICKER_WITHDRAW_HOUSING:
+            case STICKER_WITHDRAW_SHOPPING:
+            case STICKER_WITHDRAW_CULTURE:
+            case STICKER_WITHDRAW_EDUCATION:
+            case STICKER_WITHDRAW_CREDIT:
+            case STICKER_WITHDRAW_SAVING:
+            case STICKER_WITHDRAW_ETC:
+            {
+                // 입출금 타입
+                [cell.typeLabel setText:@"출금"];
+                [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
+                [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                                      cell.amountLabel.frame.origin.y,
+                                                      amountSize.width, cell.amountLabel.frame.size.height)];
+                // 금액
+                [cell.amountLabel setText:amount];
+                [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
+                
+                [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                          cell.amountDescLabel.frame.origin.y,
+                                                          cell.amountDescLabel.frame.size.width,
+                                                          cell.amountDescLabel.frame.size.height)];
+                [cell.amountDescLabel setTextColor:WITHDRAW_STRING_COLOR];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        // 계좌별명 + 계좌명
+        NSString *accountNickName = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:inboxData.nhAccountNumber];
+        
+        if(accountNickName != nil && [accountNickName length] > 0)
+        {
+            [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, [CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]];
+        }
+        else
+        {
+            [cell.accountLabel setText:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]];
+        }
+        
+        // 잔액
+        if(balance != nil && [balance length] > 0)
+        {
+            [cell.remainAmountLabel setText:[NSString stringWithFormat:@"잔액 %@원", balance]];
+        }
+        else
+        {
+            [cell.remainAmountLabel setText:@""];
+        }
+        
+        // 고정핀
+        [cell.pinButton setIndexPath:indexPath];
+        [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        // more 버튼
+        [cell.moreButton setIndexPath:indexPath];
+        [cell.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
         if(indexPath.row == 0)
         {
             [cell.upperLine setHidden:YES];
         }
-        
-        if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+        else if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
         {
             [cell.underLine setHidden:YES];
         }
-    }
-    [cell.stickerButton setTag:(StickerType)inboxData.stickerCode];
-    [cell.stickerButton addTarget:self action:@selector(stickerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
-    // 푸시 시간
-    [cell.timeLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
-    // 거래명
-    [cell.nameLabel setText:inboxData.oppositeUser];
-    
-    NSNumberFormatter *numFomatter = [NSNumberFormatter new];
-    [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString *amount = @"";
-    NSString *balance = @"";
-    if(inboxData.amount >= 0)
-    {
-        amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
-    }
-    
-    if(inboxData.balance >= 0)
-    {
-        balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
-    }
-    // 금액 String size
-    CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];
-    
-    if(inboxData.payType != nil && [inboxData.payType length] > 0)
-    {
-        CGRect descFrame = cell.amountDescLabel.frame;
-        [cell.amountDescLabel setText:inboxData.payType];
-        [cell.amountDescLabel sizeToFit];
-        [cell.amountDescLabel setFrame:CGRectMake(descFrame.origin.x,
-                                                  descFrame.origin.y,
-                                                  cell.amountDescLabel.frame.size.width,
-                                                  descFrame.size.height)];
-    }
-    
-    switch (inboxData.stickerCode)
-    {
-        case STICKER_DEPOSIT_NORMAL:
-        case STICKER_DEPOSIT_SALARY:
-        case STICKER_DEPOSIT_POCKET:
-        case STICKER_DEPOSIT_ETC:
+        
+        if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
         {
-            // 입출금 타입
-            [cell.typeLabel setText:@"입금"];
-            [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
-            // 금액
-            [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
-                                                  cell.amountLabel.frame.origin.y,
-                                                  amountSize.width, cell.amountLabel.frame.size.height)];
-            [cell.amountLabel setText:amount];
-            [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
-            
-            [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
-                                                      cell.amountDescLabel.frame.origin.y,
-                                                      cell.amountDescLabel.frame.size.width,
-                                                      cell.amountDescLabel.frame.size.height)];
-            [cell.amountDescLabel setTextColor:INCOME_STRING_COLOR];
-            break;
+            [cell.pinButton setSelected:YES];
         }
-            
-        case STICKER_WITHDRAW_NORMAL:
-        case STICKER_WITHDRAW_FOOD:
-        case STICKER_WITHDRAW_TELEPHONE:
-        case STICKER_WITHDRAW_HOUSING:
-        case STICKER_WITHDRAW_SHOPPING:
-        case STICKER_WITHDRAW_CULTURE:
-        case STICKER_WITHDRAW_EDUCATION:
-        case STICKER_WITHDRAW_CREDIT:
-        case STICKER_WITHDRAW_SAVING:
-        case STICKER_WITHDRAW_ETC:
+        
+        CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
+        if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
         {
-            // 입출금 타입
-            [cell.typeLabel setText:@"출금"];
-            [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
-            [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
-                                                  cell.amountLabel.frame.origin.y,
-                                                  amountSize.width, cell.amountLabel.frame.size.height)];
-            // 금액
-            [cell.amountLabel setText:amount];
-            [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
-            
-            [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
-                                                      cell.amountDescLabel.frame.origin.y,
-                                                      cell.amountDescLabel.frame.size.width,
-                                                      cell.amountDescLabel.frame.size.height)];
-            [cell.amountDescLabel setTextColor:WITHDRAW_STRING_COLOR];
-            break;
+            CGFloat pinButtonHeight = cell.pinButton.frame.size.height * (viewHeight / IPHONE_FIVE_FRAME_HEIGHT);
+            [cell.pinButton setFrame:CGRectMake(cell.pinButton.frame.origin.x
+                                                - (pinButtonHeight / 2),
+                                                cell.pinButton.frame.origin.y - (pinButtonHeight / 2),
+                                                pinButtonHeight, pinButtonHeight)];
+            [cell.moreButton setFrame:CGRectMake(cell.moreButton.frame.origin.x
+                                                 - (pinButtonHeight / 2),
+                                                 cell.moreButton.frame.origin.y - (pinButtonHeight / 2),
+                                                 pinButtonHeight, pinButtonHeight)];
         }
-            
-        default:
-            break;
+        
+        return cell;
     }
-    
-    // 계좌별명 + 계좌명
-    NSString *accountNickName = [[[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_NICKNAME_DICTIONARY] objectForKey:inboxData.nhAccountNumber];
-    
-    if(accountNickName != nil && [accountNickName length] > 0)
-    {
-        [cell.accountLabel setText:[NSString stringWithFormat:@"%@ %@", accountNickName, [CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]];
-    }
-    else
-    {
-        [cell.accountLabel setText:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]];
-    }
-    
-    // 잔액
-    if(balance != nil && [balance length] > 0)
-    {
-        [cell.remainAmountLabel setText:[NSString stringWithFormat:@"잔액 %@원", balance]];
-    }
-    else
-    {
-        [cell.remainAmountLabel setText:@""];
-    }
-    
-    // 고정핀
-    [cell.pinButton setIndexPath:indexPath];
-    [cell.pinButton addTarget:self action:@selector(pinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    // more 버튼
-    [cell.moreButton setIndexPath:indexPath];
-    [cell.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if(indexPath.row == 0)
-    {
-        [cell.upperLine setHidden:YES];
-    }
-    else if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
-    {
-        [cell.underLine setHidden:YES];
-    }
-    
-    if(pinnedIdList != nil && [pinnedIdList containsObject:inboxData.serverMessageKey])
-    {
-        [cell.pinButton setSelected:YES];
-    }
-    
-    CGFloat viewHeight = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.frame.size.height;
-    if(viewHeight > IPHONE_FIVE_FRAME_HEIGHT)
-    {
-        CGFloat pinButtonHeight = cell.pinButton.frame.size.height * (viewHeight / IPHONE_FIVE_FRAME_HEIGHT);
-        [cell.pinButton setFrame:CGRectMake(cell.pinButton.frame.origin.x
-                                            - (pinButtonHeight / 2),
-                                            cell.pinButton.frame.origin.y - (pinButtonHeight / 2),
-                                            pinButtonHeight, pinButtonHeight)];
-        [cell.moreButton setFrame:CGRectMake(cell.moreButton.frame.origin.x
-                                             - (pinButtonHeight / 2),
-                                             cell.moreButton.frame.origin.y - (pinButtonHeight / 2),
-                                             pinButtonHeight, pinButtonHeight)];
-    }
-    
-    return cell;
 }
 
 #pragma mark - UIButtonAction
@@ -1159,7 +1274,7 @@
 {
     if (isLoading) return;
     if(isDeleteMode) return;
-    if(isSearchResult) return;
+//    if(isSearchResult) return;
     isDragging = YES;
 }
 
@@ -1169,10 +1284,14 @@
     {
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
+        {
             bankingListTable.contentInset = UIEdgeInsetsZero;
+            emptyScrollView.contentInset = UIEdgeInsetsZero;
+        }
         else if (scrollView.contentOffset.y < 0 && scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
         {
             bankingListTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+            emptyScrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
         }
         /*
         else if(scrollView.contentOffset.y > 0 && bankingListTable.contentSize.height + scrollView.contentOffset.y < bankingListTable.frame.size.height)
@@ -1200,9 +1319,11 @@
             if (scrollView.contentOffset.y < -REFRESH_HEADER_HEIGHT) {
                 // User is scrolling above the header
                 refreshLabel.text = textRelease;
+                refreshEmptyLabel.text = textRelease;
             } else {
                 // User is scrolling somewhere within the header
                 refreshLabel.text = textPull;
+                refreshEmptyLabel.text = textPull;
             }
         }];
         
@@ -1211,12 +1332,12 @@
             [delegate performSelector:@selector(hideScrollTopButton) withObject:nil];
         }
     }
-    else if (isDragging && scrollView.contentOffset.y + bankingListTable.frame.size.height >= bankingListTable.contentSize.height)
+    else if (isDragging && scrollView.contentOffset.y + bankingListTable.frame.size.height >= bankingListTable.contentSize.height && ![bankingListTable isHidden])
     {
         refreshFooterLabel.text = textPull;
     }
     
-    if(isDragging && scrollView.contentOffset.y > 0)
+    if(isDragging && scrollView.contentOffset.y > 0 && ![bankingListTable isHidden])
     {
         if(delegate != nil && [delegate respondsToSelector:@selector(showScrollTopButton)])
         {
@@ -1229,14 +1350,14 @@
 {
     if (isLoading) return;
     if(isDeleteMode) return;
-    if(isSearchResult) return;
+//    if(isSearchResult) return;
     isDragging = NO;
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT)
     {
         // Released above the header
         [self startLoading];
     }
-    else if(scrollView.contentOffset.y + bankingListTable.frame.size.height - bankingListTable.contentSize.height >= REFRESH_HEADER_HEIGHT)
+    else if(scrollView.contentOffset.y + bankingListTable.frame.size.height - bankingListTable.contentSize.height >= REFRESH_HEADER_HEIGHT && ![bankingListTable isHidden])
     {
         // 스크롤이 끝까지 내려가면 이전 목록을 불러와 리프레쉬 한다.
         [self startFooterLoading];

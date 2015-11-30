@@ -8,7 +8,7 @@
 
 #import "CommonViewController.h"
 
-@interface NotiSettingMenuViewController : CommonViewController<UIAlertViewDelegate>
+@interface NotiSettingMenuViewController : CommonViewController<UIAlertViewDelegate, IBNgmServiceProtocol>
 
 @property (strong, nonatomic) IBOutlet UIButton *allNotiButton;
 

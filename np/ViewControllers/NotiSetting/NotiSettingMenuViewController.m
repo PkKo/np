@@ -48,7 +48,6 @@
     {
         // 알림 켜기
         [IBNgmService setApnsAllow:YES];
-        [allNotiButton setSelected:YES];
     }
 }
 
@@ -75,7 +74,14 @@
     {
         // 알림 끄기
         [IBNgmService setApnsAllow:NO];
-        [allNotiButton setSelected:NO];
+    }
+}
+
+- (void)apnsAllows:(BOOL)success
+{
+    if(success)
+    {
+        [allNotiButton setSelected:[IBNgmService getApnsAllow]];
     }
 }
 @end
