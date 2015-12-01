@@ -9,6 +9,7 @@
 #import "ExchangeCountryAddViewController.h"
 #import "ServiceDeactivationController.h"
 
+#define ALERT_TAG_MODIFY_COUNTRY    133
 #define ALERT_TAG_ADD_NEW_COUNTRY   134
 #define ALERT_TAG_ADD_CHANGE_COUNTRY 135
 
@@ -205,8 +206,12 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"통화국가 수정이 완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alertView.tag = ALERT_TAG_MODIFY_COUNTRY;
+        [alertView show];
+        /*
         [self.navigationController popViewControllerAnimated:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:self];*/
     }
     else
     {
@@ -558,6 +563,12 @@
     {
         switch ([alertView tag])
         {
+            case ALERT_TAG_MODIFY_COUNTRY:
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:nil];
+                break;
+            }
             case ALERT_TAG_ADD_NEW_COUNTRY:
             {
                 [self.navigationController popViewControllerAnimated:YES];

@@ -15,7 +15,10 @@
 #if DEV_MODE
 // 개발서버
 //#define SERVER_URL          @"https://218.239.251.103:39190/"
-#define SERVER_URL          @"https://smartdev.nonghyup.com:39190/"
+//#define SERVER_URL          @"https://smartdev.nonghyup.com:39190/"
+// 스테이징
+#define SERVER_URL          @"https://smartdev.nonghyup.com:9190/"
+//@"https://"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 // cloud server
@@ -86,7 +89,7 @@
 #define SECTION_FOOTER_HEIGHT   93.0f
 #define TIMELINE_BANKING_HEIGHT 117.0f
 #define TIMELINE_ETC_HEIGHT     115.0f
-#define TIMELINE_ETC_NOTICE_HEIGHT  71.0f
+#define TIMELINE_ETC_NOTICE_HEIGHT  80.0f
 #define TIMELINE_BANNER_HEIGHT  93.0f
 #define AMOUNT_FONT_SIZE        20.0f
 #define IPHONE_FIVE_FRAME_HEIGHT    568

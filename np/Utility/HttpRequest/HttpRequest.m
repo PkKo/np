@@ -220,7 +220,10 @@
         {
             if(responseDic == nil)
             {
-                responseDic = [NSDictionary dictionaryWithObject:@"서버에러가 발생했습니다.\n잠시 후 다시 시도해주세요." forKey:RESULT_MESSAGE];
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+                [dic setObject:@"서버에러가 발생했습니다.\n잠시 후 다시 시도해주세요." forKey:RESULT_MESSAGE];
+                [dic setObject:@"-1" forKey:RESULT];
+                responseDic = [NSDictionary dictionaryWithDictionary:dic];
             }
             [[self target] performSelector:[self selector] withObject:responseDic];
         }
