@@ -71,9 +71,12 @@
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[details dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
+    self.contents.attributedText = attributedString;
+    
     [self.contents setFont:[UIFont systemFontOfSize:14]];
     [self.contents setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:109.0f/255.0f alpha:1]];
     [self.contents setTextAlignment:NSTextAlignmentJustified];
+    
     
     [self.contents setSelectable:NO];
     
