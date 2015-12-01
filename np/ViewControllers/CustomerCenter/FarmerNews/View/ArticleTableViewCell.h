@@ -25,12 +25,12 @@
 
 @property (weak, nonatomic) IBOutlet UILabel        * regDate;
 @property (weak, nonatomic) IBOutlet UILabel        * headline;
-@property (weak, nonatomic) IBOutlet UITextView     * subject;
+@property (weak, nonatomic) IBOutlet UILabel        * subject;
 @property (weak, nonatomic) IBOutlet UIImageView    * imgOpen;
 @property (weak, nonatomic) IBOutlet UIImageView    * imgClose;
 
 @property (weak, nonatomic) IBOutlet UILabel        * rowSeparator;
-@property (weak, nonatomic) IBOutlet UITextView     * contents;
+@property (weak, nonatomic) IBOutlet UILabel        * contents;
 @property (weak, nonatomic) IBOutlet UIImageView    * photo;
 
 - (IBAction)toggleDetails:(UITapGestureRecognizer *)sender;

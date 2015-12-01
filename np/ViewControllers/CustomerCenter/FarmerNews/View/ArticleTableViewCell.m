@@ -7,6 +7,7 @@
 //
 
 #import "ArticleTableViewCell.h"
+#import "StorageBoxUtil.h"
 
 @implementation ArticleTableViewCell
 
@@ -40,51 +41,51 @@
 
 - (void)updateSubject:(NSString *)subject {
     
-    [self.subject setSelectable:YES];
-    [self.subject setFont:[UIFont systemFontOfSize:16]];
-    self.subject.text = subject;
-    [self.subject setSelectable:NO];
-    /*
+    CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
+    
+    self.subject.text       = subject;
+    CGRect subjectFrame     = self.subject.frame;
+    CGFloat subjectWidth    = screenWidth - (subjectFrame.origin.x + (screenWidth - self.imgOpen.frame.origin.x));
+    subjectFrame.size.width = subjectWidth;
+    [self.subject setFrame:subjectFrame];
     [self.subject sizeToFit];
-    [self.subject layoutIfNeeded];
     
-    CGRect headlineViewFrame    = self.headlineView.frame;
-    CGSize headlineViewSize     = self.headlineView.frame.size;
-    headlineViewSize.height     = self.subject.frame.size.height + self.regDate.frame.size.height;
+    subjectFrame.size.height= self.subject.frame.size.height;
+    [self.subject setFrame:subjectFrame];
     
-    NSLog(@"\n\n======>self.subject.frame: %@", NSStringFromCGRect(self.subject.frame));
-    NSLog(@"headlineViewSize: %@\n\n", NSStringFromCGSize(headlineViewSize));
+    CGRect headlineViewFrame        = self.headlineView.frame;
+    headlineViewFrame.size.height   = subjectFrame.origin.y + subjectFrame.size.height + 22;
     
     [self.headlineView setFrame:headlineViewFrame];
-     */
 }
 
 - (void )updateDetails:(NSString *)details {
-    
-    //NSLog(@"original details: %@", details);
-    
-    [self.contents setSelectable:YES];
     
     details = [details stringByReplacingOccurrencesOfString:@"\r\n" withString:@"<br>"];
     details = [details stringByReplacingOccurrencesOfString:@"[b]" withString:@"<b>"];
     details = [details stringByReplacingOccurrencesOfString:@"[/b]" withString:@"</b>"];
     
+    details = [NSString stringWithFormat:@"<html>"
+     "  <head>"
+     "    <style type='text/css'>"
+     "      body { font-size: 11pt; color: #60616D; text-align: justify; }"
+     "    </style>"
+     "  </head>"
+     "  <body>%@</body>"
+     "</html>", details];
+    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[details dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
-    self.contents.attributedText = attributedString;
+    self.contents.attributedText= attributedString;
     
-    [self.contents setFont:[UIFont systemFontOfSize:14]];
-    [self.contents setTextColor:[UIColor colorWithRed:96.0f/255.0f green:97.0f/255.0f blue:109.0f/255.0f alpha:1]];
-    [self.contents setTextAlignment:NSTextAlignmentJustified];
-    
-    
-    [self.contents setSelectable:NO];
-    
+    CGFloat screenWidth         = [[UIScreen mainScreen] bounds].size.width;
+    CGRect contentsFrame        = self.contents.frame;
+    CGFloat contentsWidth       = screenWidth - (contentsFrame.origin.x * 2);
+    contentsFrame.size.width    = contentsWidth;
+    [self.contents setFrame:contentsFrame];
     [self.contents sizeToFit];
-    [self.contents layoutIfNeeded];
-    
-    CGRect contentsFrame    = self.contents.frame;
-    contentsFrame.origin.y  = self.photo.isHidden ? 0 : self.photo.frame.size.height + 20;
+    contentsFrame.size.height   = self.contents.frame.size.height;
+    contentsFrame.origin.y      = self.photo.isHidden ? 20 : self.photo.frame.origin.y + self.photo.frame.size.height + 20;
     [self.contents setFrame:contentsFrame];
     
     CGRect footerViewFrame      = self.footerView.frame;

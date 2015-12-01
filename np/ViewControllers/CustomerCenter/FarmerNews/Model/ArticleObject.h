@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString * imgPath;
 
 @property (nonatomic, assign) BOOL isDetailsShown;
+@property (nonatomic, assign) BOOL isAlreadyShownDetails;
 @property (nonatomic, assign) CGSize cellSize;
 
 @end

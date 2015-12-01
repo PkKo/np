@@ -146,24 +146,17 @@
     
     if (article.isDetailsShown) {
         
-        if (article.imgPath) {
-            [cell.photo setHidden:NO];
+        if (article.isAlreadyShownDetails) {
             
-            UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]];
-            
-            CGSize scaledPhotoSize  = [self scaleImage:image toSize:CGSizeMake(284, 166)];
-            CGRect photoFrame       = cell.photo.frame;
-            photoFrame.size         = scaledPhotoSize;
-            [cell.photo setFrame:photoFrame];
-            [cell.photo setImage:image];
+            if ([cell.subject.text isEqualToString:@""] || ![article.subject isEqualToString:cell.subject.text]) {
+                [self startIndicator];
+                [self performSelector:@selector(updateCell:) withObject:@[cell, article] afterDelay:0.07f];
+            }
             
         } else {
-            [cell.photo setHidden:YES];
+            [self updateCell:@[cell, article]];
+            article.isAlreadyShownDetails = YES;
         }
-        
-        [cell updateSubject:article.subject];
-        [cell updateDetails:article.contents];
-        article.cellSize        = cell.frame.size;
     }
     
     [cell hideDetailsView:!article.isDetailsShown];
@@ -171,10 +164,39 @@
     return cell;
 }
 
+- (void)updateCell:(NSArray *)args {
+    
+    ArticleTableViewCell    * cell      = (ArticleTableViewCell *)[args objectAtIndex:0];
+    ArticleObject           * article   = (ArticleObject *)[args objectAtIndex:1];
+    
+    if (article.imgPath) {
+        [cell.photo setHidden:NO];
+        
+        UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.imgPath]]];
+        
+        CGSize scaledPhotoSize  = [self scaleImage:image toSize:CGSizeMake(284, 166)];
+        CGRect photoFrame       = cell.photo.frame;
+        photoFrame.size         = scaledPhotoSize;
+        [cell.photo setFrame:photoFrame];
+        [cell.photo setImage:image];
+        
+    } else {
+        [cell.photo setHidden:YES];
+    }
+    
+    [cell updateSubject:article.subject];
+    [cell updateDetails:article.contents];
+    
+    if (article.isAlreadyShownDetails) {
+        [self stopIndicator];
+    } else {
+        article.cellSize        = cell.frame.size;
+    }
+}
+
 - (CGSize)scaleImage:(UIImage *)image toSize: (CGSize)size {
     
     float newHeight = size.width / image.size.width * image.size.height;
-    //NSLog(@"size: %@", NSStringFromCGSize(CGSizeMake(size.width, newHeight)));
     return CGSizeMake(size.width, newHeight);
 }
 
@@ -182,12 +204,13 @@
     
     if (openCell) {
         if (indexPath.row == _prvSltedRow) {
-            return ((ArticleObject *)[articles objectAtIndex:indexPath.row]).cellSize.height;
+            
+            CGFloat cellHeight = ((ArticleObject *)[articles objectAtIndex:indexPath.row]).cellSize.height;
+            return cellHeight == 0 ? 1 : cellHeight;
         }
     }
     
     return 77;
-    
 }
 
 #pragma mark - Details
@@ -209,8 +232,11 @@
     
     if (openCell) {
         [openCell hideDetailsView:YES];
+        
+        ArticleObject * selectedArticle = [articles objectAtIndex:_prvSltedRow];
+        [selectedArticle setIsAlreadyShownDetails:NO];
+        
         openCell = nil;
-        [self stopIndicator];
     }
     
     if (isShown) {
@@ -229,9 +255,8 @@
         }
     }
     
-    
-    
     [self.articleTableView reloadData];
+    [self.articleTableView layoutIfNeeded];
     
     if (isShown && selectedIndexPath) {
         
@@ -241,6 +266,8 @@
         } completion:^(BOOL finished) {
             [self stopIndicator];
         }];
+    } else {
+        [self stopIndicator];
     }
 }
 
