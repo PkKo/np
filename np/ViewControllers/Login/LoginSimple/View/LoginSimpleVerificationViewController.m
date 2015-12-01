@@ -108,7 +108,7 @@
         
         alertMessage = @"숫자 6자리를 입력해 주세요.";
         
-    } else if (![pw isEqualToString:savedPassword]) {
+    } else if (![[util getEncryptedPassword:pw] isEqualToString:savedPassword]) {
         
         failedTimes++;
         [util saveSimplePasswordFailedTimes:failedTimes];

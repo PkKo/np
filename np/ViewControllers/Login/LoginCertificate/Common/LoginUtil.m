@@ -95,6 +95,10 @@
     }
 }
 
+- (NSString *)getEncryptedPassword:(NSString *)pw {
+    return [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+}
+
 - (void)showMainPage {
     
     if ([self isServiceDeactivated]) {
@@ -312,14 +316,20 @@
     if (!encryptedSimplePassword) {
         return nil;
     }
+    /*
     NSString * simplePassword           = [CommonUtil decrypt3DES:encryptedSimplePassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    
+    NSLog(@"encryptedSimplePassword: %@ - simplePassword: %@", encryptedSimplePassword, simplePassword);
+    
     return simplePassword;
+     */
+    return encryptedSimplePassword;
 }
 
 - (void)saveSimplePassword:(NSString *)simplePassword {
     
     NSUserDefaults *prefs               = [NSUserDefaults standardUserDefaults];
-    NSString * encryptedSimplePassword  = [CommonUtil encrypt3DESWithKey:simplePassword key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    NSString * encryptedSimplePassword  = [self getEncryptedPassword:simplePassword];
     
     [prefs setObject:encryptedSimplePassword forKey:PREF_KEY_SIMPLE_LOGIN_SETT_PW];
     [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES];
@@ -366,14 +376,18 @@
     if (!encryptedPassword) {
         return nil;
     }
+    /*
     NSString * password             = [CommonUtil decrypt3DES:encryptedPassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    
     return password;
+    */
+    return encryptedPassword;
 }
 
 - (void)savePatternPassword:(NSString *)pw {
     
     NSUserDefaults *prefs           = [NSUserDefaults standardUserDefaults];
-    NSString * encryptedPassword    = [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    NSString * encryptedPassword    = [self getEncryptedPassword:pw];
     
     [prefs setObject:encryptedPassword forKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
     [prefs setObject:[NSNumber numberWithInt:0] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];

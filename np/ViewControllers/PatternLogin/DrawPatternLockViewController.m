@@ -312,7 +312,7 @@
         if ([password length] < 8) {
             alertMessage = @"4개 이상의 점을 연결해 주세요.";
             
-        } else if (![password isEqualToString:savedPassword]) {
+        } else if (![[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
             
             failedTimes++;
             [util savePatternPasswordFailedTimes:failedTimes];

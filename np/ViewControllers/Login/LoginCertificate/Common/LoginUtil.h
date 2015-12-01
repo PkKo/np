@@ -26,6 +26,7 @@
 - (void)gotoLoginSettings:(UINavigationController *)navController;
 - (void)saveLoginMethod:(LoginMethod)loginMethod;
 - (LoginMethod)getLoginMethod;
+- (NSString *)getEncryptedPassword:(NSString *)pw;
 - (void)showMainPage;
 - (void)showLoginPage:(UINavigationController *)navController;
 - (void)showSelfIdentifer:(LoginMethod)loginMethod;

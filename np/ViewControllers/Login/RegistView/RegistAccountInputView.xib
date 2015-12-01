@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -171,6 +171,7 @@
                 <outlet property="accountInputField" destination="lYW-2z-S45" id="zof-qW-CKO"/>
                 <outlet property="accountPassInputField" destination="U1b-JR-Jup" id="dSw-Mt-hk0"/>
                 <outlet property="birthInputField" destination="xm9-fF-INu" id="oSR-Nb-kwV"/>
+                <outlet property="carrierDropdownImage" destination="uT2-Cc-Spp" id="TUC-4v-yqP"/>
                 <outlet property="carrierPickerBgView" destination="Zg2-w5-Rxk" id="t9u-Yx-XrI"/>
                 <outlet property="carrierPickerView" destination="6l7-K9-rhF" id="F7u-xc-2IE"/>
                 <outlet property="carrierSelectBtn" destination="Vs4-sB-g6n" id="QQe-GG-n4i"/>

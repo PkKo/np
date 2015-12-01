@@ -73,21 +73,21 @@
     return cell;
 }
 
-#pragma mark - Close View
-- (IBAction)closeCertListView {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSIndexPath * indexPath = [self.certTableView indexPathForSelectedRow];
-    if (indexPath) {
-        
-        CertInfo * selectedCert = (CertInfo *)[self.certificates objectAtIndex:[indexPath row]];
-        
-        [[[LoginUtil alloc] init] saveCertToLogin:selectedCert];
-        
-        if (self.closeBtnTarget) {
-            [self.closeBtnTarget performSelector:self.closeBtnAction withObject:selectedCert afterDelay:0];
-        }
+    CertInfo * selectedCert = (CertInfo *)[self.certificates objectAtIndex:[indexPath row]];
+    
+    [[[LoginUtil alloc] init] saveCertToLogin:selectedCert];
+    
+    if (self.closeBtnTarget) {
+        [self.closeBtnTarget performSelector:self.closeBtnAction withObject:selectedCert afterDelay:0];
     }
     
+    [self closeCertListView];
+}
+
+#pragma mark - Close View
+- (IBAction)closeCertListView {
     
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];

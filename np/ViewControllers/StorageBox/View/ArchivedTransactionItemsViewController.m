@@ -161,6 +161,9 @@
     // highlight delete button
     [self highlightDeleteBtn];
     
+    
+    
+    
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
 }
 
@@ -356,6 +359,10 @@
     if (![self.noDataView isHidden]) {
         [self.noDataImageView setImage:[UIImage imageNamed:_isSearch ? @"icon_noresult_01" : @"icon_noresult_02"]];
         [self.noDataNotice setText: _isSearch ? @"해당기간 내 검색 결과가 없습니다." : @"보관함에 저장된 내역이 없습니다."];
+        
+        // close select to remove view in case there is no data.
+        StorageBoxUtil *selectToRemoveUtil = [[StorageBoxUtil alloc] init];
+        [selectToRemoveUtil removeSelectToRemoveViewFromParentView:self.view];
     }
     _isSearch = NO;
 }

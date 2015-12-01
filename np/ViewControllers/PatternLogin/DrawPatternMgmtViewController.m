@@ -254,7 +254,7 @@ typedef enum SetupStatus {
             
         } else if (_setupStatus == SETUP_UPDATE) {
             
-            if (![password isEqualToString:savedPassword]) {
+            if (![[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
                 
                 _savedPw = nil;
                 
@@ -276,7 +276,7 @@ typedef enum SetupStatus {
             
         } else if (_setupStatus == SETUP_PW) {
             
-            if ([password isEqualToString:savedPassword]) {
+            if ([[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
                 alertMessage = @"현재 패턴과 동일한 패턴 입니다.";
             } else {
                 _pw = password;
