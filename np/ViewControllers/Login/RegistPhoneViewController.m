@@ -277,6 +277,7 @@
     
     [phoneAuthNumInput setHidden:NO];
     [bottomDescView setFrame:CGRectMake(orgBottomRect.origin.x, orgBottomRect.origin.y, bottomDescView.frame.size.width, bottomDescView.frame.size.height)];
+    [phoneAuthNumInput setText:@""];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_PHONE_AUTH];
     
@@ -444,8 +445,16 @@
             [self authNumberTimerStop];
         }
         
-        // 타이머 숫자 표시
-        [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %ld초)", AUTH_NUMBER_TIMER_MAX - authNumCounter] forState:UIControlStateNormal];
+        if(authNumCounter > AUTH_NUMBER_TIMER_MAX)
+        {
+            // 타이머 숫자 표시
+            [reqAuthNumButton setTitle:@"인증번호 재요청 (남은시간 0초)" forState:UIControlStateNormal];
+        }
+        else
+        {
+            // 타이머 숫자 표시
+            [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %ld초)", AUTH_NUMBER_TIMER_MAX - authNumCounter] forState:UIControlStateNormal];
+        }
     }
 }
 

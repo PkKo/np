@@ -29,13 +29,10 @@
     [super viewDidLoad];
     
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
-    [self.mNaviView.mMenuButton setHidden:YES];
+//    [self.mNaviView.mMenuButton setHidden:YES];
 
     // 인증서 목록 로드
     mCertControllArray = [CertLoader getCertControlArray];
-    
-    // 인증서 삭제시 받을 노티피케이션
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCertList:) name:@"CertDeletedNotification" object:nil];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mCertListTable.frame.size.width, 0)];
     [mCertListTable setTableFooterView:footerView];
@@ -51,6 +48,8 @@
         [alertView setTag:CERT_LIST_EMPTY];
         [alertView show];
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CertDeletedNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,8 +124,12 @@
     // 공인인증서 상세 화면으로 이동
     CertInfoViewController *vc = [[CertInfoViewController alloc] init];
     [vc setCertInfo:[mCertControllArray objectAtIndex:indexPath.row]];
+    ECSlidingViewController *eVc = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    // 인증서 삭제시 받을 노티피케이션
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCertList:) name:@"CertDeletedNotification" object:nil];
+    
+    [self.navigationController pushViewController:eVc animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate

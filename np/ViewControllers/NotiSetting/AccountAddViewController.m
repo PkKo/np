@@ -285,12 +285,14 @@
         // 전자서명 API 호출
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_CERT];
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT];
         
         NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
         [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
         [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
         [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
+        [requestBody setObject:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+        [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:RESPONSE_CERT_CRM_MOBILE];
         
         NSString *bodyString = [CommonUtil getBodyString:requestBody];
         
@@ -363,8 +365,10 @@
     [reqBody setObject:accountInputField.text forKey:REQUEST_ACCOUNT_NUMBER];
     [reqBody setObject:accountPasswordField.text forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:birthdayInputField.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:RESPONSE_CERT_CRM_MOBILE];
+    [reqBody setObject:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT];
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
     
     // Request Start
     HttpRequest *req = [HttpRequest getInstance];
@@ -378,13 +382,24 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        // 계좌 옵션 설정으로
-        AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
-        [vc setAccountNumber:accountInputField.text];
-        [vc setIsNewAccount:YES];
-        ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        NSString *phoneNumber = [[response objectForKey:@"crmMobile"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *crmNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
         
-        [self.navigationController pushViewController:eVC animated:YES];
+        if([crmNumber isEqualToString:phoneNumber])
+        {
+            // 계좌 옵션 설정으로
+            AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
+            [vc setAccountNumber:accountInputField.text];
+            [vc setIsNewAccount:YES];
+            ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+            
+            [self.navigationController pushViewController:eVC animated:YES];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"본인 계좌가 아닙니다.\n(휴대폰 번호가 변경된 경우 고객센터에 문의하세요.)" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+        }
     }
     else
     {

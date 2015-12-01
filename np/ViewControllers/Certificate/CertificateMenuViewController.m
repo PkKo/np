@@ -28,7 +28,6 @@
     [super viewDidLoad];
     
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
-    [self.mNaviView.mMenuButton setHidden:YES];
     
     mCertMenuArray = [[NSArray alloc] initWithObjects:@"PC > 스마트폰 인증서 가져오기", @"스마트폰 > 스마트폰 인증서 가져오기", @"인증서 관리", nil];
     

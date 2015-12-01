@@ -31,7 +31,7 @@
     [super viewDidLoad];
     
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
-    [self.mNaviView.mMenuButton setHidden:YES];
+//    [self.mNaviView.mMenuButton setHidden:YES];
     
     // certInfo에 맞춰 데이터뷰 구성
     if(certInfo != nil)
@@ -88,7 +88,8 @@
 {
     CertPasswordChangeViewController *vc = [[CertPasswordChangeViewController alloc] init];
     [vc setCertInfo:certInfo];
-    [self.navigationController pushViewController:vc animated:YES];
+    ECSlidingViewController *eVc = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+    [self.navigationController pushViewController:eVc animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate

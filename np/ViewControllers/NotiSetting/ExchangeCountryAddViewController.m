@@ -30,6 +30,7 @@
 @synthesize countryNameLabel;
 @synthesize countrySelectButton;
 @synthesize countryDeleteButton;
+@synthesize countrySelectDropImg;
 
 @synthesize optionOneImg;
 @synthesize optionOneText;
@@ -69,7 +70,8 @@
         // 기존 옵션 정보를 가져온다
         [countrySelectButton setEnabled:NO];
         [countryNameLabel setText:countryName];
-        [countryNameLabel setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+        [countryNameLabel setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [countrySelectDropImg setHidden:YES];
         [self registedCurrencyOptionRequest];
     }
     else
@@ -566,19 +568,16 @@
             case ALERT_TAG_MODIFY_COUNTRY:
             {
                 [self.navigationController popViewControllerAnimated:YES];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:nil];
                 break;
             }
             case ALERT_TAG_ADD_NEW_COUNTRY:
             {
                 [self.navigationController popViewControllerAnimated:YES];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:self];
                 break;
             }
                 case ALERT_TAG_ADD_CHANGE_COUNTRY:
             {
                 [self.navigationController popViewControllerAnimated:YES];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeCurrencyCountryUpdateNotification" object:self];
                 break;
             }
             default:

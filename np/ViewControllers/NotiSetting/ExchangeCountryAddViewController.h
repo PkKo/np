@@ -39,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *countryNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *countrySelectButton;
 @property (strong, nonatomic) IBOutlet UIButton *countryDeleteButton;
+@property (strong, nonatomic) IBOutlet UIImageView *countrySelectDropImg;
 
 @property (strong, nonatomic) IBOutlet CircleView *optionOneImg;
 @property (strong, nonatomic) IBOutlet UILabel *optionOneText;

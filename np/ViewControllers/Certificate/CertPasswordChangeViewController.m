@@ -28,7 +28,7 @@
     [super viewDidLoad];
 
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
-    [self.mNaviView.mMenuButton setHidden:YES];
+//    [self.mNaviView.mMenuButton setHidden:YES];
     
     wrongPasswordCount = 0;
 }

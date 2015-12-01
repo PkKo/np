@@ -188,6 +188,10 @@
             
             [IBInbox reqQueryAccountInboxListWithSize:reqData];
         }
+        else
+        {
+            [self makeTimelineView];
+        }
     }
 }
 

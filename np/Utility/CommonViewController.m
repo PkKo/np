@@ -46,6 +46,13 @@
 {
     [super viewDidAppear:animated];
     
+    if([CommonUtil getNetworkStatus] == NotReachable)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"네트워크에 연결되지 않았습니다.\n네트워크 상태를 확인해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
         [self sessionRefreshRequest];
