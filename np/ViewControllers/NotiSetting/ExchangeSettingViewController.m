@@ -45,12 +45,6 @@
     
     [payAlarmListTable.layer setBorderWidth:1.0f];
     [payAlarmListTable.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
-    
-    // 2. 서버에서 환율알림 국가 목록을 조회해온다.
-    [self currencyCountryListRequest];
-    
-    // 환율 삭제 시 받을 노티 설정
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registCurrencyCountryListRequest) name:@"ExchangeCurrencyCountryUpdateNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,6 +69,14 @@
     {
         payCountryOriginFrame = payAlarmListTable.frame;
     }
+    
+    // 2. 서버에서 환율알림 국가 목록을 조회해온다.
+    [self currencyCountryListRequest];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - 환율 알림 전체 국가 목록 요청

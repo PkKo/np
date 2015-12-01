@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     [self.mNaviView.mTitleLabel setText:@"공인인증센터"];
-    [self.mNaviView.mMenuButton setHidden:YES];
+//    [self.mNaviView.mMenuButton setHidden:YES];
     
     [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, bottomView.frame.origin.y + bottomView.frame.size.height)];
     

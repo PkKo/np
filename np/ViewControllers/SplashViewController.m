@@ -161,6 +161,13 @@
             layerPopupInfo = [[LayerPopupInfo alloc] init];
             layerPopupInfo.viewStartdate    = [response objectForKey:@"view_startdate"];
             layerPopupInfo.linkOutUrl       = [response objectForKey:@"link_out_url"];
+            if([layerPopupInfo.linkOutUrl length] > 0)
+            {
+                if(![layerPopupInfo.linkOutUrl hasPrefix:@"http://"])
+                {
+                    layerPopupInfo.linkOutUrl = [NSString stringWithFormat:@"http://%@", layerPopupInfo.linkOutUrl];
+                }
+            }
             layerPopupInfo.viewEnddate      = [response objectForKey:@"view_enddate"];
             layerPopupInfo.popupType        = [response objectForKey:@"popup_type"];
             layerPopupInfo.viewTitle        = [response objectForKey:@"view_title"];

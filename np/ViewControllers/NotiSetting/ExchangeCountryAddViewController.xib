@@ -11,6 +11,7 @@
                 <outlet property="countryDeleteButton" destination="8oT-e5-moB" id="vIl-tA-mI4"/>
                 <outlet property="countryNameLabel" destination="0Xu-iI-Dby" id="rLK-ma-rxx"/>
                 <outlet property="countrySelectButton" destination="dvl-3h-8ot" id="yoQ-68-U21"/>
+                <outlet property="countrySelectDropImg" destination="A6i-mB-ejo" id="9Np-s5-llw"/>
                 <outlet property="optionOneImg" destination="NDI-ub-1hW" id="D2Y-CT-68N"/>
                 <outlet property="optionOneText" destination="qec-UF-NvH" id="siR-gd-hoN"/>
                 <outlet property="optionTwoImg" destination="DoH-iQ-rI4" id="mgc-Ki-idF"/>

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.mNaviView.mTitleLabel setText:@"비밀번호 입력"];
-    [self.mNaviView.mMenuButton setHidden:YES];
+//    [self.mNaviView.mMenuButton setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
