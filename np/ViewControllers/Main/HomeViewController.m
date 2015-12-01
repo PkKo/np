@@ -320,7 +320,6 @@
     isRefresh = YES;
     isNewData = newData;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.ascending = !newData;
     reqData.size = TIMELINE_LOAD_COUNT;
     
     switch (viewType)
@@ -386,23 +385,33 @@
             break;
     }
     
-    if(newData)
+    if([sectionList count] > 0)
     {
+        reqData.ascending = !newData;
         
-        // 최신 데이터를 가져온다.
-        if(((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey != nil)
+        if(newData)
         {
-            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey;
+            
+            // 최신 데이터를 가져온다.
+            if(((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey != nil)
+            {
+                reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList firstObject]).date] firstObject]).serverMessageKey;
+            }
+            /*
+             else if([sectionList count] > 1)
+             {
+             reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:1]).date] firstObject]).serverMessageKey;
+             }*/
         }
-        else if([sectionList count] > 1)
+        else
         {
-            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList objectAtIndex:1]).date] firstObject]).serverMessageKey;
+            // 현재 이전 데이터를 가져온다.
+            reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject]).serverMessageKey;
         }
     }
     else
     {
-        // 현재 이전 데이터를 가져온다.
-        reqData.nextServerMsgKey = ((NHInboxMessageData *)[[timelineMessageList objectForKey:((TimelineSectionData *)[sectionList lastObject]).date] lastObject]).serverMessageKey;
+        reqData.ascending = YES;
     }
     
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
