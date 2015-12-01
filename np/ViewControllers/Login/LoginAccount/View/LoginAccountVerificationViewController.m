@@ -109,15 +109,15 @@
     
     if (!self.accountTextField.text || [self.accountTextField.text isEqualToString:@""]) {
         
-        alertMessage = @"계좌번호를 다시 확인해주세요.";
+        alertMessage = @"계좌번호를 입력해주세요.";
         
     } else if (!self.passwordTextField.text || [self.passwordTextField.text length] < 4) {
         
-        alertMessage = @"비밀번호를 다시 확인해주세요.";
+        alertMessage = @"계좌비밀번호를 입력해주세요.";
         
     } else if (!self.birthdayTextField.text || [self.birthdayTextField.text length] < 6) {
         
-        alertMessage = @"생년월일을 다시 확인해주세요.";
+        alertMessage = @"생년월일을 입력해주세요.";
         
     } else {
         
