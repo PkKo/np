@@ -31,6 +31,12 @@
 @property (strong, nonatomic) IBOutlet UIView *carrierPickerBgView;
 @property (strong, nonatomic) IBOutlet UIPickerView *carrierPickerView;
 
+@property (weak, nonatomic) IBOutlet UILabel *noticeAsterisk1;
+@property (weak, nonatomic) IBOutlet UILabel *notice1;
+@property (weak, nonatomic) IBOutlet UILabel *noticeAsterisk2;
+@property (weak, nonatomic) IBOutlet UILabel *notice2;
+
+
 - (void)initData;
 - (IBAction)checkAccount:(id)sender;
 - (IBAction)carrierSelectConfirm:(id)sender;

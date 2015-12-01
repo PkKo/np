@@ -164,9 +164,43 @@
     [[inputView phoneNumInputField] setDelegate:self];
     [inputView setDelegate:self];
     [inputView initData];
+    
+    if (self.isSelfIdentified) {
+        [self hidePhoneNumAndAdjustNoticePosition:inputView];
+    }
+    
     [contentView addSubview:inputView];
     
     // 2-2. 이후 서버와 통신진행
+}
+
+- (void)hidePhoneNumAndAdjustNoticePosition:(RegistAccountInputView *)inputView {
+    
+    [inputView.carrierSelectBtn setHidden:YES];
+    [inputView.phoneNumInputField setHidden:YES];
+    [inputView.carrierDropdownImage setHidden:YES];
+    
+    CGPoint carrierSelectBtnPoint   = inputView.carrierSelectBtn.frame.origin;
+    CGPoint notice1Point            = inputView.notice1.frame.origin;
+    
+    CGFloat moveUpDistance          = notice1Point.y - carrierSelectBtnPoint.y - 5;
+    
+    CGRect notice1Frame = inputView.notice1.frame;
+    notice1Frame.origin.y -= moveUpDistance;
+    [inputView.notice1 setFrame:notice1Frame];
+    
+    CGRect noticeAsterisk1Frame = inputView.noticeAsterisk1.frame;
+    noticeAsterisk1Frame.origin.y -= moveUpDistance;
+    [inputView.noticeAsterisk1 setFrame:noticeAsterisk1Frame];
+    
+    
+    CGRect notice2Frame = inputView.notice2.frame;
+    notice2Frame.origin.y -= moveUpDistance;
+    [inputView.notice2 setFrame:notice2Frame];
+    
+    CGRect noticeAsterisk2Frame = inputView.noticeAsterisk2.frame;
+    noticeAsterisk2Frame.origin.y -= moveUpDistance;
+    [inputView.noticeAsterisk2 setFrame:noticeAsterisk2Frame];
 }
 
 /**

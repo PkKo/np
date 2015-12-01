@@ -176,6 +176,10 @@
                 <outlet property="carrierPickerView" destination="6l7-K9-rhF" id="F7u-xc-2IE"/>
                 <outlet property="carrierSelectBtn" destination="Vs4-sB-g6n" id="QQe-GG-n4i"/>
                 <outlet property="contentView" destination="hAG-ZO-m8a" id="WNW-Cx-lOs"/>
+                <outlet property="notice1" destination="aX8-KJ-Dk7" id="O26-eQ-33H"/>
+                <outlet property="notice2" destination="Nah-5K-PVX" id="aQt-as-gwx"/>
+                <outlet property="noticeAsterisk1" destination="g9y-Ic-OaM" id="Atg-K3-h2L"/>
+                <outlet property="noticeAsterisk2" destination="8Vb-0j-ll2" id="7UW-jM-jfl"/>
                 <outlet property="phoneNumInputField" destination="zzV-gv-Ygn" id="BLw-BI-Sk2"/>
                 <outlet property="scrollView" destination="I4T-DY-dPm" id="bEU-9a-NMt"/>
             </connections>
