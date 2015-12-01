@@ -525,18 +525,20 @@
         return;
     }
     
-    if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 4)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 10)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 정확히 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-        [alertView show];
-        return;
+    if (!self.isSelfIdentified) {
+        if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 4)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        
+        if([[inputAccountInfo objectForKey:@"mobile_number"] length] < 10)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 정확히 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
     }
     
     [self startIndicator];
@@ -544,9 +546,8 @@
     if(self.isSelfIdentified)
     {
         [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
-        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
         
         // Request Start
         HttpRequest *req = [HttpRequest getInstance];
@@ -577,17 +578,6 @@
 #else
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
-        NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
-        NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
-        
-        if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가 NH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
-            [alertView setTag:60001];
-            [alertView show];
-            return;
-        }
         
         if (self.isSelfIdentified)
         {
@@ -601,6 +591,18 @@
         }
         else
         {
+            NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
+            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+            NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
+            
+            if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가 NH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+                [alertView setTag:60001];
+                [alertView show];
+                return;
+            }
+            
             // 계좌번호로 인증한걸로 저장한다.
             [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
             
