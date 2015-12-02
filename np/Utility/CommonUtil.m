@@ -9,6 +9,7 @@
 #import "CommonUtil.h"
 #import "KeychainItemWrapper.h"
 #import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonHMAC.h>
 #import "nsdataadditions.h"
 #import <mach/mach.h>
 #import <mach/mach_host.h>
@@ -696,6 +697,24 @@
     //NSLog(@"result : %@", result);
     
     return result;
+}
+
++ (NSString *)hashSHA256EncryptString:(NSString *)value withKey:(NSString *)key
+{
+    const char *cKey  = [key cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *cData = [value cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+    
+    CCHmac (kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", cHMAC[i]];
+    }
+    
+    return output;
 }
 
 + (NSString *)getFormattedTodayString:(NSString *)format

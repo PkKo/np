@@ -130,6 +130,16 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
+        if([regCountryList count] > 0)
+        {
+            [regCountryList removeAllObjects];
+        }
+        
+        if([chargeList count] > 0)
+        {
+            [chargeList removeAllObjects];
+        }
+        
         regCountryList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"freeList"]];
         chargeList = [NSMutableArray arrayWithArray:[[response objectForKey:@"list"] objectForKey:@"chargeList"]];
     }
@@ -153,25 +163,33 @@
         {
             [countryListTable setHidden:YES];
         }
+        else
+        {
+            [countryListTable setHidden:NO];
+        }
         
         if([chargeList count] == 0)
         {
-            CGFloat totalCellHeight = countryCellHeight * [regCountryList count];
-            CGFloat tableViewHeight = payAlarmView.frame.origin.y + payAlarmView.frame.size.height - 28 - countryListTable.frame.origin.y;
-            if(totalCellHeight < tableViewHeight)
+            if([regCountryList count] > 0)
             {
-                tableViewHeight = totalCellHeight;
-                [countryListTable setScrollEnabled:NO];
+                CGFloat totalCellHeight = countryCellHeight * [regCountryList count];
+                CGFloat tableViewHeight = payAlarmView.frame.origin.y + payAlarmView.frame.size.height - 28 - countryListTable.frame.origin.y;
+                if(totalCellHeight < tableViewHeight)
+                {
+                    tableViewHeight = totalCellHeight;
+                    [countryListTable setScrollEnabled:NO];
+                }
+                else
+                {
+                    [countryListTable setScrollEnabled:YES];
+                }
+                
+                [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
+                                                      countryListTable.frame.origin.y,
+                                                      countryListTable.frame.size.width,
+                                                      tableViewHeight)];
+                [countryListTable setHidden:NO];
             }
-            else
-            {
-                [countryListTable setScrollEnabled:YES];
-            }
-            
-            [countryListTable setFrame:CGRectMake(countryListTable.frame.origin.x,
-                                                  countryListTable.frame.origin.y,
-                                                  countryListTable.frame.size.width,
-                                                  tableViewHeight)];
             [payAlarmView setHidden:YES];
         }
         else
@@ -194,6 +212,7 @@
                                                        payAlarmListTable.frame.size.width,
                                                        payCountryOriginFrame.size.height)];
             }
+            [payAlarmListTable setHidden:NO];
         }
         
         if([regCountryList count] > 0 && [chargeList count] > 0)
@@ -216,6 +235,8 @@
                                                       countryListTable.frame.size.width,
                                                       regCountryOriginFrame.size.height)];
             }
+            [countryListTable setHidden:NO];
+            [payAlarmListTable setHidden:NO];
         }
         
         [countryListTable reloadData];

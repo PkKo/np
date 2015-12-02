@@ -225,7 +225,7 @@
         [alertView show];
         return;
     }
-    
+    /*
     if(isRegisteredUser)
     {
         RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
@@ -235,7 +235,10 @@
     {
         RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+    }//*/
+    
+    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
     
     authNumber = nil;
     carrierIndex = 0;

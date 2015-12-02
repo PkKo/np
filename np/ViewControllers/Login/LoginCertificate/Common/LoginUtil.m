@@ -96,7 +96,8 @@
 }
 
 - (NSString *)getEncryptedPassword:(NSString *)pw {
-    return [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+//    return [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    return [CommonUtil hashSHA256EncryptString:pw withKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
 }
 
 - (void)showMainPage {
@@ -458,7 +459,7 @@
         NFilterChar *vc = [[NFilterChar alloc] initWithNibName:@"NFilterChar" bundle:nil];
         //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction];
@@ -473,7 +474,7 @@
     {
         nFilterCharForPad *vc = [[nFilterCharForPad alloc] initWithNibName:@"nFilterCharForPad" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:cancelAction];
@@ -501,10 +502,10 @@
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
-        //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
+//        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
+        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
@@ -521,7 +522,7 @@
     {
         nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:@""];
+        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress];

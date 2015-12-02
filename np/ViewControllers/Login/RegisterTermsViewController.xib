@@ -71,18 +71,18 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="M2f-KK-I5I">
-                                    <rect key="frame" x="18" y="18" width="284" height="137"/>
+                                    <rect key="frame" x="18" y="18" width="284" height="278"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 이용약관 동의(필수)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" id="WcS-1N-709">
                                             <rect key="frame" x="18" y="0.0" width="202" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <webView contentMode="scaleToFill" id="g8u-8h-XGm">
-                                            <rect key="frame" x="18" y="43" width="246" height="58"/>
+                                            <rect key="frame" x="18" y="43" width="246" height="192"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
@@ -91,18 +91,18 @@
                                             </connections>
                                         </webView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_agree_01_off.png" highlightedImage="icon_agree_01_on.png" id="H2w-N7-Mvf">
-                                            <rect key="frame" x="18" y="114" width="13" height="13"/>
+                                            <rect key="frame" x="18" y="244" width="18" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="2wk-QY-e56">
-                                            <rect key="frame" x="39" y="114" width="51" height="13"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2wk-QY-e56">
+                                            <rect key="frame" x="44" y="244" width="70" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gke-dz-X2c">
-                                            <rect key="frame" x="18" y="112" width="72" height="17"/>
+                                            <rect key="frame" x="18" y="243" width="96" height="20"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <connections>
                                                 <action selector="checkServiceTermAgree:" destination="-1" eventType="touchUpInside" id="qn7-41-weK"/>
@@ -129,8 +129,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view contentMode="scaleToFill" id="ONL-Qd-pvz">
-                                    <rect key="frame" x="18" y="157" width="284" height="137"/>
+                                <view hidden="YES" contentMode="scaleToFill" id="ONL-Qd-pvz">
+                                    <rect key="frame" x="18" y="152" width="284" height="155"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인(신용)정보 수집,이용 동의(필수)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cRa-4M-4Ev">
@@ -141,7 +141,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <webView contentMode="scaleToFill" id="06S-k8-Rnv">
-                                            <rect key="frame" x="18" y="43" width="246" height="58"/>
+                                            <rect key="frame" x="18" y="43" width="246" height="76"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
@@ -149,19 +149,19 @@
                                                 <outlet property="delegate" destination="-1" id="tWd-rL-GCE"/>
                                             </connections>
                                         </webView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_agree_01_off.png" highlightedImage="icon_agree_01_on.png" id="Qku-ty-5Tg">
-                                            <rect key="frame" x="18" y="114" width="13" height="13"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_agree_01_off.png" highlightedImage="icon_agree_01_on.png" id="Qku-ty-5Tg">
+                                            <rect key="frame" x="18" y="132" width="13" height="13"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="VYp-td-Mfv">
-                                            <rect key="frame" x="39" y="114" width="51" height="13"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="VYp-td-Mfv">
+                                            <rect key="frame" x="39" y="132" width="51" height="13"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sBa-1P-RYU">
-                                            <rect key="frame" x="18" y="112" width="72" height="17"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sBa-1P-RYU">
+                                            <rect key="frame" x="18" y="130" width="72" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <connections>
                                                 <action selector="checkPersonalTermAgree:" destination="-1" eventType="touchUpInside" id="Y3u-Hw-pUw"/>
@@ -189,29 +189,29 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="B5x-2d-bhj">
-                                    <rect key="frame" x="18" y="296" width="284" height="69"/>
+                                    <rect key="frame" x="18" y="298" width="284" height="75"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금융정보/기타 알림 메시지 수신에 동의(필수)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" id="LRq-s2-KAY">
-                                            <rect key="frame" x="18" y="13" width="249" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금융정보/기타 알림 메시지 수신에 동의" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" id="LRq-s2-KAY">
+                                            <rect key="frame" x="18" y="16" width="249" height="16"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_agree_01_off.png" highlightedImage="icon_agree_01_on.png" id="Qjf-w8-cgK">
-                                            <rect key="frame" x="18" y="42" width="13" height="13"/>
+                                            <rect key="frame" x="18" y="41" width="18" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="0RV-fK-Bcz">
-                                            <rect key="frame" x="39" y="42" width="51" height="13"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0RV-fK-Bcz">
+                                            <rect key="frame" x="44" y="41" width="70" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Oo9-jU-8GY">
-                                            <rect key="frame" x="18" y="40" width="72" height="17"/>
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Oo9-jU-8GY">
+                                            <rect key="frame" x="18" y="46" width="96" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <connections>
                                                 <action selector="checkPushAgree:" destination="-1" eventType="touchUpInside" id="3eZ-mJ-1ey"/>

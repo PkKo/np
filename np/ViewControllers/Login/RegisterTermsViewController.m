@@ -48,16 +48,20 @@
     contentViewHeight = contentView.frame.size.height;
     [scrollView setContentSize:contentView.frame.size];
     
-    [serviceTermWebView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
+    [serviceTermWebView.layer setBorderColor:[UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f].CGColor];
     [serviceTermWebView.layer setBorderWidth:1.0f];
+    /*
     [personalDataTermWebView.layer setBorderColor:[UIColor colorWithRed:176.0f/255.0f green:177.0f/255.0f blue:182.0f/255.0f alpha:1.0f].CGColor];
-    [personalDataTermWebView.layer setBorderWidth:1.0f];
+    [personalDataTermWebView.layer setBorderWidth:1.0f];*/
     
     [serviceTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SERVICE_TERMS_URL_SHORT]]];
-    [personalDataTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_SHORT]]];
+//    [personalDataTermWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:PERSONAL_TERMS_URL_SHORT]]];
     
     serviceTermClick = NO;
-    personalTermClick = NO;
+//    personalTermClick = NO;
+    
+    [pushAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
+    [pushAgreeImg setHighlighted:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,11 +173,12 @@
     // 약관동의 여부 체크
     if(![serviceTermAgreeImg isHighlighted])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 이용약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
     }
     
+    /*
     if(!personalTermClick)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관 전문보기를 선택하시고\n약관 내용을 확인하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -186,7 +191,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"개인정보 수집/이용 약관에 동의하셔야 서비스 이용이 가능합니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
         return;
-    }
+    }*/
     
     if(![pushAgreeImg isHighlighted])
     {
@@ -200,11 +205,12 @@
     [self.navigationController pushViewController:vc animated:YES];
     
     serviceTermClick = NO;
-    personalTermClick = NO;
-    [self checkPersonalTermAgree:nil];
+//    personalTermClick = NO;
+//    [self checkPersonalTermAgree:nil];
     [self checkServiceTermAgree:nil];
+    /*
     [pushAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
-    [pushAgreeImg setHighlighted:NO];
+    [pushAgreeImg setHighlighted:NO];*/
 }
 
 - (IBAction)closeServiceTermsView:(id)sender
