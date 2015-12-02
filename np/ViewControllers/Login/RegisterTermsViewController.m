@@ -60,8 +60,8 @@
     serviceTermClick = NO;
 //    personalTermClick = NO;
     
-    [pushAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
-    [pushAgreeImg setHighlighted:YES];
+//    [pushAgreeText setTextColor:[UIColor colorWithRed:48.0f/255.0f green:158.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
+//    [pushAgreeImg setHighlighted:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,9 +208,9 @@
 //    personalTermClick = NO;
 //    [self checkPersonalTermAgree:nil];
     [self checkServiceTermAgree:nil];
-    /*
+
     [pushAgreeText setTextColor:[UIColor colorWithRed:144.0f/255.0f green:145.0f/255.0f blue:150.0f/255.0f alpha:1.0f]];
-    [pushAgreeImg setHighlighted:NO];*/
+    [pushAgreeImg setHighlighted:NO];
 }
 
 - (IBAction)closeServiceTermsView:(id)sender

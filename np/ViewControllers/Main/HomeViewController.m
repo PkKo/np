@@ -129,7 +129,7 @@
                     }
                     else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                     {
-                        reqData.queryType = @"3,4,5,6,Z";
+                        reqData.queryType = @"3,4,5,6,B,Z";
                     }
                 }
                 else
@@ -178,7 +178,7 @@
                 }
                 else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                 {
-                    reqData.queryType = @"3,4,5,6,Z";
+                    reqData.queryType = @"3,4,5,6,B,Z";
                 }
             }
             else
@@ -380,7 +380,7 @@
                 }
                 else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                 {
-                    reqData.queryType = @"3,4,5,6,Z";
+                    reqData.queryType = @"3,4,5,6,B,Z";
                 }
             }
             break;
