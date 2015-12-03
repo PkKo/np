@@ -26,7 +26,7 @@
     _prvSltedRow = -1;
     
     [self.mNaviView.mBackButton setHidden:NO];
-    [self.mNaviView.mTitleLabel setText:@"농민뉴스"];
+    [self.mNaviView.mTitleLabel setText:@"농민신문"];
     articles = [[NSArray alloc] init];
 }
 
