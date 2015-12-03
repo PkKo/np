@@ -39,7 +39,12 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     [textField resignFirstResponder];
-    [textField setText:@""];
+    
+    BOOL isFullMode = YES;
+    
+    if (!isFullMode) {
+        [textField setText:@""];
+    }
     
     NSString * title = textField.placeholder;;
     SEL action;
@@ -58,9 +63,10 @@
     }
     
     LoginUtil * util = [[LoginUtil alloc] init];
-    [util showSecureNumpadInParent:self topBar:@"간편비밀번호 관리" title:title
+    [util showSecureNumpadInParent:self topBar:@"간편비밀번호" title:title
                         textLength:6
-                        doneAction:action methodOnPress:action];
+                        doneAction:action methodOnPress:action
+                        isFullMode:isFullMode isAutoCloseKeyboard:!isFullMode];
 }
 
 - (void)currentPassword:(NSString *)pw {

@@ -508,7 +508,11 @@
         [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         
         //콜백함수 설정
-        [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
+        if (isFullMode) {
+            [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnCancel:nil ];
+        } else {
+            [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress ];
+        }
         [vc setLengthWithTagName:@"PasswordInput" length:length webView:nil isAutoCloseKeyboard:isAutoCloseKeyboard];
         [vc setFullMode:isFullMode];
         [vc setToolBar:NO];

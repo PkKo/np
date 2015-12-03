@@ -64,7 +64,10 @@
     
     if (textField == self.passwordTextField) {
         
-        [textField setText:@""];
+        BOOL isFullMode = YES;
+        if (!isFullMode) {
+            [textField setText:@""];
+        }
         
         [textField resignFirstResponder];
         
@@ -74,7 +77,7 @@
         [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:@"계좌비밀번호 입력"
                             textLength:4
                             doneAction:confirmAction methodOnPress:confirmAction
-                            isFullMode:YES isAutoCloseKeyboard:NO];
+                            isFullMode:isFullMode isAutoCloseKeyboard:!isFullMode];
         return;
     }
     
