@@ -162,7 +162,7 @@
     // 휴대폰 번호 유효성 체크(CRM 확인)
     if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가/nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
         [alertView setTag:60001];
         [alertView show];
         return;
@@ -225,7 +225,7 @@
         [alertView show];
         return;
     }
-    /*
+    //*
     if(isRegisteredUser)
     {
         RegisterAccountViewController *vc = [[RegisterAccountViewController alloc] init];
@@ -237,8 +237,8 @@
         [self.navigationController pushViewController:vc animated:YES];
     }//*/
     
-    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    RegisterTermsViewController *vc = [[RegisterTermsViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
     
     authNumber = nil;
     carrierIndex = 0;
