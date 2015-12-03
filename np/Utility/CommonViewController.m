@@ -116,19 +116,23 @@
     [loadingIndicatorBg setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.75f]];
     [loadingIndicatorBg setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [loadingIndicatorBg setAutoresizesSubviews:YES];
-    /*
-    CircleView *animationBg = [[CircleView alloc] initWithFrame:CGRectMake(
-                                                                          (loadingIndicatorBg.frame.size.width - 54) / 2,
-                                                                           (loadingIndicatorBg.frame.size.height - 54) / 2, 54, 54)];
-    [animationBg setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
-//    [animationBg setBackgroundColor:[UIColor clearColor]];
-    [animationBg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
-    [loadingIndicatorBg addSubview:animationBg];*/
-    loadingIndicatorImg = [[UIImageView alloc] initWithFrame:CGRectMake(
+    UIView *animationBg = [[UIView alloc] initWithFrame:CGRectMake(
                                                             (loadingIndicatorBg.frame.size.width - 50) / 2,
                                                             (loadingIndicatorBg.frame.size.height - 50) / 2,
                                                             50, 50)];
+//    [animationBg setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
+    [animationBg setBackgroundColor:[UIColor clearColor]];
+    [animationBg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+    [loadingIndicatorBg addSubview:animationBg];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(11.5f, 19.5f, 27, 11)];
+    [logoView setImage:[UIImage imageNamed:@"loading_logo.png"]];
+    [animationBg addSubview:logoView];
+    
+    loadingIndicatorImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [loadingIndicatorImg setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+    [loadingIndicatorImg setImage:[UIImage imageNamed:@"loading_circle.png"]];
+    /*
     NSArray *loadingImageNames = @[@"loading_01.png",@"loading_02.png",@"loading_03.png",@"loading_04.png"];
     NSMutableArray *loadingImages = [[NSMutableArray alloc] init];
     for(NSString *name in loadingImageNames)
@@ -137,8 +141,8 @@
     }
     [loadingIndicatorImg setBackgroundColor:[UIColor clearColor]];
     [loadingIndicatorImg setAnimationImages:loadingImages];
-    [loadingIndicatorImg setAnimationDuration:0.25f];
-    [loadingIndicatorBg addSubview:loadingIndicatorImg];
+    [loadingIndicatorImg setAnimationDuration:0.25f];*/
+    [animationBg addSubview:loadingIndicatorImg];
     [loadingIndicatorBg setHidden:YES];
     
     [self.view addSubview:loadingIndicatorBg];
@@ -185,15 +189,15 @@
 - (void)startIndicator
 {
     [self.view bringSubviewToFront:loadingIndicatorBg];
-//    [CommonUtil runSpinAnimationWithDuration:loadingIndicatorImg duration:10.0f];
-    [loadingIndicatorImg startAnimating];
+    [CommonUtil runSpinAnimationWithDuration:loadingIndicatorImg duration:10.0f];
+//    [loadingIndicatorImg startAnimating];
     [loadingIndicatorBg setHidden:NO];
 }
 
 - (void)stopIndicator
 {
-//    [CommonUtil stopSpinAnimation:loadingIndicatorImg];
-    [loadingIndicatorImg stopAnimating];
+    [CommonUtil stopSpinAnimation:loadingIndicatorImg];
+//    [loadingIndicatorImg stopAnimating];
     [loadingIndicatorBg setHidden:YES];
 }
 
