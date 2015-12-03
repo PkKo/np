@@ -117,7 +117,7 @@
             [util saveSimplePasswordFailedTimes:failedTimes];
             if (failedTimes >= 5) {
                 
-                alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여 로그인이 불가능합니다. 본인인증 후 간편 비밀번호를 재설정해주세요.";
+                alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여\n로그인이 불가능합니다. 본인인증 후\n간편 비밀번호를 재설정해주세요.";
                 tag             = ALERT_GOTO_SELF_IDENTIFY;
             } else {
                 
@@ -131,7 +131,16 @@
             
             alertMessage = @"현재 비밀번호와 동일한 비밀번호 입니다.";
             
+        } else if ([self isPasswordContainsMobileNo:self.myNewPw.text]) {
+            
+            alertMessage = @"휴대폰번호와 중복되는 간편 비밀번호는\n사용하실 수 없습니다.";
+            
+        } else if ([CommonUtil isRepeatSameString:self.myNewPw.text] || [CommonUtil isRepeatSequenceString:self.myNewPw.text]) {
+            
+            alertMessage = @"연속된 번호는 간편 비밀번호로\n사용하실 수 없습니다.";
+            
         } else {
+            
             alertMessage = @"간편비밀번호가 번경 되었습니다.";
             [util saveSimplePassword:self.myNewPw.text];
             tag = ALERT_SUCCEED_SAVE;
@@ -196,6 +205,34 @@
     CGRect newPwSettingsViewFrame = self.myNewPwSettingsView.frame;
     newPwSettingsViewFrame.origin.y = simplePassword ? 48 : 0;
     [self.myNewPwSettingsView setFrame:newPwSettingsViewFrame];
+}
+
+#pragma mark - strong password policy
+- (BOOL)isPasswordContainsMobileNo:(NSString *)pw {
+    
+    NSUserDefaults  * prefs     = [NSUserDefaults standardUserDefaults];
+    NSString        * crmMobile = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];
+    
+    NSString        * firstPart;
+    NSString        * secondPart;
+    
+    if (!crmMobile || crmMobile.length < 7) {
+        return NO;
+    }
+    
+    // 01074560407
+    secondPart  = [crmMobile substringFromIndex:crmMobile.length - 4];  // 0407
+    crmMobile   = [crmMobile substringToIndex:crmMobile.length - 4];    // 0107456
+    firstPart   = [crmMobile substringFromIndex:3];                     // 7456
+    
+    if ([pw containsString:firstPart]) {
+        return YES;
+    }
+    
+    if ([pw containsString:secondPart]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end
