@@ -628,7 +628,6 @@
 		A5EA7E371BBBA09C00626C74 /* ArchivedTransItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5EA7E351BBBA09C00626C74 /* ArchivedTransItemCell.xib */; };
 		A5EA7E3D1BBBB36000626C74 /* StorageBoxController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA7E3C1BBBB36000626C74 /* StorageBoxController.m */; };
 		A5ED265B1BA943C0007E6689 /* StatisticMainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */; };
-		A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26421BA943C0007E6689 /* ChartController.m */; };
 		A5ED26661BA943C0007E6689 /* StatisticDateSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */; };
 		A5ED26671BA943C0007E6689 /* StatisticDateSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */; };
 		A5ED26681BA943C0007E6689 /* StatisticMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5ED26581BA943C0007E6689 /* StatisticMainStoryboard.storyboard */; };
@@ -1451,8 +1450,6 @@
 		A5EA7E3C1BBBB36000626C74 /* StorageBoxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorageBoxController.m; path = StorageBox/Controller/StorageBoxController.m; sourceTree = "<group>"; };
 		A5ED263E1BA943C0007E6689 /* StatisticMainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticMainUtil.h; sourceTree = "<group>"; };
 		A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticMainUtil.m; sourceTree = "<group>"; };
-		A5ED26411BA943C0007E6689 /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
-		A5ED26421BA943C0007E6689 /* ChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartController.m; sourceTree = "<group>"; };
 		A5ED26551BA943C0007E6689 /* StatisticDateSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticDateSearchView.h; sourceTree = "<group>"; };
 		A5ED26561BA943C0007E6689 /* StatisticDateSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticDateSearchView.m; sourceTree = "<group>"; };
 		A5ED26571BA943C0007E6689 /* StatisticDateSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticDateSearchView.xib; sourceTree = "<group>"; };
@@ -3182,7 +3179,6 @@
 			isa = PBXGroup;
 			children = (
 				A5ED263D1BA943C0007E6689 /* Common */,
-				A5ED26401BA943C0007E6689 /* Controller */,
 				A5ED26441BA943C0007E6689 /* Model */,
 				A5ED26471BA943C0007E6689 /* View */,
 			);
@@ -3196,15 +3192,6 @@
 				A5ED263F1BA943C0007E6689 /* StatisticMainUtil.m */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		A5ED26401BA943C0007E6689 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A5ED26411BA943C0007E6689 /* ChartController.h */,
-				A5ED26421BA943C0007E6689 /* ChartController.m */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		A5ED26441BA943C0007E6689 /* Model */ = {
@@ -3858,7 +3845,6 @@
 				A2DE58811BA7E780008903E6 /* CertificateRoamingPassViewController.m in Sources */,
 				A2DD87511BC23B9B0013470D /* RegistAccountInputView.m in Sources */,
 				17208CA71BEA702500968498 /* ArticleTableViewCell.m in Sources */,
-				A5ED265C1BA943C0007E6689 /* ChartController.m in Sources */,
 				A2DEAE621B9FE6D800EDCCBA /* NSArray+MASAdditions.m in Sources */,
 				A2D95B521BA8F1DD00DC943D /* nFilterNumForPad.m in Sources */,
 				1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */,

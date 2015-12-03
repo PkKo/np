@@ -112,8 +112,6 @@
 #define FIRST_LOGIN_FLAG_FOR_STORAGE    @"firstStorage"
 
 #pragma mark 입출금 내역 스트링
-#define INCOME_TYPE_STRING             @"입금"
-#define WITHDRAW_TYPE_STRING           @"출금"
 #define INCOME_STRING_COLOR     [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1.0f]
 #define WITHDRAW_STRING_COLOR   [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1.0f]
 #define STROKE_LINE_COLOR       [UIColor colorWithRed:208.0f/255.0f green:209.0f/255.0f blue:214.0f/255.0f alpha:1.0f]
@@ -259,9 +257,15 @@
 
 #define TRANS_ALL_ACCOUNT  @"전체계좌"
 
-#define TRANS_TYPE_GENERAL @"입출금"
-#define TRANS_TYPE_INCOME  @"입금"
-#define TRANS_TYPE_EXPENSE @"출금"
+#define TRANS_TYPE_GENERAL          @"입출금"
+#define TRANS_TYPE_INCOME           @"입금"
+#define TRANS_TYPE_INCOME_MODIFY    @"입금정정"
+#define TRANS_TYPE_INCOME_CANCEL    @"입금취소"
+#define TRANS_TYPE_EXPENSE          @"출금"
+#define TRANS_TYPE_EXPENSE_MODIFY   @"출금정정"
+#define TRANS_TYPE_EXPENSE_CANCEL   @"출금취소"
+#define TRANS_TYPE_ETC              @""
+
 
 //@"최신순", @"과거순"
 #define TIME_ACSENDING_ORDER    @"과거순"

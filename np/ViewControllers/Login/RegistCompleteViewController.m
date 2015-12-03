@@ -137,7 +137,7 @@
  */
 - (IBAction)moveMainPage:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"간편한 로그인 방식을 설정하러 이동하시겠습니까?" delegate:self cancelButtonTitle:@"메인으로 이동" otherButtonTitles:@"예", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"간편한 로그인 방식을 설정하러\n이동하시겠습니까?" delegate:self cancelButtonTitle:@"메인으로 이동" otherButtonTitles:@"예", nil];
     [alertView setTag:112];
     [alertView show];
 }

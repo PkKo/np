@@ -322,7 +322,7 @@
     endDate                 = [NSString stringWithFormat:@"%@ 23:59:59", endDate];
     
     NSString * checkedAccountNo = [account isEqualToString:TRANS_ALL_ACCOUNT] ? nil : account;
-    NSString * checkedTransType = [transType isEqualToString:TRANS_TYPE_GENERAL] ? nil : ([transType isEqualToString:INCOME_TYPE_STRING] ? @"1" : @"2");
+    NSString * checkedTransType = [transType isEqualToString:TRANS_TYPE_GENERAL] ? nil : ([transType isEqualToString:TRANS_TYPE_INCOME] ? @"1" : @"2");
     NSString * checkedMemo = [memo isEqualToString:@""] ? nil : memo;
     
     NSArray * searchedItems = [[DBManager sharedInstance] selectByTransactionsStartDate:startDate endDate:endDate
@@ -471,6 +471,11 @@
         [cell.transacAmount setText:[transacObj formattedTransactionAmount]];
         [cell.transacAmountUnit setText:transacObj.currencyUnit];
         
+        CGRect transacAmountTypeRect    = cell.transacAmountType.frame;
+        CGSize transacAmountTypeSize    = [StorageBoxUtil contentSizeOfLabel:cell.transacAmountType];
+        transacAmountTypeRect.size.width= transacAmountTypeSize.width + 5;
+        [cell.transacAmountType setFrame:transacAmountTypeRect];
+        
         CGRect transacAmountUnitRect    = cell.transacAmountUnit.frame;
         CGSize transacAmountUnitSize    = [StorageBoxUtil contentSizeOfLabel:cell.transacAmountUnit];
         transacAmountUnitRect.size.width= transacAmountUnitSize.width;
@@ -478,8 +483,9 @@
         CGSize transacAmountSize        = [StorageBoxUtil contentSizeOfLabel:cell.transacAmount];
         CGRect transacAmountRect        = cell.transacAmount.frame;
         
-        CGFloat maxTransacAmountWidth   = cell.transacAmountView.frame.size.width - (cell.transacAmountType.frame.size.width +transacAmountUnitRect.size.width);
+        CGFloat maxTransacAmountWidth   = cell.transacAmountView.frame.size.width - (cell.transacAmountType.frame.size.width + transacAmountUnitRect.size.width);
         
+        transacAmountRect.origin.x      = transacAmountTypeRect.origin.x + transacAmountTypeRect.size.width;
         transacAmountRect.size.width    = transacAmountSize.width > maxTransacAmountWidth ? maxTransacAmountWidth : transacAmountSize.width;
         [cell.transacAmount setFrame:transacAmountRect];
         
@@ -487,7 +493,7 @@
         transacAmountUnitRect.origin.x  = transacAmountRect.origin.x + transacAmountRect.size.width;
         [cell.transacAmountUnit setFrame:transacAmountUnitRect];
         
-        [cell.transacAmount setTextColor:[[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME] ? [UIColor colorWithRed:36.0f/255.0f green:132.0f/255.0f blue:199.0f/255.0f alpha:1] : [UIColor colorWithRed:222.0f/255.0f green:69.0f/255.0f blue:98.0f/255.0f alpha:1]];
+        [cell.transacAmount setTextColor:[self getAmountTextColor:transacObj]];
         [cell.transacAmountType setTextColor:cell.transacAmount.textColor];
         [cell.transacAmountUnit setTextColor:cell.transacAmount.textColor];
         
@@ -496,6 +502,18 @@
         [cell updateMemoTextBorder];
     }
     return cell;
+}
+
+- (UIColor *)getAmountTextColor:(TransactionObject *)transacObj {
+    
+    if ([[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME]
+        || [[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME_CANCEL]
+        || [[transacObj transactionTypeDesc] isEqualToString:TRANS_TYPE_INCOME_MODIFY]) {
+        
+        return INCOME_STRING_COLOR;
+    }
+    
+    return WITHDRAW_STRING_COLOR;
 }
 
 - (void)markAsDeleted:(BOOL)isMarkedAsDeleted ofItemSection:(NSInteger)section row:(NSInteger)row {

@@ -86,8 +86,34 @@
         case STICKER_DEPOSIT_POCKET:
         case STICKER_DEPOSIT_ETC:
             return TRANS_TYPE_INCOME;
-        default:
+            
+        case STICKER_DEPOSIT_MODIFY:
+            return TRANS_TYPE_INCOME_MODIFY;
+            
+        case STICKER_DEPOSIT_CANCEL:
+            return TRANS_TYPE_INCOME_CANCEL;
+            
+            
+        case STICKER_WITHDRAW_NORMAL:
+        case STICKER_WITHDRAW_FOOD:
+        case STICKER_WITHDRAW_TELEPHONE:
+        case STICKER_WITHDRAW_HOUSING:
+        case STICKER_WITHDRAW_SHOPPING:
+        case STICKER_WITHDRAW_CULTURE:
+        case STICKER_WITHDRAW_EDUCATION:
+        case STICKER_WITHDRAW_CREDIT:
+        case STICKER_WITHDRAW_SAVING:
+        case STICKER_WITHDRAW_ETC:
             return TRANS_TYPE_EXPENSE;
+            
+        case STICKER_WITHDRAW_MODIFY:
+            return TRANS_TYPE_EXPENSE_MODIFY;
+        
+        case STICKER_WITHDRAW_CANCEL:
+            return TRANS_TYPE_EXPENSE_CANCEL;
+            
+        default:
+            return TRANS_TYPE_ETC;
     }
 }
 
