@@ -137,14 +137,9 @@
  */
 - (IBAction)moveMainPage:(id)sender
 {
-    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] init];
-    // 메인 시작
-    MainPageViewController *vc = [[MainPageViewController alloc] init];
-    [vc setStartPageIndex:0];
-    slidingViewController.topViewController = vc;
-    
-    [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"간편한 로그인 방식을 설정하러 이동하시겠습니까?" delegate:self cancelButtonTitle:@"메인으로 이동" otherButtonTitles:@"예", nil];
+    [alertView setTag:112];
+    [alertView show];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -158,13 +153,27 @@
             {
                 [[[LoginUtil alloc] init] saveUsingSimpleViewFlag:YES];
             }
+            [[[LoginUtil alloc] init] showMainPage];
             break;
         }
-            
+        case 112:
+        {
+            if(buttonIndex == 0) // main page
+            {
+                [[[LoginUtil alloc] init] showMainPage];
+            }
+            else if (buttonIndex == 1)
+            {
+                [[[LoginUtil alloc] init] setLogInStatus:YES];
+                [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
+            }
+            break;
+        }
         default:
+            [[[LoginUtil alloc] init] showMainPage];
             break;
     }
     
-    [self moveMainPage:nil];
+    
 }
 @end

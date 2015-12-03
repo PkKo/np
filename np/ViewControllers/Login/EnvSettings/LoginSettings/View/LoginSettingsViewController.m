@@ -14,6 +14,7 @@
 #import "LoginCertController.h"
 #import "CertificateMenuViewController.h"
 #import "EnvMgmtViewController.h"
+#import "RegistCompleteViewController.h"
 
 #define HIGHLIGHT_BG_COLOR              [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
@@ -32,6 +33,8 @@
 
 @interface LoginSettingsViewController () {
     LoginMethod selectedLoginMethod;
+    NSString * originalPAT;
+    NSString * originalPIN;
 }
 
 @end
@@ -49,6 +52,9 @@
     
     LoginMethod savedLoginMethod = [[[LoginUtil alloc] init] getLoginMethod];
     [self selectLoginBy:savedLoginMethod];
+    
+    originalPAT = [[[LoginUtil alloc] init] getPatternPassword];
+    originalPIN = [[[LoginUtil alloc] init] getSimplePassword];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -136,7 +142,6 @@
 #pragma mark - cancel/done
 // overwrite back button's action
 - (void)moveBack {
-    NSLog(@"%s", __func__);
     [self removeLoginSettings];
 }
 
@@ -149,6 +154,22 @@
         [alert show];
         return;
     }
+    
+    NSArray             * viewControllers       = [self.navigationController viewControllers];
+    UIViewController    * loginSettingsParent   = nil;
+    int                 numberOfViewControllers = (int)[viewControllers count];
+    
+    if (numberOfViewControllers >= 2) {
+        
+        loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
+        
+        if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[RegistCompleteViewController class]]) {
+            
+            [[[LoginUtil alloc] init] showMainPage];
+            return;
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -235,6 +256,7 @@
         [self.patternLoginMgmtBtn setEnabled:YES];
     }
     
+    // toggle PIN/PAT login selection
     if ( (selectedLoginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (selectedLoginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
         [self selectLoginBy:LOGIN_BY_NONE];
     }
@@ -242,6 +264,18 @@
     LoginMethod loginMethod = [util getLoginMethod];
     if ( (loginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (loginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
         [util saveLoginMethod:LOGIN_BY_NONE];
+    }
+    
+    // automatically select PIN/PAT login if PIN/PAT is reset.
+    if (simplePw && ![simplePw isEqualToString:originalPIN]) {
+        
+        [self selectLoginBy:LOGIN_BY_SIMPLEPW];
+        originalPIN = simplePw;
+        
+    } else if (patternPw && ![patternPw isEqualToString:originalPAT]) {
+        
+        [self selectLoginBy:LOGIN_BY_PATTERN];
+        originalPAT = patternPw;
     }
 }
 
@@ -332,17 +366,23 @@
             
         case ALERT_SETTINGS_DONE_CONFIRM:
         {
-            NSArray * viewControllers = [self.navigationController viewControllers];
-            UIViewController * loginSettingsParent = nil;
-            int numberOfViewControllers = (int)[viewControllers count];
+            NSArray             * viewControllers       = [self.navigationController viewControllers];
+            UIViewController    * loginSettingsParent   = nil;
+            int                 numberOfViewControllers = (int)[viewControllers count];
             
             if (numberOfViewControllers >= 2) {
                 
                 loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
                 
                 if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[EnvMgmtViewController class]]) {
+                    
                     [self removeLoginSettings];
-                } else {
+                    
+                } else if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[RegistCompleteViewController class]]) {
+                    
+                    [[[LoginUtil alloc] init] showMainPage];
+                    
+                } else { // login page
                     [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
                 }
             }
