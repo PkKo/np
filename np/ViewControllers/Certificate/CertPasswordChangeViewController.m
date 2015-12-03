@@ -77,7 +77,13 @@
         [alertView show];
         return;
     }
-        
+    
+    if(![CommonUtil CheckCertPassword:newPassword])
+    {
+        // password 유효성 검사
+        // 10자리 이상, 특수문자,숫자,영자 모두 포함되어야 함
+    }
+    
     if(certInfo != nil)
     {
         [[CertManager sharedInstance] setCertInfo:certInfo];

@@ -785,4 +785,126 @@
     
     return [fromDate compare:toDate];
 }
+
+#pragma mark -인증서 비밀번호 유효성 검사
++ (BOOL)CheckCertPassword:(NSString*)strPassword
+{
+    //비밀번호는 min~max자리, 영문자 포함, 숫자포함, 특수문자 포함..
+    NSString *format = [NSString stringWithFormat:@"^.*(?=^.{%d,%d}$)(?=.*[a-­z­A-Z­])(?=.*[0-9])(?=.*[^A-Z0-9a-z]).*$",10,30];
+    
+    NSPredicate *checkP = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", format];
+    
+    BOOL check = [checkP evaluateWithObject:strPassword];
+    
+    if(!check)
+    {
+        return NO;
+    }
+    
+    // ' " \ | 사용불가
+    format = @"[^\'\"\\\\|]*$";
+    checkP = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", format];
+    
+    if (![checkP evaluateWithObject:strPassword]) {
+        return NO;
+    }
+    
+    return check;
+}
+
+//동일한 문자가 same번 연속 들어가면 안된다.
++ (BOOL)isRepeatSameString:(NSString*)str
+{
+    if (3 < 2)
+    {
+        return NO;
+    }
+    
+    NSUInteger len = str.length;
+    
+    unichar preC = 0;
+    int count=0;
+    
+    for(int i = 0 ; i < len ; i++)
+    {
+        unichar c = [str characterAtIndex:i];
+        if(preC == c)
+        {
+            count++;
+        }
+        else
+        {
+            count = 0;
+        }
+        
+        if(count > 3 - 2)
+        {
+            return YES;
+        }
+        
+        preC = c;
+    }
+    return NO;
+}
+
+//문자가 순차적으로 오는 경우 abc, cba
++ (BOOL)isRepeatSequenceString:(NSString*)str
+{
+    if (3 < 2)
+    {
+        return NO;
+    }
+    
+    NSUInteger len = str.length;
+    
+    unichar preC = 0;
+    int count = 0;
+    BOOL asc = NO;//오름차순
+    BOOL des = NO;//내림차순
+    for (int i=0;i<len;i++) {
+        
+        unichar c = [str characterAtIndex:i];
+        
+        if(preC == c + 1)
+        {
+            count++;
+            asc = YES;
+            
+            if(des)
+            {
+                count--;
+            }
+        }
+        else if (preC == c-1)
+        {
+            count++;
+            des = YES;
+            if(asc)
+            {
+                count--;
+            }
+        }
+        else
+        {
+            asc = des = NO;
+            count = 0;
+        }
+        
+        //영문자, 숫자가 아닌 경우는 초기화
+        if(!(c >= 'a'&& c <= 'z') && !(c >= 'A' && c <= 'Z') && !(c >= '0' && c <= '9'))
+        {
+            count=0;
+        }
+        
+        if(count > 3 - 2)
+        {
+            return YES;
+        }
+        
+        preC = c;
+    }
+    
+    return NO;
+    
+}
 @end

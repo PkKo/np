@@ -1379,9 +1379,10 @@
                     [cell.titleLabel setText:@"공지사항"];
                     // 내용
                     [cell.contentLabel setText:inboxData.text];
-                    [cell.contentLabel setNumberOfLines:1];
-                    CGSize cellSize = cell.contentLabel.frame.size;
                     [cell.contentLabel sizeToFit];
+                    [cell.contentLabel setNumberOfLines:1];
+                    [cell.contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+                    CGSize cellSize = cell.contentLabel.frame.size;
                     [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
                                                            cellSize.width, cell.contentLabel.frame.size.height)];
                 }

@@ -72,4 +72,7 @@ typedef enum StickerType
 + (NSInteger)getUnreadCountForEtc;
 + (NetworkStatus)getNetworkStatus;
 + (NSComparisonResult)compareDateString:(NSString *)fromDateString toDate:(NSString *)toDateString;
++ (BOOL)CheckCertPassword:(NSString*)strPassword;
++ (BOOL)isRepeatSameString:(NSString*)str;
++ (BOOL)isRepeatSequenceString:(NSString*)str;
 @end

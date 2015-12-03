@@ -107,6 +107,10 @@
             {
                 [imageView setImage:downloadedImage];
             }
+            else
+            {
+                [imageView setImage:[UIImage imageNamed:@"noimage.png"]];
+            }
         });
     });
 }
