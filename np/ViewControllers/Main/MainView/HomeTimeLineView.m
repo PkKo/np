@@ -1368,8 +1368,10 @@
                     [cell.contentLabel setNumberOfLines:1];
                     CGSize cellSize = cell.contentLabel.frame.size;
                     [cell.contentLabel sizeToFit];
-                    [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
-                                                           cellSize.width, cell.contentLabel.frame.size.height)];
+                    [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x,
+                                                           cell.contentLabel.frame.origin.y,
+                                                           cellSize.width,
+                                                           cell.contentLabel.frame.size.height)];
                 }
                 else if([inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
                 {
@@ -1378,13 +1380,15 @@
                     // 타이틀
                     [cell.titleLabel setText:@"공지사항"];
                     // 내용
-                    [cell.contentLabel setText:inboxData.text];
-                    [cell.contentLabel sizeToFit];
                     [cell.contentLabel setNumberOfLines:1];
+                    [cell.contentLabel setText:inboxData.text];
                     [cell.contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                     CGSize cellSize = cell.contentLabel.frame.size;
-                    [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y,
-                                                           cellSize.width, cell.contentLabel.frame.size.height)];
+                    [cell.contentLabel sizeToFit];
+                    [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x,
+                                                           cell.contentLabel.frame.origin.y,
+                                                           cellSize.width,
+                                                           cell.contentLabel.frame.size.height)];
                 }
                 else
                 {
@@ -1433,7 +1437,7 @@
                         [bannerView.underLine setHidden:YES];
                     }
                     
-                    [cell.contentLabel sizeToFit];
+//                    [cell.contentLabel sizeToFit];
                     
                     [cell.separateLine setHidden:YES];
                 }

@@ -82,6 +82,9 @@
     {
         // password 유효성 검사
         // 10자리 이상, 특수문자,숫자,영자 모두 포함되어야 함
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서 암호는 순자,영문,특수문자를\n반드시 포함하여 10자리 이상으로\n입력해야 합니다.\n(단, ',\",\\,₩(|) 사용불가)" delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
     }
     
     if(certInfo != nil)
