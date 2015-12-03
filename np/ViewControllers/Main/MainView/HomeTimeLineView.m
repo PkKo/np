@@ -1149,14 +1149,62 @@
                     case STICKER_DEPOSIT_SALARY:
                     case STICKER_DEPOSIT_POCKET:
                     case STICKER_DEPOSIT_ETC:
-                    case STICKER_DEPOSIT_MODIFY:
-                    case STICKER_DEPOSIT_CANCEL:
                     {
                         // 입출금 타입
                         [cell.typeLabel setText:@"입금"];
                         [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
                         // 금액
                         [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                                              cell.amountLabel.frame.origin.y,
+                                                              amountSize.width, cell.amountLabel.frame.size.height)];
+                        [cell.amountLabel setText:amount];
+                        [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
+                        
+                        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                                  cell.amountDescLabel.frame.origin.y,
+                                                                  cell.amountDescLabel.frame.size.width,
+                                                                  cell.amountDescLabel.frame.size.height)];
+                        [cell.amountDescLabel setTextColor:INCOME_STRING_COLOR];
+                        break;
+                    }
+                    case STICKER_DEPOSIT_MODIFY:
+                    {
+                        // 입금 수정
+                        [cell.typeLabel setText:@"입금정정"];
+                        [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
+                        CGSize typeLabelSize = cell.typeLabel.frame.size;
+                        [cell.typeLabel sizeToFit];
+                        [cell.typeLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x,
+                                                            cell.typeLabel.frame.origin.y,
+                                                            cell.typeLabel.frame.size.width,
+                                                            typeLabelSize.height)];
+                        // 금액
+                        [cell.amountLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x + cell.typeLabel.frame.size.width + 2,
+                                                              cell.amountLabel.frame.origin.y,
+                                                              amountSize.width, cell.amountLabel.frame.size.height)];
+                        [cell.amountLabel setText:amount];
+                        [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
+                        
+                        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                                  cell.amountDescLabel.frame.origin.y,
+                                                                  cell.amountDescLabel.frame.size.width,
+                                                                  cell.amountDescLabel.frame.size.height)];
+                        [cell.amountDescLabel setTextColor:INCOME_STRING_COLOR];
+                        break;
+                    }
+                    case STICKER_DEPOSIT_CANCEL:
+                    {
+                        // 입금 취소
+                        [cell.typeLabel setText:@"입금취소"];
+                        [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
+                        CGSize typeLabelSize = cell.typeLabel.frame.size;
+                        [cell.typeLabel sizeToFit];
+                        [cell.typeLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x,
+                                                            cell.typeLabel.frame.origin.y,
+                                                            cell.typeLabel.frame.size.width,
+                                                            typeLabelSize.height)];
+                        // 금액
+                        [cell.amountLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x + cell.typeLabel.frame.size.width + 2,
                                                               cell.amountLabel.frame.origin.y,
                                                               amountSize.width, cell.amountLabel.frame.size.height)];
                         [cell.amountLabel setText:amount];
@@ -1180,13 +1228,61 @@
                     case STICKER_WITHDRAW_CREDIT:
                     case STICKER_WITHDRAW_SAVING:
                     case STICKER_WITHDRAW_ETC:
-                    case STICKER_WITHDRAW_MODIFY:
-                    case STICKER_WITHDRAW_CANCEL:
                     {
                         // 입출금 타입
                         [cell.typeLabel setText:@"출금"];
                         [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
                         [cell.amountLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x,
+                                                              cell.amountLabel.frame.origin.y,
+                                                              amountSize.width, cell.amountLabel.frame.size.height)];
+                        // 금액
+                        [cell.amountLabel setText:amount];
+                        [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        
+                        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                                  cell.amountDescLabel.frame.origin.y,
+                                                                  cell.amountDescLabel.frame.size.width,
+                                                                  cell.amountDescLabel.frame.size.height)];
+                        [cell.amountDescLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        break;
+                    }
+                    case STICKER_WITHDRAW_MODIFY:
+                    {
+                        // 출금수정
+                        [cell.typeLabel setText:@"출금정정"];
+                        [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        CGSize typeLabelSize = cell.typeLabel.frame.size;
+                        [cell.typeLabel sizeToFit];
+                        [cell.typeLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x,
+                                                            cell.typeLabel.frame.origin.y,
+                                                            cell.typeLabel.frame.size.width,
+                                                            typeLabelSize.height)];
+                        [cell.amountLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x + cell.typeLabel.frame.size.width + 2,
+                                                              cell.amountLabel.frame.origin.y,
+                                                              amountSize.width, cell.amountLabel.frame.size.height)];
+                        // 금액
+                        [cell.amountLabel setText:amount];
+                        [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        
+                        [cell.amountDescLabel setFrame:CGRectMake(cell.amountLabel.frame.origin.x + amountSize.width,
+                                                                  cell.amountDescLabel.frame.origin.y,
+                                                                  cell.amountDescLabel.frame.size.width,
+                                                                  cell.amountDescLabel.frame.size.height)];
+                        [cell.amountDescLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        break;
+                    }
+                    case STICKER_WITHDRAW_CANCEL:
+                    {
+                        // 출금취소
+                        [cell.typeLabel setText:@"출금취소"];
+                        [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
+                        CGSize typeLabelSize = cell.typeLabel.frame.size;
+                        [cell.typeLabel sizeToFit];
+                        [cell.typeLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x,
+                                                            cell.typeLabel.frame.origin.y,
+                                                            cell.typeLabel.frame.size.width,
+                                                            typeLabelSize.height)];
+                        [cell.amountLabel setFrame:CGRectMake(cell.typeLabel.frame.origin.x + cell.typeLabel.frame.size.width + 2,
                                                               cell.amountLabel.frame.origin.y,
                                                               amountSize.width, cell.amountLabel.frame.size.height)];
                         // 금액

@@ -249,8 +249,6 @@
             break;
         }
         case STICKER_DEPOSIT_ETC:
-        case STICKER_DEPOSIT_MODIFY:
-        case STICKER_DEPOSIT_CANCEL:
         {
             stickerImageName = @"icon_sticker_01.png";
             break;
@@ -301,8 +299,6 @@
             break;
         }
         case STICKER_WITHDRAW_ETC:
-        case STICKER_WITHDRAW_MODIFY:
-        case STICKER_WITHDRAW_CANCEL:
         {
             stickerImageName = @"icon_sticker_02.png";
             break;
@@ -316,6 +312,14 @@
         case STICKER_ETC:
         {
             stickerImageName = @"icon_sticker_04.png";
+            break;
+        }
+        case STICKER_DEPOSIT_MODIFY:
+        case STICKER_DEPOSIT_CANCEL:
+        case STICKER_WITHDRAW_MODIFY:
+        case STICKER_WITHDRAW_CANCEL:
+        {
+            stickerImageName = @"icon_sticker_02_.png";
             break;
         }
         default:

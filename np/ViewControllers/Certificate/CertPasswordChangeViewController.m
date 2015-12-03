@@ -87,6 +87,13 @@
         return;
     }
     
+    if(![CommonUtil isRepeatSameString:newPassword] || ![CommonUtil isRepeatSequenceString:newPassword])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서 암호에 연속된 문자/숫자 3자리 이상\n사용할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     if(certInfo != nil)
     {
         [[CertManager sharedInstance] setCertInfo:certInfo];
