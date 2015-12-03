@@ -1119,7 +1119,7 @@
 {
     CustomizedPickerViewController * pickerViewController = [[CustomizedPickerViewController alloc] initWithNibName:@"CustomizedPickerViewController" bundle:nil];
     
-    [pickerViewController setItems:@[SERVICE_TYPE_ALL, SERVICE_TYPE_ECOMMERCE, SERVICE_TYPE_EXCHANGE, SERVICE_TYPE_ETC]];
+    [pickerViewController setItems:@[SERVICE_TYPE_ALL, SERVICE_TYPE_EXCHANGE, SERVICE_TYPE_ETC]];
     
     pickerViewController.view.frame             = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.bounds;
     pickerViewController.view.autoresizingMask  = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.view.autoresizingMask;
@@ -1161,7 +1161,7 @@
     }
     else if([selection isEqualToString:SERVICE_TYPE_ETC])
     {
-        reqData.queryType = @"3,4,5,6,Z";
+        reqData.queryType = @"3,4,5,6,B,Z";
         [serviceSelectLabel setFrame:serviceSelectLabelFrame];
     }
     

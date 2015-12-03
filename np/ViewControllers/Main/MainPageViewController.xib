@@ -32,7 +32,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="80" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="전체">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -51,7 +51,7 @@
                             <rect key="frame" x="80" y="0.0" width="80" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.39607843139999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <state key="normal" title="입출금">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
@@ -69,7 +69,7 @@
                             <rect key="frame" x="160" y="0.0" width="80" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <state key="normal" title="기타">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                             </state>
@@ -87,7 +87,7 @@
                             <rect key="frame" x="240" y="0.0" width="80" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.396078431372549" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="보관함">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
