@@ -8,7 +8,6 @@
 
 #import "StatisticMainViewController.h"
 #import "StatisticMainUtil.h"
-#import "ChartController.h"
 #import "StorageBoxUtil.h"
 #import "StatisticMainUtil.h"
 #import "ChartDataView.h"

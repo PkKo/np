@@ -155,6 +155,14 @@
             
             alertMessage = @"입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
             
+        } else if ([self isPasswordContainsMobileNo:self.myNewPw.text]) {
+            
+            alertMessage = @"휴대폰번호와 중복되는 간편 비밀번호는\n사용하실 수 없습니다.";
+            
+        } else if ([CommonUtil isRepeatSameString:self.myNewPw.text] || [CommonUtil isRepeatSequenceString:self.myNewPw.text]) {
+            
+            alertMessage = @"연속된 번호는 간편 비밀번호로\n사용하실 수 없습니다.";
+            
         } else {
             alertMessage = @"간편비밀번호가 설정 되었습니다.";
             tag          = ALERT_SUCCEED_SAVE;
