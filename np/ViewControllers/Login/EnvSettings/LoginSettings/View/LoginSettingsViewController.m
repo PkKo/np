@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.mNaviView.mBackButton setHidden:NO];
+    [self.mNaviView.mBackButton setHidden:[self isRegistCompleteViewControllerItsParent]];
     [self.mNaviView.mTitleLabel setText:@"로그인 설정"];
     
     selectedLoginMethod = LOGIN_BY_NONE;
@@ -155,6 +155,16 @@
         return;
     }
     
+    if ([self isRegistCompleteViewControllerItsParent]) {
+        [[[LoginUtil alloc] init] showMainPage];
+        return;
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)isRegistCompleteViewControllerItsParent {
+    
     NSArray             * viewControllers       = [self.navigationController viewControllers];
     UIViewController    * loginSettingsParent   = nil;
     int                 numberOfViewControllers = (int)[viewControllers count];
@@ -165,12 +175,10 @@
         
         if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[RegistCompleteViewController class]]) {
             
-            [[[LoginUtil alloc] init] showMainPage];
-            return;
+            return YES;
         }
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    return NO;
 }
 
 - (IBAction)doneLoginSettings {
