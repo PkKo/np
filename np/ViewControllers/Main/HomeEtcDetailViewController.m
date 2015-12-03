@@ -65,7 +65,15 @@
     else
     {
         [imgScrollView setHidden:NO];
-        [imgPageControl setHidden:NO];
+        
+        if([imgUrl count] == 1)
+        {
+            [imgPageControl setHidden:YES];
+        }
+        else
+        {
+            [imgPageControl setHidden:NO];
+        }
         [imgPageControl setNumberOfPages:[imgUrl count]];
         CGFloat numberOfPages       = imgPageControl.numberOfPages;
         CGFloat scrollViewWith      = imgScrollView.frame.size.width;
