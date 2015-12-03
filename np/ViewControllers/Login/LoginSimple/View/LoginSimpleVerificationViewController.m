@@ -114,7 +114,7 @@
         [util saveSimplePasswordFailedTimes:failedTimes];
         if (failedTimes >= 5) {
             
-            alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여 로그인이 불가능합니다. 본인인증 후 간편 비밀번호를 재설정해주세요.";
+            alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여\n로그인이 불가능합니다. 본인인증 후\n간편 비밀번호를 재설정해주세요.";
             tag             = ALERT_GOTO_SELF_IDENTIFY;
             
         } else {
@@ -138,6 +138,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     [self toggleBtnBgColor:NO textLength:0];
+    _pw = @"";
     
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
