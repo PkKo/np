@@ -51,17 +51,25 @@
 {
     [super viewWillAppear:animated];
     
-    [IBInbox loadWithListener:self];
+//    [IBInbox loadWithListener:self];
     
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     [mMainContentView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
 //    [self makeTimelineView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [IBInbox loadWithListener:nil];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
+    [IBInbox loadWithListener:self];
     [self queryInitData];
 }
 
@@ -789,6 +797,7 @@
 
 - (void)inboxLoadFailed:(int)responseCode
 {
+    NSLog(@"%s", __FUNCTION__);
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"데이터 가져오기에 실패했습니다.\n잠시 후 다시 시도해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
