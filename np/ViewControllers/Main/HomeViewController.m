@@ -115,7 +115,7 @@
             case BANKING:
             {
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                reqData.queryType = @"1,2";
+                reqData.queryType = @"1,2,3,4,5,6";
                 break;
             }
             case OTHER:
@@ -137,7 +137,7 @@
                     }
                     else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                     {
-                        reqData.queryType = @"3,4,5,6,B,Z";
+                        reqData.queryType = @"B,Z";
                     }
                 }
                 else
@@ -186,7 +186,7 @@
                 }
                 else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                 {
-                    reqData.queryType = @"3,4,5,6,B,Z";
+                    reqData.queryType = @"B,Z";
                 }
             }
             else
@@ -359,7 +359,7 @@
             else
             {
                 reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
-                reqData.queryType = @"1,2";
+                reqData.queryType = @"1,2,3,4,5,6";
             }
             break;
         }
@@ -388,7 +388,7 @@
                 }
                 else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
                 {
-                    reqData.queryType = @"3,4,5,6,B,Z";
+                    reqData.queryType = @"B,Z";
                 }
             }
             break;
