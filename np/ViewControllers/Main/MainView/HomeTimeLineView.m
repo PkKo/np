@@ -303,7 +303,7 @@
 {
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     CGFloat originY = mTimeLineTable.frame.size.height;
-    if(mTimeLineTable.contentSize.height > mTimeLineTable.frame.size.height)
+    if(mTimeLineTable.contentSize.height >= mTimeLineTable.frame.size.height)
     {
         originY = mTimeLineTable.contentSize.height;
     }
