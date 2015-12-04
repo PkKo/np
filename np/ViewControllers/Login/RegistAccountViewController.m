@@ -52,7 +52,7 @@
         [self.mNaviView.imgTitleView setHidden:NO];
     }
     
-    
+    certWrongPassCount = 0;
     [self showRegistCertView];
 }
 
@@ -335,6 +335,20 @@
 
 - (void)passwordCheck
 {
+    if(self.currentTextField.text.length == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if (certWrongPassCount >= 5)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     int rc = 0;
     rc = [[CertManager sharedInstance] p12ImportWithUrl:NH_BANK_CERT_URL password:self.currentTextField.text];
 
@@ -354,9 +368,23 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
     }
-    else {
+    else
+    {
+        certWrongPassCount++;
+        NSString *alertMessage = @"";
+        if (certWrongPassCount >= 5) {
+            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+            
+        } else {
+            
+            alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)certWrongPassCount];
+        }
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:alertMessage delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
-        [alert show];
+        [alert show];*/
     }
 }
 
@@ -390,6 +418,20 @@
 
 - (void)certInfoRequest:(NSString *)password
 {
+    if([password length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if (certWrongPassCount >= 5)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     int rc = 0;
     
     rc = [[CertManager sharedInstance] checkPassword:password];
@@ -438,7 +480,18 @@
     }
     else
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력하신 인증서의 비밀번호가 맞지 않습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        certWrongPassCount++;
+        
+        NSString *alertMessage = @"";
+        if (certWrongPassCount >= 5) {
+            alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다.\n가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+            
+        } else {
+            
+            alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d 회 오류입니다.", (int)certWrongPassCount];
+        }
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:alertMessage delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -597,7 +650,7 @@
             
             if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
                 [alertView setTag:60001];
                 [alertView show];
                 return;

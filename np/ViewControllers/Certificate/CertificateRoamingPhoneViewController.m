@@ -146,7 +146,7 @@
     }
     else if (rc == 200)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서가 업로드 되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
         return;
     }

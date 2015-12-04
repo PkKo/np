@@ -162,7 +162,7 @@
     // 휴대폰 번호 유효성 체크(CRM 확인)
     if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
         [alertView setTag:60001];
         [alertView show];
         return;
@@ -196,7 +196,7 @@
     // 휴대폰 번호 유효성 체크(CRM 확인)
     if(![crmPhoneNumber isEqualToString:[NSString stringWithFormat:@"%@%@", carrierSelectButton.titleLabel.text, phoneNumberInput.text]])
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서비스 가입불가\n입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입력한 휴대폰번호가\nNH농협에 미등록되어 있거나\n번호가 다른경우 가입이 불가능합니다." delegate:self cancelButtonTitle:@"닫기" otherButtonTitles:@"자세히보기", nil];
         [alertView setTag:60001];
         [alertView show];
         return;
@@ -247,6 +247,8 @@
     [phoneNumberInput setText:@""];
     [phoneAuthNumInput setText:@""];
     [reqAuthNumButton setTitle:@"인증번호 요청" forState:UIControlStateNormal];
+    [reqAuthNumButton setEnabled:YES];
+    [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
     [phoneAuthNumInput setHidden:YES];
     [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
                                         phoneAuthNumInput.frame.origin.y,
@@ -301,9 +303,14 @@
     // Connection Success
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS])
     {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증번호를 발송하였습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+        
         // 인증번호 입력 대기 및 카운터 스타트
         [self authNumberTimerStart];
         [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %d초)", AUTH_NUMBER_TIMER_MAX] forState:UIControlStateNormal];
+        [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        [reqAuthNumButton setEnabled:NO];
         
         // 인증 코드 저장
         authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
@@ -411,6 +418,9 @@
         [authNumTimer invalidate];
         authNumTimer = nil;
     }
+    
+    [reqAuthNumButton setEnabled:YES];
+    [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
 }
 
 - (void)authNumberOnTime

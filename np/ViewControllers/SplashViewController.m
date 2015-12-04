@@ -129,6 +129,7 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[CommonUtil getDeviceUUID] forKey:REQUEST_APP_VERSION_UUID];
     [reqBody setObject:[CommonUtil getAppVersion] forKey:REQUEST_APP_VERSION_APPVER];
+    [reqBody setObject:@"I" forKey:@"appType"];
 //    [reqBody setObject:@"N" forKey:@"forceUpdate"];
 //    [reqBody setObject:@"N" forKey:@"lpType"];
     

@@ -11,7 +11,8 @@
 #import "FileManager.h"
 #import "CertManager.h"
 
-#define CERT_DELETE_TAG     111
+#define CERT_DELETE_TAG             111
+#define CERT_DELETE_COMPLETE_TAG    112
 
 @interface CertInfoViewController ()
 
@@ -98,15 +99,20 @@
     if([alertView tag] == CERT_DELETE_TAG && buttonIndex == BUTTON_INDEX_OK)
     {
         /* 인증서 삭제*/
-         [FileManager deleteCertFile:certInfo.subjectDN];
-         [self.navigationController popViewControllerAnimated:YES];
-         
-         if ([[CertManager getLoginedCertInfo].subjectDN isEqualToString:certInfo.subjectDN])
-         {     //추가된부분
-             [CertManager clear];
-         }
-         
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"CertDeletedNotification" object:self];
+        [FileManager deleteCertFile:certInfo.subjectDN];
+        if ([[CertManager getLoginedCertInfo].subjectDN isEqualToString:certInfo.subjectDN])
+        {     //추가된부분
+            [CertManager clear];
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"인증서를 삭제하였습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alert setTag:CERT_DELETE_COMPLETE_TAG];
+        [alert show];
+    }
+    else if([alertView tag] == CERT_DELETE_COMPLETE_TAG)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CertDeletedNotification" object:self];
     }
 }
 @end

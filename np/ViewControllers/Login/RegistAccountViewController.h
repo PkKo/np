@@ -21,6 +21,8 @@
     NSString *certNumFourString;
     CGPoint scrollPoint;
     NSMutableDictionary *inputAccountInfo;
+    
+    NSInteger certWrongPassCount;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;
