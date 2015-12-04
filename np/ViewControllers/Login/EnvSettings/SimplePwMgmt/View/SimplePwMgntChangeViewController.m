@@ -106,8 +106,7 @@
     
     if (!self.existingPw.isHidden) {
         
-        if (self.existingPw.text.length != PW_LENGTH ||
-            self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
+        if (self.existingPw.text.length != PW_LENGTH) {
             
             alertMessage = @"숫자 6자리를 입력해 주세요.";
             
@@ -123,6 +122,10 @@
                 
                 alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d회 오류입니다.", (int)failedTimes];
             }
+        } else if (self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
+            
+            alertMessage = @"숫자 6자리를 입력해 주세요.";
+            
         } else if (![self.myNewPw.text isEqualToString:self.myNewPwConfirm.text]) {
             
             alertMessage = @"입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";

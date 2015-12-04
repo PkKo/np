@@ -15,6 +15,9 @@
 #import "LoginSimpleVerificationViewController.h"
 #import "DBManager.h"
 
+#define ALERT_TAG_ALERT_CONFIRM 132
+#define ALERT_TAG_ALERT_DONE    133
+
 @interface EnvMgmtViewController ()
 
 @end
@@ -68,11 +71,34 @@
 -(IBAction)resetData {
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"NH스마트알림 모든 데이터 (전체, 입출금, 보관함 등)가 초기화 됩니다.\n초기화 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    alert.tag = ALERT_TAG_ALERT_CONFIRM;
     [alert show];
 }
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (alertView.tag) {
+            
+        case ALERT_TAG_ALERT_CONFIRM:
+        {
+            if (buttonIndex == 1) {
+                // remove data here
+                [self startIndicator];
+                [self performSelector:@selector(resetService) withObject:nil afterDelay:0.06];
+            }
+            break;
+        }
+            
+        case ALERT_TAG_ALERT_DONE:
+        {
+            [[[LoginUtil alloc] init] showMainPage];
+            break;
+        }
+        default:
+            break;
+    }
+    
     switch (buttonIndex) {
         case 1:
             // remove data here
@@ -110,7 +136,10 @@
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO]) {
         
         [[DBManager sharedInstance] deleteAllTransactions];
-        [[[LoginUtil alloc] init] showMainPage];
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"모든 데이터 초기화 처리가\n완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alert.tag = ALERT_TAG_ALERT_DONE;
+        [alert show];
         
     } else {
         

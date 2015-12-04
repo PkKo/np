@@ -2,7 +2,7 @@
 //  VersionInfoViewController.m
 //  np
 //
-//  Created by Infobank2 on 10/21/15.
+//  Created by Infobank2 on 10/21/15.eww
 //  Copyright © 2015 Infobank1. All rights reserved.
 //
 
@@ -26,8 +26,20 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self refreshVersionInfo];
-    [self getAppVersionFromAppStore];
+    
+    BOOL test = YES;
+    
+    if (test) {
+        [self.checkAppVersionBtn setEnabled:NO];
+        _currentVersion = @"1.0";
+        _latestVersion = _currentVersion;
+        [self.currentVersionNo setText:[NSString stringWithFormat:@"현재 버전 %@", _currentVersion]];
+        [self.latestVersionNo setText:[NSString stringWithFormat:@"최신 버전 %@", _latestVersion]];
+        
+    } else {
+        [self refreshVersionInfo];
+        [self getAppVersionFromAppStore];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
