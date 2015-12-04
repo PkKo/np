@@ -328,10 +328,10 @@
         [cell.dateLabel setFrame:CGRectMake(cell.accountLabel.frame.origin.x - cell.dateLabel.frame.size.width,
                                             cell.dateLabel.frame.origin.y, cell.dateLabel.frame.size.width, cell.dateLabel.frame.size.height)];*/
         
-        UIFont *dateFont = [UIFont boldSystemFontOfSize:13.0f];
+        UIFont *dateFont = [UIFont boldSystemFontOfSize:12.5f];
         NSMutableAttributedString *dateString = [[NSMutableAttributedString alloc] initWithString:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
         [dateString addAttribute:NSFontAttributeName value:dateFont range:NSMakeRange(0, [dateString length])];
-        UIFont *accountFont = [UIFont systemFontOfSize:13.0f];
+        UIFont *accountFont = [UIFont systemFontOfSize:12.5f];
         NSMutableAttributedString *accountString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"/ %@", [CommonUtil getMaskingNumber:[CommonUtil getAccountNumberAddDash:inboxData.nhAccountNumber]]]];
         [accountString addAttribute:NSFontAttributeName value:accountFont range:NSMakeRange(0, [accountString length])];
         NSMutableAttributedString *totalString = [[NSMutableAttributedString alloc] initWithAttributedString:dateString];
@@ -383,7 +383,7 @@
                 [cell.typeLabel sizeToFit];
                 [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
                 // 스티커 이미지
-                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_DEPOSIT_NORMAL]];
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_DEPOSIT_MODIFY]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
@@ -406,7 +406,7 @@
                 [cell.typeLabel sizeToFit];
                 [cell.typeLabel setTextColor:INCOME_STRING_COLOR];
                 // 스티커 이미지
-                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_DEPOSIT_NORMAL]];
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_DEPOSIT_CANCEL]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:INCOME_STRING_COLOR];
@@ -461,7 +461,7 @@
                 [cell.typeLabel sizeToFit];
                 [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
                 // 스티커 이미지
-                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_WITHDRAW_NORMAL]];
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_WITHDRAW_MODIFY]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];
@@ -486,7 +486,7 @@
                 [cell.typeLabel sizeToFit];
                 [cell.typeLabel setTextColor:WITHDRAW_STRING_COLOR];
                 // 스티커 이미지
-                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_WITHDRAW_NORMAL]];
+                [cell.stickerImg setImage:[CommonUtil getStickerImage:STICKER_WITHDRAW_CANCEL]];
                 // 금액
                 [cell.amountLabel setText:amount];
                 [cell.amountLabel setTextColor:WITHDRAW_STRING_COLOR];

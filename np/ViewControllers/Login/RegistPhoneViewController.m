@@ -247,6 +247,8 @@
     [phoneNumberInput setText:@""];
     [phoneAuthNumInput setText:@""];
     [reqAuthNumButton setTitle:@"인증번호 요청" forState:UIControlStateNormal];
+    [reqAuthNumButton setEnabled:YES];
+    [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
     [phoneAuthNumInput setHidden:YES];
     [bottomDescView setFrame:CGRectMake(phoneAuthNumInput.frame.origin.x,
                                         phoneAuthNumInput.frame.origin.y,
@@ -304,6 +306,8 @@
         // 인증번호 입력 대기 및 카운터 스타트
         [self authNumberTimerStart];
         [reqAuthNumButton setTitle:[NSString stringWithFormat:@"인증번호 재요청 (남은시간 %d초)", AUTH_NUMBER_TIMER_MAX] forState:UIControlStateNormal];
+        [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:208.0/255.0f green:209.0/255.0f blue:214.0/255.0f alpha:1.0f]];
+        [reqAuthNumButton setEnabled:NO];
         
         // 인증 코드 저장
         authNumber = [response objectForKey:RESPONSE_PHONE_AUTH_CODE];
@@ -411,6 +415,9 @@
         [authNumTimer invalidate];
         authNumTimer = nil;
     }
+    
+    [reqAuthNumButton setEnabled:YES];
+    [reqAuthNumButton setBackgroundColor:[UIColor colorWithRed:62.0/255.0f green:155.0/255.0f blue:233.0/255.0f alpha:1.0f]];
 }
 
 - (void)authNumberOnTime
