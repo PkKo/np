@@ -44,7 +44,7 @@
     
     if (rc == 0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"완료" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"완료" message:@"인증서 저장이 완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
         
         [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:([[self.navigationController viewControllers] count] - 3)] animated:YES];
@@ -59,8 +59,9 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"PC에서 인증서가 업로드되지 않았습니다. 다시 시도해 주십시오." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
     }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"네" otherButtonTitles:nil];
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"비밀번호가 일치하지 않습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alert show];
     }
 }

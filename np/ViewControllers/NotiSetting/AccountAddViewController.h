@@ -22,6 +22,8 @@
     
     RegistAccountAllListView *allListView;
     NSMutableArray *allAccountList;
+    
+    NSInteger certWrongPassCount;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *accountCertTab;
