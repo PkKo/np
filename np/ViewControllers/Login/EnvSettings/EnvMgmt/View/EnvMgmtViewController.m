@@ -98,17 +98,6 @@
         default:
             break;
     }
-    
-    switch (buttonIndex) {
-        case 1:
-            // remove data here
-            [self startIndicator];
-            [self performSelector:@selector(resetService) withObject:nil afterDelay:0.06];
-            
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)resetService {
