@@ -250,7 +250,7 @@
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     
     CGFloat originY = timelineTableView.frame.size.height;
-    if(timelineTableView.contentSize.height > timelineTableView.frame.size.height)
+    if(timelineTableView.contentSize.height >= timelineTableView.frame.size.height)
     {
         originY = timelineTableView.contentSize.height;
     }

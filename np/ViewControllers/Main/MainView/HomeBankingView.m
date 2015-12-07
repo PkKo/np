@@ -168,7 +168,7 @@
     [self setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [bankingListTable setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
     [refreshHeaderView setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
-    
+    [self addPullToRefreshFooter];
     [refreshFooterView setHidden:!isMoreList];
     
     isDeleteMode = NO;
@@ -393,7 +393,7 @@
 {
     LoginUtil *loginUtil = [[LoginUtil alloc] init];
     CGFloat originY = bankingListTable.frame.size.height;
-    if(bankingListTable.contentSize.height > bankingListTable.frame.size.height)
+    if(bankingListTable.contentSize.height >= bankingListTable.frame.size.height)
     {
         originY = bankingListTable.contentSize.height;
     }
