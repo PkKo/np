@@ -20,7 +20,6 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"약관보기"];
     
-//    NSString * url = @"https://218.239.251.103:39190/content/html/ef/pu/efpu0911r.html";
     NSString *url = [NSString stringWithFormat:@"%@content/html/ef/pu/efpu0911r.html", SERVER_URL];
     NSURL * nsUrl = [NSURL URLWithString:url];
     
