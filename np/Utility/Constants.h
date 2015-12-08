@@ -15,9 +15,9 @@
 #if DEV_MODE
 // 개발서버
 //#define SERVER_URL          @"https://218.239.251.103:39190/"
-#define SERVER_URL          @"https://smartdev.nonghyup.com:39190/"
+//#define SERVER_URL          @"https://smartdev.nonghyup.com:39190/"
 // 스테이징
-//#define SERVER_URL          @"https://smartdev.nonghyup.com:9190/"
+#define SERVER_URL          @"https://smartdev.nonghyup.com:9190/"
 //@"https://"
 #define PUSH_APP_ID         @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
 #define PUSH_APP_SECRET     @"8e08577a-6041-4b20-90ae-3017f9d4b5b4"
