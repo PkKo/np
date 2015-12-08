@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *mMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *mBackButton;
 @property (strong, nonatomic) IBOutlet UIView *imgTitleView;
+@property (strong, nonatomic) IBOutlet UILabel *subTitle;
 @end

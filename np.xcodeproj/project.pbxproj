@@ -34,6 +34,7 @@
 		A2D860911BD48C880003CBB6 /* WithdrawStickerSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860901BD48C880003CBB6 /* WithdrawStickerSettingView.m */; };
 		A2D860961BD4C7570003CBB6 /* DepositStickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D860951BD4C7570003CBB6 /* DepositStickerView.m */; };
 		A2D860981BD4C7620003CBB6 /* DepositStickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */; };
+		A2D909011C16C5F900D26747 /* JBroken.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D908FF1C16C5F900D26747 /* JBroken.m */; };
 		A2D90D5B1BB2303900315425 /* RegistCertMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */; };
 		A2D90D5D1BB2304900315425 /* RegistCertMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */; };
 		A2D90D601BB2489300315425 /* RegistCertPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D90D5F1BB2489300315425 /* RegistCertPassView.m */; };
@@ -708,6 +709,8 @@
 		A2D860941BD4C7570003CBB6 /* DepositStickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepositStickerView.h; sourceTree = "<group>"; };
 		A2D860951BD4C7570003CBB6 /* DepositStickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepositStickerView.m; sourceTree = "<group>"; };
 		A2D860971BD4C7620003CBB6 /* DepositStickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositStickerView.xib; sourceTree = "<group>"; };
+		A2D908FE1C16C5F900D26747 /* JBroken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBroken.h; sourceTree = "<group>"; };
+		A2D908FF1C16C5F900D26747 /* JBroken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBroken.m; sourceTree = "<group>"; };
 		A2D90D591BB2303900315425 /* RegistCertMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistCertMenuView.h; sourceTree = "<group>"; };
 		A2D90D5A1BB2303900315425 /* RegistCertMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistCertMenuView.m; sourceTree = "<group>"; };
 		A2D90D5C1BB2304900315425 /* RegistCertMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistCertMenuView.xib; sourceTree = "<group>"; };
@@ -1540,6 +1543,15 @@
 			path = NDDatAdditions;
 			sourceTree = "<group>";
 		};
+		A2D908FD1C16C5F900D26747 /* JailBroken */ = {
+			isa = PBXGroup;
+			children = (
+				A2D908FE1C16C5F900D26747 /* JBroken.h */,
+				A2D908FF1C16C5F900D26747 /* JBroken.m */,
+			);
+			path = JailBroken;
+			sourceTree = "<group>";
+		};
 		A2D90D681BB2742900315425 /* CertificateView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2352,6 +2364,7 @@
 		A2DEAE1E1B9FE6D800EDCCBA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A2D908FD1C16C5F900D26747 /* JailBroken */,
 				A2DEAE241B9FE6D800EDCCBA /* ECSlidingViewController */,
 				A2DEAE321B9FE6D800EDCCBA /* HttpRequest */,
 				A2DEAE351B9FE6D800EDCCBA /* Masonry */,
@@ -3851,6 +3864,7 @@
 			files = (
 				A2DEAE771B9FE6E600EDCCBA /* CertificateMenuViewController.m in Sources */,
 				A2E235411BAA4AF500BAEBEA /* CertPasswordChangeViewController.m in Sources */,
+				A2D909011C16C5F900D26747 /* JBroken.m in Sources */,
 				A5D50B061BD4E55900D7A2DD /* CustomerCenterViewController.m in Sources */,
 				A2D7916A1BBD0B8F00E817E7 /* HomeQuickPushTableViewCell.m in Sources */,
 				A2D653931BFEEEA300A00935 /* ServiceFunctionInfoView.m in Sources */,

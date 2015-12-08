@@ -14,5 +14,6 @@
 @synthesize mMenuButton;
 @synthesize mBackButton;
 @synthesize imgTitleView;
+@synthesize subTitle;
 
 @end

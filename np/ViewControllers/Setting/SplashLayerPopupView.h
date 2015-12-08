@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *closeDayOptionButton;
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
 @property (strong, nonatomic) IBOutlet UIImageView *contentImage;
+@property (strong, nonatomic) NSString *linkInUrl;
 @property (strong, nonatomic) NSString *linkOutUrl;
 @property (strong, nonatomic) IBOutlet UIButton *linkUrlButton;
 

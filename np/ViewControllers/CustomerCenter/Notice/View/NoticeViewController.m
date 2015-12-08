@@ -14,11 +14,14 @@
 
 @implementation NoticeViewController
 
+@synthesize isMenuButtonHidden;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"공지사항"];
+    [self.mNaviView.mMenuButton setHidden:isMenuButtonHidden];
     
     NSString * url = [NSString stringWithFormat:@"%@servlet/EFPU2010R.view", SERVER_URL];
     NSURL * nsUrl = [NSURL URLWithString:url];

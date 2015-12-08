@@ -19,6 +19,8 @@
 
 @implementation FarmerNewsViewController
 
+@synthesize isMenuButtonHidden;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self startIndicator];
@@ -26,7 +28,10 @@
     _prvSltedRow = -1;
     
     [self.mNaviView.mBackButton setHidden:NO];
-    [self.mNaviView.mTitleLabel setText:@"농민신문"];
+    [self.mNaviView.mTitleLabel setText:@"생활정보"];
+    [self.mNaviView.mMenuButton setHidden:isMenuButtonHidden];
+    [self.mNaviView.subTitle setHidden:NO];
+    
     articles = [[NSArray alloc] init];
 }
 

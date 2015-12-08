@@ -11,5 +11,5 @@
 
 @interface NoticeViewController : CommonViewController <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
+@property (assign, nonatomic) BOOL isMenuButtonHidden;
 @end

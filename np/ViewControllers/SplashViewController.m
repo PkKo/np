@@ -22,6 +22,7 @@
 #import "BannerInfo.h"
 #import "SplashLayerPopupView.h"
 #import "CertificateMenuViewController.h"
+#import "JBroken.h"
 
 @interface SplashViewController ()
 
@@ -58,6 +59,8 @@
 //    [self appVersionCheckRequest];
 //    return;
     //*
+    [[[LoginUtil alloc] init] setLogInStatus:NO];
+    
     if([CommonUtil getNetworkStatus] == NotReachable)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"네트워크에 연결되지 않았습니다.\n네트워크 상태를 확인해주세요." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -66,7 +69,16 @@
     }
     else
     {
-        [self appVersionCheckRequest];
+        if(!isDeviceJailbroken())
+        {
+            [self appVersionCheckRequest];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"고객님의 소중한 재산을 보호하기 위해 탈옥된\n스마트기기 및 앱스토어외에 블로그, 카페에서\n설치한 위변조된 앱(App)에 대해 거래를 차단\n하오니 양해해 주시기 바랍니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            [alertView setTag:90001];
+            [alertView show];
+        }
     }//*/
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
@@ -325,9 +337,14 @@
             [view.contentImage setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:layerPopupInfo.imageUrl]]]];
         }
         [view.closeDayOptionButton setTitle:[NSString stringWithFormat:@"%@일간 보지 않기", layerPopupInfo.closedayType] forState:UIControlStateNormal];
-        if(layerPopupInfo.linkOutUrl != nil && [layerPopupInfo.linkOutUrl length] > 0)
+        if([layerPopupInfo.linkType isEqualToString:@"O"] && layerPopupInfo.linkOutUrl != nil && [layerPopupInfo.linkOutUrl length] > 0)
         {
             view.linkOutUrl = layerPopupInfo.linkOutUrl;
+            [view.linkUrlButton setEnabled:YES];
+        }
+        else if ([layerPopupInfo.linkType isEqualToString:@"I"] && layerPopupInfo.linkInUrl != nil && [layerPopupInfo.linkInUrl length] > 0)
+        {
+            view.linkInUrl = layerPopupInfo.linkInUrl;
             [view.linkUrlButton setEnabled:YES];
         }
         [view setDelegate:self];
@@ -369,7 +386,6 @@
     
     if(isUser != nil && [isUser isEqualToString:@"Y"])
     {
-        [[[LoginUtil alloc] init] setLogInStatus:NO];
         // 간편보기 확인
         if([[[LoginUtil alloc] init] isUsingSimpleView])
         {
@@ -424,12 +440,20 @@
         {
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"com.nonghyup.nhsmartbanking://"]];
+            // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39190/apps/push/p.html"]];
         }
         [self getBannerInfoRequest];
     }
     else if([alertView tag] == 1101)
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+        // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
+        //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39190/apps/push/p.html"]];
+    }
+    else if([alertView tag] == 90001)
+    {
+        exit(0);
     }
     else if ([alertView tag] == 90004)
     {

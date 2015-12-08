@@ -13,5 +13,5 @@
 @interface FarmerNewsViewController : CommonViewController <UITableViewDataSource, UITableViewDelegate, ArticleTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *articleTableView;
-
+@property (assign, nonatomic) BOOL isMenuButtonHidden;
 @end

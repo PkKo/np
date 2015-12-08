@@ -7,6 +7,9 @@
 //
 
 #import "SplashLayerPopupView.h"
+#import "SplashViewController.h"
+#import "NoticeViewController.h"
+#import "FarmerNewsViewController.h"
 
 @implementation SplashLayerPopupView
 
@@ -16,6 +19,7 @@
 @synthesize closeDayOptionButton;
 @synthesize closeButton;
 @synthesize contentImage;
+@synthesize linkInUrl;
 @synthesize linkOutUrl;
 @synthesize linkUrlButton;
 
@@ -38,6 +42,22 @@
     if(linkOutUrl != nil && [linkOutUrl length] > 0)
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkOutUrl]];
+    }
+    else if(linkInUrl != nil && [linkInUrl length] > 0)
+    {
+        if([linkInUrl isEqualToString:@"N"])
+        {
+            // 공지사항
+            NoticeViewController *vc = [[NoticeViewController alloc] init];
+            [vc setIsMenuButtonHidden:YES];
+            [((SplashViewController *)delegate).navigationController pushViewController:vc animated:YES];
+        }
+        else if ([linkInUrl isEqualToString:@"F"])
+        {
+            FarmerNewsViewController *vc = [[FarmerNewsViewController alloc] init];
+            [vc setIsMenuButtonHidden:YES];
+            [((SplashViewController *)delegate).navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 @end
