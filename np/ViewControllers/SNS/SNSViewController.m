@@ -55,7 +55,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)showServiceNotReadyAlert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"서비스 준비중입니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    [alert show];
+}
+
 - (IBAction)shareOnKakaoTalk:(id)sender {
+    
+    BOOL isReady = NO;
+    
+    if (!isReady) {
+        [self showServiceNotReadyAlert];
+        return;
+    }
+    
     if ([KOAppCall canOpenKakaoTalkAppLink]) {
         
         [KOAppCall openKakaoTalkAppLink:[self kakaotalkMessage]];
@@ -88,6 +101,14 @@
 
 - (IBAction)shareOnKakaoStory:(id)sender {
     
+    
+    BOOL isReady = NO;
+    
+    if (!isReady) {
+        [self showServiceNotReadyAlert];
+        return;
+    }
+    
     if (![StoryLinkHelper canOpenStoryLink]) {
         NSLog(@"Cannot open kakao story.");
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/kakaostory/id486244601?l=en&mt=8"]];
@@ -105,7 +126,7 @@
     scrapInfo.desc          = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
     scrapInfo.type          = ScrapTypeVideo;
     
-    NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원 https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8",
+    NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원",
                          [bundle objectForInfoDictionaryKey:@"CFBundleName"],
                          [self.transactionObject formattedTransactionDate],
                          [self.transactionObject transactionAccountNumber],
@@ -134,7 +155,7 @@
     SLComposeViewController * tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     [tweetSheet setInitialText:[NSString stringWithFormat:@"[%@]\n%@",
                                 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"], _snsContent.text]];
-    [tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/nhnonghyeob-mobailkadeu-aebkadeu/id698023004?l=en&mt=8"]];
+    [tweetSheet addURL:[NSURL URLWithString:APP_STORE_APP_URL]];
     [self presentViewController:tweetSheet animated:YES completion:nil];
 }
 

@@ -43,6 +43,10 @@
 #define NH_BANK_AUTH_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getauth.jsp"
 #define NH_BANK_CERT_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"
 
+#define APP_STORE_APP_URL               @"https://itunes.apple.com/kr/app/seumateunhnonghyeobkadeu/id406473666?l=en&mt=8"
+#define APP_STORE_APP_VERSION_CHECK_URL @"http://itunes.apple.com/lookup?id=406473666"
+#define NONG_MIN_NEWS_URL               @"http://www.nongmin.com/xml/app_push/ar_xml_all.xml"
+
 /*
 *  System Versioning Preprocessor Macros
 */
@@ -128,6 +132,7 @@
 #define RESULT_SUCCESS_ZERO     @"0"
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
+#define RESULT_MESSAGE2          @"resultMessage2"
 
 #pragma mark 앱버전 체크
 // 앱 버전 체크

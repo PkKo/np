@@ -50,7 +50,7 @@
     
     CFStringEncoding encoding = (CFStringEncoding)CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingEUC_KR);//
     
-    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.nongmin.com/xml/app_push/ar_xml_all.xml"] encoding:encoding error:nil];
+    NSString * dataString = [NSString stringWithContentsOfURL:[NSURL URLWithString:NONG_MIN_NEWS_URL] encoding:encoding error:nil];
     
     NSRange  range;
     NSString * element;

@@ -27,9 +27,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    BOOL test = YES;
+    BOOL isReady = NO;
     
-    if (test) {
+    if (!isReady) {
         [self.checkAppVersionBtn setEnabled:NO];
         _currentVersion = @"1.0";
         _latestVersion = _currentVersion;
@@ -73,14 +73,14 @@
 }
 
 - (IBAction)checkAppVersion:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/kr/app/seumateunhnonghyeobkadeu/id406473666?l=en&mt=8"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_APP_URL]];
 }
 
 - (void)getAppVersionFromAppStore {
     
     [self startIndicator];
     
-    NSURL           * url       = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=406473666"];
+    NSURL           * url       = [NSURL URLWithString:APP_STORE_APP_VERSION_CHECK_URL];
     NSURLRequest    * request   = [NSURLRequest requestWithURL:url];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
