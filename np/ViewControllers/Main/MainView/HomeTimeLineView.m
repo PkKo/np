@@ -1474,7 +1474,7 @@
                     [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, TIMELINE_ETC_NOTICE_HEIGHT)];
                     [cell.depthImage setHidden:NO];
                     // 타이틀
-                    [cell.titleLabel setText:@"공지사항"];
+                    [cell.titleLabel setText:@"농협알림"];
                     // 내용
                     [cell.contentLabel setNumberOfLines:1];
                     [cell.contentLabel setText:inboxData.text];
