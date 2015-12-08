@@ -95,6 +95,17 @@
     [alert show];
 }
 
+- (void)showForceToDeactivateALertWithMessage:(NSString *)msg {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내"
+                                                     message:msg
+                                                    delegate:self
+                                           cancelButtonTitle:@"확인"
+                                           otherButtonTitles:nil];
+    alert.tag = SERVICE_DEACTIVATION_WILL_DO_REG_F;
+    [alert show];
+}
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     switch (alertView.tag) {
@@ -113,6 +124,13 @@
             
             break;
         }
+        case SERVICE_DEACTIVATION_WILL_DO_REG_F:
+        {
+            [[[LoginUtil alloc] init] removeAllData];
+            [(AppDelegate *)[UIApplication sharedApplication].delegate restartApplication];
+            break;
+        }
+            
         default:
             break;
     }

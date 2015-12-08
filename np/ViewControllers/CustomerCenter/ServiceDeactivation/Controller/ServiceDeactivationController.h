@@ -10,10 +10,12 @@
 
 #define IS_REGISTERED_YES   @"Y"
 #define IS_REGISTERED_NO    @"N"
+#define IS_REGISTERED_F     @"F"
 
 typedef enum AlertTag {
     SERVICE_DEACTIVATION_DONE_EXIT,
-    SERVICE_DEACTIVATION_WILL_DO
+    SERVICE_DEACTIVATION_WILL_DO,
+    SERVICE_DEACTIVATION_WILL_DO_REG_F
 } AlertTag;
 
 
@@ -24,4 +26,5 @@ typedef enum AlertTag {
 
 #pragma mark - Alert
 - (void)showForceToDeactivateAlert;
+- (void)showForceToDeactivateALertWithMessage:(NSString *)msg;
 @end

@@ -132,6 +132,7 @@
 #define RESULT_SUCCESS_ZERO     @"0"
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
+#define RESULT_MESSAGE2          @"resultMessage2"
 
 #pragma mark 앱버전 체크
 // 앱 버전 체크

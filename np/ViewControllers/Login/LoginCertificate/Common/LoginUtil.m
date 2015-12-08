@@ -96,7 +96,6 @@
 }
 
 - (NSString *)getEncryptedPassword:(NSString *)pw {
-//    return [CommonUtil encrypt3DESWithKey:pw key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
     return [CommonUtil hashSHA256EncryptString:pw withKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
 }
 

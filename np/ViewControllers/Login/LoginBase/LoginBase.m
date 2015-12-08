@@ -41,6 +41,14 @@
             return;
         }
         
+        if ([isRegistered isEqualToString:IS_REGISTERED_F]) {
+            
+            NSString *message = (NSString *)response[RESULT_MESSAGE2];
+            
+            [[ServiceDeactivationController sharedInstance] showForceToDeactivateALertWithMessage:message];
+            return;
+        }
+        
         LoginUtil * util        = [[LoginUtil alloc] init];
         [util saveAllAccountsAndAllTransAccounts:response];
         
