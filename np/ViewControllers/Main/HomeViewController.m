@@ -62,14 +62,17 @@
 {
     [super viewWillDisappear:animated];
     
-    [IBInbox loadWithListener:nil];
+    if(((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController).startPageIndex == viewType)
+    {
+        [IBInbox loadWithListener:nil];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [IBInbox loadWithListener:self];
+//    [IBInbox loadWithListener:self];
     [self queryInitData];
 }
 
@@ -152,6 +155,7 @@
     if(reqData != nil)
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+        [IBInbox loadWithListener:self];
         [IBInbox reqQueryAccountInboxListWithSize:reqData];
     }
     else
@@ -871,9 +875,9 @@
 {
     NSLog(@"%s", __FUNCTION__);
     [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) stopIndicator];
-    
+    /*
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"데이터 가져오기에 실패했습니다.\n잠시 후 다시 시도해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-    [alertView show];
+    [alertView show];*/
     [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 

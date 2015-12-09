@@ -1118,15 +1118,19 @@
                 [numFomatter setNumberStyle:NSNumberFormatterDecimalStyle];
                 NSString *amount = @"";
                 NSString *balance = @"";
+                amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
+                /*
                 if(inboxData.amount >= 0)
                 {
                     amount = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.amount]];
-                }
+                }*/
                 
+                balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
+                /*
                 if(inboxData.balance >= 0)
                 {
-                    balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:inboxData.balance]];
-                }
+                    balance = [numFomatter stringFromNumber:[NSNumber numberWithInteger:-1000]];
+                }*/
                 
                 // 금액 String size
                 CGSize amountSize = [CommonUtil getStringFrameSize:amount fontSize:AMOUNT_FONT_SIZE bold:YES];

@@ -9,7 +9,7 @@
 #import "BannerInfoView.h"
 #import "CustomerCenterUtil.h"
 
-#define SCROLL_TIMER_MAX        3
+#define SCROLL_TIMER_MAX        4
 #define SCROLL_TIMER_INTERVAL   1
 
 @implementation BannerInfoView

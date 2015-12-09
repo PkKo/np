@@ -524,7 +524,7 @@
         NHInboxMessageData *inboxData = [noticeList objectAtIndex:indexPath.row];
         
         // 푸시 시간
-        [cell.noticeDateLabel setText:[CommonUtil getTimeString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
+        [cell.noticeDateLabel setText:[CommonUtil getQuickViewDateString:[NSDate dateWithTimeIntervalSince1970:(inboxData.regDate/1000)]]];
         // 공지 타이틀
         [cell.noticeTitleLabel setText:inboxData.title];
         

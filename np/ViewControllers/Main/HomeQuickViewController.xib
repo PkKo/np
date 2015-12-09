@@ -107,12 +107,12 @@
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" id="Uxu-x6-9Zw" customClass="CircleView">
-                                            <rect key="frame" x="0.0" y="18" width="34" height="18"/>
+                                            <rect key="frame" x="0.0" y="16" width="34" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" id="Nfa-VV-GlG">
-                                            <rect key="frame" x="0.0" y="18" width="34" height="18"/>
+                                            <rect key="frame" x="0.0" y="16" width="34" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
