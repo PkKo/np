@@ -424,7 +424,7 @@
             {
                 nickNameDic = [[NSMutableDictionary alloc] init];
             }
-            [nickNameDic setObject:optionView.accountNicknameInput.text forKey:optionView.accountNumberLabel.text];
+            [nickNameDic setObject:optionView.accountNicknameInput.text forKey:[optionView.accountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]];
 
             [[NSUserDefaults standardUserDefaults] setObject:nickNameDic forKey:ACCOUNT_NICKNAME_DICTIONARY];
         }

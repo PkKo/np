@@ -110,6 +110,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "NHSmartPush"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

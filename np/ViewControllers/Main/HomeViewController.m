@@ -87,13 +87,85 @@
 
 - (void)queryInitData
 {
+    /*
+    필수 설정값
+    //
+    // 정렬 순서
+    //    reqData.ascending;
+    // 알림받는 계좌번호 리스트
+    //    reqData.accountNumberList;
+    // 입출금 구분
+    //    reqData.queryType;*/
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    reqData.ascending = YES;
+    reqData.size = TIMELINE_LOAD_COUNT;
+    
+    switch (viewType)
+    {
+        case TIMELINE:
+        {
+            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+            reqData.queryType = @"ALL";
+            break;
+        }
+        case BANKING:
+        {
+            reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
+            reqData.queryType = @"1,2,3,4,5,6";
+            break;
+        }
+        case OTHER:
+        {
+            reqData.accountNumberList = [NSArray array];
+            if(etcTimeLineView != nil)
+            {
+                if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ALL])
+                {
+                    reqData.queryType = @"ETC";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ECOMMERCE])
+                {
+                    reqData.queryType = @"B";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_EXCHANGE])
+                {
+                    reqData.queryType = @"A";
+                }
+                else if([etcTimeLineView.serviceSelectLabel.text isEqualToString:SERVICE_TYPE_ETC])
+                {
+                    reqData.queryType = @"B,Z";
+                }
+            }
+            else
+            {
+                reqData.queryType = @"ETC";
+            }
+            break;
+        }
+        default:
+        {
+            reqData = nil;
+            break;
+        }
+    }
+    
+    if(reqData != nil)
+    {
+        [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
+        [IBInbox reqQueryAccountInboxListWithSize:reqData];
+    }
+    else
+    {
+        [self makeTimelineView];
+    }
+    /*
     if([[[LoginUtil alloc] init] getAllAccounts] != nil && [[[[LoginUtil alloc] init] getAllAccounts] count] > 0)
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
-        
-        /*
+     
+        ///
          필수 설정값
-         */
+         //
         // 정렬 순서
         //    reqData.ascending;
         // 알림받는 계좌번호 리스트
@@ -200,7 +272,7 @@
         {
             [self makeTimelineView];
         }
-    }
+    }*/
 }
 
 - (void)didReceiveMemoryWarning

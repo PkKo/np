@@ -439,17 +439,17 @@
         if(buttonIndex == BUTTON_INDEX_OK)
         {
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"com.nonghyup.nhsmartbanking://"]];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"com.nonghyup.nhsmartbanking://"]];
             // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
-//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39190/apps/push/p.html"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
         }
         [self getBannerInfoRequest];
     }
     else if([alertView tag] == 1101)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
         // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
-        //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39190/apps/push/p.html"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
     }
     else if([alertView tag] == 90001)
     {
