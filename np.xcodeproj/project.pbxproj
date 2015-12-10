@@ -3350,6 +3350,11 @@
 					A2DEADE41B9FE68600EDCCBA = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = YAFW638TZE;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					A2DEADFD1B9FE68600EDCCBA = {
 						CreatedOnToolsVersion = 6.4;
