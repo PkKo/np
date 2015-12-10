@@ -58,6 +58,8 @@
     [pageViewController didMoveToParentViewController:self];
     
     [self tabButtonChange:startPageIndex];
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)didReceiveMemoryWarning

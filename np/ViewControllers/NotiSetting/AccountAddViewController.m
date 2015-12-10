@@ -119,6 +119,7 @@
         [[menuView getCertFromPCBtn] addTarget:self action:@selector(moveToGetCertFromPcView) forControlEvents:UIControlEventTouchUpInside];
         [[menuView getCertFromPhoneBtn] addTarget:self action:@selector(moveToGetCertFromPhoneView) forControlEvents:UIControlEventTouchUpInside];
         [certMenuContentView addSubview:menuView];
+        [nextButton setHidden:NO];
         [nextButton setEnabled:YES];
         [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
     }
@@ -138,27 +139,31 @@
 {
     // 1-3. 공인인증서 가져오기 실행
     CertificateRoamingViewController *vc = [[CertificateRoamingViewController alloc] init];
-    UIView *view = vc.view;
-    [view setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
-    [vc.mainView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+//    UIView *view = vc.view;
+//    [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [vc viewDidLoad];
+    [vc.scrollView setFrame:CGRectMake(0, 10, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+    [vc.scrollView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
     [vc.nextButton setHidden:YES];
     [nextButton setTag:10001];
-    [certMenuContentView addSubview:vc.mainView];
+    [certMenuContentView addSubview:vc.scrollView];
 }
 
 - (void)moveToGetCertFromPhoneView
 {
     CertificateRoamingPhoneViewController *vc = [[CertificateRoamingPhoneViewController alloc] init];
-    UIView *view = vc.view;
-    [view setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
-    [vc.mainView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+//    UIView *view = vc.view;
+//    [view setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+    [vc viewDidLoad];
+    [vc.scrollView setFrame:CGRectMake(0, 10, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+    [vc.scrollView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
     [vc.certNumOne setDelegate:self];
     [vc.certNumTwo setDelegate:self];
     [vc.certNumThree setDelegate:self];
     [vc.certNumFour setDelegate:self];
     [vc.nextButton setHidden:YES];
     [nextButton setTag:10002];
-    [certMenuContentView addSubview:vc.mainView];
+    [certMenuContentView addSubview:vc.scrollView];
 }
 
 - (void)checkCertUploaded
@@ -228,6 +233,7 @@
     // 1-3-1. 공인인증서 비밀번호 확인 뷰
     RegistCertPassView *passView = [RegistCertPassView view];
     [passView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
+    [passView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
     [certMenuContentView addSubview:passView];
     
     [passView.certPasswordInput setDelegate:self];
@@ -694,6 +700,29 @@
         {
             [self certInfoRequest:plainText];
         }
+    }
+}
+
+#pragma mark - AlertView Delegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch ([alertView tag])
+    {
+        case 10001: // 공인인증서 비밀번호 입력
+        {
+            [self moveToCertPassView];
+            break;
+        }
+        case 10002: // 공인인증서 목록
+        {
+            self.currentTextField = nil;
+            [self moveToCertListView];
+            break;
+        }
+            
+        default:
+            break;
     }
 }
 @end

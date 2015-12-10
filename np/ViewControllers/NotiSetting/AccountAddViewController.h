@@ -10,7 +10,7 @@
 #import "RegistCertListView.h"
 #import "RegistAccountAllListView.h"
 
-@interface AccountAddViewController : CommonViewController<UITextFieldDelegate, RegistCertListDelegate>
+@interface AccountAddViewController : CommonViewController<UITextFieldDelegate, RegistCertListDelegate, UIAlertViewDelegate>
 {
     BOOL isCertRegist;
     NSArray *certControllArray;

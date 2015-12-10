@@ -62,7 +62,14 @@
 {
     [super viewWillDisappear:animated];
     
-    if(((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController).startPageIndex == viewType)
+    if(((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController != nil &&
+       ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController != nil &&
+       [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController isKindOfClass:[MainPageViewController class]] &&
+       ((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController).startPageIndex == viewType)
+    {
+        [IBInbox loadWithListener:nil];
+    }
+    else if (![((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController isKindOfClass:[MainPageViewController class]])
     {
         [IBInbox loadWithListener:nil];
     }

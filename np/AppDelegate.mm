@@ -116,6 +116,9 @@
     // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달
     ////////////////////////////////////////////////////////////////////////////////////////////////
     [IBPush apnsHandleRemoteNotification:userInfo];
+    
+    NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber++;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeCount];
 }
 
 - (void)timeoutError:(NSDictionary *)response

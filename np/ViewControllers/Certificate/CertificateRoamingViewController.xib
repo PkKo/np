@@ -36,7 +36,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" id="jih-lf-i6Q" customClass="StrokeView">
                                     <rect key="frame" x="18" y="18" width="284" height="103"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="FFC-0P-URf">
                                             <rect key="frame" x="0.0" y="15" width="284" height="18"/>
@@ -82,7 +82,7 @@
                                 </view>
                                 <view contentMode="scaleToFill" id="l04-zO-XWJ">
                                     <rect key="frame" x="18" y="130" width="284" height="167"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PC에서 인증서 가져오기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dje-Zl-uGO">
                                             <rect key="frame" x="18" y="0.0" width="248" height="42"/>
@@ -120,11 +120,9 @@
                                             <color key="textColor" red="0.69019607839999997" green="0.69411764710000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" id="nmo-NX-2cq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PC에서 농협 인터넷뱅킹 https://banking.nonghyup.com에 접속합니다." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" id="nmo-NX-2cq">
                                             <rect key="frame" x="55" y="55" width="220" height="27"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <string key="text">PC에서 농협 인터넷뱅킹
-http://banking.nonghyup.com에 접속합니다.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
