@@ -109,10 +109,10 @@
     NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, userInfo);
     
     NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
-    if(badgeCount < 0)
-    {
-        badgeCount = 0;
-    }
+//    if(badgeCount < 0)
+//    {
+//        badgeCount = 0;
+//    }
     badgeCount++;
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeCount];
     
@@ -134,10 +134,10 @@
     NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, userInfo);
     
     NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
-    if(badgeCount < 0)
-    {
-        badgeCount = 0;
-    }
+//    if(badgeCount < 0)
+//    {
+//        badgeCount = 0;
+//    }
     badgeCount++;
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeCount];
     
