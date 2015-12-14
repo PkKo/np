@@ -22,6 +22,7 @@
 @property (assign, nonatomic) NSInteger unreadCountEtc;
 @property (strong, nonatomic) UIImage *nongminBannerImg;
 @property (strong, nonatomic) UIImage *noticeBannerImg;
+@property (strong, nonatomic) NSMutableArray *tempAllAccountList;
 
 - (void)timeoutError:(NSDictionary *)response;
 - (void)restartApplication;

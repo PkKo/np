@@ -209,7 +209,7 @@
     }
     else
     {
-        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"mobile_number"];
+        [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"mobile_number"];
     }
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedType] forKey:REQUEST_NOTI_OPTION_EVENT_TYPE];
     [reqBody setObject:[NSNumber numberWithInt:optionView.selectedAmount] forKey:REQUEST_NOTI_OPTION_PRICE];
@@ -431,11 +431,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(self.currentTextField == optionView.accountNicknameInput)
+    if(self.currentTextField != optionView.accountNicknameInput)
     {
         if(![string isEqualToString:@""])
         {
-            if(range.location == [textField tag])
+            NSString *replacedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+            replacedString = [replacedString precomposedStringWithCompatibilityMapping];
+            if(replacedString.length <= [textField tag])
+            {
+                return YES;
+            }
+            else
             {
                 return NO;
             }

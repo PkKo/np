@@ -240,7 +240,7 @@
     NSString * loginType        = @"PIN";
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
-    NSString * crmMobile    = [prefs stringForKey:RESPONSE_CERT_CRM_MOBILE];;
+    NSString * crmMobile    = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];;
     
     [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
     [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];

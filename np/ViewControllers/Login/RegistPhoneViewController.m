@@ -57,7 +57,7 @@
     NSString *carrierListPath = [[NSBundle mainBundle] pathForResource:@"CarrierList" ofType:@"plist"];
     carrierListArray = [[NSArray alloc] initWithContentsOfFile:carrierListPath];
     
-    crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
+    crmPhoneNumber = [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
     if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
     {
         [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];
@@ -104,7 +104,7 @@
                                             bottomDescView.frame.size.height)];
     }
     
-    crmPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE];
+    crmPhoneNumber = [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
     if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
     {
         [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];
@@ -145,6 +145,7 @@
  */
 - (IBAction)requestAuthNumber:(id)sender
 {
+#if !DEV_MODE
     if([[phoneNumberInput text] length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"휴대폰번호를 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -167,7 +168,7 @@
         [alertView show];
         return;
     }
-    
+#endif
     [self authNumberRequest];
 }
 
@@ -177,7 +178,7 @@
 - (IBAction)nextViewClick:(id)sender
 {
     [self authNumberTimerStop];
-    
+#if !DEV_MODE
     // 휴대폰 번호 입력 체크
     if([[phoneNumberInput text] length] == 0)
     {
@@ -225,6 +226,8 @@
         [alertView show];
         return;
     }
+    
+#endif
     //*
     if(isRegisteredUser)
     {

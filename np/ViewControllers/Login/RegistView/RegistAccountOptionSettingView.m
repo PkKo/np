@@ -372,6 +372,11 @@
 {
     [notiAutoText setText:[notiAutoList objectAtIndex:notiAutoFlag - 1]];
     [notiAutoText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
+    
+    if(accountType == FUND || accountType == TRUST)
+    {
+        [notiAutoText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+    }
 }
 
 /**
@@ -890,9 +895,13 @@
 }
 
 #pragma mark - TextField
-- (IBAction)validateNicknameTextEditing:(UITextField *)textField {
+- (IBAction)validateNicknameTextEditing:(UITextField *)textField
+{
+    NSLog(@"%s, text = %@, %d", __FUNCTION__, textField.text, (int)textField.text.length);
+    NSLog(@"%s, text = %@, %d", __FUNCTION__, [textField.text precomposedStringWithCanonicalMapping], (int)[textField.text precomposedStringWithCanonicalMapping].length);
     int maxLength = 5;
-    if ([[textField text] length] >= maxLength) {
+    if ([[textField text] length] > maxLength)
+    {
         [textField setText:[[textField text] substringToIndex:maxLength]];
     }
 }

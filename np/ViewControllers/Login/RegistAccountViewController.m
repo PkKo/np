@@ -453,7 +453,7 @@
             [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
             [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
             [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
-            [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
+            [requestBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
             [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
             
             NSString *bodyString = [CommonUtil getBodyString:requestBody];
@@ -517,18 +517,25 @@
             [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_CERT forKey:REGIST_TYPE];
             if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
             {
-                NSArray *allAccountList = [NSArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
-                [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
+                ((AppDelegate *)[UIApplication sharedApplication].delegate).tempAllAccountList = [NSMutableArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
+                /*
+                NSMutableArray *encryptedAccountList = [[NSMutableArray alloc] init];
+                for(NSDictionary *accountInfo in allAccountList)
+                {
+                    NSString *account = [accountInfo objectForKey:@"EAAPAL00R0_OUT_SUB.acno"];
+                    [encryptedAccountList addObject:[CommonUtil encrypt3DESWithKey:account key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
+                }*/
+//                [[NSUserDefaults standardUserDefaults] setObject:allAccountList forKey:RESPONSE_CERT_ACCOUNT_LIST];
             }
             NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
             //        NSString *umsId = [response objectForKey:RESPONSE_CERT_UMS_USER_ID];
             //        NSString *ibId = [response objectForKey:RESPONSE_CERT_IB_USER_ID];
-            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+//            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
             NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
             
-            [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
-            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
-            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:crmMobile key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_CRM_MOBILE];
+            //            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:userName key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_USER_NAME];
             
             NSInteger userCount = [[response objectForKey:@"user_count"] integerValue];
             
@@ -598,7 +605,7 @@
     
     if(self.isSelfIdentified)
     {
-        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
+        [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
         
         NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
         
@@ -645,7 +652,7 @@
         else
         {
             NSString *crmMobile = [response objectForKey:RESPONSE_CERT_CRM_MOBILE];
-            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
+//            NSString *rlno = [response objectForKey:RESPONSE_CERT_RLNO];
             NSString *userName = [response objectForKey:RESPONSE_CERT_USER_NAME];
             
             if(![[inputAccountInfo objectForKey:@"mobile_number"] isEqualToString:crmMobile])
@@ -659,10 +666,10 @@
             // 계좌번호로 인증한걸로 저장한다.
             [[NSUserDefaults standardUserDefaults] setObject:REGIST_TYPE_ACCOUNT forKey:REGIST_TYPE];
             
-            [[NSUserDefaults standardUserDefaults] setObject:tempAccountNum forKey:RESPONSE_CERT_ACCOUNT_LIST];
-            [[NSUserDefaults standardUserDefaults] setObject:crmMobile forKey:RESPONSE_CERT_CRM_MOBILE];
-            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
-            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:RESPONSE_CERT_USER_NAME];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:tempAccountNum key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_ACCOUNT_LIST];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:crmMobile key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_CRM_MOBILE];
+//            [[NSUserDefaults standardUserDefaults] setObject:rlno forKey:RESPONSE_CERT_RLNO];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:userName key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_USER_NAME];
             
             NSInteger userCount = [[response objectForKey:@"user_count"] integerValue];
             
@@ -784,7 +791,12 @@
         {
             if(![string isEqualToString:@""])
             {
-                if(range.location == [textField tag])
+                NSString *replacedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+                if(replacedString.length <= [textField tag])
+                {
+                    return YES;
+                }
+                else
                 {
                     return NO;
                 }

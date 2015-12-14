@@ -38,14 +38,15 @@
         isCertMode = YES;
         // 전 계좌 조회 루틴 실행
 //        [self allAccountListRequest];
-        allAccountList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+//        allAccountList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST]];
+        allAccountList = ((AppDelegate *)[UIApplication sharedApplication].delegate).tempAllAccountList;
         [self makeAllAccountListView];
     }
     else if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
     {
         // 계좌인증 - 입력한 계좌 혹은 다른 계좌번호를 입력받을 수 있도록 뷰 구성
         isCertMode = NO;
-        certifiedAccountNumber = [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST];
+        certifiedAccountNumber = [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         [self makeInputAccountView];
     }
     
@@ -70,7 +71,7 @@
 - (void)makeAllAccountListView
 {
     allListView = [RegistAccountAllListView view];
-    [allListView initAccountList:allAccountList customerName:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]];
+    [allListView initAccountList:allAccountList customerName:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
     [allListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [contentView addSubview:allListView];
     [nextButton setTag:0];
@@ -189,7 +190,7 @@
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
     [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:inputAccountView.addNewAccountBirthInput.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] forKey:@"crmMobile"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
     
@@ -227,7 +228,12 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
+    /*
+#if !DEV_MODE
     [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_RLNO] forKey:REQUEST_NOTI_OPTION_SEARCH_RLNO];
+#else
+    [reqBody setObject:@"9805282169468" forKey:REQUEST_NOTI_OPTION_SEARCH_RLNO];
+#endif*/
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SEARCH];
@@ -408,10 +414,10 @@
         {
             [[NSUserDefaults standardUserDefaults] setObject:umsId forKey:RESPONSE_CERT_UMS_USER_ID];
 //            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
-            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE]];
+            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
             
             NSMutableDictionary *additionalInfo = [[NSMutableDictionary alloc] init];
-            [additionalInfo setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] forKey:@"TAG1"];
+            [additionalInfo setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"TAG1"];
             [IBNgmService setAdditionalInfo:additionalInfo];
         }
         
@@ -498,11 +504,19 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(![string isEqualToString:@""])
+    if(self.currentTextField != optionView.accountNicknameInput)
     {
-        if(range.location == [textField tag])
+        if(![string isEqualToString:@""])
         {
-            return NO;
+            NSString *replacedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+            if(replacedString.length <= [textField tag])
+            {
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
         }
     }
     
