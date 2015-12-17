@@ -386,6 +386,31 @@
     
     if(isUser != nil && [isUser isEqualToString:@"Y"])
     {
+        // 전체 계좌 리스트 저장된 내용 삭제
+        if([[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_ACCOUNT_LIST])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:RESPONSE_CERT_ACCOUNT_LIST];
+        }
+        
+        // 주민번호 저장된 내용 삭제
+        if([[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_RLNO])
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:RESPONSE_CERT_RLNO];
+        }
+        
+        //휴대폰 번호, 이름 암호화
+        if([[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] != nil && [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] == nil)
+        {
+            NSString *encryptPhoneNumber = [CommonUtil encrypt3DESWithKey:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [[NSUserDefaults standardUserDefaults] setObject:encryptPhoneNumber forKey:RESPONSE_CERT_CRM_MOBILE];
+        }
+        
+        if([[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] != nil && [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] == nil)
+        {
+            NSString *encryptName = [CommonUtil encrypt3DESWithKey:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [[NSUserDefaults standardUserDefaults] setObject:encryptName forKey:RESPONSE_CERT_USER_NAME];
+        }
+        
         // 간편보기 확인
         if([[[LoginUtil alloc] init] isUsingSimpleView])
         {

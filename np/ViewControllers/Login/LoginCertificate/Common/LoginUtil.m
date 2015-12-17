@@ -266,13 +266,13 @@
             
             NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
             if (account && ![account isEqualToString:@""]) {
-                [accountNumbers addObject:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account]];
+                [accountNumbers addObject:[CommonUtil encrypt3DESWithKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
                 
                 // 입출금 계좌
                 NSString * accountType = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_type"]);
                 
                 if ([accountType isEqualToString:@"1"]) { // 1:입출금 계좌
-                    [transAccountNumbers addObject:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account]];
+                    [transAccountNumbers addObject:[CommonUtil encrypt3DESWithKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
                 }
             }
         }
@@ -282,9 +282,24 @@
     [self saveAllAccounts:[accountNumbers copy]];
 }
 
-- (NSArray *)getAllAccounts {
+- (NSArray *)getAllAccounts
+{
+    NSArray *allAccounts = [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_ACCOUNT];
+    NSMutableArray *decryptedAccounts = [[NSMutableArray alloc] init];
+    for(NSString *account in allAccounts)
+    {
+        NSString *decryptedAccountNumber = [CommonUtil decrypt3DES:account decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        if(decryptedAccountNumber != nil)
+        {
+            [decryptedAccounts addObject:decryptedAccountNumber];
+        }
+        else
+        {
+            [decryptedAccounts addObject:account];
+        }
+    }
     
-    return [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_ACCOUNT];
+    return decryptedAccounts;
 }
 
 - (void)saveAllAccounts:(NSArray *)allAccounts {
@@ -292,9 +307,24 @@
     [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_ACCOUNT];
 }
 
-- (NSArray *)getAllTransAccounts {
+- (NSArray *)getAllTransAccounts
+{
+    NSArray *allAccounts = [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_TRANS_ACCOUNT];
+    NSMutableArray *decryptedAccounts = [[NSMutableArray alloc] init];
+    for(NSString *account in allAccounts)
+    {
+        NSString *decryptedAccountNumber = [CommonUtil decrypt3DES:account decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        if(decryptedAccountNumber != nil)
+        {
+            [decryptedAccounts addObject:decryptedAccountNumber];
+        }
+        else
+        {
+            [decryptedAccounts addObject:account];
+        }
+    }
     
-    return [[NSUserDefaults standardUserDefaults] arrayForKey:PREF_KEY_ALL_TRANS_ACCOUNT];
+    return decryptedAccounts;
 }
 
 - (void)saveAllTransAccounts:(NSArray *)allAccounts {
