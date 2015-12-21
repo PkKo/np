@@ -33,6 +33,7 @@
 
 @interface LoginSettingsViewController () {
     LoginMethod selectedLoginMethod;
+    LoginMethod selectedPINPATOnly;
     /*
      NSString * originalPAT;
      NSString * originalPIN;
@@ -49,6 +50,7 @@
     [self.mNaviView.mBackButton setHidden:[self isRegistCompleteViewControllerItsParent]];
     [self.mNaviView.mTitleLabel setText:@"로그인 설정"];
     
+    selectedPINPATOnly  = LOGIN_BY_NONE;
     selectedLoginMethod = LOGIN_BY_NONE;
     [self updateUI];
     
@@ -106,6 +108,7 @@
 - (IBAction)selectSimpleLogin:(id)sender {
     
     LoginUtil * util    = [[LoginUtil alloc] init];
+    selectedPINPATOnly  = LOGIN_BY_SIMPLEPW;
     
     if ([util existSimplePassword]) {
         
@@ -118,13 +121,15 @@
 }
 
 - (IBAction)gotoSimpleLoginMgmt {
+    selectedPINPATOnly  = LOGIN_BY_SIMPLEPW;
     [[[LoginUtil alloc] init] gotoSimpleLoginMgmt:self.navigationController animated:YES];
 }
 
 #pragma mark - Pattern Login
 - (IBAction)selectPatternLogin {
     
-    LoginUtil * util        = [[LoginUtil alloc] init];
+    LoginUtil * util    = [[LoginUtil alloc] init];
+    selectedPINPATOnly  = LOGIN_BY_PATTERN;
     
     if ([util existPatternPassword]) {
         
@@ -137,6 +142,7 @@
 }
 
 - (IBAction)gotoPatternLoginMgmt {
+    selectedPINPATOnly  = LOGIN_BY_PATTERN;
     [[[LoginUtil alloc] init] gotoPatternLoginMgmt:self.navigationController animated:YES];
 }
 
@@ -276,17 +282,16 @@
     }
     
     // automatically select PIN/PAT login if PIN/PAT is reset.
-    
-    //if (simplePw && ![simplePw isEqualToString:originalPIN]) {
-    if ([util existSimplePassword]) {
+    if ([util existSimplePassword] && (selectedPINPATOnly == LOGIN_BY_SIMPLEPW)) {
         
         [self selectLoginBy:LOGIN_BY_SIMPLEPW];
         
-        //} else if (patternPw && ![patternPw isEqualToString:originalPAT]) {
-    } else if ([util existPatternPassword]) {
+    } else if ([util existPatternPassword] && (selectedPINPATOnly == LOGIN_BY_PATTERN)) {
         
         [self selectLoginBy:LOGIN_BY_PATTERN];
     }
+    
+    selectedPINPATOnly = LOGIN_BY_NONE;
 }
 
 - (void)selectLoginBy:(LoginMethod)loginMethod {
