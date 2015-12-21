@@ -36,7 +36,7 @@
     _isRegistered = isRegistered;
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
-    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+    NSString * user_id      = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_SERVICE_DEACTIVATION];
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];

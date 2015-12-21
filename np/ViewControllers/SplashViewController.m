@@ -411,6 +411,12 @@
             [[NSUserDefaults standardUserDefaults] setObject:encryptName forKey:RESPONSE_CERT_USER_NAME];
         }
         
+        if([[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] != nil && [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] == nil)
+        {
+            NSString *encryptUserId = [CommonUtil encrypt3DESWithKey:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [[NSUserDefaults standardUserDefaults] setObject:encryptUserId forKey:RESPONSE_CERT_UMS_USER_ID];
+        }
+        
         // 간편보기 확인
         if([[[LoginUtil alloc] init] isUsingSimpleView])
         {

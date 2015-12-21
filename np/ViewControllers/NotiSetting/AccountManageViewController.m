@@ -53,7 +53,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_REGIST_ACCOUNT_LIST];
     

@@ -413,7 +413,7 @@
         NSString *umsId = [response objectForKey:@"user_id"];
         if(umsId != nil)
         {
-            [[NSUserDefaults standardUserDefaults] setObject:umsId forKey:RESPONSE_CERT_UMS_USER_ID];
+            [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:umsId key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_UMS_USER_ID];
 //            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
             [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
             

@@ -281,6 +281,15 @@
         [amountSelectText setTextColor:CIRCLE_BACKGROUND_COLOR_SELECTED];
         [amountSelectText setText:[amountList objectAtIndex:selectedAmount - 1]];
     }
+    
+    if(accountType == EXCHANGE)
+    {
+        [amountNoLimitImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [amountNoLimitText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [amountSelectImg setBackgroundColor:CIRCLE_BACKGROUND_COLOR_UNSELECTED];
+        [amountSelectText setTextColor:CIRCLE_TEXT_COLOR_UNSELECTED];
+        [amountSelectText setText:[amountList objectAtIndex:selectedAmount]];
+    }
 }
 
 /**

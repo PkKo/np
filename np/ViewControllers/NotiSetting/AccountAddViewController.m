@@ -340,7 +340,7 @@
         [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
         [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
         [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
-        [requestBody setObject:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+        [requestBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
         [requestBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:REQUEST_CERT_CRM_MOBILE];
         
         NSString *bodyString = [CommonUtil getBodyString:requestBody];
@@ -426,7 +426,7 @@
     [reqBody setObject:accountPasswordField.text forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:birthdayInputField.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:REQUEST_CERT_CRM_MOBILE];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT_VERIFY];
     

@@ -15,7 +15,7 @@
 - (void)validateLoginAccount:(NSString *)accountNo password:(NSString *)pw birthday:(NSString *)birthday ofViewController:(UIViewController *)viewController action:(SEL)action {
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
-    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+    NSString * user_id      = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
     NSString * crmMobile    = [LoginUtil getDecryptedCrmMobile];
     
     NSString * account_number   = accountNo;

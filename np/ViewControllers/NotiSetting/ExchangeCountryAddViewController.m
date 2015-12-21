@@ -151,7 +151,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CURRENCY_COUNTRY_OPION];
@@ -188,7 +188,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
@@ -228,7 +228,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodOneIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
@@ -264,7 +264,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     
@@ -304,7 +304,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     

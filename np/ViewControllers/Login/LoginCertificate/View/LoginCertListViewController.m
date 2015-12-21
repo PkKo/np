@@ -148,7 +148,7 @@
         NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
         
         NSString * strTbs       = @"abc"; //서명할 원문
-        NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
+        NSString * user_id      = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
         NSString * crmMobile    = [LoginUtil getDecryptedCrmMobile];
         
         [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];

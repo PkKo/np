@@ -87,7 +87,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SEARCH];
@@ -202,7 +202,7 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     
     [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
     {
         [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];
@@ -310,7 +310,7 @@
     [self startIndicator];
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
-    [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
     [reqBody setObject:PUSH_APP_ID forKey:@"app_id"];
     
