@@ -334,7 +334,7 @@
         // 전자서명 API 호출
         NSString *sig = [CommonUtil getURLEncodedString:[[CertManager sharedInstance] getSignature]];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT];
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT_VERIFY];
         
         NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
         [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
@@ -428,7 +428,7 @@
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_CRM_MOBILE];
     [reqBody setObject:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT];
+    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_ACCOUNT_VERIFY];
     
     // Request Start
     HttpRequest *req = [HttpRequest getInstance];
