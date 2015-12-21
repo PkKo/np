@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Daum Kakao Corp.
+ * Copyright 2015 Kakao Corp.
  *
  * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
  *
@@ -23,15 +23,15 @@
 
 /*!
  @protocol KOTalkMessageSending
- @discussion 카카오톡 메세지를 전송하기 위해 구현해야 하는 프로토콜
+ @discussion 카카오톡 메시지를 전송하기 위해 구현해야 하는 프로토콜
  */
 @protocol KOTalkMessageSending <NSObject>
 
 @required
 /*!
- @abstract 미리 지정된 Message Template 를 사용하여, 카카오톡으로 메세지를 전송합니다. 제휴를 통해 권한이 부여된 특정 앱에서만 호출 가능합니다.
- @param templateID 미리 지정된 템플릿 메세지 ID
- @param arguments 템플릿 메세지를 만들 때, 채워줘야할 파라미터들
+ @abstract 미리 지정된 Message Template 를 사용하여, 카카오톡으로 메시지를 전송합니다. 제휴를 통해 권한이 부여된 특정 앱에서만 호출 가능합니다.
+ @param templateID 미리 지정된 템플릿 메시지 ID
+ @param arguments 템플릿 메시지를 만들 때, 채워줘야할 파라미터들
  @param completionHandler 요청 완료시 실행될 block. 오류 처리와 전송 완료 시 수행된다.
  */
 - (KOSessionTask *)sendMessageWithTemplateID:(NSString *)templateID

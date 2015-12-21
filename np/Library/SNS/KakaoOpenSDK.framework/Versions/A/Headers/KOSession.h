@@ -1,5 +1,5 @@
 /**
-* Copyright 2015 Daum Kakao Corp.
+* Copyright 2015 Kakao Corp.
 *
 * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
 *
@@ -84,6 +84,8 @@ typedef NS_ENUM(NSInteger, KOAgeAuthLimit) {
     KOAgeAuthLimitType15 = 15,
     KOAgeAuthLimitType19 = 19
 };
+
+@class KOAgeAuthQueryStringBuilder;
 
 /*!
  * @class KOSession
@@ -230,7 +232,8 @@ typedef NS_ENUM(NSInteger, KOAgeAuthLimit) {
 /*!
  새로운 연령 인증이 필요할 경우 사용자에게 연령 인증관련 창을 띄워서 연령 인증을 유도합니다. 제휴를 통해 권한이 부여된 특정 앱에서만 호출 가능합니다.
  */
-- (void)showAgeAuthWithAuthLevel:(KOAgeAuthLevel)authLevel authLimit:(KOAgeAuthLimit)authLimit;
+- (void)showAgeAuthWithAuthLevel:(KOAgeAuthQueryStringBuilder *) ageAuthQueryStringBuilder
+               completionHandler:(KOCompletionSuccessHandler)completionHandler;
 
 @end
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Daum Kakao Corp.
+ * Copyright 2015 Kakao Corp.
  *
  * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
  *
@@ -22,7 +22,7 @@
 /*!
  @class KOChat
  @discussion 카카오톡 내의 채팅방을 나타내는 정보 구조체.
- @see KOTalkMessageSending 카카오톡 메세지를 전송하기 위해 구현해야 하는 프로토콜.
+ @see KOTalkMessageSending 카카오톡 메시지를 전송하기 위해 구현해야 하는 프로토콜.
  */
 @interface KOChat : NSObject <KOTalkMessageSending>
 
@@ -49,6 +49,13 @@
  @abstract 카카오톡 채팅방 참여자의 수.
  */
 @property (nonatomic, readonly) NSNumber *memberCount;
+
+/*!
+ @property memberImageURLs
+ @abstract 카카오톡 채팅방 멤버들의 썸네일 이미지 URL List. (최대 5개 까지)
+ */
+@property (nonatomic, readonly) NSArray *memberImageURLs;
+
 
 + (instancetype)responseWithDictionary:(NSDictionary *)dictionary;
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Daum Kakao Corp.
+ * Copyright 2015 Kakao Corp.
  *
  * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
  *

@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Daum Kakao Corp.
+ * Copyright 2015 Kakao Corp.
  *
  * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
  *
@@ -17,7 +17,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "KOTalkMessageSending.h"
+#import "KOUserInfo.h"
 
 /*!
  @abstract KOOSPropertyType 카카오톡 사용자의 디바이스 OS 타입
@@ -48,21 +48,9 @@ extern NSString* convertOSPropertyTypeString(KOOSPropertyType type);
 /*!
  @class KOFriend
  @discussion 카카오톡, 카카오스토리 친구 정보를 담는 구조체
- @see KOTalkMessageSending 카카오톡 메세지를 전송하기 위해 구현해야 하는 프로토콜
+ @see KOTalkMessageSending 카카오톡 메시지를 전송하기 위해 구현해야 하는 프로토콜
  */
-@interface KOFriend : NSObject <KOTalkMessageSending>
-
-/*!
- @property ID
- @abstract 카카오 친구 ID
- */
-@property (nonatomic, readonly) NSString *ID;
-
-/*!
- @property serviceUserID
- @abstract 친구의 카카오 회원번호. 앱의 특정 카테고리나 특정 권한에 한해 내려줌
- */
-@property (nonatomic, readonly) NSNumber *serviceUserID;
+@interface KOFriend : KOUserInfo
 
 /*!
  @property appRegistered
@@ -90,7 +78,7 @@ extern NSString* convertOSPropertyTypeString(KOOSPropertyType type);
 
 /*!
  @property allowedTalkMessaging
- @abstract 메세지 수신이 허용되었는지 여부. 앱가입 친구의 경우는 feed msg에 해당. 앱미가입친구는 invite msg에 해당
+ @abstract 메시지 수신이 허용되었는지 여부. 앱가입 친구의 경우는 feed msg에 해당. 앱미가입친구는 invite msg에 해당
  */
 @property (nonatomic, readonly, getter=isAllowedTalkMessaging) BOOL allowedTalkMessaging;
 

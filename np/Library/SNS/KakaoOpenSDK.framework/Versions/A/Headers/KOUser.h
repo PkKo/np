@@ -1,5 +1,5 @@
 /**
-* Copyright 2014 Daum Kakao Corp.
+* Copyright 2015 Kakao Corp.
 *
 * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
 *
@@ -21,15 +21,12 @@
  사용자 정보를 담고 있는 구조체.
  */
 #import <Foundation/Foundation.h>
+#import "KOUserInfo.h"
 
 /*!
  */
-@interface KOUser : NSObject
+@interface KOUser : KOUserInfo
 
-@property(nonatomic, readonly) NSNumber *ID;
-@property(nonatomic, readonly) NSString *friendID;
-@property(nonatomic, readonly) NSNumber *serviceUserID;
-@property(nonatomic, readonly) NSNumber *inviteMessageRemainingCount;
 @property(nonatomic, readonly) NSDictionary *properties;
 
 /*!

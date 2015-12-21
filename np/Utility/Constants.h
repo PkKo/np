@@ -9,7 +9,7 @@
 #ifndef httpserver_Constants_h
 #define httpserver_Constants_h
 
-#define DEV_MODE        1
+#define DEV_MODE        0
 
 // server url 정보
 #if DEV_MODE

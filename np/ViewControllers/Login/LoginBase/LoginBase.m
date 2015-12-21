@@ -66,6 +66,9 @@
             [self.navigationController pushViewController:eVC animated:YES];
         }
         
+        NSString *userName = [response objectForKey:@"user_name"];
+        [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:userName key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_USER_NAME];
+        
     } else {
         
         NSString *message = [response objectForKey:RESULT_MESSAGE];
