@@ -300,8 +300,6 @@ typedef enum SetupStatus {
             _savedPw = nil;
         }
         
-        
-        
         if (_setupStatus == SETUP_PW_CONFIRM) {
             _pwConfirm  = nil;
         } else if (_setupStatus == SETUP_PW) {
@@ -311,13 +309,10 @@ typedef enum SetupStatus {
         [self drawIncorrectDotConnections];
         
         NSString *message = [response objectForKey:RESULT_MESSAGE];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
 }
-
-
-
 
 #pragma mark - UI
 - (void)refreshUI:(SetupStatus)setupStatus {

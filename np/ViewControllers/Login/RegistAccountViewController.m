@@ -455,11 +455,8 @@
             [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
             [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
             [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
-            
-            if (![util isLoggedIn]) {
-                [requestBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
-                [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
-            }
+            [requestBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
+            [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
             
             NSString *bodyString = [CommonUtil getBodyString:requestBody];
             
@@ -615,11 +612,8 @@
         LoginUtil * util = [[LoginUtil alloc] init];
         
         NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL,[util isLoggedIn] ? REQUEST_LOGIN_ACCOUNT_VERIFY : REQUEST_LOGIN_ACCOUNT];
-        
-        if (![util isLoggedIn]) {
-            [reqBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
-            [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
-        }
+        [reqBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
+        [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
         
         // Request Start
         HttpRequest *req = [HttpRequest getInstance];

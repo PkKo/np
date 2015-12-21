@@ -62,7 +62,7 @@
 
 - (IBAction)shareOnKakaoTalk:(id)sender {
     
-    BOOL isReady = NO;
+    BOOL isReady = YES;
     
     if (!isReady) {
         [self showServiceNotReadyAlert];
@@ -102,7 +102,7 @@
 - (IBAction)shareOnKakaoStory:(id)sender {
     
     
-    BOOL isReady = NO;
+    BOOL isReady = YES;
     
     if (!isReady) {
         [self showServiceNotReadyAlert];
