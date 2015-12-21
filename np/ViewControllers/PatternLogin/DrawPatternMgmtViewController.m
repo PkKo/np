@@ -308,6 +308,12 @@ typedef enum SetupStatus {
         
         [self drawIncorrectDotConnections];
         
+        NSInteger tag = ALERT_DO_NOTHING;
+        
+        if([[response objectForKey:RESULT] isEqualToString:RESULT_PAT_EXCEED_5_TIMES]) {
+            tag = ALERT_GOTO_SELF_IDENTIFY;
+        }
+        
         NSString *message = [response objectForKey:RESULT_MESSAGE];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
