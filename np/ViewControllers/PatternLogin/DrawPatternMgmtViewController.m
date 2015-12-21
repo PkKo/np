@@ -316,6 +316,7 @@ typedef enum SetupStatus {
         
         NSString *message = [response objectForKey:RESULT_MESSAGE];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alertView.tag = tag;
         [alertView show];
     }
 }
