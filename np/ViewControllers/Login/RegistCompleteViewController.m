@@ -33,7 +33,7 @@
     [addAccountButton.layer setBorderColor:[UIColor colorWithRed:38.0f/255.0f green:156.0f/255.0f blue:255.0f/255.0f alpha:1.0f].CGColor];
     [addAccountButton.layer setBorderWidth:1.5f];
     
-    [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
+    [registCompleteTextLabel setText:[NSString stringWithFormat:@"%@님의 NH 스마트알림\n서비스 가입이 완료 되었습니다.", [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]]];
     
     [self getBannerInfoRequest];
 }

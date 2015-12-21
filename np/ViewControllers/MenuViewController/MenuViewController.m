@@ -78,7 +78,7 @@
     
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
-        [loginTextLabel setText:[NSString stringWithFormat:@"%@님 환영합니다.", [[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME]]];
+        [loginTextLabel setText:[NSString stringWithFormat:@"%@님 환영합니다.", [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]]];
         [loginButtonTextLabel setText:@"로그아웃"];
         [loginImg setHighlighted:YES];
     }
