@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 #import "DrawPatternLockView.h"
+#import "LoginBase.h"
 
-@interface DrawPatternMgmtViewController : CommonViewController <UIAlertViewDelegate> {
+@interface DrawPatternMgmtViewController :  LoginBase {
     NSMutableArray* _paths;
 }
 

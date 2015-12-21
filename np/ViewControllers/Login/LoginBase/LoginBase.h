@@ -9,7 +9,21 @@
 #import "CommonViewController.h"
 
 @interface LoginBase : CommonViewController
+
+@property (nonatomic, assign) LoginMethod loginMethod;
+
+#pragma mark - CERT, ACCOUNT, PIN, PAT Login
 - (void)loginResponse:(NSDictionary *)response;
+
+#pragma mark - PIN/PAT Server Connection
+#pragma mark - Password Reset
+- (void)resetPasswordOnServer:(NSString *)pw;
+
+#pragma mark - Password Validation & Account List
+- (void)validateLoginPassword:(NSString *)pw checkPasswordSEL:(SEL)checkPasswordSEL;
+- (void)validateLoginPasswordAndGetAccountList:(NSString *)pw;
+
+- (void)showAlert:(NSString *)alertMessage tag:(int)tag;
 
 #pragma mark - Footer
 - (IBAction)gotoNotice;

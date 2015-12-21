@@ -31,6 +31,7 @@
     
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
+    self.loginMethod = LOGIN_BY_CERTIFICATE;
     [self updateUI];
 }
 
@@ -104,7 +105,7 @@
             }
         }
     }
-
+    
     if (alertMessage) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                         delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -148,7 +149,7 @@
         
         NSString * strTbs       = @"abc"; //서명할 원문
         NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
-        NSString * crmMobile    = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        NSString * crmMobile    = [LoginUtil getDecryptedCrmMobile];
         
         [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
         [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
@@ -166,7 +167,7 @@
         [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
         
         [requestBody setObject:user_id forKey:@"user_id"];
-        [requestBody setObject:crmMobile forKey:@"crmMobile"];
+        [requestBody setObject:crmMobile forKey:REQUEST_CERT_CRM_MOBILE];
         
         NSString *bodyString = [CommonUtil getBodyString:requestBody];
         

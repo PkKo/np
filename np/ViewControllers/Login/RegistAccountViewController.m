@@ -447,14 +447,19 @@
         
         if (self.isSelfIdentified)
         {
-            NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_CERT];
+            LoginUtil * util = [[LoginUtil alloc] init];
+            
+            NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, [util isLoggedIn] ? REQUEST_LOGIN_CERT_VERIFY : REQUEST_LOGIN_CERT];
             
             NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
             [requestBody setObject:strTbs forKey:REQUEST_CERT_SSLSIGN_TBS];
             [requestBody setObject:sig forKey:REQUEST_CERT_SSLSIGN_SIGNATURE];
             [requestBody setObject:@"1" forKey:REQUEST_CERT_LOGIN_TYPE];
-            [requestBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
-            [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+            
+            if (![util isLoggedIn]) {
+                [requestBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
+                [requestBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+            }
             
             NSString *bodyString = [CommonUtil getBodyString:requestBody];
             
@@ -505,9 +510,11 @@
         if (self.isSelfIdentified) {
             LoginUtil * util = [[LoginUtil alloc] init];
             if (self.loginMethod == LOGIN_BY_PATTERN) {
-                [util removePatternPassword];
+                
+                [util setPatternPasswordExist:NO];
+                
             } else if (self.loginMethod == LOGIN_BY_SIMPLEPW) {
-                [util removeSimplePassword];
+                [util setSimplePasswordExist:NO];
             }
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -605,9 +612,14 @@
     
     if(self.isSelfIdentified)
     {
-        [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
+        LoginUtil * util = [[LoginUtil alloc] init];
         
-        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
+        NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL,[util isLoggedIn] ? REQUEST_LOGIN_ACCOUNT_VERIFY : REQUEST_LOGIN_ACCOUNT];
+        
+        if (![util isLoggedIn]) {
+            [reqBody setObject:[LoginUtil getDecryptedCrmMobile] forKey:REQUEST_CERT_CRM_MOBILE];
+            [reqBody setObject:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_UMS_USER_ID] forKey:@"user_id"];
+        }
         
         // Request Start
         HttpRequest *req = [HttpRequest getInstance];
@@ -643,9 +655,12 @@
         {
             LoginUtil * util = [[LoginUtil alloc] init];
             if (self.loginMethod == LOGIN_BY_PATTERN) {
-                [util removePatternPassword];
+                
+                [util setPatternPasswordExist:NO];
+                
             } else if (self.loginMethod == LOGIN_BY_SIMPLEPW) {
-                [util removeSimplePassword];
+                
+                [util setSimplePasswordExist:NO];
             }
             [self.navigationController popViewControllerAnimated:YES];
         }

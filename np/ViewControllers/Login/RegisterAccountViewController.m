@@ -190,7 +190,7 @@
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
     [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:inputAccountView.addNewAccountBirthInput.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
-    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"crmMobile"];
+    [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:REQUEST_CERT_CRM_MOBILE];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_ACCOUNT_CHECK];
     

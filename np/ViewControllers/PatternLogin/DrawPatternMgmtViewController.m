@@ -48,6 +48,8 @@ typedef enum SetupStatus {
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"패턴 관리"];
     
+    self.loginMethod                = LOGIN_BY_PATTERN;
+    
     CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
     CGRect patternViewFrame         = _patternView.frame;
     patternViewFrame.size.width     = (screenWidth - patternViewFrame.origin.x * 2);
@@ -207,7 +209,7 @@ typedef enum SetupStatus {
     if (!_paths || [_paths count] == 0) {
         return nil;
     }
-
+    
     NSMutableString *key;
     key = [NSMutableString string];
     
@@ -222,8 +224,8 @@ typedef enum SetupStatus {
 #pragma mark - Logic
 - (void)checkSavedPassword {
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    NSString * savedPw = [util getPatternPassword];
+    LoginUtil * util    = [[LoginUtil alloc] init];
+    BOOL savedPw        = [util existPatternPassword];
     
     _setupStatus    = savedPw ? SETUP_UPDATE : SETUP_PW;
     [self refreshUI:_setupStatus];
@@ -235,61 +237,32 @@ typedef enum SetupStatus {
         return;
     }
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    
     NSString * alertMessage     = nil;
-    NSInteger failedTimes       = [util getPatternPasswordFailedTimes];
-    NSString * savedPassword    = [util getPatternPassword];
     NSInteger tag               = ALERT_DO_NOTHING;
     
-    if (failedTimes >= 5) {
+    if ([password length] < 8) {
+        alertMessage = @"4개 이상의 점을 연결해 주세요.";
         
-        alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-        tag             = ALERT_GOTO_SELF_IDENTIFY;
+    } else if (_setupStatus == SETUP_UPDATE) {
         
-    } else {
-    
-        if ([password length] < 8) {
-            alertMessage = @"4개 이상의 점을 연결해 주세요.";
-            
-        } else if (_setupStatus == SETUP_UPDATE) {
-            
-            if (![[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
-                
-                _savedPw = nil;
-                
-                failedTimes++;
-                [util savePatternPasswordFailedTimes:failedTimes];
-                if (failedTimes >= 5) {
-                    
-                    alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-                    tag             = ALERT_GOTO_SELF_IDENTIFY;
-                    
-                } else {
-                    alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
-                }
-                
-            } else {
-                _savedPw = password;
-                [util savePatternPasswordFailedTimes:0];
-            }
-            
-        } else if (_setupStatus == SETUP_PW) {
-            
-            if ([[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
-                alertMessage = @"현재 패턴과 동일한 패턴 입니다.";
-            } else {
-                _pw = password;
-            }
-            
-        } else if (_setupStatus == SETUP_PW_CONFIRM) {
-            
-            if (![password isEqualToString:_pw]) {
-                alertMessage    = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
-                _pwConfirm      = nil;
-            } else {
-                _pwConfirm      = password;
-            }
+        [self startIndicator];
+        [self validateLoginPassword:password checkPasswordSEL:@selector(checkLoginPassword:)];
+        
+    } else if (_setupStatus == SETUP_PW) {
+        
+        if ([password isEqualToString:_savedPw]) {
+            alertMessage = @"현재 패턴과 동일한 패턴 입니다.";
+        } else {
+            _pw = password;
+        }
+        
+    } else if (_setupStatus == SETUP_PW_CONFIRM) {
+        
+        if (![password isEqualToString:_pw]) {
+            alertMessage    = @"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요.";
+            _pwConfirm      = nil;
+        } else {
+            _pwConfirm      = password;
         }
     }
     
@@ -307,6 +280,44 @@ typedef enum SetupStatus {
         [self redrawCorrectDotConnections];
     }
 }
+
+- (void)checkLoginPassword:(NSDictionary *)response {
+    
+    NSLog(@"%s", __func__);
+    
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        if (_setupStatus == SETUP_UPDATE) {
+            _savedPw = [self getKey];
+        }
+        [self redrawCorrectDotConnections];
+        
+    } else {
+        
+        if (_setupStatus == SETUP_UPDATE) {
+            _savedPw = nil;
+        }
+        
+        
+        
+        if (_setupStatus == SETUP_PW_CONFIRM) {
+            _pwConfirm  = nil;
+        } else if (_setupStatus == SETUP_PW) {
+            _pw         = nil;
+        }
+        
+        [self drawIncorrectDotConnections];
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+
+
 
 #pragma mark - UI
 - (void)refreshUI:(SetupStatus)setupStatus {
@@ -426,8 +437,6 @@ typedef enum SetupStatus {
 
 - (IBAction)clickNext {
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    
     if (_setupStatus < SETUP_PW_CONFIRM) {
         
         BOOL clickNextWithoutEnteringPattern = (_setupStatus == SETUP_PW && _pw == nil) || (_setupStatus == SETUP_UPDATE && _savedPw == nil);
@@ -446,11 +455,39 @@ typedef enum SetupStatus {
         if (!_pwConfirm) {
             [self showAlert:@"패턴이 일치하지 않습니다. 다시 한번 같은 패턴을 그려주세요." tag:ALERT_DO_NOTHING];
         } else if ([_pw isEqualToString:_pwConfirm]) {
-            [util savePatternPassword:_pw];
-            [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
+            
+            [self startIndicator];
+            [self resetPasswordOnServer:_pw];
+            
+            //[util savePatternPassword:_pw];
+            //[self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
         }
     }
 }
+
+- (BOOL)resetPassword:(NSDictionary *)response {
+    
+    NSLog(@"%s", __func__);
+    
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        [[[LoginUtil alloc] init] setPatternPasswordExist:YES];
+        [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
+        return YES;
+        
+    } else {
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+    return NO;
+}
+
+
 
 - (IBAction)clickToShowSelfIdentifier {
     [self clearDotConnections];

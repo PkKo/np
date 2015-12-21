@@ -22,6 +22,7 @@
     [super viewDidLoad];
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"간편비밀번호 관리"];
+    self.loginMethod = LOGIN_BY_SIMPLEPW;
     [self updateUI];
 }
 
@@ -95,13 +96,9 @@
 
 - (IBAction)clickDone {
     
-    LoginUtil * util = [[LoginUtil alloc] init];
-    
     const int PW_LENGTH                   = 6;
     
-    NSString * alertMessage     = @"";
-    NSString * savedPassword    = [util getSimplePassword];
-    NSInteger failedTimes       = [util getSimplePasswordFailedTimes];
+    NSString * alertMessage     = nil;
     NSInteger tag               = ALERT_DO_NOTHING;
     
     if (!self.existingPw.isHidden) {
@@ -110,19 +107,58 @@
             
             alertMessage = @"숫자 6자리를 입력해 주세요.";
             
-        } else if (![[util getEncryptedPassword:self.existingPw.text] isEqualToString:savedPassword]) {
+        } else {
             
-            failedTimes++;
-            [util saveSimplePasswordFailedTimes:failedTimes];
-            if (failedTimes >= 5) {
-                
-                alertMessage    = @"간편 비밀번호 오류가 5회 이상 발생하여\n로그인이 불가능합니다. 본인인증 후\n간편 비밀번호를 재설정해주세요.";
-                tag             = ALERT_GOTO_SELF_IDENTIFY;
-            } else {
-                
-                alertMessage = [NSString stringWithFormat:@"입력하신 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하시고 이용해주세요.\n비밀번호 %d회 오류입니다.", (int)failedTimes];
-            }
-        } else if (self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
+            [self startIndicator];
+            [self validateLoginPassword:self.existingPw.text checkPasswordSEL:@selector(checkLoginPassword:)];
+            
+        }
+    } else {
+        
+        if (self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
+            
+            alertMessage = @"숫자 6자리를 입력해 주세요.";
+            
+        } else if (![self.myNewPw.text isEqualToString:self.myNewPwConfirm.text]) {
+            
+            alertMessage = @"입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+            
+        } else if ([self isPasswordContainsMobileNo:self.myNewPw.text]) {
+            
+            alertMessage = @"휴대폰번호와 중복되는 간편 비밀번호는\n사용하실 수 없습니다.";
+            
+        } else if ([CommonUtil isRepeatSameString:self.myNewPw.text] || [CommonUtil isRepeatSequenceString:self.myNewPw.text]) {
+            
+            alertMessage = @"연속된 번호는 간편 비밀번호로\n사용하실 수 없습니다.";
+            
+        } else {
+            [self startIndicator];
+            [self resetPasswordOnServer:self.myNewPw.text];
+        }
+        
+    }
+    
+    if (alertMessage) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
+                                                        delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alert.tag = tag;
+        [alert show];
+    }
+}
+
+- (void)checkLoginPassword:(NSDictionary *)response {
+    
+    NSLog(@"%s", __func__);
+    
+    [self stopIndicator];
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        const int PW_LENGTH         = 6;
+        NSString * alertMessage     = nil;
+        NSInteger tag               = ALERT_DO_NOTHING;
+        
+        if (self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
             
             alertMessage = @"숫자 6자리를 입력해 주세요.";
             
@@ -144,43 +180,59 @@
             
         } else {
             
-            alertMessage = @"간편비밀번호가 번경 되었습니다.";
-            [util saveSimplePassword:self.myNewPw.text];
-            tag = ALERT_SUCCEED_SAVE;
+            [self startIndicator];
+            [self resetPasswordOnServer:self.myNewPw.text];
         }
+        
+        if (alertMessage != nil) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
+                                                            delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+            alert.tag = tag;
+            [alert show];
+        }
+        
     } else {
         
-        if (self.myNewPw.text.length != PW_LENGTH || self.myNewPwConfirm.text.length != PW_LENGTH) {
-            
-            alertMessage = @"숫자 6자리를 입력해 주세요.";
-            
-        } else if (![self.myNewPw.text isEqualToString:self.myNewPwConfirm.text]) {
-            
-            alertMessage = @"입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
-            
-        } else if ([self isPasswordContainsMobileNo:self.myNewPw.text]) {
-            
-            alertMessage = @"휴대폰번호와 중복되는 간편 비밀번호는\n사용하실 수 없습니다.";
-            
-        } else if ([CommonUtil isRepeatSameString:self.myNewPw.text] || [CommonUtil isRepeatSequenceString:self.myNewPw.text]) {
-            
-            alertMessage = @"연속된 번호는 간편 비밀번호로\n사용하실 수 없습니다.";
-            
-        } else {
-            alertMessage = @"간편비밀번호가 설정 되었습니다.";
-            tag          = ALERT_SUCCEED_SAVE;
-            
-            LoginUtil * util = [[LoginUtil alloc] init];
-            [util saveSimplePassword:self.myNewPw.text];
+        NSInteger tag = ALERT_DO_NOTHING;
+        
+        if([[response objectForKey:RESULT] isEqualToString:RESULT_PIN_EXCEED_5_TIMES]) {
+            tag = ALERT_GOTO_SELF_IDENTIFY;
         }
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alertView.tag = tag;
+        [alertView show];
+    }
+}
 
+- (BOOL)resetPassword:(NSDictionary *)response {
+    
+    NSLog(@"----- NHI ----> %s", __func__);
+    
+    if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
+        
+        [[[LoginUtil alloc] init] setSimplePasswordExist:YES];
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"간편비밀번호가 번경 되었습니다."
+                                                        delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        alert.tag = ALERT_SUCCEED_SAVE;
+        [alert show];
+        
+        return YES;
+        
+    } else {
+        
+        [self stopIndicator];
+        
+        NSString *message = [response objectForKey:RESULT_MESSAGE];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        [alertView show];
     }
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
-                                                    delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
-    alert.tag = tag;
-    [alert show];
+    return NO;
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
@@ -209,8 +261,8 @@
 }
 
 - (void)refreshUI {
-    LoginUtil   * util              = [[LoginUtil alloc] init];
-    NSString    * simplePassword    = [util getSimplePassword];
+    LoginUtil   * util      = [[LoginUtil alloc] init];
+    BOOL simplePassword     = [util existSimplePassword];
     
     [self.existingPw setHidden:!simplePassword];
     CGRect newPwSettingsViewFrame = self.myNewPwSettingsView.frame;

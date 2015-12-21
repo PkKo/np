@@ -37,6 +37,8 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     
+    self.loginMethod                = LOGIN_BY_PATTERN;
+    
     _backFromSelfIdentifer          = NO;
     
     CGFloat screenWidth             = [[UIScreen mainScreen] bounds].size.width;
@@ -87,8 +89,8 @@
     
     if (_backFromSelfIdentifer) {
         LoginUtil * util = [[LoginUtil alloc] init];
-        NSString * patternPw = [util getPatternPassword];
-        if (!patternPw) {
+        //NSString * patternPw = [util getPatternPassword];
+        if (![util existPatternPassword]) {
             [util gotoPatternLoginMgmt:self.navigationController animated:YES];
         }
     }
@@ -286,7 +288,7 @@
 }
 
 
-#pragma mark - Logic 
+#pragma mark - Logic
 - (void)validatePW:(NSString *)password {
     
     if (!password || [password isEqualToString:@""]) {
@@ -294,56 +296,15 @@
     }
     
     [self redrawCorrectDotConnections];
-    
-    LoginUtil * util = [[LoginUtil alloc] init];
-    
-    NSString * alertMessage     = nil;
-    NSInteger failedTimes       = [util getPatternPasswordFailedTimes];
-    NSString * savedPassword    = [util getPatternPassword];
-    NSInteger tag               = ALERT_DO_NOTHING;
-    
-    if (failedTimes >= 5) {
-        
-        alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-        tag             = ALERT_GOTO_SELF_IDENTIFY;
-        
-    } else {
-        
-        if ([password length] < 8) {
-            alertMessage = @"4개 이상의 점을 연결해 주세요.";
-            
-        } else if (![[util getEncryptedPassword:password] isEqualToString:savedPassword]) {
-            
-            failedTimes++;
-            [util savePatternPasswordFailedTimes:failedTimes];
-            if (failedTimes >= 5) {
-                
-                alertMessage    = @"패턴 오류가 5회 이상 발생하여 본인인증이 필요합니다. 본인인증 후 다시 이용해주세요.";
-                tag             = ALERT_GOTO_SELF_IDENTIFY;
-                
-            } else {
-                alertMessage = [NSString stringWithFormat:@"패턴이 일치하지 않습니다.\n%d 회 오류입니다. 5회 이상 오류 시 본인 인증이 필요합니다.", (int)failedTimes];
-            }
-        }
-    }
-    
-    if (alertMessage) {
-        [self showAlert:alertMessage tag:(int)tag];
-    } else {
-        
-        [self startIndicator];
-        
-        LoginUtil * util = [[LoginUtil alloc] init];
-        [util savePatternPasswordFailedTimes:0];
-        [self clearDotConnections];
-        
-        [self validateLoginPattern];
-        
-    }
+    [self startIndicator];
+    [self validateLoginPasswordAndGetAccountList:[self getKey]];
 }
 
 #pragma mark - Alert
+
 - (void)showAlert:(NSString *)alertMessage tag:(int)tag {
+    
+    NSLog(@"NHI ----- > %s", __func__);
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:alertMessage
                                                     delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -352,6 +313,8 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSLog(@"%s", __func__);
     
     switch (alertView.tag) {
         case ALERT_GOTO_SELF_IDENTIFY:
@@ -369,47 +332,15 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-
 #pragma mark - Settings
 - (IBAction)gotoPatternLoginMgmt {
     [self clearDotConnections];
     _backFromSelfIdentifer = YES;
     [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_PATTERN];
-    
 }
 
 -(IBAction)gotoLoginSettings {
     [[[LoginUtil alloc] init] gotoLoginSettings:self.navigationController];
-}
-
-#pragma mark - Server Connection
-
-- (void)validateLoginPattern {
-    
-    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-    
-    NSString * loginType        = @"PAT";
-    NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
-    NSString * crmMobile    = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
-    
-    [[Codeguard sharedInstance] setAppName:@"NHSmartPush"];
-    [[Codeguard sharedInstance] setAppVer:[CommonUtil getAppVersion]];
-    [[Codeguard sharedInstance] setChallengeRequestUrl:[NSString stringWithFormat:@"%@CodeGuard/check.jsp", SERVER_URL]];
-    NSString *token = [[Codeguard sharedInstance] requestAndGetToken];
-    
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_LOGIN_PINPAT];
-    NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
-    
-    [requestBody setObject:user_id forKey:@"user_id"];
-    [requestBody setObject:crmMobile forKey:@"crmMobile"];
-    [requestBody setObject:loginType forKey:@"loginType"];
-    
-    NSString *bodyString = [CommonUtil getBodyString:requestBody];
-    
-    HttpRequest *req = [HttpRequest getInstance];
-    [req setDelegate:self selector:@selector(loginResponse:)];
-    [req requestUrl:url bodyString:bodyString token:token];
-    
 }
 
 @end

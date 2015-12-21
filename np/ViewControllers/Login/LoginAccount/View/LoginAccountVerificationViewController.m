@@ -30,7 +30,8 @@
     [self.mNaviView.mBackButton setHidden:YES];
     [self.mNaviView.mTitleLabel setText:@""];
     
-    _edittingTextField = nil;
+    self.loginMethod    = LOGIN_BY_ACCOUNT;
+    _edittingTextField  = nil;
     [self updateUI];
 }
 

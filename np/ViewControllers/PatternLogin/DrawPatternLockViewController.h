@@ -10,7 +10,7 @@
 #import "LoginBase.h"
 #import "DrawPatternLockView.h"
 
-@interface DrawPatternLockViewController : LoginBase <UIAlertViewDelegate> {
+@interface DrawPatternLockViewController : LoginBase {
     NSMutableArray* _paths;
 }
 

@@ -46,6 +46,11 @@
 }
 
 #pragma mark - App Version {
++ (NSString *)getDecryptedCrmMobile {
+    
+    return [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+}
+
 - (NSString *)getLatestAppVersion {
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     NSString * latestVersion = [prefs stringForKey:PREF_KEY_LATEST_APP_VERSION];
@@ -347,11 +352,11 @@
         return nil;
     }
     /*
-    NSString * simplePassword           = [CommonUtil decrypt3DES:encryptedSimplePassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
-    
-    NSLog(@"encryptedSimplePassword: %@ - simplePassword: %@", encryptedSimplePassword, simplePassword);
-    
-    return simplePassword;
+     NSString * simplePassword           = [CommonUtil decrypt3DES:encryptedSimplePassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+     
+     NSLog(@"encryptedSimplePassword: %@ - simplePassword: %@", encryptedSimplePassword, simplePassword);
+     
+     return simplePassword;
      */
     return encryptedSimplePassword;
 }
@@ -387,6 +392,17 @@
     [prefs synchronize];
 }
 
+- (void)setSimplePasswordExist:(BOOL)isExisted {
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs setBool:isExisted forKey:PREF_KEY_SIMPLE_LOGIN_PW_EXIST];
+    [prefs synchronize];
+}
+
+- (BOOL)existSimplePassword {
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:PREF_KEY_SIMPLE_LOGIN_PW_EXIST];
+}
+
 #pragma mark - Pattern Login
 - (void)gotoPatternLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated {
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:[self getPatternLoginMgmt]];
@@ -407,10 +423,10 @@
         return nil;
     }
     /*
-    NSString * password             = [CommonUtil decrypt3DES:encryptedPassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
-    
-    return password;
-    */
+     NSString * password             = [CommonUtil decrypt3DES:encryptedPassword decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+     
+     return password;
+     */
     return encryptedPassword;
 }
 
@@ -429,6 +445,9 @@
     NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
     [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_PW];
     [prefs removeObjectForKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
+    
+    [prefs setBool:NO forKey:PREF_KEY_PATTERN_LOGIN_PW_EXIST];
+    
     [prefs synchronize];
 }
 
@@ -443,6 +462,17 @@
     NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
     [prefs setValue:[NSNumber numberWithInteger:failedTimes] forKey:PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES];
     [prefs synchronize];
+}
+
+- (void)setPatternPasswordExist:(BOOL)isExisted {
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    [prefs setBool:isExisted forKey:PREF_KEY_PATTERN_LOGIN_PW_EXIST];
+    [prefs synchronize];
+}
+
+- (BOOL)existPatternPassword {
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+    return [prefs boolForKey:PREF_KEY_PATTERN_LOGIN_PW_EXIST];
 }
 
 #pragma mark - Notice Background Colour

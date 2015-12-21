@@ -17,6 +17,7 @@
 - (void)removeAllData;
 
 #pragma mark - App Version {
++ (NSString *)getDecryptedCrmMobile;
 - (NSString *)getLatestAppVersion;
 - (void)saveLatestAppVersion:(NSString *)latestVersion;
 
@@ -49,20 +50,44 @@
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;
-- (NSString *)getSimplePassword;
-- (void)saveSimplePassword:(NSString *)simplePassword;
-- (void)removeSimplePassword;
-- (NSInteger)getSimplePasswordFailedTimes;
-- (void)saveSimplePasswordFailedTimes:(NSInteger)failedTimes;
+
+
+/*
+ - (NSString *)getSimplePassword;
+ - (void)saveSimplePassword:(NSString *)simplePassword;
+ - (void)removeSimplePassword;
+ - (NSInteger)getSimplePasswordFailedTimes;
+ - (void)saveSimplePasswordFailedTimes:(NSInteger)failedTimes;
+ */
+
+
+
+
+
+- (void)setSimplePasswordExist:(BOOL)isExisted;
+- (BOOL)existSimplePassword;
 
 #pragma mark - Pattern Login
 - (void)gotoPatternLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;
 - (UIViewController *)getPatternLoginMgmt;
-- (NSString *)getPatternPassword;
-- (void)savePatternPassword:(NSString *)pw;
-- (void)removePatternPassword;
-- (NSInteger)getPatternPasswordFailedTimes;
-- (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes;
+
+/*
+ - (NSString *)getPatternPassword;
+ - (void)savePatternPassword:(NSString *)pw;
+ - (void)removePatternPassword;
+ - (NSInteger)getPatternPasswordFailedTimes;
+ - (void)savePatternPasswordFailedTimes:(NSInteger)failedTimes;
+ */
+
+
+
+
+
+
+
+
+- (void)setPatternPasswordExist:(BOOL)isExisted;
+- (BOOL)existPatternPassword;
 
 #pragma mark - Notice Background Colour
 - (UIColor *)getNoticeBackgroundColour;

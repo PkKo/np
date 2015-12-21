@@ -16,7 +16,7 @@
     
     NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
     NSString * user_id      = [prefs stringForKey:RESPONSE_CERT_UMS_USER_ID];
-    NSString * crmMobile    = [CommonUtil decrypt3DES:[prefs stringForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    NSString * crmMobile    = [LoginUtil getDecryptedCrmMobile];
     
     NSString * account_number   = accountNo;
     NSString * account_password = pw;
@@ -31,7 +31,7 @@
     NSMutableDictionary *requestBody = [[NSMutableDictionary alloc] init];
     
     [requestBody setObject:user_id forKey:@"user_id"];
-    [requestBody setObject:crmMobile forKey:@"crmMobile"];
+    [requestBody setObject:crmMobile forKey:REQUEST_CERT_CRM_MOBILE];
     [requestBody setObject:account_number forKey:@"account_number"];
     [requestBody setObject:account_password forKey:@"account_password"];
     [requestBody setObject:user_birthday forKey:@"user_birthday"];

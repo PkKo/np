@@ -33,8 +33,10 @@
 
 @interface LoginSettingsViewController () {
     LoginMethod selectedLoginMethod;
-    NSString * originalPAT;
-    NSString * originalPIN;
+    /*
+     NSString * originalPAT;
+     NSString * originalPIN;
+     */
 }
 
 @end
@@ -52,9 +54,10 @@
     
     LoginMethod savedLoginMethod = [[[LoginUtil alloc] init] getLoginMethod];
     [self selectLoginBy:savedLoginMethod];
-    
-    originalPAT = [[[LoginUtil alloc] init] getPatternPassword];
-    originalPIN = [[[LoginUtil alloc] init] getSimplePassword];
+    /*
+     originalPAT = [[[LoginUtil alloc] init] getPatternPassword];
+     originalPIN = [[[LoginUtil alloc] init] getSimplePassword];
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -103,9 +106,8 @@
 - (IBAction)selectSimpleLogin:(id)sender {
     
     LoginUtil * util    = [[LoginUtil alloc] init];
-    NSString * simplePw = [util getSimplePassword];
     
-    if (simplePw) {
+    if ([util existSimplePassword]) {
         
         [self selectLoginBy:LOGIN_BY_SIMPLEPW];
         
@@ -123,9 +125,8 @@
 - (IBAction)selectPatternLogin {
     
     LoginUtil * util        = [[LoginUtil alloc] init];
-    NSString * patternPw    = [util getPatternPassword];
     
-    if (patternPw) {
+    if ([util existPatternPassword]) {
         
         [self selectLoginBy:LOGIN_BY_PATTERN];
         
@@ -242,17 +243,17 @@
     LoginUtil * util            = [[LoginUtil alloc] init];
     CertInfo * savedCertToLogin = [util getCertToLogin];
     [self updateSelectedCert:savedCertToLogin];
-    
-    NSString * simplePw     = [util getSimplePassword];
-    NSString * patternPw    = [util getPatternPassword];
-    
+    /*
+     NSString * simplePw     = [util getSimplePassword];
+     NSString * patternPw    = [util getPatternPassword];
+     */
     if (![util isLoggedIn]) {
         
-        if (!simplePw) {
+        if (![util existSimplePassword]) {
             [self.simpleLoginBtn setEnabled:NO];
         }
         
-        if (!patternPw) {
+        if (![util existPatternPassword]) {
             [self.patternLoginBtn setEnabled:NO];
         }
         
@@ -265,25 +266,26 @@
     }
     
     // toggle PIN/PAT login selection
-    if ( (selectedLoginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (selectedLoginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
+    if ( (selectedLoginMethod == LOGIN_BY_SIMPLEPW && ![util existSimplePassword]) || (selectedLoginMethod == LOGIN_BY_PATTERN && ![util existPatternPassword]) ) {
         [self selectLoginBy:LOGIN_BY_NONE];
     }
     
     LoginMethod loginMethod = [util getLoginMethod];
-    if ( (loginMethod == LOGIN_BY_SIMPLEPW && !simplePw) || (loginMethod == LOGIN_BY_PATTERN && !patternPw) ) {
+    if ( (loginMethod == LOGIN_BY_SIMPLEPW && ![util existSimplePassword]) || (loginMethod == LOGIN_BY_PATTERN && ![util existPatternPassword]) ) {
         [util saveLoginMethod:LOGIN_BY_NONE];
     }
     
     // automatically select PIN/PAT login if PIN/PAT is reset.
-    if (simplePw && ![simplePw isEqualToString:originalPIN]) {
+    
+    //if (simplePw && ![simplePw isEqualToString:originalPIN]) {
+    if ([util existSimplePassword]) {
         
         [self selectLoginBy:LOGIN_BY_SIMPLEPW];
-        originalPIN = simplePw;
         
-    } else if (patternPw && ![patternPw isEqualToString:originalPAT]) {
+        //} else if (patternPw && ![patternPw isEqualToString:originalPAT]) {
+    } else if ([util existPatternPassword]) {
         
         [self selectLoginBy:LOGIN_BY_PATTERN];
-        originalPAT = patternPw;
     }
 }
 

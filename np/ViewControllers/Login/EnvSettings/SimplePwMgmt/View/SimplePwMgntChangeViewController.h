@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
+#import "LoginBase.h"
 
-@interface SimplePwMgntChangeViewController : CommonViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface SimplePwMgntChangeViewController : LoginBase <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField    *existingPw;
 @property (weak, nonatomic) IBOutlet UIView         *myNewPwSettingsView;
 @property (weak, nonatomic) IBOutlet UITextField    *myNewPw;

@@ -127,9 +127,12 @@
 
 #pragma mark - API
 // 통신 결과 값
-#define RESULT                  @"result"
-#define RESULT_SUCCESS          @"00000"
-#define RESULT_SUCCESS_ZERO     @"0"
+#define RESULT                      @"result"
+#define RESULT_SUCCESS              @"00000"
+#define RESULT_SUCCESS_ZERO         @"0"
+#define RESULT_PIN_EXCEED_5_TIMES   @"EFPU99205"
+#define RESULT_PAT_EXCEED_5_TIMES   @"EFPU99305"
+
 // 결과 메시지
 #define RESULT_MESSAGE          @"resultMessage"
 #define RESULT_MESSAGE2          @"resultMessage2"
@@ -148,6 +151,7 @@
 #define REQUEST_CERT_SSLSIGN_TBS        @"SSLSIGN_TBS_DATA"
 #define REQUEST_CERT_SSLSIGN_SIGNATURE  @"SSLSIGN_SIGNATURE"
 // crm 휴대폰 번호
+#define REQUEST_CERT_CRM_MOBILE     @"mobile_number"
 #define RESPONSE_CERT_CRM_MOBILE    @"crmMobile"
 // ums id
 #define RESPONSE_CERT_UMS_USER_ID   @"umsUserId"
@@ -278,16 +282,21 @@
 
 #define REQUEST_LATEST_TERMS_OF_USE                 @"servlet/EFPU1017U.cmd"
 #define REQUEST_LOGIN_CERT                          @"servlet/EFPU1011R.cmd"
+#define REQUEST_LOGIN_CERT_VERIFY                   @"servlet/EFPU1021R.cmd"
 #define REQUEST_LOGIN_ACCOUNT                       @"servlet/EFPU1012R.cmd"
+#define REQUEST_LOGIN_ACCOUNT_VERIFY                @"servlet/EFPU1022R.cmd"
 #define REQUEST_LOGIN_PINPAT                        @"servlet/EFPU1013R.cmd"
+#define REQUEST_LOGIN_PINPAT_RESET                  @"servlet/EFPU1013E.cmd"
 #define REQUEST_SERVICE_DEACTIVATION                @"servlet/EFPUD040001.cmd"
 #define REQUEST_RESET_DATA                          @"servlet/EFPU1099E.cmd"
 
 #define NOTIFICATION_REFRESH_BADGES                 @"notificationRefreshBadges"
 
+#define PREF_KEY_SIMPLE_LOGIN_PW_EXIST              @"hasSimpleLoginSettingsKeyPW"
 #define PREF_KEY_SIMPLE_LOGIN_SETT_PW               @"simpleLoginSettingsKeyPW"
 #define PREF_KEY_SIMPLE_LOGIN_SETT_FAILED_TIMES     @"simpleLoginSettingsKeyFailedTimes"
 
+#define PREF_KEY_PATTERN_LOGIN_PW_EXIST             @"hasPatternLoginSettingsKeyPW"
 #define PREF_KEY_PATTERN_LOGIN_SETT_PW              @"patternLoginSettingsKeyPW"
 #define PREF_KEY_PATTERN_LOGIN_SETT_FAILED_TIMES    @"patternLoginSettingsKeyFailedTimes"
 
