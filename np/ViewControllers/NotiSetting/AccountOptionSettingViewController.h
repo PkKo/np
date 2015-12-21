@@ -15,6 +15,7 @@
     NSString *receiptsPaymentId;
     NSInteger totalNotiCount;
     NSInteger accountType;
+    NSInteger receiptsCount;
 }
 
 @property (strong, nonatomic) NSString *accountNumber;

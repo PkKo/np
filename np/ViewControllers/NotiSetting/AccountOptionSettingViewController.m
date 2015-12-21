@@ -158,6 +158,8 @@
             optionView.notiPeriodTime1 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE] intValue];
             optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
             optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
+            
+            receiptsCount = [[optionData objectForKey:@"UMSW022001_OUT_SUB.receipts_cnt"] integerValue];
         }
         
         totalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
@@ -284,8 +286,17 @@
                 [[[LoginUtil alloc] init] saveAllAccounts:allAccountList];
             }
         }*/
+        NSString *message = @"";
+        if(receiptsCount > 0)
+        {
+            message = @"UMS에서 이용중인 입출금 알림 옵션이\n설정하신 계좌 알림 옵션으로 변경됩니다.";
+        }
+        else
+        {
+            message = @"입출금 알림 설정이 완료되었습니다.";
+        }
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"입출금 알림 설정이 완료되었습니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:message delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView setTag:90000];
         [alertView show];
     }

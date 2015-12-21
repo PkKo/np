@@ -30,7 +30,7 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setText:@"생활정보"];
     [self.mNaviView.mMenuButton setHidden:isMenuButtonHidden];
-    [self.mNaviView.subTitle setHidden:NO];
+//    [self.mNaviView.subTitle setHidden:NO];
     
     articles = [[NSArray alloc] init];
 }
