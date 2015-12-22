@@ -129,7 +129,7 @@
     NSString *content = [NSString stringWithFormat:@"[%@] %@ %@ %@ %@ %@원",
                          [bundle objectForInfoDictionaryKey:@"CFBundleName"],
                          [self.transactionObject formattedTransactionDate],
-                         [self.transactionObject transactionAccountNumber],
+                         [self.transactionObject getMaskingTransactionAccountNumber],
                          [self.transactionObject transactionDetails],
                          [self.transactionObject transactionTypeDesc],
                          [self.transactionObject formattedTransactionAmount]];

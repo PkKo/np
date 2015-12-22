@@ -83,7 +83,7 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="cpm-cY-Ymb">
-                            <rect key="frame" x="29" y="218" width="72" height="73"/>
+                            <rect key="frame" x="29" y="301" width="72" height="73"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <inset key="titleEdgeInsets" minX="-55" minY="60" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-13" maxX="0.0" maxY="0.0"/>
@@ -145,7 +145,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="IsX-b5-4Ob">
-                            <rect key="frame" x="38" y="301" width="53" height="73"/>
+                            <rect key="frame" x="38" y="218" width="53" height="73"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <inset key="titleEdgeInsets" minX="-55" minY="60" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-13" maxX="0.0" maxY="0.0"/>
