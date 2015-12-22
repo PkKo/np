@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakao7f6f6caa697b1f5e34ababd0428a62e0</string>
+				<string>kakaof733f49ef09cf1942d7f623573e1e11a</string>
 			</array>
 		</dict>
 	</array>
@@ -42,6 +42,10 @@
 		<string>kakaotalk-4.5.0</string>
 		<string>kakaostory-2.9.0</string>
 		<string>storylink</string>
+		<string>urlscheme</string>
+		<string>urlscheme2</string>
+		<string>urlscheme3</string>
+		<string>urlscheme4</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
