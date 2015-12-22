@@ -11,6 +11,7 @@
 @implementation MenuTableCell
 
 @synthesize mMenuTitleLabel;
+@synthesize menuSubTitleLabel;
 @synthesize menuTitleImg;
 @synthesize menuSeparateLine;
 

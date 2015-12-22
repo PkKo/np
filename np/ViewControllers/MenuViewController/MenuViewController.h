@@ -9,6 +9,31 @@
 #import <UIKit/UIKit.h>
 #import "MenuTableEtcView.h"
 
+typedef enum MenuIndex
+{
+    ALL_TIMELINE        = 0,
+    DEPOSIT_TIMELINE,
+    ETC_TIMELINE,
+    STORAGE,
+    
+    NOTI_SETTING,
+    NOTI_ONOFF_SETTING,
+    NOTI_ACCOUNT_SETTING,
+    NOTI_EXCHANGE_SETTING,
+    
+    SETTINGS,
+    SETTINGS_QUICKVIEW_ONOFF,
+    SETTINGS_PIN,
+    SETTINGS_PATTERN,
+    SETTINGS_LOGIN,
+    SETTINGS_BG,
+    SETTINGS_DELETE_DATA,
+    
+    CUSTOMER_CENTER,
+    CERTIFICATE_CENTER,
+    NH_APPZONE
+}MenuIndex;
+
 @interface MenuViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     NSArray *mMenuTitleArray;

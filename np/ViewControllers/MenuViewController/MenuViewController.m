@@ -19,6 +19,12 @@
 #import "AppZoneViewController.h"
 #import "SplashViewController.h"
 #import "CertificateMenuViewController.h"
+#import "AccountManageViewController.h"
+#import "ExchangeSettingViewController.h"
+#import "SimplePwMgntChangeViewController.h"
+#import "DrawPatternMgmtViewController.h"
+#import "LoginSettingsViewController.h"
+#import "NoticeBackgroundSettingsViewController.h"
 
 #define MENU_CELL_HEIGHT    37
 #define MENU_ICON_HEIGHT    27
@@ -52,21 +58,31 @@
   @[@"기타 알림", @"icon_notice_03_dft.png", @"icon_notice_03_on.png"],
   @[@"보관함", @"icon_storage_01_dft.png", @"icon_storage_01_on.png"],
   @[@"알림 설정", @"icon_notice_setting_01_dft.png", @"icon_notice_setting_01_on.png"],
+                       @[@"알림 받기 설정"],          //5
+                       @[@"입출금 계좌 추가/변경/삭제"], //6
+                       @[@"환율알림 설정"],           //7
   @[@"환경 설정", @"icon_settings_01_dft.png", @"icon_settings_01_on.png"],
+                       @[@"간편보기 사용"],           //9
+                       @[@"간편비밀번호 관리"],        //10
+                       @[@"패턴 관리"],              //11
+                       @[@"로그인 설정"],             //12
+                       @[@"알림배경 설정"],           //13
+                       @[@"데이터 초기화"],           //14
   @[@"고객센터", @"icon_customer_01_dft.png", @"icon_customer_01_on.png"],
   @[@"공인인증센터", @"icon_certificate_01_dft.png", @"icon_certificate_01_on.png"],
   @[@"NH APPZONE", @"icon_app_zone_01_dft.png", @"icon_app_zone_01_on.png"], nil];
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT)];
     [menuTableView setTableHeaderView:headerView];
-    /*
+    ///*
 	// 빈 리스트 안보이게 하기 위해 height 0인 뷰를 붙여준다.
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, 0)];
     [menuTableView setTableFooterView:footerView];
     
-    MenuTableEtcView *bottomMenu = [MenuTableEtcView view];
+    bottomMenu = [MenuTableEtcView view];
     [bottomMenu setFrame:CGRectMake(0, 0, bottomMenuView.frame.size.width, bottomMenu.frame.size.height)];
-    [bottomMenuView addSubview:bottomMenu];*/
+    [bottomMenuView addSubview:bottomMenu];//*/
+    /*
     bottomMenu = [MenuTableEtcView view];
     [[bottomMenu nongminButton] setDelegateLabel:[bottomMenu nongminLabel]];
     [[bottomMenu telButton] setDelegateLabel:[bottomMenu telLabel]];
@@ -74,7 +90,7 @@
     [[bottomMenu noticeButton] setDelegateLabel:[bottomMenu noticeLabel]];
     [bottomMenu setFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_FOOTER_HEIGHT)];
     [menuTableView setTableFooterView:bottomMenu];
-    [menuTableView bringSubviewToFront:bottomMenu];
+    [menuTableView bringSubviewToFront:bottomMenu];*/
     
     if([[[LoginUtil alloc] init] isLoggedIn])
     {
@@ -125,6 +141,7 @@
 {
     [super viewDidAppear:animated];
     
+    /*
     if(cellHeight > MENU_CELL_HEIGHT)
     {
         [menuTableView setScrollEnabled:NO];
@@ -134,7 +151,7 @@
         [menuTableView setScrollEnabled:YES];
         [menuTableView setContentSize:CGSizeMake(menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT + (cellHeight * [mMenuTitleArray count]) + TABLE_VIEW_FOOTER_HEIGHT)];
         [menuTableView bringSubviewToFront:menuTableView.tableFooterView];
-    }
+    }*/
 }
 
 #pragma mark - UITableViewDataSource
@@ -152,19 +169,32 @@
     
     NSString *title = [[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:0];
     
-    [cell.mMenuTitleLabel setText:title];
-    
-    CGFloat iconHeight = (cellHeight * MENU_ICON_HEIGHT) / MENU_CELL_HEIGHT;
-    [cell.menuTitleImg setImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:1]]];
-    [cell.menuTitleImg setHighlightedImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:2]]];
-    if(iconHeight > MENU_ICON_HEIGHT)
+    if((indexPath.row >= NOTI_ONOFF_SETTING && indexPath.row <= NOTI_EXCHANGE_SETTING) ||
+       (indexPath.row >= SETTINGS_QUICKVIEW_ONOFF && indexPath.row <= SETTINGS_DELETE_DATA))
     {
-        [cell.menuTitleImg setFrame:CGRectMake(cell.menuTitleImg.frame.origin.x,
-                                              cell.menuTitleImg.frame.origin.y,
-                                               iconHeight, iconHeight)];
+//        [cell.mMenuTitleLabel setText:[NSString stringWithFormat:@"- %@", title]];
+        [cell.mMenuTitleLabel setHidden:YES];
+        [cell.menuSubTitleLabel setText:[NSString stringWithFormat:@"-  %@", title]];
+        [cell.menuTitleImg setHidden:YES];
+        [cell.contentView setBackgroundColor:[UIColor colorWithRed:245.0/255.0f green:246.0/255.0f blue:249.0/255.0f alpha:1.0f]];
+        [cell.menuSeparateLine setBackgroundColor:[UIColor whiteColor]];
+    }
+    else
+    {
+        [cell.mMenuTitleLabel setText:title];
+        [cell.menuSubTitleLabel setHidden:YES];
+        CGFloat iconHeight = (cellHeight * MENU_ICON_HEIGHT) / MENU_CELL_HEIGHT;
+        [cell.menuTitleImg setImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:1]]];
+        [cell.menuTitleImg setHighlightedImage:[UIImage imageNamed:[[mMenuTitleArray objectAtIndex:indexPath.row] objectAtIndex:2]]];
+        if(iconHeight > MENU_ICON_HEIGHT)
+        {
+            [cell.menuTitleImg setFrame:CGRectMake(cell.menuTitleImg.frame.origin.x,
+                                                   cell.menuTitleImg.frame.origin.y,
+                                                   iconHeight, iconHeight)];
+        }
     }
     
-    if (indexPath.row == 8)
+    if (indexPath.row == [mMenuTitleArray count] - 1)
     {
         [cell.menuSeparateLine setHidden:YES];
     }
@@ -183,11 +213,14 @@
     
 //    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize].height;
 //    return MENU_CELL_HEIGHT * (self.view.bounds.size.height / IPHONE_FIVE_FRAME_HEIGHT);
-    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT - TABLE_VIEW_FOOTER_HEIGHT) / [mMenuTitleArray count]);
-    if(cellHeight < MENU_CELL_HEIGHT)
-    {
-        cellHeight = MENU_CELL_HEIGHT;
-    }
+//    cellHeight = ((menuTableView.frame.size.height - TABLE_VIEW_HEADER_HEIGHT - TABLE_VIEW_FOOTER_HEIGHT) / [mMenuTitleArray count]);
+//    if(cellHeight < MENU_CELL_HEIGHT)
+//    {
+//        cellHeight = MENU_CELL_HEIGHT;
+//    }
+    
+    cellHeight = MENU_CELL_HEIGHT;
+    
     return cellHeight;
 }
 
@@ -215,13 +248,13 @@
     {
         switch (indexPath.row)
         {
-            case 0: // 전체
+            case ALL_TIMELINE: // 전체
             {
                 newTopViewController = [[MainPageViewController alloc] init];
                 [(MainPageViewController *)newTopViewController setStartPageIndex:TIMELINE];
                 break;
             }
-            case 1: // 입출금
+            case DEPOSIT_TIMELINE: // 입출금
             {
                 newTopViewController = [[MainPageViewController alloc] init];
                 [(MainPageViewController *)newTopViewController setStartPageIndex:BANKING];
@@ -229,39 +262,88 @@
                 //            pushViewController = [[CertificateMenuViewController alloc] init];
                 break;
             }
-            case 2: // 기타
+            case ETC_TIMELINE: // 기타
             {
                 newTopViewController = [[MainPageViewController alloc] init];
                 [(MainPageViewController *)newTopViewController setStartPageIndex:OTHER];
                 break;
             }
-            case 3: // 보관함
+            case STORAGE: // 보관함
             {
                 newTopViewController = [[MainPageViewController alloc] init];
                 [(MainPageViewController *)newTopViewController setStartPageIndex:INBOX];
                 break;
             }
-            case 4: // 알림설정
+            case NOTI_SETTING: // 알림설정
             {
                 pushViewController = [[NotiSettingMenuViewController alloc] init];
                 break;
             }
-            case 5: // 환경설정
+            //////////////////////////////////////////////////////////////////////////////
+            case NOTI_ONOFF_SETTING: // 알림 받기 설정 - 서브메뉴
+            {
+                pushViewController = [[NotiSettingMenuViewController alloc] init];
+                break;
+            }
+            case NOTI_ACCOUNT_SETTING: // 입출금 계좌 추가/변경/삭제 - 서브메뉴
+            {
+                pushViewController = [[AccountManageViewController alloc] init];
+                break;
+            }
+            case NOTI_EXCHANGE_SETTING: // 환율 알림 설정
+            {
+                pushViewController = [[ExchangeSettingViewController alloc] init];
+                break;
+            }
+            ///////////////////////////////////////////////////////////////////////////////
+            case SETTINGS: // 환경설정
             {
                 pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
                 break;
             }
-            case 6: // 고객센터
+            ///////////////////////////////////////////////////////////////////////////////
+            case SETTINGS_QUICKVIEW_ONOFF:  // 간편보기 사용 - 서브메뉴
+            {
+                pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
+                break;
+            }
+            case SETTINGS_PIN: // 간편비밀번호 관리 - 서브메뉴
+            {
+                pushViewController = [[SimplePwMgntChangeViewController alloc] initWithNibName:@"SimplePwMgntChangeViewController" bundle:nil];
+                break;
+            }
+            case SETTINGS_PATTERN: // 패턴관리 - 서브메뉴
+            {
+                pushViewController = [[DrawPatternMgmtViewController alloc] initWithNibName:@"DrawPatternMgmtViewController" bundle:nil];
+                break;
+            }
+            case SETTINGS_LOGIN: // 로그인 설정 - 서브메뉴
+            {
+                pushViewController = [[LoginSettingsViewController alloc] initWithNibName:@"LoginSettingsViewController" bundle:nil];
+                break;
+            }
+            case SETTINGS_BG: // 알림배경 설정 - 서브메뉴
+            {
+                pushViewController = [[NoticeBackgroundSettingsViewController alloc] initWithNibName:@"NoticeBackgroundSettingsViewController" bundle:nil];
+                break;
+            }
+            case SETTINGS_DELETE_DATA: // 데이터 초기화 - 서브메뉴
+            {
+                pushViewController = [[EnvMgmtViewController alloc] initWithNibName:@"EnvMgmtViewController" bundle:nil];
+                break;
+            }
+            ///////////////////////////////////////////////////////////////////////////////
+            case CUSTOMER_CENTER: // 고객센터
             {
                 pushViewController = [[CustomerCenterViewController alloc] initWithNibName:@"CustomerCenterViewController" bundle:nil];
                 break;
             }
-            case 7: // 공인인증센터
+            case CERTIFICATE_CENTER: // 공인인증센터
             {
                 pushViewController = [[CertificateMenuViewController alloc] initWithNibName:@"CertificateMenuViewController" bundle:nil];
                 break;
             }
-            case 8: // NH APPZONE
+            case NH_APPZONE: // NH APPZONE
             {
                 pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
                 break;
@@ -310,7 +392,7 @@
         
         switch (indexPath.row)
         {
-            case 7: // 공인인증센터
+            case CERTIFICATE_CENTER: // 공인인증센터
             {
                 pushViewController = [[CertificateMenuViewController alloc] initWithNibName:@"CertificateMenuViewController" bundle:nil];
                 [self closeMenu:nil];
@@ -319,7 +401,7 @@
                 [((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController pushViewController:eVC animated:YES];
                 break;
             }
-            case 8: // NH APPZONE
+            case NH_APPZONE: // NH APPZONE
             {
                 pushViewController = [[AppZoneViewController alloc] initWithNibName:@"AppZoneViewController" bundle:nil];
                 [self closeMenu:nil];
