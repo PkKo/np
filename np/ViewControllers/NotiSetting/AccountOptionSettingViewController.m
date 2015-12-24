@@ -289,7 +289,8 @@
         NSString *message = @"";
         if(receiptsCount > 0)
         {
-            message = @"UMS에서 이용중인 입출금 알림 옵션이\n설정하신 계좌 알림 옵션으로 변경됩니다.";
+            //message = @"UMS에서 이용중인 입출금 알림 옵션이\n설정하신 계좌 알림 옵션으로 변경됩니다.";
+            message = @"PUSH서비스 옵션을 변경하실 경우 기존 가입되신 UMS(입출금알림) 옵션이 변경되오니 유의하시기 바랍니다.";
         }
         else
         {
