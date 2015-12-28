@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     [self.mNaviView.mBackButton setHidden:NO];
-    [self.mNaviView.mTitleLabel setText:@"NH APPZONE"];
+    [self.mNaviView.mTitleLabel setText:@"NH 앱존"];
     
     NSString * url = [NSString stringWithFormat:@"%@content/html/ef/pu/efpu0930r.html", SERVER_URL];
     NSURL * nsUrl = [NSURL URLWithString:url];

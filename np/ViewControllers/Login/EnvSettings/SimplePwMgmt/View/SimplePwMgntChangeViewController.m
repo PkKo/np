@@ -214,7 +214,7 @@
         
         [[[LoginUtil alloc] init] setSimplePasswordExist:YES];
         
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"간편비밀번호가 번경 되었습니다."
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"간편비밀번호가 변경 되었습니다."
                                                         delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
         alert.tag = ALERT_SUCCEED_SAVE;
         [alert show];

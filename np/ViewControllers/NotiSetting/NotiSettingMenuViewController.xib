@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotiSettingMenuViewController">
@@ -61,10 +61,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="Dy7-MM-bHV">
-                            <rect key="frame" x="0.0" y="82" width="319.99999943361115" height="92"/>
+                            <rect key="frame" x="0.0" y="82" width="319.9999994337382" height="92"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입출금 알림 계좌관리" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="sZJ-IO-4Xa">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입출금 계좌 추가/변경/삭제" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="sZJ-IO-4Xa">
                                     <rect key="frame" x="18" y="1" width="270" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -72,11 +72,11 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_depth_05.png" id="uPc-gC-nmg">
-                                    <rect key="frame" x="287.99999943361115" y="14" width="18" height="18"/>
+                                    <rect key="frame" x="287.9999994337382" y="14" width="18" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NFp-Oy-gIP">
-                                    <rect key="frame" x="0.0" y="1" width="319.99999943361115" height="44"/>
+                                    <rect key="frame" x="0.0" y="1" width="319.9999994337382" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <connections>
@@ -91,11 +91,11 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_depth_05.png" id="QX0-pd-fNx">
-                                    <rect key="frame" x="287.99999943361115" y="59" width="18" height="18"/>
+                                    <rect key="frame" x="287.9999994337382" y="59" width="18" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fzn-TS-kt6">
-                                    <rect key="frame" x="0.0" y="46" width="319.99999943361115" height="44"/>
+                                    <rect key="frame" x="0.0" y="46" width="319.9999994337382" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <connections>
@@ -103,17 +103,17 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" id="7u3-yE-gWc">
-                                    <rect key="frame" x="17.99999943361119" y="45" width="302" height="1"/>
+                                    <rect key="frame" x="17.999999433738218" y="45" width="302" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="npH-8m-7mo">
-                                    <rect key="frame" x="0.0" y="0.0" width="319.99999943361115" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="319.9999994337382" height="1"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.87843137250000003" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="VND-kZ-XKQ">
-                                    <rect key="frame" x="0.0" y="91" width="319.99999943361115" height="1"/>
+                                    <rect key="frame" x="0.0" y="91" width="319.9999994337382" height="1"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" red="0.87843137250000003" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>

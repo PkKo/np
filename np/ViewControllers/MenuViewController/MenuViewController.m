@@ -70,7 +70,7 @@
                        @[@"데이터 초기화"],           //14
   @[@"고객센터", @"icon_customer_01_dft.png", @"icon_customer_01_on.png"],
   @[@"공인인증센터", @"icon_certificate_01_dft.png", @"icon_certificate_01_on.png"],
-  @[@"NH APPZONE", @"icon_app_zone_01_dft.png", @"icon_app_zone_01_on.png"], nil];
+  @[@"NH 앱존", @"icon_app_zone_01_dft.png", @"icon_app_zone_01_on.png"], nil];
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, menuTableView.frame.size.width, TABLE_VIEW_HEADER_HEIGHT)];
     [menuTableView setTableHeaderView:headerView];
