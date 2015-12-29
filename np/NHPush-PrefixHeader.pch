@@ -26,6 +26,6 @@
 #import <IBNgmService/IBNgmService.h>
 #import "LoginUtil.h"
 
-//#define NSLog(...)
+#define NSLog(...)
 
 #endif

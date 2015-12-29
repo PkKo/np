@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -36,13 +36,26 @@
                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6VM-r6-qCS">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="nsL-zk-ijY">
                             <rect key="frame" x="36" y="87" width="213" height="197"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6VM-r6-qCS">
+                                    <rect key="frame" x="0.0" y="0.0" width="213" height="197"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.37647058823529411" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NQV-hn-CNr">
+                                    <rect key="frame" x="0.0" y="0.0" width="213" height="197"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <connections>
+                                        <action selector="linkUrlOpen:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zkv-pp-P1S"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </scrollView>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Lhe-2V-69a">
                             <rect key="frame" x="0.0" y="0.0" width="284" height="315"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,6 +98,8 @@
                 <outlet property="closeDayOptionButton" destination="3T4-SG-cg8" id="e6Y-Fu-i6B"/>
                 <outlet property="contentImage" destination="Lhe-2V-69a" id="AWi-8l-yAQ"/>
                 <outlet property="contentLabel" destination="6VM-r6-qCS" id="JGi-Kf-yjc"/>
+                <outlet property="contentLinkButton" destination="NQV-hn-CNr" id="Gw8-1p-gV1"/>
+                <outlet property="contentScrollView" destination="nsL-zk-ijY" id="OQ5-ne-pBu"/>
                 <outlet property="linkUrlButton" destination="P8H-eo-Uus" id="h5Z-OU-BBm"/>
                 <outlet property="titleLabel" destination="8yj-5y-am5" id="zai-Xq-tKw"/>
             </connections>

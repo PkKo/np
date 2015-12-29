@@ -330,6 +330,9 @@
         {
             [view.contentLabel setText:layerPopupInfo.textBody];
             [view.contentLabel sizeToFit];
+            [view.contentScrollView setContentSize:view.contentLabel.frame.size];
+            [view.contentLinkButton setFrame:view.contentLabel.frame];
+            [view.linkUrlButton setHidden:YES];
         }
         else if([layerPopupInfo.popupType isEqualToString:@"I"])
         {

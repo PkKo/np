@@ -12,7 +12,9 @@
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIScrollView *contentScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *contentLabel;
+@property (strong, nonatomic) IBOutlet UIButton *contentLinkButton;
 @property (strong, nonatomic) IBOutlet UIButton *closeDayOptionButton;
 @property (strong, nonatomic) IBOutlet UIButton *closeButton;
 @property (strong, nonatomic) IBOutlet UIImageView *contentImage;

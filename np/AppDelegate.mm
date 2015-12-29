@@ -149,7 +149,7 @@
     // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달
     ////////////////////////////////////////////////////////////////////////////////////////////////
     [IBPush apnsHandleRemoteNotification:userInfo];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
 }
 
 /*

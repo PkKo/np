@@ -15,6 +15,8 @@
 
 @synthesize delegate;
 @synthesize titleLabel;
+@synthesize contentScrollView;
+@synthesize contentLinkButton;
 @synthesize contentLabel;
 @synthesize closeDayOptionButton;
 @synthesize closeButton;
