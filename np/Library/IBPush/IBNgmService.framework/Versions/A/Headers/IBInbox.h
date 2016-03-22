@@ -25,6 +25,7 @@
 
 @property (nonatomic) int size;
 @property (nonatomic) BOOL ascending;
+@property (nonatomic) BOOL isSimpleView;
 @property (nonatomic) NSArray *accountNumberList;
 @property (nonatomic) NSString * startDate;
 @property (nonatomic) NSString * endDate;
@@ -80,6 +81,7 @@
 + (void)requestInboxCategoryInfo;
 
 + (void)requestDeleteMessages:(NSArray *)sMsgKeys;
++ (void)requestDeleteCategoryMessage:(int)categoryId;
 
 + (void)requestReadMessageWithMsgKey:(NSArray *)sMsgKeys readMethod:(int)readMethod;
 

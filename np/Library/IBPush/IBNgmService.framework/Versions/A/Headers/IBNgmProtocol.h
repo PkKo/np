@@ -103,6 +103,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 @interface InboxCategotyData : NSObject
 
 @property (nonatomic) int32_t categoryId;
+@property (nonatomic) int64_t lastMessageTime;
 @property (nonatomic, readonly) NSString * categoryName;
 @property (nonatomic, readonly) NSString * iconUrl;
 @property (nonatomic, readonly) NSString * iconName;
@@ -119,6 +120,8 @@ typedef enum EN_APNS_REQUEST_TYPE
 
 - (void)apnsAllows:(BOOL)success;
 - (void)registerUserResponse:(int)responseCode;
+- (void)registerDeviceInfoResponse:(int)responseCode;
+- (void)getServiceRouteInfoResponse:(int)responseCode;
 
 @optional
 
@@ -154,6 +157,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 - (void)loadedInboxList:(BOOL)success messageList:(NSArray *)messageList;
 - (void)loadedSingleMessage:(BOOL)success message:(InboxMessageData *)message;
 - (void)removedMessages:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys;
+- (void)deleteCategoryMessages:(BOOL)success;
 
 - (void)loadedInboxCategoryList:(NSArray *)categoryList;
 
