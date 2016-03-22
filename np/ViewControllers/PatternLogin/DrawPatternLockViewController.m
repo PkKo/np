@@ -295,6 +295,12 @@
         return;
     }
     
+    if ([password length] < 8) {
+        [self showAlert:@"4개 이상의 점을 연결하여 패턴을 그려주세요." tag:ALERT_DO_NOTHING];
+        return;
+    }
+    
+    
     [self redrawCorrectDotConnections];
     [self startIndicator];
     [self validateLoginPasswordAndGetAccountList:[self getKey]];

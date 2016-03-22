@@ -32,6 +32,23 @@ typedef enum EN_SERVICE_RESPONSE_CODE
 	ServiceResponseCodeNotRegisteredMoRecipientNum,				// 등록되지 않은 번호
 } ServiceResponseCode;
 
+
+typedef enum EN_REGISTER_RESCODE
+{
+    RegisterResCodeResSuccess							= 100,  //성공
+    RegisterResCodeFailed,                                      //실패
+    RegisterResCodeInternalError,                               //서버 에러
+    
+    RegisterResCodeInvalidRequest						= 1001, //유효하지 않은 요청
+    RegisterResCodeInvalidToken,                                //유효하지 않은 토큰
+    RegisterResCodeInvalidParameter,                            //유효하지 않은 파라미터
+    
+    RegisterResCodeNotFoundUser                         = 3001, //만료된 사용자정보
+    RegisterResCodeNotFoundToken,                               //만료된 토큰정보
+    
+}RegisterResCode;
+
+
 typedef enum INBOX_READ_METHOD
 {
     ReadMethodByNoti = 1,

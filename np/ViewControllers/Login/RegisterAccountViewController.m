@@ -12,6 +12,8 @@
 #import "nFilterNumForPad.h"
 #import "EccEncryptor.h"
 #import "LoginUtil.h"
+#import "StatisticMainUtil.h"
+#import "AccountObject.h"
 
 @interface RegisterAccountViewController ()
 
@@ -65,6 +67,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    CGRect accountListTableRect         = allListView.accountListTable.frame;
+    CGRect convertedAccountListTableRect= [allListView convertRect:accountListTableRect toView:self.view];
+    CGFloat accountListTableHeight      = nextButton.frame.origin.y - convertedAccountListTableRect.origin.y;
+    
+    accountListTableRect.size.height    = accountListTableHeight;
+    
+    [allListView.accountListTable setFrame:accountListTableRect];
 }
 
 #pragma mark - 공인인증 : 전계좌 리스트 뷰 구성
@@ -72,6 +82,10 @@
 {
     allListView = [RegistAccountAllListView view];
     [allListView initAccountList:allAccountList customerName:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
+    
+    // NHI TEST
+    //[allListView highlightDefaultAccount];
+    
     [allListView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [contentView addSubview:allListView];
     [nextButton setTag:0];
@@ -122,8 +136,20 @@
         case 0:
         {
             // 계좌옵션 설정 뷰를 보여줌
-            certifiedAccountNumber = [[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"];
-            [self accountOptionSearchReqeust];
+            // NHI TEST
+            //certifiedAccountNumber = [[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"];
+            
+            certifiedAccountNumber = [allListView getFirstSelectedAccount];
+            
+            NSArray * selectedAccounts = [allListView getSelectedAccounts];
+            if (selectedAccounts && [selectedAccounts count] > 1) {
+                
+                AccountType accountType = [(AccountObject *)[selectedAccounts objectAtIndex:0] accountType];
+                [self createRegistAccountOptionSettingView:accountType response:nil];
+                
+            } else {
+                [self accountOptionSearchReqeust];
+            }
             /*
             optionView = [RegistAccountOptionSettingView view];
             [optionView setDelegate:self];
@@ -227,7 +253,6 @@
 - (void)accountOptionSearchReqeust
 {
     [self startIndicator];
-    
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     /*
 #if !DEV_MODE
@@ -258,12 +283,31 @@
             return;
         }
         
+        [self createRegistAccountOptionSettingView:(AccountType)accountType response:response];
+        
+        /*
         [self.mNaviView.mBackButton removeTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
         [self.mNaviView.mBackButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
         
         optionView = [RegistAccountOptionSettingView view];
         [optionView setDelegate:self];
-        [optionView initDataWithAccountNumber:certifiedAccountNumber];
+        
+        
+        //NHI TEST
+        NSArray * accountNumbers = [allListView getSelectedAccounts];
+        NSInteger numberOfAccounts = 0;
+        if (accountNumbers && accountNumbers.count > 1) {
+            
+            numberOfAccounts = accountNumbers.count - 1;
+            [[optionView accountNicknameInput] setText:@""];
+            [[optionView accountNicknameInput] setEnabled:NO];
+            [[optionView accountNicknameInput] setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1]];
+        }
+        
+        //[optionView initDataWithAccountNumber:certifiedAccountNumber];
+        [optionView initDataWithAccountNumber:certifiedAccountNumber numberOfAccounts:numberOfAccounts];
+        
+        
         [optionView setAccountType:accountType];
         [optionView.accountChangeButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
         [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
@@ -309,12 +353,90 @@
         [optionView.descLabel2 sizeToFit];
         [optionView.descLabel3 sizeToFit];
         [optionView.descLabel4 sizeToFit];
+         */
     }
     else
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:[response objectForKey:RESULT_MESSAGE] delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+- (void)createRegistAccountOptionSettingView:(AccountType)accountType response:(NSDictionary *)response {
+    
+    
+    [self.mNaviView.mBackButton removeTarget:self action:@selector(moveBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.mNaviView.mBackButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    optionView = [RegistAccountOptionSettingView view];
+    [optionView setDelegate:self];
+    
+    
+    //NHI TEST
+    NSArray * accountNumbers = [allListView getSelectedAccounts];
+    NSInteger numberOfAccounts = 0;
+    if (accountNumbers && accountNumbers.count > 1) {
+        
+        numberOfAccounts = accountNumbers.count - 1;
+        [[optionView accountNicknameInput] setPlaceholder:@""];
+        [[optionView accountNicknameInput] setEnabled:NO];
+        [[optionView accountNicknameInput] setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1]];
+        [[optionView accountNicknameTitle] setText:@"계좌별칭 (다계좌 등록시 별칭입력 불가)"];
+    }
+    
+    //[optionView initDataWithAccountNumber:certifiedAccountNumber];
+    [optionView initDataWithAccountNumber:certifiedAccountNumber numberOfAccounts:numberOfAccounts];
+    
+    
+    [optionView setAccountType:accountType];
+    [optionView.accountChangeButton addTarget:self action:@selector(accountChangeClick:) forControlEvents:UIControlEventTouchUpInside];
+    [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
+    
+    if (response) {
+        
+        if([(NSArray *)[[response objectForKey:@"list"] objectForKey:@"sub"] count] > 0)
+        {
+            NSDictionary *optionData = [[[response objectForKey:@"list"] objectForKey:@"sub"] objectAtIndex:0];
+            // 옵션 초기화
+            receiptsPaymentId = [optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_RPID];
+            // 입출금 선택
+            optionView.selectedType = (AlarmSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_EVENT_TYPE] integerValue];
+            // 통지가격
+            if([[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue] < 0)
+            {
+                optionView.selectedAmount = 0;
+            }
+            else
+            {
+                optionView.selectedAmount = (AmountSettingType)[[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PRICE] integerValue];
+            }
+            // 제한시간 설정
+            optionView.notiTimeFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_TIME_FLAG] boolValue];
+            // 알림제한 시작
+            optionView.notiStartTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ST] intValue];
+            // 알림제한 종료
+            optionView.notiEndTime = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_UNNOTI_ET] intValue];
+            // 잔액표시 여부
+            optionView.balanceFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_BALANCE_FLAG] intValue];
+            // 자동이체 선택
+            optionView.notiAutoFlag = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_AUTO_FLAG] intValue];
+            // 알림 주기
+            optionView.notiPeriodType = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_PERIOD_TYPE] intValue];
+            // 지정시간
+            optionView.notiPeriodTime1 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_ONE] intValue];
+            optionView.notiPeriodTime2 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_TWO] intValue];
+            optionView.notiPeriodTime3 = [[optionData objectForKey:RESPONSE_NOTI_OPTION_SEARCH_NOTI_TIME_THREE] intValue];
+        }
+    }
+    
+    [optionView makeAllOptionDataView];
+    [contentView addSubview:optionView];
+    [nextButton setTag:2];
+    [optionView.descLabel1 sizeToFit];
+    [optionView.descLabel2 sizeToFit];
+    [optionView.descLabel3 sizeToFit];
+    [optionView.descLabel4 sizeToFit];
+    
 }
 
 - (void)accountChangeClick:(id)sender
@@ -362,7 +484,26 @@
      */
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     
+    // NHI TEST
     [reqBody setObject:[optionView.accountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""] forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
+    
+    NSLog(@"key:%@ - value: %@", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, [optionView.accountNumberLabel.text stringByReplacingOccurrencesOfString:STRING_DASH withString:@""]);
+    
+    NSArray * selectedAccounts = [allListView getSelectedAccounts];
+    if (selectedAccounts && selectedAccounts.count > 1) {
+        
+        int numberOfAccounts = selectedAccounts.count;
+        
+        for (int accountIdx = 1; accountIdx < numberOfAccounts; accountIdx++) {
+            AccountObject * account = (AccountObject *)[selectedAccounts objectAtIndex:accountIdx];
+            [reqBody setObject:account.accountNo forKey:[NSString stringWithFormat:@"%@_0%d", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, (accountIdx + 1)]];
+            
+            NSLog(@"key: %@ - value:%@", [NSString stringWithFormat:@"%@_0%d", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, (accountIdx + 1)], account.accountNo);
+        }
+    }
+    
+    
+    
     if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
     {
         [reqBody setObject:receiptsPaymentId forKey:REQUEST_NOTI_OPTION_RECEIPTS_ID];

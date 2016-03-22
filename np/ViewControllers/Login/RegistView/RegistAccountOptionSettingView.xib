@@ -22,30 +22,45 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌 알림 옵션을 설정해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="gtt-a6-0Vf">
                                     <rect key="frame" x="0.0" y="15" width="320" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" id="Jpd-rG-ggT" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="50" width="284" height="57"/>
+                                    <rect key="frame" x="18" y="50" width="284" height="94"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌번호" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="YgT-qX-i5p">
-                                            <rect key="frame" x="18" y="0.0" width="50" height="57"/>
+                                            <rect key="frame" x="18" y="15" width="70" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kMv-hG-C2e">
+                                            <rect key="frame" x="0.0" y="47" width="284" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.96470588235294119" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111-22-333333" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="fEr-qu-bxX">
-                                            <rect key="frame" x="70" y="0.0" width="130" height="57"/>
+                                            <rect key="frame" x="18" y="64" width="140" height="13"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.18431372549019609" green="0.61568627450980395" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="외 2건" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="xmq-bf-ZQc">
+                                            <rect key="frame" x="128" y="64" width="39" height="13"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.16862745583057404" green="0.27450981736183167" blue="0.078431375324726105" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NLU-f0-0Gz">
-                                            <rect key="frame" x="202" y="20" width="64" height="18"/>
+                                            <rect key="frame" x="212" y="64" width="64" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.81568627450980391" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -55,11 +70,11 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="WlT-66-0Cc" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="116" width="284" height="94"/>
+                                    <rect key="frame" x="18" y="153" width="284" height="94"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌별칭" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="AZh-Yy-Hbx">
-                                            <rect key="frame" x="18" y="15" width="50" height="18"/>
+                                            <rect key="frame" x="18" y="15" width="258" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -87,7 +102,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="Lvd-bC-aQx" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="219" width="284" height="94"/>
+                                    <rect key="frame" x="18" y="256" width="284" height="94"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입출금 선택" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="4FK-Aj-dlO">
@@ -186,7 +201,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="dZM-DC-zdR" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="322" width="284" height="106"/>
+                                    <rect key="frame" x="18" y="359" width="284" height="106"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="통지금액" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="HXn-2B-JLz">
@@ -263,7 +278,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="5Qr-Qo-5Sf" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="437" width="284" height="94"/>
+                                    <rect key="frame" x="18" y="474" width="284" height="94"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잔액표시" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="3wF-OZ-hLS">
@@ -336,7 +351,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="mUc-5s-8Pg" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="540" width="284" height="94"/>
+                                    <rect key="frame" x="18" y="577" width="284" height="94"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자동이체 선택" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="0lK-o3-h3h">
@@ -382,7 +397,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="NAw-nd-2QH" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="643" width="284" height="123"/>
+                                    <rect key="frame" x="18" y="680" width="284" height="123"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 시간 제한(24시간 기준으로 입력)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="H6P-Ir-yjF">
@@ -493,7 +508,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="C0s-wb-nwR" customClass="StrokeView">
-                                    <rect key="frame" x="18" y="775" width="284" height="124"/>
+                                    <rect key="frame" x="18" y="812" width="284" height="124"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림주기(24시간 기준으로 입력)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="A5V-Dj-11c">
@@ -634,7 +649,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NFS-Ao-t77">
-                                    <rect key="frame" x="18" y="918" width="5" height="10"/>
+                                    <rect key="frame" x="18" y="955" width="5" height="10"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -642,7 +657,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자동이체 옵션을 '제한없음(실시간)'으로 선택하시는 경우, 새벽에 발생되는 자동이체 입출금 알림도 실시간 발송됩니다." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vhl-MP-o7B">
-                                    <rect key="frame" x="25" y="914" width="277" height="48"/>
+                                    <rect key="frame" x="25" y="951" width="277" height="48"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -650,7 +665,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" id="qz4-Ch-mON">
-                                    <rect key="frame" x="18" y="966" width="284" height="56"/>
+                                    <rect key="frame" x="18" y="1003" width="284" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NDg-PW-hht">
@@ -671,7 +686,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="Fo3-xF-AcS">
-                                    <rect key="frame" x="18" y="1014" width="284" height="39"/>
+                                    <rect key="frame" x="18" y="1051" width="284" height="39"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fDz-s3-f1T">
@@ -681,7 +696,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌 알림 옵션은 알림설정&gt;입출금 계좌 추가/변경/삭제에서 변경 가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yWR-yp-lfq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌 알림 옵션은 알림설정&gt;계좌 추가/변경/삭제에서 변경 가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yWR-yp-lfq">
                                             <rect key="frame" x="7" y="0.0" width="277" height="32"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -692,7 +707,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="aD9-qt-zcb">
-                                    <rect key="frame" x="18" y="1050" width="284" height="42"/>
+                                    <rect key="frame" x="18" y="1087" width="284" height="42"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gc3-b5-mbd">
@@ -713,7 +728,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="jgp-8V-DvT">
-                                    <rect key="frame" x="18" y="1092" width="284" height="42"/>
+                                    <rect key="frame" x="18" y="1129" width="284" height="42"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YvK-sH-aAh">
@@ -733,8 +748,29 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <view contentMode="scaleToFill" id="0et-E4-Gee" userLabel="Desc View6">
+                                    <rect key="frame" x="18" y="1171" width="284" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8r8-dk-9T2">
+                                            <rect key="frame" x="0.0" y="4" width="5" height="10"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다계좌추가일 경우 알림옵션이 동일하게 적용됩니다." lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LHW-eT-f8l">
+                                            <rect key="frame" x="7" y="0.0" width="277" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yxn-6F-bed">
-                                    <rect key="frame" x="80" y="1098" width="160" height="40"/>
+                                    <rect key="frame" x="80" y="1135" width="160" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -759,6 +795,7 @@
                 <outlet property="accountChangeButton" destination="NLU-f0-0Gz" id="CZ1-fd-EkI"/>
                 <outlet property="accountDeleteButton" destination="Yxn-6F-bed" id="8V0-27-7ff"/>
                 <outlet property="accountNicknameInput" destination="04K-K9-RBy" id="rjd-tk-vnv"/>
+                <outlet property="accountNicknameTitle" destination="AZh-Yy-Hbx" id="8Dt-ud-kty"/>
                 <outlet property="accountNumberLabel" destination="fEr-qu-bxX" id="gYH-km-6b9"/>
                 <outlet property="amountLimitBgView" destination="4Zq-TD-RCz" id="wYy-xF-K68"/>
                 <outlet property="amountNoLimitImg" destination="PKV-Ga-aJq" id="gX9-gA-ZVE"/>
@@ -785,10 +822,12 @@
                 <outlet property="descLabel3" destination="yWR-yp-lfq" id="AOr-0W-mJQ"/>
                 <outlet property="descLabel4" destination="AGK-it-rl7" id="zDL-43-dHQ"/>
                 <outlet property="descLabel5" destination="TV6-Ul-kFJ" id="JVB-aZ-bBm"/>
+                <outlet property="descLabel6" destination="LHW-eT-f8l" id="wkn-F4-tzo"/>
                 <outlet property="descView2" destination="qz4-Ch-mON" id="zsg-Ho-1Ta"/>
                 <outlet property="descView3" destination="Fo3-xF-AcS" id="33Y-WS-7g1"/>
                 <outlet property="descView4" destination="aD9-qt-zcb" id="6ie-Px-RGL"/>
                 <outlet property="descView5" destination="jgp-8V-DvT" id="lia-rI-KYK"/>
+                <outlet property="descView6" destination="0et-E4-Gee" id="3dG-Fa-MM0"/>
                 <outlet property="notiAbortLabel" destination="Uiy-LA-oNl" id="0Rl-hH-Ywr"/>
                 <outlet property="notiAbortOnImg" destination="FTs-2K-lAj" id="zAD-4d-2ca"/>
                 <outlet property="notiAutoText" destination="y6n-NK-h1W" id="Rox-8L-LQS"/>
@@ -801,6 +840,7 @@
                 <outlet property="notiTimeStartLabel" destination="xDa-s3-1gY" id="29E-Gg-Fxo"/>
                 <outlet property="notiTimeThreeText" destination="g0P-j9-XhO" id="9if-k0-eSt"/>
                 <outlet property="notiTimeTwoText" destination="5Ik-dY-Byo" id="y4S-pd-aNJ"/>
+                <outlet property="numberOfAccountsLabel" destination="xmq-bf-ZQc" id="FUK-9C-gBa"/>
                 <outlet property="scrollView" destination="B6A-fx-7xM" id="gQg-RG-cBM"/>
                 <outlet property="withdrawSelectImg" destination="UlU-T3-k5H" id="TUg-oe-DKh"/>
                 <outlet property="withdrawSelectText" destination="OYI-qB-qkZ" id="9fW-B6-8N0"/>

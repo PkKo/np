@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -36,7 +36,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R2t-Cr-91t">
-                    <rect key="frame" x="280" y="13" width="27" height="27"/>
+                    <rect key="frame" x="278" y="13" width="29" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                     <state key="normal" backgroundImage="menu_01.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,6 +69,6 @@
     <resources>
         <image name="back_01.png" width="27" height="27"/>
         <image name="logo_01.png" width="172" height="27"/>
-        <image name="menu_01.png" width="27" height="27"/>
+        <image name="menu_01.png" width="29" height="27"/>
     </resources>
 </document>

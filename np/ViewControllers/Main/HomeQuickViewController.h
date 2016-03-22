@@ -42,8 +42,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *noticeTitleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tabOneBg;
 @property (strong, nonatomic) IBOutlet UIImageView *tabTwoBg;
+
+@property (assign, nonatomic) SIMPLE_VIEW_TYPE notifType;
+
 - (IBAction)selectTabButton:(id)sender;
 - (IBAction)noticeClick:(id)sender;
 - (IBAction)moveMainView:(id)sender;
-
 @end

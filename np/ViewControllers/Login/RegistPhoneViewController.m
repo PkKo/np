@@ -104,7 +104,9 @@
                                             bottomDescView.frame.size.height)];
     }
     
-    crmPhoneNumber = [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    crmPhoneNumber = [CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE]
+                                 decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:REGIST_TYPE] isEqualToString:REGIST_TYPE_ACCOUNT])
     {
         [phoneNumberInput setText:[crmPhoneNumber substringWithRange:NSMakeRange(3, crmPhoneNumber.length - 3)]];

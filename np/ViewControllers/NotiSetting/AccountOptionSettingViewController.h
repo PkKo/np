@@ -19,6 +19,7 @@
 }
 
 @property (strong, nonatomic) NSString *accountNumber;
+@property (strong, nonatomic) NSArray  *accountNumbers;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (assign, nonatomic) BOOL isNewAccount;
 

@@ -108,6 +108,14 @@
     [IBInbox requestInboxCategoryInfo];
 }
 
+- (void)inboxLoadFailed:(int)responseCode
+{
+    NSLog(@"%s,responseCode: %d", __FUNCTION__, responseCode);
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버 오류가 발생되었습니다.\n다시 시도해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    alert.tag = 243;
+    [alert show];
+}
+
 - (void)loadedInboxCategoryList:(NSArray *)categoryList
 {
     NSLog(@"%s, %@", __FUNCTION__, categoryList);
@@ -131,6 +139,9 @@
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
+    
+    [vc setNotifType:((AppDelegate *)[UIApplication sharedApplication].delegate).simpleViewType];
+    
 }
 
 #pragma mark - 세션 생성 init 및 앱 버전 확인
@@ -278,7 +289,6 @@
 
 - (void)getBannerInfoResponse:(NSDictionary *)response
 {
-//    NSLog(@"%s, %@", __FUNCTION__, response);
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         BannerInfo *bannerInfo = [[BannerInfo alloc] init];
@@ -293,8 +303,10 @@
         bannerInfo.viewStartDate    = [response objectForKey:@"view_startdate"];
         bannerInfo.viewType         = [response objectForKey:@"view_type"];
         
+        
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
-        [self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
+        //[self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
+        [self performSelector:@selector(getBannerImages) withObject:nil];
     }
     
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
@@ -472,18 +484,17 @@
     {
         if(buttonIndex == BUTTON_INDEX_OK)
         {
-//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
-//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"com.nonghyup.nhsmartbanking://"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_APP_URL]];
             // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
+            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
         }
         [self getBannerInfoRequest];
     }
     else if([alertView tag] == 1101)
     {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://geo.itunes.apple.com/kr/app/newnhseumateubaengking/id398002630?mt=8"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_APP_URL]];
         // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
     }
     else if([alertView tag] == 90001)
     {
@@ -492,6 +503,16 @@
     else if ([alertView tag] == 90004)
     {
         [((AppDelegate *)[UIApplication sharedApplication].delegate) restartApplication];
+        
+        
+    } else if ([alertView tag] == 243) { // failed to the total number of unread message
+        
+        // 퀵뷰
+        HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
+        ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:vc];
+        
+        [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
     }
 }
 

@@ -26,6 +26,23 @@
     return view;
 }
 
++ (id)viewForAddAccount
+{
+    NSString *nibName  = @"RegistAccountAllListViewAddAccount";
+    UINib   * nib        = [UINib nibWithNibName:nibName bundle:nil];
+    NSArray * nibObjects = [nib instantiateWithOwner:nil options:nil];
+    
+    NSAssert2(([nibObjects count] > 0) && [[nibObjects objectAtIndex:0] isKindOfClass:[self class]],
+              @"Xib '%@' does not appear to contain a valid %@",
+              NSStringFromClass([self class]), NSStringFromClass([self class]));
+    
+    id view = [nibObjects objectAtIndex:0];
+    
+    
+    return view;
+}
+
+
 + (id)view_iPhone5
 {
 

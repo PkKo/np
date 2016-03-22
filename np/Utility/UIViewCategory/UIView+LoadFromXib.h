@@ -11,6 +11,7 @@
 @interface UIView (LoadFromXib)
 
 + (id)view;
++ (id)viewForAddAccount;
 + (id)view_iPhone5;
 + (id)cell;
 

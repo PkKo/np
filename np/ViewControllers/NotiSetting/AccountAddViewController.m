@@ -93,6 +93,18 @@
 
 - (void)makeCertMenuView
 {
+    // NHI TEST
+    // move account list downward
+    CGRect certMenuContentViewBounds = certMenuContentView.frame;
+    if (certMenuContentViewBounds.origin.y == 0) {
+        
+        certMenuContentViewBounds.origin.y      = 50;
+        certMenuContentViewBounds.size.height  -= certMenuContentViewBounds.origin.y;
+        
+        [certMenuContentView setFrame:certMenuContentViewBounds];
+    }
+    
+    
     if([[certMenuContentView subviews] count] > 0)
     {
         for(UIView *subview in [certMenuContentView subviews])
@@ -377,6 +389,7 @@
         if([(NSArray *)[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"] count] > 0)
         {
             allAccountList = [NSMutableArray arrayWithArray:[[response objectForKey:RESPONSE_CERT_ACCOUNT_LIST] objectForKey:@"allAccountList"]];
+            
             NSMutableArray *tempAllAccountList = [NSMutableArray arrayWithArray:allAccountList];
             NSArray *joinedAccounts = [[[LoginUtil alloc] init] getAllAccounts];
             for(NSDictionary *account in allAccountList)
@@ -389,8 +402,15 @@
                     }
                 }
             }
+            
+            // move account list upward
+            CGRect certMenuContentViewBounds        = certMenuContentView.frame;
+            certMenuContentViewBounds.size.height   += certMenuContentViewBounds.origin.y;
+            certMenuContentViewBounds.origin.y      = 0;
+            [certMenuContentView setFrame:certMenuContentViewBounds];
+            
             allAccountList = tempAllAccountList;
-            allListView = [RegistAccountAllListView view];
+            allListView = [RegistAccountAllListView viewForAddAccount];
             [allListView initAccountList:allAccountList customerName:[response objectForKey:@"user_name"]];
             [allListView setFrame:CGRectMake(0, 0, certMenuContentView.frame.size.width, certMenuContentView.frame.size.height)];
             [allListView setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0/255.0f blue:246.0/255.0f alpha:1.0f]];
@@ -398,6 +418,15 @@
             [nextButton setHidden:NO];
             [nextButton setEnabled:YES];
             [nextButton setBackgroundColor:BUTTON_BGCOLOR_ENABLE];
+            
+            CGRect accountListTableRect         = allListView.accountListTable.frame;
+            CGRect convertedAccountListTableRect= [allListView convertRect:accountListTableRect toView:self.view];
+            CGFloat accountListTableHeight      = nextButton.frame.origin.y - convertedAccountListTableRect.origin.y;
+            
+            accountListTableRect.size.height    = accountListTableHeight;
+            
+            [allListView.accountListTable setFrame:accountListTableRect];
+            
         }
     }
     else
@@ -487,10 +516,20 @@
         {
             // 공인인증서로 추가
             // 계좌번호가 있으면 옵션 설정 뷰 컨트롤러로 이동한다.
-            if([allAccountList count] > 0)
-            {
+            
+            //if([allAccountList count] > 0) // NHI TEST
+            NSArray * selectedAccounts = [allListView getSelectedAccounts];
+            if (selectedAccounts && [selectedAccounts count] > 0) {
+                
                 AccountOptionSettingViewController *vc = [[AccountOptionSettingViewController alloc] init];
+                
+                /* // NHI TEST
                 [vc setAccountNumber:[[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"]];
+                */
+                
+                [vc setAccountNumber:[allListView getFirstSelectedAccount]];
+                [vc setAccountNumbers:selectedAccounts];
+                
                 [vc setIsNewAccount:YES];
                 ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
                 

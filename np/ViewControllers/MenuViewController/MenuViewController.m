@@ -59,7 +59,7 @@
   @[@"보관함", @"icon_storage_01_dft.png", @"icon_storage_01_on.png"],
   @[@"알림 설정", @"icon_notice_setting_01_dft.png", @"icon_notice_setting_01_on.png"],
                        @[@"알림 받기 설정"],          //5
-                       @[@"입출금 계좌 추가/변경/삭제"], //6
+                       @[@"계좌 추가/변경/삭제"], //6
                        @[@"환율알림 설정"],           //7
   @[@"환경 설정", @"icon_settings_01_dft.png", @"icon_settings_01_on.png"],
                        @[@"간편보기 사용"],           //9

@@ -25,11 +25,20 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
+    NSInteger numberOfPages = existNoticeBanner ? 2 : 1;
+    [pageControl setNumberOfPages:numberOfPages];
+    [pageControl setHidden:!existNoticeBanner];
+    
     // Drawing code
-    [scrollView setContentSize:CGSizeMake(rect.size.width * 2, rect.size.height)];
+    [scrollView setContentSize:CGSizeMake(rect.size.width * numberOfPages, rect.size.height)];
 
     [nongminBanner setFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
-    [noticeBanner setFrame:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height)];
+    
+    if (existNoticeBanner) {
+        [noticeBanner setFrame:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height)];
+    }
+    
     /*
     [scrollView scrollRectToVisible:CGRectMake(rect.size.width, 0, rect.size.width, rect.size.height) animated:NO];
     

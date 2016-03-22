@@ -31,6 +31,7 @@
 - (void)showMainPage;
 - (void)showLoginPage:(UINavigationController *)navController;
 - (void)showSelfIdentifer:(LoginMethod)loginMethod;
+- (void)showSelfIdentifer:(LoginMethod)loginMethod accountNumber:(NSString *)accountNumber;
 
 #pragma mark - Certificate Login
 - (void)removeCertToLogin;
@@ -46,7 +47,6 @@
 - (void)saveAllAccounts:(NSArray *)allAccounts;
 - (NSArray *)getAllTransAccounts;
 - (void)saveAllTransAccounts:(NSArray *)allAccounts;
-
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated;

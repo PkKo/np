@@ -3,22 +3,43 @@
     {
       "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "2x"
+      "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "3x"
-    },
-    {
       "idiom" : "iphone",
-      "size" : "40x40",
+      "filename" : "58px.png",
       "scale" : "2x"
     },
     {
+      "size" : "29x29",
       "idiom" : "iphone",
-      "size" : "40x40",
+      "filename" : "87px.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "80px.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "40px@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "57px.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "114px.png",
+      "scale" : "2x"
     },
     {
       "size" : "60x60",

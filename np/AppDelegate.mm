@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SplashViewController.h"
+#import "HomeQuickViewController.h"
 
 @interface AppDelegate ()
 
@@ -47,13 +48,33 @@
     [[IBNgmService sharedInstance] setAccountServAddr:IPNS_ACCOUNT_HOST];
     [[IBNgmService sharedInstance] setPortNum:6100];
     
+    //[IBNgmService setNgmServiceReceiver:self];
+    
     // APN 데이터를 처리한 후 라이브러리로부터 메시지를 받을 Delegate 설정
     [IBPush setApnsHelperReceiver:(AppDelegate *)[[UIApplication sharedApplication] delegate]];
     // APNS Device 등록 및 Device Token 요청
     [IBPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-    
     NSInteger count = [UIApplication sharedApplication].applicationIconBadgeNumber;
     NSLog(@"%s, %d, %d", __FUNCTION__, (int)count, (int)application.applicationIconBadgeNumber);
+    
+    
+    
+    
+    
+    
+    
+    //Remote notification info
+    NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    //Accept push notification when app is not open
+    if (remoteNotifiInfo) {
+        [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
+    }
+    
+    
+    
+    
+    
+    
     
     /*
     if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
@@ -131,6 +152,28 @@
     NSLog(@"##########################################################");
     
     NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, userInfo);
+    
+    if (userInfo[@"scd"] != nil) {
+        
+        NSInteger scd = [userInfo[@"scd"] intValue];
+        
+        if (scd >= 100 && scd <= 106) {
+            
+            self.simpleViewType = SIMPLE_VIEW_TYPE_PUSH;
+            
+        } else {
+            self.simpleViewType = SIMPLE_VIEW_TYPE_NOTI;
+        }
+        
+    } else {
+        self.simpleViewType = SIMPLE_VIEW_TYPE_NOTI;
+    }
+    
+    if (self.slidingViewController && slidingViewController.topViewController && [self.slidingViewController.topViewController isKindOfClass:[HomeQuickViewController class]]) {
+        
+        [(HomeQuickViewController *)slidingViewController.topViewController setNotifType:self.simpleViewType];
+    }
+    
     /*
     NSInteger badgeCount = 0;
     badgeCount = application.applicationIconBadgeNumber + 1;
@@ -148,7 +191,13 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // APN(Apple Push Notification) 데이터 처리를 위해 Library에 데이터 전달
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     [IBPush apnsHandleRemoteNotification:userInfo];
+    
+    
+    
+    
 //    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
 }
 

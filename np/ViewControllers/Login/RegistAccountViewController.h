@@ -32,6 +32,7 @@
 
 @property (assign, nonatomic) BOOL isSelfIdentified;
 @property (assign, nonatomic) LoginMethod loginMethod;
+@property (copy, nonatomic) NSString * accountNumber;
 
 - (void)certInfoSelected:(CertInfo *)certInfo;
 - (IBAction)changeRegistView:(id)sender;

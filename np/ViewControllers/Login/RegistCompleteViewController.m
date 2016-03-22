@@ -47,6 +47,9 @@
 #pragma mark - 배너정보 가져오기
 - (void)getBannerInfoRequest
 {
+    
+    NSLog(@"NHI --->getBannerInfoRequest");
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_BANNER_INFO];
     HttpRequest *req = [HttpRequest getInstance];
     [req setDelegate:self selector:@selector(getBannerInfoResponse:)];
@@ -56,7 +59,7 @@
 - (void)getBannerInfoResponse:(NSDictionary *)response
 {
     NSLog(@"%s, %@", __FUNCTION__, response);
-    BannerInfo *bannerInfo = [[BannerInfo alloc] init];
+    
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
         BannerInfo *bannerInfo = [[BannerInfo alloc] init];
@@ -74,7 +77,8 @@
         ((AppDelegate *)[UIApplication sharedApplication].delegate).bannerInfo = bannerInfo;
     }
     
-    [self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
+    //[self performSelectorInBackground:@selector(getBannerImages) withObject:nil];
+    [self performSelector:@selector(getBannerImages) withObject:nil];
 }
 
 - (void)getBannerImages

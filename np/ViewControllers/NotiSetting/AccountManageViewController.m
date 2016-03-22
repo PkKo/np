@@ -31,7 +31,7 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setHidden:NO];
     [self.mNaviView.imgTitleView setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"입출금 알림 계좌관리"];
+    [self.mNaviView.mTitleLabel setText:@"계좌 추가/변경/삭제"];
 }
 
 - (void)didReceiveMemoryWarning

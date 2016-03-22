@@ -43,8 +43,8 @@
 #define NH_BANK_AUTH_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getauth.jsp"
 #define NH_BANK_CERT_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"
 
-#define APP_STORE_APP_URL               @"https://itunes.apple.com/kr/app/seumateunhnonghyeobkadeu/id406473666?l=en&mt=8"
-#define APP_STORE_APP_VERSION_CHECK_URL @"http://itunes.apple.com/lookup?id=406473666"
+#define APP_STORE_APP_URL               @"https://itunes.apple.com/us/app/nh-seumateu-allim/id1084588831?ls=1&mt=8"
+#define APP_STORE_APP_VERSION_CHECK_URL @"http://itunes.apple.com/lookup?id=1084588831"
 #define NONG_MIN_NEWS_URL               @"http://www.nongmin.com/xml/app_push/ar_xml_all.xml"
 
 /*
@@ -213,6 +213,8 @@
 // 신규 계좌 추가 알림 설정
 #define REQUEST_NOTI_OPTION_NEW_SET         @"servlet/EFPUD020001.cmd"
 //////////////////////////////////////////////////////////////////
+
+#define MAX_NUM_OF_SELECTED_ACCOUNT         3
 #define REQUEST_NOTI_OPTION_ACCOUNT_NUMBER  @"account_number"
 #define REQUEST_NOTI_OPTION_RECEIPTS_ID     @"receipts_payment_id"
 #define REQUEST_NOTI_OPTION_EVENT_TYPE      @"noti_event_type"
@@ -324,6 +326,28 @@ typedef enum LoginMethod {
 #define ALERT_GOTO_SELF_IDENTIFY    100
 #define ALERT_DO_NOTHING            0
 #define ALERT_SUCCEED_SAVE          1
+
+typedef enum SIMPLE_VIEW_TYPE {
+    SIMPLE_VIEW_TYPE_PUSH = 1,
+    SIMPLE_VIEW_TYPE_NOTI = 2
+} SIMPLE_VIEW_TYPE;
+
+
+typedef enum AccountType
+{
+    REGISTERED = 0,
+    // 입출금(요구불)
+    NORMAL = 1,
+    // 외화(요구불)
+    EXCHANGE,
+    // 수익증권
+    FUND,
+    // 신탁
+    TRUST
+}AccountType;
+
+#define ACCOUNT_TYPE_DESCRIPTION [NSArray arrayWithObjects:@"입출금알림(PUSH) 기등록 계좌", @"입출식 계좌", @"외화 입출식 계좌", @"수입증권 계좌", @"신탁 계좌", nil]
+
 
 
 #endif

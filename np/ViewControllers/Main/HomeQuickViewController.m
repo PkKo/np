@@ -59,11 +59,6 @@
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
     
-    [pushMenuButton setEnabled:NO];
-    [noticeMenuButton setEnabled:YES];
-    [tabOneBg setHidden:[pushMenuButton isEnabled]];
-    [tabTwoBg setHidden:[noticeMenuButton isEnabled]];
-    
     [noticeIconView.layer setCornerRadius:(noticeIconView.frame.size.height /2)];
     [noticeIconView setAlpha:0.9f];
     
@@ -79,14 +74,18 @@
     [noticeTableView setTableFooterView:footerView];
     
     // 2. 최신순으로 5개만 선택해 보여준다.
-    isPushListRequest = YES;
     [IBInbox loadWithListener:self];
+    /*
+    isPushListRequest = YES;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
     [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
     [reqData setQueryType:@"1,2,3,4,5,6"];
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
+    */
+    
+    
     
     NSInteger pushCount = [CommonUtil getUnreadCountForBanking];
     if(pushCount > 99)
@@ -153,6 +152,8 @@
     [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, contentView.frame.size.height)];
     
     [self getRecentNoticeRequest];
+    
+    [self selectTabBasedOnNotifType:_notifType];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -163,7 +164,12 @@
     [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.frame.size.width, bannerInfoView.frame.size.height)];
     [bannerView addSubview:bannerInfoView];
     [bannerView bringSubviewToFront:bannerInfoView];
-    [bannerInfoView bannerTimerStart];
+    
+    BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
+    if (existNoticeBanner) {
+        [bannerInfoView bannerTimerStart];
+    }
+    
     [bannerView setUserInteractionEnabled:YES];
     [scrollView bringSubviewToFront:bannerView];
     [bannerInfoView.nongminBanner setBackgroundImage:((AppDelegate *)[UIApplication sharedApplication].delegate).nongminBannerImg forState:UIControlStateNormal];
@@ -219,8 +225,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)requestPushList {
+    
+    [self startIndicator];
+    
+    isPushListRequest = YES;
+    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+    [reqData setAscending:YES];
+    [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
+    [reqData setQueryType:@"1,2,3,4,5,6"];
+    [reqData setSize:5];
+    [IBInbox reqQueryAccountInboxListWithSize:reqData];
+}
+
 - (void)requestNoticeList
 {
+    [self startIndicator];
+    
     isPushListRequest = NO;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     [reqData setAscending:YES];
@@ -547,6 +568,7 @@
 #pragma mark - IBInboxProtocol
 - (void)loadedAccountQueryInboxList:(BOOL)success messageList:(NSArray *)messageList
 {
+    [self stopIndicator];
     if(success)
     {
         if(isPushListRequest)
@@ -594,9 +616,39 @@
     }
 }
 
+- (void)inboxLoadFailed:(int)responseCode
+{
+    [self stopIndicator];
+    NSLog(@"%s,responseCode: %d", __FUNCTION__, responseCode);
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림" message:@"서버 오류가 발생되었습니다.\n다시 시도해주세요."
+                                                    delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    alert.tag = 243;
+    [alert show];
+}
+
+
 - (void)loadingInboxList
 {
     NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)selectTabBasedOnNotifType:(SIMPLE_VIEW_TYPE)notifType {
+    
+    [pushMenuButton setEnabled:_notifType == SIMPLE_VIEW_TYPE_NOTI ? NO : YES];
+    [noticeMenuButton setEnabled:!pushMenuButton.isEnabled];
+    [tabOneBg setHidden:[pushMenuButton isEnabled]];
+    [tabTwoBg setHidden:[noticeMenuButton isEnabled]];
+    
+    [self selectTabButton:notifType == SIMPLE_VIEW_TYPE_NOTI ? noticeMenuButton : pushMenuButton];
+}
+
+- (void)setNotifType:(SIMPLE_VIEW_TYPE)notifType {
+    
+    _notifType = notifType;
+    
+    if (noticeMenuButton) {
+        [self selectTabBasedOnNotifType:_notifType];
+    }
 }
 
 - (IBAction)selectTabButton:(id)sender
@@ -625,10 +677,13 @@
                 [noticeTableView setHidden:YES];
                 [emptyListView setHidden:NO];
             }
+        } else {
+            [self requestPushList];
         }
     }
     else if (currentButton == noticeMenuButton)
     {
+        
         if(isNoticeListLoadingEnd)
         {
             if([noticeList count] > 0)
@@ -651,6 +706,7 @@
         }
     }
 }
+
 
 - (IBAction)noticeClick:(id)sender
 {

@@ -25,6 +25,7 @@
 #import "RegistAccountViewController.h"
 #import "ServiceDeactivationController.h"
 #import "DBManager.h"
+#import "AccountObject.h"
 
 @implementation LoginUtil
 
@@ -157,7 +158,7 @@
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
 }
 
-- (void)showSelfIdentifer:(LoginMethod)loginMethod {
+- (void)showSelfIdentifer:(LoginMethod)loginMethod accountNumber:(NSString *)accountNumber {
     
     UINavigationController * navController = ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController.navigationController;
     
@@ -194,9 +195,14 @@
     RegistAccountViewController *vc = [[RegistAccountViewController alloc] initWithNibName:@"SelfIdentifyViewController" bundle:nil];
     [vc setIsSelfIdentified:YES];
     [vc setLoginMethod:loginMethod];
+    [vc setAccountNumber:accountNumber];
     ECSlidingViewController *eVC = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
     [navController pushViewController:eVC animated:shouldAnimateSelfIdentifier];
+}
+
+- (void)showSelfIdentifer:(LoginMethod)loginMethod {
+    [self showSelfIdentifer:loginMethod accountNumber:nil];
 }
 
 #pragma mark - Certificate Login
@@ -262,22 +268,26 @@
     
     int numberOfAccounts    = (int)[accounts count];
     
-    NSMutableArray * accountNumbers         = [NSMutableArray array];
-    NSMutableArray * transAccountNumbers    = [NSMutableArray array];
+    NSMutableArray * accountNumbers             = [NSMutableArray array];
+    NSMutableArray * transAccountNumbers        = [NSMutableArray array];
     
     if (numberOfAccounts > 0) {
         
         for (NSDictionary * accountDic in accounts) {
             
             NSString * account = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_number"]);
+            
             if (account && ![account isEqualToString:@""]) {
-                [accountNumbers addObject:[CommonUtil encrypt3DESWithKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
+                
+                NSString * encryptedAccountNo = [CommonUtil encrypt3DESWithKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+                
+                [accountNumbers addObject:encryptedAccountNo];
                 
                 // 입출금 계좌
                 NSString * accountType = (NSString *)(accountDic[@"UMSA360101_OUT_SUB.account_type"]);
                 
                 if ([accountType isEqualToString:@"1"]) { // 1:입출금 계좌
-                    [transAccountNumbers addObject:[CommonUtil encrypt3DESWithKey:[[StatisticMainUtil sharedInstance] getAccountNumberWithoutDash:account] key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
+                    [transAccountNumbers addObject:encryptedAccountNo];
                 }
             }
         }
@@ -336,7 +346,6 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:allAccounts forKey:PREF_KEY_ALL_TRANS_ACCOUNT];
 }
-
 
 #pragma mark - Simple Login
 - (void)gotoSimpleLoginMgmt:(UINavigationController *)navController animated:(BOOL)animated {

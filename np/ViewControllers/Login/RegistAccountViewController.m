@@ -167,6 +167,10 @@
     
     if (self.isSelfIdentified) {
         [self hidePhoneNumAndAdjustNoticePosition:inputView];
+        if (self.loginMethod == LOGIN_BY_ACCOUNT && self.accountNumber) {
+            [[inputView accountInputField] setText:self.accountNumber];
+            [[inputView accountInputField] setEnabled:NO];
+        }
     }
     
     [contentView addSubview:inputView];

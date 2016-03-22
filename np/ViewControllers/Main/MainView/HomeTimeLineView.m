@@ -1024,7 +1024,11 @@
             }
             [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
             [bannerView.bannerContentView addSubview:bannerInfoView];
-            [bannerInfoView bannerTimerStart];
+            
+            BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
+            if (existNoticeBanner) {
+                [bannerInfoView bannerTimerStart];
+            }
             
             LoginUtil *loginUtil = [[LoginUtil alloc] init];
             [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
@@ -1358,7 +1362,15 @@
                     
                     [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                     [bannerView.bannerContentView addSubview:bannerInfoView];
-                    [bannerInfoView bannerTimerStart];
+                    
+                    
+                    //[bannerInfoView bannerTimerStart];
+                    BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
+                    if (existNoticeBanner) {
+                        [bannerInfoView bannerTimerStart];
+                    }
+                    
+                    
                     
                     if([(NSArray *)[mTimeLineDic objectForKey:section] count] > bannerIndex + 1)
                     {
@@ -1526,7 +1538,12 @@
                     
                     [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                     [bannerView.bannerContentView addSubview:bannerInfoView];
-                    [bannerInfoView bannerTimerStart];
+                    
+                    //[bannerInfoView bannerTimerStart];
+                    BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
+                    if (existNoticeBanner) {
+                        [bannerInfoView bannerTimerStart];
+                    }
                     
                     if([(NSArray *)[mTimeLineDic objectForKey:section] count] > bannerIndex + 1)
                     {

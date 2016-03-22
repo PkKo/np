@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/*
 typedef enum AccountType
 {
     // 입출금(요구불)
@@ -19,7 +19,7 @@ typedef enum AccountType
     // 신탁
     TRUST
 }AccountType;
-
+*/
 typedef enum AlarmSetting
 {
     BOTH = 1,
@@ -70,11 +70,13 @@ typedef enum PickerViewType
 
 // 계좌번호
 @property (strong, nonatomic) IBOutlet UILabel *accountNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numberOfAccountsLabel;
 // 계좌변경
 @property (strong, nonatomic) IBOutlet UIButton *accountChangeButton;
 //
 @property (assign, nonatomic) NSInteger accountType;
 // 계좌 별칭
+@property (strong, nonatomic) IBOutlet UILabel *accountNicknameTitle;
 @property (strong, nonatomic) IBOutlet CommonTextField *accountNicknameInput;
 - (IBAction)validateNicknameTextEditing:(UITextField *)textField;
 
@@ -151,6 +153,8 @@ typedef enum PickerViewType
 @property (strong, nonatomic) IBOutlet UILabel *descDot4;
 @property (strong, nonatomic) IBOutlet UIView *descView5;
 @property (strong, nonatomic) IBOutlet UILabel *descLabel5;
+@property (strong, nonatomic) IBOutlet UIView *descView6;
+@property (strong, nonatomic) IBOutlet UILabel *descLabel6;
 /////////////////////////////////////////////////////////////////
 
 // 입출금 선택(1:입출 2:입금 3:출금)
@@ -174,7 +178,8 @@ typedef enum PickerViewType
 @property (assign, nonatomic) int notiPeriodTime2;
 @property (assign, nonatomic) int notiPeriodTime3;
 
-- (void)initDataWithAccountNumber:(NSString *)accountNum;
+//- (void)initDataWithAccountNumber:(NSString *)accountNum;
+- (void)initDataWithAccountNumber:(NSString *)accountNum numberOfAccounts:(NSInteger)numberOfAccounts;
 - (void)makeAllOptionDataView;
 - (NSInteger)getAlarmSettingType;
 // 입출금 옵션 선택

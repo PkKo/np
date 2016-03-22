@@ -118,6 +118,7 @@ typedef enum EN_APNS_REQUEST_TYPE
 @required
 
 - (void)apnsAllows:(BOOL)success;
+- (void)registerUserResponse:(int)responseCode;
 
 @optional
 

@@ -15,6 +15,7 @@
 #import "CertificateMenuViewController.h"
 #import "EnvMgmtViewController.h"
 #import "RegistCompleteViewController.h"
+#import "MainPageViewController.h"
 
 #define HIGHLIGHT_BG_COLOR              [UIColor colorWithRed:62.0f/255.0f green:155.0f/255.0f blue:233.0f/255.0f alpha:1]
 
@@ -389,11 +390,13 @@
                 
                 loginSettingsParent = [viewControllers objectAtIndex:(numberOfViewControllers - 2)];
                 
-                if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[EnvMgmtViewController class]]) {
+                UIViewController * previousVC = [(ECSlidingViewController *)loginSettingsParent topViewController];
+                
+                if (loginSettingsParent && ([previousVC isKindOfClass:[EnvMgmtViewController class]] || [previousVC isKindOfClass:[MainPageViewController class]])) { // click on 로그인 설정 button
                     
                     [self removeLoginSettings];
                     
-                } else if (loginSettingsParent && [[(ECSlidingViewController *)loginSettingsParent topViewController] isKindOfClass:[RegistCompleteViewController class]]) {
+                } else if (loginSettingsParent && [previousVC isKindOfClass:[RegistCompleteViewController class]]) {
                     
                     [[[LoginUtil alloc] init] showMainPage];
                     

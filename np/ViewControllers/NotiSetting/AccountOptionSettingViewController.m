@@ -9,14 +9,18 @@
 #import "AccountOptionSettingViewController.h"
 #import "AccountManageViewController.h"
 #import "ServiceDeactivationController.h"
+#import "AccountObject.h"
 
-@interface AccountOptionSettingViewController ()
+@interface AccountOptionSettingViewController () {
+    //BOOL _backFromSelfIdentifer;
+}
 
 @end
 
 @implementation AccountOptionSettingViewController
 
 @synthesize accountNumber;
+@synthesize accountNumbers;
 @synthesize contentView;
 @synthesize isNewAccount;
 
@@ -27,11 +31,17 @@
     [self.mNaviView.mBackButton setHidden:NO];
     [self.mNaviView.mTitleLabel setHidden:NO];
     [self.mNaviView.imgTitleView setHidden:YES];
-    [self.mNaviView.mTitleLabel setText:@"입출금 알림 계좌관리"];
+    [self.mNaviView.mTitleLabel setText:@"계좌 추가/변경/삭제"];
     
     optionView = [RegistAccountOptionSettingView view];
     [optionView setDelegate:self];
-    [optionView initDataWithAccountNumber:[CommonUtil getAccountNumberAddDash:accountNumber]];
+    
+    NSInteger numberOfAccounts  = 0;
+    if (self.accountNumbers && self.accountNumbers.count > 1) {
+        numberOfAccounts        = self.accountNumbers.count - 1;
+    }
+    [optionView initDataWithAccountNumber:accountNumber numberOfAccounts:numberOfAccounts];
+    
     [optionView setFrame:CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)];
     [[optionView accountDeleteButton] setHidden:isNewAccount];
     [[optionView accountDeleteButton] addTarget:self action:@selector(accountDeleteAlert) forControlEvents:UIControlEventTouchUpInside];
@@ -45,9 +55,26 @@
             [[optionView accountNicknameInput] setText:accountNickname];
         }
     }
+    
+    if (self.accountNumbers && self.accountNumbers.count > 1) {
+        [[optionView accountNicknameInput] setPlaceholder:@""];
+        [[optionView accountNicknameInput] setEnabled:NO];
+        [[optionView accountNicknameInput] setBackgroundColor:[UIColor colorWithRed:224.0f/255.0f green:225.0f/255.0f blue:230.0f/255.0f alpha:1]];
+        
+        [[optionView accountNicknameTitle] setText:@"계좌별칭 (다계좌 등록시 별칭입력 불가)"];
+    }
+    
     [contentView addSubview:optionView];
     
-    [self accountOptionSearchReqeust];
+    if (self.accountNumbers && self.accountNumbers.count > 1) {
+        
+        AccountObject * account = (AccountObject *)[self.accountNumbers objectAtIndex:0];
+        AccountType type = account.accountType;
+        
+        [self initOptionViewData:type];
+        return;
+    }
+    [self accountOptionSearchReqeust]; // NHI TEST
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,7 +92,23 @@
     [optionView.descLabel3 sizeToFit];
     [optionView.descLabel4 sizeToFit];
 }
-
+/*
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (_backFromSelfIdentifer) {
+        
+        if (totalNotiCount < 2) {
+            
+            [self serviceDeactivateRequest];
+            
+        } else {
+            
+            [self accountDeleteRequest];
+        }
+        _backFromSelfIdentifer = false;
+    }
+}
+*/
 #pragma mark - UIButtonAction
 /**
  @brief 확인버튼 클릭
@@ -176,6 +219,12 @@
     }
 }
 
+- (void)initOptionViewData:(AccountType)type {
+    accountType = type;
+    [optionView setAccountType:accountType];
+    [optionView makeAllOptionDataView];
+}
+
 #pragma mark - 계좌옵션 설정
 - (void)accountOptionSetReqeust
 {
@@ -204,6 +253,23 @@
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     
     [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_ACCOUNT_NUMBER];
+    
+    
+    NSLog(@"key:%@ - value: %@", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, [accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""]);
+    
+    
+    if (self.accountNumbers && self.accountNumbers.count > 1) {
+        
+        int numberOfAccounts = self.accountNumbers.count;
+        
+        for (int accountIdx = 1; accountIdx < numberOfAccounts; accountIdx++) {
+            AccountObject * account = (AccountObject *)[self.accountNumbers objectAtIndex:accountIdx];
+            [reqBody setObject:account.accountNo forKey:[NSString stringWithFormat:@"%@_0%d", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, (accountIdx + 1)]];
+            
+            NSLog(@"key: %@ - value:%@", [NSString stringWithFormat:@"%@_0%d", REQUEST_NOTI_OPTION_ACCOUNT_NUMBER, (accountIdx + 1)], account.accountNo);
+        }
+    }
+    
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     if(receiptsPaymentId != nil && [receiptsPaymentId length] > 0)
     {
@@ -312,7 +378,10 @@
 #pragma mark - 계좌 삭제
 - (void)accountDeleteAlert
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"계좌삭제를 하시면 해당 계좌의 입출금 PUSH 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    
+    //message:@"계좌삭제를 하시면 해당 계좌의 입출금 PUSH 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림"
+                                                        message:@"계좌삭제를 하시면 해당 계좌의 입출금 알림(PUSH)을 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
     [alertView setTag:90001];
     [alertView show];
 }
@@ -392,18 +461,27 @@
     {
         if(totalNotiCount < 2)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"확인" message:@"해당 계좌를 삭제하면 알림 서비스를 받을수 없습니다.\n삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+            //message:@"해당 계좌를 삭제하면 알림 서비스를 \n받을수 없습니다. 삭제하시겠습니까?"
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"확인" message:@"마지막 계좌를 삭제하시면 서비스가 해지됩니다.\n서비스가 해지 시 모든 데이터가 초기화됩니다. 그래도 삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
             [alertView setTag:90002];
             [alertView show];
         }
         else
         {
+            /*
+            _backFromSelfIdentifer = YES;
+            [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_ACCOUNT accountNumber:accountNumber];
+             */
             [self accountDeleteRequest];
         }
     }
     else if([alertView tag] == 90002 && buttonIndex == BUTTON_INDEX_OK)
     {
         // 이용해지 전문을 태운다.
+        /*
+        _backFromSelfIdentifer = YES;
+        [[[LoginUtil alloc] init] showSelfIdentifer:LOGIN_BY_ACCOUNT accountNumber:accountNumber];
+         */
         [self serviceDeactivateRequest];
     }
     else if([alertView tag] == 90003)

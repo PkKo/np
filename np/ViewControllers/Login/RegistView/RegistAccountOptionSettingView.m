@@ -7,6 +7,7 @@
 //
 
 #import "RegistAccountOptionSettingView.h"
+#import "StorageBoxUtil.h"
 
 #define DESCRIPTION_THREE_LINE_HEIGHT   48
 
@@ -94,6 +95,8 @@
 @synthesize descDot4;
 @synthesize descView5;
 @synthesize descLabel5;
+@synthesize descView6;
+@synthesize descLabel6;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -127,9 +130,12 @@
                                    descView4.frame.origin.y + descView4.frame.size.height + 4,
                                    descView5.frame.size.width,
                                    descLabel5.frame.size.height)];
-    
+    [descView6 setFrame:CGRectMake(descView6.frame.origin.x,
+                                   descView5.frame.origin.y + descView5.frame.size.height + 4,
+                                   descView6.frame.size.width,
+                                   descLabel5.frame.size.height)];
     [accountDeleteButton setFrame:CGRectMake(accountDeleteButton.frame.origin.x,
-                                             descView5.frame.origin.y + descView5.frame.size.height + 15,
+                                             descView6.frame.origin.y + descView6.frame.size.height + 15,
                                              accountDeleteButton.frame.size.width,
                                              accountDeleteButton.frame.size.height)];
     
@@ -138,11 +144,34 @@
     [scrollView setContentInset:UIEdgeInsetsZero];
 }
 
-- (void)initDataWithAccountNumber:(NSString *)accountNum
+- (void)initDataWithAccountNumber:(NSString *)accountNum numberOfAccounts:(NSInteger)numberOfAccounts
 {
+    
     [scrollView setContentSize:contentView.frame.size];
     
     [accountNumberLabel setText:[CommonUtil getAccountNumberAddDash:accountNum]];
+    
+    
+    if (numberOfAccounts > 0) {
+        [self.numberOfAccountsLabel setHidden:NO];
+        
+        CGRect accountNumberLabelRect       = accountNumberLabel.frame;
+        CGSize transacAmountTypeSize        = [StorageBoxUtil contentSizeOfLabel:accountNumberLabel];
+        accountNumberLabelRect.size.width   = transacAmountTypeSize.width;
+        [accountNumberLabel setFrame:accountNumberLabelRect];
+        
+        [self.numberOfAccountsLabel setText:[NSString stringWithFormat:@"외 %d건", numberOfAccounts]];
+        CGRect numberOfAccountsLabelRect    = self.numberOfAccountsLabel.frame;
+        CGSize numberOfAccountsLabelSize    = [StorageBoxUtil contentSizeOfLabel:self.numberOfAccountsLabel];
+        numberOfAccountsLabelRect.origin.x  = accountNumberLabelRect.origin.x + accountNumberLabelRect.size.width;
+        numberOfAccountsLabelRect.size.width= numberOfAccountsLabelSize.width;
+        [self.numberOfAccountsLabel setFrame:numberOfAccountsLabelRect];
+        
+    } else {
+        [self.numberOfAccountsLabel setHidden:YES];
+    }
+    
+    
     if(delegate != nil)
     {
         [accountNicknameInput setDelegate:delegate];
@@ -914,5 +943,4 @@
         [textField setText:[[textField text] substringToIndex:maxLength]];
     }
 }
-
 @end
