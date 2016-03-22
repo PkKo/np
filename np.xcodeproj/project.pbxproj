@@ -4208,8 +4208,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NongHyup Bank";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NongHyup Bank";
+				CODE_SIGN_IDENTITY = "iPhone Developer: PyungKwan Ko (S957WERFD5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: PyungKwan Ko (S957WERFD5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4230,9 +4230,9 @@
 					"-w",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nh.umspush;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhit.np;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2b0ec1a3-00f9-431a-acd5-772d2e9a5ec0";
+				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
 			};
 			name = Debug;
 		};
