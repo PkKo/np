@@ -95,8 +95,13 @@
             {
                 if(range.location == 3)
                 {
-                    [textField insertText:string];
-                    [textField endEditing:YES];
+					if(20001 <= [textField tag] && [textField tag] <= 20003) {
+						UITextField* nextTextField = [self.view viewWithTag: [textField tag] + 1];
+						[nextTextField performSelector: @selector(becomeFirstResponder) withObject: nil afterDelay: 0.0];
+					}
+					else {
+                        [self.view performSelector: @selector(endEditing:) withObject: @(YES) afterDelay: 0.0];
+					}
                 }
             }
             break;
