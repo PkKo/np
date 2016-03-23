@@ -13,7 +13,7 @@
 
 @property (assign, nonatomic) NSInteger startPageIndex;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSArray *pageViewControllerArray;
+@property (strong, nonatomic) NSMutableArray *pageViewControllerArray;
 @property (strong, nonatomic) IBOutlet UIView *tabButtonView;
 
 @property (strong, nonatomic) IBOutlet UIButton *timeLineButton;

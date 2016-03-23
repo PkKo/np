@@ -45,6 +45,7 @@
     unreadMessageList = [NSMutableArray array];
     isSearch = NO;
     isMoreList = YES;
+	isFirstRequest = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,7 +81,11 @@
     [super viewDidAppear:animated];
     
 //    [IBInbox loadWithListener:self];
-    [self queryInitData];
+    
+	if (isFirstRequest) {
+		[self queryInitData];
+		isFirstRequest = NO;
+	}
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -615,15 +620,15 @@
 //    NSLog(@"%s, %@", __FUNCTION__, messageList);
     if(!isRefresh)
     {
-        if([sectionList count] > 0)
-        {
-            [sectionList removeAllObjects];
-        }
+        // if([sectionList count] > 0)
+        // {
+        //     [sectionList removeAllObjects];
+        // }
         
-        if(timelineMessageList)
-        {
-            [timelineMessageList removeAllObjects];
-        }
+        // if(timelineMessageList)
+        // {
+        //     [timelineMessageList removeAllObjects];
+        // }
         
         NSString *todayString = [CommonUtil getTodayDateString];
         TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
@@ -723,22 +728,22 @@
     
     if(success)
     {
-        if([unreadMessageList count] > 0)
-        {
-            [unreadMessageList removeAllObjects];
-        }
+//        if([unreadMessageList count] > 0)
+//        {
+//            [unreadMessageList removeAllObjects];
+//        }
         
         if(!isRefresh)
         {
-            if([sectionList count] > 0)
-            {
-                [sectionList removeAllObjects];
-            }
-            
-            if(timelineMessageList)
-            {
-                [timelineMessageList removeAllObjects];
-            }
+//            if([sectionList count] > 0)
+//            {
+//                [sectionList removeAllObjects];
+//            }
+//            
+//            if(timelineMessageList)
+//            {
+//                [timelineMessageList removeAllObjects];
+//            }
             
             for(NHInboxMessageData *inboxData in messageList)
             {

@@ -46,6 +46,7 @@ typedef enum HomeViewType
     BOOL isAscending;
     BOOL isSearch;
     BOOL isMoreList;
+	BOOL isFirstRequest;
 }
 
 @property (assign, nonatomic) HomeViewType viewType;

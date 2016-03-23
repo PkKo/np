@@ -39,8 +39,14 @@
     [self.mNaviView.mTitleLabel setHidden:YES];
     [self.mNaviView.imgTitleView setHidden:NO];
     
+	pageViewControllerArray = [[NSMutableArray alloc] init];
+	for(int i = 0; i <= PAGE_VIEWCONTROLLER_MAX; i ++) {
+		[pageViewControllerArray addObject: [NSNull null]];
+	}
+
     HomeViewController *homeVc = [self viewControllerAtIndex:startPageIndex];
-    pageViewControllerArray = [NSArray arrayWithObject:homeVc];
+    // pageViewControllerArray = [NSArray arrayWithObject:homeVc];
+	// pageViewControllerArray[startPageIndex] = homeVc;
     
     pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [pageViewController setDelegate:self];
@@ -71,10 +77,17 @@
 #pragma mark - UIPageViewDataSource
 - (HomeViewController *)viewControllerAtIndex:(NSInteger)index
 {
-    HomeViewController *vc = [[HomeViewController alloc] init];
-    [vc setViewType:(HomeViewType)index];
-    
-    return vc;
+    if (index < 0 || PAGE_VIEWCONTROLLER_MAX < index) {
+		return nil;
+	}
+	
+	if ((id)[NSNull null] == pageViewControllerArray[index]) {
+		HomeViewController *vc = [[HomeViewController alloc] init];
+		[vc setViewType:(HomeViewType)index];
+		pageViewControllerArray[index] = vc;
+	}	 
+	 
+	return pageViewControllerArray[index];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
