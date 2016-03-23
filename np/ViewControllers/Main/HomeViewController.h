@@ -14,6 +14,11 @@
 #import "WithdrawStickerSettingView.h"
 #import "TimelineSectionData.h"
 
+#define kNotificationAlarmDeleted	@"NOTIFICATION_ALARM_DELETED"
+#define kMsgKeyArray @"msgKeyArray"	
+
+
+
 typedef enum HomeViewType
 {
     TIMELINE    = 0,

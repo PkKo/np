@@ -58,6 +58,19 @@
 
 @synthesize emptyListImageView;
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+	
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(onNotificationAlarmDeleted:) name: kNotificationAlarmDeleted object: nil];
+}
+
+
 - (id)init
 {
     self = [super init];
@@ -1901,4 +1914,53 @@
         }
     }
 }
+
+#pragma mark - notification
+
+- (void) onNotificationAlarmDeleted: (NSNotification*)notification {
+    NSDictionary* userInfo = [notification userInfo];
+	NSArray* keyAry = userInfo[kMsgKeyArray];
+	
+	for(NSString * key in keyAry) {
+		[self deleteMsgByKey: key];
+	}
+	
+	[self removeEmptySection];
+	
+	if (isDeleteMode) {
+        [self deleteViewHide: nil];
+	}
+
+	[mTimeLineTable reloadData];
+}
+
+
+#pragma mark - etc
+
+- (void) deleteMsgByKey:(NSString *)aKey
+{
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		for(NHInboxMessageData* inboxData in ary) {
+			if ([aKey isEqualToString: inboxData.serverMessageKey]) {
+				[ary removeObject: inboxData];
+				return;
+			}
+		}
+	}
+}
+
+- (void) removeEmptySection {
+	NSMutableArray *emptySections = [[NSMutableArray alloc] init];
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		if (0 == [ary count]) {
+			[mTimeLineDic removeObjectForKey: section.date];
+			[emptySections addObject: section];
+		}
+	}
+
+	[mTimeLineSection removeObjectsInArray: emptySections];
+}
+
 @end

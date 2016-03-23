@@ -20,8 +20,8 @@
 @implementation HomeBankingView
 
 @synthesize delegate;
-@synthesize timeLineSection;
-@synthesize timeLineDic;
+@synthesize mTimeLineSection;
+@synthesize mTimeLineDic;
 @synthesize bankingListTable;
 @synthesize listEmptyView;
 @synthesize emptyLabel;
@@ -56,14 +56,27 @@
 
 @synthesize emptyListImageView;
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(onNotificationAlarmDeleted:) name: kNotificationAlarmDeleted object: nil];
+}
+
+
+
 - (id)init
 {
     self = [super init];
     
     if(self)
     {
-        timeLineSection = [[NSMutableArray alloc] init];
-        timeLineDic = [[NSMutableDictionary alloc] init];
+        mTimeLineSection = [[NSMutableArray alloc] init];
+        mTimeLineDic = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -71,8 +84,8 @@
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
-    timeLineSection = section;
-    timeLineDic = data;
+    mTimeLineSection = section;
+    mTimeLineDic = data;
     listSortType = YES;
     isDeleteMode = NO;
     isMoreList = YES;
@@ -101,7 +114,7 @@
     [searchTypePicker setDataSource:self];
     [searchTypePicker setDelegate:self];
     
-    if([timeLineSection count] == 0)
+    if([mTimeLineSection count] == 0)
     {
         [bankingListTable setHidden:YES];
         [listEmptyView setHidden:NO];
@@ -126,7 +139,7 @@
     
     [self refreshBadges];
     
-    if([timeLineSection count] == 0)
+    if([mTimeLineSection count] == 0)
     {
         [bankingListTable setHidden:YES];
         [listEmptyView setHidden:NO];
@@ -151,15 +164,15 @@
     if(!listSortType)
     {
         // section을 먼저 sorting한다.
-        timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
+        mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
         // sorting된 section을 가지고 dictionary를 구성한다.
         NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
-        for(TimelineSectionData *sectionData in timeLineSection)
+        for(TimelineSectionData *sectionData in mTimeLineSection)
         {
-            NSArray *reverseArray = [[[timeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
+            NSArray *reverseArray = [[[mTimeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
             [reverseDic setObject:reverseArray forKey:sectionData.date];
         }
-        timeLineDic = reverseDic;
+        mTimeLineDic = reverseDic;
     }
     [self stopLoading];
     [self stopFooterLoading];
@@ -230,18 +243,18 @@
         listSortType = YES;
     }
     
-    if([timeLineSection count] > 0)
+    if([mTimeLineSection count] > 0)
     {
         // section을 먼저 sorting한다.
-        timeLineSection = (NSMutableArray *)[[timeLineSection reverseObjectEnumerator] allObjects];
+        mTimeLineSection = (NSMutableArray *)[[mTimeLineSection reverseObjectEnumerator] allObjects];
         // sorting된 section을 가지고 dictionary를 구성한다.
         NSMutableDictionary *reverseDic = [[NSMutableDictionary alloc] init];
-        for(TimelineSectionData *sectionData in timeLineSection)
+        for(TimelineSectionData *sectionData in mTimeLineSection)
         {
-            NSArray *reverseArray = [[[timeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
+            NSArray *reverseArray = [[[mTimeLineDic objectForKey:sectionData.date] reverseObjectEnumerator] allObjects];
             [reverseDic setObject:reverseArray forKey:sectionData.date];
         }
-        timeLineDic = reverseDic;
+        mTimeLineDic = reverseDic;
         
         [bankingListTable reloadData];
     }
@@ -856,7 +869,7 @@
     }
     else
     {
-        return [timeLineSection count];
+        return [mTimeLineSection count];
     }
 }
 
@@ -868,14 +881,14 @@
     }
     else
     {
-        if([timeLineSection count] == 0)
+        if([mTimeLineSection count] == 0)
         {
             return 0;
         }
         else
         {
             
-            NSArray *array = [timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:section]).date];
+            NSArray *array = [mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:section]).date];
             return [array count];
         }
     }
@@ -905,7 +918,7 @@
         
         [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
         
-        TimelineSectionData *sectionData = [timeLineSection objectAtIndex:section];
+        TimelineSectionData *sectionData = [mTimeLineSection objectAtIndex:section];
         NSString *date = sectionData.date;
         NSString *day = sectionData.day;
         
@@ -954,8 +967,8 @@
         LoginUtil *loginUtil = [[LoginUtil alloc] init];
         [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
         
-        NSString *section = ((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date;
-        NHInboxMessageData *inboxData = [[timeLineDic objectForKey:section] objectAtIndex:indexPath.row];
+        NSString *section = ((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date;
+        NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
         
         // 스티커 버튼
         [cell.stickerButton setIndexPath:indexPath];
@@ -995,7 +1008,7 @@
                 [cell.upperLine setHidden:YES];
             }
             
-            if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+            if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
             {
                 [cell.underLine setHidden:YES];
             }
@@ -1231,7 +1244,7 @@
         {
             [cell.upperLine setHidden:YES];
         }
-        else if ([(NSArray *)[timeLineDic objectForKey:section] count] - 1 == indexPath.row)
+        else if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
         {
             [cell.underLine setHidden:YES];
         }
@@ -1267,7 +1280,7 @@
     
     if(isDeleteMode)
     {
-        NSString *pushId = ((NHInboxMessageData *)[[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
+        NSString *pushId = ((NHInboxMessageData *)[[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
         
         BOOL isPinnedItem = (pinnedIdList != nil && [pinnedIdList containsObject:pushId]);
         if(isPinnedItem) {
@@ -1320,7 +1333,7 @@
     
 //    NSLog(@"button indexPath = %@", currentBtn.indexPath);
     
-    NHInboxMessageData *inboxData = [[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
+    NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     
     if([currentBtn isSelected])
     {
@@ -1354,7 +1367,7 @@
     
     IndexPathButton *currentButton = (IndexPathButton *)sender;
     NSIndexPath *indexPath = currentButton.indexPath;
-    NHInboxMessageData *inboxData = [[timeLineDic objectForKey:((TimelineSectionData *)[timeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
+    NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row];
     HomeTimeLineTableViewCell *cell = [bankingListTable cellForRowAtIndexPath:indexPath];
     
     NSString * currencyUnit = (!inboxData.payType || [inboxData.payType isEqualToString:@""]) ? @"원" : inboxData.payType;
@@ -1524,7 +1537,7 @@
     else
     {
         // 전체선택 모드
-        if([timeLineSection count] > 0)
+        if([mTimeLineSection count] > 0)
         {
             // 리스트가 있는 경우에만 진행한다
             if([deleteIdList count] > 0)
@@ -1532,10 +1545,10 @@
                 [deleteIdList removeAllObjects];
             }
             
-            for(TimelineSectionData *sectionData in timeLineSection)
+            for(TimelineSectionData *sectionData in mTimeLineSection)
             {
                 NSString *key = sectionData.date;
-                NSArray *list = [timeLineDic objectForKey:key];
+                NSArray *list = [mTimeLineDic objectForKey:key];
                 for (NHInboxMessageData *item in list)
                 {
                     BOOL isPinnedItem = (pinnedIdList != nil && [pinnedIdList containsObject:item.serverMessageKey]);
@@ -1626,4 +1639,55 @@
         }
     }
 }
+
+#pragma mark - notification
+
+- (void) onNotificationAlarmDeleted: (NSNotification*)notification {
+    NSDictionary* userInfo = [notification userInfo];
+	NSArray* keyAry = userInfo[kMsgKeyArray];
+	
+	for(NSString * key in keyAry) {
+		[self deleteMsgByKey: key];
+	}
+	
+	[self removeEmptySection];
+
+	
+	if (isDeleteMode) {
+        [self deleteViewHide: nil];
+	}
+
+	[bankingListTable reloadData];
+}
+
+
+#pragma mark - etc
+
+- (void) deleteMsgByKey:(NSString *)aKey
+{
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		for(NHInboxMessageData* inboxData in ary) {
+			if ([aKey isEqualToString: inboxData.serverMessageKey]) {
+				[ary removeObject: inboxData];
+				return;
+			}
+		}
+	}
+}
+
+- (void) removeEmptySection {
+	NSMutableArray *emptySections = [[NSMutableArray alloc] init];
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		if (0 == [ary count]) {
+			[mTimeLineDic removeObjectForKey: section.date];
+			[emptySections addObject: section];
+		}
+	}
+
+	[mTimeLineSection removeObjectsInArray: emptySections];
+}
+
+
 @end

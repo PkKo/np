@@ -43,8 +43,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (strong, nonatomic) IBOutlet UITableView *emptyScrollView;
 
-@property (strong, nonatomic) NSMutableArray *timelineSection;
-@property (strong, nonatomic) NSMutableDictionary *timelineDic;
+@property (strong, nonatomic) NSMutableArray *mTimeLineSection;
+@property (strong, nonatomic) NSMutableDictionary *mTimeLineDic;
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;
 @property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
 @property (strong, nonatomic) IBOutlet UIImageView *deleteAllImg;

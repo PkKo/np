@@ -54,9 +54,9 @@
 
 @property (strong, nonatomic) id delegate;
 // 날짜별 섹션 구분
-@property (strong, nonatomic) NSMutableArray        *timeLineSection;
+@property (strong, nonatomic) NSMutableArray        *mTimeLineSection;
 // 날짜를 키로
-@property (strong, nonatomic) NSMutableDictionary   *timeLineDic;
+@property (strong, nonatomic) NSMutableDictionary   *mTimeLineDic;
 @property (strong, nonatomic) IBOutlet UITableView *bankingListTable;
 @property (strong, nonatomic) IBOutlet UIView *listEmptyView;
 @property (strong, nonatomic) IBOutlet UILabel *emptyLabel;

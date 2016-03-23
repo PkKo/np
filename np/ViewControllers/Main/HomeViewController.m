@@ -340,8 +340,8 @@
             }
             else
             {
-                bankingView.timeLineSection = sectionList;
-                bankingView.timeLineDic = timelineMessageList;
+                bankingView.mTimeLineSection = sectionList;
+                bankingView.mTimeLineDic = timelineMessageList;
                 [bankingView setIsSearchResult:isSearch];
                 isSearch = NO;
                 [bankingView setIsMoreList:isMoreList];
@@ -364,8 +364,8 @@
             }
             else
             {
-                etcTimeLineView.timelineSection = sectionList;
-                etcTimeLineView.timelineDic = timelineMessageList;
+                etcTimeLineView.mTimeLineSection = sectionList;
+                etcTimeLineView.mTimeLineDic = timelineMessageList;
                 [etcTimeLineView setIsSearchResult:isSearch];
                 isSearch = NO;
                 [etcTimeLineView setIsMoreList:isMoreList];
@@ -598,7 +598,7 @@
         }
         else if(viewType == BANKING)
         {
-            inboxData = [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+            inboxData = [[bankingView.mTimeLineDic objectForKey:((TimelineSectionData *)[bankingView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
         }
         
         if(inboxData != nil)
@@ -925,9 +925,9 @@
         }
         else if(viewType == BANKING)
         {
-            inboxData = [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
+            inboxData = [[bankingView.mTimeLineDic objectForKey:((TimelineSectionData *)[bankingView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] objectAtIndex:currentStickerIndexPath.row];
             inboxData.stickerCode = selectedStickerCode;
-            [[bankingView.timeLineDic objectForKey:((TimelineSectionData *)[bankingView.timeLineSection objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
+            [[bankingView.mTimeLineDic objectForKey:((TimelineSectionData *)[bankingView.mTimeLineSection objectAtIndex:currentStickerIndexPath.section]).date] setObject:inboxData atIndex:currentStickerIndexPath.row];
         }
         
         // 각 뷰가 있으면 테이블 갱신
@@ -944,8 +944,12 @@
     
     if(success)
     {
-        [self queryInitData];
-        /*
+		NSDictionary* info = [NSDictionary dictionaryWithObjectsAndKeys: [sMsgKeys copy], kMsgKeyArray, nil]; // 함수 끝난 다음에 sMsgKeys가 비워지므로 copy해서 전달한다.
+		[[NSNotificationCenter defaultCenter] postNotificationName: kNotificationAlarmDeleted object: nil userInfo: info];
+		
+		// [self queryInitData];
+        
+		/*
         for(NSString *msgKey in sMsgKeys)
         {
             NSMutableArray *deletedSectionList = [NSMutableArray arrayWithArray:sectionList];

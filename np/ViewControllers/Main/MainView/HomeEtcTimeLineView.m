@@ -28,8 +28,8 @@
 @synthesize emptyLabel;
 @synthesize emptyScrollView;
 
-@synthesize timelineSection;
-@synthesize timelineDic;
+@synthesize mTimeLineSection;
+@synthesize mTimeLineDic;
 
 @synthesize deleteAllView;
 @synthesize deleteButtonView;
@@ -53,6 +53,19 @@
 
 @synthesize serviceSelectLabel;
 
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(onNotificationAlarmDeleted:) name: kNotificationAlarmDeleted object: nil];
+}
+
+
 - (void)drawRect:(CGRect)rect
 {
     serviceSelectLabelFrame = serviceSelectLabel.frame;
@@ -60,8 +73,8 @@
 
 - (void)initData:(NSMutableArray *)section timeLineDic:(NSMutableDictionary *)data
 {
-    timelineSection = section;
-    timelineDic = data;
+    mTimeLineSection = section;
+    mTimeLineDic = data;
     deleteIdList = [[NSMutableArray alloc] init];
     isSearchResult = NO;
     isMoreList = YES;
@@ -73,7 +86,7 @@
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
     
-    if([timelineSection count] == 0)
+    if([mTimeLineSection count] == 0)
     {
         [timelineTableView setHidden:YES];
         [listEmptyView setHidden:NO];
@@ -95,7 +108,7 @@
 
 - (void)refreshData
 {
-    if([timelineSection count] == 0)
+    if([mTimeLineSection count] == 0)
     {
         [timelineTableView setHidden:YES];
         [listEmptyView setHidden:NO];
@@ -366,7 +379,7 @@
     }
     else
     {
-        return [timelineSection count];
+        return [mTimeLineSection count];
     }
 }
 
@@ -378,13 +391,13 @@
     }
     else
     {
-        if([timelineSection count] == 0)
+        if([mTimeLineSection count] == 0)
         {
             return 0;
         }
         else
         {
-            return [(NSArray *)[timelineDic objectForKey:((TimelineSectionData *)[timelineSection objectAtIndex:section]).date] count];
+            return [(NSArray *)[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:section]).date] count];
         }
     }
 }
@@ -413,7 +426,7 @@
         
         [sectionHeaderView setBackgroundColor:[UIColor colorWithRed:240.0f/255.0f green:241.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
         
-        TimelineSectionData *sectionData = [timelineSection objectAtIndex:section];
+        TimelineSectionData *sectionData = [mTimeLineSection objectAtIndex:section];
         NSString *date = sectionData.date;
         NSString *day = sectionData.day;
         
@@ -443,8 +456,8 @@
     }
     else
     {
-        NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
-        NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+        NSString *section = ((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date;
+        NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
         
         if([inboxData.inboxType isEqualToString:@"B"] || [inboxData.inboxType isEqualToString:@"Z"] || inboxData.stickerCode == STICKER_NOTICE_NORMAL)
         {
@@ -483,8 +496,8 @@
         LoginUtil *loginUtil = [[LoginUtil alloc] init];
         [cell setBackgroundColor:[loginUtil getNoticeBackgroundColour]];
         
-        NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
-        NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+        NSString *section = ((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date;
+        NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
         
         //    NSArray *payload = inboxMessageData.payloadList;
         
@@ -585,7 +598,7 @@
             [cell.upperLine setHidden:YES];
         }
         
-        if ([(NSArray *)[timelineDic objectForKey:section] count] - 1 == indexPath.row)
+        if ([(NSArray *)[mTimeLineDic objectForKey:section] count] - 1 == indexPath.row)
         {
             [cell.underLine setHidden:YES];
         }
@@ -599,8 +612,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    NSString *section = ((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date;
-    NHInboxMessageData *inboxData = [[timelineDic objectForKey:section] objectAtIndex:indexPath.row];
+    NSString *section = ((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date;
+    NHInboxMessageData *inboxData = [[mTimeLineDic objectForKey:section] objectAtIndex:indexPath.row];
     
     if([inboxData.inboxType isEqualToString:@"A"])
     {
@@ -733,7 +746,7 @@
     
     if(isDeleteMode)
     {
-        NSString *pushId = ((NHInboxMessageData *)[[timelineDic objectForKey:((TimelineSectionData *)[timelineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
+        NSString *pushId = ((NHInboxMessageData *)[[mTimeLineDic objectForKey:((TimelineSectionData *)[mTimeLineSection objectAtIndex:indexPath.section]).date] objectAtIndex:indexPath.row]).serverMessageKey;
         
         if([currentBtn isSelected])
         {
@@ -1034,7 +1047,7 @@
     else
     {
         // 전체선택 모드
-        if([timelineSection count] > 0)
+        if([mTimeLineSection count] > 0)
         {
             // 리스트가 있는 경우에만 진행한다
             if([deleteIdList count] > 0)
@@ -1042,10 +1055,10 @@
                 [deleteIdList removeAllObjects];
             }
             
-            for(TimelineSectionData *sectionData in timelineSection)
+            for(TimelineSectionData *sectionData in mTimeLineSection)
             {
                 NSString *key = sectionData.date;
-                NSArray *list = [timelineDic objectForKey:key];
+                NSArray *list = [mTimeLineDic objectForKey:key];
                 for (NHInboxMessageData *item in list)
                 {
                     [deleteIdList addObject:item.serverMessageKey];
@@ -1191,4 +1204,55 @@
         }
     }
 }
+
+#pragma mark - notification
+
+- (void) onNotificationAlarmDeleted: (NSNotification*)notification {
+    NSDictionary* userInfo = [notification userInfo];
+	NSArray* keyAry = userInfo[kMsgKeyArray];
+	
+	for(NSString * key in keyAry) {
+		[self deleteMsgByKey: key];
+	}
+	
+	[self removeEmptySection];
+	
+	if (isDeleteMode) {
+        [self deleteViewHide: nil];
+	}
+
+	[timelineTableView reloadData];
+}
+
+
+#pragma mark - etc
+
+- (void) deleteMsgByKey:(NSString *)aKey
+{
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		for(NHInboxMessageData* inboxData in ary) {
+			if ([aKey isEqualToString: inboxData.serverMessageKey]) {
+				[ary removeObject: inboxData];
+				return;
+			}
+		}
+	}
+}
+
+
+- (void) removeEmptySection {
+	NSMutableArray *emptySections = [[NSMutableArray alloc] init];
+	for(TimelineSectionData* section in mTimeLineSection) {
+		NSMutableArray* ary = [mTimeLineDic objectForKey:section.date];
+		if (0 == [ary count]) {
+			[mTimeLineDic removeObjectForKey: section.date];
+			[emptySections addObject: section];
+		}
+	}
+
+	[mTimeLineSection removeObjectsInArray: emptySections];
+}
+
+
 @end
