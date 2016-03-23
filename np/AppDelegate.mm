@@ -22,9 +22,19 @@
 @synthesize nongminBannerImg;
 @synthesize noticeBannerImg;
 
+#ifdef DEV_MODE
+void MyUncaughtExceptionHandler(NSException *exception) {
+	NSLog(@"APPDELEGATE CRASH REPORT ---------------- %@", [exception callStackSymbols]);
+}
+#endif
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, launchOptions);
+#ifdef DEV_MODE    
+	NSSetUncaughtExceptionHandler(&MyUncaughtExceptionHandler);
+#endif
+	
+	NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, launchOptions);
     // Override point for customization after application launch.
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
