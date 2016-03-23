@@ -4232,7 +4232,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nhit.np;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "658537d7-15ac-4e03-9aac-de6b1f578089";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
