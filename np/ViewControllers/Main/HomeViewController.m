@@ -82,6 +82,8 @@
     
 //    [IBInbox loadWithListener:self];
     
+	[IBInbox loadWithListener:self];
+	
 	if (isFirstRequest) {
 		[self queryInitData];
 		isFirstRequest = NO;
@@ -167,7 +169,7 @@
     if(reqData != nil)
     {
         [((MainPageViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController.topViewController) startIndicator];
-        [IBInbox loadWithListener:self];
+        // [IBInbox loadWithListener:self];
         [IBInbox reqQueryAccountInboxListWithSize:reqData];
     }
     else
@@ -620,15 +622,15 @@
 //    NSLog(@"%s, %@", __FUNCTION__, messageList);
     if(!isRefresh)
     {
-        // if([sectionList count] > 0)
-        // {
-        //     [sectionList removeAllObjects];
-        // }
+        if([sectionList count] > 0)
+        {
+            [sectionList removeAllObjects];
+        }
         
-        // if(timelineMessageList)
-        // {
-        //     [timelineMessageList removeAllObjects];
-        // }
+        if(timelineMessageList)
+        {
+            [timelineMessageList removeAllObjects];
+        }
         
         NSString *todayString = [CommonUtil getTodayDateString];
         TimelineSectionData *todaySectionData = [[TimelineSectionData alloc] init];
@@ -728,22 +730,22 @@
     
     if(success)
     {
-//        if([unreadMessageList count] > 0)
-//        {
-//            [unreadMessageList removeAllObjects];
-//        }
+       if([unreadMessageList count] > 0)
+       {
+           [unreadMessageList removeAllObjects];
+       }
         
         if(!isRefresh)
         {
-//            if([sectionList count] > 0)
-//            {
-//                [sectionList removeAllObjects];
-//            }
-//            
-//            if(timelineMessageList)
-//            {
-//                [timelineMessageList removeAllObjects];
-//            }
+           if([sectionList count] > 0)
+           {
+               [sectionList removeAllObjects];
+           }
+           
+           if(timelineMessageList)
+           {
+               [timelineMessageList removeAllObjects];
+           }
             
             for(NHInboxMessageData *inboxData in messageList)
             {
