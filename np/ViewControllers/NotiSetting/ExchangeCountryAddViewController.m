@@ -341,16 +341,18 @@
 {
     if(isNewCoutry)
     {
-        if(countrySelectIndex == 0)
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"대상국가를 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-            [alertView show];
-            return;
-        }
-        else
-        {
-            [self currencyOptionMakeRequest];
-        }
+        [self currencyOptionMakeRequest];
+		
+		// if(countrySelectIndex == 0)
+        // {
+        //     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"대상국가를 선택해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+        //     [alertView show];
+        //     return;
+        // }
+        // else
+        // {
+        //     [self currencyOptionMakeRequest];
+        // }
     }
     else if (isChargeCountry)
     {
