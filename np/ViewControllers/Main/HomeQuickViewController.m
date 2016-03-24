@@ -566,7 +566,8 @@
 	
 	// 처음에 보일 탭을 저장해 둔다.
 	// MainPageViewController에서 사용한다.
-	HomeViewType idx = (tableView == pushTableView) ? BANKING : OTHER;
+	// HomeViewType idx = (tableView == pushTableView) ? BANKING : OTHER;
+	HomeViewType idx = TIMELINE;	// 현재는 강제로 전체 목록이 나오도록 설정함.(안드로이드와 일치시키기 위해)
 	[[NSUserDefaults standardUserDefaults] setValue: @(idx) forKey: kStartPageIndex];
 	
 	// Login
