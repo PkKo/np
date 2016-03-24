@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CommonViewController.h"
 
+#define kStartPageIndex	@"StartPageIndex"
+
+typedef enum HomeViewType
+{
+    TIMELINE    = 0,
+    BANKING,
+    OTHER,
+    INBOX
+} HomeViewType;
+
+
 @interface MainPageViewController : CommonViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (assign, nonatomic) NSInteger startPageIndex;

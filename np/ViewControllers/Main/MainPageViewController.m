@@ -44,10 +44,11 @@
 		[pageViewControllerArray addObject: [NSNull null]];
 	}
 
-    HomeViewController *homeVc = [self viewControllerAtIndex:startPageIndex];
+    startPageIndex = [self getStartPageIndex];
+	HomeViewController *homeVc = [self viewControllerAtIndex:startPageIndex];
     // pageViewControllerArray = [NSArray arrayWithObject:homeVc];
 	// pageViewControllerArray[startPageIndex] = homeVc;
-    
+	
     pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [pageViewController setDelegate:self];
     [pageViewController setDataSource:self];
@@ -159,7 +160,7 @@
 {
     switch (index)
     {
-        case 0:
+        case TIMELINE:
         {
             [timeLineButton setEnabled:NO];
             [incomeButton setEnabled:YES];
@@ -167,7 +168,7 @@
             [inboxButton setEnabled:YES];
             break;
         }
-        case 1:
+        case BANKING:
         {
             [timeLineButton setEnabled:YES];
             [incomeButton setEnabled:NO];
@@ -175,7 +176,7 @@
             [inboxButton setEnabled:YES];
             break;
         }
-        case 2:
+        case OTHER:
         {
             [timeLineButton setEnabled:YES];
             [incomeButton setEnabled:YES];
@@ -183,7 +184,7 @@
             [inboxButton setEnabled:YES];
             break;
         }
-        case 3:
+        case INBOX:
         {
             [timeLineButton setEnabled:YES];
             [incomeButton setEnabled:YES];
@@ -201,4 +202,17 @@
     [inboxSelectImg setHidden:[inboxButton isEnabled]];
 
 }
+
+#pragma mark - etc
+
+- (HomeViewType) getStartPageIndex {
+    NSNumber* num = [[NSUserDefaults standardUserDefaults] valueForKey:kStartPageIndex];
+	if(num) {
+		return num.integerValue;
+	}
+	else {
+		return TIMELINE;
+	}
+}
+
 @end
