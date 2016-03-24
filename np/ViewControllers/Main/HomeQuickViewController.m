@@ -10,8 +10,6 @@
 #import "HomeQuickPushTableViewCell.h"
 #import "HomeQuickNoticeTableViewCell.h"
 #import "CustomerCenterUtil.h"
-#import "MainPageViewController.h"
-
 
 #define HOME_QUICKVIEW_TABLE_HEIGHT         306
 #define HOME_QUICKVIEW_CELL_HEIGHT          64
@@ -563,14 +561,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-	
-	// 처음에 보일 탭을 저장해 둔다.
-	// MainPageViewController에서 사용한다.
-	// HomeViewType idx = (tableView == pushTableView) ? BANKING : OTHER;
-	HomeViewType idx = TIMELINE;	// (현재는 강제로 전체탭이 보이게 설정했다. 안드로이드와 일치시키기 위해.)
-	[[NSUserDefaults standardUserDefaults] setValue: @(idx) forKey: kStartPageIndex];
-	
-	// Login
+    // Login
     [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 }
 
