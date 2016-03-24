@@ -1584,7 +1584,8 @@
     // deleteIdList로 삭제를 진행한다.
     if([deleteIdList count] > 0)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"선택한 메시지를 삭제하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+        NSString *msg = DELETE_MESSAGE([deleteIdList count]);
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:msg delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
         [alertView setTag:70001];
         [alertView show];
     }
