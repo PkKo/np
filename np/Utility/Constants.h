@@ -346,7 +346,7 @@ typedef enum AccountType
     TRUST
 }AccountType;
 
-#define ACCOUNT_TYPE_DESCRIPTION [NSArray arrayWithObjects:@"입출금알림(PUSH) 기등록 계좌", @"입출식 계좌", @"외화 입출식 계좌", @"수입증권 계좌", @"신탁 계좌", nil]
+#define ACCOUNT_TYPE_DESCRIPTION [NSArray arrayWithObjects:@"입출금알림(PUSH) 기등록 계좌", @"입출식 계좌", @"외화 입출식 계좌", @"수익증권 계좌", @"신탁 계좌", nil]
 
 
 
