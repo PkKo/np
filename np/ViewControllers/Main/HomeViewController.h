@@ -13,20 +13,10 @@
 #import "DepositStickerView.h"
 #import "WithdrawStickerSettingView.h"
 #import "TimelineSectionData.h"
+#import "MainPageViewController.h"
 
 #define kNotificationAlarmDeleted	@"NOTIFICATION_ALARM_DELETED"
 #define kMsgKeyArray @"msgKeyArray"	
-
-
-
-typedef enum HomeViewType
-{
-    TIMELINE    = 0,
-    BANKING,
-    OTHER,
-    INBOX
-} HomeViewType;
-
 #define TOP_MENU_BAR_HEIGHT     27
 
 @interface HomeViewController : CommonViewController<IBInboxProtocol, StickerSettingDelegate>
