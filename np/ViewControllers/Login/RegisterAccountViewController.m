@@ -14,6 +14,7 @@
 #import "LoginUtil.h"
 #import "StatisticMainUtil.h"
 #import "AccountObject.h"
+#import "AppDelegate.h"
 
 @interface RegisterAccountViewController ()
 
@@ -24,6 +25,10 @@
 @synthesize scrollView;
 @synthesize contentView;
 @synthesize nextButton;
+
+- (void) dealloc {
+    [IBNgmService setNgmServiceReceiver: nil];
+}
 
 - (void)viewDidLoad
 {
@@ -556,7 +561,10 @@
         {
             [[NSUserDefaults standardUserDefaults] setObject:[CommonUtil encrypt3DESWithKey:umsId key:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:RESPONSE_CERT_UMS_USER_ID];
 //            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding]];
-            [IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
+            
+            
+            [IBNgmService setNgmServiceReceiver: self];
+			[IBNgmService registerUserWithAccountId:umsId verifyCode:[umsId dataUsingEncoding:NSUTF8StringEncoding] phoneNumber:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey]];
             
             NSMutableDictionary *additionalInfo = [[NSMutableDictionary alloc] init];
             [additionalInfo setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_USER_NAME] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"TAG1"];
@@ -739,6 +747,35 @@
 - (void)onKeyboardHide:(NSNotification *)notifcation
 {
     [self.scrollView setContentOffset:CGPointZero];
+}
+
+
+#pragma mark - IBNgmServiceProtocol
+
+- (void)registerUserResponse:(int)responseCode
+{
+    if(100 == responseCode)
+        NSLog(@"사용자등록 성공");
+    else
+        NSLog(@"사용자등록 실패");
+}
+
+
+- (void)registerDeviceInfoResponse:(int)responseCode
+{
+	if(100 == responseCode)
+    {
+        NSLog(@"단말정보등록 성공");
+		
+		AppDelegate* app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+		[[NSUserDefaults standardUserDefaults] setObject: app.currentDeviceToken forKey: kOldDeviceToken];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+    }
+	else
+	{
+        NSLog(@"단말정보등록 실패");
+	}
+
 }
 
 @end

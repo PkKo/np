@@ -10,8 +10,11 @@
 #import "ECSlidingViewController.h"
 #import "BannerInfo.h"
 #import "Constants.h"
+#import <IBNgmService/IBNgmService.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#define kOldDeviceToken @"OldDeviceToken"
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, IBNgmServiceProtocol>
 
 @property (nonatomic) BOOL isServiceDeactivated;
 
@@ -26,6 +29,7 @@
 @property (strong, nonatomic) UIImage *nongminBannerImg;
 @property (strong, nonatomic) UIImage *noticeBannerImg;
 @property (strong, nonatomic) NSMutableArray *tempAllAccountList;
+@property (strong, nonatomic) NSData* currentDeviceToken;
 
 - (void)timeoutError:(NSDictionary *)response;
 - (void)restartApplication;

@@ -21,6 +21,7 @@
 @synthesize bannerInfo;
 @synthesize nongminBannerImg;
 @synthesize noticeBannerImg;
+@synthesize currentDeviceToken;
 
 #ifdef DEV_MODE
 void MyUncaughtExceptionHandler(NSException *exception) {
@@ -147,6 +148,17 @@ void MyUncaughtExceptionHandler(NSException *exception) {
 {
     NSLog(@"########## %s ##########\nuserInfo\n%@", __FUNCTION__, deviceToken);
     [IBPush registerApnsDeviceToken:deviceToken];
+    currentDeviceToken = deviceToken;
+	
+	NSString *isUser = [[NSUserDefaults standardUserDefaults] objectForKey:IS_USER];
+	NSData *oldTok = [[NSUserDefaults standardUserDefaults] objectForKey: kOldDeviceToken];
+	if ([isUser isEqualToString:@"Y"] &&
+		(NO == [currentDeviceToken isEqualToData: oldTok]))
+	{
+		//디바이스 정보 등록 요청
+		[IBNgmService setNgmServiceReceiver:self];
+        [IBNgmService registerDeviceInfo];
+	}
 }
 
 // 푸시 설정 에러
@@ -247,4 +259,24 @@ void MyUncaughtExceptionHandler(NSException *exception) {
     UINavigationController *naviCon = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RootNavigationController"];
     self.window.rootViewController = naviCon;
 }
+
+#pragma mark
+#pragma mark - IBNgmServiceProtocol
+
+- (void)registerDeviceInfoResponse:(int)responseCode
+{
+    //디바이스 정보 등록 성공
+    if(100 == responseCode)
+    {
+        //변경된 토큰 저장
+		[[NSUserDefaults standardUserDefaults] setObject: currentDeviceToken forKey: kOldDeviceToken];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    //디바이스 정보 등록 실패
+    else
+    {
+        NSLog(@"디바이스 정보 등록에 실패 하였습니다.");
+    }
+}
+
 @end

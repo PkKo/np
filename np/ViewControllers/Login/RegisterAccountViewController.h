@@ -10,8 +10,9 @@
 #import "RegistAccountAllListView.h"
 #import "RegistAccountInputAccountView.h"
 #import "RegistAccountOptionSettingView.h"
+#import <IBNgmService/IBNgmService.h>
 
-@interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface RegisterAccountViewController : CommonViewController<UITextFieldDelegate, UIAlertViewDelegate, IBNgmServiceProtocol>
 {
     BOOL isCertMode;
     RegistAccountAllListView *allListView;
