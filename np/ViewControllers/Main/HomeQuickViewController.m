@@ -233,7 +233,8 @@
     
     isPushListRequest = YES;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    [reqData setAscending:YES];
+    reqData.isSimpleView = YES;
+	[reqData setAscending:YES];
     [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
     [reqData setQueryType:@"1,2,3,4,5,6"];
     [reqData setSize:5];
@@ -246,7 +247,8 @@
     
     isPushListRequest = NO;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    [reqData setAscending:YES];
+    reqData.isSimpleView = YES;
+	[reqData setAscending:YES];
     [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
     [reqData setQueryType:@"ETC"];
     [reqData setSize:5];

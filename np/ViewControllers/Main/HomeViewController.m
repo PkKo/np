@@ -114,7 +114,8 @@
     // 입출금 구분
     //    reqData.queryType;*/
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.ascending = YES;
+    reqData.isSimpleView = NO;
+	reqData.ascending = YES;
     reqData.size = TIMELINE_LOAD_COUNT;
     
     switch (viewType)
@@ -422,7 +423,8 @@
     isRefresh = YES;
     isNewData = newData;
     AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.size = TIMELINE_LOAD_COUNT;
+    reqData.isSimpleView = NO;
+	reqData.size = TIMELINE_LOAD_COUNT;
     
     switch (viewType)
     {
