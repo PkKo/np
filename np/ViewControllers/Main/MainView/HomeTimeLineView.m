@@ -649,7 +649,7 @@
 
 - (void)invalidSelectedDatesAlert {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"알림"
-                                                     message:@"검색 기간이 잘못 설정되었습니다. 기간을 다시 설정한 후 검색하시기바랍니다."
+                                                     message:@"검색 기간이 잘못 설정되었습니다. 기간을 다시 설정한 후 검색하시기 바랍니다."
                                                     delegate:nil
                                            cancelButtonTitle:@"확인"
                                            otherButtonTitles:nil];
