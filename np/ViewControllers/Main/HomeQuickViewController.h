@@ -42,6 +42,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *noticeTitleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tabOneBg;
 @property (strong, nonatomic) IBOutlet UIImageView *tabTwoBg;
+@property (assign, nonatomic) int64_t lastMessageTimePush;
+@property (assign, nonatomic) int64_t lastMessageTimeNotice;
 
 @property (assign, nonatomic) SIMPLE_VIEW_TYPE notifType;
 

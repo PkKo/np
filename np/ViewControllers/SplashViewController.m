@@ -121,26 +121,28 @@
     NSLog(@"%s, %@", __FUNCTION__, categoryList);
     [loadingProgressBar setProgress:0.9f animated:YES];
     
+    // 퀵뷰
+    HomeQuickViewController *quickVc = [[HomeQuickViewController alloc] init];
+    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:quickVc];
+    
     for(InboxCategotyData *data in categoryList)
     {
         if(data.categoryId == 1)
         {
             [CommonUtil setUnreadCountForBanking:data.unreadCount];
+            quickVc.lastMessageTimePush = data.lastMessageTime;
         }
         else if (data.categoryId == 2)
         {
             [CommonUtil setUnreadCountForEtc:data.unreadCount];
+            quickVc.lastMessageTimeNotice = data.lastMessageTime;
         }
     }
-    
-    // 퀵뷰
-    HomeQuickViewController *vc = [[HomeQuickViewController alloc] init];
-    ECSlidingViewController *slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:vc];
     
     [self.navigationController setViewControllers:@[slidingViewController] animated:YES];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).slidingViewController = slidingViewController;
     
-    [vc setNotifType:((AppDelegate *)[UIApplication sharedApplication].delegate).simpleViewType];
+    [quickVc setNotifType:((AppDelegate *)[UIApplication sharedApplication].delegate).simpleViewType];
     
 }
 

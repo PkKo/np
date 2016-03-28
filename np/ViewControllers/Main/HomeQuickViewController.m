@@ -12,10 +12,14 @@
 #import "CustomerCenterUtil.h"
 #import "MainPageViewController.h"
 
-
 #define HOME_QUICKVIEW_TABLE_HEIGHT         306
 #define HOME_QUICKVIEW_CELL_HEIGHT          64
 #define HOME_QUICKVIEW_FIRST_CELL_HEIGHT    51
+
+#define INBOX_CATEGORY_LASTTIME_PUSH   @"InboxCategoryLasttimePush"
+#define INBOX_CATEGORY_LASTTIME_NOTICE @"InboxCategoryLasttimeNotice"
+#define PUSH_LIST_FILE                 @"pushFile.dat"
+#define NOTICE_LIST_FILE               @"noticeFile.dat"
 
 @interface HomeQuickViewController ()
 
@@ -228,31 +232,44 @@
 }
 
 - (void)requestPushList {
+	CGFloat lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_PUSH];
+	if ((0 == self.lastMessageTimePush) || // 서버에서 lastMessageTime이 0으로 오는 경우 
+		(lastTime < self.lastMessageTimePush)) { // 마지막에 받은 시간보다 큰경우
+		[self startIndicator];
     
-    [self startIndicator];
-    
-    isPushListRequest = YES;
-    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.isSimpleView = YES;
-	[reqData setAscending:YES];
-    [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
-    [reqData setQueryType:@"1,2,3,4,5,6"];
-    [reqData setSize:5];
-    [IBInbox reqQueryAccountInboxListWithSize:reqData];
+		isPushListRequest = YES;
+		AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+		reqData.isSimpleView = YES;
+		[reqData setAscending:YES];
+		[reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
+		[reqData setQueryType:@"1,2,3,4,5,6"];
+		[reqData setSize:5];
+		[IBInbox reqQueryAccountInboxListWithSize:reqData];		
+	}
+	else {
+		pushList = [self readArrayFromFile: PUSH_LIST_FILE];
+	}
 }
 
 - (void)requestNoticeList
 {
-    [self startIndicator];
+	CGFloat lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_NOTICE];
+	if ((0 == self.lastMessageTimeNotice) || // 서버에서 lastMessageTime이 0으로 오는 경우 
+		(lastTime < self.lastMessageTimeNotice)) { // 마지막에 받은 시간보다 큰경우
+		[self startIndicator];
     
-    isPushListRequest = NO;
-    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
-    reqData.isSimpleView = YES;
-	[reqData setAscending:YES];
-    [reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
-    [reqData setQueryType:@"ETC"];
-    [reqData setSize:5];
-    [IBInbox reqQueryAccountInboxListWithSize:reqData];
+		isPushListRequest = NO;
+		AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+		reqData.isSimpleView = YES;
+		[reqData setAscending:YES];
+		[reqData setAccountNumberList:[[[LoginUtil alloc] init] getAllAccounts]];
+		[reqData setQueryType:@"ETC"];
+		[reqData setSize:5];
+		[IBInbox reqQueryAccountInboxListWithSize:reqData];
+	}
+	else {
+		noticeList = [self readArrayFromFile: NOTICE_LIST_FILE];
+	}
 }
 
 #pragma mark - Server Request
@@ -592,6 +609,9 @@
                 
                 pushList = [NSMutableArray arrayWithArray:messageList];
                 [pushTableView reloadData];
+
+				[self saveArray:pushList toFile: PUSH_LIST_FILE];
+				[self saveLastMessageTime: self.lastMessageTimePush forKey: INBOX_CATEGORY_LASTTIME_PUSH];
             }
             else
             {
@@ -606,6 +626,8 @@
             if([messageList count] > 0)
             {
                 noticeList = [NSMutableArray arrayWithArray:messageList];
+                [self saveArray:noticeList toFile: NOTICE_LIST_FILE];
+				[self saveLastMessageTime: self.lastMessageTimeNotice forKey: INBOX_CATEGORY_LASTTIME_NOTICE];
             }
             
             if([noticeList count] > 0)
@@ -729,4 +751,35 @@
     // Login
     [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
 }
+
+#pragma mark - etc
+
+- (void) saveArray:(NSArray*)ary toFile: (NSString *)aFileName {
+    NSArray*  documentPaths      = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [documentPaths objectAtIndex: 0];
+    NSString* filePath           = [documentsDirectory stringByAppendingPathComponent: aFileName];
+	[ary writeToFile: filePath atomically:YES];
+}
+
+
+- (NSMutableArray*) readArrayFromFile: (NSString *)aFileName {
+	NSArray*  documentPaths      = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [documentPaths objectAtIndex: 0];
+    NSString* filePath           = [documentsDirectory stringByAppendingPathComponent: aFileName];
+	return [NSMutableArray arrayWithContentsOfFile: filePath];
+}
+
+
+- (void) saveLastMessageTime: (CGFloat)time forKey: (NSString *)aKey
+{
+    [[NSUserDefaults standardUserDefaults] setValue: @(time) forKey: aKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (CGFloat) readLastMessageTimeForKey:(NSString *)aKey {
+    CGFloat lastTime = ((NSNumber*)[[NSUserDefaults standardUserDefaults] valueForKey: aKey]).doubleValue;
+	return lastTime;
+}
+
+
 @end
