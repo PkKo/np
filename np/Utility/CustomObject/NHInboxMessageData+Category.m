@@ -6,7 +6,7 @@
 //  Copyright © 2015년 Infobank1. All rights reserved.
 //
 
-#import "InboxCategotyData+Category.h"
+#import "NHInboxMessageData+Category.h"
 
 @implementation NHInboxMessageData(NHInboxMessageData_Category)
 
