@@ -90,10 +90,13 @@
     [reqData setSize:5];
     [IBInbox reqQueryAccountInboxListWithSize:reqData];
     */
+
+
+//   [[NSUserDefaults standardUserDefaults] setValue: @(0) forKey: INBOX_CATEGORY_LASTTIME_PUSH];
+//   [[NSUserDefaults standardUserDefaults] setValue: @(0) forKey: INBOX_CATEGORY_LASTTIME_NOTICE];
+//   [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
-    
-    NSInteger pushCount = [CommonUtil getUnreadCountForBanking];
+	NSInteger pushCount = [CommonUtil getUnreadCountForBanking];
     if(pushCount > 99)
     {
         [pushCountLabel setText:@"99+"];
@@ -232,7 +235,7 @@
 }
 
 - (void)requestPushList {
-	CGFloat lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_PUSH];
+	int64_t lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_PUSH];
 	if ((0 == self.lastMessageTimePush) || // 서버에서 lastMessageTime이 0으로 오는 경우 
 		(lastTime < self.lastMessageTimePush)) { // 마지막에 받은 시간보다 큰경우
 		[self startIndicator];
@@ -248,12 +251,13 @@
 	}
 	else {
 		pushList = [self readArrayFromFile: PUSH_LIST_FILE];
+		[self showPushTab];
 	}
 }
 
 - (void)requestNoticeList
 {
-	CGFloat lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_NOTICE];
+	int64_t lastTime = [self readLastMessageTimeForKey: INBOX_CATEGORY_LASTTIME_NOTICE];
 	if ((0 == self.lastMessageTimeNotice) || // 서버에서 lastMessageTime이 0으로 오는 경우 
 		(lastTime < self.lastMessageTimeNotice)) { // 마지막에 받은 시간보다 큰경우
 		[self startIndicator];
@@ -269,6 +273,7 @@
 	}
 	else {
 		noticeList = [self readArrayFromFile: NOTICE_LIST_FILE];
+		[self showNoticeTab];
 	}
 }
 
@@ -603,22 +608,12 @@
         {
             if([messageList count] > 0)
             {
-                [pushTableView setHidden:[pushMenuButton isEnabled]];
-                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-                [emptyListView setHidden:YES];
-                
                 pushList = [NSMutableArray arrayWithArray:messageList];
-                [pushTableView reloadData];
-
-				[self saveArray:pushList toFile: PUSH_LIST_FILE];
-				[self saveLastMessageTime: self.lastMessageTimePush forKey: INBOX_CATEGORY_LASTTIME_PUSH];
+                [self saveArray:pushList toFile: PUSH_LIST_FILE];
+                [self saveLastMessageTime: self.lastMessageTimePush forKey: INBOX_CATEGORY_LASTTIME_PUSH];
             }
-            else
-            {
-                [pushTableView setHidden:YES];
-                [noticeTableView setHidden:YES];
-                [emptyListView setHidden:NO];
-            }
+			
+			[self showPushTab];
             isPushListLoadingEnd = YES;
         }
         else
@@ -630,20 +625,7 @@
 				[self saveLastMessageTime: self.lastMessageTimeNotice forKey: INBOX_CATEGORY_LASTTIME_NOTICE];
             }
             
-            if([noticeList count] > 0)
-            {
-                [pushTableView setHidden:[pushMenuButton isEnabled]];
-                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-                [emptyListView setHidden:YES];
-                [noticeTableView reloadData];
-            }
-            else
-            {
-                [pushTableView setHidden:YES];
-                [noticeTableView setHidden:YES];
-                [emptyListView setHidden:NO];
-            }
-            
+			[self showNoticeTab];
             isNoticeListLoadingEnd = YES;
         }
     }
@@ -697,19 +679,7 @@
     {
         if(isPushListLoadingEnd)
         {
-            if([pushList count] > 0)
-            {
-                [pushTableView setHidden:[pushMenuButton isEnabled]];
-                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-                [emptyListView setHidden:YES];
-                [pushTableView reloadData];
-            }
-            else
-            {
-                [pushTableView setHidden:YES];
-                [noticeTableView setHidden:YES];
-                [emptyListView setHidden:NO];
-            }
+            [self showPushTab];
         } else {
             [self requestPushList];
         }
@@ -719,19 +689,7 @@
         
         if(isNoticeListLoadingEnd)
         {
-            if([noticeList count] > 0)
-            {
-                [pushTableView setHidden:[pushMenuButton isEnabled]];
-                [noticeTableView setHidden:[noticeMenuButton isEnabled]];
-                [emptyListView setHidden:YES];
-                [noticeTableView reloadData];
-            }
-            else
-            {
-                [pushTableView setHidden:YES];
-                [noticeTableView setHidden:YES];
-                [emptyListView setHidden:NO];
-            }
+            [self showNoticeTab];
         }
         else
         {
@@ -758,7 +716,8 @@
     NSArray*  documentPaths      = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [documentPaths objectAtIndex: 0];
     NSString* filePath           = [documentsDirectory stringByAppendingPathComponent: aFileName];
-	[ary writeToFile: filePath atomically:YES];
+	[NSKeyedArchiver archiveRootObject:ary toFile:filePath]; 
+
 }
 
 
@@ -766,20 +725,53 @@
 	NSArray*  documentPaths      = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [documentPaths objectAtIndex: 0];
     NSString* filePath           = [documentsDirectory stringByAppendingPathComponent: aFileName];
-	return [NSMutableArray arrayWithContentsOfFile: filePath];
+	return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath]; 
 }
 
 
-- (void) saveLastMessageTime: (CGFloat)time forKey: (NSString *)aKey
+- (void) saveLastMessageTime: (int64_t)time forKey: (NSString *)aKey
 {
     [[NSUserDefaults standardUserDefaults] setValue: @(time) forKey: aKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (CGFloat) readLastMessageTimeForKey:(NSString *)aKey {
-    CGFloat lastTime = ((NSNumber*)[[NSUserDefaults standardUserDefaults] valueForKey: aKey]).doubleValue;
+- (int64_t) readLastMessageTimeForKey:(NSString *)aKey {
+    int64_t lastTime = ((NSNumber*)[[NSUserDefaults standardUserDefaults] valueForKey: aKey]).longLongValue;
 	return lastTime;
 }
 
+
+- (void) showPushTab {
+    if([pushList count] > 0)
+	{
+		[pushTableView setHidden:[pushMenuButton isEnabled]];
+		[noticeTableView setHidden:[noticeMenuButton isEnabled]];
+		[emptyListView setHidden:YES];
+		[pushTableView reloadData];
+	}
+	else
+	{
+		[pushTableView setHidden:YES];
+		[noticeTableView setHidden:YES];
+		[emptyListView setHidden:NO];
+	}
+}
+
+
+- (void) showNoticeTab {
+	if([noticeList count] > 0)
+	{
+		[pushTableView setHidden:[pushMenuButton isEnabled]];
+		[noticeTableView setHidden:[noticeMenuButton isEnabled]];
+		[emptyListView setHidden:YES];
+		[noticeTableView reloadData];
+	}
+	else
+	{
+		[pushTableView setHidden:YES];
+		[noticeTableView setHidden:YES];
+		[emptyListView setHidden:NO];
+	}
+}
 
 @end

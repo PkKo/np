@@ -18,6 +18,7 @@
 		1797119E1BB805F3007131A5 /* ChartDataItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1797119D1BB805F3007131A5 /* ChartDataItemView.m */; };
 		179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1797119F1BB80604007131A5 /* ChartDataItemView.xib */; };
 		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; };
+		A205F78D1CAA36E400AC2D26 /* InboxCategotyData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A205F78C1CAA36E400AC2D26 /* InboxCategotyData+Category.m */; };
 		A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */; };
 		A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */; };
 		A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -690,6 +691,8 @@
 		1797119F1BB80604007131A5 /* ChartDataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartDataItemView.xib; sourceTree = "<group>"; };
 		179711A11BB80869007131A5 /* ChartDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDataView.h; sourceTree = "<group>"; };
 		179711A21BB80869007131A5 /* ChartDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataView.m; sourceTree = "<group>"; };
+		A205F78B1CAA36E400AC2D26 /* InboxCategotyData+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InboxCategotyData+Category.h"; sourceTree = "<group>"; };
+		A205F78C1CAA36E400AC2D26 /* InboxCategotyData+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "InboxCategotyData+Category.m"; sourceTree = "<group>"; };
 		A24D07B71BE750EC00406D96 /* menu_tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg@2x.png"; sourceTree = "<group>"; };
 		A24D07B91BE7511D00406D96 /* menu_tab_bg_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg_01@2x.png"; sourceTree = "<group>"; };
 		A24D07BA1BE7511D00406D96 /* menu_tab_bg_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg_02@2x.png"; sourceTree = "<group>"; };
@@ -2025,6 +2028,8 @@
 		A2DCFFA91BEB294A00EEABD9 /* CustomObject */ = {
 			isa = PBXGroup;
 			children = (
+				A205F78B1CAA36E400AC2D26 /* InboxCategotyData+Category.h */,
+				A205F78C1CAA36E400AC2D26 /* InboxCategotyData+Category.m */,
 				A2DCFFAA1BEB296000EEABD9 /* BannerInfo.h */,
 				A2DCFFAB1BEB296000EEABD9 /* BannerInfo.m */,
 				A2DD371F1BF2CD99002165CB /* LayerPopupInfo.h */,
@@ -4026,6 +4031,7 @@
 				A2DA4F251BCC9761009FB32F /* RegistAccountAllListView.m in Sources */,
 				A2D95B051BA8F1DD00DC943D /* EccEncryptor.m in Sources */,
 				A538C2DF1BCDE748005E3211 /* LoginSettingsViewController.m in Sources */,
+				A205F78D1CAA36E400AC2D26 /* InboxCategotyData+Category.m in Sources */,
 				A2DD07231BF01F5700897AB8 /* HomeEtcDetailViewController.m in Sources */,
 				17208CA31BEA64D300968498 /* ArticleObject.m in Sources */,
 				A2DEAE571B9FE6D800EDCCBA /* ECSlidingInteractiveTransition.m in Sources */,
