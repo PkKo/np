@@ -131,7 +131,11 @@
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
-    [reqBody setObject:[accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""] forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+    
+	NSString *acNum = [accountNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+	if(nil != acNum) {
+		[reqBody setObject:acNum forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+	}
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SEARCH];
     HttpRequest *req = [HttpRequest getInstance];
