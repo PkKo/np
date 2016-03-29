@@ -69,6 +69,9 @@
     }
     else
     {
+#if 0 //앱 위변조 안하고 넘어감
+        [self appVersionCheckRequest];
+#else
         if(!isDeviceJailbroken())
         {
             [self appVersionCheckRequest];
@@ -79,6 +82,8 @@
             [alertView setTag:90001];
             [alertView show];
         }
+#endif
+        
     }//*/
 //    [self performSelector:@selector(setMainViewController) withObject:nil afterDelay:1];
 //    [self sessionTestRequest];
