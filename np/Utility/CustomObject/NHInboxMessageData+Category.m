@@ -57,7 +57,7 @@
 		self.amount				= ((NSNumber*)[decoder decodeObjectForKey: @"amount"]).longLongValue;
 		self.balance			= ((NSNumber*)[decoder decodeObjectForKey: @"balance"]).longLongValue;
 		self.oppositeUser		= [decoder decodeObjectForKey: @"oppositeUser"];
-		self.stickerCode		= ((NSNumber*)[decoder decodeObjectForKey: @"stickerCode"]).longValue;
+		self.stickerCode		= ((NSNumber*)[decoder decodeObjectForKey: @"stickerCode"]).intValue;
 		self.accountGb			= [decoder decodeObjectForKey: @"accountGb"];
 		self.payType			= [decoder decodeObjectForKey: @"payType"];
 	}
