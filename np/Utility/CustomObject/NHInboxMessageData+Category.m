@@ -47,17 +47,17 @@
 - (id) initWithCoder: (NSCoder *)decoder {
     if (self = [super init]) {
 		self.serverMessageKey	= [decoder decodeObjectForKey: @"serverMessageKey"];
-		self.regDate			= ((NSNumber*)[decoder decodeObjectForKey: @"regDate"]).longLongValue;
-		self.readDate			= ((NSNumber*)[decoder decodeObjectForKey: @"readDate"]).longLongValue;
+		self.regDate			= ((NSNumber*)[decoder decodeObjectForKey: @"regDate"]).longValue;
+		self.readDate			= ((NSNumber*)[decoder decodeObjectForKey: @"readDate"]).longValue;
 		self.inboxType			= [decoder decodeObjectForKey: @"inboxType"];
 		self.title				= [decoder decodeObjectForKey: @"title"];
 		self.text				= [decoder decodeObjectForKey: @"text"];
 		self.linkUrl			= [decoder decodeObjectForKey: @"linkUrl"];
 		self.nhAccountNumber	= [decoder decodeObjectForKey: @"nhAccountNumber"];
-		self.amount				= ((NSNumber*)[decoder decodeObjectForKey: @"amount"]).longLongValue;
-		self.balance			= ((NSNumber*)[decoder decodeObjectForKey: @"balance"]).longLongValue;
+		self.amount				= ((NSNumber*)[decoder decodeObjectForKey: @"amount"]).longValue;
+		self.balance			= ((NSNumber*)[decoder decodeObjectForKey: @"balance"]).longValue;
 		self.oppositeUser		= [decoder decodeObjectForKey: @"oppositeUser"];
-		self.stickerCode		= ((NSNumber*)[decoder decodeObjectForKey: @"stickerCode"]).longValue;
+		self.stickerCode		= ((NSNumber*)[decoder decodeObjectForKey: @"stickerCode"]).shortValue;
 		self.accountGb			= [decoder decodeObjectForKey: @"accountGb"];
 		self.payType			= [decoder decodeObjectForKey: @"payType"];
 	}
