@@ -223,7 +223,10 @@
 }
 
 -(void)closeSearchView {
-    [self toggleSearchView];
+    // [self toggleSearchView];
+    
+    StorageBoxUtil *dateSearchUtil = [[StorageBoxUtil alloc] init];
+    [dateSearchUtil removeStorageDateSearchViewFromParentView:self.view];
 }
 
 - (void)showDataPickerToSelectAccountWithSelectedValue:(NSString *)sltedValue {

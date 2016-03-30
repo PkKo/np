@@ -30,4 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView    * noDataImageView;
 @property (weak, nonatomic) IBOutlet UILabel        * noDataNotice;
 
+- (void)closeSelectToRemoveView;
+
+
 @end

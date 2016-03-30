@@ -14,6 +14,7 @@
 #import "WithdrawStickerSettingView.h"
 #import "TimelineSectionData.h"
 #import "MainPageViewController.h"
+#import "ArchivedTransactionItemsViewController.h"
 
 #define kNotificationAlarmDeleted	@"NOTIFICATION_ALARM_DELETED"
 #define kMsgKeyArray @"msgKeyArray"	
@@ -54,6 +55,8 @@
 @property (strong, nonatomic) HomeBankingView *bankingView;
 // 기타 알림 탭 뷰
 @property (strong, nonatomic) HomeEtcTimeLineView *etcTimeLineView;
+// 보관함 뷰컨트롤러
+@property (strong, nonatomic) ArchivedTransactionItemsViewController *archivedItemsViewController;
 // 실제 내용을 보여줄 뷰
 @property (strong, nonatomic) IBOutlet UIView *mMainContentView;
 // 스크롤 위로 버튼

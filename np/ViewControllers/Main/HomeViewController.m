@@ -25,14 +25,13 @@
 @implementation HomeViewController
 
 @synthesize viewType;
-
 @synthesize mTimeLineView;
 @synthesize bankingView;
 @synthesize etcTimeLineView;
-
 @synthesize mMainContentView;
-
 @synthesize scrollMoveTopButton;
+@synthesize archivedItemsViewController;
+
 
 - (void)viewDidLoad
 {
@@ -100,6 +99,16 @@
     {
         [mTimeLineView bannerTimerStop];
     }
+
+	// 검색, 삭제 모드 취소
+	mTimeLineView.searchView.hidden = YES;
+	bankingView.searchView.hidden = YES;
+	etcTimeLineView.searchView.hidden = YES;
+	[mTimeLineView deleteViewHide: nil];
+	[bankingView deleteViewHide: nil];
+	[etcTimeLineView deleteViewHide: nil];
+	[archivedItemsViewController closeSearchView]; // 보관함 찾기 취소
+	[archivedItemsViewController closeSelectToRemoveView]; // 보관함 삭제 취소
 }
 
 - (void)queryInitData
@@ -391,8 +400,7 @@
             }
             if (!hasArchivedView) {
                 UIStoryboard        * archivedItemsStoryBoard       = [UIStoryboard storyboardWithName:@"ArchivedTransactionItems" bundle:nil];
-                UIViewController    * archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
-                
+				archivedItemsViewController   = [archivedItemsStoryBoard instantiateViewControllerWithIdentifier:@"archivedTransactionItems"];
                 archivedItemsViewController.view.frame              = mMainContentView.bounds;
                 archivedItemsViewController.view.autoresizingMask   = mMainContentView.autoresizingMask;
                 
