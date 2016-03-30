@@ -475,7 +475,10 @@ typedef enum SetupStatus {
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
-        [[[LoginUtil alloc] init] setPatternPasswordExist:YES];
+        LoginUtil * util = [[LoginUtil alloc] init];
+		[util setPatternPasswordExist:YES];
+		[util saveLoginMethod:LOGIN_BY_PATTERN];
+		
         [self showAlert:@"패턴이 설정 되었습니다." tag:ALERT_SUCCEED_SAVE];
         return YES;
         
