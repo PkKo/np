@@ -98,7 +98,7 @@
 #define AMOUNT_FONT_SIZE        20.0f
 #define IPHONE_FIVE_FRAME_HEIGHT    568
 
-#define TIMELINE_LOAD_COUNT     20
+#define TIMELINE_LOAD_COUNT     10
 #define TIMELINE_EVENT_TYPE     @"event_type"
 #define TIMELINE_ACCOUNT_NUMBER @"account_number"
 #define TIMELINE_TRN_AMT        @"trn_amt"
