@@ -636,7 +636,12 @@
         [self invalidSelectedDatesAlert];
         return;
     }
-    /*
+    
+	[mTimeLineSection removeAllObjects];
+	[mTimeLineDic removeAllObjects];
+	[bankingListTable reloadData];
+	
+	/*
     if(searchStartDate == nil || [searchStartDate length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -667,7 +672,8 @@
     reqData.ascending = listSortType;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    
+	reqData.size = TIMELINE_LOAD_COUNT;
+	
     if(inboxTypeIndex == 0)
     {
         reqData.queryType = @"1,2,3,4,5,6";

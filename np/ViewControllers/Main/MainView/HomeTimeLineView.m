@@ -666,12 +666,17 @@
         return;
     }
     
-    AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
+	[mTimeLineSection removeAllObjects];
+    [mTimeLineDic removeAllObjects];
+	[mTimeLineTable reloadData];
+	
+	AccountInboxRequestData *reqData = [[AccountInboxRequestData alloc] init];
     reqData.accountNumberList = [[[LoginUtil alloc] init] getAllAccounts];
     reqData.ascending = listSortType;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"ALL";
+    reqData.size = TIMELINE_LOAD_COUNT;
+	reqData.queryType = @"ALL";
     
     if(delegate != nil && [delegate respondsToSelector:@selector(searchInboxDataWithQuery:)])
     {

@@ -892,7 +892,12 @@
         [self invalidSelectedDatesAlert];
         return;
     }
-    /*
+    
+	[mTimeLineSection removeAllObjects];
+    [mTimeLineDic removeAllObjects];
+	[timelineTableView reloadData];
+	
+	/*
     if(searchStartDate == nil || [searchStartDate length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"검색 시작일을 입력해주세요." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
@@ -913,7 +918,8 @@
     reqData.ascending = YES;
     reqData.startDate = searchStartDate;
     reqData.endDate = searchEndDate;
-    reqData.queryType = @"ETC";
+    reqData.size = TIMELINE_LOAD_COUNT;
+	reqData.queryType = @"ETC";
     
     serviceSelectLabel.text = SERVICE_TYPE_ALL;
     [serviceSelectLabel setFrame:serviceSelectLabelFrame];
