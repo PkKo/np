@@ -656,7 +656,7 @@
                                     <color key="textColor" red="0.56470588235294117" green="0.56862745098039214" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자동이체 옵션을 '제한없음(실시간)'으로 선택하시는 경우, 새벽에 발생되는 자동이체 입출금 알림도 실시간 발송됩니다." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vhl-MP-o7B">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자동이체 옵션을 '제한없음(실시간)'으로 선택하시는 경우, 새벽에 발생되는 자동이체 입출금 알림도 실시간 발송됩니다." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vhl-MP-o7B" customClass="TopLeftLabel">
                                     <rect key="frame" x="25" y="951" width="277" height="48"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -675,7 +675,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제한발송(22시~8시)'으로 선택하시면 수면시간(22시~8시)에 발생하는 자동이체 입출금 알림은 익일 8시 이후에 전송됩니다." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sl3-lX-Rvs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제한발송(22시~8시)'으로 선택하시면 수면시간(22시~8시)에 발생하는 자동이체 입출금 알림은 익일 8시 이후에 전송됩니다." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sl3-lX-Rvs" customClass="TopLeftLabel">
                                             <rect key="frame" x="7" y="0.0" width="277" height="48"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -696,7 +696,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌 알림 옵션은 알림설정&gt;계좌 추가/변경/삭제에서 변경 가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yWR-yp-lfq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계좌 알림 옵션은 알림설정&gt;계좌 추가/변경/삭제에서 변경 가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yWR-yp-lfq" customClass="TopLeftLabel">
                                             <rect key="frame" x="7" y="0.0" width="277" height="32"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -717,7 +717,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UMS 기사용자의 경우 설정하신 계좌알림 옵션이 타 서비스에도 동일하게 적용됩니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AGK-it-rl7">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UMS 기사용자의 경우 설정하신 계좌알림 옵션이 타 서비스에도 동일하게 적용됩니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AGK-it-rl7" customClass="TopLeftLabel">
                                             <rect key="frame" x="7" y="0.0" width="277" height="32"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -738,7 +738,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림시간제한과 알림주기(지정시간)은 동시에 설정이 불가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TV6-Ul-kFJ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림시간제한과 알림주기(지정시간)은 동시에 설정이 불가능합니다." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TV6-Ul-kFJ" customClass="TopLeftLabel">
                                             <rect key="frame" x="7" y="0.0" width="277" height="32"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -759,7 +759,7 @@
                                             <color key="textColor" red="0.56470588239999997" green="0.56862745100000001" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다계좌추가일 경우 알림옵션이 동일하게 적용됩니다." lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LHW-eT-f8l">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다계좌추가일 경우 알림옵션이 동일하게 적용됩니다." lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LHW-eT-f8l" customClass="TopLeftLabel">
                                             <rect key="frame" x="7" y="0.0" width="277" height="16"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
