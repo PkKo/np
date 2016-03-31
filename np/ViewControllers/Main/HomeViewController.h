@@ -20,7 +20,7 @@
 #define kMsgKeyArray @"msgKeyArray"	
 #define TOP_MENU_BAR_HEIGHT     27
 
-#define DELETE_MESSAGE(x)	[NSString stringWithFormat:@"%ud개의 메시지를 삭제하시겠습니까? 전체 삭제는 메뉴의 데이터 초기화를 이용바랍니다.", x]
+#define DELETE_MESSAGE(x)	[NSString stringWithFormat:@"%u개의 메시지를 삭제하시겠습니까? 전체 삭제는 메뉴의 데이터 초기화를 이용바랍니다.", x]
 
 
 @interface HomeViewController : CommonViewController<IBInboxProtocol, StickerSettingDelegate>
