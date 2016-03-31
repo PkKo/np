@@ -7,6 +7,7 @@
 //
 
 #import "HttpRequest.h"
+#import "CommonViewController.h"
 
 @implementation HttpRequest
 
