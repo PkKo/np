@@ -72,7 +72,7 @@
     
     if (failedTimes >= 5) {
         
-        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+        alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 서비스가 제한됩니다. 확인 후 다시 거래하시기 바랍니다.";
         tag             = ALERT_GOTO_SELF_IDENTIFY;
         
     } else {
@@ -96,7 +96,7 @@
             failedTimes++;
             [util saveCertPasswordFailedTimes:failedTimes];
             if (failedTimes >= 5) {
-                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 인증서 사용이 불가능합니다. 가까운 NH농협 영업점을 방문하셔서 공인 인증서 비밀번호를 재설정해주세요.";
+                alertMessage    = @"비밀번호 오류가 5회 이상 발생하여 서비스가 제한됩니다. 확인 후 다시 거래하시기 바랍니다.";
                 tag             = ALERT_GOTO_SELF_IDENTIFY;
                 
             } else {
