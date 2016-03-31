@@ -265,7 +265,10 @@
 #else
     [reqBody setObject:@"9805282169468" forKey:REQUEST_NOTI_OPTION_SEARCH_RLNO];
 #endif*/
-    [reqBody setObject:certifiedAccountNumber forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+
+    if (certifiedAccountNumber) {
+        [reqBody setObject:certifiedAccountNumber forKey:REQUEST_NOTI_OPTION_SEARCH_ACNO];
+    }
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_NOTI_OPTION_SEARCH];
     HttpRequest *req = [HttpRequest getInstance];

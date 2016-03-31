@@ -212,7 +212,9 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS]) {
         
-        [[[LoginUtil alloc] init] setSimplePasswordExist:YES];
+        LoginUtil * util = [[LoginUtil alloc] init];
+        [util setSimplePasswordExist:YES];
+        [util saveLoginMethod:LOGIN_BY_SIMPLEPW];
         
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"안내" message:@"간편비밀번호가 변경 되었습니다."
                                                         delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
