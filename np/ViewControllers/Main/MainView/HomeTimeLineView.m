@@ -1013,10 +1013,15 @@
         UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, emptyScrollView.frame.size.width, 100.0f)];
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [cell addSubview:emptyListImageView];
-        [cell addSubview:emptyLabel];
+        [cell.contentView addSubview:emptyListImageView];
+        [cell.contentView addSubview:emptyLabel];
         [cell setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:241.0f/255.0f blue:246.0/255.0f alpha:1.0f]];
         
+		CGFloat x = (CGRectGetWidth(cell.contentView.frame) - CGRectGetWidth(emptyListImageView.frame)) / 2.0;
+		emptyListImageView.frame = CGRectMake(x, emptyListImageView.frame.origin.y, emptyListImageView.frame.size.width, emptyListImageView.frame.size.height);
+		x = (CGRectGetWidth(cell.contentView.frame) - CGRectGetWidth(emptyLabel.frame)) / 2.0;
+		emptyLabel.frame = CGRectMake(x, emptyLabel.frame.origin.y, emptyLabel.frame.size.width, emptyLabel.frame.size.height);
+
         return cell;
     }
     else
