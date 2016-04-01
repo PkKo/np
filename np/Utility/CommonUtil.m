@@ -841,7 +841,7 @@
             count = 0;
         }
         
-        if(count > 3 - 2)
+        if(count >= 2)
         {
             return YES;
         }
@@ -900,7 +900,7 @@
             count=0;
         }
         
-        if(count > 3 - 2)
+        if(count >= 2)   // 3개 연속되면 여기서 count가 2가 된다.
         {
             return YES;
         }
