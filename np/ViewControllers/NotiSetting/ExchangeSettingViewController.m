@@ -107,6 +107,17 @@
 //        [alertView show];
     }
     
+	
+	
+	NSMutableArray* mutAry = [countryList mutableCopy];
+	NSPredicate* predicate = [NSPredicate predicateWithFormat: @"UMSW023004_OUT_SUB.nation_id=%@", @"ALL"];
+	NSArray* filAry = [countryList filteredArrayUsingPredicate: predicate];
+
+	if(0 < filAry.count) {
+		[mutAry removeObject: filAry.firstObject];
+		countryList = [mutAry copy];
+	}
+
     [self registCurrencyCountryListRequest];
 }
 
