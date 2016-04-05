@@ -140,9 +140,17 @@
         }
     }
     
-    [periodTimeOneLabel setText:[alarmPeriodList objectAtIndex:periodOneIndex]];
-    [periodTimeTwoLabel setText:[alarmPeriodList objectAtIndex:periodTwoIndex]];
-    [periodTimeThreeLabel setText:[alarmPeriodList objectAtIndex:periodThreeIndex]];
+    if(periodOneIndex < alarmPeriodList.count) {
+		[periodTimeOneLabel setText:[alarmPeriodList objectAtIndex:periodOneIndex]];
+	}
+
+	if(periodTwoIndex < alarmPeriodList.count) {
+		[periodTimeTwoLabel setText:[alarmPeriodList objectAtIndex:periodTwoIndex]];
+	}
+
+	if(periodThreeIndex < alarmPeriodList.count) {
+		[periodTimeThreeLabel setText:[alarmPeriodList objectAtIndex:periodThreeIndex]];
+	}
 }
 
 #pragma mark - 환율 옵션 요청
