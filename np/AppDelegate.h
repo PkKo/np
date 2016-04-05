@@ -33,5 +33,7 @@
 
 - (void)timeoutError:(NSDictionary *)response;
 - (void)restartApplication;
+- (void)checkAppUpdate;
+
 @end
 

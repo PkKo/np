@@ -40,6 +40,11 @@
     }
     
     [self.view bringSubviewToFront:loadingIndicatorBg];
+
+	// 앱버전 체크처리
+    AppDelegate* app = ((AppDelegate *)[UIApplication sharedApplication].delegate);
+	[app performSelector: @selector(checkAppUpdate) withObject: nil afterDelay: 0.0];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated

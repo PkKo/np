@@ -251,6 +251,22 @@ void MyUncaughtExceptionHandler(NSException *exception) {
     {
         [self restartApplication];
     }
+	else if([alertView tag] == 1100)
+    {
+        if(buttonIndex == BUTTON_INDEX_OK)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_APP_URL]];
+            // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
+            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
+        }
+    }
+    else if([alertView tag] == 1101)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_APP_URL]];
+		exit(0);
+        // 스마트 알림앱이 등록된 이후 앱스토어 주소로 변경한다.
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://smartdev.nonghyup.com:39310/apps/push/p.html"]];
+    }
 }
 
 - (void)restartApplication
@@ -277,6 +293,30 @@ void MyUncaughtExceptionHandler(NSException *exception) {
     {
         NSLog(@"디바이스 정보 등록에 실패 하였습니다.");
     }
+}
+
+
+
+#pragma mark etc
+				
+- (void) checkAppUpdate {
+    NSString *updateYN = [[NSUserDefaults standardUserDefaults] valueForKey: @"updateNotiYn"];
+
+	if([updateYN isEqualToString:@"Y"])
+	{
+	    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"최신버전 업데이트가 있습니다.\n업데이트 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+	    [alertView setTag:1100];
+	    [alertView show];
+	}
+	else if([updateYN isEqualToString:@"F"])
+	{
+	    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"최신버전 업데이트가\n필요합니다." delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil];
+	    [alertView setTag:1101];
+	    [alertView show];
+	}
+
+	[[NSUserDefaults standardUserDefaults] setValue: @"" forKey: @"updateNotiYn"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
