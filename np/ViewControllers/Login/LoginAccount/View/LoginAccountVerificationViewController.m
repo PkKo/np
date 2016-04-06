@@ -93,7 +93,9 @@
 
 - (void)confirmPassword:(NSString *)pw {
     
-    EccEncryptor *ec = [EccEncryptor sharedInstance];
+    self.encodedPassword = pw;
+							  
+	EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     self.passwordTextField.text = plainText;
 }
@@ -127,7 +129,7 @@
         
         [self startIndicator];
         [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text
-                                                           password:self.passwordTextField.text
+                                                           password:self.encodedPassword // self.passwordTextField.text
                                                            birthday:self.birthdayTextField.text
                                                    ofViewController:self action:@selector(loginResponse:)];
         
@@ -199,5 +201,7 @@
     self.accountTextField.text = @"";
     self.passwordTextField.text = @"";
     self.birthdayTextField.text = @"";
+
+	self.encodedPassword = @"";
 }
 @end
