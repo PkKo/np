@@ -16,6 +16,9 @@
 #import "CustomerCenterUtil.h"
 #import "ServiceDeactivationController.h"
 
+// #define USE_BASE64_ACCOUNT_PASSWORD
+
+
 @interface LoginAccountVerificationViewController () {
     UITextField * _edittingTextField;
 }
@@ -92,12 +95,18 @@
 }
 
 - (void)confirmPassword:(NSString *)pw {
-    
-    self.encodedPassword = pw;
-							  
 	EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     self.passwordTextField.text = plainText;
+
+
+#ifdef USE_BASE64_ACCOUNT_PASSWORD
+	NSData* data = [plainText dataUsingEncoding: NSUTF8StringEncoding];
+	self.encodedPassword = [data base64Encoding];
+#else
+	self.encodedPassword = pw;
+#endif
+
 }
 
 - (IBAction)tapOutsideOfKBToHideKeyboard:(UITapGestureRecognizer *)sender {
