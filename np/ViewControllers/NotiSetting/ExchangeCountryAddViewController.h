@@ -18,6 +18,9 @@
     NSInteger periodOneIndex;
     NSInteger periodTwoIndex;
     NSInteger periodThreeIndex;
+    NSInteger periodOneHour;
+    NSInteger periodTwoHour;
+    NSInteger periodThreeHour;
     NSInteger tempIndex;
     
     NSMutableArray *pickerList;

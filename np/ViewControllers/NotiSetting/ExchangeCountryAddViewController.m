@@ -13,6 +13,8 @@
 #define ALERT_TAG_ADD_NEW_COUNTRY   134
 #define ALERT_TAG_ADD_CHANGE_COUNTRY 135
 
+#define TIME_START (9)	
+
 @interface ExchangeCountryAddViewController ()
 
 @end
@@ -64,6 +66,9 @@
     periodOneIndex = 0;
     periodTwoIndex = 0;
     periodThreeIndex = 0;
+    periodOneHour = 0;
+    periodTwoHour = 0;
+    periodThreeHour = 0;
     
     if(!isNewCoutry || isChargeCountry)
     {
@@ -104,6 +109,9 @@
         periodOneIndex      =  0;
         periodTwoIndex      =  0;
         periodThreeIndex    =  0;
+        periodOneHour      =  0;
+        periodTwoHour      =  0;
+        periodThreeHour    =  0;
     }
     else if(periodFlag == 2)
     {
@@ -176,11 +184,15 @@
     {
         exchangeRateId = [response objectForKey:@"UMSW023001_OUT_SUB.exchange_rate_id"];
         periodFlag = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_period_type"] integerValue];
-        periodOneIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time1"] integerValue] + 1;
-        periodTwoIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time2"] integerValue] + 1;
-        periodThreeIndex = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time3"] integerValue] + 1;
+        periodOneHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time1"] integerValue];
+        periodTwoHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time2"] integerValue];
+        periodThreeHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time3"] integerValue];
         totlalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
         
+		periodOneIndex = (0 < periodOneHour) ? (periodOneHour - TIME_START + 1) : 0;
+		periodTwoIndex = (0 < periodTwoHour) ? (periodTwoHour - TIME_START + 1) : 0;
+		periodThreeIndex = (0 < periodThreeHour) ? (periodThreeHour - TIME_START + 1) : 0;
+		
         [self makeOptionSettingView];
     }
     else
@@ -200,9 +212,9 @@
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION];
     HttpRequest *req = [HttpRequest getInstance];
@@ -239,9 +251,9 @@
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CURRENCY_ADD_COUNTRY];
     HttpRequest *req = [HttpRequest getInstance];
@@ -277,11 +289,10 @@
     [reqBody setObject:exchangeRateId forKey:RESPONSE_EXCHANGE_CURRENCY_EXCHANGE_RATE_ID];
     
     [reqBody setObject:[NSNumber numberWithInt:(int)periodFlag] forKey:REQUEST_NOTI_OPTION_PERIOD_TYPE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
-    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeIndex - 1] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodOneHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_ONE];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
+    [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
 
-    
     NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CHARGE_COUNTRY];
     
     HttpRequest *req = [HttpRequest getInstance];
@@ -457,33 +468,55 @@
         periodFlag = 2;
         if([pickerSelectView tag] == 1)
         {
-            if(tempIndex == periodTwoIndex || tempIndex == periodThreeIndex)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
-            periodOneIndex = tempIndex;
+            if(0 < tempIndex) {
+				if(tempIndex == periodTwoIndex || tempIndex == periodThreeIndex)
+				{
+					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+					[alertView show];
+					return;
+				}
+				periodOneIndex = tempIndex;
+				periodOneHour = tempIndex - 1 + TIME_START;
+			}
+			else {
+				periodOneIndex = 0;
+				periodOneHour = 0;
+			}
         }
         else if([pickerSelectView tag] == 2)
         {
-            if(tempIndex == periodOneIndex || tempIndex == periodThreeIndex)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
-            periodTwoIndex = tempIndex;
+            if (0 < tempIndex) {
+				if(tempIndex == periodOneIndex || tempIndex == periodThreeIndex)
+				{
+					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+					[alertView show];
+					return;
+				}
+				periodTwoIndex = tempIndex;
+				periodTwoHour = tempIndex - 1 + TIME_START;
+			}
+			else {
+				periodTwoIndex = 0;
+				periodTwoHour = 0;
+			}
         }
         else if([pickerSelectView tag] == 3)
         {
-            if(tempIndex == periodTwoIndex || tempIndex == periodOneIndex)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
-                [alertView show];
-                return;
-            }
-            periodThreeIndex = tempIndex;
+			if (0 < tempIndex) {
+				if(tempIndex == periodTwoIndex || tempIndex == periodOneIndex)
+				{
+					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"알림" message:@"중복된 시간은 선택할 수 없습니다." delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+					[alertView show];
+					return;
+				}
+				periodThreeIndex = tempIndex;
+				periodThreeHour = tempIndex - 1 + TIME_START;
+			}
+			else {
+				periodThreeIndex = 0;
+				periodThreeHour = 0;
+			}
+
         }
         [self makeOptionSettingView];
     }
