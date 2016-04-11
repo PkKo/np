@@ -20,6 +20,7 @@
 		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; };
 		A205F78D1CAA36E400AC2D26 /* NHInboxMessageData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A205F78C1CAA36E400AC2D26 /* NHInboxMessageData+Category.m */; };
 		A27134AE1CACDB3100D7B6C6 /* TopLeftLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A27134AD1CACDB3100D7B6C6 /* TopLeftLabel.m */; };
+		A2BD57D81CBB89A100CE6510 /* login_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A2BD57D71CBB89A100CE6510 /* login_01.png */; };
 		A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */; };
 		A2BE45B61BE0908B007D915E /* CertificateRoamingPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */; };
 		A2CAD8BD1BDF8084008C1244 /* nsdataadditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CAD8BC1BDF8084008C1244 /* nsdataadditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -699,6 +700,7 @@
 		A24D07BA1BE7511D00406D96 /* menu_tab_bg_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg_02@2x.png"; sourceTree = "<group>"; };
 		A27134AC1CACDB3100D7B6C6 /* TopLeftLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLeftLabel.h; sourceTree = "<group>"; };
 		A27134AD1CACDB3100D7B6C6 /* TopLeftLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLeftLabel.m; sourceTree = "<group>"; };
+		A2BD57D71CBB89A100CE6510 /* login_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_01.png; sourceTree = "<group>"; };
 		A2BE45B21BE0908B007D915E /* CertificateRoamingPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateRoamingPhoneViewController.h; sourceTree = "<group>"; };
 		A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateRoamingPhoneViewController.m; sourceTree = "<group>"; };
 		A2BE45B41BE0908B007D915E /* CertificateRoamingPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateRoamingPhoneViewController.xib; sourceTree = "<group>"; };
@@ -2134,6 +2136,7 @@
 		A2DEAE111B9FE6BB00EDCCBA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A2BD57D71CBB89A100CE6510 /* login_01.png */,
 				A2E810481C4DF4F2007948F1 /* cherkoff@2x.png */,
 				A2E810491C4DF4F2007948F1 /* cherkon@2x.png */,
 				A2E8104A1C4DF4F2007948F1 /* subtitleicon_off@2x.png */,
@@ -3457,6 +3460,7 @@
 				A2D9EC011BEA18E100047BEC /* close_02@2x.png in Resources */,
 				A2D9EC021BEA18E100047BEC /* icon_agree_01_off@2x.png in Resources */,
 				A2D9EC031BEA18E100047BEC /* icon_agree_01_on@2x.png in Resources */,
+				A2BD57D81CBB89A100CE6510 /* login_01.png in Resources */,
 				A2D9EC041BEA18E100047BEC /* icon_app_zone_01_dft@2x.png in Resources */,
 				A2D9EC051BEA18E100047BEC /* icon_app_zone_01_on@2x.png in Resources */,
 				A2D9EC061BEA18E100047BEC /* icon_calendar_01@2x.png in Resources */,

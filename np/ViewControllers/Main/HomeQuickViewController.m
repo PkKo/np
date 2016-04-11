@@ -60,11 +60,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[self.mNaviView.mBackButton setHidden:YES];
+	[self.mNaviView.mTitleLabel setHidden:YES];
+    [self.mNaviView.imgTitleView setHidden:NO];    
+												   
+	{ // 뒤로가기 버튼 자리에 로그인 버튼 만들기
+		UIButton* loginBtn = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 29, 27)];
+		[loginBtn setBackgroundImage: [UIImage imageNamed: @"login_01.png"] forState: UIControlStateNormal];
+		loginBtn.backgroundColor = [UIColor clearColor];
+		[loginBtn addTarget: self action: @selector(onButton_login:) forControlEvents: UIControlEventTouchUpInside];
+		loginBtn.center = self.mNaviView.mBackButton.center;
+		[self.mNaviView addSubview: loginBtn];
+	}
 
-    [self.mNaviView.mBackButton setHidden:YES];
-    [self.mNaviView.mTitleLabel setHidden:YES];
-    [self.mNaviView.imgTitleView setHidden:NO];
-    
     [noticeIconView.layer setCornerRadius:(noticeIconView.frame.size.height /2)];
     [noticeIconView setAlpha:0.9f];
     
@@ -773,5 +782,10 @@
 		[emptyListView setHidden:NO];
 	}
 }
+
+- (void) onButton_login:(id)sender {
+    [[[LoginUtil alloc] init] showLoginPage:self.navigationController];
+}
+
 
 @end
