@@ -13,7 +13,9 @@
 #define ALERT_TAG_ADD_NEW_COUNTRY   134
 #define ALERT_TAG_ADD_CHANGE_COUNTRY 135
 
-#define TIME_START (9)	
+#define TIME_START     (9)
+#define NO_SELECT_HOUR (-1)
+
 
 @interface ExchangeCountryAddViewController ()
 
@@ -66,9 +68,9 @@
     periodOneIndex = 0;
     periodTwoIndex = 0;
     periodThreeIndex = 0;
-    periodOneHour = 0;
-    periodTwoHour = 0;
-    periodThreeHour = 0;
+    periodOneHour = NO_SELECT_HOUR;
+    periodTwoHour = NO_SELECT_HOUR;
+    periodThreeHour = NO_SELECT_HOUR;
     
     if(!isNewCoutry || isChargeCountry)
     {
@@ -109,9 +111,9 @@
         periodOneIndex      =  0;
         periodTwoIndex      =  0;
         periodThreeIndex    =  0;
-        periodOneHour      =  0;
-        periodTwoHour      =  0;
-        periodThreeHour    =  0;
+        periodOneHour      =  NO_SELECT_HOUR;
+        periodTwoHour      =  NO_SELECT_HOUR;
+        periodThreeHour    =  NO_SELECT_HOUR;
     }
     else if(periodFlag == 2)
     {
@@ -189,9 +191,9 @@
         periodThreeHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time3"] integerValue];
         totlalNotiCount = [[response objectForKey:@"totalNotiCount"] integerValue];
         
-		periodOneIndex = (0 < periodOneHour) ? (periodOneHour - TIME_START + 1) : 0;
-		periodTwoIndex = (0 < periodTwoHour) ? (periodTwoHour - TIME_START + 1) : 0;
-		periodThreeIndex = (0 < periodThreeHour) ? (periodThreeHour - TIME_START + 1) : 0;
+		periodOneIndex = (TIME_START <= periodOneHour) ? (periodOneHour - TIME_START + 1) : 0;
+		periodTwoIndex = (TIME_START <= periodTwoHour) ? (periodTwoHour - TIME_START + 1) : 0;
+		periodThreeIndex = (TIME_START <= periodThreeHour) ? (periodThreeHour - TIME_START + 1) : 0;
 		
         [self makeOptionSettingView];
     }
@@ -480,7 +482,7 @@
 			}
 			else {
 				periodOneIndex = 0;
-				periodOneHour = 0;
+				periodOneHour = NO_SELECT_HOUR;
 			}
         }
         else if([pickerSelectView tag] == 2)
@@ -497,7 +499,7 @@
 			}
 			else {
 				periodTwoIndex = 0;
-				periodTwoHour = 0;
+				periodTwoHour = NO_SELECT_HOUR;
 			}
         }
         else if([pickerSelectView tag] == 3)
@@ -514,7 +516,7 @@
 			}
 			else {
 				periodThreeIndex = 0;
-				periodThreeHour = 0;
+				periodThreeHour = NO_SELECT_HOUR;
 			}
 
         }
