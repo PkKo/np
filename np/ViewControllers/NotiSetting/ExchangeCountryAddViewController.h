@@ -39,6 +39,7 @@
 @property (strong, nonatomic) NSString *countryCode;
 @property (strong, nonatomic) NSString *countryName;
 @property (strong, nonatomic) NSArray *countryAllList;
+@property (strong, nonatomic) NSDictionary* responseDictionary;
 @property (strong, nonatomic) IBOutlet UILabel *countryNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *countrySelectButton;
 @property (strong, nonatomic) IBOutlet UIButton *countryDeleteButton;

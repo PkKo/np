@@ -31,6 +31,7 @@
 @synthesize countryCode;
 @synthesize countryName;
 @synthesize countryAllList;
+@synthesize responseDictionary;
 @synthesize countryNameLabel;
 @synthesize countrySelectButton;
 @synthesize countryDeleteButton;
@@ -184,7 +185,9 @@
     
     if([[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS] || [[response objectForKey:RESULT] isEqualToString:RESULT_SUCCESS_ZERO])
     {
-        exchangeRateId = [response objectForKey:@"UMSW023001_OUT_SUB.exchange_rate_id"];
+        self.responseDictionary = response;
+		
+		exchangeRateId = [response objectForKey:@"UMSW023001_OUT_SUB.exchange_rate_id"];
         periodFlag = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_period_type"] integerValue];
         periodOneHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time1"] integerValue];
         periodTwoHour = [[response objectForKey:@"UMSW023001_OUT_SUB.noti_time2"] integerValue];
@@ -207,8 +210,6 @@
 #pragma mark - 환율 옵션 수정 저장
 - (void)currencyOptionSaveRequest
 {
-    [self startIndicator];
-    
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
     [reqBody setObject:countryCode forKey:REQUEST_EXCHANGE_CURRENCY_NATION_ID];
@@ -218,7 +219,16 @@
     [reqBody setObject:[NSNumber numberWithInt:(int)periodTwoHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_TWO];
     [reqBody setObject:[NSNumber numberWithInt:(int)periodThreeHour] forKey:REQUEST_NOTI_OPTION_NOTI_TIME_THREE];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION];
+#if 0
+	// 기존 데이터와 같으면 전송하지 않는다.
+	if([self checkRequestIsSame: reqBody withResponse: self.responseDictionary]) {
+		return;
+	}
+#endif
+	
+	[self startIndicator];
+	
+	NSString *url = [NSString stringWithFormat:@"%@%@", SERVER_URL, REQUEST_EXCHANGE_CURRENCY_CHANGE_OPTION];
     HttpRequest *req = [HttpRequest getInstance];
     [req setDelegate:self selector:@selector(currencyOptionSaveResponse:)];
     [req requestUrl:url bodyString:[CommonUtil getBodyString:reqBody]];
@@ -630,4 +640,25 @@
         }
     }
 }
+
+
+- (BOOL) checkRequestIsSame: (NSDictionary *)requestDic withResponse: (NSDictionary *)responseDic {
+
+	if (nil == responseDic) {
+		return NO;
+	}
+	
+	if (([[responseDic objectForKey:@"UMSW023001_OUT_SUB.noti_period_type"] integerValue] == [[requestDic objectForKey: REQUEST_NOTI_OPTION_PERIOD_TYPE] integerValue]) &&
+		([[responseDic objectForKey:@"UMSW023001_OUT_SUB.noti_time1"] integerValue]		  == [[requestDic objectForKey: REQUEST_NOTI_OPTION_NOTI_TIME_ONE] integerValue]) &&
+		([[responseDic objectForKey:@"UMSW023001_OUT_SUB.noti_time2"] integerValue]		  == [[requestDic objectForKey: REQUEST_NOTI_OPTION_NOTI_TIME_TWO] integerValue]) &&
+		([[responseDic objectForKey:@"UMSW023001_OUT_SUB.noti_time3"] integerValue]		  == [[requestDic objectForKey: REQUEST_NOTI_OPTION_NOTI_TIME_THREE] integerValue])) {
+		return YES;
+	}
+	else {
+		return NO;
+	}
+}
+
+
+
 @end
