@@ -357,14 +357,20 @@
         [CommonUtil runSpinAnimationWithDuration:refreshIndicator duration:10.0f];
         [CommonUtil runSpinAnimationWithDuration:refreshEmptyIndicator duration:10.0f];
     }];
-	
+
+#ifdef REMOVE_ALL_WHEN_TOP_REFRESH
+	[mTimeLineSection removeAllObjects];
+	[mTimeLineDic removeAllObjects];
+	[bankingListTable reloadData];
+#else
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
 		[bankingListTable reloadData];
 	}
+#endif
 
-    // Refresh action!
+	// Refresh action!
     [self refresh];
 }
 
@@ -394,7 +400,23 @@
 
 - (void)refresh
 {
-    // This is just a demo. Override this method with your custom reload action.
+	 
+#ifdef REMOVE_ALL_WHEN_TOP_REFRESH	
+	// This is just a demo. Override this method with your custom reload action.
+    // Don't forget to call stopLoading at the end.
+    if(delegate != nil && [delegate respondsToSelector:@selector(queryInitData)])
+    {
+        isSearchResult = NO;
+        inboxAccountsIndex = 0;
+        inboxTypeIndex = 0;
+        searchStartDate = nil;
+        searchEndDate = nil;
+        [searchTypeAccountLabel setText:[allAccountList objectAtIndex:inboxAccountsIndex]];
+        [searchTypeInboxLabel setText:[inboxTypeList objectAtIndex:inboxTypeIndex]];
+        [delegate queryInitData];
+    }
+#else
+	// This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
     if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
     {
@@ -407,7 +429,10 @@
         [searchTypeInboxLabel setText:[inboxTypeList objectAtIndex:inboxTypeIndex]];
         [delegate refreshData:YES requestData:nil];
     }
+#endif
+
 }
+
 
 - (void)addPullToRefreshFooter
 {
@@ -1666,11 +1691,15 @@
 	NSDictionary* userInfo = [notification userInfo];
 	NSArray* keyAry = userInfo[kMsgKeyArray];
 	
+	// 현재 탭이 삭제모드일 경우만 배열에서 해당하는 키를 제거한다.
 	if (YES == isDeleteMode) {
 		[self deleteMsgAndEmptySection: keyAry];
 		[self deleteViewHide: nil];
 		[bankingListTable reloadData];
 	}
+
+	// 그렇지 않은 경우 삭제된 키드를 저장해 뒀다가 서버에 데이터를 요구할 때 지운다.
+	// 안드로이드와 동작을 맞추기 위함이다.
 	else {
 		self.deletedKeysFromOtherTab = keyAry;
 	}

@@ -792,11 +792,18 @@
         [CommonUtil runSpinAnimationWithDuration:refreshEmptyIndicator duration:10.0f];
     }];
 
+
+#ifdef REMOVE_ALL_WHEN_TOP_REFRESH
+	[mTimeLineSection removeAllObjects];
+	[mTimeLineDic removeAllObjects];
+	[mTimeLineTable reloadData];
+#else
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
 		[mTimeLineTable reloadData];
 	}
+#endif
 
     // Refresh action!
     [self refresh];
@@ -828,13 +835,23 @@
 
 - (void)refresh
 {
-    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
+#ifdef REMOVE_ALL_WHEN_TOP_REFRESH
+	if(delegate != nil && [delegate respondsToSelector:@selector(queryInitData)])
+    {
+        isSearchResult = NO;
+        searchStartDate = nil;
+        searchEndDate = nil;
+        [delegate queryInitData];
+    }
+#else
+	if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
     {
         isSearchResult = NO;
         searchStartDate = nil;
         searchEndDate = nil;
         [delegate refreshData:YES requestData:nil];
     }
+#endif
 }
 
 - (void)startFooterLoading
@@ -1939,11 +1956,15 @@
 	NSDictionary* userInfo = [notification userInfo];
 	NSArray* keyAry = userInfo[kMsgKeyArray];
 	
+	// 현재 탭이 삭제모드일 경우만 배열에서 해당하는 키를 제거한다.
 	if (YES == isDeleteMode) {
 		[self deleteMsgAndEmptySection: keyAry];	
 		[self deleteViewHide: nil];
 		[mTimeLineTable reloadData];
 	}
+	
+	// 그렇지 않은 경우 삭제된 키드를 저장해 뒀다가 서버에 데이터를 요구할 때 지운다.
+	// 안드로이드와 동작을 맞추기 위함이다.
 	else {
 		self.deletedKeysFromOtherTab = keyAry;
 	}

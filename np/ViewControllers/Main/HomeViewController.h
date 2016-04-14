@@ -20,6 +20,12 @@
 #define kMsgKeyArray @"msgKeyArray"	
 #define TOP_MENU_BAR_HEIGHT     27
 
+
+// 테이블뷰의 상단 영역을 스크롤해서 갱신하는 경우 기존 데이터를 모두 지우고 다시 가져오게 하는 플래그
+// 이 플래그가 없으면 기존 데이터는 유지한 상태에서 새로운 데이터만 가져온다.
+#define REMOVE_ALL_WHEN_TOP_REFRESH	
+
+
 #define DELETE_MESSAGE(x)	[NSString stringWithFormat:@"%u개의 메시지를 삭제하시겠습니까? 전체 삭제는 메뉴의 데이터 초기화를 이용바랍니다.", x]
 
 
@@ -62,6 +68,7 @@
 // 스크롤 위로 버튼
 @property (strong, nonatomic) IBOutlet UIButton *scrollMoveTopButton;
 
+- (void)queryInitData;
 - (void)refreshData:(BOOL)newData requestData:(AccountInboxRequestData *)requestData;
 - (void)searchInboxDataWithQuery:(AccountInboxRequestData *)reqData;
 - (IBAction)scrollToTop:(id)sender;
