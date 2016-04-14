@@ -1220,7 +1220,12 @@
 #pragma mark - notification
 
 - (void) onNotificationAlarmDeleted: (NSNotification*)notification {
-    NSDictionary* userInfo = [notification userInfo];
+    
+	if (NO == isDeleteMode) {
+		return;
+	}
+
+	NSDictionary* userInfo = [notification userInfo];
 	NSArray* keyAry = userInfo[kMsgKeyArray];
 	
 	for(NSString * key in keyAry) {

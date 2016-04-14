@@ -22,6 +22,7 @@
 @synthesize delegate;
 @synthesize mTimeLineSection;
 @synthesize mTimeLineDic;
+@synthesize deletedKeysFromOtherTab;
 @synthesize bankingListTable;
 @synthesize listEmptyView;
 @synthesize emptyLabel;
@@ -1655,8 +1656,14 @@
 #pragma mark - notification
 
 - (void) onNotificationAlarmDeleted: (NSNotification*)notification {
-    NSDictionary* userInfo = [notification userInfo];
+	
+	NSDictionary* userInfo = [notification userInfo];
 	NSArray* keyAry = userInfo[kMsgKeyArray];
+	
+	if (NO == isDeleteMode) {
+		self.deletedKeysFromOtherTab = keyAry;
+		return;
+	}
 	
 	for(NSString * key in keyAry) {
 		[self deleteMsgByKey: key];
