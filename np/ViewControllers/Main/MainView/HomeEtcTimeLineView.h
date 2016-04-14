@@ -45,6 +45,7 @@
 
 @property (strong, nonatomic) NSMutableArray *mTimeLineSection;
 @property (strong, nonatomic) NSMutableDictionary *mTimeLineDic;
+@property (strong, nonatomic) NSArray   *deletedKeysFromOtherTab;
 @property (strong, nonatomic) IBOutlet UIView *deleteAllView;
 @property (strong, nonatomic) IBOutlet UIView *deleteButtonView;
 @property (strong, nonatomic) IBOutlet UIImageView *deleteAllImg;

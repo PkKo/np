@@ -55,6 +55,7 @@
 @property (strong, nonatomic) NSMutableArray        *mTimeLineSection;
 // 날짜를 키로 
 @property (strong, nonatomic) NSMutableDictionary   *mTimeLineDic;
+@property (strong, nonatomic) NSArray   *deletedKeysFromOtherTab;
 
 @property (strong, nonatomic) IBOutlet UITableView  *mTimeLineTable;
 

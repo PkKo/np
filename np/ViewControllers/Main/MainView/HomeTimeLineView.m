@@ -26,6 +26,7 @@
 
 @synthesize mTimeLineSection;
 @synthesize mTimeLineDic;
+@synthesize deletedKeysFromOtherTab;
 @synthesize mTimeLineTable;
 @synthesize listEmptyView;
 @synthesize emptyLabel;
@@ -790,7 +791,12 @@
         [CommonUtil runSpinAnimationWithDuration:refreshIndicator duration:10.0f];
         [CommonUtil runSpinAnimationWithDuration:refreshEmptyIndicator duration:10.0f];
     }];
-    
+
+	if (0 < self.deletedKeysFromOtherTab.count) {
+		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
+		self.deletedKeysFromOtherTab = nil;
+	}
+
     // Refresh action!
     [self refresh];
 }
@@ -1929,28 +1935,31 @@
 #pragma mark - notification
 
 - (void) onNotificationAlarmDeleted: (NSNotification*)notification {
-	if (NO == isDeleteMode) {
-		return;
-	}
-	
 	NSDictionary* userInfo = [notification userInfo];
 	NSArray* keyAry = userInfo[kMsgKeyArray];
 	
+	if (YES == isDeleteMode) {
+		[self deleteMsgAndEmptySection: keyAry];	
+		[self deleteViewHide: nil];
+		[mTimeLineTable reloadData];
+	}
+	else {
+		self.deletedKeysFromOtherTab = keyAry;
+	}
+
+}
+
+
+#pragma mark - etc
+
+- (void) deleteMsgAndEmptySection:(NSArray*)keyAry {
 	for(NSString * key in keyAry) {
 		[self deleteMsgByKey: key];
 	}
 	
 	[self removeEmptySection];
-	
-	if (isDeleteMode) {
-        [self deleteViewHide: nil];
-	}
-
-	[mTimeLineTable reloadData];
 }
 
-
-#pragma mark - etc
 
 - (void) deleteMsgByKey:(NSString *)aKey
 {
