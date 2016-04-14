@@ -16,6 +16,9 @@
 #import "CustomerCenterUtil.h"
 #import "ServiceDeactivationController.h"
 
+// #define USE_BASE64_ACCOUNT_PASSWORD
+
+
 @interface LoginAccountVerificationViewController () {
     UITextField * _edittingTextField;
 }
@@ -72,7 +75,7 @@
         
         [textField resignFirstResponder];
         
-        SEL confirmAction   = @selector(confirmPassword:);
+        SEL confirmAction   = @selector(confirmPassword: encPw:);
         
         LoginUtil * util = [[LoginUtil alloc] init];
         [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:@"계좌비밀번호 입력"
@@ -91,11 +94,19 @@
     return NO;
 }
 
-- (void)confirmPassword:(NSString *)pw {
-    
-    EccEncryptor *ec = [EccEncryptor sharedInstance];
+- (void)confirmPassword:(NSString *)pw encPw:(NSString*)encPw{
+	EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     self.passwordTextField.text = plainText;
+
+
+#ifdef USE_BASE64_ACCOUNT_PASSWORD
+	NSData* data = [plainText dataUsingEncoding: NSUTF8StringEncoding];
+	self.encodedPassword = [data base64Encoding];
+#else
+    self.encodedPassword = [CommonUtil getURLEncodedString:encPw];
+#endif
+
 }
 
 - (IBAction)tapOutsideOfKBToHideKeyboard:(UITapGestureRecognizer *)sender {
@@ -127,7 +138,7 @@
         
         [self startIndicator];
         [[[LoginAccountController alloc] init] validateLoginAccount:self.accountTextField.text
-                                                           password:self.passwordTextField.text
+                                                           password:self.encodedPassword // self.passwordTextField.text
                                                            birthday:self.birthdayTextField.text
                                                    ofViewController:self action:@selector(loginResponse:)];
         
@@ -199,5 +210,7 @@
     self.accountTextField.text = @"";
     self.passwordTextField.text = @"";
     self.birthdayTextField.text = @"";
+
+	self.encodedPassword = @"";
 }
 @end

@@ -573,7 +573,8 @@
 //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
         NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        [vc setServerPublickeyURL: nil];
         
         //콜백함수 설정
         if (isFullMode) {

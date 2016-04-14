@@ -1063,8 +1063,8 @@ static EccEncryptor *instance = nil;
     
 #pragma mark - NFNUM옵션
     // 3. 암호화된값 앞에 클라이언트 공개키 붙이기
-	NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], encData];
-    //NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], encData];
+	// NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], encData];
+    NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], encData];
     return encDataPlusPublickey;
 }
 
@@ -1236,8 +1236,8 @@ static EccEncryptor *instance = nil;
 	
 #pragma mark - NFNUM옵션
 	// 3. 암호화된값 앞에 클라이언트 공개키 붙이기
-	NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], strReturn];
-	//NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], strReturn];
+	// NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], strReturn];
+	NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], strReturn];
 	plainText = nil;
 	textData = nil;
 	return encDataPlusPublickey;
@@ -1435,8 +1435,8 @@ static EccEncryptor *instance = nil;
 	
 #pragma mark - NFNUM옵션
 	// 3. 암호화된값 앞에 클라이언트 공개키 붙이기
-	NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], strReturn];
-	//  NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], strReturn];
+	// NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@%@", [_publicKeyOfMine base64Encoding], [[@"NF_NUM" dataUsingEncoding:NSUTF8StringEncoding] base64Encoding], strReturn];
+	NSString *encDataPlusPublickey = [NSString stringWithFormat:@"%@%@", [_publicKeyOfMine base64Encoding], strReturn];
 	plainText = nil;
 	textData = nil;
 	return encDataPlusPublickey;

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView         * containerView;
 @property (weak, nonatomic) IBOutlet UIScrollView   * containerScrollView;
 @property (weak, nonatomic) IBOutlet UIView                     * keyboardDimmedBg;
+@property (strong, nonatomic) NSString *encodedPassword;
+
 - (IBAction)tapOutsideOfKBToHideKeyboard:(UITapGestureRecognizer *)sender;
 
 - (IBAction)clickToLogin;
