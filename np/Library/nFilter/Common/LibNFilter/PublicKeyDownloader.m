@@ -29,7 +29,8 @@ static PublicKeyDownloader *instance = nil;
 
 		_serverkey = nil;
 		_serverkey = [[NSString alloc] initWithFormat:
-									@"MDIwGhMABBYCBPAGls2rN4qgQ/LfD0PbqTxaZqZrBBQw0BlWfrVf37PJd0zoXWV1yqw2xA=="];
+									@"MDIwGhMABBYCAqv0p592ZSkH5+f9RJrvTSlnBrEFBBSWvZfHXJGf9k2VJD+Ujk0ZbM/fkA=="];
+									// @"MDIwGhMABBYCBPAGls2rN4qgQ/LfD0PbqTxaZqZrBBQw0BlWfrVf37PJd0zoXWV1yqw2xA=="];
 		//NSLog(@"서버공개키 NIL 지정 - 기본값: %@", _serverkey);
 		return;
 	}
