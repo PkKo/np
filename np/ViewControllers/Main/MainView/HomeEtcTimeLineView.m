@@ -221,10 +221,12 @@
     }];
 
 #ifdef REMOVE_ALL_WHEN_TOP_REFRESH		
+	// 데이터를 모두 비우고 새로 받는다.
 	[mTimeLineSection removeAllObjects];
 	[mTimeLineDic removeAllObjects];
 	[timelineTableView reloadData];
 #else
+	// 삭제된 키만 제거한 다음에 추가 데이터를 요청한다
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
@@ -263,6 +265,7 @@
 - (void)refresh
 {
 #ifdef REMOVE_ALL_WHEN_TOP_REFRESH	
+	// 데이터를 모두 비우고 새로 받는다.
 	if(delegate != nil && [delegate respondsToSelector:@selector(queryInitData)])
     {
         isSearchResult = NO;
@@ -271,7 +274,8 @@
         [delegate queryInitData];
     }
 #else
-    if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
+    // 삭제된 키만 제거한 다음에 추가 데이터를 요청한다
+	if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
     {
         isSearchResult = NO;
         searchStartDate = nil;
@@ -1265,6 +1269,10 @@
 
 #pragma mark - etc
 
+/**
+   키배열에서 키들을 삭제한 다음 빈 섹션이 있으면 제거한다.
+   @param 
+*/
 - (void) deleteMsgAndEmptySection:(NSArray*)keyAry {
 	for(NSString * key in keyAry) {
 		[self deleteMsgByKey: key];

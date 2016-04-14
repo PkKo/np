@@ -359,10 +359,12 @@
     }];
 
 #ifdef REMOVE_ALL_WHEN_TOP_REFRESH
+	// 데이터를 모두 비우고 새로 받는다.
 	[mTimeLineSection removeAllObjects];
 	[mTimeLineDic removeAllObjects];
 	[bankingListTable reloadData];
 #else
+	// 삭제된 키만 제거한 다음에 추가 데이터를 요청한다
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
@@ -402,8 +404,7 @@
 {
 	 
 #ifdef REMOVE_ALL_WHEN_TOP_REFRESH	
-	// This is just a demo. Override this method with your custom reload action.
-    // Don't forget to call stopLoading at the end.
+	// 데이터를 모두 비우고 새로 받는다.
     if(delegate != nil && [delegate respondsToSelector:@selector(queryInitData)])
     {
         isSearchResult = NO;
@@ -416,8 +417,7 @@
         [delegate queryInitData];
     }
 #else
-	// This is just a demo. Override this method with your custom reload action.
-    // Don't forget to call stopLoading at the end.
+	// 삭제된 키만 제거한 다음에 추가 데이터를 요청한다
     if(delegate != nil && [delegate respondsToSelector:@selector(refreshData:requestData:)])
     {
         isSearchResult = NO;
@@ -1708,6 +1708,10 @@
 
 #pragma mark - etc
 
+/**
+   키배열에서 키들을 삭제한 다음 빈 섹션이 있으면 제거한다.
+   @param 
+*/
 - (void) deleteMsgAndEmptySection:(NSArray*)keyAry {
 	for(NSString * key in keyAry) {
 		[self deleteMsgByKey: key];
