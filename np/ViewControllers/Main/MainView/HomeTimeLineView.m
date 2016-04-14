@@ -795,6 +795,7 @@
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
+		[mTimeLineTable reloadData];
 	}
 
     // Refresh action!

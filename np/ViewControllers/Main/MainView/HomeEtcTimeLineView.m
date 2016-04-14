@@ -223,6 +223,7 @@
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
+		[timelineTableView reloadData];
 	}
 
     // Refresh action!

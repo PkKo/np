@@ -361,6 +361,7 @@
 	if (0 < self.deletedKeysFromOtherTab.count) {
 		[self deleteMsgAndEmptySection: self.deletedKeysFromOtherTab];
 		self.deletedKeysFromOtherTab = nil;
+		[bankingListTable reloadData];
 	}
 
     // Refresh action!
