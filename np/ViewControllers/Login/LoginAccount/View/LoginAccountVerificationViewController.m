@@ -75,7 +75,7 @@
         
         [textField resignFirstResponder];
         
-        SEL confirmAction   = @selector(confirmPassword:);
+        SEL confirmAction   = @selector(confirmPassword: encPw:);
         
         LoginUtil * util = [[LoginUtil alloc] init];
         [util showSecureNumpadInParent:self topBar:@"계좌 로그인" title:@"계좌비밀번호 입력"
@@ -94,7 +94,7 @@
     return NO;
 }
 
-- (void)confirmPassword:(NSString *)pw {
+- (void)confirmPassword:(NSString *)pw encPw:(NSString*)encPw{
 	EccEncryptor *ec = [EccEncryptor sharedInstance];
     NSString *plainText = [ec makeDecNoPadWithSeedkey:pw];
     self.passwordTextField.text = plainText;
@@ -104,7 +104,7 @@
 	NSData* data = [plainText dataUsingEncoding: NSUTF8StringEncoding];
 	self.encodedPassword = [data base64Encoding];
 #else
-	self.encodedPassword = pw;
+	self.encodedPassword = encPw;
 #endif
 
 }
