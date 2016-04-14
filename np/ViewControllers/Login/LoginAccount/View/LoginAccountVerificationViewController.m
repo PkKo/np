@@ -104,7 +104,7 @@
 	NSData* data = [plainText dataUsingEncoding: NSUTF8StringEncoding];
 	self.encodedPassword = [data base64Encoding];
 #else
-	self.encodedPassword = encPw;
+    self.encodedPassword = [CommonUtil getURLEncodedString:encPw];
 #endif
 
 }
