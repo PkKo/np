@@ -595,7 +595,8 @@
     {
         nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+		[vc setServerPublickeyURL:nil];
         
         //콜백함수 설정
         [vc setCallbackMethod:viewController methodOnConfirm:doneAction methodOnPress:methodOnPress];

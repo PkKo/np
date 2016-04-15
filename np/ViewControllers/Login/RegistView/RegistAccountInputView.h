@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *noticeAsterisk2;
 @property (weak, nonatomic) IBOutlet UILabel *notice2;
 
+@property (nonatomic, strong) NSString *encodedPassword;
 
 - (void)initData;
 - (IBAction)checkAccount:(id)sender;

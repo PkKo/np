@@ -53,7 +53,8 @@
     {
         NSMutableDictionary *accountInfo = [[NSMutableDictionary alloc] init];
         [accountInfo setObject:[accountInputField text] forKey:REQUEST_ACCOUNT_NUMBER];
-        [accountInfo setObject:[accountPassInputField text] forKey:REQUEST_ACCOUNT_PASSWORD];
+        // [accountInfo setObject:[accountPassInputField text] forKey:REQUEST_ACCOUNT_PASSWORD];
+        [accountInfo setObject:self.encodedPassword forKey:REQUEST_ACCOUNT_PASSWORD];
         [accountInfo setObject:[birthInputField text] forKey:REQUEST_ACCOUNT_BIRTHDAY];
         [accountInfo setObject:[NSString stringWithFormat:@"%@%@", carrierSelectBtn.titleLabel.text, [phoneNumInputField text]] forKey:@"mobile_number"];
         [delegate performSelector:@selector(checkRegistAccountRequest:) withObject:accountInfo];

@@ -860,7 +860,8 @@
 //            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
             NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            //[vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [vc setServerPublickeyURL: nil];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -875,8 +876,10 @@
         else
         {
             nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
+            
             //서버 공개키 설정
-            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            //[vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [vc setServerPublickeyURL: nil];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -894,6 +897,9 @@
     if(self.currentTextField != nil)
     {
         [self.currentTextField setText:plainText];
+		
+		RegistAccountInputView *inputView = [[contentView subviews] objectAtIndex:0];
+		inputView.encodedPassword = [CommonUtil getURLEncodedString:pEncText];
     }
     
     if(![certSelectBtn isEnabled])
