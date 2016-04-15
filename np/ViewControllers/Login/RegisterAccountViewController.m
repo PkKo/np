@@ -219,7 +219,8 @@
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:certifiedAccountNumber forKey:REQUEST_ACCOUNT_NUMBER];
-    [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
+    // [reqBody setObject:inputAccountView.addNewAccountPassInput.text forKey:REQUEST_ACCOUNT_PASSWORD];
+    [reqBody setObject:inputAccountView.encodedPassword forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:inputAccountView.addNewAccountBirthInput.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
     /*
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:REQUEST_CERT_CRM_MOBILE];*/
@@ -684,7 +685,8 @@
 //        NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
         NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        [vc setServerPublickeyURL:nil];
         
         //콜백함수 설정
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -699,7 +701,8 @@
     {
         nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
         //서버 공개키 설정
-        [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+        // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+		[vc setServerPublickeyURL:nil];
         
         //콜백함수 설정
         [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -716,6 +719,7 @@
     if(self.currentTextField != nil)
     {
         [self.currentTextField setText:plainText];
+		inputAccountView.encodedPassword = [CommonUtil getURLEncodedString:pEncText];
     }
     
     self.currentTextField = nil;

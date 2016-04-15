@@ -17,7 +17,7 @@
 @synthesize addNewAccountInput;
 @synthesize addNewAccountPassInput;
 @synthesize addNewAccountBirthInput;
-
+@synthesize encodedPassword;
 @synthesize certifiedAccountNumberLabel;
 @synthesize certifiedAccountNum;
 

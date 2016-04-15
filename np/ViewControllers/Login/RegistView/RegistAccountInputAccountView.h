@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountInput;
 @property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountPassInput;
 @property (strong, nonatomic) IBOutlet CommonTextField *addNewAccountBirthInput;
+@property (strong, nonatomic) NSString *encodedPassword;
 @property (strong, nonatomic) IBOutlet UILabel *certifiedAccountNumberLabel;
 @property (strong, nonatomic) NSString *certifiedAccountNum;
 

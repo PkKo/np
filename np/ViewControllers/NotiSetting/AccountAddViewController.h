@@ -35,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet UIView *certMenuView;
 @property (strong, nonatomic) IBOutlet UIView *certMenuContentView;
 @property (strong, nonatomic) IBOutlet UIButton *nextButton;
+@property (strong, nonatomic) NSString *encodedPassword;
 
 - (IBAction)changeCertView:(id)sender;
 - (IBAction)nextButtonClick:(id)sender;

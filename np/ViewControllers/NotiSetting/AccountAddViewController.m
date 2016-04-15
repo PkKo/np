@@ -38,6 +38,7 @@
 @synthesize certMenuContentView;
 
 @synthesize nextButton;
+@synthesize encodedPassword;
 
 - (void)viewDidLoad
 {
@@ -452,7 +453,8 @@
     
     NSMutableDictionary *reqBody = [[NSMutableDictionary alloc] init];
     [reqBody setObject:accountInputField.text forKey:REQUEST_ACCOUNT_NUMBER];
-    [reqBody setObject:accountPasswordField.text forKey:REQUEST_ACCOUNT_PASSWORD];
+    // [reqBody setObject:accountPasswordField.text forKey:REQUEST_ACCOUNT_PASSWORD];
+    [reqBody setObject:self.encodedPassword forKey:REQUEST_ACCOUNT_PASSWORD];
     [reqBody setObject:birthdayInputField.text forKey:REQUEST_ACCOUNT_BIRTHDAY];
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] objectForKey:RESPONSE_CERT_CRM_MOBILE] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:REQUEST_CERT_CRM_MOBILE];
     [reqBody setObject:[CommonUtil decrypt3DES:[[NSUserDefaults standardUserDefaults] stringForKey:RESPONSE_CERT_UMS_USER_ID] decodingKey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey] forKey:@"user_id"];
@@ -692,8 +694,9 @@
 //            NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterNum" bundle:nil];
             NFilterNum *vc = [[NFilterNum alloc] initWithNibName:@"NFilterSerialNum" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
-            
+            // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            [vc setServerPublickeyURL:nil];
+			
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
             [vc setLengthWithTagName:@"PasswordInput" length:4 webView:nil];
@@ -707,7 +710,8 @@
         {
             nFilterNumForPad *vc = [[nFilterNumForPad alloc] initWithNibName:@"nFilterNumForPad" bundle:nil];
             //서버 공개키 설정
-            [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+            // [vc setServerPublickey:((AppDelegate *)[UIApplication sharedApplication].delegate).serverKey];
+			[vc setServerPublickeyURL:nil];
             
             //콜백함수 설정
             [vc setCallbackMethod:self methodOnConfirm:@selector(onPasswordConfirmNFilter:encText:dummyText:tagName:) methodOnCancel:nil];
@@ -725,6 +729,7 @@
     if(self.currentTextField != nil)
     {
         [self.currentTextField setText:plainText];
+		self.encodedPassword = [CommonUtil getURLEncodedString:pEncText];;
     }
     
     self.currentTextField = nil;
