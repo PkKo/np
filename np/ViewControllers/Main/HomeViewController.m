@@ -41,10 +41,14 @@
     
     sectionList = [NSMutableArray array];
     timelineMessageList = [NSMutableDictionary dictionary];
-    unreadMessageList = [NSMutableArray array];
     isSearch = NO;
     isMoreList = YES;
 	isFirstRequest = YES;
+
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST       	
+	unreadMessageList = [NSMutableArray array];	
+#endif
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -740,10 +744,12 @@
     
     if(success)
     {
-       if([unreadMessageList count] > 0)
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST       
+	   if([unreadMessageList count] > 0)
        {
            [unreadMessageList removeAllObjects];
        }
+#endif
         
         if(!isRefresh)
         {
@@ -789,10 +795,12 @@
                 
                 [timelineMessageList setObject:itemList forKey:dateString];
                 
-                if(inboxData.readDate == 0)
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST                       
+				if(inboxData.readDate == 0)
                 {
                     [unreadMessageList addObject:inboxData.serverMessageKey];
                 }
+#endif				 
             }
         }
         else
@@ -831,10 +839,12 @@
                     [itemList insertObject:inboxData atIndex:0];
                     [timelineMessageList setObject:itemList forKey:dateString];
                     
-                    if(inboxData.readDate == 0)
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST                           
+					if(inboxData.readDate == 0)
                     {
                         [unreadMessageList addObject:inboxData.serverMessageKey];
                     }
+#endif
                 }
             }
             else
@@ -876,10 +886,12 @@
                     
                     [timelineMessageList setObject:itemList forKey:dateString];
                     
-                    if(inboxData.readDate == 0)
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST                           
+					if(inboxData.readDate == 0)
                     {
                         [unreadMessageList addObject:inboxData.serverMessageKey];
                     }
+#endif
                 }
             }
             
@@ -888,10 +900,12 @@
         
         [self performSelector:@selector(makeTimelineView) withObject:nil];
         
-        if([unreadMessageList count] > 0)
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST               
+		if([unreadMessageList count] > 0)
         {
             [self sendReadStatus];
         }
+#endif		 
     }
 }
 
@@ -905,17 +919,22 @@
     [self performSelector:@selector(makeTimelineView) withObject:nil];
 }
 
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST       
 - (void)sendReadStatus
 {
     [IBInbox requestReadMessageWithMsgKey:unreadMessageList readMethod:1];
 }
+#endif
 
 - (void)readMessage:(BOOL)success sMsgKeys:(NSArray *)sMsgKeys
 {
 //    NSLog(@"%s, %d, keys = %@", __FUNCTION__, success, sMsgKeys);
     if(success)
     {
-        [unreadMessageList removeAllObjects];
+        
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST       		
+		[unreadMessageList removeAllObjects];
+#endif
     }
 }
 

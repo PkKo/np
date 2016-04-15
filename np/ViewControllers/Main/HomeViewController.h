@@ -25,6 +25,9 @@
 // 이 플래그가 없으면 기존 데이터는 유지한 상태에서 새로운 데이터만 가져온다.
 #define REMOVE_ALL_WHEN_TOP_REFRESH	
 
+// 목록을 받을때 읽음상태를 서버로 전송한다.
+// 서버에 부하가 많다고 하여 막았고, 상세화면 들어갈때 읽음상태를 전송하도록 바뀌었다.
+// #define SEND_READ_STATUS_WHEN_RESPONSE_LIST
 
 #define DELETE_MESSAGE(x)	[NSString stringWithFormat:@"%u개의 메시지를 삭제하시겠습니까? 전체 삭제는 메뉴의 데이터 초기화를 이용바랍니다.", x]
 
@@ -35,8 +38,11 @@
     NSMutableArray *sectionList;
     // 날짜를 키로 한 푸시 데이터 딕셔너리 리스트
     NSMutableDictionary *timelineMessageList;
-    // 읽음 표시할 리스트
+    
+#ifdef SEND_READ_STATUS_WHEN_RESPONSE_LIST       	
+	// 읽음 표시할 리스트
     NSMutableArray *unreadMessageList;
+#endif
     
     // 입금 스티커 뷰
     DepositStickerView *depositStickerView;

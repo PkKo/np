@@ -7,6 +7,7 @@
 //
 
 #import "HomeEtcDetailViewController.h"
+#import "HomeViewController.h"
 #import "LoadingImageView.h"
 
 @interface HomeEtcDetailViewController ()
@@ -51,6 +52,11 @@
         [IBInbox requestInboxSingMessage:inboxData.serverMessageKey];
     }
 }
+
+- (void) viewWillDisappear: (BOOL)animated {
+    [IBInbox loadWithListener:nil];
+}
+
 
 - (void)setImageView
 {
@@ -206,6 +212,12 @@
     {
         [self stopIndicator];
     }
+
+#ifndef SEND_READ_STATUS_WHEN_RESPONSE_LIST       	
+	if(0 == inboxData.readDate) {
+		[self sendReadStatus];
+	}
+#endif
 }
 
 /**
@@ -240,4 +252,14 @@
     float pagePos           =  self.imgScrollView.contentOffset.x * 1.0f  / scrollViewWith;
     [self.imgPageControl setCurrentPage:round(pagePos)];
 }
+
+
+#ifndef SEND_READ_STATUS_WHEN_RESPONSE_LIST       
+- (void)sendReadStatus
+{
+    [IBInbox requestReadMessageWithMsgKey: @[inboxData.serverMessageKey] readMethod:1];
+}
+
+#endif
+	  
 @end
