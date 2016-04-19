@@ -23,7 +23,7 @@
 @synthesize noticeBannerImg;
 @synthesize currentDeviceToken;
 
-#ifdef DEV_MODE
+#if DEV_MODE
 void MyUncaughtExceptionHandler(NSException *exception) {
 	NSLog(@"APPDELEGATE CRASH REPORT ---------------- %@", [exception callStackSymbols]);
 }
@@ -31,7 +31,7 @@ void MyUncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#ifdef DEV_MODE    
+#if DEV_MODE    
 	NSSetUncaughtExceptionHandler(&MyUncaughtExceptionHandler);
 #endif
 	

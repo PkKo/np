@@ -33,7 +33,7 @@
     sessionRefreshRequest = [[HttpRequest alloc] init];
 
 
-#ifdef DEV_MODE
+#if DEV_MODE
 	if (NO == [self isKindOfClass: [HomeViewController class]]) {
 		UILabel* label = [[UILabel alloc] initWithFrame: CGRectMake(0, 5, 70, 25)];
 		label.text          = @"DEV_MODE";
