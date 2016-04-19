@@ -8,6 +8,9 @@
 
 #import "CommonViewController.h"
 #import "SplashViewController.h"
+#import "HomeViewController.h"
+
+
 
 #define TOP_LAYOUT_OFFSET   22
 
@@ -28,6 +31,18 @@
     [super viewDidLoad];
     [self makeNaviAndMenuView];
     sessionRefreshRequest = [[HttpRequest alloc] init];
+
+
+#ifdef DEV_MODE
+	if (NO == [self isKindOfClass: [HomeViewController class]]) {
+		UILabel* label = [[UILabel alloc] initWithFrame: CGRectMake(0, 5, 70, 25)];
+		label.text          = @"DEV_MODE";
+		label.font          = [UIFont systemFontOfSize: 10];
+		label.textColor     = [UIColor blackColor];
+		label.backgroundColor = [UIColor greenColor];
+		[self.view addSubview: label];		
+	}
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
