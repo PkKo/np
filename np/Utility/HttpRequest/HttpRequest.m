@@ -11,11 +11,12 @@
 
 @implementation HttpRequest
 
-@synthesize receivedData;
+// @synthesize receivedData;
 @synthesize response;
 @synthesize result;
 @synthesize target;
 @synthesize selector;
+@synthesize connectionDataDictionary;
 
 +(HttpRequest *)getInstance
 {
@@ -26,7 +27,7 @@
         mRequest = [[HttpRequest alloc] init];
     });
     
-    return mRequest;
+	return mRequest;
 }
 
 - (id)init
@@ -35,6 +36,7 @@
     
     if(self)
     {
+        connectionDataDictionary = [[NSMutableDictionary alloc] init];
         
     }
     
@@ -52,7 +54,9 @@
 #pragma mark - request function
 -(BOOL)requestUrl:(NSString *)url bodyObject:(NSDictionary *)bodyObject
 {
-    //NSLog(@"%s",__FUNCTION__);
+    
+	
+	//NSLog(@"%s",__FUNCTION__);
     //서버에 연결한다
     requestUrl = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
     
@@ -64,11 +68,12 @@
     [requestUrl setHTTPBody:postData];
     
     //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
     
     //연결이 되면 데이터를 받을 변수 초기화
     if(connection) {
-        receivedData = [[NSMutableData alloc] init];
+        NSMutableData* receivedData = [[NSMutableData alloc] init];
+		[connectionDataDictionary setObject:receivedData forKey: @(connection.hash)];
         return YES;
     }
     
@@ -93,11 +98,12 @@
     [requestUrl setHTTPBody:postData];
     
     //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
     
     //연결이 되면 데이터를 받을 변수 초기화
     if(connection) {
-        receivedData = [[NSMutableData alloc] init];
+        NSMutableData* receivedData = [[NSMutableData alloc] init];
+		[connectionDataDictionary setObject:receivedData forKey: @(connection.hash)];
         return YES;
     }
     
@@ -123,11 +129,12 @@
     [requestUrl setHTTPBody:postData];
     
     //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
     
     //연결이 되면 데이터를 받을 변수 초기화
     if(connection) {
-        receivedData = [[NSMutableData alloc] init];
+        NSMutableData* receivedData = [[NSMutableData alloc] init];
+		[connectionDataDictionary setObject:receivedData forKey: @(connection.hash)];
         return YES;
     }
     
@@ -147,47 +154,55 @@
     [requestUrl addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     //연결을 시도하는 connection 생성
-    connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:requestUrl delegate:self];
     
     //연결이 되면 데이터를 받을 변수 초기화
     if(connection) {
-        receivedData = [[NSMutableData alloc] init];
+        NSMutableData* receivedData = [[NSMutableData alloc] init];
+		[connectionDataDictionary setObject:receivedData forKey: @(connection.hash)];
         return YES;
     }
     
     return NO;
 }
 
-- (void)cancelRequestAsync
-{
-    if (connection)
-    {
-        [connection cancel];
-        connection = nil;
-    }
-    if (receivedData)
-    {
-        receivedData = nil;
-    }
-}
+//- (void)cancelRequestAsync
+//{
+//    if (connection)
+//    {
+//		[connection cancel];
+//        connection = nil;
+//    }
+//     if (receivedData)
+//     {
+//         receivedData = nil;
+//     }
+//}
 
 #pragma mark - connection response
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)mResponse
 {
 //    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)mResponse;
 //    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, httpResponse.allHeaderFields);
+																					
     //데이터를 전송받기 전 헤더를 받아온다
-    self.response = mResponse;
+    // self.response = mResponse;
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    //데이터 전송도중 호출된다. 여러번 나눠서 호출될 수 있다
-    [receivedData appendData:data];
+	NSMutableData* receivedData = [connectionDataDictionary objectForKey: @(connection.hash)];
+		
+	if(data && receivedData) {
+		//데이터 전송도중 호출된다. 여러번 나눠서 호출될 수 있다
+		[receivedData appendData:data];
+	}
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    [connectionDataDictionary removeObjectForKey: @(connection.hash)];
+    
     //에러가 발생했을 경우 호출된다
     NSLog(@"%s", __FUNCTION__);
     if([self target] != nil && [[self target] respondsToSelector:@selector(didFailWithError:)])
@@ -198,7 +213,14 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    //데이터 전송이 끝났을 때 호출된다. 데이터 구성을 한다. 파싱을 같이 하자
+    NSMutableData* receivedData = [connectionDataDictionary objectForKey: @(connection.hash)];
+	[connectionDataDictionary removeObjectForKey: @(connection.hash)];
+    
+	if(nil == receivedData) {
+		return;
+	}
+	
+	//데이터 전송이 끝났을 때 호출된다. 데이터 구성을 한다. 파싱을 같이 하자
 //    NSLog(@"%s, receivedHeader = %@", __FUNCTION__, receivedData);
     result = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     

@@ -10,9 +10,9 @@
 
 @interface HttpRequest : NSObject
 {
-    NSURLConnection *connection;
-    NSMutableData *receivedData;
-    NSURLResponse *response;
+    // NSURLConnection *connection;
+    // NSMutableData *receivedData;
+    // NSURLResponse *response;
     NSString *result;
     id target;
     SEL selector;
@@ -20,11 +20,12 @@
     NSData* postData;
 }
 
-@property (strong, nonatomic) NSMutableData *receivedData;
+// @property (strong, nonatomic) NSMutableData *receivedData;
 @property (strong, nonatomic) NSURLResponse *response;
 @property (strong, nonatomic) NSString *result;
 @property (strong, nonatomic) id target;
 @property (assign, nonatomic) SEL selector;
+@property (strong, nonatomic) NSMutableDictionary *connectionDataDictionary;
 
 +(HttpRequest *)getInstance;
 -(void)setDelegate:(id)mTarget selector:(SEL)mSelector;
@@ -38,5 +39,5 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection;
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(nonnull NSURLProtectionSpace *)protectionSpace;
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
--(BOOL)requestRestart;
+// -(BOOL)requestRestart;
 @end
