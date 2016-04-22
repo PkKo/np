@@ -27,7 +27,7 @@
 
 // 목록을 받을때 읽음상태를 서버로 전송한다.
 // 서버에 부하가 많다고 하여 막았고, 상세화면 들어갈때 읽음상태를 전송하도록 바뀌었다.
-// #define SEND_READ_STATUS_WHEN_RESPONSE_LIST
+#define SEND_READ_STATUS_WHEN_RESPONSE_LIST
 
 #define DELETE_MESSAGE(x)	[NSString stringWithFormat:@"%u개의 메시지를 삭제하시겠습니까? 전체 삭제는 메뉴의 데이터 초기화를 이용바랍니다.", x]
 
