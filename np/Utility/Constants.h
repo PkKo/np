@@ -9,7 +9,8 @@
 #ifndef httpserver_Constants_h
 #define httpserver_Constants_h
 
-#define DEV_MODE        1
+#define DEV_MODE        1       // 개발서버용
+#define FOR_ENTERPRISE  0       // 엔터프라이즈 배포용(업데이트 페이지의 URL이 다름)
 
 // server url 정보
 #if DEV_MODE
@@ -43,7 +44,12 @@
 #define NH_BANK_AUTH_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getauth.jsp"
 #define NH_BANK_CERT_URL    @"https://newsmart.nonghyup.com/so/jsp/btworks/roaming/getcert.jsp"
 
-#define APP_STORE_APP_URL               @"https://itunes.apple.com/us/app/nh-seumateu-allim/id1084588831?ls=1&mt=8"
+#if FOR_ENTERPRISE
+#define APP_STORE_APP_URL   @"https://smartdev.nonghyup.com:39310/apps/push/p.html"
+#else
+#define APP_STORE_APP_URL   @"https://itunes.apple.com/us/app/nh-seumateu-allim/id1084588831?ls=1&mt=8"
+#endif
+
 #define APP_STORE_APP_VERSION_CHECK_URL @"http://itunes.apple.com/lookup?id=1084588831"
 #define NONG_MIN_NEWS_URL               @"http://www.nongmin.com/xml/app_push/ar_xml_all.xml"
 
