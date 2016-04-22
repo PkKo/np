@@ -9,7 +9,7 @@
 #ifndef httpserver_Constants_h
 #define httpserver_Constants_h
 
-#define DEV_MODE        1       // 개발서버용
+#define DEV_MODE        0       // 개발서버용
 #define FOR_ENTERPRISE  0       // 엔터프라이즈 배포용(업데이트 페이지의 URL이 다름)
 
 // server url 정보
