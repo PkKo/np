@@ -20,6 +20,13 @@
 #import "ServiceFunctionInfoView.h"
 #import "HomeEtcDetailViewController.h"
 
+// iPhone6+등의 고해상도에서 가로가 늘어남에 따라 배너의 높이도 늘어나게 하기 위함
+// 93=배너영역의 총 높이(배너높이69 + 하단여백24)
+// TimelineBannerView.xib가 현재 (320x93) 사이즈로 되어 있다.
+#define TIMELINE_BANNER_HEIGHT (self.frame.size.width * (93.0 / 320.0))	
+#define TIMELINE_BANNER_BOTTOM_MARGIN	(24)
+
+
 @implementation HomeTimeLineView
 
 @synthesize delegate;
@@ -1074,7 +1081,14 @@
             {
                 [bannerInfoView bannerTimerStop];
             }
-            [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+            
+			// 배너 컨테이너뷰의 높이 조정
+			[bannerView.bannerContentView setFrame: CGRectMake(bannerView.bannerContentView.frame.origin.x,
+															   bannerView.bannerContentView.frame.origin.y,
+															   bannerView.bannerContentView.frame.size.width,
+															   TIMELINE_BANNER_HEIGHT - TIMELINE_BANNER_BOTTOM_MARGIN)];
+			
+			[bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
             [bannerView.bannerContentView addSubview:bannerInfoView];
             
             BOOL existNoticeBanner  = ((AppDelegate *)[UIApplication sharedApplication].delegate).noticeBannerImg ? YES : NO;
@@ -1412,7 +1426,13 @@
                     [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                     [cell addSubview:bannerView];
                     
-                    [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
+					// 배너 컨테이너뷰의 높이 조정
+					[bannerView.bannerContentView setFrame: CGRectMake(bannerView.bannerContentView.frame.origin.x,
+																	   bannerView.bannerContentView.frame.origin.y,
+																	   bannerView.bannerContentView.frame.size.width,
+																	   TIMELINE_BANNER_HEIGHT - TIMELINE_BANNER_BOTTOM_MARGIN)];
+					
+					[bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                     [bannerView.bannerContentView addSubview:bannerInfoView];
                     
                     
@@ -1588,6 +1608,12 @@
                     [cell setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + TIMELINE_BANNER_HEIGHT)];
                     [cell addSubview:bannerView];
                     
+					// 배너 컨테이너뷰의 높이 조정
+					[bannerView.bannerContentView setFrame: CGRectMake(bannerView.bannerContentView.frame.origin.x,
+																	   bannerView.bannerContentView.frame.origin.y,
+																	   bannerView.bannerContentView.frame.size.width,
+																	   TIMELINE_BANNER_HEIGHT - TIMELINE_BANNER_BOTTOM_MARGIN)]; 
+					
                     [bannerInfoView setFrame:CGRectMake(0, 0, bannerView.bannerContentView.frame.size.width, bannerView.bannerContentView.frame.size.height)];
                     [bannerView.bannerContentView addSubview:bannerInfoView];
                     
