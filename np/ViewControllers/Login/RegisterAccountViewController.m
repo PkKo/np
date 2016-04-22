@@ -140,21 +140,28 @@
     {
         case 0:
         {
-            // 계좌옵션 설정 뷰를 보여줌
+			// 계좌옵션 설정 뷰를 보여줌
             // NHI TEST
             //certifiedAccountNumber = [[allAccountList objectAtIndex:[allListView getSelectedIndex]] objectForKey:@"EAAPAL00R0_OUT_SUB.acno"];
-            
-            certifiedAccountNumber = [allListView getFirstSelectedAccount];
-            
+			certifiedAccountNumber = [allListView getFirstSelectedAccount];
             NSArray * selectedAccounts = [allListView getSelectedAccounts];
-            if (selectedAccounts && [selectedAccounts count] > 1) {
-                
+			 
+			if (selectedAccounts && [selectedAccounts count] > 1) {
                 AccountType accountType = [(AccountObject *)[selectedAccounts objectAtIndex:0] accountType];
                 [self createRegistAccountOptionSettingView:accountType response:nil];
-                
-            } else {
+            } else if (selectedAccounts && [selectedAccounts count] == 1){
                 [self accountOptionSearchReqeust];
             }
+			else {
+				UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"알림"
+																	message: @"계좌를 선택해 주세요."
+																   delegate: nil
+														  cancelButtonTitle: @"확인"
+														  otherButtonTitles: nil, nil];
+				[alertView show];
+				return;				
+			}
+            
             /*
             optionView = [RegistAccountOptionSettingView view];
             [optionView setDelegate:self];
