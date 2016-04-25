@@ -3398,7 +3398,7 @@
 				TargetAttributes = {
 					A2DEADE41B9FE68600EDCCBA = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = YAFW638TZE;
+						DevelopmentTeam = VHT8AUNDB4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -4224,8 +4224,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer: PyungKwan Ko (S957WERFD5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: PyungKwan Ko (S957WERFD5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4246,9 +4246,10 @@
 					"-w",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhit.np;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nonghyup.nhsmartpush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -4259,8 +4260,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer: BeomSu Kim (26P242JT9J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: BeomSu Kim (26P242JT9J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4281,9 +4282,10 @@
 					"-w",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nh.umspush;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nonghyup.nhsmartpush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
