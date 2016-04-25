@@ -662,6 +662,9 @@
 		A5F89D5C1BDE2A12000A24CB /* FaqViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F89D5A1BDE2A12000A24CB /* FaqViewController.xib */; };
 		A5F89D611BDE2BA5000A24CB /* TermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */; };
 		A5F89D621BDE2BA5000A24CB /* TermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */; };
+		C0ED97181CCDF89B0066FBDD /* 72px.png in Resources */ = {isa = PBXBuildFile; fileRef = C0ED97151CCDF89B0066FBDD /* 72px.png */; };
+		C0ED97191CCDF89B0066FBDD /* 76px.png in Resources */ = {isa = PBXBuildFile; fileRef = C0ED97161CCDF89B0066FBDD /* 76px.png */; };
+		C0ED971A1CCDF89B0066FBDD /* 152px.png in Resources */ = {isa = PBXBuildFile; fileRef = C0ED97171CCDF89B0066FBDD /* 152px.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1518,6 +1521,9 @@
 		A5F89D5E1BDE2BA5000A24CB /* TermsOfUseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TermsOfUseViewController.h; path = View/TermsOfUseViewController.h; sourceTree = "<group>"; };
 		A5F89D5F1BDE2BA5000A24CB /* TermsOfUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TermsOfUseViewController.m; path = View/TermsOfUseViewController.m; sourceTree = "<group>"; };
 		A5F89D601BDE2BA5000A24CB /* TermsOfUseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsOfUseViewController.xib; path = View/TermsOfUseViewController.xib; sourceTree = "<group>"; };
+		C0ED97151CCDF89B0066FBDD /* 72px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72px.png; sourceTree = "<group>"; };
+		C0ED97161CCDF89B0066FBDD /* 76px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76px.png; sourceTree = "<group>"; };
+		C0ED97171CCDF89B0066FBDD /* 152px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152px.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2136,6 +2142,9 @@
 		A2DEAE111B9FE6BB00EDCCBA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C0ED97151CCDF89B0066FBDD /* 72px.png */,
+				C0ED97161CCDF89B0066FBDD /* 76px.png */,
+				C0ED97171CCDF89B0066FBDD /* 152px.png */,
 				A2BD57D91CBB991400CE6510 /* login_01@2x.png */,
 				A2E810481C4DF4F2007948F1 /* cherkoff@2x.png */,
 				A2E810491C4DF4F2007948F1 /* cherkon@2x.png */,
@@ -3817,6 +3826,7 @@
 				A2DEAE7C1B9FE6E600EDCCBA /* MenuViewController.xib in Resources */,
 				A2D95B421BA8F1DD00DC943D /* NFPadspacebar@2x.png in Resources */,
 				A2DF50E41C106BCE00D9C84A /* loading_04@2x.png in Resources */,
+				C0ED97181CCDF89B0066FBDD /* 72px.png in Resources */,
 				A2DCFFB91BEB537000EEABD9 /* image_02@2x.png in Resources */,
 				A2D95B761BA8F1DD00DC943D /* nf_ios_icon_shift_pressed@2x.png in Resources */,
 				A2D9EBE51BEA162900047BEC /* icon_news_01_on@2x.png in Resources */,
@@ -3896,7 +3906,9 @@
 				A2D95B831BA8F1DD00DC943D /* nf_ios_btn@3x.png in Resources */,
 				A2DD07241BF01F5700897AB8 /* HomeEtcDetailViewController.xib in Resources */,
 				A2D95B671BA8F1DD00DC943D /* NFtopbg.png in Resources */,
+				C0ED971A1CCDF89B0066FBDD /* 152px.png in Resources */,
 				A2D95B441BA8F1DD00DC943D /* NFPadbg_wide@2x.png in Resources */,
+				C0ED97191CCDF89B0066FBDD /* 76px.png in Resources */,
 				A2D95B0C1BA8F1DD00DC943D /* click3.wav in Resources */,
 				A2D95B141BA8F1DD00DC943D /* NFPadBtnNext.png in Resources */,
 				A2DA147E1BFC11EA00830FF6 /* 120px.png in Resources */,
@@ -4249,7 +4261,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nonghyup.nhsmartpush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4285,7 +4297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nonghyup.nhsmartpush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
