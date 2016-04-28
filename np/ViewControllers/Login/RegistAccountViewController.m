@@ -783,7 +783,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     switch ([textField tag])
-    {
+	{
         case 20001:
         case 20002:
         case 20003:
@@ -793,15 +793,20 @@
             {
                 if(range.location == 3)
                 {
-                    [textField insertText:string];
-                    [textField endEditing:YES];
+					if(20001 <= [textField tag] && [textField tag] <= 20003) {
+						UITextField* nextTextField = [self.view viewWithTag: [textField tag] + 1];
+						[nextTextField performSelector: @selector(becomeFirstResponder) withObject: nil afterDelay: 0.0];
+					}
+					else {
+                        [self.view performSelector: @selector(endEditing:) withObject: @(YES) afterDelay: 0.0];
+					}
                 }
             }
             break;
         }
             
         default:
-        {
+		{
             if(![string isEqualToString:@""])
             {
                 NSString *replacedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -814,11 +819,11 @@
                     return NO;
                 }
             }
-            break;
-        }
+			break;
+		}
     }
     
-    return YES;
+	return YES;
 }
 
 - (void)showNFilterKeypad
@@ -897,9 +902,15 @@
     if(self.currentTextField != nil)
     {
         [self.currentTextField setText:plainText];
-		
-		RegistAccountInputView *inputView = [[contentView subviews] objectAtIndex:0];
-		inputView.encodedPassword = [CommonUtil getURLEncodedString:pEncText];
+
+		// 계좌인증을 선택해서 계좌비번을 입력한 경우
+		for(UIView* sub in contentView.subviews) {
+            if([sub isKindOfClass: [RegistAccountInputView class]]) {
+				RegistAccountInputView* inputView = (RegistAccountInputView*)sub;
+				inputView.encodedPassword = [CommonUtil getURLEncodedString:pEncText];
+				break;
+			}
+		}
     }
     
     if(![certSelectBtn isEnabled])
