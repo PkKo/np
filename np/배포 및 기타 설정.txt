@@ -82,3 +82,6 @@ Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
 전화번호를 입력하고 인증번호를 요청하면 로그에 "randomCode"가 인증번호이다.
 개발모드(dev_mode)에서는 전화인증번호를 입력 안하고 다음 버튼 눌러도 넘어간다.
 
+- XCode의 Source Control 옵션은 꺼져 있으며 소스관리는 SourceTree 프로그램을 사용한다.
+
+
