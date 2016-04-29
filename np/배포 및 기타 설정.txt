@@ -74,3 +74,6 @@ Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
 전화번호를 입력하고 인증번호를 요청하면 로그에 "randomCode"가 인증번호이다.
 개발모드(dev_mode)에서는 전화인증번호를 입력 안하고 다음 버튼 눌러도 넘어간다.
 
+- 엔터프라이즈 배포파일 모아둔 폴더
+~/Desktop/Ad-Distribution
+
