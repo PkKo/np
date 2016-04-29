@@ -19,6 +19,7 @@
 		179711A01BB80604007131A5 /* ChartDataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1797119F1BB80604007131A5 /* ChartDataItemView.xib */; };
 		179711A31BB80869007131A5 /* ChartDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179711A21BB80869007131A5 /* ChartDataView.m */; };
 		A205F78D1CAA36E400AC2D26 /* NHInboxMessageData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A205F78C1CAA36E400AC2D26 /* NHInboxMessageData+Category.m */; };
+		A216165F1CD2E8070098521D /* 배포 및 기타 설정.txt in Resources */ = {isa = PBXBuildFile; fileRef = A216165E1CD2E8070098521D /* 배포 및 기타 설정.txt */; };
 		A27134AE1CACDB3100D7B6C6 /* TopLeftLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A27134AD1CACDB3100D7B6C6 /* TopLeftLabel.m */; };
 		A2BD57DA1CBB991400CE6510 /* login_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2BD57D91CBB991400CE6510 /* login_01@2x.png */; };
 		A2BE45B51BE0908B007D915E /* CertificateRoamingPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BE45B31BE0908B007D915E /* CertificateRoamingPhoneViewController.m */; };
@@ -698,6 +699,7 @@
 		179711A21BB80869007131A5 /* ChartDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDataView.m; sourceTree = "<group>"; };
 		A205F78B1CAA36E400AC2D26 /* NHInboxMessageData+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NHInboxMessageData+Category.h"; path = "../../Utility/CustomObject/NHInboxMessageData+Category.h"; sourceTree = "<group>"; };
 		A205F78C1CAA36E400AC2D26 /* NHInboxMessageData+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NHInboxMessageData+Category.m"; path = "../../Utility/CustomObject/NHInboxMessageData+Category.m"; sourceTree = "<group>"; };
+		A216165E1CD2E8070098521D /* 배포 및 기타 설정.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "배포 및 기타 설정.txt"; sourceTree = "<group>"; };
 		A24D07B71BE750EC00406D96 /* menu_tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg@2x.png"; sourceTree = "<group>"; };
 		A24D07B91BE7511D00406D96 /* menu_tab_bg_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg_01@2x.png"; sourceTree = "<group>"; };
 		A24D07BA1BE7511D00406D96 /* menu_tab_bg_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_tab_bg_02@2x.png"; sourceTree = "<group>"; };
@@ -2088,6 +2090,7 @@
 				A2DEADF51B9FE68600EDCCBA /* Images.xcassets */,
 				A2DEADF71B9FE68600EDCCBA /* LaunchScreen.xib */,
 				A2DEAE7E1B9FE72400EDCCBA /* NHPush-PrefixHeader.pch */,
+				A216165E1CD2E8070098521D /* 배포 및 기타 설정.txt */,
 				A2DEADE81B9FE68600EDCCBA /* Supporting Files */,
 			);
 			path = np;
@@ -3819,6 +3822,7 @@
 				A2D95B811BA8F1DD00DC943D /* nf_cancel@3x.png in Resources */,
 				A54B94E31BAA841C00D5D99B /* SNSViewController.xib in Resources */,
 				A2D95B461BA8F1DD00DC943D /* NFPadbtn_ok_wide_pressed@2x.png in Resources */,
+				A216165F1CD2E8070098521D /* 배포 및 기타 설정.txt in Resources */,
 				A538C2E01BCDE748005E3211 /* LoginSettingsViewController.xib in Resources */,
 				A2D95B161BA8F1DD00DC943D /* NFPadchar.png in Resources */,
 				A2D90D671BB2731900315425 /* RegistCertListView.xib in Resources */,
