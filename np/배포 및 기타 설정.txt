@@ -31,7 +31,15 @@ Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
   1. Archive 한다.
   2. 엔터프라이즈 버전으로 Export한다.
   3. NongHyup Bank를 선택한다.
-  4. *.plist파일과 *.ipa파일만 전달하면 된다.
+  4. 엔터프라이즈 버전 마지막에 넣는 정보
+    title				= NHSmartPush
+    software-package	= https://smartdev.nonghyup.com:39310/apps/push/NHSmartPush.ipa
+    display-image		= https://smartdev.nonghyup.com:39310/apps/push/image_57px.png
+    full-size-image		= https://smartdev.nonghyup.com:39310/apps/push/image_512px.png
+  5. *.plist파일과 *.ipa파일만 전달하면 된다.
+
+- 엔터프라이즈 배포파일 모아둔 폴더
+~/Desktop/Ad-Distribution
 
 
 5. 앱스토어 배포 계정과 설정(배포용 맥북에서 설정)
@@ -73,7 +81,4 @@ Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
 인증화면에서 공인인증방식을 선택하고 화면이 넘어가면 나오는 로그에서 "crmMobile"가 전화번호이다.
 전화번호를 입력하고 인증번호를 요청하면 로그에 "randomCode"가 인증번호이다.
 개발모드(dev_mode)에서는 전화인증번호를 입력 안하고 다음 버튼 눌러도 넘어간다.
-
-- 엔터프라이즈 배포파일 모아둔 폴더
-~/Desktop/Ad-Distribution
 
