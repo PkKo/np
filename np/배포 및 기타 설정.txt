@@ -1,0 +1,76 @@
+1. #define 설정
+#define DEV_MODE        0       // 개발서버용
+#define FOR_ENTERPRISE  0       // 엔터프라이즈 배포용(업데이트 페이지의 URL이 다름)
+
+
+2. 엔터프라이즈와 앱스토어 버전 넘버
+2016.05.28 기준 : 
+	엔터프라이즈	= Ver 1.08, Build 1.08
+	앱스토어		= Ver 1.0, Build 1.09
+중요: 서버에서의 버전체크는 Build 값을 기준으로 한다.(버전화면에 보이는 버전도 마찬가지)
+
+	  
+3. 엔터프라이즈 계정과 설정
+iTunes ID = nonghyupoffice@gmail.com
+App(Bundle) ID = com.nh.umspush
+(현재 프로젝트에서 Archive하면 자동으로 App(Bundle) ID가 "com.nh.umspush"로 바뀐다.)
+Team = NongHyup Bank
+Build Settings에서 Code Signing Identity
+	Debug	= iPhone Developer: PyungKwan Ko(S957WERFD5)
+	Release = iPhone Developer: BeomSu Kim(26P242JT9J)
+Build Settings에서 Product Bundle Identifier
+	Debug	= com.nhit.np
+	Release = com.nh.umspush
+Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
+
+
+4. 엔터프라이즈 배포 버전 만들기
+  0. #define 설정을 아래 값으로 변경
+    #define DEV_MODE        0
+    #define FOR_ENTERPRISE  1
+  1. Archive 한다.
+  2. 엔터프라이즈 버전으로 Export한다.
+  3. NongHyup Bank를 선택한다.
+  4. *.plist파일과 *.ipa파일만 전달하면 된다.
+
+
+5. 앱스토어 배포 계정과 설정(배포용 맥북에서 설정)
+iTunes ID = nhebiz
+App(Bundle) ID = com.nonghyup.nhsmartpush
+Team = National Aricultural Cooperative Federation
+Build Settings에서 Code Signing Identity
+	Debug	= iOS Developer
+	Release = iOS Distribution
+Build Settings에서 Product Bundle Identifier
+	Debug	= com.nhit.np
+	Release = com.nonghyup.nhsmartpush
+Build Settings에서 Provisioning Profile은 Automatic으로 설정한다.
+
+
+6. 앱스토어 배포 버전 만들기
+  0. #define 설정을 아래 값으로 변경
+    #define DEV_MODE        0
+    #define FOR_ENTERPRISE  0
+  1. iPhone은 맥북에 연결하지 않아도 되고 "Generic iOS Device"를 선택한다.
+  2. Archive 한다.
+  3. 업로드할 때 National Agricultural Cooperative Federation을 선택한다.
+  4. Archive를 "Save for iOS App Store Deployment" 옵션으로 Export한다.
+     여기서 나온 *.ipa파일을 위변조 체크 파일로 전달한다.
+
+
+7. 기타
+- 테스트용 공인인증서 비번(공통): 고도화01!
+
+- 위변조 체크를 막는 부분
+  SplashViewController.m -> viewAppear함수에서 아래 "#if 0"을 "#if 1"로 바꾸면
+  위변조 체크를 건너뛴다.
+  
+  #if 0 //앱 위변조 안하고 넘어감
+        [self appVersionCheckRequest];
+  #else
+
+- 개발서버에서 전화번호 인증하는 방법
+인증화면에서 공인인증방식을 선택하고 화면이 넘어가면 나오는 로그에서 "crmMobile"가 전화번호이다.
+전화번호를 입력하고 인증번호를 요청하면 로그에 "randomCode"가 인증번호이다.
+개발모드(dev_mode)에서는 전화인증번호를 입력 안하고 다음 버튼 눌러도 넘어간다.
+
